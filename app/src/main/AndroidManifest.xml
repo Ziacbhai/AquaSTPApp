@@ -2,18 +2,65 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.WRITE_SECURE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission
+        android:name="android.permission.START_FOREGROUND_SERVICES_FROM_BACKGROUND"
+        tools:ignore="ProtectedPermissions" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/aqua_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/aqua_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AquaSTPApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.ResetPasswordNumber"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ResetPasswordUserName"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ResetPasswordEmail"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.RecoveryPasswordWith"
+            android:exported="false"
+            android:label="@string/title_activity_recovery_password_with"
+            android:theme="@style/Theme.AquaSTPApp" />
+        <activity
+            android:name=".Activities.RegisterActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Activities.SliderScreen"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +68,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activities.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.LoginFragment"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.LoginSignUpFragment"
+            android:exported="false" />
     </application>
 
 </manifest>
