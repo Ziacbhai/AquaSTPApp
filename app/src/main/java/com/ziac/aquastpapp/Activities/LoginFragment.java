@@ -2,6 +2,8 @@ package com.ziac.aquastpapp.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -47,12 +49,35 @@ public class LoginFragment extends Fragment {
         login_btn = view.findViewById(R.id.loginbtn);
 
         mcheckBox = view.findViewById(R.id.lcheckBox);
-        TermsOfUse = view.findViewById(R.id.text31);
-        privacy = view.findViewById(R.id.text6);
+        TermsOfUse = view.findViewById(R.id.terms);
+        privacy = view.findViewById(R.id.privacy);
         forgotpwd = view.findViewById(R.id.btnftpass);
 
-        return view;
 
+
+        TermsOfUse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://ziacsoft.com/terms.html")));
+
+            }
+        });
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://ziacsoft.com/privacy.html")));
+            }
+        });
+
+        forgotpwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), RecoveryPasswordWith.class));
+            }
+        });
+        return view;
     }
 
 

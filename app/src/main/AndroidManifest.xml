@@ -39,6 +39,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.VerifyNumberOTP"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.VerifyUserNameOTP"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.VerifiyEmailOTP"
+            android:exported="false" />
+        <activity
             android:name=".Activities.ResetPasswordNumber"
             android:exported="false" />
         <activity
@@ -52,10 +61,6 @@
             android:exported="false"
             android:label="@string/title_activity_recovery_password_with"
             android:theme="@style/Theme.AquaSTPApp" />
-        <activity
-            android:name=".Activities.RegisterActivity"
-            android:exported="false" />
-
         <activity
             android:name=".Activities.SliderScreen"
             android:exported="false" />

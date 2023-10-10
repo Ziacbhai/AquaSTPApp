@@ -31,15 +31,15 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/inputbg"
                 android:hint="Company Name"
-                android:padding="10dp"
-                android:maxLength="10"
                 android:inputType="textFilter"
+                android:maxLength="10"
+                android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 
 
             <EditText
-                android:id="@+id/empcode"
+                android:id="@+id/cperson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -79,49 +79,54 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="@drawable/inputbg"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_height="wrap_content">
+                android:background="@drawable/inputbg">
+
                 <TextView
-                    android:id="@+id/rstate"
-                    android:layout_weight="0.9"
+                    android:id="@+id/tvstate"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="0.9"
                     android:hint="State"
                     android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
+                    android:textColorHint="@color/black"
+                    android:textSize="15dp" />
+
                 <ImageView
-                    android:layout_weight="0.1"
+                    android:id="@+id/dd_state"
                     android:layout_width="0dp"
-                    android:src="@drawable/baseline_arrow_drop_down_24"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/baseline_arrow_drop_down_24" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="@drawable/inputbg"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_height="wrap_content">
+                android:background="@drawable/inputbg">
+
                 <TextView
-                    android:id="@+id/rcity"
-                    android:layout_weight="0.9"
+                    android:id="@+id/tvcity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
                     android:hint="City"
                     android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/black" />
+                    android:textColorHint="@color/black"
+                    android:textSize="15dp" />
 
                 <ImageView
-                    android:layout_weight="0.1"
+                    android:id="@+id/dd_city"
                     android:layout_width="0dp"
-                    android:src="@drawable/baseline_arrow_drop_down_24"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:src="@drawable/baseline_arrow_drop_down_24" />
 
             </LinearLayout>
-
-
 
 
             <EditText
@@ -142,21 +147,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
                 android:background="@drawable/inputbg"
+                android:drawableRight="@drawable/visibility_off_24"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:maxLength="20"
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
+
             <EditText
                 android:id="@+id/rcpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/inputbg"
-                android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
+                android:drawableRight="@drawable/visibility_off_24"
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:maxLength="20"
@@ -178,37 +184,42 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
+
                 <CheckBox
                     android:id="@+id/ccheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:buttonTint="@color/black"
                     android:text="I agree to the"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/terms"
                     android:layout_width="wrap_content"
-                    android:text="@string/my_text"
+                    android:layout_height="match_parent"
                     android:gravity="center"
+                    android:text="@string/my_text"
                     android:textColor="@color/appcolor"
-                    android:layout_height="match_parent"/>
+                    android:textSize="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text=" and"
-                    android:gravity="center"
-                    android:layout_height="match_parent"/>
+                    android:textSize="12dp" />
+
                 <TextView
-                    android:id="@+id/policy"
+                    android:id="@+id/privacy"
                     android:layout_width="wrap_content"
-                    android:text="@string/my_text1"
+                    android:layout_height="match_parent"
                     android:gravity="center"
+                    android:text="@string/my_text1"
                     android:textColor="@color/appcolor"
-                    android:layout_height="match_parent"/>
+                    android:textSize="12dp" />
             </LinearLayout>
 
 
@@ -217,17 +228,18 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/registerbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:padding="10dp"
                 android:background="@drawable/btnbg"
+                android:padding="10dp"
                 android:text="Register"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
 
             <View
                 android:layout_width="fill_parent"
@@ -238,7 +250,6 @@
         </LinearLayout>
 
     </ScrollView>
-
 
 
 </LinearLayout>
