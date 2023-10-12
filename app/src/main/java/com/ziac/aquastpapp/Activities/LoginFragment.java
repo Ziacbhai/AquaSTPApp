@@ -54,6 +54,14 @@ public class LoginFragment extends Fragment {
         forgotpwd = view.findViewById(R.id.btnftpass);
 
 
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
 
         TermsOfUse.setOnClickListener(new View.OnClickListener() {
             @Override

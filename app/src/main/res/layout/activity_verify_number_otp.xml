@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp" />
 
-        <LinearLayout
+       <!-- <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -128,7 +128,24 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-        </LinearLayout>
+        </LinearLayout>-->
+        <com.chaos.view.PinView
+            android:id="@+id/pinview"
+            style="@style/PinWidget.PinView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:cursorVisible="true"
+            android:gravity="center"
+            android:inputType="number"
+            app:hideLineWhenFilled="false"
+            app:itemCount="6"
+            app:itemHeight="50dp"
+            app:itemRadius="10dp"
+            app:itemWidth="40dp">
+
+        </com.chaos.view.PinView>
         <View
             android:layout_width="match_parent"
             android:layout_height="20dp" />
@@ -144,6 +161,7 @@
                 android:text="Didn't recive the OTP ? " />
 
             <TextView
+                android:id="@+id/resendotp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -160,6 +178,7 @@
             android:layout_height="40dp" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/verifyotp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#01A3A3"

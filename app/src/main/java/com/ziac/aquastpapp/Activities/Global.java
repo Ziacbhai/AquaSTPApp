@@ -1,6 +1,14 @@
 package com.ziac.aquastpapp.Activities;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.ziac.aquastpapp.R;
 
 import java.util.ArrayList;
 
@@ -11,10 +19,36 @@ public class Global {
     public static SharedPreferences sharedPreferences;
     public static SharedPreferences.Editor editor;
 
-    public static String baseurl="http://192.168.1.13/AquaSTP/Help/Api/POST-api-Account-Register";
+//    Server url
+//     public static String baseurl = "https://api.AquaSTP/";
 
-    public static String urlGetStates = baseurl + "api-List-GetStates";
-    public static String urlGetCities = baseurl +"api/list/POSTcity";
+    //    Local url
+    public static String baseurl="http://192.168.1.10/AquaSTP/";
+
+    public static String urlGetStates = baseurl+"api/List/GetStates";
+
+    public static String urlGetCities = baseurl+"api/List/GetCity?state_code=";
+    public static String registration = baseurl+"api/Account/Register";
+
+    public static String forgotpasswordurl = baseurl +"api/Account/ForgotPassword";
+    public static String validateotpurl = baseurl +"api/Account/ValidateOTP";
+    public static String resettpasswordurl = baseurl +"api/Account/ChangePassword";
+
     public static ArrayList<zList> statearraylist;
     public static ArrayList<zList> cityarraylist;
+
+    public static void  customtoast(Context context, LayoutInflater inflater, String msg){
+        //LayoutInflater inflater = getLayoutInflater();
+        View customToastView = inflater.inflate(R.layout.costom_toast, null);
+
+        // Find and modify any elements inside the custom layout
+        ImageView icon = customToastView.findViewById(R.id.toast_icon);
+        TextView text = customToastView.findViewById(R.id.toast_text);
+        text.setText(msg);
+        // Create the Toast with the custom layout
+        Toast customToast = new Toast(context);
+        customToast.setDuration(Toast.LENGTH_LONG);
+        customToast.setView(customToastView);
+        customToast.show();
+    }
 }

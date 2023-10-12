@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         tabLayout = findViewById(R.id.tablayout);
+        tabLayout.setSelectedTabIndicatorHeight(0);
 
         tabLayout.addTab(tabLayout.newTab().setText("LOGIN"));
         tabLayout.addTab(tabLayout.newTab().setText("REGISTER"));
