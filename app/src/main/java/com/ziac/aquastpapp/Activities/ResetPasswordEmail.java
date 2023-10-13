@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,6 +33,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
 
     String email;
     SharedPreferences sharedPreferences;
+    ProgressBar progressBar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,18 +43,20 @@ public class ResetPasswordEmail extends AppCompatActivity {
 
         E_OTPbtn = findViewById(R.id.eotpbtn);
         Femail = findViewById(R.id.Femail);
+        progressBar = findViewById(R.id.progressbr);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         String emailId = sharedPreferences.getString("email", "");
+
 
         Femail.setText(emailId);
 
         E_OTPbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 email = Femail.getText().toString();
+                progressBar.setVisibility(View.VISIBLE);
                 if (email.isEmpty()) {
                     Femail.setError("Please Enter Email");
                     Femail.requestFocus();
@@ -96,6 +100,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    progressBar.setVisibility(View.GONE);
                     // Toast.makeText(ForgotPasswordActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
                 }
@@ -104,6 +109,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressBar.setVisibility(View.GONE);
 
             }
         }){
@@ -111,6 +117,9 @@ public class ResetPasswordEmail extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Email", email);
+                params.put("Mobile", "mobile");
+                params.put("FPType", "E");
+                params.put("user_email", "ziacbhai1993@gmail.com");
                 return params;
             }
         };

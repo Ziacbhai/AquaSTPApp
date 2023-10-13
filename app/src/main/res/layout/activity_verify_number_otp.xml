@@ -48,87 +48,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="100dp" />
+            android:layout_height="40dp" />
 
-       <!-- <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/btnbgoutline"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="6dp"
-                android:layout_height="match_parent" />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/btnbgoutline"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="6dp"
-                android:layout_height="match_parent" />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/btnbgoutline"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="6dp"
-                android:layout_height="match_parent" />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/btnbgoutline"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="6dp"
-                android:layout_height="match_parent" />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/btnbgoutline"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="6dp"
-                android:layout_height="match_parent" />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:background="@drawable/btnbgoutline"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>-->
         <com.chaos.view.PinView
             android:id="@+id/pinview"
             style="@style/PinWidget.PinView"
@@ -161,7 +82,7 @@
                 android:text="Didn't recive the OTP ? " />
 
             <TextView
-                android:id="@+id/resendotp"
+                android:id="@+id/resendNotp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -175,7 +96,27 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="10dp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/newpassword"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_margin="10dp"
+            android:longClickable="true"
+            android:hint="New password"
+            android:drawableRight="@drawable/visibility_off_24"
+            android:background="@drawable/btnbgoutline"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/verifyotp"
@@ -184,6 +125,14 @@
             android:background="#01A3A3"
             android:text="VERIFY"
             android:textColor="@color/white" />
+
+        <ProgressBar
+            android:layout_marginTop="10dp"
+            android:id="@+id/progressbr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </LinearLayout>

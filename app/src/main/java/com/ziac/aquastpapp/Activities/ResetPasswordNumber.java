@@ -9,8 +9,10 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,47 +29,44 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ResetPasswordNumber extends AppCompatActivity {
-    AppCompatButton N_OTPbtn;
-    EditText ForgotPass;
+    AppCompatButton GetOTPBtn;
+    EditText FMobile;
     String mobile;
     SharedPreferences sharedPreferences;
+    ProgressBar progressBar;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_number);
 
-        N_OTPbtn = findViewById(R.id.n_OTPbtn);
-        ForgotPass = findViewById(R.id.fpassword);
+        FMobile = findViewById(R.id.fmobile);
+        GetOTPBtn = findViewById(R.id.n_OTPbtn);
 
-        // Get the default shared preferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-
         String mobileno = sharedPreferences.getString("mobile", "");
 
-        ForgotPass.setText(mobileno);
+        FMobile.setText(mobileno);
+        progressBar = findViewById(R.id.progressbr);
 
-        N_OTPbtn.setOnClickListener(new View.OnClickListener() {
+        GetOTPBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mobile = ForgotPass.getText().toString();
-                 if (mobile.isEmpty()) {
-                     ForgotPass.setError("Please Enter Password");
-                     ForgotPass.requestFocus();
-                    return;
-                } else if(mobile.length() < 10 ){
-                    Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(), "Mobile number should not be less than 10 digits !!");
-                    return;}
+                mobile = FMobile.getText().toString();
+                progressBar.setVisibility(View.VISIBLE);
+//                 if (mobile.isEmpty()) {
+//                     ForgotPass.setError("Please Enter Password");
+//                     ForgotPass.requestFocus();
+//                    return;
+//                } else if(mobile.length() < 10 ){
+//                    Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(), "Mobile number should not be less than 10 digits !!");
+//                    return;}
                 postDataUsingVolley();
             }
         });
     }
-
     private void postDataUsingVolley() {
         String urlnumber = Global.forgotpasswordurl;
-       // progressBar.setVisibility(View.VISIBLE);
-
         RequestQueue queue= Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, urlnumber, new Response.Listener<String>() {
             @Override
@@ -84,6 +83,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
 
 
                     if (issuccess.equals("true")) {
+                        Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(),"OTP send successfully ");
                         startActivity(new Intent(ResetPasswordNumber.this, VerifyNumberOTP.class));
                     } else {
                         // Show a toast message for wrong username or password
@@ -91,7 +91,9 @@ public class ResetPasswordNumber extends AppCompatActivity {
                     }
 
                 } catch (JSONException e) {
+
                     e.printStackTrace();
+                    progressBar.setVisibility(View.GONE);
                     // Toast.makeText(ForgotPasswordActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
                 }
@@ -100,7 +102,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-
+                progressBar.setVisibility(View.GONE);
             }
         }) {
             @Override
@@ -108,6 +110,8 @@ public class ResetPasswordNumber extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 //params.put("UserName", username);
                 params.put("Mobile", mobile);
+                params.put("FPType", "M");
+                params.put("user_email", "ziacbhai1993@gmail.com");
                 return params;
             }
         };

@@ -35,7 +35,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
     EditText etusername;
     AppCompatButton Getotp1;
     ProgressBar progressBar;
-    String username1;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
 
         Getotp1 = findViewById(R.id.submitotp);
         etusername = findViewById(R.id.fgusername);
+        progressBar = findViewById(R.id.progressbr);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -54,9 +55,8 @@ public class ResetPasswordUserName extends AppCompatActivity {
         Getotp1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                username1 = etusername.getText().toString();
-               if (usernames.isEmpty()) {
+                username = etusername.getText().toString();
+               if (username.isEmpty()) {
                    etusername.setError("Please Enter User Name");
                    etusername.requestFocus();
                     return;
@@ -69,7 +69,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
     private void postDataUsingVolley() {
 
         String urlUsername = Global.forgotpasswordurl;
-        //progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
 
         RequestQueue queue= Volley.newRequestQueue(ResetPasswordUserName.this);
         StringRequest request = new StringRequest(Request.Method.POST, urlUsername, new Response.Listener<String>() {
@@ -82,7 +82,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
                     String error = respObj.getString("error");
 
                     Global.editor = sharedPreferences.edit();
-                    Global.editor.putString("username", username1);
+                    Global.editor.putString("username", username);
                     Global.editor.commit();
 
                     if (issuccess.equals("true")) {
@@ -94,7 +94,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    //progressBar.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
                     // Toast.makeText(ForgotPasswordActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
                 }
@@ -102,18 +102,20 @@ public class ResetPasswordUserName extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                progressBar.setVisibility(View.GONE);
             }
         }){
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("UserName", username1);
+                params.put("UserName", username);
+                params.put("Mobile", "mobile");
+                params.put("FPType", "U");
+                params.put("user_email", "ziacbhai1993@gmail.com");
                 return params;
             }
         };
         queue.add(request);
-
 
     }
 }

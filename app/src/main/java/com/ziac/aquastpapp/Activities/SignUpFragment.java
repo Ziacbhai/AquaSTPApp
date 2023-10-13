@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Filter;
@@ -202,7 +201,7 @@ public class SignUpFragment extends Fragment {
     private void getstates() {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        //String baseurl="http://192.168.1.10/AquaSTP/api/List/GetStates";
+        //String baseurl="http://192.168.1.4/AquaSTP/api/List/GetStates";
         JsonArrayRequest jsonArrayrequest = new JsonArrayRequest(Request.Method.GET,urlGetStates, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -641,7 +640,7 @@ public class SignUpFragment extends Fragment {
                         try {
                             if (response.getBoolean("isSuccess")) {
                                 Toast.makeText(getActivity(), "Registration successfull", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getActivity(), MainActivity.class));
+                                startActivity(new Intent(getActivity(), LoginSignupActivity.class));
                                //finish();
                             } else {
                                 //textViewError.setText(response.getString("error"));

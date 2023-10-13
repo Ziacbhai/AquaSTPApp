@@ -23,7 +23,7 @@ public class Global {
 //     public static String baseurl = "https://api.AquaSTP/";
 
     //    Local url
-    public static String baseurl="http://192.168.1.10/AquaSTP/";
+    public static String baseurl="http://192.168.1.4/AquaSTP/";
 
     public static String urlGetStates = baseurl+"api/List/GetStates";
 
@@ -33,6 +33,10 @@ public class Global {
     public static String forgotpasswordurl = baseurl +"api/Account/ForgotPassword";
     public static String validateotpurl = baseurl +"api/Account/ValidateOTP";
     public static String resettpasswordurl = baseurl +"api/Account/ChangePassword";
+
+    public static String getuserdetailsurl = baseurl + "api/account/getuserdetails";
+
+    public static String tokenurl = baseurl + "TOKEN";
 
     public static ArrayList<zList> statearraylist;
     public static ArrayList<zList> cityarraylist;
