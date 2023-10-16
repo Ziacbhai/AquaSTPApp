@@ -57,7 +57,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
 
         Resendotp = findViewById(R.id.resendUotp);
 
-       Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyUserNameOTP.this, ResetPasswordNumber.class)));
+       Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyUserNameOTP.this, ResetPasswordUserName.class)));
         UNewpwd.setOnTouchListener((v, event) -> {
 
             final int Right = 2;

@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
     tools:context=".Activities.LoginFragment">
 
@@ -42,7 +42,7 @@
 
 
                     <EditText
-                        android:id="@+id/email2"
+                        android:id="@+id/Luser"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_marginTop="10dp"
@@ -71,7 +71,7 @@
                         android:textColorHint="@color/black" />
 
                     <CheckBox
-                        android:id="@+id/lcheckBox"
+                        android:id="@+id/RcheckBox"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="5dp"

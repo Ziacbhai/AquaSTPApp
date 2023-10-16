@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#FFFBEB">
+
+
+    <item android:id="@+id/dashboard"
+        android:tint="@color/black"
+        android:title="Dashboard" />
+    <!--android:icon="@drawable/dashboard_icon"-->
+
+    <item android:id="@+id/settings"
+        android:icon="@drawable/ic_baseline_settings"
+        android:title="Settings" />
+
+
+    <item android:id="@+id/about"
+        android:icon="@drawable/baseline_about_icon"
+        android:title="About us" />
+
+
+    <item android:id="@+id/share"
+        android:icon="@drawable/baseline_share_icon"
+        android:title="Share" />
+
+
+    <item android:id="@+id/rateus"
+        android:icon="@drawable/baseline_star_rate_icon"
+        android:title="Rate us" />
+
+    <item android:id="@+id/nav_logout"
+        android:icon="@drawable/baseline_logout_icon"
+        android:title="Logout" />
+
+
+
+
+
+
+
+</menu>

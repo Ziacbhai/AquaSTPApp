@@ -32,7 +32,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
     EditText Femail;
 
     String email;
-    SharedPreferences sharedPreferences;
+    //SharedPreferences sharedPreferences;
     ProgressBar progressBar;
 
     @SuppressLint("MissingInflatedId")
@@ -45,9 +45,9 @@ public class ResetPasswordEmail extends AppCompatActivity {
         Femail = findViewById(R.id.Femail);
         progressBar = findViewById(R.id.progressbr);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String emailId = sharedPreferences.getString("email", "");
+        String emailId = Global.sharedPreferences.getString("email", "");
 
 
         Femail.setText(emailId);
@@ -73,7 +73,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
     private void postDataUsingVolley() {
 
         String urlemail = Global.forgotpasswordurl;
-        // progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
 
         RequestQueue queue= Volley.newRequestQueue(this);
 
@@ -87,7 +87,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
                     String issuccess = respObj.getString("isSuccess");
                     String error = respObj.getString("error");
 
-                    Global.editor = sharedPreferences.edit();
+                    Global.editor = Global.sharedPreferences.edit();
                     Global.editor.putString("Email", email);
                     Global.editor.commit();
 

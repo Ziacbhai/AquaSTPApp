@@ -60,7 +60,7 @@ public class VerifiyEmailOTP extends AppCompatActivity {
 
         Resendotp = findViewById(R.id.resendEotp);
 
-        Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifiyEmailOTP.this, ResetPasswordNumber.class)));
+        Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifiyEmailOTP.this, ResetPasswordEmail.class)));
         ENewpwd.setOnTouchListener((v, event) -> {
 
             final int Right = 2;

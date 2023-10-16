@@ -24,6 +24,7 @@ public class Global {
 
     //    Local url
     public static String baseurl="http://192.168.1.4/AquaSTP/";
+    public static String userimageurl = baseurl + "websitedata/users/";
 
     public static String urlGetStates = baseurl+"api/List/GetStates";
 
@@ -35,6 +36,10 @@ public class Global {
     public static String resettpasswordurl = baseurl +"api/Account/ChangePassword";
 
     public static String getuserdetailsurl = baseurl + "api/account/getuserdetails";
+
+    public static String getuserprofileurl = baseurl + "api/Users/GetUserProfile";
+
+
 
     public static String tokenurl = baseurl + "TOKEN";
 

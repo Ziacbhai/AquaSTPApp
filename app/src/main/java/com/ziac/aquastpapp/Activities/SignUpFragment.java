@@ -4,7 +4,10 @@ import static com.ziac.aquastpapp.Activities.Global.urlGetStates;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -104,12 +107,12 @@ public class SignUpFragment extends Fragment {
         TermsOfUse = view.findViewById(R.id.terms);
         privacy = view.findViewById(R.id.privacy);
 
+        //////Call Api State And City/////
         tvState = view.findViewById(R.id.tvstate);
         DDstate = view.findViewById(R.id.dd_state);
 
         DDcity = view.findViewById(R.id.dd_city);
         tvCity = view.findViewById(R.id.tvcity);
-
 
         getstates();
         tvState.setOnClickListener(v -> statespopup());
@@ -165,6 +168,8 @@ public class SignUpFragment extends Fragment {
             return false;
         });
 
+        //Registerbtn.setOnClickListener(v -> Registration());
+
 
         TermsOfUse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,8 +201,6 @@ public class SignUpFragment extends Fragment {
         return view;
 
     }
-
-
     private void getstates() {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());

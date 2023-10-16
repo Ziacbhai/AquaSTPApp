@@ -1,6 +1,6 @@
 package com.ziac.aquastpapp.Activities;
 
-import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -46,9 +46,9 @@ public class ResetPasswordUserName extends AppCompatActivity {
         etusername = findViewById(R.id.fgusername);
         progressBar = findViewById(R.id.progressbr);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String usernames = sharedPreferences.getString("username", "");
+        String usernames = Global.sharedPreferences.getString("username", "");
 
         etusername.setText(usernames);
 
@@ -81,7 +81,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
                     String issuccess = respObj.getString("isSuccess");
                     String error = respObj.getString("error");
 
-                    Global.editor = sharedPreferences.edit();
+                    Global.editor = Global.sharedPreferences.edit();
                     Global.editor.putString("username", username);
                     Global.editor.commit();
 

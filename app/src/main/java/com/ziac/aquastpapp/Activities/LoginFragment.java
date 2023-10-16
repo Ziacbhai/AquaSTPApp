@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -22,17 +23,22 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.chaos.view.BuildConfig;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ziac.aquastpapp.R;
 
@@ -45,12 +51,12 @@ import java.util.Map;
 
 public class LoginFragment extends Fragment {
 
-    EditText Log_email,Log_pwd ;
-
+    EditText Log_User,Log_pwd ;
+    private CheckBox RememberMe;
     Button Login_btn;
-    TextView TermsOfUse, privacy, forgotpwd, Login;
-    private CheckBox mcheckBox;
+    TextView TermsOfUse, privacy, forgotpwd;
     boolean passwordVisible;
+    String username, pwd;
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -62,7 +68,7 @@ public class LoginFragment extends Fragment {
     }
     private ProgressDialog progressDialog;
 
-    String pwd,username;
+    //SharedPreferences sharedPreferences;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,23 +77,68 @@ public class LoginFragment extends Fragment {
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Logging in...");
         progressDialog.setCancelable(true);
-
-        Log_email = view.findViewById(R.id.email2);
+        Log_User = view.findViewById(R.id.Luser);
         Log_pwd = view.findViewById(R.id.password2);
         Login_btn = view.findViewById(R.id.loginbtn);
-
-        mcheckBox = view.findViewById(R.id.lcheckBox);
         TermsOfUse = view.findViewById(R.id.terms);
         privacy = view.findViewById(R.id.privacy);
         forgotpwd = view.findViewById(R.id.btnftpass);
-
+        RememberMe = view.findViewById(R.id.RcheckBox);
 
         Login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                username = Log_User.getText().toString();
+                pwd = Log_pwd.getText().toString();
+                username = Log_User.getText().toString();
+                pwd = Log_pwd.getText().toString();
+                if (username.isEmpty()) {
+                    Log_User.setError("Please enter the User name");
+                    Log_User.requestFocus();
+                    return;
+                } else if (pwd.isEmpty()) {
+                    Log_pwd.setError("Please enter the Password");
+                    Log_pwd.requestFocus();
+                    return;
+                }
+
+                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                Global.editor = Global.sharedPreferences.edit();
+                if (RememberMe.isChecked()){
+                    Global.editor.putString("username", username);
+                    Global.editor.putString("password", pwd);
+                }else {
+                    Global.editor.putString("username", "");
+                    Global.editor.putString("password", "");
+                }
+                Global.editor.commit();
                 dologinVolley();
             }
         });
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Logging in...");
+        progressDialog.setCancelable(true);
+
+       // TextView versionName = findViewById(R.id.version);
+       // versionName.setText("Ver No:" + BuildConfig.VERSION_NAME);
+
+        RememberMe.setChecked(false);
+        try {
+            Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            username = Global.sharedPreferences.getString("username", "");
+            pwd = Global.sharedPreferences.getString("password", "");
+            Log_User.setText(username);
+            Log_pwd.setText(pwd);
+            if (username.length() == 0) {
+                RememberMe.setChecked(false);
+            } else {
+                RememberMe.setChecked(true);
+            }
+
+        } catch (Exception e) {
+            RememberMe.setChecked(false);
+        }
 
         TermsOfUse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,29 +192,31 @@ public class LoginFragment extends Fragment {
 //            Global.customtoast(LoginActivity.this, getLayoutInflater(), "Internet connection lost !!");
 //            return;
 //        }
-        username = Log_email.getText().toString();
+        username = Log_User.getText().toString();
         pwd = Log_pwd.getText().toString();
         progressDialog.show();
         //new InternetCheckTask().execute();
 
         String url = Global.tokenurl;
         RequestQueue queue= Volley.newRequestQueue(getActivity());
-        StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
-            try {
-                JSONObject respObj = new JSONObject(response);
-                String access_token = respObj.getString("access_token");
-                Global.editor = Global.sharedPreferences.edit();
-                Global.editor.putString("access_token", access_token);
-                Global.editor.commit();
-                startActivity(new Intent(getActivity(), MainActivity.class));
-                //getuserdetails();
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                try {
+                    JSONObject respObj = new JSONObject(response);
+                    String access_token = respObj.getString("access_token");
+                    Global.editor = Global.sharedPreferences.edit();
+                    Global.editor.putString("access_token", access_token);
+                    Global.editor.commit();
+                    //startActivity(new Intent(getActivity(), MainActivity.class));
+                    getuserprofile();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-
-
-
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -171,7 +224,7 @@ public class LoginFragment extends Fragment {
                 if (error instanceof TimeoutError) {
                      Global.customtoast(requireActivity(), getLayoutInflater(),"Request Time-Out");
                 } else if (error instanceof ServerError) {
-                    Global.customtoast(getActivity(), getLayoutInflater(),"ServerError");
+                    Global.customtoast(getActivity(), getLayoutInflater(),"Invalid Username or Password");
                 }  else if (error instanceof ParseError) {
                      Global.customtoast(requireActivity(), getLayoutInflater(),"Parse Error ");
                 }  else if (error instanceof AuthFailureError) {
@@ -197,12 +250,13 @@ public class LoginFragment extends Fragment {
 
         queue.add(request);
     }
-    private void getuserdetails() {
+    private void getuserprofile() {
 
-        String url = Global.getuserdetailsurl;
+        String url = Global.getuserprofileurl;
         RequestQueue queue= Volley.newRequestQueue(getActivity());
-        //progressDialog.show();
-        StringRequest request = new StringRequest(Request.Method.GET, url, response -> {
+        progressDialog.show();
+        StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
+            progressDialog.dismiss();
 
             try {
                 JSONObject respObj1 = new JSONObject(response);
@@ -212,36 +266,37 @@ public class LoginFragment extends Fragment {
                 String person_name = respObj.getString("person_name");
                 String com_code = respObj.getString("com_code");
                 String user_image = respObj.getString("user_image");
-                String com_name = respObj.getString("com_name");
+               // String com_name = respObj.getString("com_name");
                 String user_mobile = respObj.getString("user_mobile");
-                String alternativemob = respObj.getString("user_mobile1");
+               // String alternativemob = respObj.getString("user_mobile1");
                 String user_email = respObj.getString("user_email");
-                String state_code = respObj.getString("state_code");
-                String city_code = respObj.getString("city_code");
-                String city_name = respObj.getString("city_name");
-                String state_name = respObj.getString("state_name");
+                //String state_code = respObj.getString("state_code");
+                //String city_code = respObj.getString("city_code");
+               // String city_name = respObj.getString("city_name");
+               // String state_name = respObj.getString("state_name");
                 String ref_code = respObj.getString("ref_code");
 
-               // Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 Global.editor = Global.sharedPreferences.edit();
                 Global.editor.putString("user_code", user_code);
                 Global.editor.putString("person_name", person_name);
                 Global.editor.putString("com_code", com_code);
-                Global.editor.putString("user_image", user_image);
-                Global.editor.putString("com_name", com_name);
+                 Global.editor.putString("user_image", user_image);
+               // Global.editor.putString("com_name", com_name);
                 Global.editor.putString("user_mobile", user_mobile);
-                Global.editor.putString("user_mobile1", alternativemob);
+              //  Global.editor.putString("user_mobile1", alternativemob);
                 Global.editor.putString("user_email", user_email);
-                Global.editor.putString("statecode", state_code);
-                Global.editor.putString("citycode", city_code);
-                Global.editor.putString("statename", state_name);
-                Global.editor.putString("cityname", city_name);
+                //Global.editor.putString("statecode", state_code);
+               // Global.editor.putString("citycode", city_code);
+               // Global.editor.putString("statename", state_name);
+               // Global.editor.putString("cityname", city_name);
                 Global.editor.putString("ref_code", ref_code);
                 Global.editor.putString("user_image", user_image);
                 Global.editor.commit();
 
-               /* startActivity(new Intent(getActivity(), PreferenceActivity.class));*/
-              //  finish();
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                //finish();
+                Toast.makeText(getActivity(), "Login Successfull", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
 
             } catch (JSONException e) {
@@ -251,17 +306,16 @@ public class LoginFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-
-//                if (error instanceof TimeoutError) {
-//                    Toast.makeText(LoginActivity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
-//                } else if (error instanceof NoConnectionError) {
-//                    Toast.makeText(LoginActivity.this, "No Connection Found", Toast.LENGTH_LONG).show();
-//                } else if (error instanceof ServerError) {
-//                    Toast.makeText(LoginActivity.this, "Server Error", Toast.LENGTH_LONG).show();
-//                } else if (error instanceof NetworkError) {
-//                    Toast.makeText(LoginActivity.this, "Network Error", Toast.LENGTH_LONG).show();
-//                } else if (error instanceof ParseError) {
-//                    Toast.makeText(LoginActivity.this, "Parse Error", Toast.LENGTH_LONG).show();}
+                if (error instanceof TimeoutError) {
+                    Toast.makeText(getActivity(), "Request Time-Out", Toast.LENGTH_LONG).show();
+            } else if (error instanceof NoConnectionError) {
+                   Toast.makeText(getActivity(), "No Connection Found", Toast.LENGTH_LONG).show();
+              } else if (error instanceof ServerError) {
+                   Toast.makeText(getActivity(), "Invalid Username or Password", Toast.LENGTH_LONG).show();
+               } else if (error instanceof NetworkError) {
+                   Toast.makeText(getActivity(), "Network Error", Toast.LENGTH_LONG).show();
+               } else if (error instanceof ParseError) {
+                    Toast.makeText(getActivity(), "Parse Error", Toast.LENGTH_LONG).show();}
             }
         }) {
             @Override
@@ -273,12 +327,11 @@ public class LoginFragment extends Fragment {
                 return headers;
             }
 
-        /*    @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("username", username);
                 return params;
-            }*/
+            }
         };
 
         request.setRetryPolicy(new DefaultRetryPolicy(
@@ -286,8 +339,6 @@ public class LoginFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
-
-
         queue.add(request);
     }
 

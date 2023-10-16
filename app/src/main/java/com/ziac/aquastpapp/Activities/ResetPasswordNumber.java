@@ -32,7 +32,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
     AppCompatButton GetOTPBtn;
     EditText FMobile;
     String mobile;
-    SharedPreferences sharedPreferences;
+    //SharedPreferences sharedPreferences;
     ProgressBar progressBar;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -43,8 +43,8 @@ public class ResetPasswordNumber extends AppCompatActivity {
         FMobile = findViewById(R.id.fmobile);
         GetOTPBtn = findViewById(R.id.n_OTPbtn);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String mobileno = sharedPreferences.getString("mobile", "");
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String mobileno = Global.sharedPreferences.getString("mobile", "");
 
         FMobile.setText(mobileno);
         progressBar = findViewById(R.id.progressbr);
@@ -77,7 +77,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
                     String issuccess = respObj.getString("isSuccess");
                     String error = respObj.getString("error");
 
-                    Global.editor = sharedPreferences.edit();
+                    Global.editor = Global.sharedPreferences.edit();
                     Global.editor.putString("mobile", mobile);
                     Global.editor.commit();
 
