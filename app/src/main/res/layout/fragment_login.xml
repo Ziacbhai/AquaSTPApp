@@ -48,7 +48,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/inputbg"
                         android:drawablePadding="5dp"
-                        android:hint="Email ID"
+                        android:hint="User Name"
                         android:inputType="textEmailAddress"
                         android:longClickable="true"
                         android:padding="10dp"

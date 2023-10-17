@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Intent intent;
     PopupWindow popUp;
     boolean click = true;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +50,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //if (!isNetworkAvailable()) {showToast("Internet connection lost !!");}
        // Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+       // getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
         Profile=findViewById(R.id.profileIcon);
 
         drawerLayout = findViewById(R.id.drawerlayout);
@@ -57,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        openFragment(new HomeFragment());
         Profile=findViewById(R.id.profileIcon);
         Profile.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(MainActivity.this, v);
@@ -67,12 +75,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (itemId == R.id.my_profile) {
                     startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                     return true;
-                } else if (itemId == R.id.contact) {
-                   // openFragment(new ChangePasswordFragment());
-                    return true;
-                } else if (itemId == R.id.nav_logout) {
+                }if (itemId == R.id.nav_logout) {
                     startActivity(new Intent(MainActivity.this, LoginSignupActivity.class));
                     return true;
+                }else {
+
                 }
                 return false;
             });
@@ -85,12 +92,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-                ImageView Profile_img;
-                Profile_img=drawerLayout.findViewById(R.id.profileIcon);
-
-
-                String userimage = Global.userimageurl + Global.sharedPreferences.getString("user_image", "");
-                Picasso.get().load(userimage).into(Profile_img);
+//                ImageView Profile_img;
+//                Profile_img=drawerLayout.findViewById(R.id.profileIcon);
+//                String userimage = Global.userimageurl + Global.sharedPreferences.getString("user_image", "");
+//                Picasso.get().load(userimage).into(Profile_img);
             }
 
             @Override
@@ -105,23 +110,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-
        // bottomNavigationView=findViewById(R.id.bottomNavigationView);
        // bottomNavigationView.setBackground(null);
-
 
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
 
-        int itemIDd = item.getItemId();
-
-        if (itemIDd == R.id.nav_logout) {
-            startActivity(new Intent(MainActivity.this, LoginSignupActivity.class));
-        }else{
-
+        if (itemId == R.id.nav_aboutus) {
+            startActivity(new Intent(MainActivity.this, AboutActivity.class));
+            return true;
         }
-        drawerLayout.closeDrawer(GravityCompat.START);
+        if (itemId == R.id.nav_share) {
+            shareContent();
+            return true;
+        }
+        if (itemId == R.id.nav_logout) {
+            startActivity(new Intent(MainActivity.this, LoginSignupActivity.class));
+            return true;
+        }
+
+        // Close the drawer after an item is selected (optional)
+        drawerLayout.closeDrawers();
         return true;
+    }
+    private void shareContent() {
+        // Create an intent to share content
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        String sAux = "\nClick the link to download the app from the Google Play Store\n\n";
+        sAux = sAux + "https://play.google.com/store/apps/details?id=com.ziac.aquastpapp\n\n";
+        shareIntent.putExtra(Intent.EXTRA_TEXT, sAux);
+        // Launch the sharing dialog
+        startActivity(Intent.createChooser(shareIntent, "Share via"));
+    }
+    private void openFragment(Fragment fragment){
+        HomeFragment homeFragment=new HomeFragment();
+        fragmentManager=getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
     }
 }

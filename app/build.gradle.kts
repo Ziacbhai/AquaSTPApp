@@ -56,4 +56,7 @@ dependencies {
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("com.squareup.okhttp3:okhttp:4.9.1")
 
+
+    implementation ("com.airbnb.android:lottie:3.4.0")
+
 }
