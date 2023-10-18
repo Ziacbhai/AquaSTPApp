@@ -168,7 +168,7 @@ public class ResetPassword extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                if (error instanceof TimeoutError) {
+               /* if (error instanceof TimeoutError) {
                     Global.customtoast(ResetPassword.this, getLayoutInflater(),"Request Time-Out");
                 } else if (error instanceof ServerError) {
                     Global.customtoast(ResetPassword.this, getLayoutInflater(),"ServerError");
@@ -189,7 +189,7 @@ public class ResetPassword extends AppCompatActivity {
                 else {
                     // Log.e("MyApp", "Something else: " + error.getMessage());
                     // Global.customtoast(requireActivity(), getLayoutInflater(), "Something else");
-                }
+                }*/
 
             }
         }){

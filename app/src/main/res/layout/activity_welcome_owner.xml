@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#eaeff5"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.WelcomeOwner">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_margin="10dp"
+        app:cardMaxElevation="10dp"
+        android:layout_gravity="center_horizontal"
+        app:cardCornerRadius="10dp"
+        android:layout_height="300dp">
+        <ImageView
+            android:id="@+id/imageurl"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:src="@drawable/aqua_login_img"/>
+    </androidx.cardview.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amaranth_bold"
+            android:gravity="center_horizontal"
+            android:text="Welcome"
+            android:textStyle="italic"
+            android:textColor="#01a4a3"
+            android:textSize="25sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <TextView
+            android:id="@+id/wname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Helloziac"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/wemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="ziac@gmail.com"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/wph"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="1234567890"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/WContinue"
+        android:layout_width="180dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Continue"
+        android:background="@drawable/btnbg"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_height="55dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1.2"
+            android:gravity="end"
+            android:text="In above detail's wrong ?"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/Clickhere"
+            android:layout_width="0dp"
+            android:layout_weight="0.8"
+            android:text=" Click here"
+            android:textColor="#F44336"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>

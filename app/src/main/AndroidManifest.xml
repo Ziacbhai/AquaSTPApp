@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission
         android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
@@ -40,11 +40,25 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.WelcomeSupervisor"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.WelcomeCustomer"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.WelcomeManager"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.WelcomeUser"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.WelcomeOwner"
+            android:exported="false" />
+        <activity
             android:name=".Activities.AboutActivity"
             android:exported="false"
             android:label="@string/title_activity_about"
             android:theme="@style/Theme.AquaSTPApp" />
-
         <activity
             android:name=".Activities.ProfileActivity"
             android:exported="false" />
@@ -95,6 +109,10 @@
         <activity
             android:name=".Activities.LoginFragment"
             android:exported="false" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

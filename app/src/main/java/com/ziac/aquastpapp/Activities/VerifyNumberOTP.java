@@ -143,28 +143,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 progressBar.setVisibility(View.GONE);
                // Global.customtoast(VerifyNumberOTP.this,getLayoutInflater(), error.getMessage());
-                if (error instanceof TimeoutError) {
-                    Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(),"Request Time-Out");
-                } else if (error instanceof ServerError) {
-                    Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(),"ServerError");
-                }  else if (error instanceof ParseError) {
-                    Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(),"Parse Error ");
-                }  else if (error instanceof AuthFailureError) {
-                    Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), "AuthFailureError");
-                } else if (error instanceof ServerError) {
-                    Log.e("MyApp", "ServerError: " + error.getMessage());
-                    Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), "ServerError");
-                } else if (error instanceof ParseError) {
-                    Log.e("MyApp", "ParseError: " + error.getMessage());
-                    Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), "Parse Error");
-                } else if (error instanceof AuthFailureError) {
-                    Log.e("MyApp", "AuthFailureError: " + error.getMessage());
-                    Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), "AuthFailureError");
-                }
-                else {
-                   // Log.e("MyApp", "Something else: " + error.getMessage());
-                     Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), "Something else");
-                }
+
 
             }
         }) {

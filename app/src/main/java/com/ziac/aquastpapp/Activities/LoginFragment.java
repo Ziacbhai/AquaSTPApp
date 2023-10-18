@@ -4,14 +4,12 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -27,8 +25,6 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,8 +34,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.chaos.view.BuildConfig;
-import com.google.android.material.textfield.TextInputEditText;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONException;
@@ -294,7 +288,7 @@ public class LoginFragment extends Fragment {
                 Global.editor.putString("user_image", user_image);
                 Global.editor.commit();
 
-                startActivity(new Intent(getActivity(), MainActivity.class));
+                startActivity(new Intent(getActivity(), WelcomeOwner.class));
                 //finish();
                 Toast.makeText(getActivity(), "Login Successfull", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
@@ -306,16 +300,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                if (error instanceof TimeoutError) {
-                    Toast.makeText(getActivity(), "Request Time-Out", Toast.LENGTH_LONG).show();
-            } else if (error instanceof NoConnectionError) {
-                   Toast.makeText(getActivity(), "No Connection Found", Toast.LENGTH_LONG).show();
-              } else if (error instanceof ServerError) {
-                   Toast.makeText(getActivity(), "Invalid Username or Password", Toast.LENGTH_LONG).show();
-               } else if (error instanceof NetworkError) {
-                   Toast.makeText(getActivity(), "Network Error", Toast.LENGTH_LONG).show();
-               } else if (error instanceof ParseError) {
-                    Toast.makeText(getActivity(), "Parse Error", Toast.LENGTH_LONG).show();}
+
             }
         }) {
             @Override

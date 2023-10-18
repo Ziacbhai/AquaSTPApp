@@ -142,7 +142,7 @@ public class VerifiyEmailOTP extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressBar.setVisibility(View.GONE);
-                // Global.customtoast(VerifyNumberOTP.this,getLayoutInflater(), error.getMessage());
+              /*  // Global.customtoast(VerifyNumberOTP.this,getLayoutInflater(), error.getMessage());
                 if (error instanceof TimeoutError) {
                     Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(),"Request Time-Out");
                 } else if (error instanceof ServerError) {
@@ -164,7 +164,7 @@ public class VerifiyEmailOTP extends AppCompatActivity {
                 else {
                     // Log.e("MyApp", "Something else: " + error.getMessage());
                     Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(), "Something else");
-                }
+                }*/
             }
         }){
             @Override

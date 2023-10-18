@@ -4,6 +4,7 @@ import static com.ziac.aquastpapp.Activities.Global.urlGetStates;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -31,6 +32,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,9 +78,9 @@ public class SignUpFragment extends Fragment {
     private boolean passwordvisible = false;
     boolean passwordVisible;
     String citycode;
-
-
     private zList cityname;
+
+     ProgressDialog progressDialog;
 
     private CheckBox checkBox;
 
@@ -97,6 +99,10 @@ public class SignUpFragment extends Fragment {
         Email = view.findViewById(R.id.remail);
         AUname = view.findViewById(R.id.auname);
         checkBox = view.findViewById(R.id.ccheckbox);
+
+        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(true);
 
         Registerbtn = view.findViewById(R.id.registerbtn);
 
@@ -191,7 +197,9 @@ public class SignUpFragment extends Fragment {
         Registerbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 CreateNewUser();
+                //progressBar.setVisibility(View.VISIBLE);
 
             }
 
@@ -239,29 +247,6 @@ public class SignUpFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (error instanceof TimeoutError) {
-                     Global.customtoast(requireActivity(), getLayoutInflater(),"Request Time-Out");
-                } else if (error instanceof ServerError) {
-                    Global.customtoast(requireActivity(), getLayoutInflater(),"ServerError");
-                }  else if (error instanceof ParseError) {
-                     Global.customtoast(requireActivity(), getLayoutInflater(),"Parse Error ");
-                }  else if (error instanceof AuthFailureError) {
-                     Global.customtoast(requireActivity(), getLayoutInflater(), "AuthFailureError");
-                } else if (error instanceof ServerError) {
-                Log.e("MyApp", "ServerError: " + error.getMessage());
-                Global.customtoast(requireActivity(), getLayoutInflater(), "ServerError");
-                } else if (error instanceof ParseError) {
-                Log.e("MyApp", "ParseError: " + error.getMessage());
-                Global.customtoast(requireActivity(), getLayoutInflater(), "Parse Error");
-                } else if (error instanceof AuthFailureError) {
-                Log.e("MyApp", "AuthFailureError: " + error.getMessage());
-                Global.customtoast(requireActivity(), getLayoutInflater(), "AuthFailureError");
-                }
-                else {
-               // Log.e("MyApp", "Something else: " + error.getMessage());
-               // Global.customtoast(requireActivity(), getLayoutInflater(), "Something else");
-            }
-
 
         }
         });
@@ -585,6 +570,7 @@ public class SignUpFragment extends Fragment {
 
         password = RPassword.getText().toString();
         cpassword = Cpassword.getText().toString();
+        progressDialog.show();
 
 
 
@@ -628,9 +614,11 @@ public class SignUpFragment extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest = new StringRequest(Request.Method.POST,Global.registration,
+
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String sresponse) {
+                        progressDialog.dismiss();
                         JSONObject response = null;
                         try {
                             response = new JSONObject(sresponse);

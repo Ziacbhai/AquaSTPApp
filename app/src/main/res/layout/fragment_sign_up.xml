@@ -32,7 +32,6 @@
                 android:background="@drawable/inputbg"
                 android:hint="Company Name"
                 android:inputType="textFilter"
-                android:maxLength="10"
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
@@ -240,7 +239,7 @@
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="match_parent"
+                android:layout_height="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1" />
 

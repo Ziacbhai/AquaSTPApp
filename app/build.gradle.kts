@@ -6,12 +6,14 @@ android {
     namespace = "com.ziac.aquastpapp"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "com.ziac.aquastpapp"
         minSdk = 19
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -29,6 +31,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
 }
 
 dependencies {
@@ -56,6 +59,7 @@ dependencies {
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("com.squareup.okhttp3:okhttp:4.9.1")
 
+    implementation ("com.android.support:multidex:1.0.3")
 
     implementation ("com.airbnb.android:lottie:3.4.0")
 
