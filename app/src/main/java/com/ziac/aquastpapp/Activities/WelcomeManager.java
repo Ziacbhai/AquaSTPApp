@@ -3,6 +3,7 @@ package com.ziac.aquastpapp.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,24 +11,32 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.larvalabs.svgandroid.SVG;
+import com.larvalabs.svgandroid.SVGParser;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.ziac.aquastpapp.R;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class WelcomeManager extends AppCompatActivity {
 
     private TextView Mname,Mmail,Mph,ClickHere;
     ImageView McircularImageView;
-    AppCompatButton wContinue;
+    AppCompatButton mContinue;
     private String username;
     Context context;
 
@@ -55,7 +64,7 @@ public class WelcomeManager extends AppCompatActivity {
         Mname.setText(usrname);
         Mmail.setText(mail);
         Mph.setText(mobile);
-
+/*
         Picasso.Builder builder=new Picasso.Builder(getApplication());
         Picasso picasso=builder.build();
         picasso.load(Uri.parse(userimage)).into(McircularImageView );
@@ -123,7 +132,8 @@ public class WelcomeManager extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
 
     }
+
 }

@@ -20,9 +20,9 @@
         app:cardCornerRadius="10dp"
         android:layout_height="300dp">
         <ImageView
-            android:id="@+id/SuperVisor"
+            android:id="@+id/sCircularImageView"
             android:layout_width="300dp"
-            android:layout_height="350dp"/>
+            android:layout_height="300dp"/>
     </androidx.cardview.widget.CardView>
     <View
         android:layout_width="match_parent"
@@ -43,18 +43,21 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
         <TextView
+            android:id="@+id/sName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="20sp"
             android:text="xxxxxxxxxxx"/>
         <TextView
+            android:id="@+id/sMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="20sp"
             android:text="xxxxxxxxxxx"/>
         <TextView
+            android:id="@+id/sPh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -70,7 +73,7 @@
         android:layout_height="20dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/OLogin"
+        android:id="@+id/sContinue"
         android:layout_width="180dp"
         android:layout_gravity="center_horizontal"
         android:text="Continue"

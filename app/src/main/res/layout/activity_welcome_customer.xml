@@ -20,8 +20,9 @@
         app:cardCornerRadius="10dp"
         android:layout_height="300dp">
         <ImageView
+            android:id="@+id/cCircularImageView"
             android:layout_width="300dp"
-            android:layout_height="350dp"
+            android:layout_height="300dp"
             android:src="@drawable/aqua_login_img"/>
     </androidx.cardview.widget.CardView>
     <View
@@ -43,18 +44,21 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
         <TextView
+            android:id="@+id/cname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="20sp"
             android:text="xxxxxxxxxxx"/>
         <TextView
+            android:id="@+id/cmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="20sp"
             android:text="xxxxxxxxxxx"/>
         <TextView
+            android:id="@+id/cph"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -70,7 +74,7 @@
         android:layout_height="20dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/OLogin"
+        android:id="@+id/cContinue"
         android:layout_width="180dp"
         android:layout_gravity="center_horizontal"
         android:text="Continue"

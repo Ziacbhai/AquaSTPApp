@@ -19,8 +19,9 @@
         app:cardCornerRadius="10dp"
         android:layout_height="300dp">
         <ImageView
+            android:id="@+id/UcircularImageView"
             android:layout_width="300dp"
-            android:layout_height="350dp"
+            android:layout_height="300dp"
             android:src="@drawable/aqua_login_img"/>
     </androidx.cardview.widget.CardView>
     <View
@@ -42,18 +43,21 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
         <TextView
+            android:id="@+id/uName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="20sp"
             android:text="xxxxxxxxxxx"/>
         <TextView
+            android:id="@+id/uMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="20sp"
             android:text="xxxxxxxxxxx"/>
         <TextView
+            android:id="@+id/uPh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"

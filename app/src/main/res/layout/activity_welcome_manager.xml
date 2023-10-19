@@ -73,7 +73,7 @@
         android:layout_height="20dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/OLogin"
+        android:id="@+id/mContinue"
         android:layout_width="180dp"
         android:layout_gravity="center_horizontal"
         android:text="Continue"

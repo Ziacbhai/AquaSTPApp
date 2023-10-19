@@ -132,8 +132,8 @@ public class WelcomeOwner extends AppCompatActivity {
         ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(WelcomeOwner.this,ProfileActivity.class);
-                startActivity(i);
+                Intent in = new Intent(WelcomeOwner.this,ProfileActivity.class);
+                startActivity(in);
 
             }
         });
@@ -141,8 +141,7 @@ public class WelcomeOwner extends AppCompatActivity {
         wContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeOwner.this,ProfileActivity.class);
-                startActivity(in);
+
             }
         });
 

@@ -39,6 +39,7 @@ import com.ziac.aquastpapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.acl.Owner;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -260,6 +261,7 @@ public class LoginFragment extends Fragment {
                 String person_name = respObj.getString("person_name");
                 String com_code = respObj.getString("com_code");
                 String user_image = respObj.getString("user_image");
+                String user_type = respObj.getString("user_type");
                // String com_name = respObj.getString("com_name");
                 String user_mobile = respObj.getString("user_mobile");
                // String alternativemob = respObj.getString("user_mobile1");
@@ -276,7 +278,7 @@ public class LoginFragment extends Fragment {
                 Global.editor.putString("person_name", person_name);
                 Global.editor.putString("com_code", com_code);
                  Global.editor.putString("user_image", user_image);
-               // Global.editor.putString("com_name", com_name);
+                Global.editor.putString("user_type", user_type);
                 Global.editor.putString("user_mobile", user_mobile);
               //  Global.editor.putString("user_mobile1", alternativemob);
                 Global.editor.putString("user_email", user_email);
@@ -288,11 +290,27 @@ public class LoginFragment extends Fragment {
                 Global.editor.putString("user_image", user_image);
                 Global.editor.commit();
 
-                startActivity(new Intent(getActivity(), WelcomeOwner.class));
                 //finish();
                 Toast.makeText(getActivity(), "Login Successfull", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
 
+                switch (user_type) {
+                    case "O":
+                        startActivity(new Intent(getActivity(), WelcomeOwner.class));
+                        break;
+                    case "C":
+                        startActivity(new Intent(getActivity(), WelcomeCustomer.class));
+                        break;
+                    case "S":
+                        startActivity(new Intent(getActivity(), WelcomeSupervisor.class));
+                        break;
+                    case "M":
+                        startActivity(new Intent(getActivity(), WelcomeManager.class));
+                        break;
+                    case "U":
+                        startActivity(new Intent(getActivity(), WelcomeUser.class));
+                        break;
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
