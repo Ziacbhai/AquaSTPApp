@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -41,7 +42,7 @@ public class WelcomeCustomer extends AppCompatActivity {
 
         CcircularImageView = findViewById(R.id.cCircularImageView);
         Cname = findViewById(R.id.cname);
-       // ClickHere = findViewById(R.id.Clickhere);
+        ClickHere = findViewById(R.id.Clickhere);
         cContinue = findViewById(R.id.cContinue);
 
         Cmail = findViewById(R.id.cmail);
@@ -65,6 +66,135 @@ public class WelcomeCustomer extends AppCompatActivity {
             public void onClick(View v) {
                 String userimage = Global.userimageurl + Global.sharedPreferences.getString("user_image", "");
                 showImage(picasso,userimage);
+
+            }
+
+            public void showImage(Picasso picasso, String userimage) {
+                Dialog builder = new Dialog(context);
+                builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                builder.getWindow().setBackgroundDrawable(
+                        new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        // Nothing
+                    }
+                });
+
+                // Calculate display dimensions
+                DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+                int screenWidth = displayMetrics.widthPixels;
+                int screenHeight = displayMetrics.heightPixels;
+
+                // Load the image using Picasso
+                picasso.load(Uri.parse(userimage)).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        ImageView imageView = new ImageView(getApplicationContext());
+
+                        // Calculate dimensions to fit the image within the screen
+                        int imageWidth = bitmap.getWidth();
+                        int imageHeight = bitmap.getHeight();
+                        float aspectRatio = (float) imageWidth / imageHeight;
+
+                        int newWidth = screenWidth;
+                        int newHeight = (int) (screenWidth / aspectRatio);
+                        if (newHeight > screenHeight) {
+                            newHeight = screenHeight;
+                            newWidth = (int) (screenHeight * aspectRatio);
+                        }
+
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(newWidth, newHeight);
+                        imageView.setLayoutParams(layoutParams);
+
+                        imageView.setImageBitmap(bitmap);
+
+                        builder.addContentView(imageView, layoutParams);
+                        builder.show();
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                        // Handle bitmap loading failure
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        // Prepare bitmap loading
+                    }
+                });
+            }
+        });
+
+        CcircularImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userimage = Global.userimageurl + Global.sharedPreferences.getString("user_image", "");
+                showImage(picasso,userimage);
+
+            }
+
+            public void showImage(Picasso picasso, String userimage) {
+                Dialog builder = new Dialog(context);
+                builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                builder.getWindow().setBackgroundDrawable(
+                        new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        // Nothing
+                    }
+                });
+
+                // Calculate display dimensions
+                DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+                int screenWidth = displayMetrics.widthPixels;
+                int screenHeight = displayMetrics.heightPixels;
+
+                // Load the image using Picasso
+                picasso.load(Uri.parse(userimage)).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        ImageView imageView = new ImageView(getApplicationContext());
+
+                        // Calculate dimensions to fit the image within the screen
+                        int imageWidth = bitmap.getWidth();
+                        int imageHeight = bitmap.getHeight();
+                        float aspectRatio = (float) imageWidth / imageHeight;
+
+                        int newWidth = screenWidth;
+                        int newHeight = (int) (screenWidth / aspectRatio);
+                        if (newHeight > screenHeight) {
+                            newHeight = screenHeight;
+                            newWidth = (int) (screenHeight * aspectRatio);
+                        }
+
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(newWidth, newHeight);
+                        imageView.setLayoutParams(layoutParams);
+
+                        imageView.setImageBitmap(bitmap);
+
+                        builder.addContentView(imageView, layoutParams);
+                        builder.show();
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                        // Handle bitmap loading failure
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        // Prepare bitmap loading
+                    }
+                });
+            }
+        });
+        ClickHere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(WelcomeCustomer.this,ProfileActivity.class);
+                startActivity(in);
 
             }
 

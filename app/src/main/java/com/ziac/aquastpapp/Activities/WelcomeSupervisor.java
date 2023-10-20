@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -46,6 +47,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
 
         Smail = findViewById(R.id.sMail);
         Sph = findViewById(R.id.sPh);
+        ClickHere = findViewById(R.id.Clickhere);
 
         String usrname = Global.sharedPreferences.getString("username", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
@@ -124,5 +126,15 @@ public class WelcomeSupervisor extends AppCompatActivity {
                 });
             }
         });
+
+        ClickHere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(WelcomeSupervisor.this,ProfileActivity.class);
+                startActivity(in);
+            }
+        });
+
+
     }
 }

@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -22,8 +23,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.larvalabs.svgandroid.SVG;
-import com.larvalabs.svgandroid.SVGParser;
+//import com.larvalabs.svgandroid.SVG;
+//import com.larvalabs.svgandroid.SVGParser;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.ziac.aquastpapp.R;
@@ -39,6 +40,7 @@ public class WelcomeManager extends AppCompatActivity {
     AppCompatButton mContinue;
     private String username;
     Context context;
+    Bitmap imageBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,7 @@ public class WelcomeManager extends AppCompatActivity {
         Mname.setText(usrname);
         Mmail.setText(mail);
         Mph.setText(mobile);
-/*
+
         Picasso.Builder builder=new Picasso.Builder(getApplication());
         Picasso picasso=builder.build();
         picasso.load(Uri.parse(userimage)).into(McircularImageView );
@@ -132,7 +134,73 @@ public class WelcomeManager extends AppCompatActivity {
                     }
                 });
             }
-        });*/
+        });
+
+
+        ClickHere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(WelcomeManager.this,ProfileActivity.class);
+                startActivity(in);
+
+            }
+
+            public void showImage(Picasso picasso, String userimage) {
+                Dialog builder = new Dialog(context);
+                builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                builder.getWindow().setBackgroundDrawable(
+                        new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        // Nothing
+                    }
+                });
+
+                // Calculate display dimensions
+                DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+                int screenWidth = displayMetrics.widthPixels;
+                int screenHeight = displayMetrics.heightPixels;
+
+                // Load the image using Picasso
+                picasso.load(Uri.parse(userimage)).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        ImageView imageView = new ImageView(getApplicationContext());
+
+                        // Calculate dimensions to fit the image within the screen
+                        int imageWidth = bitmap.getWidth();
+                        int imageHeight = bitmap.getHeight();
+                        float aspectRatio = (float) imageWidth / imageHeight;
+
+                        int newWidth = screenWidth;
+                        int newHeight = (int) (screenWidth / aspectRatio);
+                        if (newHeight > screenHeight) {
+                            newHeight = screenHeight;
+                            newWidth = (int) (screenHeight * aspectRatio);
+                        }
+
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(newWidth, newHeight);
+                        imageView.setLayoutParams(layoutParams);
+
+                        imageView.setImageBitmap(bitmap);
+
+                        builder.addContentView(imageView, layoutParams);
+                        builder.show();
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                        // Handle bitmap loading failure
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        // Prepare bitmap loading
+                    }
+                });
+            }
+        });
 
     }
 
