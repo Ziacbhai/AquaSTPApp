@@ -10,21 +10,43 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="30dp"/>
+        android:layout_height="50dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+        <!-- First CircleImageView -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageView"
+            android:layout_width="210dp"
+            android:layout_height="210dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            app:civ_border_color="#3FD5C7"
+            app:civ_border_width="4dp" />
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        android:layout_margin="10dp"
-        app:cardMaxElevation="10dp"
-        android:layout_gravity="center_horizontal"
-        app:cardCornerRadius="10dp"
-        android:layout_height="300dp">
-        <ImageView
-            android:id="@+id/imageurl"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:src="@drawable/aqua_login_img"/>
-    </androidx.cardview.widget.CardView>
+        <!-- First FloatingActionButton -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/imageView"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#EE0F0F"
+            android:clickable="true"
+            android:src="@drawable/camera_icon"
+            app:fabCustomSize="40dp"
+            app:fabSize="mini"
+            app:maxImageSize="20dp"
+            app:tint="@color/white" />
+
+    </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"/>
@@ -38,10 +60,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Welcome"
+            android:text="Greetings,esteemed Owner!"
             android:textStyle="italic"
             android:textColor="#01a4a3"
             android:textSize="25sp" />
+        <View
+            android:layout_width="100dp"
+            android:background="#F44336"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_height="2dp"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
@@ -53,8 +82,9 @@
             android:gravity="center_horizontal"
             android:fontFamily="@font/amaranth_bold"
             android:text="Helloziac"
+            android:textStyle="italic"
             android:textColor="@color/black"
-            android:textSize="22sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/wemail"
@@ -62,7 +92,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="ziac@gmail.com"
-            android:textSize="20sp"/>
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/wph"
@@ -70,15 +100,35 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="1234567890"
-            android:textSize="18sp" />
+            android:textSize="15sp"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="100dp"/>
+            android:layout_height="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:gravity="center"
+                android:text="The helm of AquaSTP awaits."
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:textSize="15dp"
+            android:padding="2dp"
+            android:gravity="center_horizontal"
+            android:text="dive into comprehensive insights."
+            android:layout_height="wrap_content"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="40dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/WContinue"

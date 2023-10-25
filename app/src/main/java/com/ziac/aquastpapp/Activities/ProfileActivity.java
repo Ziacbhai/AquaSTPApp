@@ -82,7 +82,7 @@ public class ProfileActivity extends AppCompatActivity {
         String dealername = Global.sharedPreferences.getString("person_name", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
-        String userimage = Global.userimageurl + Global.sharedPreferences.getString("user_image", "");
+        String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
 
         Picasso.Builder builder=new Picasso.Builder(getApplication());
@@ -97,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userimage = Global.userimageurl + Global.sharedPreferences.getString("user_image", "");
+                String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
                 showImage(picasso,userimage);
 
             }

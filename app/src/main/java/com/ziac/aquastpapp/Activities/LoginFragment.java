@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
@@ -296,19 +297,29 @@ public class LoginFragment extends Fragment {
 
                 switch (user_type) {
                     case "O":
-                        startActivity(new Intent(getActivity(), WelcomeOwner.class));
+                        Intent o = new Intent(getActivity(), WelcomeOwner.class);
+                        o.setType(Settings.ACTION_SYNC_SETTINGS);
+                        getActivity().startActivity(o);
                         break;
                     case "C":
-                        startActivity(new Intent(getActivity(), WelcomeCustomer.class));
+                        Intent c = (new Intent(getActivity(), WelcomeCustomer.class));
+                        c.setType(Settings.ACTION_SYNC_SETTINGS);
+                        getActivity().startActivity(c);
                         break;
                     case "S":
-                        startActivity(new Intent(getActivity(), WelcomeSupervisor.class));
+                        Intent s = (new Intent(getActivity(), WelcomeSupervisor.class));
+                        s.setType(Settings.ACTION_SYNC_SETTINGS);
+                        getActivity().startActivity(s);
                         break;
                     case "M":
-                        startActivity(new Intent(getActivity(), WelcomeManager.class));
+                        Intent m =(new Intent(getActivity(), WelcomeManager.class));
+                        m.setType(Settings.ACTION_SYNC_SETTINGS);
+                        getActivity().startActivity(m);
                         break;
                     case "U":
-                        startActivity(new Intent(getActivity(), WelcomeUser.class));
+                        Intent u =(new Intent(getActivity(), WelcomeUser.class));
+                        u.setType(Settings.ACTION_SYNC_SETTINGS);
+                        getActivity().startActivity(u);
                         break;
                 }
             } catch (JSONException e) {
