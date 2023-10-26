@@ -154,7 +154,7 @@
             android:layout_width="0dp"
             android:layout_weight="1.2"
             android:gravity="end"
-            android:text="In above detail's wrong ?"
+            android:text="If above Detail's wrong ?"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/Clickhere"

@@ -147,8 +147,7 @@ public class LoginFragment extends Fragment {
         privacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://ziacsoft.com/privacy.html")));
+                startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://ziacsoft.com/privacy.html")));
             }
         });
 

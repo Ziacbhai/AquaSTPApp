@@ -114,6 +114,14 @@ public class WelcomeCustomer extends AppCompatActivity {
 
             }
         });
+
+        cContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(WelcomeCustomer.this,MainActivity.class);
+                startActivity(in);
+            }
+        });
     }
 
     public void showImage(@NonNull Picasso picasso, String userimage) {

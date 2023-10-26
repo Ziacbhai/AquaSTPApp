@@ -95,7 +95,7 @@ public class WelcomeManager extends AppCompatActivity {
 
         Mname = findViewById(R.id.Mname);
         ClickHere = findViewById(R.id.Clickhere);
-        //wContinue = findViewById(R.id.WContinue);
+        mContinue = findViewById(R.id.mContinue);
 
         Mmail = findViewById(R.id.Mmail);
         Mph = findViewById(R.id.Mph);
@@ -142,6 +142,14 @@ public class WelcomeManager extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(WelcomeManager.this,ProfileActivity.class);
+                startActivity(in);
+            }
+        });
+
+        mContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(WelcomeManager.this,MainActivity.class);
                 startActivity(in);
             }
         });

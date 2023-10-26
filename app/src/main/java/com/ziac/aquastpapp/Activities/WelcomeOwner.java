@@ -58,9 +58,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WelcomeOwner extends AppCompatActivity {
 
-   private TextView Wname,Mailid,Mobno,ClickHere;
+    TextView Wname,Mailid,Mobno,ClickHere;
     CircleImageView ImageView;
-    AppCompatButton wContinue;
+    AppCompatButton oContinue;
     private String username;
     Context context;
     FloatingActionButton fab;
@@ -77,7 +77,7 @@ public class WelcomeOwner extends AppCompatActivity {
         ImageView = findViewById(R.id.imageView);
         Wname = findViewById(R.id.wname);
         ClickHere = findViewById(R.id.Clickhere);
-        wContinue = findViewById(R.id.WContinue);
+        oContinue = findViewById(R.id.oContinue);
         fab = findViewById(R.id.floating);
 
         Mailid = findViewById(R.id.wemail);
@@ -176,6 +176,14 @@ public class WelcomeOwner extends AppCompatActivity {
                         // Prepare bitmap loading
                     }
                 });
+            }
+        });
+
+        oContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(WelcomeOwner.this,MainActivity.class);
+                startActivity(in);
             }
         });
 

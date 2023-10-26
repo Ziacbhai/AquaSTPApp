@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(MainActivity.this, LoginSignupActivity.class));
             return true;
         }
-
         // Close the drawer after an item is selected (optional)
         drawerLayout.closeDrawers();
         return true;

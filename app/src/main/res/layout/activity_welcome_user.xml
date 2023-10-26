@@ -126,7 +126,7 @@
         android:layout_height="40dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/OLogin"
+        android:id="@+id/uContinue"
         android:layout_width="180dp"
         android:layout_gravity="center_horizontal"
         android:text="Continue"
@@ -145,7 +145,7 @@
             android:layout_width="0dp"
             android:layout_weight="1.2"
             android:gravity="end"
-            android:text="In above detail's wrong ?"
+            android:text="If above Detail's wrong ?"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/Clickhere"

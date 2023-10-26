@@ -17,13 +17,13 @@ import com.ziac.aquastpapp.R;
 
 public class AboutActivity extends AppCompatActivity {
 
-    CardView Website ,CallUs,MailUs,ChatUs,LinkedIn,FaceBook,Instagram,WhatsApp;
+   private CardView Website ,CallUs,MailUs,ChatUs,LinkedIn,FaceBook,Instagram,WhatsApp;
 
     LinearLayout Locate;
 
     LottieAnimationView Ziac ;
 
-   String Gmail;
+    String Gmail;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -43,16 +43,14 @@ public class AboutActivity extends AppCompatActivity {
         WhatsApp = findViewById(R.id.whatsApp);
 
         Ziac = findViewById(R.id.animationView);
-// Declaring the animation view
+       // Declaring the animation view
         LottieAnimationView animationView
                 = findViewById(R.id.animationView);
-        animationView
-                .addAnimatorUpdateListener(
+        animationView.addAnimatorUpdateListener(
                         (animation) -> {
                            // Global.customtoast(this,getLayoutInflater(), "Working");
-                        });
-        animationView
-                .playAnimation();
+                          });
+        animationView.playAnimation();
 
         if (animationView.isAnimating()) {
             // Do something.
@@ -113,7 +111,7 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://192.168.1.7/AquaSTP/")));
+                        Uri.parse("https://www.facebook.com/ziacsoft/")));
             }
         });
         LinkedIn.setOnClickListener(new View.OnClickListener() {
@@ -127,11 +125,10 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://192.168.1.7/AquaSTP/")));
+                        Uri.parse("https://twitter.com/ziac3" +
+                                "soft")));
             }
         });
-
-
 
     }
 }

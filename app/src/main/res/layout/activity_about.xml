@@ -314,13 +314,13 @@
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="50dp"
-                                android:src="@drawable/whatsapp" />
+                                android:src="@drawable/twitter" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:text="Whats App"
+                                android:text="Twitter"
                                 android:textSize="15dp" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>

@@ -74,7 +74,7 @@ public class WelcomeUser extends AppCompatActivity {
         ImageView = findViewById(R.id.imageView);
         Uname = findViewById(R.id.uName);
         ClickHere = findViewById(R.id.Clickhere);
-        uContinue = findViewById(R.id.sContinue);
+        uContinue = findViewById(R.id.uContinue);
 
         Umail = findViewById(R.id.uMail);
         Uph = findViewById(R.id.uPh);
@@ -113,6 +113,14 @@ public class WelcomeUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(WelcomeUser.this,ProfileActivity.class);
+                startActivity(in);
+            }
+        });
+
+        uContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(WelcomeUser.this,MainActivity.class);
                 startActivity(in);
             }
         });

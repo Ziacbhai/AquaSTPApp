@@ -121,6 +121,14 @@ public class WelcomeSupervisor extends AppCompatActivity {
             }
         });
 
+        sContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(WelcomeSupervisor.this,MainActivity.class);
+                startActivity(in);
+            }
+        });
+
     }
 
     public void showImage(@NonNull Picasso picasso, String userimage) {
@@ -290,7 +298,8 @@ public class WelcomeSupervisor extends AppCompatActivity {
                 JSONObject respObj = new JSONObject(respObj1.getString("data"));
 
                 String user_image = respObj.getString("user_image");
-                Log.d("MyTag", "user_image: " + user_image);
+                Log.d("MyTag", "Profile image: " + user_image);
+
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 Global.editor = Global.sharedPreferences.edit();
                 Global.editor.putString("user_image", user_image);
@@ -318,7 +327,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", null).toString();
+                String accesstoken = Global.sharedPreferences.getString("access_token", null);
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
@@ -327,14 +336,11 @@ public class WelcomeSupervisor extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("username", username);
+                params.put("username", Global.sharedPreferences.getString("username",null));
                 return params;
             }
         };
         queue.add(request);
     }
-
-
-
 
 }
