@@ -83,10 +83,10 @@
                         android:layout_height="50dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/btnbg"
+                        android:background="@drawable/profilebtnupdate"
                         android:padding="5dp"
-                        android:text="\Login"
-                        android:textAllCaps="false"
+                        android:text="Login"
+                        android:textAllCaps="true"
                         android:textColor="#FFFBEB"
                         android:textSize="20sp" />
 
@@ -162,6 +162,15 @@
                 android:layout_marginTop="2dp"
                 android:text="Privacy policy"
                 android:textColor="@color/appcolor" />
+
+            <TextView
+                android:id="@+id/version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                android:text=""
+                android:textColor="@color/black" />
 
             <View
                 android:layout_width="fill_parent"

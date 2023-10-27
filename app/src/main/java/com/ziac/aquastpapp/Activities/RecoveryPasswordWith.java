@@ -1,6 +1,7 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,7 +13,7 @@ import com.ziac.aquastpapp.R;
 
 public class RecoveryPasswordWith extends AppCompatActivity {
 
-    TextView Remail,Rusername,Rmobile;
+    CardView Remail,Rusername,Rmobile;
 
     @SuppressLint("MissingInflatedId")
     @Override

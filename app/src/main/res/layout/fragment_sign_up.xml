@@ -233,7 +233,7 @@
                 android:background="@drawable/btnbg"
                 android:padding="10dp"
                 android:text="Register"
-                android:textAllCaps="false"
+                android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
 

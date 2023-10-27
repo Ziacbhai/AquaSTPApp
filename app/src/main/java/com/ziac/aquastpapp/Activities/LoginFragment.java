@@ -35,6 +35,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.chaos.view.BuildConfig;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONException;
@@ -81,6 +82,10 @@ public class LoginFragment extends Fragment {
         forgotpwd = view.findViewById(R.id.btnftpass);
         RememberMe = view.findViewById(R.id.RcheckBox);
 
+        TextView versionName = view.findViewById(R.id.version);
+        versionName.setText("Version No:" + BuildConfig.VERSION_NAME);
+
+
         Login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,12 +117,6 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Logging in...");
-        progressDialog.setCancelable(true);
-
-       // TextView versionName = findViewById(R.id.version);
-       // versionName.setText("Ver No:" + BuildConfig.VERSION_NAME);
 
         RememberMe.setChecked(false);
         try {
@@ -216,15 +215,6 @@ public class LoginFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                if (error instanceof TimeoutError) {
-                     Global.customtoast(requireActivity(), getLayoutInflater(),"Request Time-Out");
-                } else if (error instanceof ServerError) {
-                    Global.customtoast(getActivity(), getLayoutInflater(),"Invalid Username or Password");
-                }  else if (error instanceof ParseError) {
-                     Global.customtoast(requireActivity(), getLayoutInflater(),"Parse Error ");
-                }  else if (error instanceof AuthFailureError) {
-                     Global.customtoast(requireActivity(), getLayoutInflater(), "AuthFailureError");
-                }
             }
         }) {
             @Override
@@ -249,7 +239,7 @@ public class LoginFragment extends Fragment {
 
         String url = Global.getuserprofileurl;
         RequestQueue queue= Volley.newRequestQueue(getActivity());
-        progressDialog.show();
+       // progressDialog.show();
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
             progressDialog.dismiss();
 

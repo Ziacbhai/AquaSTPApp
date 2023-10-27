@@ -35,10 +35,11 @@
                 android:layout_marginLeft="50dp">
 
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="32dp"
+                    android:textStyle="bold"
+                    android:textColor="#FF5722"
                     android:text="Pumps" />
 
 
@@ -80,9 +81,11 @@
                 android:layout_marginLeft="50dp">
 
                 <TextView
+                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="32dp"
+                    android:textColor="#2196F3"
                     android:text="Blowers" />
 
             </LinearLayout>
@@ -122,10 +125,11 @@
                 android:layout_marginLeft="50dp">
 
                 <TextView
-
+                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="32dp"
+                    android:textColor="#ED1B62"
                     android:text="Meters" />
 
             </LinearLayout>
@@ -165,11 +169,13 @@
                 android:layout_marginLeft="50dp">
 
                 <TextView
-
+                    android:textSize="32dp"
+                    android:textColor="#19E81C"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:textStyle="bold"
                     android:text="Sensors"
-                    android:textSize="16dp" />
+                     />
 
             </LinearLayout>
 
@@ -178,7 +184,7 @@
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@drawable/senser"
+            android:src="@drawable/sensor"
             android:layout_centerVertical="true"
             android:elevation="13dp"/>
 
@@ -208,10 +214,11 @@
                 android:layout_marginLeft="50dp">
 
                 <TextView
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16dp"
+                    android:textSize="32dp"
+                    android:textStyle="bold"
+                    android:textColor="#3F51B5"
                     android:text="Filters" />
 
             </LinearLayout>

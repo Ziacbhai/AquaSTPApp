@@ -130,7 +130,7 @@
         android:layout_width="180dp"
         android:layout_gravity="center_horizontal"
         android:text="Continue"
-        android:background="@drawable/btnbg"
+        android:background="@drawable/profilebtnupdate"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:layout_height="55dp"/>

@@ -12,6 +12,7 @@ import com.ziac.aquastpapp.R;
 
 import java.util.ArrayList;
 
+import Models.CommonModelClass;
 import Models.zList;
 
 public class Global {
@@ -24,7 +25,7 @@ public class Global {
 
     //    Local url
    // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl="http://192.168.1.11:6968/";
+    public static String baseurl="http://192.168.1.16:6968/";
     public static String userImageurl = baseurl+"WebsiteData/Users/";
     public static String urlUpdateprofileImage = baseurl +"api/Users/UpdateProfilePhoto";
 
@@ -42,11 +43,14 @@ public class Global {
     public static String getuserprofileurl = baseurl + "api/Users/GetUserProfile";
     public static String updateProfile = baseurl + "api/Users/UpdateProfile";
 
-
     public static String tokenurl = baseurl+"TOKEN";
+
+    public static String urlmystock = baseurl + "api/Vehicles/GetMyStock";
 
     public static ArrayList<zList> statearraylist;
     public static ArrayList<zList> cityarraylist;
+
+    public static ArrayList<CommonModelClass> equipmentNameslist;
 
     public static void  customtoast(Context context, LayoutInflater inflater, String msg){
         //LayoutInflater inflater = getLayoutInflater();

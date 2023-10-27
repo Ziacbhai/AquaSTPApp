@@ -40,24 +40,11 @@
         android:theme="@style/Theme.AquaSTPApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
-            android:name=".Activities.FilterActivity"
+            android:name=".Activities.PumpsFragment"
             android:exported="false" />
-        <activity
-            android:name=".Activities.SensorActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.MeterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.BlowerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.PumpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.Data"
-            android:exported="false" />
+
         <activity
             android:name=".Activities.OwnerDashBoard"
             android:exported="false" />

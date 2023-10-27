@@ -21,16 +21,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="@color/appcolor"
+                android:background="@drawable/btn_gradient"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
+                <!--<ImageView
                     android:id="@+id/backarrowbtn"
                     android:layout_width="30dp"
                     android:layout_marginStart="5dp"
                     android:src="@drawable/baseline_backbutton_icon"
-                    android:layout_height="40dp"/>
+                    android:layout_height="40dp"/>-->
 
                 <View
                     android:layout_width="fill_parent"
