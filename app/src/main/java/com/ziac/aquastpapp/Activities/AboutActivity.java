@@ -1,6 +1,7 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
@@ -30,6 +31,7 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         Website = findViewById(R.id.websiteaqua);
         CallUs = findViewById(R.id.callUs);

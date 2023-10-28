@@ -34,8 +34,7 @@
         android:text="from"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#01A3A3"
-        android:textSize="20dp"
-        android:textStyle="italic" />
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/txt"

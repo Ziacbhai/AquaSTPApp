@@ -1,6 +1,7 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
@@ -35,7 +36,7 @@ import java.util.Map;
 public class VerifyUserNameOTP extends AppCompatActivity {
     String username,mobile,otp ,Newpassword;
     TextView Resendotp;
-    PinView pinView;
+    PinView mPinView;
     AppCompatButton UVerify;
     ProgressBar progressBar;
     boolean passwordvisible;
@@ -48,8 +49,8 @@ public class VerifyUserNameOTP extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_user_name_otp);
-
-        pinView=findViewById(R.id.pinview);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        mPinView=findViewById(R.id.pinview);
         UVerify=findViewById(R.id.uverifyotp);
 
         progressBar = findViewById(R.id.progressbr);
@@ -87,7 +88,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
                 // getting the PinView data
                 Newpassword = UNewpwd.getText().toString();
                // username = UNewpwd.getText().toString();
-                otp = pinView.getText().toString();
+                otp = mPinView.getText().toString();
                 progressBar.setVisibility(View.VISIBLE);
               /*  if (Newpassword.length() < 6 ){
                     Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(), "Password should not be less than 6 digits !!");
@@ -101,6 +102,8 @@ public class VerifyUserNameOTP extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     private void UserDataUsingVolley(String otp) {

@@ -5,26 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="10dp"
     tools:context=".Activities.VerifiyEmailOTP">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/btnbgoutline"
         android:src="@drawable/aqua_logo" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:background="@drawable/btnbgoutline"
+        android:padding="10dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="@drawable/profilebtnupdate"
             android:gravity="center"
             android:text="Verification"
@@ -32,6 +36,14 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:src="@drawable/verify"
+            android:padding="15dp"
+            android:layout_height="75dp" />
         <View
             android:layout_width="match_parent"
             android:layout_height="20dp" />
@@ -45,11 +57,9 @@
             android:text="You will get a OTP via EMAIL"
             android:textSize="16sp"
             android:textStyle="bold" />
-
         <View
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
-
+            android:layout_height="20dp" />
 
         <com.chaos.view.PinView
             android:id="@+id/pinview"
@@ -70,7 +80,7 @@
         </com.chaos.view.PinView>
         <View
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="10dp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Didn't recive the OTP ? " />
+                android:text="Didn't receive the OTP ? " />
 
             <TextView
                 android:id="@+id/resendEotp"
@@ -98,7 +108,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/enewpassword"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="55dp"
             android:layout_marginTop="10dp"
             android:layout_margin="10dp"
             android:longClickable="true"
@@ -111,7 +121,7 @@
             android:textSize="18sp" />
         <View
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="10dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/everifyotp"
@@ -120,6 +130,18 @@
             android:background="@drawable/profilebtnupdate"
             android:text="VERIFY"
             android:textColor="@color/white" />
+        <ProgressBar
+            android:layout_marginTop="5dp"
+            android:id="@+id/progressbr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0"
+            android:progressDrawable="@drawable/custom_progress_dialog" />
     </LinearLayout>
 
 </LinearLayout>

@@ -2,6 +2,21 @@ package Models;
 
 public class CommonModelClass {
     private String Image_id,Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,Form_Factor,Phase,Cleaning_RunningFrequency_HRS;
+    private int Card_view ;
+
+
+    public CommonModelClass(String image_id, String manufacturer, String equipmentName, String specification, String equipmentNumber_Id, String rating_Capacity, String form_Factor, String phase, String cleaning_RunningFrequency_HRS, int card_view) {
+        Image_id = image_id;
+        Manufacturer = manufacturer;
+        EquipmentName = equipmentName;
+        Specification = specification;
+        EquipmentNumber_Id = equipmentNumber_Id;
+        Rating_Capacity = rating_Capacity;
+        Form_Factor = form_Factor;
+        Phase = phase;
+        Cleaning_RunningFrequency_HRS = cleaning_RunningFrequency_HRS;
+        Card_view = card_view;
+    }
 
     public String getImage_id() {
         return Image_id;
@@ -10,8 +25,6 @@ public class CommonModelClass {
     public void setImage_id(String image_id) {
         Image_id = image_id;
     }
-
-
 
     public String getManufacturer() {
         return Manufacturer;
@@ -68,11 +81,20 @@ public class CommonModelClass {
     public void setPhase(String phase) {
         Phase = phase;
     }
+
     public String getCleaning_RunningFrequency_HRS() {
         return Cleaning_RunningFrequency_HRS;
     }
 
     public void setCleaning_RunningFrequency_HRS(String cleaning_RunningFrequency_HRS) {
         Cleaning_RunningFrequency_HRS = cleaning_RunningFrequency_HRS;
+    }
+
+    public int getCard_view() {
+        return Card_view;
+    }
+
+    public void setCard_view(int card_view) {
+        Card_view = card_view;
     }
 }

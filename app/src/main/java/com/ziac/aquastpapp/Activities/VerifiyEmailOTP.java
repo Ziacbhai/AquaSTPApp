@@ -1,6 +1,7 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
@@ -57,7 +58,7 @@ public class VerifiyEmailOTP extends AppCompatActivity {
         EVerify=findViewById(R.id.verifyotp);
         progressBar = findViewById(R.id.progressbr);
         ENewpwd = findViewById(R.id.enewpassword);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Resendotp = findViewById(R.id.resendEotp);
 
         Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifiyEmailOTP.this, ResetPasswordEmail.class)));

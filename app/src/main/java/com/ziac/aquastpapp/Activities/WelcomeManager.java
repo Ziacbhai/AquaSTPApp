@@ -3,6 +3,7 @@ package com.ziac.aquastpapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
@@ -92,7 +93,7 @@ public class WelcomeManager extends AppCompatActivity {
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         fab = findViewById(R.id.floating);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Mname = findViewById(R.id.Mname);
         ClickHere = findViewById(R.id.Clickhere);
         mContinue = findViewById(R.id.mContinue);
@@ -253,7 +254,7 @@ public class WelcomeManager extends AppCompatActivity {
 
 
                     Global.customtoast(WelcomeManager.this, getLayoutInflater(), "Image uploaded successfully");
-                    // getuserdetails();
+                    getuserdetails();
 
                 } else {
                     if (resp.has("error")) {
@@ -291,12 +292,8 @@ public class WelcomeManager extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
-
                 params.put("fileName",image);
-
                 Log.d("YourTag", "Key: fileName, Value: " + image);
-
-
 
                 return params;
             }
@@ -305,6 +302,8 @@ public class WelcomeManager extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+
+
     private String imageToString(Bitmap imageBitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
@@ -312,6 +311,53 @@ public class WelcomeManager extends AppCompatActivity {
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 
+    private void getuserdetails() {
 
+        String url = Global.getuserprofileurl;
+        RequestQueue queue= Volley.newRequestQueue(WelcomeManager.this);
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
+
+            try {
+                JSONObject respObj1 = new JSONObject(response);
+                JSONObject respObj = new JSONObject(respObj1.getString("data"));
+
+                String user_image = respObj.getString("user_image");
+                Log.d("MyTag", "Profile image: " + user_image);
+
+                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                Global.editor = Global.sharedPreferences.edit();
+                Global.editor.putString("user_image", user_image);
+                Global.editor.commit();
+                String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+                Picasso.get().load(userimage).into(ImageView);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", null);
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("username", Global.sharedPreferences.getString("username",null));
+                return params;
+            }
+        };
+        queue.add(request);
+    }
 
 }

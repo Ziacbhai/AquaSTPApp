@@ -2,6 +2,7 @@ package com.ziac.aquastpapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -20,13 +21,14 @@ import com.ziac.aquastpapp.R;
 public class SliderScreen extends AppCompatActivity {
 
     private ViewPager viewPager;
-
+    private static final String TAG = "SliderActivity";
     private TextView Next,Skip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slider_screen);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         Next = findViewById(R.id.next);
         Skip = findViewById(R.id.skip);
@@ -135,6 +137,7 @@ public class SliderScreen extends AppCompatActivity {
     private void gotosignin() {
 
         startActivity(new Intent(SliderScreen.this, LoginSignupActivity.class));
+        finish();
     }
 
 

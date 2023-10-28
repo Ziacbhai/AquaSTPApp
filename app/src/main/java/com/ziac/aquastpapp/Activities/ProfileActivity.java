@@ -6,8 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -65,6 +68,8 @@ public class ProfileActivity extends AppCompatActivity {
     TextView pName,pNum,pEmail;
     private static final int CAMERA_REQUEST = 0;
 
+    ImageView Backarrowbtn;
+
     @SuppressLint("MissingInflatedId")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -72,8 +77,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         fab=findViewById(R.id.floating);
-
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+       Backarrowbtn = findViewById(R.id.backarrowbtn);
         pName = findViewById(R.id.uName);
         pNum = findViewById(R.id.uNumber);
         pEmail = findViewById(R.id.uEmail);
@@ -107,6 +112,14 @@ public class ProfileActivity extends AppCompatActivity {
                 String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
                 showImage(picasso,userimage);
 
+            }
+        });
+
+
+        Backarrowbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
@@ -357,5 +370,10 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-
+    @Override
+    public void onBackPressed() {
+       // Log.d("CDA", "onBackPressed Called");
+        Intent setIntent = new Intent(this, MainActivity.class);
+        startActivity(setIntent);
+    }
 }

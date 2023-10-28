@@ -1,6 +1,7 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
@@ -39,7 +40,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_number);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         FMobile = findViewById(R.id.fmobile);
         GetOTPBtn = findViewById(R.id.n_OTPbtn);
 

@@ -4,7 +4,7 @@
         android:icon="@drawable/baseline_share_icon"
         android:title="Profile" />
 
-    <item android:id="@+id/about"
+    <item android:id="@+id/aboutt"
         android:icon="@drawable/baseline_star_rate_icon"
         android:title="About" />
 

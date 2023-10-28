@@ -28,11 +28,6 @@
         android:title="Share"/>
 
     <item
-        android:id="@+id/nav_data"
-        android:icon="@drawable/baseline_dataset_24"
-        android:title="Data"/>
-
-    <item
         android:id="@+id/nav_logout"
         android:icon="@drawable/baseline_logout_icon"
         android:title="Logout"/>

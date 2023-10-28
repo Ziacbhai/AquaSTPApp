@@ -3,6 +3,7 @@ package com.ziac.aquastpapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
@@ -71,7 +72,7 @@ public class WelcomeOwner extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_owner);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         ImageView = findViewById(R.id.imageView);
@@ -284,8 +285,6 @@ public class WelcomeOwner extends AppCompatActivity {
             try {
                 if (resp.getBoolean("success")) {
 
-
-
                     Global.customtoast(WelcomeOwner.this, getLayoutInflater(), "Image uploaded successfully");
                     // getuserdetails();
 
@@ -325,12 +324,8 @@ public class WelcomeOwner extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
-
                 params.put("fileName",image);
-
-                Log.d("YourTag", "Key: fileName, Value: " + image);
-
-
+              //  Log.d("YourTag", "Key: fileName, Value: " + image);
 
                 return params;
             }
@@ -339,10 +334,14 @@ public class WelcomeOwner extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+
+
     private String imageToString(Bitmap imageBitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
+
+
 }

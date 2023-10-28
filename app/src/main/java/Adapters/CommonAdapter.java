@@ -1,6 +1,10 @@
 package Adapters;
 
+import static com.google.android.material.internal.ViewUtils.getBackgroundColor;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -22,15 +27,20 @@ import Models.CommonModelClass;
 public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.CommonViewHolder> {
     private  List<CommonModelClass> commonModelClassList;
     Context context;
+
+    CardView dc;
     public CommonAdapter(List<CommonModelClass> commonModelClassList, Context context) {
         this.commonModelClassList = commonModelClassList;
         this.context = this.context;
     }
 
+    @SuppressLint("MissingInflatedId")
     @NonNull
     @Override
     public CommonAdapter.CommonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pump_details, parent , false);
+        dc = view.findViewById(R.id.cardView);
+        dc.setCardBackgroundColor(Color.parseColor("#FF6363"));
         return new CommonViewHolder(view);
     }
 
@@ -39,6 +49,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.CommonView
         Picasso.Builder builder=new Picasso.Builder(context);
         Picasso picasso=builder.build();
         picasso.load(Uri.parse(Global.userImageurl + commonModelClassList.get(position).getImage_id())).error(R.drawable.no_image_available_icon);
+
 
         holder.Manufacturer.setText(commonModelClassList.get(position).getManufacturer());
         holder.EquipmentName.setText(commonModelClassList.get(position).getEquipmentName());

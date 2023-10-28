@@ -1,6 +1,7 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
@@ -24,7 +25,7 @@ public class RecoveryPasswordWith extends AppCompatActivity {
         Remail = findViewById(R.id.remail);
         Rusername = findViewById(R.id.rusername);
         Rmobile = findViewById(R.id.rmobile);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
        Remail.setOnClickListener(new View.OnClickListener() {
            @Override

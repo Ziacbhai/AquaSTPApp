@@ -74,9 +74,7 @@
         <activity
             android:name=".Activities.MainActivity"
             android:exported="false" />
-        <activity
-            android:name=".Activities.ResetPassword"
-            android:exported="false" />
+
         <activity
             android:name=".Activities.VerifyNumberOTP"
             android:exported="false" />

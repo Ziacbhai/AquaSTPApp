@@ -3,6 +3,7 @@ package com.ziac.aquastpapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -12,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.SyncStateContract;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle toggle;
     Intent intent;
     PopupWindow popUp;
+
     boolean click = true;
 
 
@@ -49,14 +52,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         //if (!isNetworkAvailable()) {showToast("Internet connection lost !!");}
-       // Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-       // getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+       // getSupportActionBar().setDisplayShowTitleEnabled(false);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         toolbar = findViewById(R.id.toolbar);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         Profile=findViewById(R.id.profileIcon);
-
         drawerLayout = findViewById(R.id.drawerlayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
@@ -78,7 +81,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }if (itemId == R.id.nav_logout) {
                     startActivity(new Intent(MainActivity.this, LoginSignupActivity.class));
                     return true;
-                }else {
+                }if (itemId == R.id.aboutt) {
+                    startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                    return true;
+                }
+                else {
 
                 }
                 return false;

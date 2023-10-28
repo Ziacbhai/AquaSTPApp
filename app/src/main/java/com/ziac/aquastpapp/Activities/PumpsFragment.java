@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,17 +57,18 @@ public class PumpsFragment extends Fragment {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
-        View view = inflater.inflate(R.layout.fragment_pump, container, false);
-        PumpRecyclerview = view.findViewById(R.id.pump_recyclerview);
+        View view = inflater.inflate(R.layout.pump_details, container, false);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+       /* PumpRecyclerview = view.findViewById(R.id.pump_recyclerview);
         PumpRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         PumpRecyclerview.setHasFixedSize(true);
-        PumpRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        PumpRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));*/
 
-        getpump();
+       // getpump();
         return view;
     }
 
-    private void getpump() {
+    /*private void getpump() {
 
         if (!isNetworkAvailable()) {
 
@@ -139,7 +141,7 @@ public class PumpsFragment extends Fragment {
             }
         };
         queue.add(jsonObjectRequest);
-    }
+    }*/
 
     private boolean isNetworkAvailable() {
         Context context = requireContext();

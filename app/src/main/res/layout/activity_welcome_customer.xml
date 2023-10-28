@@ -146,14 +146,15 @@
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1.2"
+            android:layout_weight="1"
             android:gravity="end"
-            android:text="If above Detail's wrong ?"
+            android:layout_marginStart="25dp"
+            android:text="Details wrong ?"
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/Clickhere"
             android:layout_width="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="1"
             android:text=" Click here"
             android:textColor="#F44336"
             android:layout_height="wrap_content"/>

@@ -3,8 +3,10 @@ package com.ziac.aquastpapp.Activities;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -37,11 +39,12 @@ public class ResetPasswordUserName extends AppCompatActivity {
     ProgressBar progressBar;
     String username;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_user_name);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Getotp1 = findViewById(R.id.submitotp);
         etusername = findViewById(R.id.fgusername);
         progressBar = findViewById(R.id.progressbr);

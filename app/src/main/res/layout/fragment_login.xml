@@ -169,32 +169,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="2dp"
-                android:text=""
+                android:text="1.0.0"
                 android:textColor="@color/black" />
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="2dp"
-                android:layout_weight="1" />
-
-
-            <!--android:textColor="#FFFBEB"-->
-            <!--android:background="@drawable/btnbgedited"-->
-            <ProgressBar
-                android:id="@+id/idLoadingPB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone" />
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:srcCompat="@drawable/ic_baseline_red_eye_" />
-
 
         </LinearLayout>
 

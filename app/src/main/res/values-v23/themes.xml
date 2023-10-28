@@ -6,4 +6,10 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
     </style>
+
+    <style name="CardView." parent="CardView">
+
+        <item name="android:foreground">@drawable/card_view</item>
+    </style>
+
 </resources>

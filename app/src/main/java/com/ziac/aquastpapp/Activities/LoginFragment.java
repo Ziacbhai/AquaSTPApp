@@ -8,8 +8,10 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.method.HideReturnsTransformationMethod;
@@ -71,6 +73,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         Context context = getContext();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Logging in...");
         progressDialog.setCancelable(true);
@@ -82,8 +85,9 @@ public class LoginFragment extends Fragment {
         forgotpwd = view.findViewById(R.id.btnftpass);
         RememberMe = view.findViewById(R.id.RcheckBox);
 
+
         TextView versionName = view.findViewById(R.id.version);
-        versionName.setText("Version No:" + BuildConfig.VERSION_NAME);
+        versionName.setText("v1.0.0" + BuildConfig.VERSION_NAME);
 
 
         Login_btn.setOnClickListener(new View.OnClickListener() {

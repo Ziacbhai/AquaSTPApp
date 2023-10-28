@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="#FFFBEB">
 
-
     <item android:id="@+id/dashboard"
         android:tint="@color/black"
         android:title="Dashboard" />

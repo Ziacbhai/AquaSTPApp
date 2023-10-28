@@ -3,6 +3,7 @@ package com.ziac.aquastpapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
@@ -68,7 +69,7 @@ public class WelcomeUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_user);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         fab = findViewById(R.id.floating);
         ImageView = findViewById(R.id.imageView);
@@ -262,13 +263,11 @@ public class WelcomeUser extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                String image = imageToString(imageBitmap);
+               // String image = imageToString(imageBitmap);
+                params.put("username", Global.sharedPreferences.getString("username",null));
+               // params.put("fileName",image);
 
-                params.put("fileName",image);
-
-                Log.d("YourTag", "Key: fileName, Value: " + image);
-
-
+              //  Log.d("YourTag", "Key: fileName, Value: " + image);
 
                 return params;
             }

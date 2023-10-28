@@ -3,6 +3,7 @@ package com.ziac.aquastpapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
@@ -68,7 +69,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_supervisor);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         ImageView = findViewById(R.id.imageView);
