@@ -39,11 +39,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp" />
+
         <ImageView
             android:layout_width="match_parent"
-            android:src="@drawable/verify"
-            android:padding="15dp"
-            android:layout_height="75dp" />
+            android:layout_height="75dp"
+            android:padding="10dp"
+            android:src="@drawable/verification" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="20dp" />

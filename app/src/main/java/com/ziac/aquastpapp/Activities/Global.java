@@ -13,6 +13,7 @@ import com.ziac.aquastpapp.R;
 import java.util.ArrayList;
 
 import Models.CommonModelClass;
+import Models.StpModelClass;
 import Models.zList;
 
 public class Global {
@@ -49,7 +50,9 @@ public class Global {
 
     public static ArrayList<zList> statearraylist;
     public static ArrayList<zList> cityarraylist;
+    public static ArrayList<zList> listcompany;
 
+    public static ArrayList<StpModelClass> StpList;
     public static ArrayList<CommonModelClass> equipmentNameslist;
 
     public static void  customtoast(Context context, LayoutInflater inflater, String msg){

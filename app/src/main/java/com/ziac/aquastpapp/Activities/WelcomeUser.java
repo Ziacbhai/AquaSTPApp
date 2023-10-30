@@ -225,7 +225,7 @@ public class WelcomeUser extends AppCompatActivity {
 
 
                     Global.customtoast(WelcomeUser.this, getLayoutInflater(), "Image uploaded successfully");
-                    // getuserdetails();
+                     getuserdetails();
 
                 } else {
                     if (resp.has("error")) {
@@ -274,6 +274,55 @@ public class WelcomeUser extends AppCompatActivity {
         };
 
         requestQueue.add(stringRequest);
+    }
+
+    private void getuserdetails() {
+
+        String url = Global.getuserprofileurl;
+        RequestQueue queue= Volley.newRequestQueue(WelcomeUser.this);
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
+
+            try {
+                JSONObject respObj1 = new JSONObject(response);
+                JSONObject respObj = new JSONObject(respObj1.getString("data"));
+
+                String user_image = respObj.getString("user_image");
+                Log.d("MyTag", "Profile image: " + user_image);
+
+                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                Global.editor = Global.sharedPreferences.edit();
+                Global.editor.putString("user_image", user_image);
+                Global.editor.commit();
+                String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+                Picasso.get().load(userimage).into(ImageView);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", null);
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+
+                params.put("username", Global.sharedPreferences.getString("username",null));
+                return params;
+            }
+        };
+        queue.add(request);
     }
 
     private String imageToString(Bitmap imageBitmap) {

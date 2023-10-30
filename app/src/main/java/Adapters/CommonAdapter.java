@@ -59,6 +59,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.CommonView
         holder.FormFactor.setText(commonModelClassList.get(position).getForm_Factor());
         holder.Phase.setText(commonModelClassList.get(position).getPhase());
         holder.CleaningRunningFrequencyHRS.setText(commonModelClassList.get(position).getCleaning_RunningFrequency_HRS());
+
     }
 
     @Override

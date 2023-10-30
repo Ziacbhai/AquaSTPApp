@@ -1,6 +1,7 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -11,23 +12,55 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.provider.SyncStateContract;
+import android.util.Base64;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import com.ziac.aquastpapp.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -38,14 +71,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     FloatingActionButton fab;
     NavigationView navigationView;
-    ImageView Profile;
+    CircleImageView Profile;
     ActionBarDrawerToggle toggle;
+    TextView usernameH,usermailH;
     Intent intent;
     PopupWindow popUp;
 
     boolean click = true;
+    private String username,userimage,mail;
 
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +94,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
-        Profile=findViewById(R.id.profileIcon);
+
+        Profile = findViewById(R.id.profileIcon);
         drawerLayout = findViewById(R.id.drawerlayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
@@ -69,7 +105,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         openFragment(new HomeFragment());
-        Profile=findViewById(R.id.profileIcon);
+
+        userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+        username = Global.sharedPreferences.getString("username", "");
+        mail = Global.sharedPreferences.getString("user_email", "");
+
+
+        Picasso.Builder builder=new Picasso.Builder(getApplication());
+        Picasso picasso=builder.build();
+        picasso.load(Uri.parse(userimage))
+               .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .into(Profile );
+
+
         Profile.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(MainActivity.this, v);
             popup.getMenuInflater().inflate(R.menu.profile_pop_up, popup.getMenu());
@@ -99,10 +148,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-//                ImageView Profile_img;
-//                Profile_img=drawerLayout.findViewById(R.id.profileIcon);
-//                String userimage = Global.userimageurl + Global.sharedPreferences.getString("user_image", "");
-//                Picasso.get().load(userimage).into(Profile_img);
+                CircleImageView ProfileH;
+                TextView usernameH,usermailH;
+                ProfileH=drawerLayout.findViewById(R.id.profileH);
+
+                userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+                Picasso.get().load(userimage).into(ProfileH);
+
+                usernameH =drawerLayout. findViewById(R.id.headerusername);
+                usermailH = drawerLayout.findViewById(R.id.headeremail);
+
+                usernameH.setText(username);
+                usermailH.setText(mail);
+
+
             }
 
             @Override
@@ -117,10 +176,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+       /* Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+                showImage(picasso,userimage);
+
+            }
+        });*/
+
        // bottomNavigationView=findViewById(R.id.bottomNavigationView);
        // bottomNavigationView.setBackground(null);
 
+
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();

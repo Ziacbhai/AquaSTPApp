@@ -33,18 +33,19 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/aqua_logo"
+        android:icon="@drawable/aqualauncher"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/aqua_logo"
+        android:roundIcon="@drawable/aqualauncher"
         android:supportsRtl="true"
         android:theme="@style/Theme.AquaSTPApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Activities.SelectCompanyActivity"
+            android:exported="false" />
         <activity
             android:name=".Activities.PumpsFragment"
             android:exported="false" />
-
         <activity
             android:name=".Activities.OwnerDashBoard"
             android:exported="false" />
@@ -74,7 +75,6 @@
         <activity
             android:name=".Activities.MainActivity"
             android:exported="false" />
-
         <activity
             android:name=".Activities.VerifyNumberOTP"
             android:exported="false" />
@@ -116,7 +116,6 @@
         <activity
             android:name=".Activities.LoginFragment"
             android:exported="false" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

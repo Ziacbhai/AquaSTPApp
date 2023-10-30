@@ -250,9 +250,6 @@ public class WelcomeManager extends AppCompatActivity {
 
             try {
                 if (resp.getBoolean("success")) {
-
-
-
                     Global.customtoast(WelcomeManager.this, getLayoutInflater(), "Image uploaded successfully");
                     getuserdetails();
 
@@ -300,15 +297,6 @@ public class WelcomeManager extends AppCompatActivity {
         };
 
         requestQueue.add(stringRequest);
-    }
-
-
-
-    private String imageToString(Bitmap imageBitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
-        byte[] imgBytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 
     private void getuserdetails() {
@@ -359,5 +347,15 @@ public class WelcomeManager extends AppCompatActivity {
         };
         queue.add(request);
     }
+
+
+    private String imageToString(Bitmap imageBitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
+        byte[] imgBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    }
+
+
 
 }

@@ -10,8 +10,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.method.HideReturnsTransformationMethod;
@@ -26,26 +27,26 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.chaos.view.BuildConfig;
 import com.ziac.aquastpapp.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.acl.Owner;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import Adapters.LocationsAdapter;
+import Models.StpModelClass;
 
 
 public class LoginFragment extends Fragment {
@@ -56,6 +57,12 @@ public class LoginFragment extends Fragment {
     TextView TermsOfUse, privacy, forgotpwd;
     boolean passwordVisible;
     String username, pwd;
+
+    RecyclerView CompanyrecyclerView;
+
+    LocationsAdapter locationsAdapter;
+
+    StpModelClass stpModelClass;
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -84,8 +91,9 @@ public class LoginFragment extends Fragment {
         privacy = view.findViewById(R.id.privacy);
         forgotpwd = view.findViewById(R.id.btnftpass);
         RememberMe = view.findViewById(R.id.RcheckBox);
+        CompanyrecyclerView = view.findViewById(R.id.stp_recyclerview);
 
-
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         TextView versionName = view.findViewById(R.id.version);
         versionName.setText("v1.0.0" + BuildConfig.VERSION_NAME);
 
@@ -250,21 +258,18 @@ public class LoginFragment extends Fragment {
             try {
                 JSONObject respObj1 = new JSONObject(response);
                 JSONObject respObj = new JSONObject(respObj1.getString("data"));
-
                 String user_code = respObj.getString("user_code");
                 String person_name = respObj.getString("person_name");
                 String com_code = respObj.getString("com_code");
                 String user_image = respObj.getString("user_image");
                 String user_type = respObj.getString("user_type");
-               // String com_name = respObj.getString("com_name");
                 String user_mobile = respObj.getString("user_mobile");
-               // String alternativemob = respObj.getString("user_mobile1");
                 String user_email = respObj.getString("user_email");
-                //String state_code = respObj.getString("state_code");
-                //String city_code = respObj.getString("city_code");
-               // String city_name = respObj.getString("city_name");
-               // String state_name = respObj.getString("state_name");
                 String ref_code = respObj.getString("ref_code");
+
+                ///////////DATA2
+                /*String site_code = respObj.getString("site_code");
+                String site_name = respObj.getString("site_name");*/
 
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 Global.editor = Global.sharedPreferences.edit();
@@ -274,15 +279,46 @@ public class LoginFragment extends Fragment {
                  Global.editor.putString("user_image", user_image);
                 Global.editor.putString("user_type", user_type);
                 Global.editor.putString("user_mobile", user_mobile);
-              //  Global.editor.putString("user_mobile1", alternativemob);
                 Global.editor.putString("user_email", user_email);
-                //Global.editor.putString("statecode", state_code);
-               // Global.editor.putString("citycode", city_code);
-               // Global.editor.putString("statename", state_name);
-               // Global.editor.putString("cityname", city_name);
                 Global.editor.putString("ref_code", ref_code);
                 Global.editor.putString("user_image", user_image);
+
+                ////////////Data2
+                /*Global.editor.putString("site_code", site_code);
+                Global.editor.putString("site_name", site_name);*/
+
                 Global.editor.commit();
+                ////////////////////////////////
+                //JSONObject respObjdata2 = new JSONObject(respObj1.getString("data2"));
+                JSONArray liststp = new JSONArray(respObj1.getString("data2"));
+
+                //JSONObject listofstp;
+
+                int i;
+                Global.StpList = new ArrayList<StpModelClass>();
+                for (i = 0;i<liststp.length();i++){
+                    final JSONObject e;
+                    try {
+                        e = liststp.getJSONObject(i);
+                    } catch (JSONException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    //listofstp = new JSONObject(liststp[i]("site_code"));
+                    stpModelClass = new StpModelClass();
+                    stpModelClass.setSuCode(e.getString("su_code"));
+                    stpModelClass.setSTPName(e.getString("site_name"));
+                    Global.StpList.add(stpModelClass);
+                }
+
+                Global.listcompany =new ArrayList<>();
+
+
+                CompanyrecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                LocationsAdapter stplocation = new LocationsAdapter(Global.listcompany, getContext());
+                CompanyrecyclerView.setAdapter(stplocation);
+
+               // getallmodels();
 
                 //finish();
                 Toast.makeText(getActivity(), "Login Successfull", Toast.LENGTH_SHORT).show();
@@ -290,27 +326,27 @@ public class LoginFragment extends Fragment {
 
                 switch (user_type) {
                     case "O":
-                        Intent o = new Intent(getActivity(), WelcomeOwner.class);
+                        Intent o = new Intent(getActivity(), SelectCompanyActivity.class);
                         o.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(o);
                         break;
                     case "C":
-                        Intent c = (new Intent(getActivity(), WelcomeCustomer.class));
+                        Intent c = (new Intent(getActivity(), SelectCompanyActivity.class));
                         c.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(c);
                         break;
                     case "S":
-                        Intent s = (new Intent(getActivity(), WelcomeSupervisor.class));
+                        Intent s = (new Intent(getActivity(), SelectCompanyActivity.class));
                         s.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(s);
                         break;
                     case "M":
-                        Intent m =(new Intent(getActivity(), WelcomeManager.class));
+                        Intent m =(new Intent(getActivity(), SelectCompanyActivity.class));
                         m.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(m);
                         break;
                     case "U":
-                        Intent u =(new Intent(getActivity(), WelcomeUser.class));
+                        Intent u =(new Intent(getActivity(), SelectCompanyActivity.class));
                         u.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(u);
                         break;
@@ -336,7 +372,10 @@ public class LoginFragment extends Fragment {
 
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
+                params.put("site_code", Global.sharedPreferences.getString("sitecode", "0"));
+                params.put("site_name", Global.sharedPreferences.getString("sitename", "0"));
                 params.put("username", username);
+
                 return params;
             }
         };
