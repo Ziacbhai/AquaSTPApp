@@ -17,7 +17,7 @@ public class LoginSignupActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager2 viewPager2;
-    ViewPagerAdapter adapter;
+    ViewPagerAdapter loginadapter;
     private boolean doubleBackToExitPressedOnce;
 
     @SuppressLint("MissingInflatedId")
@@ -33,9 +33,9 @@ public class LoginSignupActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("LOGIN"));
         tabLayout.addTab(tabLayout.newTab().setText("REGISTER"));
 
-        viewPager2 = findViewById(R.id.viewpager22);
-        adapter  =  new ViewPagerAdapter(this);
-        viewPager2.setAdapter(adapter);
+        viewPager2 = findViewById(R.id.viewpagerlogin);
+        loginadapter  =  new ViewPagerAdapter(this);
+        viewPager2.setAdapter(loginadapter);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

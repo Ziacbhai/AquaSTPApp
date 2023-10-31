@@ -150,7 +150,7 @@ public class WelcomeManager extends AppCompatActivity {
         mContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeManager.this,MainActivity.class);
+                Intent in = new Intent(WelcomeManager.this,SelectCompanyActivity.class);
                 startActivity(in);
             }
         });

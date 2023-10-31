@@ -33,10 +33,10 @@
             android:background="@drawable/btnbgoutline"/>
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewpager22"
+            android:id="@+id/viewpagerlogin"
             android:layout_width="match_parent"
-            app:layout_anchorGravity="bottom"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:layout_anchorGravity="bottom" />
 
     </LinearLayout>
 

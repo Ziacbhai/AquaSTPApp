@@ -62,7 +62,7 @@ public class WelcomeOwner extends AppCompatActivity {
     TextView Wname,Mailid,Mobno,ClickHere;
     CircleImageView ImageView;
     AppCompatButton oContinue;
-    private String username;
+    String username;
     Context context;
     FloatingActionButton fab;
     Bitmap imageBitmap;
@@ -183,7 +183,7 @@ public class WelcomeOwner extends AppCompatActivity {
         oContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeOwner.this,MainActivity.class);
+                Intent in = new Intent(WelcomeOwner.this, MainActivity.class);
                 startActivity(in);
             }
         });

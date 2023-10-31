@@ -10,7 +10,22 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="14dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="11dp"
+            android:src="@drawable/close" />
+    </RelativeLayout>
+
+
 
 
     <RelativeLayout

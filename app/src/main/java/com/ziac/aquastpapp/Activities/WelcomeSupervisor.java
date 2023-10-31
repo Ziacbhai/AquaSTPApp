@@ -125,7 +125,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
         sContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeSupervisor.this,MainActivity.class);
+                Intent in = new Intent(WelcomeSupervisor.this, SelectCompanyActivity.class);
                 startActivity(in);
             }
         });
@@ -331,6 +331,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("username", Global.sharedPreferences.getString("username",null));
+
                 return params;
             }
         };

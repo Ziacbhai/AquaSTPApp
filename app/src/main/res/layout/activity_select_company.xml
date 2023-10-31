@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#eaeff5"
@@ -21,22 +21,101 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fillViewport="true"
         android:scrollbars="none">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/stp_recyclerview"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="70dp"
-                android:layout_height="wrap_content"/>
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp"
+                app:cardMaxElevation="10dp"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:background="@drawable/selectcompany"
+                        android:layout_height="40dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:text="Code"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                android:layout_height="match_parent"/>
+
+                            <View
+                                android:layout_width="1dp"
+                                android:background="@color/my_light_primary"
+                                android:layout_height="match_parent"/>
+                            <TextView
+                                android:layout_weight="3.4"
+                                android:text="STP"
+                                android:gravity="center"
+                                android:layout_width="0dp"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:layout_height="match_parent"/>
+                            <View
+                                android:layout_width="1dp"
+                                android:background="@color/my_light_primary"
+                                android:layout_height="match_parent"/>
+
+                            <TextView
+                                android:text=""
+                                android:gravity="center_horizontal"
+                                android:layout_weight="1.5"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"/>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/stp_recyclerview"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="10dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
+
 
     </androidx.core.widget.NestedScrollView>
 

@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,10 +28,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -45,7 +50,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import Adapters.LocationsAdapter;
+import Adapters.SiteLocationAdapter;
 import Models.StpModelClass;
 
 
@@ -58,9 +63,10 @@ public class LoginFragment extends Fragment {
     boolean passwordVisible;
     String username, pwd;
 
-    RecyclerView CompanyrecyclerView;
+    RecyclerView siteLocationRecyclerView;
 
-    LocationsAdapter locationsAdapter;
+    private SiteLocationAdapter siteLocationAdapter;
+
 
     StpModelClass stpModelClass;
     @Override
@@ -91,7 +97,18 @@ public class LoginFragment extends Fragment {
         privacy = view.findViewById(R.id.privacy);
         forgotpwd = view.findViewById(R.id.btnftpass);
         RememberMe = view.findViewById(R.id.RcheckBox);
-        CompanyrecyclerView = view.findViewById(R.id.stp_recyclerview);
+
+
+
+       /* siteLocationRecyclerView = view.findViewById(R.id.stp_recyclerview);
+        siteLocationRecyclerView.setHasFixedSize(true);
+        siteLocationRecyclerView.setAdapter(siteLocationAdapter);
+        siteLocationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL , false));*/
+
+
+//      COMMENTED BELOW LINE FOR TESTING
+//        siteLocationAdapter = new SiteLocationAdapter(Global.StpList, getContext());
+
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         TextView versionName = view.findViewById(R.id.version);
@@ -267,35 +284,28 @@ public class LoginFragment extends Fragment {
                 String user_email = respObj.getString("user_email");
                 String ref_code = respObj.getString("ref_code");
 
-                ///////////DATA2
-                /*String site_code = respObj.getString("site_code");
-                String site_name = respObj.getString("site_name");*/
 
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 Global.editor = Global.sharedPreferences.edit();
                 Global.editor.putString("user_code", user_code);
                 Global.editor.putString("person_name", person_name);
                 Global.editor.putString("com_code", com_code);
-                 Global.editor.putString("user_image", user_image);
+                Global.editor.putString("user_image", user_image);
                 Global.editor.putString("user_type", user_type);
                 Global.editor.putString("user_mobile", user_mobile);
                 Global.editor.putString("user_email", user_email);
                 Global.editor.putString("ref_code", ref_code);
                 Global.editor.putString("user_image", user_image);
 
-                ////////////Data2
-                /*Global.editor.putString("site_code", site_code);
-                Global.editor.putString("site_name", site_name);*/
-
                 Global.editor.commit();
-                ////////////////////////////////
-                //JSONObject respObjdata2 = new JSONObject(respObj1.getString("data2"));
-                JSONArray liststp = new JSONArray(respObj1.getString("data2"));
+
+
+              /*  JSONArray liststp = new JSONArray(respObj1.getString("data2"));
 
                 //JSONObject listofstp;
 
                 int i;
-                Global.StpList = new ArrayList<StpModelClass>();
+                Global.StpList = new ArrayList<>();
                 for (i = 0;i<liststp.length();i++){
                     final JSONObject e;
                     try {
@@ -306,47 +316,57 @@ public class LoginFragment extends Fragment {
 
                     //listofstp = new JSONObject(liststp[i]("site_code"));
                     stpModelClass = new StpModelClass();
-                    stpModelClass.setSuCode(e.getString("su_code"));
-                    stpModelClass.setSTPName(e.getString("site_name"));
-                    Global.StpList.add(stpModelClass);
-                }
+                    stpModelClass.setSucode(e.getString("su_code"));
+                    stpModelClass.setStpname(e.getString("site_name"));
 
-                Global.listcompany =new ArrayList<>();
+                    stpModelClass.setComcode(e.getString("com_code"));
+                    stpModelClass.setUsercode(e.getString("user_code"));
+                    stpModelClass.setPersonname(e.getString("person_name"));
+                    stpModelClass.setUsername(e.getString("username"));
+                    stpModelClass.setSstp1code(e.getString("sstp1_code"));
+                    stpModelClass.setStpname(e.getString("stp_name"));
+                    stpModelClass.setSitecode(e.getString("site_code"));
+                    stpModelClass.setStpactive(e.getString("stp_active"));
+                    Global.StpList.add(stpModelClass);*/
+               // }
 
+                /*siteLocationAdapter = new SiteLocationAdapter(Global.StpList, getContext());
+                siteLocationRecyclerView.setAdapter(siteLocationAdapter);*/
 
-                CompanyrecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                LocationsAdapter stplocation = new LocationsAdapter(Global.listcompany, getContext());
-                CompanyrecyclerView.setAdapter(stplocation);
+                //Global.StpList = new ArrayList<>();
+//                siteLocationAdapter = new SiteLocationAdapter(Global.StpList, getContext());
+//                siteLocationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL , false));
+//                siteLocationRecyclerView.setHasFixedSize(true); // Optional, but can help improve performance
+//                siteLocationRecyclerView.setAdapter(siteLocationAdapter);
 
                // getallmodels();
-
                 //finish();
                 Toast.makeText(getActivity(), "Login Successfull", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
 
                 switch (user_type) {
                     case "O":
-                        Intent o = new Intent(getActivity(), SelectCompanyActivity.class);
+                        Intent o = new Intent(getActivity(), WelcomeOwner.class);
                         o.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(o);
                         break;
                     case "C":
-                        Intent c = (new Intent(getActivity(), SelectCompanyActivity.class));
+                        Intent c = (new Intent(getActivity(), WelcomeCustomer.class));
                         c.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(c);
                         break;
                     case "S":
-                        Intent s = (new Intent(getActivity(), SelectCompanyActivity.class));
+                        Intent s = (new Intent(getActivity(), WelcomeSupervisor.class));
                         s.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(s);
                         break;
                     case "M":
-                        Intent m =(new Intent(getActivity(), SelectCompanyActivity.class));
+                        Intent m =(new Intent(getActivity(), WelcomeManager.class));
                         m.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(m);
                         break;
                     case "U":
-                        Intent u =(new Intent(getActivity(), SelectCompanyActivity.class));
+                        Intent u =(new Intent(getActivity(), WelcomeUser.class));
                         u.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(u);
                         break;
@@ -358,6 +378,24 @@ public class LoginFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
+                if (error instanceof TimeoutError) {
+                    Global.customtoast(getActivity(), getLayoutInflater(),"Request Time-Out");
+                } else if (error instanceof ServerError) {
+                    Global.customtoast(getActivity(), getLayoutInflater(),"ServerError");
+                }  else if (error instanceof ParseError) {
+                    Global.customtoast(getActivity(), getLayoutInflater(),"Parse Error ");
+                }  else if (error instanceof AuthFailureError) {
+                    Global.customtoast(getActivity(), getLayoutInflater(), "AuthFailureError");
+                } else if (error instanceof ServerError) {
+                    Log.e("MyApp", "ServerError: " + error.getMessage());
+                    Global.customtoast(getActivity(), getLayoutInflater(), "ServerError");
+                } else if (error instanceof ParseError) {
+                    Log.e("MyApp", "ParseError: " + error.getMessage());
+                    Global.customtoast(getActivity(), getLayoutInflater(), "Parse Error");
+                } else if (error instanceof AuthFailureError) {
+                    Log.e("MyApp", "AuthFailureError: " + error.getMessage());
+                    Global.customtoast(getActivity(), getLayoutInflater(), "AuthFailureError");
+                }
 
             }
         }) {
@@ -372,8 +410,6 @@ public class LoginFragment extends Fragment {
 
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("site_code", Global.sharedPreferences.getString("sitecode", "0"));
-                params.put("site_name", Global.sharedPreferences.getString("sitename", "0"));
                 params.put("username", username);
 
                 return params;

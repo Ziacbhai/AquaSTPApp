@@ -119,7 +119,7 @@ public class WelcomeCustomer extends AppCompatActivity {
         cContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeCustomer.this,MainActivity.class);
+                Intent in = new Intent(WelcomeCustomer.this,SelectCompanyActivity.class);
                 startActivity(in);
             }
         });

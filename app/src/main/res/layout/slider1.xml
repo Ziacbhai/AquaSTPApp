@@ -7,7 +7,7 @@
     <!--ramesh-->
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="510sp"
+        android:layout_height="480sp"
         android:src="@drawable/slide1" />
 
     <TextView
@@ -25,6 +25,10 @@
         android:text="Seamless monitoring, superior control"
         android:textAlignment="center"
         android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
 
 
 </LinearLayout>
