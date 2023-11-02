@@ -28,13 +28,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -119,7 +115,7 @@ public class WelcomeCustomer extends AppCompatActivity {
         cContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeCustomer.this,SelectCompanyActivity.class);
+                Intent in = new Intent(WelcomeCustomer.this, SelectLocationActivity.class);
                 startActivity(in);
             }
         });

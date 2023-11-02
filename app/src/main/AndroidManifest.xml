@@ -37,72 +37,96 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/aqualauncher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AquaSTPApp"
         android:usesCleartextTraffic="true"
+        android:theme="@style/Theme.AquaSTPApp"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.SelectCompanyActivity"
+            android:name=".Activities.ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.SelectLocationActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.PumpsFragment"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.OwnerDashBoard"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.WelcomeSupervisor"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.WelcomeCustomer"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.WelcomeManager"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.WelcomeUser"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.WelcomeOwner"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.AboutActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:label="@string/title_activity_about"
             android:theme="@style/Theme.AquaSTPApp" />
         <activity
             android:name=".Activities.ProfileActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.VerifyNumberOTP"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.VerifyUserNameOTP"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.VerifiyEmailOTP"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.ResetPasswordNumber"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.ResetPasswordUserName"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.ResetPasswordEmail"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.RecoveryPasswordWith"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_recovery_password_with"
             android:theme="@style/Theme.AquaSTPApp" />
         <activity
             android:name=".Activities.SliderScreen"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.SplashScreen"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -112,12 +136,16 @@
         </activity>
         <activity
             android:name=".Activities.LoginSignupActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Activities.LoginFragment"
+            android:screenOrientation="portrait"
             android:exported="false" />
+
         <meta-data
             android:name="preloaded_fonts"
+            android:screenOrientation="portrait"
             android:resource="@array/preloaded_fonts" />
     </application>
 

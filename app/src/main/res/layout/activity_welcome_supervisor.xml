@@ -14,15 +14,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp">
+        android:layout_height="35dp">
 
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="14dp"
+            android:id="@+id/supervisorexit"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="11dp"
-            android:src="@drawable/close" />
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="0dp"
+            android:src="@drawable/cross" />
     </RelativeLayout>
 
 

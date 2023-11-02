@@ -57,7 +57,7 @@ public class PumpsFragment extends Fragment {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
-        View view = inflater.inflate(R.layout.pump_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_pump, container, false);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
        /* PumpRecyclerview = view.findViewById(R.id.pump_recyclerview);
         PumpRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));

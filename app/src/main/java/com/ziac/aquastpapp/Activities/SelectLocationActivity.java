@@ -1,13 +1,13 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -29,7 +29,7 @@ import java.util.Map;
 import Adapters.SiteLocationAdapter;
 import Models.StpModelClass;
 
-public class SelectCompanyActivity extends AppCompatActivity {
+public class SelectLocationActivity extends AppCompatActivity {
 
     String username;
     SiteLocationAdapter siteLocationAdapter;
@@ -41,6 +41,7 @@ public class SelectCompanyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_company);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -93,7 +94,7 @@ public class SelectCompanyActivity extends AppCompatActivity {
                         Global.StpList.add(stpModelClass);
 
                     }
-                    siteLocationAdapter = new SiteLocationAdapter(Global.StpList, SelectCompanyActivity.this);
+                    siteLocationAdapter = new SiteLocationAdapter(Global.StpList, SelectLocationActivity.this);
                     siteLocationRecyclerView.setAdapter(siteLocationAdapter);
 
                 }catch (Exception e){
@@ -134,6 +135,5 @@ public class SelectCompanyActivity extends AppCompatActivity {
         ));
         queue.add(request);
     }
-
 
 }

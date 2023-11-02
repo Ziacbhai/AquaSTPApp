@@ -45,6 +45,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.7.4")
     implementation("com.google.android.gms:play-services-cast-framework:21.3.0")
     implementation("com.android.support:support-annotations:28.0.0")
+    implementation("androidx.drawerlayout:drawerlayout:1.2.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -62,6 +63,7 @@ dependencies {
     implementation ("com.airbnb.android:lottie:3.4.0")
 
     implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation ("androidx.drawerlayout:drawerlayout:1.0.0")
 
     implementation ("com.github.bumptech.glide:glide:4.15.1")
     implementation ("com.github.dhaval2404:imagepicker:2.1")

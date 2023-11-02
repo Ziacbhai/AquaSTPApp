@@ -299,48 +299,6 @@ public class LoginFragment extends Fragment {
 
                 Global.editor.commit();
 
-
-              /*  JSONArray liststp = new JSONArray(respObj1.getString("data2"));
-
-                //JSONObject listofstp;
-
-                int i;
-                Global.StpList = new ArrayList<>();
-                for (i = 0;i<liststp.length();i++){
-                    final JSONObject e;
-                    try {
-                        e = liststp.getJSONObject(i);
-                    } catch (JSONException ex) {
-                        throw new RuntimeException(ex);
-                    }
-
-                    //listofstp = new JSONObject(liststp[i]("site_code"));
-                    stpModelClass = new StpModelClass();
-                    stpModelClass.setSucode(e.getString("su_code"));
-                    stpModelClass.setStpname(e.getString("site_name"));
-
-                    stpModelClass.setComcode(e.getString("com_code"));
-                    stpModelClass.setUsercode(e.getString("user_code"));
-                    stpModelClass.setPersonname(e.getString("person_name"));
-                    stpModelClass.setUsername(e.getString("username"));
-                    stpModelClass.setSstp1code(e.getString("sstp1_code"));
-                    stpModelClass.setStpname(e.getString("stp_name"));
-                    stpModelClass.setSitecode(e.getString("site_code"));
-                    stpModelClass.setStpactive(e.getString("stp_active"));
-                    Global.StpList.add(stpModelClass);*/
-               // }
-
-                /*siteLocationAdapter = new SiteLocationAdapter(Global.StpList, getContext());
-                siteLocationRecyclerView.setAdapter(siteLocationAdapter);*/
-
-                //Global.StpList = new ArrayList<>();
-//                siteLocationAdapter = new SiteLocationAdapter(Global.StpList, getContext());
-//                siteLocationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL , false));
-//                siteLocationRecyclerView.setHasFixedSize(true); // Optional, but can help improve performance
-//                siteLocationRecyclerView.setAdapter(siteLocationAdapter);
-
-               // getallmodels();
-                //finish();
                 Toast.makeText(getActivity(), "Login Successfull", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
 
@@ -377,25 +335,7 @@ public class LoginFragment extends Fragment {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
-                if (error instanceof TimeoutError) {
-                    Global.customtoast(getActivity(), getLayoutInflater(),"Request Time-Out");
-                } else if (error instanceof ServerError) {
-                    Global.customtoast(getActivity(), getLayoutInflater(),"ServerError");
-                }  else if (error instanceof ParseError) {
-                    Global.customtoast(getActivity(), getLayoutInflater(),"Parse Error ");
-                }  else if (error instanceof AuthFailureError) {
-                    Global.customtoast(getActivity(), getLayoutInflater(), "AuthFailureError");
-                } else if (error instanceof ServerError) {
-                    Log.e("MyApp", "ServerError: " + error.getMessage());
-                    Global.customtoast(getActivity(), getLayoutInflater(), "ServerError");
-                } else if (error instanceof ParseError) {
-                    Log.e("MyApp", "ParseError: " + error.getMessage());
-                    Global.customtoast(getActivity(), getLayoutInflater(), "Parse Error");
-                } else if (error instanceof AuthFailureError) {
-                    Log.e("MyApp", "AuthFailureError: " + error.getMessage());
-                    Global.customtoast(getActivity(), getLayoutInflater(), "AuthFailureError");
-                }
+               // progressDialog.dismiss();
 
             }
         }) {

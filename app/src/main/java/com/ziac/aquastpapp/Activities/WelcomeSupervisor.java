@@ -16,6 +16,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -59,6 +61,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class WelcomeSupervisor extends AppCompatActivity {
     private TextView Sname,Smail,Sph,ClickHere;
     CircleImageView ImageView;
+    ImageView Supervisorexit ;
     AppCompatButton sContinue;
     private String username;
     Context context;
@@ -77,6 +80,18 @@ public class WelcomeSupervisor extends AppCompatActivity {
         // ClickHere = findViewById(R.id.Clickhere);
         sContinue = findViewById(R.id.sContinue);
         fab = findViewById(R.id.floating);
+        Supervisorexit = findViewById(R.id.supervisorexit);
+
+        Supervisorexit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
 
         Smail = findViewById(R.id.sMail);
         Sph = findViewById(R.id.sPh);
@@ -125,7 +140,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
         sContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeSupervisor.this, SelectCompanyActivity.class);
+                Intent in = new Intent(WelcomeSupervisor.this, SelectLocationActivity.class);
                 startActivity(in);
             }
         });

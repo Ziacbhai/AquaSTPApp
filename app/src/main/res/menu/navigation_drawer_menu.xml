@@ -2,20 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
     <group
-        android:checkableBehavior="single"/>
-
+        android:checkableBehavior="single">
+        <!--<item android:title="Manage"/>-->
     <item
         android:id="@+id/nav_dashboard"
         android:icon="@drawable/baseline_home_icon"
         android:title="Dashboard"/>
 
     <item
-        android:id="@+id/nav_settings"
-    android:icon="@drawable/ic_baseline_settings"
-        android:title="Settings"/>
-
+        android:id="@+id/nav_my_profile"
+        android:icon="@drawable/ic_baseline_settings"
+        android:title="Profile"/>
 
     <item
         android:id="@+id/nav_aboutus"
@@ -31,5 +29,6 @@
         android:id="@+id/nav_logout"
         android:icon="@drawable/baseline_logout_icon"
         android:title="Logout"/>
+    </group>
 
 </menu>
