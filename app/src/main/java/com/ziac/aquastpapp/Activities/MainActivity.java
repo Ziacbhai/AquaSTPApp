@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -38,6 +39,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     BottomNavigationView bottomNavigationView;
     FragmentManager fragmentManager;
     Toolbar toolbar;
+    LinearLayout layout;
     FloatingActionButton fab;
     NavigationView navigationView;
     CircleImageView Profile;
@@ -84,9 +87,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     PopupWindow popUp;
     private boolean doubleBackToExitPressedOnce;
 
-
     boolean click = true;
-    private String username,userimage,mail,Stpname ,Sitename;
+    private String personname,userimage,mail,Stpname ,Sitename;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         /*Menu menu = navigationView.getMenu();
         MenuItem RefItem = menu.findItem(R.id.refaral_code);
         View RefView = RefItem.getActionView();
@@ -122,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         openFragment(new HomeFragment());
 
         userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
-        username = sharedPreferences.getString("username", "");
+        personname = sharedPreferences.getString("person_name", "");
         mail = sharedPreferences.getString("user_email", "");
         Sitename = sharedPreferences.getString("site_name", "");
         Stpname = sharedPreferences.getString("stp_name", "");
@@ -137,15 +140,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .into(Profile );
 
 
-        Profile.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(MainActivity.this, v);
+      Profile.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(MainActivity.this, v);
             popup.getMenuInflater().inflate(R.menu.profile_pop_up, popup.getMenu());
 
             // Retrieve data from SharedPreferences
-            Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
             String profileName = Global.sharedPreferences.getString("ref_code", "");
             MenuItem profileMenuItem = popup.getMenu().findItem(R.id.refaral_code);
             profileMenuItem.setTitle("Code: " + profileName);
+
 
             popup.setOnMenuItemClickListener(item -> {
                 int itemId = item.getItemId();
@@ -165,7 +171,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             });
             popup.show();
-        });
+          }
+      });
 
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -174,21 +181,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
                 CircleImageView ProfileH;
-                TextView usernameH,usermailH ,usersiteH,userstpH ;
+                TextView personnameH,usermailH ,usersiteH,userstpH ;
                 ProfileH=drawerLayout.findViewById(R.id.profileH);
+                layout = findViewById(R.id.headeProfile);
 
                 userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
                 Picasso.get().load(userimage).into(ProfileH);
 
-                usernameH =drawerLayout. findViewById(R.id.headerusername);
+                personnameH =drawerLayout. findViewById(R.id.headerusername);
                 usermailH = drawerLayout.findViewById(R.id.headeremail);
                 usersiteH = drawerLayout.findViewById(R.id.site_name);
                 userstpH = drawerLayout.findViewById(R.id.stp_name);
 
-                usernameH.setText(username);
+                personnameH.setText(personname);
                 usermailH.setText(mail);
                 usersiteH.setText(Sitename);
                 userstpH.setText(Stpname);
+
+                layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                    }
+                });
             }
 
             @Override
@@ -233,8 +248,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (itemId == R.id.nav_logout) {
             startActivity(new Intent(MainActivity.this, LoginSignupActivity.class));
             return true;
-        }if (itemId == R.id.nav_my_profile) {
-            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+        }if (itemId == R.id.nav_selectStp) {
+            startActivity(new Intent(MainActivity.this, SelectLocationActivity.class));
             return true;
         }
         // Close the drawer after an item is selected (optional)
@@ -259,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-    public void onBackPressed() {
+   /* public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             moveTaskToBack(true);
@@ -276,5 +291,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }*/
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

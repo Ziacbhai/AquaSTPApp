@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -76,6 +77,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
                     JSONObject respObj = new JSONObject(response);
 
                     String issuccess = respObj.getString("isSuccess");
+                    progressBar.setVisibility(View.GONE);
                     String error = respObj.getString("error");
 
                     Global.editor = Global.sharedPreferences.edit();
@@ -84,11 +86,12 @@ public class ResetPasswordNumber extends AppCompatActivity {
 
 
                     if (issuccess.equals("true")) {
-                        Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(),"OTP send successfully ");
+                        Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(),respObj.getString("error"));
                         startActivity(new Intent(ResetPasswordNumber.this, VerifyNumberOTP.class));
                     } else {
+                        progressBar.setVisibility(View.GONE);
                         // Show a toast message for wrong username or password
-                        Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(),"Provided number is invalid ");
+                        Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(),respObj.getString("error"));
                     }
 
                 } catch (JSONException e) {
@@ -109,13 +112,19 @@ public class ResetPasswordNumber extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                //params.put("UserName", username);
+                params.put("UserName", "");
                 params.put("Mobile", mobile);
                 params.put("FPType", "M");
-                params.put("user_email", "ziacbhai1993@gmail.com");
+                params.put("user_email", "");
                 return params;
             }
         };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                0, // timeout in milliseconds
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
         queue.add(request);
     }
 }

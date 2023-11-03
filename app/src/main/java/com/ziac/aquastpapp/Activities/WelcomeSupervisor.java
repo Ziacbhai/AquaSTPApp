@@ -97,7 +97,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
         Sph = findViewById(R.id.sPh);
         ClickHere = findViewById(R.id.Clickhere);
 
-        String usrname = Global.sharedPreferences.getString("username", "");
+        String usrname = Global.sharedPreferences.getString("person_name", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
@@ -346,6 +346,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("username", Global.sharedPreferences.getString("username",null));
+                params.put("person_name", Global.sharedPreferences.getString("person_name",null));
 
                 return params;
             }

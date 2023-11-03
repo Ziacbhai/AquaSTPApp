@@ -81,21 +81,21 @@
             android:gravity="center_horizontal"
             android:textSize="16sp"
             android:textStyle="italic"
-            android:text="xxxxxxxxxxx"/>
+            android:text=""/>
         <TextView
             android:id="@+id/uMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="16sp"
-            android:text="xxxxxxxxxxx"/>
+            android:text=""/>
         <TextView
             android:id="@+id/uPh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="16sp"
-            android:text="xxxxxxxxxxx"/>
+            android:text=""/>
 
         <View
             android:layout_width="match_parent"

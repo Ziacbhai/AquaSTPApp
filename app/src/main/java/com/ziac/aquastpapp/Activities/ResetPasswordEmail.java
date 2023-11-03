@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -93,10 +94,12 @@ public class ResetPasswordEmail extends AppCompatActivity {
                     Global.editor.commit();
 
                     if (issuccess.equals("true")) {
+                        Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(),respObj.getString("error"));
                         startActivity(new Intent(ResetPasswordEmail.this, VerifyNumberOTP.class));
                     } else {
                         // Show a toast message for wrong username or password
-                        Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(),"Provided Email is invalid ");
+                        Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(),respObj.getString("error"));
+
                     }
 
                 } catch (JSONException e) {
@@ -117,13 +120,19 @@ public class ResetPasswordEmail extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
+                params.put("UserName", "");
                 params.put("Email", email);
-                params.put("Mobile", "mobile");
+                params.put("Mobile", "");
                 params.put("FPType", "E");
-                params.put("user_email", "ziacbhai1993@gmail.com");
+                params.put("user_email", "");
                 return params;
             }
         };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                0, // timeout in milliseconds
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
         queue.add(request);
     }
 }

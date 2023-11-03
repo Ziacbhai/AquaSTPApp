@@ -551,9 +551,7 @@ public class SignUpFragment extends Fragment {
             return v;
         }
 
-
     }
-
 
 
     private void CreateNewUser() {
@@ -571,7 +569,7 @@ public class SignUpFragment extends Fragment {
 
         password = RPassword.getText().toString();
         cpassword = Cpassword.getText().toString();
-        progressDialog.show();
+        //progressDialog.show();
 
 
 
@@ -608,14 +606,12 @@ public class SignUpFragment extends Fragment {
             toast.show();
             return;
         } if (!checkBox.isChecked()) {
-            Toast.makeText(getActivity(), "You are not  agree with the terms and conditions of swasti cars to move further  ", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(getActivity(), "You are not  agree with the terms and conditions of Aqua to move further  ", Toast.LENGTH_SHORT).show();
             return;
         }
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest = new StringRequest(Request.Method.POST,Global.registration,
-
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String sresponse) {
@@ -669,7 +665,7 @@ public class SignUpFragment extends Fragment {
                 params.put("com_contact", CPerson.getText().toString());
                 params.put("com_contact_mobno", Mobile.getText().toString());
                 params.put("com_email", Email.getText().toString());
-//                params.put("com_email", Email.getText().toString());
+                params.put("person_name", Email.getText().toString());
                 params.put("state_code", String.valueOf(statename.get_code()));
                 params.put("city_code", String.valueOf(cityname.get_code()));
                 params.put("username", AUname.getText().toString());

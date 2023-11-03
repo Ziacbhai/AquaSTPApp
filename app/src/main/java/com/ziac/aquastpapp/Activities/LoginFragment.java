@@ -243,6 +243,7 @@ public class LoginFragment extends Fragment {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Global.customtoast(getActivity(), getLayoutInflater(),"Invalid username / password error");
                 progressDialog.dismiss();
             }
         }) {
@@ -257,7 +258,7 @@ public class LoginFragment extends Fragment {
         };
 
         request.setRetryPolicy(new DefaultRetryPolicy(
-                30000, // timeout in milliseconds
+                3000, // timeout in milliseconds
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));

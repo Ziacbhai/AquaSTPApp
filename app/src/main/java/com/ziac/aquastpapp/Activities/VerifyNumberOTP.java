@@ -116,11 +116,12 @@ public class VerifyNumberOTP extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-              Toast.makeText(VerifyNumberOTP.this, "Data added to API", Toast.LENGTH_SHORT).show();
+            //  Toast.makeText(VerifyNumberOTP.this, "Data added to API", Toast.LENGTH_SHORT).show();
                 try {
 
                     JSONObject respObj = new JSONObject(response);
                     String issuccess = respObj.getString("isSuccess");
+
                     String error = respObj.getString("error");
 //                    Global.editor = sharedPreferences.edit();
 //                    Global.editor.putString("username", username);
@@ -138,7 +139,9 @@ public class VerifyNumberOTP extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     Global.customtoast(VerifyNumberOTP.this,getLayoutInflater(), e.getMessage());
                 }
+
             }
+
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {

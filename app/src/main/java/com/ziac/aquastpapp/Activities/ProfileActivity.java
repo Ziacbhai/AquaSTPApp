@@ -29,6 +29,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -69,7 +70,9 @@ public class ProfileActivity extends AppCompatActivity {
     CircleImageView circleImageView;
     Bitmap imageBitmap;
     private String username;
-    TextView pName,pNum,pEmail;
+
+    EditText uName ,uNumber,uEmail;
+    TextView Uref_code;
     private static final int CAMERA_REQUEST = 0;
 
     ImageView Backarrowbtn;
@@ -83,22 +86,30 @@ public class ProfileActivity extends AppCompatActivity {
         fab=findViewById(R.id.floating);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
        Backarrowbtn = findViewById(R.id.backarrowbtn);
-        pName = findViewById(R.id.uName);
-        pNum = findViewById(R.id.uNumber);
-        pEmail = findViewById(R.id.uEmail);
+        uName = findViewById(R.id.uName);
+        uNumber = findViewById(R.id.uNumber);
+        uEmail = findViewById(R.id.uEmail);
+
+        Uref_code = findViewById(R.id.Uref);
         circleImageView = findViewById(R.id.imageVie);
 
 
         Updatebutton = findViewById(R.id.updatebutton);
         Updatebutton.setOnClickListener(v -> updateprofile());
-
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         username = Global.sharedPreferences.getString("username", "");
 
-        String dealername = Global.sharedPreferences.getString("person_name", "");
+        String usname = Global.sharedPreferences.getString("person_name", "");
+        String refcode = Global.sharedPreferences.getString("ref_code", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+
+        uName.setText(usname);
+        uEmail.setText(mail);
+        uNumber.setText(mobile);
+        Uref_code.setText(refcode);
 
 
         Picasso.Builder builder=new Picasso.Builder(getApplication());
@@ -287,18 +298,30 @@ public class ProfileActivity extends AppCompatActivity {
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
 
+
+
             try {
                 JSONObject respObj1 = new JSONObject(response);
                 JSONObject respObj = new JSONObject(respObj1.getString("data"));
 
                 String user_image = respObj.getString("user_image");
-                Log.d("MyTag", "Profile image: " + user_image);
+                String usname = Global.sharedPreferences.getString("person_name", "");
+                String refcode = Global.sharedPreferences.getString("ref_code", "");
+                String mail = Global.sharedPreferences.getString("user_email", "");
+                String mobile = Global.sharedPreferences.getString("user_mobile", "");
+                        Log.d("MyTag", "Profile image: " + user_image);
+
 
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 Global.editor = Global.sharedPreferences.edit();
                 Global.editor.putString("user_image", user_image);
+                Global.editor.putString("ref_code", refcode);
+                Global.editor.putString("person_name", usname);
+                Global.editor.putString("user_email", mail);
+                Global.editor.putString("user_mobile", mobile);
                 Global.editor.commit();
                 String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+
                 Picasso.get().load(userimage).into(circleImageView);
 
             } catch (JSONException e) {
@@ -340,9 +363,9 @@ public class ProfileActivity extends AppCompatActivity {
     private void updateprofile() {
         String personname,email,mobile;
 
-        personname = pName.getText().toString();
-        mobile = pNum.getText().toString();
-        email = pEmail.getText().toString();
+        personname = uName.getText().toString();
+        mobile = uNumber.getText().toString();
+        email = uEmail.getText().toString();
 
         if (personname.isEmpty() || mobile.isEmpty() || email.isEmpty()) {
 
@@ -368,9 +391,9 @@ public class ProfileActivity extends AppCompatActivity {
 
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 Global.editor = Global.sharedPreferences.edit();
-                Global.editor.putString("person_name", pName.getText().toString());
-                Global.editor.putString("user_mobile", pNum.getText().toString());
-                Global.editor.putString("user_email", pEmail.getText().toString());
+                Global.editor.putString("person_name", uName.getText().toString());
+                Global.editor.putString("user_mobile", uNumber.getText().toString());
+                Global.editor.putString("user_email", uEmail.getText().toString());
                 Global.editor.commit();
 
                 try {
@@ -406,9 +429,9 @@ public class ProfileActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("com_code", Global.sharedPreferences.getString("com_code", null).toString());
-                params.put("person_name", pName.getText().toString());
-                params.put("user_mobile", pNum.getText().toString());
-                params.put("user_email", pEmail.getText().toString());
+                params.put("person_name", uName.getText().toString());
+                params.put("user_mobile", uNumber.getText().toString());
+                params.put("user_email", uEmail.getText().toString());
                 return params;
 
                 //  String user_image = respObj.getString("user_image");

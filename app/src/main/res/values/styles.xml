@@ -8,6 +8,15 @@
         <item name="android:buttonTint" tools:ignore="NewApi">@color/teal_200</item>
     </style>
 
+    <style name="AppTheme.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">#FF0000</item>
+    </style>
+
+    <style name="itemTextStyle.AppTheme" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/appcolor</item>
+        <item name="android:textSize">@color/appcolor</item>
+    </style>
+
 
 
 </resources>

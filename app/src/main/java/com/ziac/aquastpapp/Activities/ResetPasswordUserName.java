@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -89,10 +90,12 @@ public class ResetPasswordUserName extends AppCompatActivity {
                     Global.editor.commit();
 
                     if (issuccess.equals("true")) {
+                        Global.customtoast(ResetPasswordUserName.this, getLayoutInflater(),respObj.getString("error"));
                         startActivity(new Intent(ResetPasswordUserName.this, VerifyUserNameOTP.class));
                     } else {
+                        Global.customtoast(ResetPasswordUserName.this, getLayoutInflater(),respObj.getString("error"));
                         // Show a toast message for wrong username or password
-                        Global.customtoast(ResetPasswordUserName.this, getLayoutInflater(),"Provided username is invalid ");
+
                     }
 
                 } catch (JSONException e) {
@@ -112,12 +115,18 @@ public class ResetPasswordUserName extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("UserName", username);
-                params.put("Mobile", "mobile");
+                params.put("Mobile", "");
                 params.put("FPType", "U");
-                params.put("user_email", "ziacbhai1993@gmail.com");
+                params.put("user_email", "");
                 return params;
             }
         };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                0, // timeout in milliseconds
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
         queue.add(request);
 
     }

@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_margin="5dp"
+    android:id="@+id/headeProfile"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -13,13 +14,12 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileH"
-            android:layout_width="75dp"
+            android:layout_width="70dp"
             android:layout_height="80dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:padding="5dp"
             android:layout_gravity="center"
-            android:src="@drawable/pump"
             app:civ_border_color="#FF000000"
             app:civ_border_overlay="true"
             app:civ_border_width="2dp" />
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
-                android:text="ZiacDemo"
+                android:text="name"
                 android:textColor="@color/white"
                 android:textSize="21sp"
                 android:textStyle="bold" />
@@ -46,31 +46,35 @@
                 android:id="@+id/headeremail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="3dp"
-                android:text="1234123456789@gmail.com"
+                android:text="email"
                 android:textColor="@color/my_light_primary"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/my_light_primary"
+                android:layout_height="1dp"/>
 
             <TextView
                 android:id="@+id/site_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
-                android:text="1234123456789@gmail.com"
+                android:text="location"
                 android:textColor="@color/my_light_primary"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textSize="14sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/stp_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
-                android:text="1234123456789@gmail.com"
+                android:text="htp"
                 android:textColor="@color/my_light_primary"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
+
 
 
         </LinearLayout>

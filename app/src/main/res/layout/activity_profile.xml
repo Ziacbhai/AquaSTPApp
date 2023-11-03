@@ -92,7 +92,6 @@
                 android:layout_width="210dp"
                 android:layout_height="210dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
                 app:civ_border_color="#3FD5C7"
                 app:civ_border_width="4dp" />
 
@@ -140,6 +139,7 @@
                         android:textSize="18dp"
                         android:text="Reference Code"/>
                     <TextView
+                        android:id="@+id/Uref"
                         android:layout_width="match_parent"
                         android:layout_marginTop="5dp"
                         android:layout_height="wrap_content"

@@ -336,6 +336,4 @@ public class WelcomeManager extends AppCompatActivity {
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 
-
-
 }
