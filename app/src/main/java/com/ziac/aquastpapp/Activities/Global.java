@@ -26,8 +26,9 @@ public class Global {
 
     //    Local url
    // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl="http://192.168.1.16:6968/";
+    public static String baseurl="http://192.168.1.11:6968/";
     public static String userImageurl = baseurl+"WebsiteData/Users/";
+
     public static String urlUpdateprofileImage = baseurl +"api/Users/UpdateProfilePhoto";
 
     public static String urlGetStates = baseurl+"api/List/GetStates";
@@ -46,14 +47,14 @@ public class Global {
 
     public static String tokenurl = baseurl+"TOKEN";
 
-    public static String urlmystock = baseurl + "api/Vehicles/GetMyStock";
+    public static String Equipment_Details_com_ = baseurl + "api/Masters/GetPumps?";
 
     public static ArrayList<zList> statearraylist;
     public static ArrayList<zList> cityarraylist;
     public static ArrayList<StpModelClass> stplistcompany;
 
     public static ArrayList<StpModelClass> StpList;
-    public static ArrayList<CommonModelClass> equipmentNameslist;
+    public static ArrayList<CommonModelClass> pumpdetails;
 
     public static void  customtoast(Context context, LayoutInflater inflater, String msg){
         //LayoutInflater inflater = getLayoutInflater();

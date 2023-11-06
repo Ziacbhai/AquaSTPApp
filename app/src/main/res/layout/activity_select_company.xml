@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#eaeff5"
     android:layout_margin="5dp"
+    android:background="#eaeff5"
+    android:orientation="vertical"
     tools:context=".Activities.SelectLocationActivity">
 
     <androidx.cardview.widget.CardView
@@ -21,7 +21,6 @@
             android:background="@drawable/btn_gradient"
             android:gravity="center_vertical"
             android:orientation="horizontal">
-
 
 
             <ImageView
@@ -53,9 +52,11 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,74 +65,79 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
         android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                app:cardCornerRadius="10dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                app:cardMaxElevation="10dp"
-                android:layout_height="wrap_content">
+                app:cardCornerRadius="10dp"
+                app:cardMaxElevation="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:padding="5dp"
+                        android:layout_height="40dp"
                         android:background="@drawable/selectcompany"
-                        android:layout_height="40dp">
+                        android:orientation="vertical"
+                        android:padding="5dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:layout_width="0dp"
+                                android:gravity="center"
                                 android:text="Code"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
                                 android:textColor="@color/white"
-                                android:gravity="center"
-                                android:layout_height="match_parent"/>
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
 
                             <View
                                 android:layout_width="1dp"
-                                android:background="@color/my_light_primary"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:background="@color/my_light_primary" />
+
                             <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
                                 android:layout_weight="3.4"
-                                android:text="STP"
                                 android:gravity="center"
-                                android:layout_width="0dp"
+                                android:text="STP"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
-                                android:textStyle="bold"
-                                android:layout_height="match_parent"/>
+                                android:textStyle="bold" />
+
                             <View
                                 android:layout_width="1dp"
-                                android:background="@color/my_light_primary"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:background="@color/my_light_primary" />
 
                             <TextView
-                                android:text=""
-                                android:gravity="center_horizontal"
-                                android:layout_weight="1.5"
                                 android:layout_width="0dp"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:gravity="center_horizontal"
+                                android:text="" />
                         </LinearLayout>
 
 
@@ -139,9 +145,9 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="5dp"
-                        android:layout_height="wrap_content">
+                        android:padding="5dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -156,9 +162,10 @@
                         </LinearLayout>
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="5dp"/>
+                        android:layout_height="5dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>

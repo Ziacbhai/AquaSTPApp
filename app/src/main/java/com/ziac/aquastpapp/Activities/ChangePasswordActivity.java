@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.method.HideReturnsTransformationMethod;
@@ -13,6 +16,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -41,7 +46,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
     EditText Newpwd ,Rpwd;
     AppCompatButton Pwdconfirm;
     boolean passwordVisible;
-    String username ,newpassword;
+    ProgressBar progressBar;
+    ImageView Backarrowbtn;
+
+    String username,Newpassword,repeatmpassword;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +59,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
         Newpwd = findViewById(R.id.newpwd);
         Rpwd = findViewById(R.id.rpwd);
         Pwdconfirm = findViewById(R.id.pwdconfirm);
+        Backarrowbtn = findViewById(R.id.backarrowbtn);
+        progressBar = findViewById(R.id.progressbr);
 
 
         Newpwd.setOnTouchListener((v, event) -> {
@@ -93,32 +103,57 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
             return false;
         });
+        Backarrowbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         Pwdconfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updatepassword();
+
+                // Check network availability
+                if (!isNetworkAvailable()) {
+                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(),"Internet connection lost !!");
+                    return;
+                }
+
+                Newpassword = Newpwd.getText().toString();
+                repeatmpassword = Rpwd.getText().toString();
+
+                if (Newpassword.length() < 6) {
+                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(),"Password should not be less than 6 digits !!");
+                    return;
+                }
+
+                if (repeatmpassword.length() < 6) {
+                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(),"Password should not be less than 6 digits !!");
+                    return;
+                }
+
+                if (Newpassword.equals(repeatmpassword)) {
+                    username = Global.sharedPreferences.getString("username", null);
+                    updatepassword();
+                } else {
+                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Passwords do not match!!");
+                }
             }
         });
     }
 
     private void updatepassword() {
-        String newpwd,rpassword;
 
-        newpwd = Newpwd.getText().toString();
-        rpassword = Rpwd.getText().toString();
+        String url = Global.changetpasswordurl;
+       progressBar.setVisibility(View.VISIBLE);
 
-        if (newpwd.isEmpty() || rpassword.isEmpty()) {
-            Toast.makeText(ChangePasswordActivity.this, "Complete the information and try again !!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (Rpwd.length() < 6) {
-            Toast.makeText(ChangePasswordActivity.this, "Password  should not be less than 6 digits !!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        // creating a new variable for our request queue
+        RequestQueue queue= Volley.newRequestQueue(ChangePasswordActivity.this);
 
-        RequestQueue queue = Volley.newRequestQueue(ChangePasswordActivity.this);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Global.changetpasswordurl, new Response.Listener<String>() {
+        progressBar.setVisibility(View.GONE);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url , new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {
                 JSONObject response = null;
@@ -142,31 +177,20 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         if (response.has("error")) {
                             Toast.makeText(ChangePasswordActivity.this, response.getString("error"), Toast.LENGTH_SHORT).show();
                         } else {
-                            // Toast.makeText(requireActivity(), "Unknown error occurred", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } catch (JSONException e) {
                     // Handle JSON parsing exception here
                     e.printStackTrace();
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if (error instanceof TimeoutError) {
-                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Request Time-Out");
-                } else if (error instanceof NoConnectionError) {
-                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "No Connection Found");
-                } else if (error instanceof ServerError) {
-                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Server Error");
-                } else if (error instanceof NetworkError) {
-                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Network Error");
-                } else if (error instanceof ParseError) {
-                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Parse Error");
-                }
+
             }
         }){
-
             @Override
             public Map<String, String> getHeaders() {
                 // below line we are creating a map for
@@ -179,11 +203,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("UserName", username);
-                params.put("NewPassword",newpassword);
+                params.put("NewPassword",Newpassword);
                 return params;
-
-                //  String user_image = respObj.getString("user_image");
-
             }
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
@@ -192,5 +213,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         queue.add(stringRequest);
+    }
+
+    private boolean isNetworkAvailable() {
+        Context context = ChangePasswordActivity.this;
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        return false;
     }
 }

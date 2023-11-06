@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="10dp"
+    android:orientation="vertical"
     tools:context=".Activities.VerifyNumberOTP">
 
     <ImageView
@@ -23,8 +23,8 @@
         android:layout_height="match_parent"
         android:layout_margin="8dp"
         android:background="@drawable/btnbgoutline"
-        android:padding="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -59,6 +59,7 @@
             android:text="You will get a OTP via Number"
             android:textSize="16sp"
             android:textStyle="bold" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp" />
@@ -77,8 +78,7 @@
             app:itemCount="6"
             app:itemHeight="50dp"
             app:itemRadius="10dp"
-            app:itemWidth="40dp">
-        </com.chaos.view.PinView>
+            app:itemWidth="40dp"></com.chaos.view.PinView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,9 +97,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:text="Resend OTP"
-                android:textStyle="bold"
+                android:textColor="#01A3A3"
                 android:textSize="15dp"
-                android:textColor="#01A3A3" />
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -112,12 +112,12 @@
             android:id="@+id/newpassword"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:layout_marginTop="10dp"
             android:layout_margin="10dp"
-            android:longClickable="true"
-            android:hint="New password"
-            android:drawableRight="@drawable/visibility_off_24"
+            android:layout_marginTop="10dp"
             android:background="@drawable/btnbgoutline"
+            android:drawableRight="@drawable/visibility_off_24"
+            android:hint="New password"
+            android:longClickable="true"
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
@@ -137,17 +137,17 @@
             android:textColor="@color/white" />
 
         <ProgressBar
-            android:layout_marginTop="5dp"
             android:id="@+id/progressbr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="invisible"
             android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
             android:indeterminate="false"
             android:max="100"
             android:progress="0"
-            android:progressDrawable="@drawable/custom_progress_dialog" />
+            android:progressDrawable="@drawable/custom_progress_dialog"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </LinearLayout>

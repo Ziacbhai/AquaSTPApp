@@ -9,14 +9,14 @@
     <ImageView
         android:id="@+id/toast_icon"
         android:layout_width="40dp"
-        android:layout_height="20dp"/>
+        android:layout_height="20dp" />
 
     <TextView
         android:id="@+id/toast_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="This is a custom Toast message"
         android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:text="This is a custom Toast message" />
+        android:textSize="16sp" />
 
 </LinearLayout>

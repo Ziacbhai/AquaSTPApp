@@ -74,12 +74,10 @@ public class SignUpFragment extends Fragment {
     TextView tvState, tvCity;
     ImageView DDstate,DDcity;
     private zList statename;
-
-
+    private zList cityname;
     private boolean passwordvisible = false;
     boolean passwordVisible;
     String citycode;
-    private zList cityname;
 
      ProgressDialog progressDialog;
 
@@ -235,8 +233,8 @@ public class SignUpFragment extends Fragment {
                         statename.set_code(e.getString("state_code"));
 
 
-                        Log.d("YourTag", "State Name: " + statename.get_name());
-                        Log.d("YourTag", "State Code: " + statename.get_code());
+                       /* Log.d("YourTag", "State Name: " + statename.get_name());
+                        Log.d("YourTag", "State Code: " + statename.get_code());*/
 
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);

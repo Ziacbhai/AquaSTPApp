@@ -84,7 +84,6 @@ public class ResetPasswordNumber extends AppCompatActivity {
                     Global.editor.putString("mobile", mobile);
                     Global.editor.commit();
 
-
                     if (issuccess.equals("true")) {
                         Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(),respObj.getString("error"));
                         startActivity(new Intent(ResetPasswordNumber.this, VerifyNumberOTP.class));

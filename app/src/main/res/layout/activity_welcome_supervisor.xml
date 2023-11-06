@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#eaeff5"
+    android:orientation="vertical"
     tools:context=".Activities.WelcomeSupervisor">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="20dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,8 +26,6 @@
             android:layout_marginBottom="0dp"
             android:src="@drawable/cross" />
     </RelativeLayout>
-
-
 
 
     <RelativeLayout
@@ -68,7 +66,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,108 +77,122 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textSize="22sp"
-            android:textStyle="italic"
+            android:text="Hello Supervisor"
             android:textColor="#01a4a3"
-            android:text="Hello Supervisor"/>
+            android:textSize="22sp"
+            android:textStyle="italic" />
+
         <View
             android:layout_width="100dp"
-            android:background="#F44336"
+            android:layout_height="2dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:layout_height="2dp"/>
+            android:background="#F44336" />
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+            android:layout_height="10dp" />
+
         <TextView
             android:id="@+id/sName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:fontFamily="@font/amaranth_bold"
-            android:textStyle="italic"
+            android:gravity="center_horizontal"
+            android:text=""
             android:textSize="16sp"
-            android:text=""/>
+            android:textStyle="italic" />
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+            android:layout_height="5dp" />
+
         <TextView
             android:id="@+id/sMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textSize="16sp"
-            android:text=""/>
+            android:text=""
+            android:textSize="16sp" />
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+            android:layout_height="5dp" />
+
         <TextView
             android:id="@+id/sPh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textSize="16sp"
-            android:text=""/>
+            android:text=""
+            android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="20dp"/>
+            android:layout_height="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="match_parent"
-                android:textStyle="bold"
-                android:textSize="17dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Guiding excellence at every step."
-                android:layout_height="wrap_content"/>
+                android:textSize="17dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
-            android:textSize="15dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:padding="2dp"
-           android:gravity="center_horizontal"
             android:text="Oversee operations with ease."
-            android:layout_height="wrap_content"/>
+            android:textSize="15dp" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+        android:layout_height="40dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sContinue"
         android:layout_width="180dp"
+        android:layout_height="55dp"
         android:layout_gravity="center_horizontal"
-        android:text="Continue"
         android:background="@drawable/profilebtnupdate"
-        android:textStyle="bold"
+        android:text="Continue"
         android:textColor="@color/white"
-        android:layout_height="55dp"/>
+        android:textStyle="bold" />
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="5dp"/>
+        android:layout_height="5dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
             android:layout_weight="1"
             android:gravity="end"
-            android:layout_marginStart="25dp"
-            android:text="Details wrong ?"
-            android:layout_height="wrap_content"/>
+            android:text="Details wrong ?" />
+
         <TextView
             android:id="@+id/Clickhere"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text=" Click here"
-            android:textColor="#F44336"
-            android:layout_height="wrap_content"/>
+            android:textColor="#F44336" />
     </LinearLayout>
 
 </LinearLayout>

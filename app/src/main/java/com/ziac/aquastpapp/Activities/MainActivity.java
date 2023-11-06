@@ -241,6 +241,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(MainActivity.this, AboutActivity.class));
             return true;
         }
+        if (itemId == R.id.nav_equipment) {
+            HomeFragment homeFragment = new HomeFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, homeFragment);
+            fragmentTransaction.commit();
+            drawerLayout.closeDrawers();
+            return true;
+        }
         if (itemId == R.id.nav_share) {
             shareContent();
             return true;
@@ -267,10 +276,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(Intent.createChooser(shareIntent, "Share via"));
     }
     private void openFragment(Fragment fragment){
-        HomeFragment homeFragment=new HomeFragment();
+        FiltersFragment homeFragment=new FiltersFragment();
         fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
+    }
+    private void loadHomeFragment() {
+        HomeFragment homeFragment = new HomeFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, homeFragment);
         fragmentTransaction.commit();
     }
 

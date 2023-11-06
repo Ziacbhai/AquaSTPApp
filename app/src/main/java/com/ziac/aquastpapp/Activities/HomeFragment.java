@@ -17,7 +17,7 @@ import com.ziac.aquastpapp.R;
 
 
 public class HomeFragment extends Fragment {
-    private RelativeLayout Blower,Pump,Meter,Sensor,Filter;
+    private RelativeLayout Pump;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -25,12 +25,6 @@ public class HomeFragment extends Fragment {
        View view = inflater.inflate(R.layout.fragment_home, container, false);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Pump = view.findViewById(R.id.pump);
-        Blower = view.findViewById(R.id.blower);
-        Meter=view.findViewById(R.id.meter);
-        Sensor=view.findViewById(R.id.sensor);
-        Filter=view.findViewById(R.id.filter);
-
-
 
         Pump.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,10 +35,12 @@ public class HomeFragment extends Fragment {
                 fragmentTransaction.replace(R.id.frame_layout, pumpFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
+
             }
         });
 
-        Blower.setOnClickListener(new View.OnClickListener() {
+        /*Blower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BlowersFragment blowersFragment = new BlowersFragment();
@@ -54,43 +50,8 @@ public class HomeFragment extends Fragment {
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
-        });
+        });*/
 
-        Meter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MetersFragment metersFragment = new MetersFragment();
-                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, metersFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
-
-        Sensor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SensorsFragment sensorsFragment = new SensorsFragment();
-                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, sensorsFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
-
-        Filter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FiltersFragment filtersFragment = new FiltersFragment();
-                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, filtersFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
 
 
         return view;

@@ -1,28 +1,36 @@
 package Models;
 
 public class CommonModelClass {
-    private String Image_id,Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,Form_Factor,Phase,Cleaning_RunningFrequency_HRS;
+    private String Process_name ,Sstp2_code,Image_id,Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,Form_Factor,Phase,Cleaning_RunningFrequency_HRS;
     private int Card_view ;
 
 
-    public CommonModelClass(String image_id, String manufacturer, String equipmentName, String specification, String equipmentNumber_Id, String rating_Capacity, String form_Factor, String phase, String cleaning_RunningFrequency_HRS, int card_view) {
-        Image_id = image_id;
-        Manufacturer = manufacturer;
-        EquipmentName = equipmentName;
-        Specification = specification;
-        EquipmentNumber_Id = equipmentNumber_Id;
-        Rating_Capacity = rating_Capacity;
-        Form_Factor = form_Factor;
-        Phase = phase;
-        Cleaning_RunningFrequency_HRS = cleaning_RunningFrequency_HRS;
-        Card_view = card_view;
+
+    public CommonModelClass() {
+
     }
 
-    public String getImage_id() {
+    public String getProcess_name() {
+        return Process_name;
+    }
+
+    public void setProcess_name(String process_name) {
+        Process_name = process_name;
+    }
+
+    public String getSstp2_code() {
+        return Sstp2_code;
+    }
+
+    public void setSstp2_code(String sstp2_code) {
+        Sstp2_code = sstp2_code;
+    }
+
+    public String getImage() {
         return Image_id;
     }
 
-    public void setImage_id(String image_id) {
+    public void setImage(String image_id) {
         Image_id = image_id;
     }
 

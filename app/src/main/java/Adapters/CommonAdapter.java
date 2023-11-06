@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
@@ -31,7 +34,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.CommonView
     CardView dc;
     public CommonAdapter(List<CommonModelClass> commonModelClassList, Context context) {
         this.commonModelClassList = commonModelClassList;
-        this.context = this.context;
+        this.context =context;
     }
 
     @SuppressLint("MissingInflatedId")
@@ -39,17 +42,25 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.CommonView
     @Override
     public CommonAdapter.CommonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pump_details, parent , false);
-        dc = view.findViewById(R.id.cardView);
-        dc.setCardBackgroundColor(Color.parseColor("#FF6363"));
+        //dc = view.findViewById(R.id.cardView);
+       // dc.setCardBackgroundColor(Color.parseColor("#FF6363"));
         return new CommonViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CommonAdapter.CommonViewHolder holder, int position) {
+
+      //  String userimage = Global.userImageurl + Global.sharedPreferences.getString("name_plate", "");
+
         Picasso.Builder builder=new Picasso.Builder(context);
         Picasso picasso=builder.build();
-        picasso.load(Uri.parse(Global.userImageurl + commonModelClassList.get(position).getImage_id())).error(R.drawable.no_image_available_icon);
-
+        //picasso.load(Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2))).error(R.drawable.no_image_available_icon).into(holder.ImageView);
+        picasso.load(Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2))).error(R.drawable.no_image_available_icon)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .into(holder.ImageView);
+        //picasso.load(Global.baseurl + commonModelClassList.get(position).getImage().substring(2)).into(holder.ImageView);
+        Log.d("imageurl",Global.baseurl + commonModelClassList.get(position).getImage().substring(2));
 
         holder.Manufacturer.setText(commonModelClassList.get(position).getManufacturer());
         holder.EquipmentName.setText(commonModelClassList.get(position).getEquipmentName());
@@ -75,7 +86,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.CommonView
         public CommonViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ImageView=itemView.findViewById(R.id.pump_image);
+            ImageView=itemView.findViewById(R.id._image1);
             Manufacturer=itemView.findViewById(R.id.manufacturer);
             EquipmentName=itemView.findViewById(R.id.equipmentName);
             Specification=itemView.findViewById(R.id.specification);
