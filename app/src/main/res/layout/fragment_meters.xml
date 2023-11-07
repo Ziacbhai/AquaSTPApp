@@ -3,7 +3,167 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#eaeff5"
+    android:orientation="vertical"
     tools:context=".Activities.MetersFragment">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_margin="5dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="10dp"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:background="@drawable/btn_gradient"
+                            android:layout_width="match_parent"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/site_name"
+                                        android:layout_width="match_parent"
+                                        android:gravity="center_horizontal"
+                                        android:layout_height="wrap_content"
+                                        android:text="Site name"
+                                        android:textColor="@color/white"
+                                        android:textStyle="bold"
+                                        android:textSize="16dp" />
+
+                                    <TextView
+                                        android:id="@+id/stp_name"
+                                        android:layout_width="match_parent"
+                                        android:gravity="center_horizontal"
+                                        android:layout_height="wrap_content"
+                                        android:text="STP name"
+                                        android:textColor="@color/white"
+                                        android:textStyle="bold"
+                                        android:textSize="12dp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                            <!--<LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:textColor="@color/white"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="SBR  :"
+                                        android:textSize="10sp"
+                                        android:gravity="center"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/sbr_"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text=""
+                                        android:textColor="@color/white"
+                                        android:layout_gravity="left"
+                                        android:textStyle="bold"
+                                        android:textSize="12dp" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>-->
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginLeft="20dp"
+                                android:background="@color/my_light_primary" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="vertical"
+                                android:padding="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="3.4"
+                                        android:gravity="center"
+                                        android:textColor="@color/white"
+                                        android:text="Equipment Details"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/meters_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </FrameLayout>

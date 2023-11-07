@@ -52,9 +52,9 @@ public class ResetPasswordUserName extends AppCompatActivity {
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String usernames = Global.sharedPreferences.getString("username", "");
+        //String usernames = Global.sharedPreferences.getString("username", "");
 
-        etusername.setText(usernames);
+        //etusername.setText(usernames);
 
         Getotp1.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -47,7 +47,10 @@ public class Global {
 
     public static String tokenurl = baseurl+"TOKEN";
 
-    public static String Equipment_Details_com_ = baseurl + "api/Masters/GetPumps?";
+    public static String Equipment_Details_com_pumps = baseurl + "api/Masters/GetPumps?";
+
+    public static String Equipment_Details_com_meters = baseurl + "api/Masters/GetMeters?";
+
 
     public static ArrayList<zList> statearraylist;
     public static ArrayList<zList> cityarraylist;
@@ -55,6 +58,8 @@ public class Global {
 
     public static ArrayList<StpModelClass> StpList;
     public static ArrayList<CommonModelClass> pumpdetails;
+
+    public static ArrayList<CommonModelClass> metersdetails;
 
     public static void  customtoast(Context context, LayoutInflater inflater, String msg){
         //LayoutInflater inflater = getLayoutInflater();

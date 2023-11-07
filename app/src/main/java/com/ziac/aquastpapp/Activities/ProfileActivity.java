@@ -48,6 +48,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.cast.framework.media.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.ziac.aquastpapp.R;
@@ -114,7 +116,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         Picasso.Builder builder=new Picasso.Builder(getApplication());
         Picasso picasso=builder.build();
-        picasso.load(Uri.parse(userimage)).into(circleImageView );
+        picasso.load(Uri.parse(userimage))
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
+                .into(circleImageView );
 
 
         fab.setOnClickListener(v -> {
@@ -144,8 +149,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void showImage(Picasso picasso, String userimage) {
         Dialog builder = new Dialog(this);
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        builder.getWindow().setBackgroundDrawable(
-                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        builder.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {

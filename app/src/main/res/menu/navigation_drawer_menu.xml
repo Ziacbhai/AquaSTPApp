@@ -5,14 +5,14 @@
     <group
         android:checkableBehavior="single">
         <!--<item android:title="Manage"/>-->
-<!--        <item-->
-<!--            android:id="@+id/nav_dashboard"-->
-<!--            android:icon="@drawable/baseline_home_icon"-->
-<!--            android:title="Dashboard" />-->
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/baseline_home_icon"
+            android:title="Dashboard" />
 
         <item
             android:id="@+id/nav_equipment"
-            android:icon="@drawable/select"
+            android:icon="@drawable/baseline_brightness_7_24"
             android:title="Equipments" />
 
         <item

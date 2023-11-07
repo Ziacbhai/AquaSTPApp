@@ -14,8 +14,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ziac.aquastpapp.Activities.EquipmentsFragment;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.MainActivity;
 import com.ziac.aquastpapp.R;
@@ -72,6 +75,13 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
 
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
+               /* EquipmentsFragment equipmentsFragment = new EquipmentsFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout, equipmentsFragment);
+                fragmentTransaction.commit();*/
+
+
             }
         });
 

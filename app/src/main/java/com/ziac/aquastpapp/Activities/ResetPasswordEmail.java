@@ -49,10 +49,10 @@ public class ResetPasswordEmail extends AppCompatActivity {
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String emailId = Global.sharedPreferences.getString("email", "");
+        //String emailId = Global.sharedPreferences.getString("email", "");
 
 
-        Femail.setText(emailId);
+       // Femail.setText(emailId);
 
         E_OTPbtn.setOnClickListener(new View.OnClickListener() {
             @Override

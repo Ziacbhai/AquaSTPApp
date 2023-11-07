@@ -46,9 +46,9 @@ public class ResetPasswordNumber extends AppCompatActivity {
         GetOTPBtn = findViewById(R.id.n_OTPbtn);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String mobileno = Global.sharedPreferences.getString("mobile", "");
+     //   String mobileno = Global.sharedPreferences.getString("mobile", "");
 
-        FMobile.setText(mobileno);
+       // FMobile.setText(mobileno);
         progressBar = findViewById(R.id.progressbr);
 
         GetOTPBtn.setOnClickListener(new View.OnClickListener() {

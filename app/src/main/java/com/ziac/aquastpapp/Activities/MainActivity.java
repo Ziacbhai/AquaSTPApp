@@ -237,15 +237,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
 
+        if (itemId == R.id.nav_dashboard) {
+            HomeFragment homeFragment = new HomeFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, homeFragment);
+            fragmentTransaction.commit();
+            drawerLayout.closeDrawers();
+            return true;
+        }
+
         if (itemId == R.id.nav_aboutus) {
             startActivity(new Intent(MainActivity.this, AboutActivity.class));
             return true;
         }
         if (itemId == R.id.nav_equipment) {
-            HomeFragment homeFragment = new HomeFragment();
+            EquipmentsFragment equipmentsFragment = new EquipmentsFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frame_layout, homeFragment);
+            fragmentTransaction.replace(R.id.frame_layout, equipmentsFragment);
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
