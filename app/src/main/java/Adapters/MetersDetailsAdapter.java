@@ -59,6 +59,7 @@ public class MetersDetailsAdapter extends RecyclerView.Adapter<MetersDetailsAdap
 
         holder.Manufacturer.setText(commonModelClassList.get(position).getManufacturer());
         holder.EquipmentName.setText(commonModelClassList.get(position).getEquipmentName());
+        holder.Equipment_id.setText(commonModelClassList.get(position).getEquipmentNumber_Id());
         holder.Specification.setText(commonModelClassList.get(position).getSpecification());
         holder.Rating_Capacity.setText(commonModelClassList.get(position).getRating_Capacity());
 
@@ -137,7 +138,7 @@ public class MetersDetailsAdapter extends RecyclerView.Adapter<MetersDetailsAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private android.widget.ImageView ImageView;
-        private TextView Manufacturer,EquipmentName,Specification,Rating_Capacity,
+        private TextView Manufacturer,EquipmentName,Specification,Rating_Capacity,Equipment_id,
                 CleaningRunningFrequencyHRS;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -145,6 +146,7 @@ public class MetersDetailsAdapter extends RecyclerView.Adapter<MetersDetailsAdap
             ImageView=itemView.findViewById(R.id.image_);
             Manufacturer=itemView.findViewById(R.id.manufacturer_);
             EquipmentName=itemView.findViewById(R.id.equipmentName_);
+            Equipment_id=itemView.findViewById(R.id.equipmentId_);
             Specification=itemView.findViewById(R.id.specification_);
             Rating_Capacity=itemView.findViewById(R.id.rating_capacity_);
             CleaningRunningFrequencyHRS=itemView.findViewById(R.id.cleaning_Running_);

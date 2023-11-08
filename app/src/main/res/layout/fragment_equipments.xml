@@ -4,11 +4,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eaeff5"
-    android:gravity="center"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:layout_margin="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/header_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="_name"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/person"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="_Person"
+                android:textColor="@color/my_light_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/my_light_primary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="00000000000"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="_Mail"
+                android:textSize="16sp"
+                android:textColor="@color/my_light_primary"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:padding="10dp"
@@ -35,7 +103,7 @@
                         android:layout_height="100dp"
                         android:padding="10dp"
                         android:layout_marginBottom="10dp"
-                        android:src="@drawable/ppumps"
+                        android:src="@drawable/motor"
                         android:gravity="center"/>
                     <TextView
                         android:layout_width="match_parent"
@@ -84,7 +152,7 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:src="@drawable/motersss" />
+                        android:src="@drawable/metering" />
 
                     <TextView
                         android:layout_width="match_parent"

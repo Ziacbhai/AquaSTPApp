@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
         android:layout_margin="5dp">
 
         <androidx.cardview.widget.CardView
@@ -23,8 +22,8 @@
             app:cardMaxElevation="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="@drawable/btnbgoutline"
                 android:layout_height="wrap_content"
+                android:background="@drawable/btnbgoutline"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -49,6 +48,15 @@
                                 android:gravity="center_horizontal"
                                 android:orientation="vertical">
 
+                                <!--<TextView
+                                    android:gravity="center_horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:textStyle="bold"
+                                    android:text="Manufacturer"
+                                    android:textColor="#000"
+                                    android:textSize="12dp" />-->
                                 <TextView
                                     android:id="@+id/equipmentName_"
                                     android:layout_width="match_parent"
@@ -83,14 +91,26 @@
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:id="@+id/image_"
+                        <LinearLayout
                             android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_gravity="center"
-                            android:layout_margin="5dp"
-                            android:padding="10dp"
-                            android:src="@drawable/aqua_logo" />
+                            android:orientation="vertical"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:id="@+id/image_"
+                                android:layout_width="80dp"
+                                android:layout_height="60dp"
+                                android:layout_margin="5dp"
+                                android:padding="10dp"
+                                android:src="@drawable/aqua_logo" />
+
+                            <TextView
+                                android:id="@+id/equipmentId_"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_horizontal"
+                                android:text="" />
+                        </LinearLayout>
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -106,7 +126,6 @@
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-
                                     android:layout_weight="1"
                                     android:gravity="center_horizontal"
                                     android:orientation="vertical">
@@ -168,6 +187,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
                                 android:padding="5dp"
                                 android:orientation="horizontal">
 
@@ -204,6 +224,7 @@
                 </LinearLayout>
 
             </LinearLayout>
+
 
         </androidx.cardview.widget.CardView>
 

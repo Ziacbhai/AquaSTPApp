@@ -82,14 +82,10 @@ public class WelcomeManager extends AppCompatActivity {
         Mph = findViewById(R.id.Mph);
         ImageView = findViewById(R.id.imageView);
 
+        String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
         String usrname = Global.sharedPreferences.getString("username", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
-        String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-
-        Mname.setText(usrname);
-        Mmail.setText(mail);
-        Mph.setText(mobile);
 
         ///1
         Picasso.Builder builder=new Picasso.Builder(getApplication());
@@ -98,6 +94,13 @@ public class WelcomeManager extends AppCompatActivity {
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(ImageView );
+
+
+        Mname.setText(usrname);
+        Mmail.setText(mail);
+        Mph.setText(mobile);
+
+
         ///2
        /* Glide.with(WelcomeManager.this).
                 load(userimage)

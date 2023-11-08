@@ -50,10 +50,10 @@ public class PumpsFragment extends Fragment {
     RecyclerView PumpRecyclerview;
    // private ImageView mImageView;
     private String userimage;
-    TextView  usersiteH,userstpH ;
-    private String personname,mail,Stpname ,Sitename;
+    TextView  usersiteH,userstpH,usersiteaddressH ;
+    private String personname,mail,Stpname ,Sitename ,SiteAddress,Sitelocation;
     private TextView Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
-            FormFactor,Phase,CleaningRunningFrequencyHRS;
+            FormFactor,Phase,CleaningRunningFrequencyHRS ,Address_M ,Process_name_;
     CommonModelClass commonModelClassList;
     private ProgressDialog progressDialog;
     @SuppressLint("MissingInflatedId")
@@ -77,12 +77,16 @@ public class PumpsFragment extends Fragment {
 
         Sitename = sharedPreferences.getString("site_name", "");
         Stpname = sharedPreferences.getString("stp_name", "");
+        SiteAddress = sharedPreferences.getString("site_address", "");
 
-        usersiteH = view.findViewById(R.id.site_name);
+
+        usersiteaddressH = view.findViewById(R.id.site_address);
+        usersiteH = view.findViewById(R.id.site_location);
         userstpH = view.findViewById(R.id.stp_name);
 
         usersiteH.setText(Sitename);
         userstpH.setText(Stpname);
+        usersiteaddressH.setText(SiteAddress);
 
 
         PumpRecyclerview = view.findViewById(R.id.pump_recyclerview);
@@ -131,11 +135,14 @@ public class PumpsFragment extends Fragment {
 
                         commonModelClassList.setImage(e.getString("name_plate"));
                         commonModelClassList.setEquipmentName(e.getString("equip_name"));
+                        commonModelClassList.setEquipmentNumber_Id(e.getString("equip_code"));
                         commonModelClassList.setRating_Capacity(e.getString("rating"));
                         commonModelClassList.setForm_Factor(e.getString("form_factor"));
                         commonModelClassList.setPhase(e.getString("phase"));
+                        commonModelClassList.setSpecification(e.getString("equip_specs"));
                         commonModelClassList.setManufacturer(e.getString("mfg_name"));
-                        commonModelClassList.setEquipmentNumber_Id(e.getString("equip_code"));
+                        commonModelClassList.setAddress_M(e.getString("site_address"));
+                        commonModelClassList.setProcess_name(e.getString("process_name"));
                         commonModelClassList.setCleaning_RunningFrequency_HRS(e.getString("cleaning_freq_hrs"));
 
 
@@ -167,14 +174,16 @@ public class PumpsFragment extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
 
-
                 params.put("equip_name", EquipmentName.getText().toString());
+                params.put("site_address", Address_M.getText().toString());
                 params.put("rating", Rating_Capacity.getText().toString());
                 params.put("form_factor",FormFactor.getText().toString());
                 params.put("phase", Phase.getText().toString());
+                params.put("equip_specs", Specification.getText().toString());
                 params.put("mfg_name", Manufacturer.getText().toString());
                 params.put("equip_code", EquipmentNumber_Id.getText().toString());
-                params.put("cleaning_freq_hrs", Specification.getText().toString());
+                params.put("process_name", Process_name_.getText().toString());
+                params.put("cleaning_freq_hrs", CleaningRunningFrequencyHRS.getText().toString());
                 return params;
             }
         };

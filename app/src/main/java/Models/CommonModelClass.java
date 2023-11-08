@@ -1,10 +1,18 @@
 package Models;
 
 public class CommonModelClass {
-    private String Process_name ,Sstp2_code,Image_id,Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,Form_Factor,Phase,Cleaning_RunningFrequency_HRS;
+    private String Process_name ,Sstp2_code,Image_id,Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
+            Form_Factor,Phase,Cleaning_RunningFrequency_HRS;
     private int Card_view ;
+    private  String Address_M ;
 
+    public String getAddress_M() {
+        return Address_M;
+    }
 
+    public void setAddress_M(String address_M) {
+        Address_M = address_M;
+    }
 
     public CommonModelClass() {
 

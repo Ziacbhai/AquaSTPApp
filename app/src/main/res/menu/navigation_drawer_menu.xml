@@ -2,8 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-    <group
-        android:checkableBehavior="single">
+    <group android:checkableBehavior="single">
         <!--<item android:title="Manage"/>-->
         <item
             android:id="@+id/nav_dashboard"
@@ -21,19 +20,42 @@
             android:title="Select STP" />
 
         <item
+            android:id="@+id/nav_itemstock"
+            android:icon="@drawable/shoppingbag"
+            android:title="Item Stock" />
+        <item
+            android:id="@+id/nav_consumption"
+            android:icon="@drawable/select"
+            android:title="Consumption" />
+
+        <item
+            android:id="@+id/nav_repair"
+            android:icon="@drawable/toolbox"
+            android:title="Repair" />
+
+        <item
+            android:id="@+id/nav_lap"
+            android:icon="@drawable/laboratory"
+            android:title="Lab" />
+
+        <item
+            android:id="@+id/nav_incident"
+            android:icon="@drawable/warningsign"
+            android:title="Incident" />
+        <item
             android:id="@+id/nav_aboutus"
             android:icon="@drawable/baseline_about_icon"
             android:title="About Us" />
 
-    <item
-        android:id="@+id/nav_share"
-        android:icon="@drawable/baseline_share_icon"
-        android:title="Share"/>
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/baseline_share_icon"
+            android:title="Share" />
 
-    <item
-        android:id="@+id/nav_logout"
-        android:icon="@drawable/baseline_logout_icon"
-        android:title="Logout"/>
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/baseline_logout_icon"
+            android:title="Logout" />
     </group>
 
 </menu>

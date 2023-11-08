@@ -96,11 +96,11 @@ public class WelcomeSupervisor extends AppCompatActivity {
         Smail = findViewById(R.id.sMail);
         Sph = findViewById(R.id.sPh);
         ClickHere = findViewById(R.id.Clickhere);
+        String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
         String usrname = Global.sharedPreferences.getString("person_name", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
-        String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
         Sname.setText(usrname);
         Smail.setText(mail);

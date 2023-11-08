@@ -247,7 +247,7 @@
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Email"
+                                        android:text="Number"
                                         android:textSize="18dp" />
 
                                     <EditText
@@ -256,7 +256,8 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="5dp"
                                         android:background="@drawable/inputbg2"
-                                        android:hint="xxxxxxxx@gmail.com" />
+                                        android:hint="123456"
+                                        android:maxLength="10" />
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>

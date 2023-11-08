@@ -43,11 +43,11 @@ public class MetersFragment extends Fragment {
     RecyclerView MetersRecyclerview;
     CommonModelClass commonModelClassList;
     private ProgressDialog progressDialog;
-    private String personname,userimage,mail,Stpname ,Sitename;
+    private String personname,userimage,mail,Stpname ,Sitename,SiteAddress;
 
-    TextView  usersiteH,userstpH ;
+    TextView  usersiteH,userstpH ,usersiteaddressH;
     private TextView Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
-            FormFactor,Phase,CleaningRunningFrequencyHRS;
+            FormFactor,Phase,CleaningRunningFrequencyHRS,Address_M;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,13 +65,16 @@ public class MetersFragment extends Fragment {
 
         Sitename = sharedPreferences.getString("site_name", "");
         Stpname = sharedPreferences.getString("stp_name", "");
+        SiteAddress = sharedPreferences.getString("site_address", "");
 
 
         usersiteH = view.findViewById(R.id.site_name);
         userstpH = view.findViewById(R.id.stp_name);
+        usersiteaddressH = view.findViewById(R.id.site_address);
 
         usersiteH.setText(Sitename);
         userstpH.setText(Stpname);
+        usersiteaddressH.setText(SiteAddress);
 
 
         MetersRecyclerview = view.findViewById(R.id.meters_recyclerview);
@@ -114,13 +117,13 @@ public class MetersFragment extends Fragment {
                     }
                     commonModelClassList = new CommonModelClass();
                     try {
-
                         commonModelClassList.setImage(e.getString("name_plate"));
                         commonModelClassList.setEquipmentName(e.getString("equip_name"));
                         commonModelClassList.setRating_Capacity(e.getString("rating"));
                         commonModelClassList.setForm_Factor(e.getString("form_factor"));
                         commonModelClassList.setPhase(e.getString("phase"));
                         commonModelClassList.setManufacturer(e.getString("mfg_name"));
+                        commonModelClassList.setSpecification(e.getString("equip_specs"));
                         commonModelClassList.setEquipmentNumber_Id(e.getString("equip_code"));
                         commonModelClassList.setCleaning_RunningFrequency_HRS(e.getString("cleaning_freq_hrs"));
 
@@ -152,12 +155,14 @@ public class MetersFragment extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("equip_name", EquipmentName.getText().toString());
+                params.put("site_address", Global.sharedPreferences.getString("site_address", null).toString());
                 params.put("rating", Rating_Capacity.getText().toString());
                 params.put("form_factor",FormFactor.getText().toString());
                 params.put("phase", Phase.getText().toString());
+                params.put("equip_specs", Specification.getText().toString());
                 params.put("mfg_name", Manufacturer.getText().toString());
                 params.put("equip_code", EquipmentNumber_Id.getText().toString());
-                params.put("cleaning_freq_hrs", Specification.getText().toString());
+                params.put("cleaning_freq_hrs", CleaningRunningFrequencyHRS.getText().toString());
                 return params;
             }
         };

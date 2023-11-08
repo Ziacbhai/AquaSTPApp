@@ -65,6 +65,16 @@
                                         android:textSize="16dp" />
 
                                     <TextView
+                                        android:id="@+id/site_address"
+                                        android:layout_width="match_parent"
+                                        android:gravity="center_horizontal"
+                                        android:layout_height="wrap_content"
+                                        android:text="Site name"
+                                        android:textColor="@color/white"
+                                        android:textStyle="bold"
+                                        android:textSize="16dp" />
+
+                                    <TextView
                                         android:id="@+id/stp_name"
                                         android:layout_width="match_parent"
                                         android:gravity="center_horizontal"
@@ -77,49 +87,7 @@
                                 </LinearLayout>
 
                             </LinearLayout>
-                            <!--<LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="5dp">
 
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:textColor="@color/white"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="SBR  :"
-                                        android:textSize="10sp"
-                                        android:gravity="center"/>
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:id="@+id/sbr_"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:text=""
-                                        android:textColor="@color/white"
-                                        android:layout_gravity="left"
-                                        android:textStyle="bold"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
-
-                            </LinearLayout>-->
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"

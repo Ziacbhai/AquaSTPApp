@@ -70,6 +70,7 @@ public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.
 
         holder.Manufacturer.setText(commonModelClassList.get(position).getManufacturer());
         holder.EquipmentName.setText(commonModelClassList.get(position).getEquipmentName());
+        holder.Equipment_id.setText(commonModelClassList.get(position).getEquipmentNumber_Id());
         holder.Specification.setText(commonModelClassList.get(position).getSpecification());
         holder.Rating_Capacity.setText(commonModelClassList.get(position).getRating_Capacity());
         holder.FormFactor.setText(commonModelClassList.get(position).getForm_Factor());
@@ -149,8 +150,8 @@ public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.
 
     public class CommonViewHolder extends RecyclerView.ViewHolder {
      private    ImageView ImageView;
-     private    TextView Manufacturer,EquipmentName,Specification,Rating_Capacity,
-             FormFactor,Phase,CleaningRunningFrequencyHRS;
+     private    TextView Manufacturer,EquipmentName,Specification,Rating_Capacity,Equipment_id,
+             FormFactor,Phase,CleaningRunningFrequencyHRS,Process_name;
 
         public CommonViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -158,6 +159,7 @@ public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.
             ImageView=itemView.findViewById(R.id.image_);
             Manufacturer=itemView.findViewById(R.id.manufacturer_);
             EquipmentName=itemView.findViewById(R.id.equipmentName_);
+            Equipment_id=itemView.findViewById(R.id.equipmentId_);
             Specification=itemView.findViewById(R.id.specification_);
             Rating_Capacity=itemView.findViewById(R.id.rating_capacity_);
             FormFactor=itemView.findViewById(R.id.formFactor_);

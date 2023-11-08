@@ -74,10 +74,6 @@
             android:layout_margin="5dp"
             android:background="#F44336" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
-
         <TextView
             android:id="@+id/uName"
             android:layout_width="match_parent"
@@ -104,9 +100,7 @@
             android:text=""
             android:textSize="16sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+
 
         <LinearLayout
             android:layout_width="match_parent"

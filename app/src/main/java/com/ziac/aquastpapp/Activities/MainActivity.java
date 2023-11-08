@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private boolean doubleBackToExitPressedOnce;
 
     boolean click = true;
-    private String personname,userimage,mail,Stpname ,Sitename;
+    private String personname,userimage,mail,Stpname ,Sitename ,Siteaddress;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mail = sharedPreferences.getString("user_email", "");
         Sitename = sharedPreferences.getString("site_name", "");
         Stpname = sharedPreferences.getString("stp_name", "");
+        Siteaddress = sharedPreferences.getString("site_address", "");
 
 
 
@@ -193,10 +194,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 usersiteH = drawerLayout.findViewById(R.id.site_name);
                 userstpH = drawerLayout.findViewById(R.id.stp_name);
 
+
                 personnameH.setText(personname);
                 usermailH.setText(mail);
                 usersiteH.setText(Sitename);
                 userstpH.setText(Stpname);
+
 
                 layout.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -242,6 +245,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, homeFragment);
+            fragmentTransaction.commit();
+            drawerLayout.closeDrawers();
+            return true;
+        }
+        if (itemId == R.id.nav_consumption) {
+            ConsumablesFragment consumablesFragment = new ConsumablesFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, consumablesFragment);
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;

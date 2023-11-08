@@ -39,7 +39,7 @@
                 android:padding="3dp"
                 android:text="name"
                 android:textColor="@color/white"
-                android:textSize="21sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
