@@ -22,9 +22,11 @@ import com.ziac.aquastpapp.R;
 
 public class EquipmentsFragment extends Fragment {
     private CardView Pump ,Meters;
-    private String userimage,mail,Stpname ,Sitename ,Siteaddress ,mobile_;
-    TextView personnameH,usermailH ,usersiteH,userstpH ,Mobile ,uderaddress ,mobile;
-    private TextView ReferenceCode,Companyname,Personname, Mailid, Mobno,AlterMobileno;
+    private String userimage,mail,Stpname ,Sitename ,mobile_;
+    TextView personnameH,usermailH ,usersiteH,userstpH ,Mobile ,uderaddress ,mobile,contact_name ;
+    TextView  usersiteaddressH ,uProcess,Mailid,Mobno;
+    private String Personname  ,SiteAddress,Process;
+    private TextView ReferenceCode,Companyname,AlterMobileno,Contact_name;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,17 +38,29 @@ public class EquipmentsFragment extends Fragment {
         Pump = view.findViewById(R.id.pump_p);
         Meters = view.findViewById(R.id.moter_s);
 
-        String dealername = Global.sharedPreferences.getString("person_name", "");
-        String mail = Global.sharedPreferences.getString("user_email", "");
-        String mobile = Global.sharedPreferences.getString("user_mobile", "");
+        Sitename = sharedPreferences.getString("site_name", "");
+        Stpname = sharedPreferences.getString("stp_name", "");
+        SiteAddress = sharedPreferences.getString("site_address", "");
+        Process = sharedPreferences.getString("process_name", "");
+         mail = sharedPreferences.getString("user_email", "");
+        mobile_ = sharedPreferences.getString("user_mobile", "");
+        Personname = sharedPreferences.getString("person_name", "");
 
-        Personname = view.findViewById(R.id.person);
+        usersiteH = view.findViewById(R.id.site_name);
         Mailid = view.findViewById(R.id.email);
         Mobno = view.findViewById(R.id._mobile);
+        userstpH = view.findViewById(R.id.stp_name);
+        uProcess = view.findViewById(R.id.processname_);
+        usersiteaddressH = view.findViewById(R.id.site_address);
+        personnameH = view.findViewById(R.id.person_name);
 
-        Personname.setText(dealername);
         Mailid.setText(mail);
-        Mobno.setText(mobile);
+        Mobno.setText(mobile_);
+        usersiteaddressH.setText(SiteAddress);
+        userstpH.setText(Stpname);
+        uProcess.setText(Process);
+        usersiteH.setText(Sitename);
+        personnameH.setText(Personname);
 
         Pump.setOnClickListener(new View.OnClickListener() {
             @Override

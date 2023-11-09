@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -265,6 +266,8 @@ public class LoginFragment extends Fragment {
 
         queue.add(request);
     }
+
+
     private void getuserprofile() {
 
         String url = Global.getuserprofileurl;
@@ -297,9 +300,37 @@ public class LoginFragment extends Fragment {
                 Global.editor.putString("user_email", user_email);
                 Global.editor.putString("ref_code", ref_code);
                 Global.editor.putString("user_image", user_image);
-
                 Global.editor.commit();
 
+                JSONArray liststp = new JSONArray(respObj1.getString("data2"));
+                int i;
+                Global.StpList = new ArrayList<>();
+                for (i = 0;i<liststp.length();i++){
+                    final JSONObject e;
+                    try {
+                        e = liststp.getJSONObject(i);
+                    } catch (JSONException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    //listofstp = new JSONObject(liststp[i]("site_code"));
+                    stpModelClass = new StpModelClass();
+
+                    stpModelClass.setSucode(e.getString("su_code"));
+                    stpModelClass.setComcode(e.getString("com_code"));
+                    stpModelClass.setUsercode(e.getString("user_code"));
+                    stpModelClass.setPersonname(e.getString("person_name"));
+                    stpModelClass.setUsername(e.getString("username"));
+                    stpModelClass.setSstp1code(e.getString("sstp1_code"));
+                    stpModelClass.setStpname(e.getString("stp_name"));
+                    stpModelClass.setSitecode(e.getString("site_code"));
+                    stpModelClass.setSitename(e.getString("site_name"));
+                    stpModelClass.setStpactive(e.getString("stp_active"));
+
+                    stpModelClass.setSite_address(e.getString("site_address"));
+                    stpModelClass.setProcess__type(e.getString("process_name"));
+
+                    Global.StpList.add(stpModelClass);
+                }
                 Toast.makeText(getActivity(), "Login Successfull", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
 

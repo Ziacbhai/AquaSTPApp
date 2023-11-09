@@ -71,7 +71,7 @@ public class SignUpFragment extends Fragment {
     EditText Company,CPerson,Mobile,Email ,AUname,RPassword ,Cpassword ,Ccode;
     AppCompatButton Registerbtn;
 
-    TextView tvState, tvCity;
+    TextView tvState, tvCity ,Site_address,Process_type ,Contact_name;
     ImageView DDstate,DDcity;
     private zList statename;
     private zList cityname;
@@ -95,9 +95,12 @@ public class SignUpFragment extends Fragment {
         Company = view.findViewById(R.id.company);
         CPerson = view.findViewById(R.id.cperson);
         Mobile = view.findViewById(R.id.mobile);
-        Email = view.findViewById(R.id.remail);
+        Email = view.findViewById(R.id.emailr);
         AUname = view.findViewById(R.id.auname);
         checkBox = view.findViewById(R.id.ccheckbox);
+
+        Site_address = view.findViewById(R.id.site_address);
+        Process_type= view.findViewById(R.id.name_process);
 
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading...");
@@ -669,6 +672,9 @@ public class SignUpFragment extends Fragment {
                 params.put("username", AUname.getText().toString());
                 params.put("password", RPassword.getText().toString());
                 params.put("confirm_password", Cpassword.getText().toString());
+                params.put("site_address", Site_address.getText().toString());
+                params.put("process_name", Process_type.getText().toString());
+                params.put("contact_name", Contact_name.getText().toString());
                // params.put("ref_code", CouponCode.getText().toString());
                 // Log.d("params", params.toString());
                 return params;

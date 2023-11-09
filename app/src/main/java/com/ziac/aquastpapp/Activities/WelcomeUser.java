@@ -52,7 +52,7 @@ import java.util.Map;
 
 public class WelcomeUser extends AppCompatActivity {
     private TextView Uname,Umail,Uph,ClickHere;
-    ImageView ImageView;
+    ImageView ImageView,Userexit;
     AppCompatButton uContinue;
     private String username;
     Context context;
@@ -72,6 +72,14 @@ public class WelcomeUser extends AppCompatActivity {
         Uname = findViewById(R.id.uName);
         ClickHere = findViewById(R.id.Clickhere);
         uContinue = findViewById(R.id.uContinue);
+
+        Userexit = findViewById(R.id.userexit);
+        Userexit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishAffinity();
+            }
+        });
 
         Umail = findViewById(R.id.uMail);
         Uph = findViewById(R.id.uPh);

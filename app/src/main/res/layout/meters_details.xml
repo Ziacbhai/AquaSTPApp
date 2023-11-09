@@ -48,15 +48,6 @@
                                 android:gravity="center_horizontal"
                                 android:orientation="vertical">
 
-                                <!--<TextView
-                                    android:gravity="center_horizontal"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:textStyle="bold"
-                                    android:text="Manufacturer"
-                                    android:textColor="#000"
-                                    android:textSize="12dp" />-->
                                 <TextView
                                     android:id="@+id/equipmentName_"
                                     android:layout_width="match_parent"
@@ -65,6 +56,13 @@
                                     android:text="Eqipment name"
                                     android:textStyle="bold"
                                     android:textSize="16dp" />
+                                <TextView
+                                    android:id="@+id/equip_slno"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:text="Equip_slno"
+                                    android:textSize="12dp"/>
                                 <TextView
                                     android:gravity="center_horizontal"
                                     android:id="@+id/manufacturer_"
@@ -98,17 +96,10 @@
                             <ImageView
                                 android:id="@+id/image_"
                                 android:layout_width="80dp"
-                                android:layout_height="60dp"
+                                android:layout_height="match_parent"
                                 android:layout_margin="5dp"
                                 android:padding="10dp"
                                 android:src="@drawable/aqua_logo" />
-
-                            <TextView
-                                android:id="@+id/equipmentId_"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_horizontal"
-                                android:text="" />
                         </LinearLayout>
 
 
@@ -212,6 +203,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="Specification"
+                                        android:padding="3dp"
                                         android:textSize="12dp" />
 
                                 </LinearLayout>

@@ -52,7 +52,7 @@ import java.util.Map;
 
 public class WelcomeCustomer extends AppCompatActivity {
     private TextView Cname,Cmail,Cph,ClickHere;
-    ImageView ImageView;
+    ImageView ImageView ,Customerexit;
     AppCompatButton cContinue;
     private String username;
     Context context;
@@ -73,6 +73,14 @@ public class WelcomeCustomer extends AppCompatActivity {
         fab = findViewById(R.id.floating);
         Cmail = findViewById(R.id.cmail);
         Cph = findViewById(R.id.cph);
+
+        Customerexit = findViewById(R.id.customerexit);
+        Customerexit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishAffinity();
+            }
+        });
 
         String usrname = Global.sharedPreferences.getString("username", "");
         String mail = Global.sharedPreferences.getString("user_email", "");

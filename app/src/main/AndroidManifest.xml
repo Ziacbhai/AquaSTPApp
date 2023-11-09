@@ -41,6 +41,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.Login_Logout_Alert_Dialog"
+            android:exported="false" />
+        <activity
             android:name=".Activities.EquipmentDetails"
             android:exported="false" />
         <activity

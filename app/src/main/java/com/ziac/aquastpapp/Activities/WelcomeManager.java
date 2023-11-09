@@ -57,7 +57,7 @@ import java.util.Map;
 public class WelcomeManager extends AppCompatActivity {
 
     private TextView Mname,Mmail,Mph,ClickHere;
-    ImageView ImageView;
+    ImageView ImageView ,ManagerExit;
     AppCompatButton mContinue;
     private String username;
     Context context;
@@ -77,6 +77,15 @@ public class WelcomeManager extends AppCompatActivity {
         Mname = findViewById(R.id.Mname);
         ClickHere = findViewById(R.id.Clickhere);
         mContinue = findViewById(R.id.mContinue);
+
+        ManagerExit = findViewById(R.id.managerexit);
+
+        ManagerExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishAffinity();
+            }
+        });
 
         Mmail = findViewById(R.id.Mmail);
         Mph = findViewById(R.id.Mph);

@@ -51,6 +51,7 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
         holder.Sucode.setText(stpModelClasses.get(position).getSucode());
         holder.StpName.setText(stpModelClasses.get(position).getStpname());
         holder.SiteName.setText(stpModelClasses.get(position).getSitename());
+        holder.Site.setText(stpModelClasses.get(position).getSitename());
 
         holder.Selectcompany.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +71,9 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
                 Global.editor.putString("site_code", Global.StpList.get(position).getSitecode());
                 Global.editor.putString("site_name", Global.StpList.get(position).getSitename());
                 Global.editor.putString("stp_active", Global.StpList.get(position).getStpactive());
+
+                Global.editor.putString("site_address", Global.StpList.get(position).getSite_address());
+                Global.editor.putString("process_name", Global.StpList.get(position).getProcess__type());
 
                 Global.editor.commit();
 
@@ -95,7 +99,7 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
 
     public class StpViewHolder extends RecyclerView.ViewHolder {
 
-        TextView Sucode,SiteName,StpName;
+        TextView Sucode,SiteName,StpName ,Site;
         AppCompatButton Selectcompany;
         public StpViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,6 +107,7 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
             StpName = itemView.findViewById(R.id.stpname);
             SiteName = itemView.findViewById(R.id.sitename);
             Selectcompany = itemView.findViewById(R.id.selectcompany);
+            Site = itemView.findViewById(R.id.site);
 
 
         }

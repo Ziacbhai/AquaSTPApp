@@ -43,9 +43,8 @@ public class MetersFragment extends Fragment {
     RecyclerView MetersRecyclerview;
     CommonModelClass commonModelClassList;
     private ProgressDialog progressDialog;
-    private String personname,userimage,mail,Stpname ,Sitename,SiteAddress;
-
-    TextView  usersiteH,userstpH ,usersiteaddressH;
+    TextView  usersiteH,userstpH,usersiteaddressH ,uProcess,Mailid,Mobno,personnameH;
+    private String Personname,mail,Stpname ,Sitename ,SiteAddress,Process;
     private TextView Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
             FormFactor,Phase,CleaningRunningFrequencyHRS,Address_M;
     @SuppressLint("MissingInflatedId")
@@ -66,15 +65,27 @@ public class MetersFragment extends Fragment {
         Sitename = sharedPreferences.getString("site_name", "");
         Stpname = sharedPreferences.getString("stp_name", "");
         SiteAddress = sharedPreferences.getString("site_address", "");
-
+        Process = sharedPreferences.getString("process_name", "");
+        String mail = Global.sharedPreferences.getString("user_email", "");
+        String mobile = Global.sharedPreferences.getString("user_mobile", "");
+        Personname = sharedPreferences.getString("person_name", "");
 
         usersiteH = view.findViewById(R.id.site_name);
         userstpH = view.findViewById(R.id.stp_name);
         usersiteaddressH = view.findViewById(R.id.site_address);
+        uProcess = view.findViewById(R.id.processname_);
+        Mailid = view.findViewById(R.id.email);
+        Mobno = view.findViewById(R.id._mobile);
+        personnameH = view.findViewById(R.id.person_name);
 
         usersiteH.setText(Sitename);
         userstpH.setText(Stpname);
         usersiteaddressH.setText(SiteAddress);
+        uProcess.setText(Process);
+        Mailid.setText(mail);
+        Mobno.setText(mobile);
+        personnameH.setText(Personname);
+
 
 
         MetersRecyclerview = view.findViewById(R.id.meters_recyclerview);
@@ -124,7 +135,7 @@ public class MetersFragment extends Fragment {
                         commonModelClassList.setPhase(e.getString("phase"));
                         commonModelClassList.setManufacturer(e.getString("mfg_name"));
                         commonModelClassList.setSpecification(e.getString("equip_specs"));
-                        commonModelClassList.setEquipmentNumber_Id(e.getString("equip_code"));
+                        commonModelClassList.setEquipmentNumber_Id(e.getString("equip_slno"));
                         commonModelClassList.setCleaning_RunningFrequency_HRS(e.getString("cleaning_freq_hrs"));
 
 
@@ -161,7 +172,7 @@ public class MetersFragment extends Fragment {
                 params.put("phase", Phase.getText().toString());
                 params.put("equip_specs", Specification.getText().toString());
                 params.put("mfg_name", Manufacturer.getText().toString());
-                params.put("equip_code", EquipmentNumber_Id.getText().toString());
+                params.put("equip_slno", EquipmentNumber_Id.getText().toString());
                 params.put("cleaning_freq_hrs", CleaningRunningFrequencyHRS.getText().toString());
                 return params;
             }

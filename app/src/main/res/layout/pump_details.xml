@@ -46,6 +46,14 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/equip_slno"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Equip_slno"
+                            android:textSize="12dp"/>
+
+                        <TextView
                             android:id="@+id/manufacturer_"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -75,17 +83,10 @@
                             <ImageView
                                 android:id="@+id/image_"
                                 android:layout_width="80dp"
-                                android:layout_height="80dp"
+                                android:layout_height="match_parent"
                                 android:layout_margin="5dp"
                                 android:padding="10dp"
                                 android:src="@drawable/aqua_logo" />
-
-                            <TextView
-                                android:id="@+id/equipmentId_"
-                                android:layout_width="match_parent"
-                                android:gravity="center"
-                                android:text=""
-                                android:layout_height="match_parent"/>
                         </LinearLayout>
 
 
@@ -257,6 +258,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="Specification"
+                                        android:padding="3dp"
                                         android:textSize="12dp" />
 
                                 </LinearLayout>

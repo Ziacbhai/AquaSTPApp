@@ -16,16 +16,15 @@ public class RecoveryPasswordWith extends AppCompatActivity {
 
     CardView Remail,Rusername,Rmobile;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recovery_password_with);
-
-        Remail = findViewById(R.id.remail);
-        Rusername = findViewById(R.id.rusername);
-        Rmobile = findViewById(R.id.rmobile);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        Remail = findViewById(R.id.emailr);
+        Rusername = findViewById(R.id.usernamer);
+        Rmobile = findViewById(R.id.mobiler);
 
        Remail.setOnClickListener(new View.OnClickListener() {
            @Override

@@ -5,6 +5,7 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private boolean doubleBackToExitPressedOnce;
 
     boolean click = true;
-    private String personname,userimage,mail,Stpname ,Sitename ,Siteaddress;
+    private String personname,userimage,mail,Stpname ,Sitename ,Siteaddress,userref;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -125,13 +126,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         openFragment(new HomeFragment());
 
         userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
+        userref = Global.userImageurl + sharedPreferences.getString("ref_code", "");
+
         personname = sharedPreferences.getString("person_name", "");
         mail = sharedPreferences.getString("user_email", "");
         Sitename = sharedPreferences.getString("site_name", "");
         Stpname = sharedPreferences.getString("stp_name", "");
+        ////
         Siteaddress = sharedPreferences.getString("site_address", "");
-
-
+        Siteaddress = sharedPreferences.getString("process_name", "");
 
         Picasso.Builder builder=new Picasso.Builder(getApplication());
         Picasso picasso=builder.build();
@@ -139,8 +142,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(Profile );
-
-
       Profile.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -160,8 +161,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                     return true;
                 }if (itemId == R.id.nav_logout) {
-                    startActivity(new Intent(MainActivity.this, LoginSignupActivity.class));
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setTitle("Logout Confirmation");
+                    builder.setMessage("Are you sure you want to logout?");
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // User clicked "Yes", perform logout action
+                            startActivity(new Intent(MainActivity.this, LoginSignupActivity.class));
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // User clicked "No", dismiss the dialog
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.create().show();
                     return true;
+
                 }if (itemId == R.id.changepwd) {
                     startActivity(new Intent(MainActivity.this, ChangePasswordActivity.class));
                     return true;
@@ -277,7 +296,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         if (itemId == R.id.nav_logout) {
-            startActivity(new Intent(MainActivity.this, LoginSignupActivity.class));
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Logout Confirmation");
+            builder.setMessage("Are you sure you want to logout?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // User clicked "Yes", perform logout action
+                    startActivity(new Intent(MainActivity.this, LoginSignupActivity.class));
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // User clicked "No", dismiss the dialog
+                    dialog.dismiss();
+                }
+            });
+            builder.create().show();
             return true;
         }if (itemId == R.id.nav_selectStp) {
             startActivity(new Intent(MainActivity.this, SelectLocationActivity.class));
@@ -291,12 +327,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Create an intent to share content
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
-        String sAux = "\n Smart Operations & Monitoring Solution Click the link to download the app from the Google Play Store\n\n";
-        sAux = sAux + "https://play.google.com/store/apps/details?id=com.ziac.aquastpapp\n\n";
-        shareIntent.putExtra(Intent.EXTRA_TEXT,sAux);
+        // Get the referral code from SharedPreferences
+        String refCode = sharedPreferences.getString("ref_code", "");
+        // Build the shared content
+        String shareMessage = "Referral Code: " + refCode +
+                "\n\nSmart Operations & Monitoring Solution. Click the link to download the app from the Google Play Store:\n" +
+                "https://play.google.com/store/apps/details?id=com.ziac.aquastpapp\n";
+        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
         // Launch the sharing dialog
         startActivity(Intent.createChooser(shareIntent, "Share via"));
     }
+
     private void openFragment(Fragment fragment){
         FiltersFragment homeFragment=new FiltersFragment();
         fragmentManager=getSupportFragmentManager();

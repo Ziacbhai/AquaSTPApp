@@ -348,7 +348,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-
                 params.put("username", Global.sharedPreferences.getString("username",null));
                 return params;
             }
@@ -403,7 +402,7 @@ public class ProfileActivity extends AppCompatActivity {
                 try {
                     if (response.getBoolean("isSuccess")) {
                         Toast.makeText(ProfileActivity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                        startActivity(new Intent(ProfileActivity.this, WelcomeManager.class));
                         finish();
                     } else {
                         //textViewError.setText(response.getString("error"));

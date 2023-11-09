@@ -140,7 +140,7 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Reference Code"
+                                    android:text="Referral code"
                                     android:textSize="18dp" />
 
                                 <TextView
@@ -155,8 +155,8 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="13dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
                         android:background="@drawable/profilebtnupdate"
                         android:orientation="vertical">
 
@@ -225,29 +225,28 @@
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>
 
-
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@drawable/profilebtnupdate"
                             android:orientation="vertical">
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_margin="10dp"
                                 app:cardCornerRadius="10dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="9dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="10dp"
                                     android:orientation="vertical">
 
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Number"
+                                        android:text="Email"
                                         android:textSize="18dp" />
 
                                     <EditText
@@ -256,11 +255,11 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="5dp"
                                         android:background="@drawable/inputbg2"
-                                        android:hint="123456"
-                                        android:maxLength="10" />
+                                        android:hint="Ziacdemo" />
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>
+
                     </LinearLayout>
 
 

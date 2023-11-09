@@ -60,14 +60,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class WelcomeOwner extends AppCompatActivity {
 
     TextView Wname,Mailid,Mobno,ClickHere;
-    CircleImageView ImageView;
+    CircleImageView ImageView,Ownerexit;
     AppCompatButton oContinue;
     String username;
     Context context;
     FloatingActionButton fab;
     Bitmap imageBitmap;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +80,14 @@ public class WelcomeOwner extends AppCompatActivity {
         ClickHere = findViewById(R.id.Clickhere);
         oContinue = findViewById(R.id.oContinue);
         fab = findViewById(R.id.floating);
+
+        Ownerexit = findViewById(R.id.ownerexit);
+        Ownerexit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishAffinity();
+            }
+        });
 
         Mailid = findViewById(R.id.wemail);
         Mobno = findViewById(R.id.wph);

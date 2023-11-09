@@ -61,7 +61,7 @@ public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.
         Picasso.Builder builder=new Picasso.Builder(context);
         Picasso picasso=builder.build();
         //picasso.load(Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2))).error(R.drawable.no_image_available_icon).into(holder.ImageView);
-        picasso.load(Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2))).error(R.drawable.no_image_available_icon)
+        picasso.load(Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2))).error(R.drawable.no_image)
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(holder.ImageView);
@@ -159,7 +159,7 @@ public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.
             ImageView=itemView.findViewById(R.id.image_);
             Manufacturer=itemView.findViewById(R.id.manufacturer_);
             EquipmentName=itemView.findViewById(R.id.equipmentName_);
-            Equipment_id=itemView.findViewById(R.id.equipmentId_);
+            Equipment_id=itemView.findViewById(R.id.equip_slno);
             Specification=itemView.findViewById(R.id.specification_);
             Rating_Capacity=itemView.findViewById(R.id.rating_capacity_);
             FormFactor=itemView.findViewById(R.id.formFactor_);
