@@ -315,6 +315,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
             builder.create().show();
             return true;
+
         }if (itemId == R.id.nav_selectStp) {
             startActivity(new Intent(MainActivity.this, SelectLocationActivity.class));
             return true;

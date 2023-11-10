@@ -54,8 +54,6 @@ public class WelcomeCustomer extends AppCompatActivity {
     private TextView Cname,Cmail,Cph,ClickHere;
     ImageView ImageView ,Customerexit;
     AppCompatButton cContinue;
-    private String username;
-    Context context;
     Bitmap imageBitmap;
     FloatingActionButton fab;
     @SuppressLint("MissingInflatedId")

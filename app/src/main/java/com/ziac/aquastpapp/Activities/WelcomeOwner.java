@@ -60,7 +60,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class WelcomeOwner extends AppCompatActivity {
 
     TextView Wname,Mailid,Mobno,ClickHere;
-    CircleImageView ImageView,Ownerexit;
+    CircleImageView ImageView;
+    ImageView Ownerexit;
     AppCompatButton oContinue;
     String username;
     Context context;

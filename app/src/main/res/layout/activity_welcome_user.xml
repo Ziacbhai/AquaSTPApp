@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Welcome"
+            android:text="Welcome User"
             android:textColor="#01a4a3"
             android:textSize="22sp"
             android:textStyle="italic" />

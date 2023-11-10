@@ -79,7 +79,7 @@
             android:gravity="center_horizontal"
             android:text="Greetings,esteemed Owner!"
             android:textColor="#01a4a3"
-            android:textSize="25sp"
+            android:textSize="22sp"
             android:textStyle="italic" />
 
         <View
