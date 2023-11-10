@@ -38,7 +38,6 @@ public class SelectLocationActivity extends AppCompatActivity {
     String username;
     SiteLocationAdapter siteLocationAdapter;
     RecyclerView siteLocationRecyclerView;
-    StpModelClass stpModelClass;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -50,9 +49,7 @@ public class SelectLocationActivity extends AppCompatActivity {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         siteLocationRecyclerView = findViewById(R.id.stp_recyclerview);
-        //siteLocationRecyclerView.setAdapter(siteLocationAdapter);
         siteLocationRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL , false));
-
         siteLocationAdapter = new SiteLocationAdapter(Global.StpList, SelectLocationActivity.this);
         siteLocationRecyclerView.setAdapter(siteLocationAdapter);
     }

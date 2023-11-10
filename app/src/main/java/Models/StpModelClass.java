@@ -2,39 +2,9 @@ package Models;
 
 public class StpModelClass {
 
-    String sucode ,stpname,comcode,usercode,personname,username,sstp1code,sitecode,stpactive,sitename;
-      String   site_address;
-    String process__type;
-
-    public String getContact_name() {
-        return contact_name;
-    }
-
-    public void setContact_name(String contact_name) {
-        this.contact_name = contact_name;
-    }
-
-    String contact_name;
-
-
+    String sucode ,stpname,comcode,usercode,personname,username,sstp1code,sitecode,stpactive,sitename,site_address,process__type;
     public StpModelClass() {
 
-    }
-
-    public String getSite_address() {
-        return site_address;
-    }
-
-    public void setSite_address(String site_address) {
-        this.site_address = site_address;
-    }
-
-    public String getProcess__type() {
-        return process__type;
-    }
-
-    public void setProcess__type(String process__type) {
-        this.process__type = process__type;
     }
 
     public String getSucode() {
@@ -115,5 +85,21 @@ public class StpModelClass {
 
     public void setSitename(String sitename) {
         this.sitename = sitename;
+    }
+
+    public String getSite_address() {
+        return site_address;
+    }
+
+    public void setSite_address(String site_address) {
+        this.site_address = site_address;
+    }
+
+    public String getProcess__type() {
+        return process__type;
+    }
+
+    public void setProcess__type(String process__type) {
+        this.process__type = process__type;
     }
 }

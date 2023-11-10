@@ -29,13 +29,13 @@ import Models.StpModelClass;
 
 public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapter.StpViewHolder> {
 
-    private List<StpModelClass> stpModelClasses;
+    private List<StpModelClass> stpModelClassList;
     Context context;
 
     String Sucode ,Comcode ,Usercode,Personname,Username,Sstp1code,Stpname,Stpactive;
 
-    public SiteLocationAdapter(List<StpModelClass> stpModelClasses, Context context) {
-        this.stpModelClasses = stpModelClasses;
+    public SiteLocationAdapter(List<StpModelClass> stpModelClassList, Context context) {
+        this.stpModelClassList = stpModelClassList;
         this.context = context;
     }
 
@@ -48,10 +48,10 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull SiteLocationAdapter.StpViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.Sucode.setText(stpModelClasses.get(position).getSucode());
-        holder.StpName.setText(stpModelClasses.get(position).getStpname());
-        holder.SiteName.setText(stpModelClasses.get(position).getSitename());
-        holder.Site.setText(stpModelClasses.get(position).getSitename());
+        holder.Sucode.setText(stpModelClassList.get(position).getSucode());
+        holder.StpName.setText(stpModelClassList.get(position).getStpname());
+        holder.SiteName.setText(stpModelClassList.get(position).getSitename());
+        holder.Site.setText(stpModelClassList.get(position).getSitename());
 
         holder.Selectcompany.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +94,7 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
 
     @Override
     public int getItemCount() {
-        return stpModelClasses.size();
+        return stpModelClassList.size();
     }
 
     public class StpViewHolder extends RecyclerView.ViewHolder {

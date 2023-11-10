@@ -83,7 +83,10 @@ public class WelcomeManager extends AppCompatActivity {
         ManagerExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishAffinity();
+                /*finishAffinity();*/
+
+                Intent i = new Intent(WelcomeManager.this,LoginSignupActivity.class);
+                startActivity(i);
             }
         });
 
@@ -92,7 +95,7 @@ public class WelcomeManager extends AppCompatActivity {
         ImageView = findViewById(R.id.imageView);
 
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-        String usrname = Global.sharedPreferences.getString("username", "");
+        String person = Global.sharedPreferences.getString("person_name", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
 
@@ -105,7 +108,7 @@ public class WelcomeManager extends AppCompatActivity {
                 .into(ImageView );
 
 
-        Mname.setText(usrname);
+        Mname.setText(person);
         Mmail.setText(mail);
         Mph.setText(mobile);
 
@@ -346,6 +349,10 @@ public class WelcomeManager extends AppCompatActivity {
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    }
+    public void onBackPressed() {
+        Intent i = new Intent(WelcomeManager.this,LoginSignupActivity.class);
+        startActivity(i);
     }
 
 }

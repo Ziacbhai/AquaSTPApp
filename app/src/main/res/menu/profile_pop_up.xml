@@ -12,7 +12,7 @@
 
     <item android:id="@+id/changepwd"
         android:icon="@drawable/baseline_password"
-        android:title="ChangePassword" />
+        android:title="Change Password" />
 
     <item android:id="@+id/nav_logout"
         android:icon="@drawable/baseline_logout_icon"

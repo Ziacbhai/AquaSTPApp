@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -32,6 +33,8 @@ public class LoginSignupActivity extends AppCompatActivity {
 
         tabLayout.addTab(tabLayout.newTab().setText("LOGIN"));
         tabLayout.addTab(tabLayout.newTab().setText("REGISTER"));
+
+
 
         viewPager2 = findViewById(R.id.viewpagerlogin);
         loginadapter  =  new ViewPagerAdapter(this);

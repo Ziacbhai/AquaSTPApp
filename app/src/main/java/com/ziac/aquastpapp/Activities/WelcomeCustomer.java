@@ -80,7 +80,7 @@ public class WelcomeCustomer extends AppCompatActivity {
             }
         });
 
-        String usrname = Global.sharedPreferences.getString("username", "");
+        String usrname = Global.sharedPreferences.getString("person_name", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");

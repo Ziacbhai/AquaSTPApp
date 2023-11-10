@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     android:background="#eaeff5"
+
     android:orientation="vertical"
     tools:context=".Activities.LoginFragment">
 
@@ -14,26 +15,30 @@
         android:fillViewport="true">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
+           <!-- <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="20dp"
+                app:cardElevation="10dp"
+                android:layout_margin="10dp"
+                app:cardMaxElevation="12dp"
                 android:elevation="20dp"
                 app:cardCornerRadius="24dp">
 
-                <!--            app:cardBackgroundColor="#C1DFDF"-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5sp"
                     android:gravity="center"
+                    android:background="@drawable/btnbgoutline"
                     android:orientation="vertical"
                     android:padding="10dp">
 
@@ -46,6 +51,7 @@
                         android:background="@drawable/inputbg"
                         android:drawablePadding="5dp"
                         android:hint="User Name"
+                        android:maxLength="50"
                         android:inputType="textEmailAddress"
                         android:longClickable="true"
                         android:padding="10dp"
@@ -61,11 +67,12 @@
                         android:drawableRight="@drawable/ic_baseline_remove_red_eye_on"
                         android:drawablePadding="5dp"
                         android:hint=" Password"
+                        android:maxLength="20"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
                         android:inputType="textPassword"
                         android:longClickable="true"
-                        android:padding="10dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black" />
+                        android:padding="10dp"/>
 
                     <CheckBox
                         android:id="@+id/RcheckBox"
@@ -73,8 +80,9 @@
                         android:layout_height="48dp"
                         android:layout_marginTop="5dp"
                         android:padding="2dp"
-                        android:text="Keep me logged in "
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:text="Keep me logged in "/>
 
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -93,8 +101,137 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="10dp"
+                app:cardMaxElevation="12dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:background="@drawable/btn_gradient"
+                    android:padding="15dp"
+                    android:orientation="vertical">
+
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="8dp">
+
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Username" />
+
+
+                            <EditText
+                                android:id="@+id/Luser"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:autofillHints=""
+                                android:background="@drawable/btnbgedited"
+                                android:inputType="textEmailAddress"
+                                android:longClickable="true"
+                                android:maxLength="25"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/black"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="8dp">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Password" />
+
+
+                            <EditText
+                                android:id="@+id/password2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:autofillHints=""
+                                android:background="@drawable/btnbgedited"
+                                android:drawableRight="@drawable/ic_baseline_remove_red_eye_on"
+                                android:inputType="textPassword"
+                                android:longClickable="true"
+                                android:maxLength="10"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/black"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <CheckBox
+                        android:id="@+id/RcheckBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="5dp"
+                        android:padding="2dp"
+                        android:text="Remember me"
+                        android:textColor="@color/white" />
+
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/loginbtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/white"
+                        android:padding="5dp"
+                        android:text="Login"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

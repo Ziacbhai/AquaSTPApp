@@ -13,6 +13,7 @@ import com.ziac.aquastpapp.R;
 import java.util.ArrayList;
 
 import Models.CommonModelClass;
+import Models.ConsumableClass;
 import Models.StpModelClass;
 import Models.zList;
 
@@ -50,6 +51,7 @@ public class Global {
     public static String Equipment_Details_com_pumps = baseurl + "api/Masters/GetPumps?";
 
     public static String Equipment_Details_com_meters = baseurl + "api/Masters/GetMeters?";
+    public static String GetItemStock = baseurl + "api/Masters/GetItemStock?";
 
 
     public static ArrayList<zList> statearraylist;
@@ -58,6 +60,7 @@ public class Global {
 
     public static ArrayList<StpModelClass> StpList;
     public static ArrayList<CommonModelClass> pumpdetails;
+    public static ArrayList<ConsumableClass> consumables_stock;
 
     public static ArrayList<CommonModelClass> metersdetails;
 

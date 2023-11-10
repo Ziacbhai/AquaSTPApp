@@ -84,12 +84,12 @@ public class WelcomeUser extends AppCompatActivity {
         Umail = findViewById(R.id.uMail);
         Uph = findViewById(R.id.uPh);
 
-        String usrname = Global.sharedPreferences.getString("username", "");
+        String personname = Global.sharedPreferences.getString("person_name", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
-        Uname.setText(usrname);
+        Uname.setText(personname);
         Umail.setText(mail);
         Uph.setText(mobile);
 

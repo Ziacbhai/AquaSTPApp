@@ -100,7 +100,7 @@ public class SignUpFragment extends Fragment {
         checkBox = view.findViewById(R.id.ccheckbox);
 
         Site_address = view.findViewById(R.id.site_address);
-        Process_type= view.findViewById(R.id.name_process);
+       // Process_type= view.findViewById(R.id.name_process);
 
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading...");
@@ -110,7 +110,7 @@ public class SignUpFragment extends Fragment {
 
         RPassword = view.findViewById(R.id.rpassword);
         Cpassword = view.findViewById(R.id.rcpassword);
-        Ccode = view.findViewById(R.id.rccode);
+       // Ccode = view.findViewById(R.id.rccode);
 
         TermsOfUse = view.findViewById(R.id.terms);
         privacy = view.findViewById(R.id.privacy);
@@ -130,18 +130,22 @@ public class SignUpFragment extends Fragment {
         tvCity.setOnClickListener(v -> citiespopup());
 
         RPassword.setOnTouchListener((v, event) -> {
+
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getRawX() >= RPassword.getRight() - RPassword.getCompoundDrawables()[Right].getBounds().width()) {
                     int selection = RPassword.getSelectionEnd();
-                    if (passwordVisible) {
+                    if (passwordvisible) {
                         RPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
                         RPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        passwordVisible = false;
+                        passwordvisible = false;
+
                     } else {
                         RPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
                         RPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        passwordVisible = true;
+                        passwordvisible = true;
+
+
                     }
                     RPassword.setSelection(selection);
                     return true;
@@ -149,7 +153,6 @@ public class SignUpFragment extends Fragment {
             }
             return false;
         });
-
 
         Cpassword.setOnTouchListener((v, event) -> {
 
@@ -597,6 +600,12 @@ public class SignUpFragment extends Fragment {
             Toast.makeText(getActivity(),"Mobile number should not be less than 10 digits !!",Toast.LENGTH_SHORT).show();
             return;
         }
+        if (password.isEmpty()) {
+            Toast toast = Toast.makeText(getActivity(), "Password  field should not be empty!!", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+            return;
+        }
         if (password.length() < 6) {
             Toast.makeText(getActivity(), "Password must be at least 6 characters long.", Toast.LENGTH_SHORT).show();
             return;
@@ -606,7 +615,12 @@ public class SignUpFragment extends Fragment {
             toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
             return;
-        } if (!checkBox.isChecked()) {
+        }
+        if ( cpassword.isEmpty()) {
+
+            Toast.makeText(getActivity(), "Confirm pasword field should not be empty!!", Toast.LENGTH_SHORT).show();
+            return;
+        }if (!checkBox.isChecked()) {
             Toast.makeText(getActivity(), "You are not  agree with the terms and conditions of Aqua to move further  ", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -666,15 +680,16 @@ public class SignUpFragment extends Fragment {
                 params.put("com_contact", CPerson.getText().toString());
                 params.put("com_contact_mobno", Mobile.getText().toString());
                 params.put("com_email", Email.getText().toString());
-                params.put("person_name", Email.getText().toString());
+
                 params.put("state_code", String.valueOf(statename.get_code()));
                 params.put("city_code", String.valueOf(cityname.get_code()));
                 params.put("username", AUname.getText().toString());
                 params.put("password", RPassword.getText().toString());
                 params.put("confirm_password", Cpassword.getText().toString());
-                params.put("site_address", Site_address.getText().toString());
-                params.put("process_name", Process_type.getText().toString());
-                params.put("contact_name", Contact_name.getText().toString());
+//                params.put("site_address", Site_address.getText().toString());
+   //             params.put("process_name", Process_type.getText().toString());
+             //   params.put("contact_name", Contact_name.getText().toString());
+                // params.put("person_name", Contact_name.getText().toString());
                // params.put("ref_code", CouponCode.getText().toString());
                 // Log.d("params", params.toString());
                 return params;

@@ -180,6 +180,7 @@
 
                                 <EditText
                                     android:id="@+id/uName"
+                                    android:maxLength="50"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
@@ -254,6 +255,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="5dp"
+                                        android:maxLength="150"
                                         android:background="@drawable/inputbg2"
                                         android:hint="Ziacdemo" />
                                 </LinearLayout>
