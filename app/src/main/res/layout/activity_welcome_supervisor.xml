@@ -172,7 +172,7 @@
             android:layout_marginStart="25dp"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="Details wrong ?" />
+            android:text="Update Profile?" />
 
         <TextView
             android:id="@+id/Clickhere"

@@ -108,7 +108,7 @@ public class LoginFragment extends Fragment {
 
 
 //      COMMENTED BELOW LINE FOR TESTING
-//        siteLocationAdapter = new SiteLocationAdapter(Global.StpList, getContext());
+//      siteLocationAdapter = new SiteLocationAdapter(Global.StpList, getContext());
 
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());

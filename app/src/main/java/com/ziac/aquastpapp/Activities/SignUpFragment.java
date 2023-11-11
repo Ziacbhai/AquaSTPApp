@@ -696,7 +696,7 @@ public class SignUpFragment extends Fragment {
 
 
                 params.put("com_name", Company.getText().toString());
-                params.put("com_contact", CPerson.getText().toString());
+                params.put("person_name", CPerson.getText().toString());
                 params.put("com_contact_mobno", Mobile.getText().toString());
                 params.put("com_email", emailValue);
                 params.put("state_code", String.valueOf(statename.get_code()));
