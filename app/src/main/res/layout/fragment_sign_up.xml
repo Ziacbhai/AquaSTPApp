@@ -405,6 +405,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLength="150"
+                                android:inputType="textEmailAddress"
                                 android:layout_marginStart="5dp"
                                 android:background="@drawable/btnbgedited"
                                 android:textColor="@color/black"
@@ -537,7 +538,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
-                                android:hint="Admin UserName" />
+                                android:hint="Admin User Name" />
 
                             <EditText
                                 android:id="@+id/auname"

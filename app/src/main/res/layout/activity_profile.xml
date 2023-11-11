@@ -179,7 +179,7 @@
                                     android:textSize="18dp" />
 
                                 <EditText
-                                    android:id="@+id/uName"
+                                    android:id="@+id/_profilename"
                                     android:maxLength="50"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"

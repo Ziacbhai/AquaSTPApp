@@ -74,7 +74,7 @@ public class WelcomeManager extends AppCompatActivity {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         fab = findViewById(R.id.floating);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        Mname = findViewById(R.id.Mname);
+
         ClickHere = findViewById(R.id.Clickhere);
         mContinue = findViewById(R.id.mContinue);
 
@@ -89,7 +89,7 @@ public class WelcomeManager extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
+        Mname = findViewById(R.id.Mname);
         Mmail = findViewById(R.id.Mmail);
         Mph = findViewById(R.id.Mph);
         ImageView = findViewById(R.id.imageView);
@@ -106,8 +106,6 @@ public class WelcomeManager extends AppCompatActivity {
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(ImageView );
-
-
         Mname.setText(person);
         Mmail.setText(mail);
         Mph.setText(mobile);

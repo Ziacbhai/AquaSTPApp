@@ -71,7 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
     AppCompatButton Updatebutton;
     CircleImageView circleImageView;
     Bitmap imageBitmap;
-    private String username;
 
     EditText uName ,uNumber,uEmail;
     TextView Uref_code;
@@ -86,29 +85,28 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         fab=findViewById(R.id.floating);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
        Backarrowbtn = findViewById(R.id.backarrowbtn);
-        uName = findViewById(R.id.uName);
+        uName = findViewById(R.id._profilename);
         uNumber = findViewById(R.id.uNumber);
         uEmail = findViewById(R.id.uEmail);
-
         Uref_code = findViewById(R.id.Uref);
         circleImageView = findViewById(R.id.imageVie);
 
-
         Updatebutton = findViewById(R.id.updatebutton);
         Updatebutton.setOnClickListener(v -> updateprofile());
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        username = Global.sharedPreferences.getString("username", "");
 
-        String usname = Global.sharedPreferences.getString("person_name", "");
+        //username = Global.sharedPreferences.getString("username", "");
+
+        String personname = Global.sharedPreferences.getString("person_name", "");
         String refcode = Global.sharedPreferences.getString("ref_code", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
-        uName.setText(usname);
+        uName.setText(personname);
         uEmail.setText(mail);
         uNumber.setText(mobile);
         Uref_code.setText(refcode);
@@ -309,18 +307,18 @@ public class ProfileActivity extends AppCompatActivity {
                 JSONObject respObj = new JSONObject(respObj1.getString("data"));
 
                 String user_image = respObj.getString("user_image");
-                String usname = Global.sharedPreferences.getString("person_name", "");
+                String person_name = Global.sharedPreferences.getString("person_name", "");
                 String refcode = Global.sharedPreferences.getString("ref_code", "");
                 String mail = Global.sharedPreferences.getString("user_email", "");
                 String mobile = Global.sharedPreferences.getString("user_mobile", "");
-                        Log.d("MyTag", "Profile image: " + user_image);
+                      //  Log.d("MyTag", "Profile image: " + user_image);
 
 
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 Global.editor = Global.sharedPreferences.edit();
                 Global.editor.putString("user_image", user_image);
                 Global.editor.putString("ref_code", refcode);
-                Global.editor.putString("person_name", usname);
+                Global.editor.putString("person_name", person_name);
                 Global.editor.putString("user_email", mail);
                 Global.editor.putString("user_mobile", mobile);
                 Global.editor.commit();

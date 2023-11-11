@@ -14,10 +14,9 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:padding="5dp"
             android:src="@drawable/aqua_logo" />
 
@@ -26,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:animateLayoutChanges="true"
+            android:layout_marginTop="10dp"
             android:background="@drawable/btnbgoutline"
             app:tabGravity="fill"
             app:tabIndicatorColor="@android:color/transparent"
@@ -34,7 +34,7 @@
             app:tabTextColor="@color/appcolor" />
 
         <androidx.viewpager2.widget.ViewPager2
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="5dp"
             android:id="@+id/viewpagerlogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

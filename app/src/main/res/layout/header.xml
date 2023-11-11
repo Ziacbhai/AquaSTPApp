@@ -33,7 +33,7 @@
             android:padding="8dp">
 
             <TextView
-                android:id="@+id/headerusername"
+                android:id="@+id/_profilename"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dp"

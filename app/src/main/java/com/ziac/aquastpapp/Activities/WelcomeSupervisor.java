@@ -85,7 +85,10 @@ public class WelcomeSupervisor extends AppCompatActivity {
         Supervisorexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishAffinity();
+                //finishAffinity();
+
+                Intent i = new Intent(WelcomeSupervisor.this,LoginSignupActivity.class);
+                startActivity(i);
             }
         });
 

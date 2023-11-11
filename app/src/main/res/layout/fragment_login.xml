@@ -150,7 +150,7 @@
                                 android:background="@drawable/btnbgedited"
                                 android:inputType="textEmailAddress"
                                 android:longClickable="true"
-                                android:maxLength="25"
+                                android:maxLength="50"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black"
                                 android:textStyle="bold" />

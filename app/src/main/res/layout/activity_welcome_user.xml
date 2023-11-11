@@ -91,7 +91,7 @@
             android:background="#F44336" />
 
         <TextView
-            android:id="@+id/uName"
+            android:id="@+id/_person"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amaranth_bold"

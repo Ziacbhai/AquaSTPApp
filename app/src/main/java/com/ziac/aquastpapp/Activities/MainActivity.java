@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private boolean doubleBackToExitPressedOnce;
 
     boolean click = true;
-    private String personname,userimage,mail,Stpname ,Sitename ,Siteaddress,userref;
+    private String userimage,mail,Stpname ,Sitename ,Siteaddress,userref,person_name;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -127,9 +127,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
         userref = Global.userImageurl + sharedPreferences.getString("ref_code", "");
+        person_name= Global.sharedPreferences.getString("person_name", "");
 
-        personname = sharedPreferences.getString("person_name", "");
-        mail = sharedPreferences.getString("user_email", "");
+        String mail = Global.sharedPreferences.getString("user_email", "");
         Sitename = sharedPreferences.getString("site_name", "");
         Stpname = sharedPreferences.getString("stp_name", "");
         ////
@@ -208,13 +208,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
                 Picasso.get().load(userimage).into(ProfileH);
 
-                personnameH =drawerLayout. findViewById(R.id.headerusername);
+                personnameH =drawerLayout. findViewById(R.id._profilename);
                 usermailH = drawerLayout.findViewById(R.id.headeremail);
                 usersiteH = drawerLayout.findViewById(R.id.site_name);
                 userstpH = drawerLayout.findViewById(R.id.stp_name);
 
 
-                personnameH.setText(personname);
+                personnameH.setText(person_name);
                 usermailH.setText(mail);
                 usersiteH.setText(Sitename);
                 userstpH.setText(Stpname);

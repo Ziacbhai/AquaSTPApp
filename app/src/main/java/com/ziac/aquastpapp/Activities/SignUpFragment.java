@@ -169,8 +169,6 @@ public class SignUpFragment extends Fragment {
                         Cpassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
                         Cpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                         passwordvisible = true;
-
-
                     }
                     Cpassword.setSelection(selection);
                     return true;
@@ -562,38 +560,53 @@ public class SignUpFragment extends Fragment {
         String company,cpperson,mobile,email,password,cpassword,adminname,state,city;
 
         company = Company.getText().toString();
+        company = company.trim();
         cpperson = CPerson.getText().toString();
+        cpperson = cpperson.trim();
         mobile = Mobile.getText().toString();
+        mobile = mobile.trim();
         email = Email.getText().toString();
+        email = email.trim();
         adminname = AUname.getText().toString();
-
-
-        state = tvState.getText().toString();
-        city = tvCity.getText().toString();
-
+        adminname = adminname.trim();
+        state = tvState.getText().toString().trim();
+        city = tvCity.getText().toString().trim();
         password = RPassword.getText().toString();
+        password = password.trim();
         cpassword = Cpassword.getText().toString();
+        cpassword = cpassword.trim();
         //progressDialog.show();
 
-
-
-        if ( company.isEmpty() || cpperson.isEmpty()  || mobile.isEmpty()  ||  email.isEmpty() || cpassword.isEmpty() || state.isEmpty() || city.isEmpty()
-                || password.isEmpty()){
-
-            Toast.makeText(getActivity(),"Complete the information and try again !!",Toast.LENGTH_SHORT).show();
+        if (company.isEmpty() ) {
+            //Toast.makeText(getActivity(), "Company name field should not be empty!!", Toast.LENGTH_SHORT).show();
+            Company.setError("Company Name should not be empty");
+            Company.requestFocus();
             return;
-        }
-        if (cpperson.isEmpty() ) {
-            Toast.makeText(getActivity(), "Contact person field should not be empty!!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (mobile.isEmpty()) {
-            Toast.makeText(getActivity(), "Mobile number should not be empty!!", Toast.LENGTH_SHORT).show();
+        } if (cpperson.isEmpty()) {
+            CPerson.setError("Please enter Contact Name");
+            CPerson.requestFocus();
 
+        }  if (mobile.isEmpty()) {
+            Mobile.setError("Mobile number should not be empty!!");
+            Mobile.requestFocus();
+        }
+
+        if (email.isEmpty()) {
+          //  Toast.makeText(getActivity(), "Email should not be empty!!", Toast.LENGTH_SHORT).show();
+            Email.setError("Email should not be empty!!");
+            Email.requestFocus();
             return;
         }
         if (adminname.isEmpty() ) {
-            Toast.makeText(getActivity(), "Contact person field should not be empty!!", Toast.LENGTH_SHORT).show();
+            AUname.setError("Admin name field should not be empty!!");
+            AUname.requestFocus();
+            //Toast.makeText(getActivity(), "Contact person field should not be empty!!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (state.isEmpty()) {
+            tvState.setError("State field should not be empty!!");
+            tvState.requestFocus();
+           // Toast.makeText(getActivity(), "Mobile number should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }
         if (mobile.length() < 10 ){
@@ -601,9 +614,11 @@ public class SignUpFragment extends Fragment {
             return;
         }
         if (password.isEmpty()) {
-            Toast toast = Toast.makeText(getActivity(), "Password  field should not be empty!!", Toast.LENGTH_SHORT);
+            RPassword.setError("Password field should not be empty!!");
+            RPassword.requestFocus();
+           /* Toast toast = Toast.makeText(getActivity(), "Password  field should not be empty!!", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
-            toast.show();
+            toast.show();*/
             return;
         }
         if (password.length() < 6) {
@@ -616,15 +631,15 @@ public class SignUpFragment extends Fragment {
             toast.show();
             return;
         }
-        if ( cpassword.isEmpty()) {
-
-            Toast.makeText(getActivity(), "Confirm pasword field should not be empty!!", Toast.LENGTH_SHORT).show();
+        if (cpassword.isEmpty()) {
+            Cpassword.setError("Confirm password field should not be empty!!");
+            Cpassword.requestFocus();
+            //Toast.makeText(getActivity(), "Confirm password field should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }if (!checkBox.isChecked()) {
             Toast.makeText(getActivity(), "You are not  agree with the terms and conditions of Aqua to move further  ", Toast.LENGTH_SHORT).show();
             return;
         }
-
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest = new StringRequest(Request.Method.POST,Global.registration,
                 new Response.Listener<String>() {
@@ -642,7 +657,7 @@ public class SignUpFragment extends Fragment {
 
                         try {
                             if (response.getBoolean("isSuccess")) {
-                                Toast.makeText(getActivity(), "Registration successfull", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Registration successfully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getActivity(), LoginSignupActivity.class));
                                //finish();
                             } else {
@@ -674,20 +689,24 @@ public class SignUpFragment extends Fragment {
 
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-               // String emailValue = Email.getText().toString();
-               /* if (emailValue.isEmpty()) {emailValue ="notprovided@gmail.com";}*/
+
+
+                String emailValue = Email.getText().toString();
+                if (emailValue.isEmpty()) {emailValue ="notprovided@gmail.com";}
+
+
                 params.put("com_name", Company.getText().toString());
                 params.put("com_contact", CPerson.getText().toString());
                 params.put("com_contact_mobno", Mobile.getText().toString());
-                params.put("com_email", Email.getText().toString());
-
+                params.put("com_email", emailValue);
                 params.put("state_code", String.valueOf(statename.get_code()));
                 params.put("city_code", String.valueOf(cityname.get_code()));
                 params.put("username", AUname.getText().toString());
                 params.put("password", RPassword.getText().toString());
                 params.put("confirm_password", Cpassword.getText().toString());
-//                params.put("site_address", Site_address.getText().toString());
-   //             params.put("process_name", Process_type.getText().toString());
+
+         //      params.put("site_address", Site_address.getText().toString());
+       //        params.put("process_name", Process_type.getText().toString());
              //   params.put("contact_name", Contact_name.getText().toString());
                 // params.put("person_name", Contact_name.getText().toString());
                // params.put("ref_code", CouponCode.getText().toString());

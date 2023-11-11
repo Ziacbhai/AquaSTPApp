@@ -47,14 +47,15 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.util.HashMap;
 import java.util.Map;
 
 public class WelcomeUser extends AppCompatActivity {
-    private TextView Uname,Umail,Uph,ClickHere;
+    private TextView _Person,Umail,Uph,ClickHere;
     ImageView ImageView,Userexit;
     AppCompatButton uContinue;
-    private String username;
+    private String personname;
     Context context;
 
     Bitmap imageBitmap;
@@ -67,29 +68,30 @@ public class WelcomeUser extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_user);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
         fab = findViewById(R.id.floating);
         ImageView = findViewById(R.id.imageView);
-        Uname = findViewById(R.id.uName);
+        _Person = findViewById(R.id._person);
         ClickHere = findViewById(R.id.Clickhere);
         uContinue = findViewById(R.id.uContinue);
-
+        Umail = findViewById(R.id.uMail);
+        Uph = findViewById(R.id.uPh);
         Userexit = findViewById(R.id.userexit);
         Userexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishAffinity();
+                Intent i = new Intent(WelcomeUser.this,LoginSignupActivity.class);
+                startActivity(i);
             }
         });
 
-        Umail = findViewById(R.id.uMail);
-        Uph = findViewById(R.id.uPh);
 
-        String personname = Global.sharedPreferences.getString("person_name", "");
+        personname = Global.sharedPreferences.getString("person_name", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
-        Uname.setText(personname);
+        _Person.setText(personname);
         Umail.setText(mail);
         Uph.setText(mobile);
 
@@ -239,7 +241,6 @@ public class WelcomeUser extends AppCompatActivity {
                         Toast.makeText(WelcomeUser.this, "Image upload failed", Toast.LENGTH_SHORT).show();
 
 
-                    } else {
                     }
                 }
             } catch (JSONException e) {

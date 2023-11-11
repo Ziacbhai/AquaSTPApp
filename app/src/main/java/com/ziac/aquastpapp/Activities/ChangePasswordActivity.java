@@ -48,7 +48,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     boolean passwordVisible;
     ProgressBar progressBar;
     ImageView Backarrowbtn;
-
+    private boolean passwordvisible = false;
     String username,Newpassword,repeatmpassword;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -64,18 +64,22 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
 
         Newpwd.setOnTouchListener((v, event) -> {
+
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getRawX() >= Newpwd.getRight() - Newpwd.getCompoundDrawables()[Right].getBounds().width()) {
                     int selection = Newpwd.getSelectionEnd();
-                    if (passwordVisible) {
+                    if (passwordvisible) {
                         Newpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
                         Newpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        passwordVisible = false;
+                        passwordvisible = false;
+
                     } else {
                         Newpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
                         Newpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        passwordVisible = true;
+                        passwordvisible = true;
+
+
                     }
                     Newpwd.setSelection(selection);
                     return true;
@@ -83,19 +87,22 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
             return false;
         });
+
         Rpwd.setOnTouchListener((v, event) -> {
+
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getRawX() >= Rpwd.getRight() - Rpwd.getCompoundDrawables()[Right].getBounds().width()) {
                     int selection = Rpwd.getSelectionEnd();
-                    if (passwordVisible) {
+                    if (passwordvisible) {
                         Rpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
                         Rpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        passwordVisible = false;
+                        passwordvisible = false;
+
                     } else {
                         Rpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
                         Rpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        passwordVisible = true;
+                        passwordvisible = true;
                     }
                     Rpwd.setSelection(selection);
                     return true;
@@ -109,7 +116,34 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+
+
         Pwdconfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Newpassword = Newpwd.getText().toString();
+                repeatmpassword = Rpwd.getText().toString();
+                username = Newpwd.getText().toString();
+                repeatmpassword = Rpwd.getText().toString();
+                if (Newpassword.isEmpty()) {
+                    Newpwd.setError("Please enter the New Password");
+                    Newpwd.requestFocus();
+                    return;
+                } else if (repeatmpassword.isEmpty()) {
+                    Rpwd.setError("Please enter the New Password");
+                    Rpwd.requestFocus();
+                    return;
+                }
+
+                if (Newpassword.equals(repeatmpassword)) {
+                    username = Global.sharedPreferences.getString("username", null);
+                    updatepassword();
+                } else {
+                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Passwords do not match!!");
+                }            }
+        });
+       /* Pwdconfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -139,7 +173,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Passwords do not match!!");
                 }
             }
-        });
+        });*/
     }
 
     private void updatepassword() {
