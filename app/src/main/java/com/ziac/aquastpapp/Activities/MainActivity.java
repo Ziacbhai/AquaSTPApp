@@ -83,13 +83,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     CircleImageView Profile;
     ActionBarDrawerToggle toggle;
-    TextView usernameH,usermailH;
+    TextView usernameH, usermailH;
     Intent intent;
     PopupWindow popUp;
     private boolean doubleBackToExitPressedOnce;
 
     boolean click = true;
-    private String userimage,mail,Stpname ,Sitename ,Siteaddress,userref,person_name;
+    private String userimage, mail, Stpname, Sitename, Siteaddress, userref, person_name;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -99,10 +99,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //if (!isNetworkAvailable()) {showToast("Internet connection lost !!");}
 
-       // getSupportActionBar().setDisplayShowTitleEnabled(false);
+        // getSupportActionBar().setDisplayShowTitleEnabled(false);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         toolbar = findViewById(R.id.toolbar);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
 
@@ -126,8 +126,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         openFragment(new HomeFragment());
 
         userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
-        userref = Global.userImageurl + sharedPreferences.getString("ref_code", "");
-        person_name= Global.sharedPreferences.getString("person_name", "");
+        userref = sharedPreferences.getString("ref_code", "");
+        person_name = Global.sharedPreferences.getString("person_name", "");
 
         String mail = Global.sharedPreferences.getString("user_email", "");
         Sitename = sharedPreferences.getString("site_name", "");
@@ -136,79 +136,81 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Siteaddress = sharedPreferences.getString("site_address", "");
         Siteaddress = sharedPreferences.getString("process_name", "");
 
-        Picasso.Builder builder=new Picasso.Builder(getApplication());
-        Picasso picasso=builder.build();
+        Picasso.Builder builder = new Picasso.Builder(getApplication());
+        Picasso picasso = builder.build();
         picasso.load(Uri.parse(userimage))
-               .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
-                .into(Profile );
-      Profile.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
+                .into(Profile);
+        Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(MainActivity.this, v);
-            popup.getMenuInflater().inflate(R.menu.profile_pop_up, popup.getMenu());
+                popup.getMenuInflater().inflate(R.menu.profile_pop_up, popup.getMenu());
 
-            // Retrieve data from SharedPreferences
-            Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-            String profileName = Global.sharedPreferences.getString("ref_code", "");
-            MenuItem profileMenuItem = popup.getMenu().findItem(R.id.refaral_code);
-            profileMenuItem.setTitle("Code: " + profileName);
+                // Retrieve data from SharedPreferences
+                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                String profileName = Global.sharedPreferences.getString("ref_code", "");
+                MenuItem profileMenuItem = popup.getMenu().findItem(R.id.refaral_code);
+                profileMenuItem.setTitle("Code: " + profileName);
 
 
-            popup.setOnMenuItemClickListener(item -> {
-                int itemId = item.getItemId();
-                if (itemId == R.id.my_profile) {
-                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-                    return true;
-                }if (itemId == R.id.nav_logout) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setTitle("Logout Confirmation");
-                    builder.setMessage("Are you sure you want to logout?");
-                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // User clicked "Yes", perform logout action
-                            startActivity(new Intent(MainActivity.this, LoginSignupActivity.class));
-                        }
-                    });
-                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // User clicked "No", dismiss the dialog
-                            dialog.dismiss();
-                        }
-                    });
-                    builder.create().show();
-                    return true;
+                popup.setOnMenuItemClickListener(item -> {
+                    int itemId = item.getItemId();
+                    if (itemId == R.id.my_profile) {
+                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                        return true;
+                    }
+                    if (itemId == R.id.nav_logout) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setTitle("Logout Confirmation");
+                        builder.setMessage("Are you sure you want to logout?");
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // User clicked "Yes", perform logout action
+                                startActivity(new Intent(MainActivity.this, LoginSignupActivity.class));
+                            }
+                        });
+                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // User clicked "No", dismiss the dialog
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.create().show();
+                        return true;
 
-                }if (itemId == R.id.changepwd) {
-                    startActivity(new Intent(MainActivity.this, ChangePasswordActivity.class));
-                    return true;
-                }
-                else {
+                    }
+                    if (itemId == R.id.changepwd) {
+                        startActivity(new Intent(MainActivity.this, ChangePasswordActivity.class));
+                        return true;
+                    } else {
 
-                }
-                return false;
-            });
-            popup.show();
-          }
-      });
+                    }
+                    return false;
+                });
+                popup.show();
+            }
+        });
 
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
-            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {}
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+            }
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
                 CircleImageView ProfileH;
-                TextView personnameH,usermailH ,usersiteH,userstpH ;
-                ProfileH=drawerLayout.findViewById(R.id.profileH);
+                TextView personnameH, usermailH, usersiteH, userstpH;
+                ProfileH = drawerLayout.findViewById(R.id.profileH);
                 layout = findViewById(R.id.headeProfile);
 
                 userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
                 Picasso.get().load(userimage).into(ProfileH);
 
-                personnameH =drawerLayout. findViewById(R.id._profilename);
+                personnameH = drawerLayout.findViewById(R.id._profilename);
                 usermailH = drawerLayout.findViewById(R.id.headeremail);
                 usersiteH = drawerLayout.findViewById(R.id.site_name);
                 userstpH = drawerLayout.findViewById(R.id.stp_name);
@@ -249,8 +251,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });*/
 
-       // bottomNavigationView=findViewById(R.id.bottomNavigationView);
-       // bottomNavigationView.setBackground(null);
+        // bottomNavigationView=findViewById(R.id.bottomNavigationView);
+        // bottomNavigationView.setBackground(null);
 
 
     }
@@ -316,7 +318,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             builder.create().show();
             return true;
 
-        }if (itemId == R.id.nav_selectStp) {
+        }
+        if (itemId == R.id.nav_selectStp) {
             startActivity(new Intent(MainActivity.this, SelectLocationActivity.class));
             return true;
         }
@@ -324,6 +327,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawers();
         return true;
     }
+
     private void shareContent() {
         // Create an intent to share content
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -339,13 +343,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(Intent.createChooser(shareIntent, "Share via"));
     }
 
-    private void openFragment(Fragment fragment){
-        FiltersFragment homeFragment=new FiltersFragment();
-        fragmentManager=getSupportFragmentManager();
+    private void openFragment(Fragment fragment) {
+        FiltersFragment homeFragment = new FiltersFragment();
+        fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
     }
+
     private void loadHomeFragment() {
         HomeFragment homeFragment = new HomeFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();

@@ -1,6 +1,6 @@
 package com.ziac.aquastpapp.Activities;
 
-import static com.google.android.gms.cast.framework.media.ImagePicker.*;
+//import static com.google.android.gms.cast.framework.media.ImagePicker.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,9 +8,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
+/*
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+*/
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -35,18 +37,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
+//import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.ParseError;
+//import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
+//import com.android.volley.ServerError;
+//import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.cast.framework.media.ImagePicker;
+//import com.google.android.gms.cast.framework.media.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
@@ -72,27 +74,24 @@ public class ProfileActivity extends AppCompatActivity {
     CircleImageView circleImageView;
     Bitmap imageBitmap;
 
-    EditText uName ,uNumber,uEmail;
+    EditText uName, uNumber, uEmail;
     TextView Uref_code;
-    private static final int CAMERA_REQUEST = 0;
+    //private static final int CAMERA_REQUEST = 0;
 
     ImageView Backarrowbtn;
-
+    Picasso.Builder builder;
+    Picasso picasso;
     @SuppressLint("MissingInflatedId")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        fab=findViewById(R.id.floating);
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        fab = findViewById(R.id.floating);
+        //Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-       Backarrowbtn = findViewById(R.id.backarrowbtn);
-        uName = findViewById(R.id._profilename);
-        uNumber = findViewById(R.id.uNumber);
-        uEmail = findViewById(R.id.uEmail);
-        Uref_code = findViewById(R.id.Uref);
-        circleImageView = findViewById(R.id.imageVie);
+        Backarrowbtn = findViewById(R.id.backarrowbtn);
+
 
         Updatebutton = findViewById(R.id.updatebutton);
         Updatebutton.setOnClickListener(v -> updateprofile());
@@ -100,24 +99,17 @@ public class ProfileActivity extends AppCompatActivity {
 
         //username = Global.sharedPreferences.getString("username", "");
 
-        String personname = Global.sharedPreferences.getString("person_name", "");
+        /*String personname = Global.sharedPreferences.getString("person_name", "");
         String refcode = Global.sharedPreferences.getString("ref_code", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-
-        uName.setText(personname);
-        uEmail.setText(mail);
-        uNumber.setText(mobile);
-        Uref_code.setText(refcode);
-
-
-        Picasso.Builder builder=new Picasso.Builder(getApplication());
-        Picasso picasso=builder.build();
-        picasso.load(Uri.parse(userimage))
-                .memoryPolicy(MemoryPolicy.NO_CACHE)
-                .networkPolicy(NetworkPolicy.NO_CACHE)
-                .into(circleImageView );
+*/
+        uName = findViewById(R.id._profilename);
+        uNumber = findViewById(R.id.uNumber);
+        uEmail = findViewById(R.id.uEmail);
+        Uref_code = findViewById(R.id.Uref);
+        circleImageView = findViewById(R.id.imageVie);
 
 
         fab.setOnClickListener(v -> {
@@ -128,7 +120,8 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-                showImage(picasso,userimage);
+
+                showImage(picasso, userimage);
 
             }
         });
@@ -141,6 +134,8 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+
+        getuserdetails();
     }
 
 
@@ -208,6 +203,7 @@ public class ProfileActivity extends AppCompatActivity {
                 .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
                 .start(10);
     }
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10 && resultCode == RESULT_OK) {
@@ -224,7 +220,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void postselelectedimage() {
 
-        if (imageBitmap == null) {return;}
+        if (imageBitmap == null) {
+            return;
+        }
 
         String url = Global.urlUpdateprofileImage;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -240,7 +238,6 @@ public class ProfileActivity extends AppCompatActivity {
                 if (resp.getBoolean("success")) {
 
 
-
                     Global.customtoast(ProfileActivity.this, getLayoutInflater(), "Image uploaded successfully");
                     getuserdetails();
 
@@ -253,6 +250,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                     } else {
+                        Log.d("else","else");
                     }
                 }
             } catch (JSONException e) {
@@ -271,7 +269,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", null).toString();
+                String accesstoken = Global.sharedPreferences.getString("access_token", null);
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
@@ -282,7 +280,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
 
-                params.put("fileName",image);
+                params.put("fileName", image);
 
                 Log.d("YourTag", "Key: fileName, Value: " + image);
 
@@ -296,22 +294,27 @@ public class ProfileActivity extends AppCompatActivity {
     private void getuserdetails() {
 
         String url = Global.getuserprofileurl;
-        RequestQueue queue= Volley.newRequestQueue(ProfileActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
-
 
 
             try {
                 JSONObject respObj1 = new JSONObject(response);
                 JSONObject respObj = new JSONObject(respObj1.getString("data"));
 
+                String person_name = respObj.getString("person_name");
                 String user_image = respObj.getString("user_image");
+                String mobile = respObj.getString("user_mobile");
+                String mail = respObj.getString("user_email");
+                String refcode = respObj.getString("ref_code");
+
+                /*String user_image = respObj.getString("user_image");
                 String person_name = Global.sharedPreferences.getString("person_name", "");
                 String refcode = Global.sharedPreferences.getString("ref_code", "");
                 String mail = Global.sharedPreferences.getString("user_email", "");
                 String mobile = Global.sharedPreferences.getString("user_mobile", "");
-                      //  Log.d("MyTag", "Profile image: " + user_image);
+                //  Log.d("MyTag", "Profile image: " + user_image);*/
 
 
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -323,8 +326,21 @@ public class ProfileActivity extends AppCompatActivity {
                 Global.editor.putString("user_mobile", mobile);
                 Global.editor.commit();
                 String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+                //Picasso.get().load(userimage).into(circleImageView);
 
-                Picasso.get().load(userimage).into(circleImageView);
+
+                uName.setText(person_name);
+                uEmail.setText(mail);
+                uNumber.setText(mobile);
+                Uref_code.setText(refcode);
+
+
+                builder = new Picasso.Builder(getApplication());
+                picasso = builder.build();
+                picasso.load(Uri.parse(userimage))
+                        .memoryPolicy(MemoryPolicy.NO_CACHE)
+                        .networkPolicy(NetworkPolicy.NO_CACHE)
+                        .into(circleImageView);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -346,7 +362,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("username", Global.sharedPreferences.getString("username",null));
+                params.put("username", Global.sharedPreferences.getString("username", null));
                 return params;
             }
         };
@@ -362,7 +378,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     private void updateprofile() {
-        String personname,email,mobile;
+        String personname, email, mobile;
 
         personname = uName.getText().toString();
         mobile = uNumber.getText().toString();
@@ -383,7 +399,7 @@ public class ProfileActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Global.updateProfile, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {
-                JSONObject response = null;
+                JSONObject response;
                 try {
                     response = new JSONObject(sresponse);
                 } catch (JSONException e) {
@@ -395,7 +411,10 @@ public class ProfileActivity extends AppCompatActivity {
                 Global.editor.putString("person_name", uName.getText().toString());
                 Global.editor.putString("user_mobile", uNumber.getText().toString());
                 Global.editor.putString("user_email", uEmail.getText().toString());
+                Global.editor.putString("ref_code",  Uref_code.getText().toString());
                 Global.editor.commit();
+
+
 
                 try {
                     if (response.getBoolean("isSuccess")) {
@@ -416,20 +435,21 @@ public class ProfileActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
 
             @Override
             public Map<String, String> getHeaders() {
                 // below line we are creating a map for
                 // storing our values in key and value pair.
                 Map<String, String> headers = new HashMap<String, String>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", null).toString();
+                String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("com_code", Global.sharedPreferences.getString("com_code", null).toString());
+                params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("person_name", uName.getText().toString());
                 params.put("user_mobile", uNumber.getText().toString());
                 params.put("user_email", uEmail.getText().toString());

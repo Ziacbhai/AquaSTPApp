@@ -63,8 +63,8 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
                 Global.editor.putString("com_code", Global.StpList.get(position).getComcode());
                 Global.editor.putString("user_code", Global.StpList.get(position).getUsercode());
 
-                Global.editor.putString("person_name", Global.StpList.get(position).getPersonname());
-                Global.editor.putString("username", Global.StpList.get(position).getUsername());
+                //Global.editor.putString("person_name", Global.StpList.get(position).getPersonname());
+                //Global.editor.putString("username", Global.StpList.get(position).getUsername());
                 Global.editor.putString("sstp1_code", Global.StpList.get(position).getSstp1code());
 
                 Global.editor.putString("stp_name", Global.StpList.get(position).getStpname());

@@ -68,18 +68,18 @@ public class SignUpFragment extends Fragment {
 
     TextView TermsOfUse, privacy;
     private Dialog zDialog;
-    EditText Company,CPerson,Mobile,Email ,AUname,RPassword ,Cpassword ,Ccode;
+    EditText Company, CPerson, Mobile, Email, AUname, RPassword, Cpassword, Ccode;
     AppCompatButton Registerbtn;
 
-    TextView tvState, tvCity ,Site_address,Process_type ,Contact_name;
-    ImageView DDstate,DDcity;
+    TextView tvState, tvCity, Site_address, Process_type, Contact_name;
+    ImageView DDstate, DDcity;
     private zList statename;
     private zList cityname;
     private boolean passwordvisible = false;
     boolean passwordVisible;
     String citycode;
 
-     ProgressDialog progressDialog;
+    ProgressDialog progressDialog;
 
     private CheckBox checkBox;
 
@@ -89,7 +89,7 @@ public class SignUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_sign_up, container, false);
+        View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         Company = view.findViewById(R.id.company);
@@ -100,7 +100,7 @@ public class SignUpFragment extends Fragment {
         checkBox = view.findViewById(R.id.ccheckbox);
 
         Site_address = view.findViewById(R.id.site_address);
-       // Process_type= view.findViewById(R.id.name_process);
+        // Process_type= view.findViewById(R.id.name_process);
 
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading...");
@@ -110,7 +110,7 @@ public class SignUpFragment extends Fragment {
 
         RPassword = view.findViewById(R.id.rpassword);
         Cpassword = view.findViewById(R.id.rcpassword);
-       // Ccode = view.findViewById(R.id.rccode);
+        // Ccode = view.findViewById(R.id.rccode);
 
         TermsOfUse = view.findViewById(R.id.terms);
         privacy = view.findViewById(R.id.privacy);
@@ -212,11 +212,12 @@ public class SignUpFragment extends Fragment {
         return view;
 
     }
+
     private void getstates() {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         //String baseurl="http://192.168.1.4/AquaSTP/api/List/GetStates";
-        JsonArrayRequest jsonArrayrequest = new JsonArrayRequest(Request.Method.GET,urlGetStates, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayrequest = new JsonArrayRequest(Request.Method.GET, urlGetStates, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
 
@@ -251,7 +252,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-        }
+            }
         });
         queue.add(jsonArrayrequest);
 
@@ -290,9 +291,9 @@ public class SignUpFragment extends Fragment {
         });
 
 
-
     }
-    private class StateAdapter extends BaseAdapter implements Filterable{
+
+    private class StateAdapter extends BaseAdapter implements Filterable {
         private ArrayList<zList> mDataArrayList;
 
         public StateAdapter(ArrayList<zList> mDataArrayList) {
@@ -365,7 +366,7 @@ public class SignUpFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
         String url = Global.urlGetCities;
-        url = url+statename.get_code();
+        url = url + statename.get_code();
 
         StringRequest jsonArrayrequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -417,14 +418,15 @@ public class SignUpFragment extends Fragment {
             }
 
 
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-               // params.put("state_code", String.valueOf(statename.get_code()));
+                // params.put("state_code", String.valueOf(statename.get_code()));
                 return params;
             }
+
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -480,7 +482,7 @@ public class SignUpFragment extends Fragment {
         });
     }
 
-    private class CityAdapter extends BaseAdapter implements Filterable{
+    private class CityAdapter extends BaseAdapter implements Filterable {
 
         private ArrayList<zList> mDataArrayList;
 
@@ -555,9 +557,8 @@ public class SignUpFragment extends Fragment {
 
     }
 
-
     private void CreateNewUser() {
-        String company,cpperson,mobile,email,password,cpassword,adminname,state,city;
+        String company, cpperson, mobile, email, password, cpassword, adminname, state, city;
 
         company = Company.getText().toString();
         company = company.trim();
@@ -575,29 +576,31 @@ public class SignUpFragment extends Fragment {
         password = password.trim();
         cpassword = Cpassword.getText().toString();
         cpassword = cpassword.trim();
-        //progressDialog.show();
+        progressDialog.show();
 
-        if (company.isEmpty() ) {
+        if (company.isEmpty()) {
             //Toast.makeText(getActivity(), "Company name field should not be empty!!", Toast.LENGTH_SHORT).show();
             Company.setError("Company Name should not be empty");
             Company.requestFocus();
             return;
-        } if (cpperson.isEmpty()) {
+        }
+        if (cpperson.isEmpty()) {
             CPerson.setError("Please enter Contact Name");
             CPerson.requestFocus();
 
-        }  if (mobile.isEmpty()) {
+        }
+        if (mobile.isEmpty()) {
             Mobile.setError("Mobile number should not be empty!!");
             Mobile.requestFocus();
         }
 
         if (email.isEmpty()) {
-          //  Toast.makeText(getActivity(), "Email should not be empty!!", Toast.LENGTH_SHORT).show();
+            //  Toast.makeText(getActivity(), "Email should not be empty!!", Toast.LENGTH_SHORT).show();
             Email.setError("Email should not be empty!!");
             Email.requestFocus();
             return;
         }
-        if (adminname.isEmpty() ) {
+        if (adminname.isEmpty()) {
             AUname.setError("Admin name field should not be empty!!");
             AUname.requestFocus();
             //Toast.makeText(getActivity(), "Contact person field should not be empty!!", Toast.LENGTH_SHORT).show();
@@ -606,11 +609,11 @@ public class SignUpFragment extends Fragment {
         if (state.isEmpty()) {
             tvState.setError("State field should not be empty!!");
             tvState.requestFocus();
-           // Toast.makeText(getActivity(), "Mobile number should not be empty!!", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(getActivity(), "Mobile number should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (mobile.length() < 10 ){
-            Toast.makeText(getActivity(),"Mobile number should not be less than 10 digits !!",Toast.LENGTH_SHORT).show();
+        if (mobile.length() < 10) {
+            Toast.makeText(getActivity(), "Mobile number should not be less than 10 digits !!", Toast.LENGTH_SHORT).show();
             return;
         }
         if (password.isEmpty()) {
@@ -625,7 +628,7 @@ public class SignUpFragment extends Fragment {
             Toast.makeText(getActivity(), "Password must be at least 6 characters long.", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (!password.matches( "^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$") ){
+        if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
             Toast toast = Toast.makeText(getActivity().getApplicationContext(), "password must contain mix of upper and lower case letters as well as digits and one special charecter !!", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
@@ -636,12 +639,13 @@ public class SignUpFragment extends Fragment {
             Cpassword.requestFocus();
             //Toast.makeText(getActivity(), "Confirm password field should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
-        }if (!checkBox.isChecked()) {
+        }
+        if (!checkBox.isChecked()) {
             Toast.makeText(getActivity(), "You are not  agree with the terms and conditions of Aqua to move further  ", Toast.LENGTH_SHORT).show();
             return;
         }
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,Global.registration,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Global.registration,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String sresponse) {
@@ -659,7 +663,7 @@ public class SignUpFragment extends Fragment {
                             if (response.getBoolean("isSuccess")) {
                                 Toast.makeText(getActivity(), "Registration successfully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getActivity(), LoginSignupActivity.class));
-                               //finish();
+                                //finish();
                             } else {
                                 //textViewError.setText(response.getString("error"));
                                 Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_SHORT).show();
@@ -692,7 +696,9 @@ public class SignUpFragment extends Fragment {
 
 
                 String emailValue = Email.getText().toString();
-                if (emailValue.isEmpty()) {emailValue ="notprovided@gmail.com";}
+                if (emailValue.isEmpty()) {
+                    emailValue = "notprovided@gmail.com";
+                }
 
 
                 params.put("com_name", Company.getText().toString());
@@ -705,11 +711,11 @@ public class SignUpFragment extends Fragment {
                 params.put("password", RPassword.getText().toString());
                 params.put("confirm_password", Cpassword.getText().toString());
 
-         //      params.put("site_address", Site_address.getText().toString());
-       //        params.put("process_name", Process_type.getText().toString());
-             //   params.put("contact_name", Contact_name.getText().toString());
+                //      params.put("site_address", Site_address.getText().toString());
+                //        params.put("process_name", Process_type.getText().toString());
+                //   params.put("contact_name", Contact_name.getText().toString());
                 // params.put("person_name", Contact_name.getText().toString());
-               // params.put("ref_code", CouponCode.getText().toString());
+                // params.put("ref_code", CouponCode.getText().toString());
                 // Log.d("params", params.toString());
                 return params;
             }

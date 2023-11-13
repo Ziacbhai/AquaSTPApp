@@ -52,8 +52,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WelcomeUser extends AppCompatActivity {
-    private TextView _Person,Umail,Uph,ClickHere;
-    ImageView ImageView,Userexit;
+    private TextView _Person, Umail, Uph, ClickHere;
+    ImageView ImageView, Userexit;
     AppCompatButton uContinue;
     private String personname;
     Context context;
@@ -80,7 +80,7 @@ public class WelcomeUser extends AppCompatActivity {
         Userexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(WelcomeUser.this,LoginSignupActivity.class);
+                Intent i = new Intent(WelcomeUser.this, LoginSignupActivity.class);
                 startActivity(i);
             }
         });
@@ -95,12 +95,12 @@ public class WelcomeUser extends AppCompatActivity {
         Umail.setText(mail);
         Uph.setText(mobile);
 
-        Picasso.Builder builder=new Picasso.Builder(getApplication());
-        Picasso picasso=builder.build();
+        Picasso.Builder builder = new Picasso.Builder(getApplication());
+        Picasso picasso = builder.build();
         picasso.load(Uri.parse(userimage))
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
-                .into(ImageView );
+                .into(ImageView);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,14 +112,14 @@ public class WelcomeUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-                showImage(picasso,userimage);
+                showImage(picasso, userimage);
 
             }
         });
         ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeUser.this,ProfileActivity.class);
+                Intent in = new Intent(WelcomeUser.this, ProfileActivity.class);
                 startActivity(in);
             }
         });
@@ -189,6 +189,7 @@ public class WelcomeUser extends AppCompatActivity {
             }
         });
     }
+
     private void opencamera() {
 
         ImagePicker.with(WelcomeUser.this)
@@ -197,6 +198,7 @@ public class WelcomeUser extends AppCompatActivity {
                 .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
                 .start(10);
     }
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10 && resultCode == RESULT_OK) {
@@ -213,7 +215,9 @@ public class WelcomeUser extends AppCompatActivity {
 
     private void postselelectedimage() {
 
-        if (imageBitmap == null) {return;}
+        if (imageBitmap == null) {
+            return;
+        }
 
         String url = Global.urlUpdateprofileImage;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -229,9 +233,8 @@ public class WelcomeUser extends AppCompatActivity {
                 if (resp.getBoolean("success")) {
 
 
-
                     Global.customtoast(WelcomeUser.this, getLayoutInflater(), "Image uploaded successfully");
-                     getuserdetails();
+                    getuserdetails();
 
                 } else {
                     if (resp.has("error")) {
@@ -268,11 +271,11 @@ public class WelcomeUser extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-               // String image = imageToString(imageBitmap);
-                params.put("username", Global.sharedPreferences.getString("username",null));
-               // params.put("fileName",image);
+                // String image = imageToString(imageBitmap);
+                params.put("username", Global.sharedPreferences.getString("username", null));
+                // params.put("fileName",image);
 
-              //  Log.d("YourTag", "Key: fileName, Value: " + image);
+                //  Log.d("YourTag", "Key: fileName, Value: " + image);
 
                 return params;
             }
@@ -284,7 +287,7 @@ public class WelcomeUser extends AppCompatActivity {
     private void getuserdetails() {
 
         String url = Global.getuserprofileurl;
-        RequestQueue queue= Volley.newRequestQueue(WelcomeUser.this);
+        RequestQueue queue = Volley.newRequestQueue(WelcomeUser.this);
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
 
@@ -323,7 +326,7 @@ public class WelcomeUser extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("username", Global.sharedPreferences.getString("username",null));
+                params.put("username", Global.sharedPreferences.getString("username", null));
                 return params;
             }
         };

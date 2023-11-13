@@ -46,7 +46,7 @@ public class SelectLocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_company);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        //Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         siteLocationRecyclerView = findViewById(R.id.stp_recyclerview);
         siteLocationRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL , false));
