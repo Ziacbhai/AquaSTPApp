@@ -212,10 +212,7 @@ public class LoginFragment extends Fragment {
 
     }
     private void dologinVolley() {
-//        if (!isNetworkAvailable()) {
-//            Global.customtoast(LoginActivity.this, getLayoutInflater(), "Internet connection lost !!");
-//            return;
-//        }
+
         username = Log_User.getText().toString();
         pwd = Log_pwd.getText().toString();
         progressDialog.show();
@@ -395,5 +392,6 @@ public class LoginFragment extends Fragment {
         ));
         queue.add(request);
     }
+
 
 }

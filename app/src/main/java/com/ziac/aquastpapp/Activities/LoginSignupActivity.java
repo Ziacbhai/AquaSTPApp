@@ -6,9 +6,13 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -31,8 +35,17 @@ public class LoginSignupActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tablayout);
         tabLayout.setSelectedTabIndicatorHeight(0);
 
-        tabLayout.addTab(tabLayout.newTab().setText("LOGIN"));
-        tabLayout.addTab(tabLayout.newTab().setText("REGISTER"));
+        TabLayout.Tab loginTab = tabLayout.newTab();
+        SpannableString loginText = new SpannableString("LOGIN");
+        loginText.setSpan(new ForegroundColorSpan(Color.WHITE), 0, loginText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        loginTab.setText(loginText);
+        tabLayout.addTab(loginTab);
+
+        TabLayout.Tab registerTab = tabLayout.newTab();
+        SpannableString registerText = new SpannableString("REGISTER");
+        registerText.setSpan(new ForegroundColorSpan(Color.WHITE), 0, registerText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        registerTab.setText(registerText);
+        tabLayout.addTab(registerTab);
 
 
 
@@ -43,17 +56,26 @@ public class LoginSignupActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                // Change the indicator color when a tab is selected
                 viewPager2.setCurrentItem(tab.getPosition());
+                for (int i = 0; i < tabLayout.getTabCount(); i++) {
+                    if (i == tab.getPosition()) {
+                        tabLayout.getTabAt(i).view.setBackgroundColor(Color.GRAY); // Change indicator color
+                    } else {
+                        tabLayout.getTabAt(i).view.setBackgroundColor(Color.TRANSPARENT); // Reset other tabs
+                    }
+                }
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                // Reset the indicator color when a tab is unselected
+                tabLayout.getTabAt(tab.getPosition()).view.setBackgroundColor(Color.TRANSPARENT);
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                // Handle tab reselection if needed
             }
         });
 

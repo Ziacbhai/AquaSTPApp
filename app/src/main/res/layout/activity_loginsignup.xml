@@ -24,20 +24,20 @@
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:background="@drawable/btn_gradient"
             android:animateLayoutChanges="true"
             android:layout_marginTop="10dp"
-            android:background="@drawable/btnbgoutline"
             app:tabGravity="fill"
             app:tabIndicatorColor="@android:color/transparent"
             app:tabIndicatorHeight="0dp"
-            app:tabMode="fixed"
-            app:tabTextColor="@color/appcolor" />
+            app:tabMode="fixed"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpagerlogin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
+            android:animateLayoutChanges="true"
             app:layout_anchorGravity="bottom" />
 
     </LinearLayout>
