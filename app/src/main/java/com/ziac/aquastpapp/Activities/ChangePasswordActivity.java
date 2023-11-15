@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -117,8 +118,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
         });
 
-
-
         Pwdconfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +133,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     Rpwd.setError("Please enter the New Password");
                     Rpwd.requestFocus();
                     return;
+                } else if (Newpassword.length() < 6) {
+                    Toast.makeText(ChangePasswordActivity.this, "Password must be at least 6 characters long.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (!Newpassword.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
+                    Toast toast = Toast.makeText(ChangePasswordActivity.this, "password must contain mix of upper and lower case letters as well as digits and one special charecter !!", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
+                    return;
                 }
 
                 if (Newpassword.equals(repeatmpassword)) {
@@ -143,37 +151,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Passwords do not match!!");
                 }            }
         });
-       /* Pwdconfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                // Check network availability
-                if (!isNetworkAvailable()) {
-                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(),"Internet connection lost !!");
-                    return;
-                }
-
-                Newpassword = Newpwd.getText().toString();
-                repeatmpassword = Rpwd.getText().toString();
-
-                if (Newpassword.length() < 6) {
-                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(),"Password should not be less than 6 digits !!");
-                    return;
-                }
-
-                if (repeatmpassword.length() < 6) {
-                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(),"Password should not be less than 6 digits !!");
-                    return;
-                }
-
-                if (Newpassword.equals(repeatmpassword)) {
-                    username = Global.sharedPreferences.getString("username", null);
-                    updatepassword();
-                } else {
-                    Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Passwords do not match!!");
-                }
-            }
-        });*/
     }
 
     private void updatepassword() {

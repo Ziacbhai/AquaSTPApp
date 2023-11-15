@@ -36,18 +36,23 @@ public class LoginSignupActivity extends AppCompatActivity {
         tabLayout.setSelectedTabIndicatorHeight(0);
 
         TabLayout.Tab loginTab = tabLayout.newTab();
-        SpannableString loginText = new SpannableString("LOGIN");
-        loginText.setSpan(new ForegroundColorSpan(Color.WHITE), 0, loginText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        loginTab.setText(loginText);
+        //SpannableString loginText = new SpannableString("LOGIN");
+        //loginText.setSpan(new ForegroundColorSpan(Color.WHITE ), 0, loginText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        //loginTab.setText(loginText);
+        loginTab.setText("LOGIN");
+
         tabLayout.addTab(loginTab);
 
         TabLayout.Tab registerTab = tabLayout.newTab();
-        SpannableString registerText = new SpannableString("REGISTER");
-        registerText.setSpan(new ForegroundColorSpan(Color.WHITE), 0, registerText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        registerTab.setText(registerText);
+        //SpannableString registerText = new SpannableString("REGISTER");
+        //registerText.setSpan(new ForegroundColorSpan(Color.rgb(1,163,163) ), 0, registerText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        //registerTab.setText(registerText);
+        registerTab.setText("REGISTER");
         tabLayout.addTab(registerTab);
 
-
+        loginTab.view.setBackgroundColor( Color.rgb(1,163,163) );
+        tabLayout.setTabTextColors(Color.rgb(1,163,163),Color.WHITE );
+        //tabLayout.setSelectedTabIndicatorColor(Color.rgb(1,163,163));
 
         viewPager2 = findViewById(R.id.viewpagerlogin);
         loginadapter  =  new ViewPagerAdapter(this);
@@ -58,19 +63,21 @@ public class LoginSignupActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 // Change the indicator color when a tab is selected
                 viewPager2.setCurrentItem(tab.getPosition());
-                for (int i = 0; i < tabLayout.getTabCount(); i++) {
+                tab.view.setBackgroundColor(Color.rgb(1,163,163) );
+
+                /*for (int i = 0; i < tabLayout.getTabCount(); i++) {
                     if (i == tab.getPosition()) {
                         tabLayout.getTabAt(i).view.setBackgroundColor(Color.GRAY); // Change indicator color
                     } else {
                         tabLayout.getTabAt(i).view.setBackgroundColor(Color.TRANSPARENT); // Reset other tabs
                     }
-                }
+                }*/
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 // Reset the indicator color when a tab is unselected
-                tabLayout.getTabAt(tab.getPosition()).view.setBackgroundColor(Color.TRANSPARENT);
+                tab.view.setBackgroundColor(Color.TRANSPARENT);
             }
 
             @Override

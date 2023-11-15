@@ -576,7 +576,7 @@ public class SignUpFragment extends Fragment {
         password = password.trim();
         cpassword = Cpassword.getText().toString();
         cpassword = cpassword.trim();
-        progressDialog.show();
+      //  progressDialog.show();
 
         if (company.isEmpty()) {
             //Toast.makeText(getActivity(), "Company name field should not be empty!!", Toast.LENGTH_SHORT).show();
