@@ -154,6 +154,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 MenuItem profileMenuItem = popup.getMenu().findItem(R.id.refaral_code);
                 profileMenuItem.setTitle("Code: " + profileName);
 
+                userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
+                Picasso.get().load(userimage).into(Profile);
 
                 popup.setOnMenuItemClickListener(item -> {
                     int itemId = item.getItemId();

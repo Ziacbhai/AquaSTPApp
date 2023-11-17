@@ -79,6 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
     //private static final int CAMERA_REQUEST = 0;
 
     ImageView Backarrowbtn;
+    String userimage;
     Picasso.Builder builder;
     Picasso picasso;
     @SuppressLint("MissingInflatedId")
@@ -119,8 +120,7 @@ public class ProfileActivity extends AppCompatActivity {
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-
+                userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
                 showImage(picasso, userimage);
 
             }
@@ -302,7 +302,7 @@ public class ProfileActivity extends AppCompatActivity {
             try {
                 JSONObject respObj1 = new JSONObject(response);
                 JSONObject respObj = new JSONObject(respObj1.getString("data"));
-
+                userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
                 String person_name = respObj.getString("person_name");
                 String user_image = respObj.getString("user_image");
                 String mobile = respObj.getString("user_mobile");
@@ -419,7 +419,7 @@ public class ProfileActivity extends AppCompatActivity {
                 try {
                     if (response.getBoolean("isSuccess")) {
                         Toast.makeText(ProfileActivity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(ProfileActivity.this, WelcomeManager.class));
+                        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
                         finish();
                     } else {
                         //textViewError.setText(response.getString("error"));
