@@ -55,7 +55,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mobile = FMobile.getText().toString();
-                progressBar.setVisibility(View.VISIBLE);
+               // progressBar.setVisibility(View.VISIBLE);
 //                 if (mobile.isEmpty()) {
 //                     ForgotPass.setError("Please Enter Password");
 //                     ForgotPass.requestFocus();
@@ -69,6 +69,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
     }
     private void postDataUsingVolley() {
         String urlnumber = Global.forgotpasswordurl;
+        progressBar.setVisibility(View.VISIBLE);
         RequestQueue queue= Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, urlnumber, new Response.Listener<String>() {
             @Override

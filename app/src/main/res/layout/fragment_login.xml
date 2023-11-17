@@ -182,7 +182,7 @@
         android:gravity="center"
         android:layout_height="wrap_content"
         android:textColor="@color/appcolor"
-        android:text="By continuing,you agree to"/>
+        android:text="By continuing, you agree to"/>
 
     <TextView
         android:id="@+id/terms"

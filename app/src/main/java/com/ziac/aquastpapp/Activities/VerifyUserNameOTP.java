@@ -89,7 +89,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
                 Newpassword = UNewpwd.getText().toString();
                // username = UNewpwd.getText().toString();
                 otp = mPinView.getText().toString();
-                progressBar.setVisibility(View.VISIBLE);
+
               /*  if (Newpassword.length() < 6 ){
                     Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(), "Password should not be less than 6 digits !!");
                     return;
@@ -127,7 +127,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
 //                    Global.editor.putString("mobile", mobileno);
 //                    Global.editor.commit();
                     Global.customtoast(VerifyUserNameOTP.this, getLayoutInflater(),error);
-
+                    progressBar.setVisibility(View.GONE);
                     if(issuccess.equals("true")){
                         startActivity(new Intent(VerifyUserNameOTP.this, LoginSignupActivity.class));
 

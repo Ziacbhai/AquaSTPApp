@@ -10,14 +10,14 @@
             android:title="Dashboard" />
 
         <item
-            android:id="@+id/nav_equipment"
-            android:icon="@drawable/baseline_brightness_7_24"
-            android:title="Equipments" />
-
-        <item
             android:id="@+id/nav_selectStp"
             android:icon="@drawable/select"
             android:title="Select STP" />
+
+        <item
+            android:id="@+id/nav_equipment"
+            android:icon="@drawable/baseline_brightness_7_24"
+            android:title="Equipments" />
 
         <item
             android:id="@+id/nav_itemstock"

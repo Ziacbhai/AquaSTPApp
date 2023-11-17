@@ -8,13 +8,10 @@
     android:orientation="vertical"
     tools:context=".Activities.WelcomeUser">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dp"/>
-
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
         android:layout_height="35dp">
 
         <ImageView
@@ -27,7 +24,10 @@
             android:layout_marginBottom="0dp"
             android:src="@drawable/cross" />
     </RelativeLayout>
-
+    <View
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Welcome User"
+            android:text="Welcome user"
             android:textColor="#01a4a3"
             android:textSize="22sp"
             android:textStyle="italic" />
@@ -143,8 +143,9 @@
     </LinearLayout>
 
     <View
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="match_parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/uContinue"
@@ -153,6 +154,7 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/profilebtnupdate"
         android:text="Continue"
+        android:layout_marginBottom="10dp"
         android:textColor="@color/white"
         android:textStyle="bold" />
 
@@ -181,5 +183,8 @@
             android:text=" Click here"
             android:textColor="#F44336" />
     </LinearLayout>
-
+    <View
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

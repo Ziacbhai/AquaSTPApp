@@ -58,7 +58,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 email = Femail.getText().toString();
-                progressBar.setVisibility(View.VISIBLE);
+               // progressBar.setVisibility(View.VISIBLE);
                 if (email.isEmpty()) {
                     Femail.setError("Please Enter Email");
                     Femail.requestFocus();

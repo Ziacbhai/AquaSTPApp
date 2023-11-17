@@ -91,7 +91,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
                 // getting the PinView data
                 Newpassword = Newpwd.getText().toString();
                 otp = pinView.getText().toString();
-                progressBar.setVisibility(View.VISIBLE);
+
                 if (Newpassword.length() < 6 ){
                     Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), "Password should not be less than 6 digits !!");
                     return;
@@ -128,7 +128,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
 //                    Global.editor.putString("mobile", mobileno);
 //                    Global.editor.commit();
                     Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(),error);
-
+                    progressBar.setVisibility(View.GONE);
                     if(issuccess.equals("true")){
                         startActivity(new Intent(VerifyNumberOTP.this, LoginSignupActivity.class));
 

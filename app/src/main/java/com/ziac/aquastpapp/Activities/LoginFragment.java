@@ -328,7 +328,7 @@ public class LoginFragment extends Fragment {
 
                     Global.StpList.add(stpModelClass);
                 }
-                Toast.makeText(getActivity(), "Login Successfull", Toast.LENGTH_SHORT).show();
+
                 progressDialog.dismiss();
 
                 switch (user_type) {
