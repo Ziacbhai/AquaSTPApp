@@ -47,7 +47,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
         Femail = findViewById(R.id.Femail);
         progressBar = findViewById(R.id.progressbr);
 
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+       Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         //String emailId = Global.sharedPreferences.getString("email", "");
 
@@ -90,12 +90,14 @@ public class ResetPasswordEmail extends AppCompatActivity {
                     String error = respObj.getString("error");
 
                     Global.editor = Global.sharedPreferences.edit();
-                    Global.editor.putString("Email", email);
+                    Global.editor.putString("user_email", email);
+                    //Global.editor.remove("Email").commit();
+
                     Global.editor.commit();
 
                     if (issuccess.equals("true")) {
                         Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(),respObj.getString("error"));
-                        startActivity(new Intent(ResetPasswordEmail.this, VerifyNumberOTP.class));
+                        startActivity(new Intent(ResetPasswordEmail.this, VerifyEmailOTP.class));
                     } else {
                         // Show a toast message for wrong username or password
                         Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(),respObj.getString("error"));
@@ -121,10 +123,10 @@ public class ResetPasswordEmail extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("UserName", "");
-                params.put("Email", email);
+               // params.put("Email", email);
                 params.put("Mobile", "");
                 params.put("FPType", "E");
-                params.put("user_email", "");
+                params.put("user_email", email);
                 return params;
             }
         };

@@ -419,7 +419,7 @@ public class ProfileActivity extends AppCompatActivity {
                 try {
                     if (response.getBoolean("isSuccess")) {
                         Toast.makeText(ProfileActivity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                        startActivity(new Intent(ProfileActivity.this, WelcomeUser.class));
                         finish();
                     } else {
                         //textViewError.setText(response.getString("error"));

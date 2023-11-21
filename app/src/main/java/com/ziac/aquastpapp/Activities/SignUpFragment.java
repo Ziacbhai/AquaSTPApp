@@ -561,21 +561,15 @@ public class SignUpFragment extends Fragment {
         String company, cpperson, mobile, email, password, cpassword, adminname, state, city;
 
         company = Company.getText().toString();
-        company = company.trim();
         cpperson = CPerson.getText().toString();
-        cpperson = cpperson.trim();
         mobile = Mobile.getText().toString();
-        mobile = mobile.trim();
         email = Email.getText().toString();
-        email = email.trim();
         adminname = AUname.getText().toString();
-        adminname = adminname.trim();
         state = tvState.getText().toString().trim();
         city = tvCity.getText().toString().trim();
         password = RPassword.getText().toString();
-        password = password.trim();
         cpassword = Cpassword.getText().toString();
-        cpassword = cpassword.trim();
+
       //  progressDialog.show();
 
         if (company.isEmpty()) {
@@ -657,7 +651,7 @@ public class SignUpFragment extends Fragment {
                             throw new RuntimeException(e);
                         }
 
-                        Log.d("Register", sresponse);
+                        //Log.d("Register", sresponse);
 
                         try {
                             if (response.getBoolean("isSuccess")) {
@@ -701,16 +695,30 @@ public class SignUpFragment extends Fragment {
                 }
 
 
-                params.put("com_name", Company.getText().toString());
-                params.put("person_name", CPerson.getText().toString());
+
+                params.put("com_contact", CPerson.getText().toString());
                 params.put("com_contact_mobno", Mobile.getText().toString());
                 params.put("com_email", emailValue);
-                params.put("state_code", String.valueOf(statename.get_code()));
-                params.put("city_code", String.valueOf(cityname.get_code()));
                 params.put("username", AUname.getText().toString());
                 params.put("password", RPassword.getText().toString());
                 params.put("confirm_password", Cpassword.getText().toString());
+                params.put("state_code", String.valueOf(statename.get_code()));
+                params.put("city_code", String.valueOf(cityname.get_code()));
+                params.put("com_name", Company.getText().toString());
 
+
+
+               /* com_contact:Siva
+                com_contact_mobno:9567542499
+                com_email:Karthikgowd123@gmail.com
+                city_code:5.0
+                username:ZaicDemo
+                password:Ziac1234$
+                confirm_password:Ziac1234$
+                state_code:5.0
+                com_name:Dhone
+*/
+                 Log.d("params", params.toString());
                 //      params.put("site_address", Site_address.getText().toString());
                 //        params.put("process_name", Process_type.getText().toString());
                 //   params.put("contact_name", Contact_name.getText().toString());

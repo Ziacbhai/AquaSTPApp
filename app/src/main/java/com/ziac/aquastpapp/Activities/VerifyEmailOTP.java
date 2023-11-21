@@ -17,13 +17,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -37,7 +33,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VerifiyEmailOTP extends AppCompatActivity {
+public class VerifyEmailOTP extends AppCompatActivity {
     String username,mobile,otp ,Newpassword;
     TextView Resendotp;
     PinView pinView;
@@ -55,13 +51,13 @@ public class VerifiyEmailOTP extends AppCompatActivity {
         setContentView(R.layout.activity_verifiy_email_otp);
 
         pinView=findViewById(R.id.pinview);
-        EVerify=findViewById(R.id.verifyotp);
+        EVerify=findViewById(R.id.everifyotp);
         progressBar = findViewById(R.id.progressbr);
         ENewpwd = findViewById(R.id.enewpassword);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Resendotp = findViewById(R.id.resendEotp);
 
-        Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifiyEmailOTP.this, ResetPasswordEmail.class)));
+        Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyEmailOTP.this, ResetPasswordEmail.class)));
         ENewpwd.setOnTouchListener((v, event) -> {
 
             final int Right = 2;
@@ -116,7 +112,7 @@ public class VerifiyEmailOTP extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, Eurl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(VerifiyEmailOTP.this, "Data added to API", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(VerifyEmailOTP.this, "Data added to API", Toast.LENGTH_SHORT).show();
                 try {
 
                     JSONObject respObj = new JSONObject(response);
@@ -126,17 +122,17 @@ public class VerifiyEmailOTP extends AppCompatActivity {
 //                    Global.editor.putString("username", username);
 //                    Global.editor.putString("mobile", mobileno);
 //                    Global.editor.commit();
-                    Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(),error);
+                    Global.customtoast(VerifyEmailOTP.this, getLayoutInflater(),error);
                     progressBar.setVisibility(View.GONE);
                     if(issuccess.equals("true")){
-                        startActivity(new Intent(VerifiyEmailOTP.this, LoginSignupActivity.class));
+                        startActivity(new Intent(VerifyEmailOTP.this, LoginSignupActivity.class));
 
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                     progressBar.setVisibility(View.GONE);
-                    Global.customtoast(VerifiyEmailOTP.this,getLayoutInflater(), e.getMessage());
+                    Global.customtoast(VerifyEmailOTP.this,getLayoutInflater(), e.getMessage());
                 }
             }
         }, new Response.ErrorListener() {
@@ -172,10 +168,11 @@ public class VerifiyEmailOTP extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("otp", otp);
-                params.put("Mobile","9703879108");
+                params.put("Mobile","");
                 params.put("FPType", "E");
+                params.put("UserName", "");
                 params.put("NewPassword", Newpassword);
-                params.put("user_email", "ziacbhai1993@gmail.com");
+                params.put("user_email", Global.sharedPreferences.getString("user_email", ""));
                 Log.d("params", params.toString());
 
                 // params.put("NewPassword", "Siva126@Ziac");

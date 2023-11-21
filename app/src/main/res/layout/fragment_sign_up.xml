@@ -327,7 +327,6 @@
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/btnbgedited"
                                 android:layout_marginStart="5dp"
-                                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@"
                                 android:includeFontPadding="false"
                                 android:maxLength="25"
                                 android:inputType="textFilter"

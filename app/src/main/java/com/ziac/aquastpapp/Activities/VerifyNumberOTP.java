@@ -155,8 +155,8 @@ public class VerifyNumberOTP extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("otp", otp);
-               // params.put("Mobile",Global.sharedPreferences.getString("mobile", ""));
-                params.put("Mobile","9703879108");
+                params.put("Mobile",Global.sharedPreferences.getString("mobile", ""));
+                //params.put("Mobile","9703879108");
                 params.put("FPType", "M");
                 params.put("NewPassword", Newpassword);
 

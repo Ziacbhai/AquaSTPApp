@@ -297,6 +297,7 @@ public class LoginFragment extends Fragment {
                 Global.editor.putString("user_email", user_email);
                 Global.editor.putString("ref_code", ref_code);
                 Global.editor.putString("user_image", user_image);
+               // preferences.edit().remove("text").commit();
                 Global.editor.commit();
 
                 JSONArray liststp = new JSONArray(respObj1.getString("data2"));

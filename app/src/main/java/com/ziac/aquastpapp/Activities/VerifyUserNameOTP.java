@@ -116,7 +116,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, Uurl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(VerifyUserNameOTP.this, "Data added to API", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(VerifyUserNameOTP.this, "Data added to API", Toast.LENGTH_SHORT).show();
                 try {
 
                     JSONObject respObj = new JSONObject(response);
@@ -148,12 +148,11 @@ public class VerifyUserNameOTP extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
+
                 params.put("otp", otp);
-                params.put("Mobile","9703879108");
-                params.put("FPType", "E");
+                params.put("FPType", "U");
                 params.put("NewPassword", Newpassword);
-                params.put("user_email", "ziacbhai1993@gmail.com");
-                params.put("username", "Ziac@123");
+                params.put("username", Global.sharedPreferences.getString("username", ""));
                 Log.d("params", params.toString());
 
                 // params.put("NewPassword", "Siva126@Ziac");
