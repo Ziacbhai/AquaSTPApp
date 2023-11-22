@@ -1,10 +1,12 @@
 package com.ziac.aquastpapp.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
     String username,mobile,otp ,Newpassword;
     TextView Resendotp;
     PinView mPinView;
+    boolean passwordVisible;
     AppCompatButton UVerify;
     ProgressBar progressBar;
     boolean passwordvisible;
@@ -60,20 +63,18 @@ public class VerifyUserNameOTP extends AppCompatActivity {
 
        Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyUserNameOTP.this, ResetPasswordUserName.class)));
         UNewpwd.setOnTouchListener((v, event) -> {
-
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getRawX() >= UNewpwd.getRight() - UNewpwd.getCompoundDrawables()[Right].getBounds().width()) {
                     int selection = UNewpwd.getSelectionEnd();
-                    if (passwordvisible) {
+                    if (passwordVisible) {
                         UNewpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
                         UNewpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        passwordvisible = false;
-
+                        passwordVisible = false;
                     } else {
                         UNewpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
                         UNewpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        passwordvisible = true;
+                        passwordVisible = true;
                     }
                     UNewpwd.setSelection(selection);
                     return true;
@@ -131,6 +132,9 @@ public class VerifyUserNameOTP extends AppCompatActivity {
                     if(issuccess.equals("true")){
                         startActivity(new Intent(VerifyUserNameOTP.this, LoginSignupActivity.class));
 
+                    }else {
+                        showAlertDialog("Wrong OTP", "The entered OTP is incorrect. Please try again.");
+
                     }
 
                 } catch (JSONException e) {
@@ -164,5 +168,16 @@ public class VerifyUserNameOTP extends AppCompatActivity {
         };
         queue.add(request);
 
+    }
+    private void showAlertDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // You can perform any action here or leave it empty
+                    }
+                })
+                .show();
     }
 }

@@ -32,8 +32,6 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
     private List<StpModelClass> stpModelClassList;
     Context context;
 
-    String Sucode ,Comcode ,Usercode,Personname,Username,Sstp1code,Stpname,Stpactive;
-
     public SiteLocationAdapter(List<StpModelClass> stpModelClassList, Context context) {
         this.stpModelClassList = stpModelClassList;
         this.context = context;
@@ -51,20 +49,17 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
         holder.Sucode.setText(stpModelClassList.get(position).getSucode());
         holder.StpName.setText(stpModelClassList.get(position).getStpname());
         holder.SiteName.setText(stpModelClassList.get(position).getSitename());
-        holder.Site.setText(stpModelClassList.get(position).getSitename());
-
         holder.Selectcompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                 Global.editor = Global.sharedPreferences.edit();
                 Global.editor.putString("su_code", Global.StpList.get(position).getSucode());
                 Global.editor.putString("com_code", Global.StpList.get(position).getComcode());
                 Global.editor.putString("user_code", Global.StpList.get(position).getUsercode());
 
-                //Global.editor.putString("person_name", Global.StpList.get(position).getPersonname());
-                //Global.editor.putString("username", Global.StpList.get(position).getUsername());
+                Global.editor.putString("person_name", Global.StpList.get(position).getPersonname());
+                Global.editor.putString("username", Global.StpList.get(position).getUsername());
                 Global.editor.putString("sstp1_code", Global.StpList.get(position).getSstp1code());
 
                 Global.editor.putString("stp_name", Global.StpList.get(position).getStpname());
@@ -79,12 +74,6 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
 
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
-               /* EquipmentsFragment equipmentsFragment = new EquipmentsFragment();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_layout, equipmentsFragment);
-                fragmentTransaction.commit();*/
-
 
             }
         });
@@ -99,7 +88,7 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
 
     public class StpViewHolder extends RecyclerView.ViewHolder {
 
-        TextView Sucode,SiteName,StpName ,Site;
+        TextView Sucode,SiteName,StpName ;
         AppCompatButton Selectcompany;
         public StpViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,7 +96,6 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
             StpName = itemView.findViewById(R.id.stpname);
             SiteName = itemView.findViewById(R.id.sitename);
             Selectcompany = itemView.findViewById(R.id.selectcompany);
-            Site = itemView.findViewById(R.id.site);
 
 
         }

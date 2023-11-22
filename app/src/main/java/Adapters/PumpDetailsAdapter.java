@@ -61,10 +61,24 @@ public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.
         Picasso.Builder builder=new Picasso.Builder(context);
         Picasso picasso=builder.build();
         //picasso.load(Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2))).error(R.drawable.no_image_available_icon).into(holder.ImageView);
-        picasso.load(Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2))).error(R.drawable.no_image)
+
+        try {
+            Uri uristring = Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2));
+            picasso.load(uristring).error(R.drawable.no_image)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(holder.ImageView);
+        }catch (Exception e){
+            picasso.load(R.drawable.no_image).error(R.drawable.no_image)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(holder.ImageView);
+        }
+
+        /*picasso.load(Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2))).error(R.drawable.no_image)
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
-                .into(holder.ImageView);
+                .into(holder.ImageView);*/
         //picasso.load(Global.baseurl + commonModelClassList.get(position).getImage().substring(2)).into(holder.ImageView);
         //Log.d("imageurl",Global.baseurl + commonModelClassList.get(position).getImage().substring(2));
 

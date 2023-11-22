@@ -1,10 +1,13 @@
 package com.ziac.aquastpapp.Activities;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -37,7 +40,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VerifyNumberOTP extends AppCompatActivity {
-
+    boolean passwordVisible;
     String username,mobile,otp ,Newpassword;
     TextView Resendotp;
     PinView pinView;
@@ -64,20 +67,18 @@ public class VerifyNumberOTP extends AppCompatActivity {
         Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyNumberOTP.this, ResetPasswordNumber.class)));
 
         Newpwd.setOnTouchListener((v, event) -> {
-
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getRawX() >= Newpwd.getRight() - Newpwd.getCompoundDrawables()[Right].getBounds().width()) {
                     int selection = Newpwd.getSelectionEnd();
-                    if (passwordvisible) {
+                    if (passwordVisible) {
                         Newpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
                         Newpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        passwordvisible = false;
-
+                        passwordVisible = false;
                     } else {
                         Newpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
                         Newpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        passwordvisible = true;
+                        passwordVisible = true;
                     }
                     Newpwd.setSelection(selection);
                     return true;
@@ -106,7 +107,8 @@ public class VerifyNumberOTP extends AppCompatActivity {
         });
 
     }
-    private void postDataUsingVolley(String otp) {
+
+    /*private void postDataUsingVolley(String otp) {
         String url = Global.validateotpurl;
        progressBar.setVisibility(View.VISIBLE);
 
@@ -121,7 +123,6 @@ public class VerifyNumberOTP extends AppCompatActivity {
 
                     JSONObject respObj = new JSONObject(response);
                     String issuccess = respObj.getString("isSuccess");
-
                     String error = respObj.getString("error");
 //                    Global.editor = sharedPreferences.edit();
 //                    Global.editor.putString("username", username);
@@ -170,6 +171,90 @@ public class VerifyNumberOTP extends AppCompatActivity {
             }
         };
         queue.add(request);
+    }*/
+    private void postDataUsingVolley(String otp) {
+        String url = Global.validateotpurl;
+        progressBar.setVisibility(View.VISIBLE);
+
+        // Check for multiple logins linked to the mobile number
+        if (hasMultipleLogins()) {
+            showAlertDialog("Multiple Logins", "Multiple logins are linked to this mobile number. Please contact support.");
+            progressBar.setVisibility(View.GONE);
+            return; // Do not proceed with OTP validation
+        }
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject respObj = new JSONObject(response);
+                    String issuccess = respObj.getString("isSuccess");
+                    String error = respObj.getString("error");
+
+                    Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), error);
+                    progressBar.setVisibility(View.GONE);
+
+                    if (issuccess.equals("true")) {
+                        startActivity(new Intent(VerifyNumberOTP.this, LoginSignupActivity.class));
+                    } else {
+                        // Show an alert dialog for wrong OTP
+                        showAlertDialog("Wrong OTP", "The entered OTP is incorrect. Please try again.");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressBar.setVisibility(View.GONE);
+                    Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), e.getMessage());
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressBar.setVisibility(View.GONE);
+                // Global.customtoast(VerifyNumberOTP.this,getLayoutInflater(), error.getMessage());
+                // Show an alert dialog for network or server error
+                showAlertDialog("Error", "Network or server error. Please try again.");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("otp", otp);
+                params.put("Mobile", Global.sharedPreferences.getString("mobile", ""));
+                params.put("FPType", "M");
+                params.put("NewPassword", Newpassword);
+
+                Log.d("params", params.toString());
+
+                return params;
+            }
+        };
+        queue.add(request);
     }
+
+    private void showAlertDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // You can perform any action here or leave it empty
+                    }
+                })
+                .show();
+    }
+
+    // Helper method to check if there are multiple logins linked to the mobile number
+    private boolean hasMultipleLogins() {
+        // Implement your logic to check if there are multiple logins linked to the mobile number
+        // For example, you may make another API call or check a local database
+        // If multiple logins are found, return true; otherwise, return false
+        return false; // Replace with your actual implementation
+    }
+
+
+
 
 }

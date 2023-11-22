@@ -81,12 +81,12 @@
                                                     android:id="@+id/stp_name"
                                                     android:layout_weight="1.1"
                                                     android:layout_width="0dp"
-                                                    android:gravity="end"
+                                                    android:gravity="center"
                                                     android:layout_height="wrap_content"
                                                     android:text="STP name"
                                                     android:textStyle="bold"
                                                     android:textSize="12dp" />
-                                                <View
+                                               <!-- <View
                                                     android:layout_width="2dp"
                                                     android:layout_height="12dp"/>
 
@@ -99,7 +99,7 @@
                                                     android:layout_height="wrap_content"
                                                     android:text= ":"
                                                     android:textStyle="bold"
-                                                    android:textSize="12dp" />
+                                                    android:textSize="12dp" />-->
 
 
                                             </LinearLayout>
@@ -132,7 +132,7 @@
                                             android:layout_width="match_parent"
                                             android:gravity="center_horizontal"
                                             android:layout_height="wrap_content"
-                                            android:text="Site_address"
+                                            android:text="email"
                                             android:textStyle="bold"
                                             android:textSize="12dp" />
 
@@ -142,7 +142,7 @@
                                             android:layout_width="match_parent"
                                             android:gravity="center_horizontal"
                                             android:layout_height="wrap_content"
-                                            android:text="Site_address"
+                                            android:text="_mobile"
                                             android:textStyle="bold"
                                             android:textSize="12dp" />
 
@@ -171,7 +171,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_weight="3.4"
                                             android:gravity="center"
-                                            android:text="Equipment Details"
+                                            android:text="Pumps / Motors / Blowers"
                                             android:textColor="@color/white"
                                             android:textSize="18sp"
                                             android:textStyle="bold" />

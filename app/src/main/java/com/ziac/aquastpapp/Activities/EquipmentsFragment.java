@@ -24,7 +24,8 @@ public class EquipmentsFragment extends Fragment {
     private CardView Pump ,Meters;
     private String userimage,mail,Stpname ,Sitename ,mobile_;
     TextView personnameH,usermailH ,usersiteH,userstpH ,Mobile ,uderaddress ,mobile,contact_name ;
-    TextView  usersiteaddressH ,uProcess,Mailid,Mobno;
+    TextView  usersiteaddressH,Mailid,Mobno,uProcess;
+    //uProcess
     private String Personname  ,SiteAddress,Process;
     private TextView ReferenceCode,Companyname,AlterMobileno,Contact_name;
     @SuppressLint("MissingInflatedId")
@@ -50,15 +51,16 @@ public class EquipmentsFragment extends Fragment {
         Mailid = view.findViewById(R.id.email);
         Mobno = view.findViewById(R.id._mobile);
         userstpH = view.findViewById(R.id.stp_name);
-        uProcess = view.findViewById(R.id.processname_);
+      //  uProcess = view.findViewById(R.id.processname_);
         usersiteaddressH = view.findViewById(R.id.site_address);
         personnameH = view.findViewById(R.id.person_name);
 
         Mailid.setText(mail);
         Mobno.setText(mobile_);
         usersiteaddressH.setText(SiteAddress);
-        userstpH.setText(Stpname);
-        uProcess.setText(Process);
+        userstpH.setText(Stpname + " / " + Process);
+       // userstpH.setText(Stpname);
+       // uProcess.setText(Process);
         usersiteH.setText(Sitename);
         personnameH.setText(Personname);
 

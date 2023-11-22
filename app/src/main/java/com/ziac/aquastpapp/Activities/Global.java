@@ -2,6 +2,9 @@ package com.ziac.aquastpapp.Activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,6 +13,9 @@ import android.widget.Toast;
 
 import com.ziac.aquastpapp.R;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 import Models.CommonModelClass;
@@ -27,7 +33,7 @@ public class Global {
 
     //    Local url
    // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl="http://192.168.1.8:6968/";
+    public static String baseurl="http://192.168.1.5:6968/";
     public static String userImageurl = baseurl+"WebsiteData/Users/";
 
     public static String urlUpdateprofileImage = baseurl +"api/Users/UpdateProfilePhoto";
@@ -77,5 +83,15 @@ public class Global {
         customToast.setDuration(Toast.LENGTH_LONG);
         customToast.setView(customToastView);
         customToast.show();
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        return false;
     }
 }

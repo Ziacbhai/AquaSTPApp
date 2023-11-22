@@ -59,7 +59,6 @@ public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.
             Consumables_Stock = itemView.findViewById(R.id.stock_);
             Consumables_Units = itemView.findViewById(R.id.units_);
 
-
         }
     }
 }

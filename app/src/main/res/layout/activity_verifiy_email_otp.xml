@@ -8,6 +8,16 @@
     android:orientation="vertical"
     tools:context=".Activities.VerifyEmailOTP">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,6 +27,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,7 +76,7 @@
             android:layout_height="20dp" />
 
         <com.chaos.view.PinView
-            android:id="@+id/pinview"
+            android:id="@+id/et_pinview"
             style="@style/PinWidget.PinView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,6 +89,8 @@
             app:itemCount="6"
             app:itemHeight="50dp"
             app:itemRadius="10dp"
+            android:autofillHints="smsOTPCode"
+            android:importantForAutofill="yes"
             app:itemWidth="40dp">
 
         </com.chaos.view.PinView>
@@ -117,7 +130,7 @@
             android:layout_margin="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/btnbgoutline"
-            android:drawableRight="@drawable/visibility_off_24"
+            android:drawableRight="@drawable/ic_baseline_remove_red_eye_on"
             android:hint="New password"
             android:longClickable="true"
             android:padding="10dp"
@@ -150,5 +163,6 @@
             android:progressDrawable="@drawable/custom_progress_dialog"
             android:visibility="invisible" />
     </LinearLayout>
-
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

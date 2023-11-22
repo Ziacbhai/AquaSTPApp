@@ -87,6 +87,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
                     JSONObject respObj = new JSONObject(response);
 
                     String issuccess = respObj.getString("isSuccess");
+                    progressBar.setVisibility(View.GONE);
                     String error = respObj.getString("error");
 
                     Global.editor = Global.sharedPreferences.edit();
@@ -99,6 +100,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
                         Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(),respObj.getString("error"));
                         startActivity(new Intent(ResetPasswordEmail.this, VerifyEmailOTP.class));
                     } else {
+                        progressBar.setVisibility(View.GONE);
                         // Show a toast message for wrong username or password
                         Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(),respObj.getString("error"));
 

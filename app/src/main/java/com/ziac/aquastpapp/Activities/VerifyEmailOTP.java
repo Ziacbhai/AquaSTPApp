@@ -1,12 +1,19 @@
 package com.ziac.aquastpapp.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -36,10 +43,10 @@ import java.util.Map;
 public class VerifyEmailOTP extends AppCompatActivity {
     String username,mobile,otp ,Newpassword;
     TextView Resendotp;
-    PinView pinView;
+    PinView Et_pinView;
     AppCompatButton EVerify;
     ProgressBar progressBar;
-    boolean passwordvisible;
+    boolean passwordVisible;
     String email;
     SharedPreferences sharedPreferences;
     private TextInputEditText ENewpwd,Dusrname,Dusrmobile;
@@ -50,7 +57,10 @@ public class VerifyEmailOTP extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verifiy_email_otp);
 
-        pinView=findViewById(R.id.pinview);
+        Et_pinView=findViewById(R.id.et_pinview);
+        new OTP_Receiver().setPinView(Et_pinView);
+        requestSMSPermission();
+
         EVerify=findViewById(R.id.everifyotp);
         progressBar = findViewById(R.id.progressbr);
         ENewpwd = findViewById(R.id.enewpassword);
@@ -59,20 +69,18 @@ public class VerifyEmailOTP extends AppCompatActivity {
 
         Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyEmailOTP.this, ResetPasswordEmail.class)));
         ENewpwd.setOnTouchListener((v, event) -> {
-
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getRawX() >= ENewpwd.getRight() - ENewpwd.getCompoundDrawables()[Right].getBounds().width()) {
                     int selection = ENewpwd.getSelectionEnd();
-                    if (passwordvisible) {
+                    if (passwordVisible) {
                         ENewpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
                         ENewpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        passwordvisible = false;
-
+                        passwordVisible = false;
                     } else {
                         ENewpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
                         ENewpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        passwordvisible = true;
+                        passwordVisible = true;
                     }
                     ENewpwd.setSelection(selection);
                     return true;
@@ -86,7 +94,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
             public void onClick(View view) {
                 // getting the PinView data
                 Newpassword = ENewpwd.getText().toString();
-                otp = pinView.getText().toString();
+                otp = Et_pinView.getText().toString();
 
               /*  if (Newpassword.length() < 6 ){
                     Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(), "Password should not be less than 6 digits !!");
@@ -101,6 +109,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
             }
         });
     }
+
 
     private void EmailDataUsingVolley(String otp) {
 
@@ -127,6 +136,9 @@ public class VerifyEmailOTP extends AppCompatActivity {
                     if(issuccess.equals("true")){
                         startActivity(new Intent(VerifyEmailOTP.this, LoginSignupActivity.class));
 
+                    }else {
+                        showAlertDialog("Wrong OTP", "The entered OTP is incorrect. Please try again.");
+
                     }
 
                 } catch (JSONException e) {
@@ -139,29 +151,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressBar.setVisibility(View.GONE);
-              /*  // Global.customtoast(VerifyNumberOTP.this,getLayoutInflater(), error.getMessage());
-                if (error instanceof TimeoutError) {
-                    Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(),"Request Time-Out");
-                } else if (error instanceof ServerError) {
-                    Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(),"ServerError");
-                }  else if (error instanceof ParseError) {
-                    Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(),"Parse Error ");
-                }  else if (error instanceof AuthFailureError) {
-                    Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(), "AuthFailureError");
-                } else if (error instanceof ServerError) {
-                    Log.e("MyApp", "ServerError: " + error.getMessage());
-                    Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(), "ServerError");
-                } else if (error instanceof ParseError) {
-                    Log.e("MyApp", "ParseError: " + error.getMessage());
-                    Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(), "Parse Error");
-                } else if (error instanceof AuthFailureError) {
-                    Log.e("MyApp", "AuthFailureError: " + error.getMessage());
-                    Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(), "AuthFailureError");
-                }
-                else {
-                    // Log.e("MyApp", "Something else: " + error.getMessage());
-                    Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(), "Something else");
-                }*/
+
             }
         }){
             @Override
@@ -183,5 +173,24 @@ public class VerifyEmailOTP extends AppCompatActivity {
             }
         };
         queue.add(request);
+    }
+    private void requestSMSPermission() {
+        if (ContextCompat.checkSelfPermission(VerifyEmailOTP.this,Manifest.permission.RECEIVE_SMS)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(VerifyEmailOTP.this,new String[]{
+                    Manifest.permission.RECEIVE_SMS
+            },100);
+        }
+
+    }
+    private void showAlertDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // You can perform any action here or leave it empty
+                    }
+                })
+                .show();
     }
 }

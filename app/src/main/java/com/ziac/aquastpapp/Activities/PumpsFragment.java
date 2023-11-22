@@ -50,7 +50,7 @@ public class PumpsFragment extends Fragment {
     RecyclerView PumpRecyclerview;
    // private ImageView mImageView;
     private String userimage;
-    TextView  usersiteH,userstpH,usersiteaddressH ,uProcess,Mailid,Mobno,personnameH;
+    TextView  usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,mail,Stpname ,Sitename ,SiteAddress,Process;
     private TextView Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
             FormFactor,Phase,CleaningRunningFrequencyHRS ,Address_M ,Process_name_;
@@ -65,7 +65,7 @@ public class PumpsFragment extends Fragment {
         //mImageView = view.findViewById(R.id._image1);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        if (!isNetworkAvailable()) {
+        if (!Global.isNetworkAvailable(getActivity())) {
             Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
@@ -86,15 +86,15 @@ public class PumpsFragment extends Fragment {
         usersiteH = view.findViewById(R.id.site_name);
         userstpH = view.findViewById(R.id.stp_name);
         usersiteaddressH = view.findViewById(R.id.site_address);
-        uProcess = view.findViewById(R.id.processname_);
+        //uProcess = view.findViewById(R.id.processname_);
         Mailid = view.findViewById(R.id.email);
         Mobno = view.findViewById(R.id._mobile);
         personnameH = view.findViewById(R.id.person_name);
 
         usersiteH.setText(Sitename);
-        userstpH.setText(Stpname);
+        userstpH.setText(Stpname + " / " + Process);
         usersiteaddressH.setText(SiteAddress);
-        uProcess.setText(Process);
+        //uProcess.setText(Process);
         Mailid.setText(mail);
         Mobno.setText(mobile);
         personnameH.setText(Personname);
@@ -185,44 +185,21 @@ public class PumpsFragment extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
 
-                params.put("equip_name", EquipmentName.getText().toString());
+                /*params.put("equip_name", EquipmentName.getText().toString());
                 params.put("rating", Rating_Capacity.getText().toString());
                 params.put("form_factor",FormFactor.getText().toString());
                 params.put("phase", Phase.getText().toString());
                 params.put("equip_specs", Specification.getText().toString());
                 params.put("mfg_name", Manufacturer.getText().toString());
                 params.put("equip_slno", EquipmentNumber_Id.getText().toString());
-                params.put("cleaning_freq_hrs", CleaningRunningFrequencyHRS.getText().toString());
+                params.put("cleaning_freq_hrs", CleaningRunningFrequencyHRS.getText().toString());*/
                 return params;
             }
         };
         queue.add(jsonObjectRequest);
     }
 
-    private boolean isNetworkAvailable() {
-        Context context = requireContext();
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager != null) {
-            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-        }
-        return false;
-    }
 
-    static class InternetCheckTask extends AsyncTask<Void, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-            try {
-                HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
-                urlc.setRequestProperty("User-Agent", "Test");
-                urlc.setRequestProperty("Connection", "close");
-                urlc.setConnectTimeout(3000);
-                urlc.connect();
-                return (urlc.getResponseCode() == 200);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
-    }
+
+
 }

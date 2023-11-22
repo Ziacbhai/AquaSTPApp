@@ -707,24 +707,8 @@ public class SignUpFragment extends Fragment {
                 params.put("com_name", Company.getText().toString());
 
 
-
-               /* com_contact:Siva
-                com_contact_mobno:9567542499
-                com_email:Karthikgowd123@gmail.com
-                city_code:5.0
-                username:ZaicDemo
-                password:Ziac1234$
-                confirm_password:Ziac1234$
-                state_code:5.0
-                com_name:Dhone
-*/
                  Log.d("params", params.toString());
-                //      params.put("site_address", Site_address.getText().toString());
-                //        params.put("process_name", Process_type.getText().toString());
-                //   params.put("contact_name", Contact_name.getText().toString());
-                // params.put("person_name", Contact_name.getText().toString());
-                // params.put("ref_code", CouponCode.getText().toString());
-                // Log.d("params", params.toString());
+
                 return params;
             }
         };

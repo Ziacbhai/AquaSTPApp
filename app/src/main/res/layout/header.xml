@@ -17,8 +17,7 @@
             android:layout_width="70dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_margin="5dp"
             android:padding="5dp"
             app:civ_border_color="@color/white"
             app:civ_border_overlay="true"
@@ -27,16 +26,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_margin="5dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/_profilename"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="3dp"
                 android:text="name"
                 android:textColor="@color/white"
                 android:textSize="14sp"
@@ -60,7 +58,6 @@
                 android:id="@+id/site_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="3dp"
                 android:text="location"
                 android:textColor="@color/my_light_primary"
                 android:textSize="14sp"
@@ -70,7 +67,6 @@
                 android:id="@+id/stp_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="3dp"
                 android:text="htp"
                 android:textColor="@color/my_light_primary"
                 android:textSize="14sp"

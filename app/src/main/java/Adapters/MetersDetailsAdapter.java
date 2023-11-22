@@ -51,10 +51,20 @@ public class MetersDetailsAdapter extends RecyclerView.Adapter<MetersDetailsAdap
     public void onBindViewHolder(@NonNull MetersDetailsAdapter.ViewHolder holder, int position) {
         Picasso.Builder builder=new Picasso.Builder(context);
         Picasso picasso=builder.build();
-        picasso.load(Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2))).error(R.drawable.no_image)
-                .memoryPolicy(MemoryPolicy.NO_CACHE)
-                .networkPolicy(NetworkPolicy.NO_CACHE)
-                .into(holder.ImageView);
+        try {
+            Uri uristring = Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2));
+            picasso.load(uristring).error(R.drawable.no_image)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(holder.ImageView);
+        }catch (Exception e){
+            picasso.load(R.drawable.no_image).error(R.drawable.no_image)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .networkPolicy(NetworkPolicy.NO_CACHE)
+                    .into(holder.ImageView);
+        }
+
+
 
 
         holder.Manufacturer.setText(commonModelClassList.get(position).getManufacturer());
@@ -62,7 +72,6 @@ public class MetersDetailsAdapter extends RecyclerView.Adapter<MetersDetailsAdap
         holder.Equipment_id.setText(commonModelClassList.get(position).getEquipmentNumber_Id());
         holder.Specification.setText(commonModelClassList.get(position).getSpecification());
         holder.Rating_Capacity.setText(commonModelClassList.get(position).getRating_Capacity());
-
         holder.CleaningRunningFrequencyHRS.setText(commonModelClassList.get(position).getCleaning_RunningFrequency_HRS());
         holder.ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
