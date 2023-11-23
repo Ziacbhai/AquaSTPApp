@@ -91,7 +91,7 @@
                             android:id="@+id/site_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
+                            android:gravity="center"
                             android:text="Site_address"
                             android:textColor="@color/white"
                             android:textSize="12dp"

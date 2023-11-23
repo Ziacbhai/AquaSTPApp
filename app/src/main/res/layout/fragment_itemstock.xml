@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="#eaeff5"
     android:layout_height="match_parent"
-    tools:context=".Activities.ConsumablesFragment">
+    tools:context=".Activities.ItemStockFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,7 +76,6 @@
             android:layout_height="match_parent"
             android:fillViewport="true"
             android:scrollbars="none">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +86,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="5dp">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -97,10 +95,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                     </LinearLayout>
-
                 </LinearLayout>
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 

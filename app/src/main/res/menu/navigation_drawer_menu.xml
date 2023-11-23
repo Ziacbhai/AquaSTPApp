@@ -20,13 +20,13 @@
             android:title="Equipments" />
 
         <item
-            android:id="@+id/nav_itemstock"
-            android:icon="@drawable/shoppingbag"
-            android:title="Item Stock" />
-        <item
             android:id="@+id/nav_consumption"
+            android:icon="@drawable/shoppingbag"
+            android:title="Consumption " />
+        <item
+            android:id="@+id/nav_itemstock"
             android:icon="@drawable/select"
-            android:title="Consumption" />
+            android:title="Item Stock" />
 
         <item
             android:id="@+id/nav_repair"

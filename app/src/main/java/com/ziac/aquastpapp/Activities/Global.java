@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,13 +12,10 @@ import android.widget.Toast;
 
 import com.ziac.aquastpapp.R;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 import Models.CommonModelClass;
-import Models.ConsumableClass;
+import Models.ItemStockClass;
 import Models.StpModelClass;
 import Models.zList;
 
@@ -33,7 +29,7 @@ public class Global {
 
     //    Local url
    // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl="http://192.168.1.5:6968/";
+    public static String baseurl="http://192.168.1.4:6968/";
     public static String userImageurl = baseurl+"WebsiteData/Users/";
 
     public static String urlUpdateprofileImage = baseurl +"api/Users/UpdateProfilePhoto";
@@ -66,7 +62,7 @@ public class Global {
 
     public static ArrayList<StpModelClass> StpList;
     public static ArrayList<CommonModelClass> pumpdetails;
-    public static ArrayList<ConsumableClass> consumables_stock;
+    public static ArrayList<ItemStockClass> consumables_stock;
 
     public static ArrayList<CommonModelClass> metersdetails;
 

@@ -1,7 +1,7 @@
 package Models;
 
-public class ConsumableClass {
-    public ConsumableClass() {
+public class ItemStockClass {
+    public ItemStockClass() {
 
     }
 

@@ -3,73 +3,36 @@ package com.ziac.aquastpapp.Activities;
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
-import android.provider.SyncStateContract;
-import android.util.Base64;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 import com.ziac.aquastpapp.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -231,7 +194,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
             }
-
             @Override
             public void onDrawerClosed(@NonNull View drawerView) {
                 //Toast.makeText(NewMainActivity.this, "On onDrawerClosed", Toast.LENGTH_SHORT).show();
@@ -255,10 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // bottomNavigationView=findViewById(R.id.bottomNavigationView);
         // bottomNavigationView.setBackground(null);
-
-
     }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
@@ -272,11 +231,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawers();
             return true;
         }
-        if (itemId == R.id.nav_consumption) {
-            ConsumablesFragment consumablesFragment = new ConsumablesFragment();
+        if (itemId == R.id.nav_itemstock) {
+            ItemStockFragment itemStockFragment = new ItemStockFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frame_layout, consumablesFragment);
+            fragmentTransaction.replace(R.id.frame_layout, itemStockFragment);
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
@@ -321,6 +280,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
 
         }
+
         if (itemId == R.id.nav_selectStp) {
             startActivity(new Intent(MainActivity.this, SelectLocationActivity.class));
             return true;
@@ -361,24 +321,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-   /* public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            moveTaskToBack(true);
-            System.exit(1);
-        }
 
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
 
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
-            }
-        }, 2000);
-    }*/
 
     @Override
     public void onBackPressed() {
