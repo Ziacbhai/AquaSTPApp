@@ -85,8 +85,6 @@ public class LoginSignupActivity extends AppCompatActivity {
                 // Handle tab reselection if needed
             }
         });
-
-
     }
     public void onBackPressed() {
 

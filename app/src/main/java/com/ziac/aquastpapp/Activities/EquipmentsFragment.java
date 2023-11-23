@@ -22,12 +22,12 @@ import com.ziac.aquastpapp.R;
 
 public class EquipmentsFragment extends Fragment {
     private CardView Pump ,Meters;
-    private String userimage,mail,Stpname ,Sitename ,mobile_;
-    TextView personnameH,usermailH ,usersiteH,userstpH ,Mobile ,uderaddress ,mobile,contact_name ;
-    TextView  usersiteaddressH,Mailid,Mobno,uProcess;
+    private String mail,Stpname ,Sitename ,mobile_;
+    TextView personnameH ,usersiteH,userstpH  ;
+    TextView  usersiteaddressH,Mailid,Mobno;
     //uProcess
     private String Personname  ,SiteAddress,Process;
-    private TextView ReferenceCode,Companyname,AlterMobileno,Contact_name;
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,8 +73,6 @@ public class EquipmentsFragment extends Fragment {
                 fragmentTransaction.replace(R.id.frame_layout, pumpFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-
-
             }
         });
         Meters.setOnClickListener(new View.OnClickListener() {
