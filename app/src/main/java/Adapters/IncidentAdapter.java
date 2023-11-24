@@ -8,20 +8,17 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.ziac.aquastpapp.R;
-
 import java.util.List;
-
-import Models.CommonModelClass;
+import Models.IncidentsClass;
 
 public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewholder> {
 
-    private List<CommonModelClass> commonModelClassList;
+    private List<IncidentsClass> incidentsClasses;
     Context context;
 
-    public IncidentAdapter(List<CommonModelClass> commonModelClassList, Context context) {
-        this.commonModelClassList = commonModelClassList;
+    public IncidentAdapter(List<IncidentsClass> incidentsClasses, Context context) {
+        this.incidentsClasses = incidentsClasses;
         this.context = context;
     }
 
@@ -34,23 +31,24 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
 
     @Override
     public void onBindViewHolder(@NonNull IncidentAdapter.Viewholder holder, int position) {
-        holder.Incno.setText(commonModelClassList.get(position).getTRNO());
-        holder.Incedent.setText(commonModelClassList.get(position).getRefno());
+        holder.Incno.setText(incidentsClasses.get(position).getInc_No());
+        holder.Incedent_Particlulars.setText(incidentsClasses.get(position).getIncidents_Particulars());
 
     }
 
     @Override
     public int getItemCount() {
-        return commonModelClassList.size();
+        return incidentsClasses.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        private TextView Incno,Incedent,Site_,STP_;
+        private TextView Incno,Incedent_Particlulars,Inc_date;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
             Incno=itemView.findViewById(R.id.trno_);
-            Incedent=itemView.findViewById(R.id.lab_refno_);
+            Incedent_Particlulars=itemView.findViewById(R.id.lab_refno_);
+            Inc_date=itemView.findViewById(R.id.lab_refno_);
 
         }
     }
