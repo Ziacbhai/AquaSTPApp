@@ -34,7 +34,7 @@
             android:title="Repair" />
 
         <item
-            android:id="@+id/nav_lap"
+            android:id="@+id/nav_lab"
             android:icon="@drawable/laboratory"
             android:title="Lab" />
 

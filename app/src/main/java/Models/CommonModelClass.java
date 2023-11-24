@@ -2,9 +2,48 @@ package Models;
 
 public class CommonModelClass {
     private String Process_name ,Sstp2_code,Image_id,Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
-            Form_Factor,Phase,Cleaning_RunningFrequency_HRS,Address_M;
+            Form_Factor,Phase,Cleaning_RunningFrequency_HRS,Address_M,REPNo,Amount,TRNO,Refno,CustomerNo,INCno ,Incident_perticular;
     private int Card_view ;
 
+    public String getTRNO() {
+        return TRNO;
+    }
+
+    public void setTRNO(String TRNO) {
+        this.TRNO = TRNO;
+    }
+
+    public String getRefno() {
+        return Refno;
+    }
+
+    public void setRefno(String refno) {
+        Refno = refno;
+    }
+
+    public String getCustomerNo() {
+        return CustomerNo;
+    }
+
+    public void setCustomerNo(String customerNo) {
+        CustomerNo = customerNo;
+    }
+
+    public String getREPNo() {
+        return REPNo;
+    }
+
+    public void setREPNo(String REPNo) {
+        this.REPNo = REPNo;
+    }
+
+    public String getAmount() {
+        return Amount;
+    }
+
+    public void setAmount(String amount) {
+        Amount = amount;
+    }
 
     public String getImage_id() {
         return Image_id;

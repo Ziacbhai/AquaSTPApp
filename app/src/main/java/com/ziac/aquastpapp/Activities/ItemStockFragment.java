@@ -105,10 +105,10 @@ public class ItemStockFragment extends Fragment {
             }
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("part_no", Consumables_Code.getText().toString());
+                /*params.put("part_no", Consumables_Code.getText().toString());
                 params.put("prd_name", Consumables_Name.getText().toString());
                 params.put("stk_ycb",Consumables_Stock.getText().toString());
-                params.put("unit_name", Consumables_Units.getText().toString());
+                params.put("unit_name", Consumables_Units.getText().toString());*/
                 return params;
             }
         };
