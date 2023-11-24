@@ -27,32 +27,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-
-                        <TextView
-                            android:id="@+id/equipmentName_"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="Eqipment name"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/equip_slno"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="Equip_slno"
-                            android:textSize="12dp"/>
-
-
-                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
@@ -128,6 +102,34 @@
                                         android:drawablePadding="5dp"
                                         android:gravity="center_horizontal"
                                         android:text="amount"
+                                        android:textSize="12dp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="RepairDate"
+                                        android:gravity="center_horizontal"
+                                        android:textStyle="bold"
+                                        android:textColor="#000"
+                                        android:textSize="12dp" />
+
+                                    <TextView
+                                        android:id="@+id/repair_date"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawablePadding="5dp"
+                                        android:gravity="center_horizontal"
+                                        android:text="RepairDate"
                                         android:textSize="12dp" />
 
                                 </LinearLayout>

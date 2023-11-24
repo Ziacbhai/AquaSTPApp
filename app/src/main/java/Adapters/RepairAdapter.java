@@ -38,22 +38,21 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
     public void onBindViewHolder(@NonNull RepairAdapter.Viewholder holder, int position) {
         holder.Repno.setText(repairS.get(position).getREPNo());
         holder.Amount.setText(repairS.get(position).getRepair_Amount());
-
+        holder.RepairDate.setText(repairS.get(position).getRepair_Date());
     }
-
     @Override
     public int getItemCount() {
         return repairS.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-
-        private TextView  Repno,Amount;
+        private TextView  Repno,Amount,RepairDate;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
             Repno=itemView.findViewById(R.id.repno_);
             Amount=itemView.findViewById(R.id.amount_);
+            RepairDate=itemView.findViewById(R.id.repair_date);
 
         }
     }

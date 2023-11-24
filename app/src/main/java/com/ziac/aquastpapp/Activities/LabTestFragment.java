@@ -43,7 +43,6 @@ import Models.zList;
 public class LabTestFragment extends Fragment {
 
     RecyclerView LabTestRecyclerview;
-
     LabTestClass labTestClass;
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,mail,Stpname ,Sitename ,SiteAddress,Process ,Mobile;
@@ -71,14 +70,14 @@ public class LabTestFragment extends Fragment {
         Stpname = sharedPreferences.getString("stp_name", "");
         SiteAddress = sharedPreferences.getString("site_address", "");
         Process = sharedPreferences.getString("process_name", "");
-        mail = Global.sharedPreferences.getString("user_email", "");
-        Mobile = Global.sharedPreferences.getString("user_mobile", "");
+        mail = sharedPreferences.getString("user_email", "");
+        Mobile = sharedPreferences.getString("user_mobile", "");
         Personname = sharedPreferences.getString("person_name", "");
 
         usersiteH = view.findViewById(R.id.site_name);
         userstpH = view.findViewById(R.id.stp_name);
         usersiteaddressH = view.findViewById(R.id.site_address);
-        //uProcess = view.findViewById(R.id.processname_);
+
         Mailid = view.findViewById(R.id.email);
         Mobno = view.findViewById(R.id._mobile);
         personnameH = view.findViewById(R.id.person_name);
@@ -86,7 +85,7 @@ public class LabTestFragment extends Fragment {
         usersiteH.setText(Sitename);
         userstpH.setText(Stpname + " / " + Process);
         usersiteaddressH.setText(SiteAddress);
-        //uProcess.setText(Process);
+
         Mailid.setText(mail);
         Mobno.setText(Mobile);
         personnameH.setText(Personname);
@@ -104,10 +103,10 @@ public class LabTestFragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String lab_Test = String.valueOf(Global.Lab_Test);
 
-        String com_code = Global.sharedPreferences.getString("com_code", "0");
-        String ayear = Global.sharedPreferences.getString("ayear", "0");
-        String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
-        lab_Test = lab_Test + "com_code=" + ayear + "ayear" +com_code  + "&sstp1_code=" + sstp1_code ;
+        String com_code = Global.sharedPreferences.getString("com_code", "");
+        String ayear = Global.sharedPreferences.getString("ayear", "2023");
+        String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "");
+        lab_Test = lab_Test + "comcode=" +  com_code  + "&ayear=" + ayear  + "&sstp1_code=" + sstp1_code ;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, lab_Test, null, new Response.Listener<JSONObject>() {
             @Override

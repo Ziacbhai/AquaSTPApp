@@ -40,16 +40,13 @@ import Models.RepairsClass;
 import Models.zList;
 
 public class RepairFragment extends Fragment {
-    private zList company_code ,location_code,stp1_code;
+
     RepairsClass repair_s;
     RecyclerView RepairRecyclerview;
-    // private ImageView mImageView;
-    private String userimage;
+     TextView  Repno,Amount,RepairDate;
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,Mail,Stpname ,Sitename ,SiteAddress,Process,Mobile;
-    private TextView Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
-            FormFactor,Phase,CleaningRunningFrequencyHRS ,Address_M ,Process_name_;
-    CommonModelClass commonModelClassList;
+
     private ProgressDialog progressDialog;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -105,9 +102,9 @@ public class RepairFragment extends Fragment {
         String repair = Global.GetRepairItems;
 
         String com_code = Global.sharedPreferences.getString("com_code", "0");
-        String ayear = Global.sharedPreferences.getString("ayear", "0");
+        String ayear = Global.sharedPreferences.getString("ayear", "2023");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
-        repair = repair + "com_code=" + ayear + "ayear" +com_code  + "&sstp1_code=" + sstp1_code ;
+        repair = repair + "comcode=" + com_code + "&ayear=" +  ayear + "&sstp1_code=" + sstp1_code ;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, repair, null, new Response.Listener<JSONObject>() {
             @Override
@@ -132,7 +129,7 @@ public class RepairFragment extends Fragment {
                     try {
                         repair_s.setREPNo(e.getString("rep_no"));
                         repair_s.setRepair_Amount(e.getString("repaired_amt"));
-                        repair_s.setRepair_Date(e.getString("repaired_amt"));
+                        repair_s.setRepair_Date(e.getString("rep_date"));
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -157,7 +154,9 @@ public class RepairFragment extends Fragment {
             }
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-
+                params.put("rep_no", Repno.getText().toString());
+                params.put("repaired_amt",Amount.getText().toString());
+                params.put("rep_date", RepairDate.getText().toString());
                 return params;
             }
         };
