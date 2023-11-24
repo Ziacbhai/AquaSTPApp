@@ -101,17 +101,17 @@ public class LabTestFragment extends Fragment {
 
     private void getLabTestReports() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
-        String lab_Test = String.valueOf(Global.Lab_Test);
+        String labTest = Global.GetLab_Test_Items;
 
         String com_code = Global.sharedPreferences.getString("com_code", "");
         String ayear = Global.sharedPreferences.getString("ayear", "2023");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "");
-        lab_Test = lab_Test + "comcode=" +  com_code  + "&ayear=" + ayear  + "&sstp1_code=" + sstp1_code ;
+        labTest = labTest + "comcode=" +  com_code  + "&ayear=" + ayear  + "&sstp1_code=" + sstp1_code ;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, lab_Test, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, labTest, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Lab_Test = new ArrayList<LabTestClass>();
+                Global.LabTest_s = new ArrayList<LabTestClass>();
                 labTestClass = new LabTestClass();
                 JSONArray jarray;
                 try {
@@ -129,22 +129,22 @@ public class LabTestFragment extends Fragment {
                     }
                     labTestClass = new LabTestClass();
                     try {
-                        labTestClass.setTRno(e.getString("rep_no"));
-                        labTestClass.setLabDate(e.getString("repaired_amt"));
-                        labTestClass.setCustomerRef(e.getString("repaired_amt"));
-                        labTestClass.setRefno(e.getString("repaired_amt"));
-                        labTestClass.setLabRefDate(e.getString("repaired_amt"));
-                        labTestClass.setSample_Received_Date(e.getString("repaired_amt"));
-                        labTestClass.setTest_Start_Date(e.getString("repaired_amt"));
-                        labTestClass.setTest_Completion_Date(e.getString("repaired_amt"));
-                        labTestClass.setSample_Received_By(e.getString("repaired_amt"));
-                        labTestClass.setSample_Particular(e.getString("repaired_amt"));
+                        labTestClass.setTRno(e.getString("ref_no"));
+                        labTestClass.setLabDate(e.getString("test_date"));
+                        labTestClass.setCustomerRef(e.getString("cus_ref"));
+                        labTestClass.setRefno(e.getString("ref_no"));
+                        labTestClass.setLabRefDate(e.getString("ref_no"));
+                        labTestClass.setSample_Received_Date(e.getString("rcp_date"));
+                        labTestClass.setTest_Start_Date(e.getString("start_date"));
+                        labTestClass.setTest_Completion_Date(e.getString("ref_no"));
+                        labTestClass.setSample_Received_By(e.getString("sample_receivedby"));
+                        labTestClass.setSample_Particular(e.getString("ref_no"));
 
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Lab_Test.add(labTestClass);
-                    LabTestAdapter labTestAdapter = new LabTestAdapter(Global.Lab_Test, getContext());
+                    Global.LabTest_s.add(labTestClass);
+                    LabTestAdapter labTestAdapter = new LabTestAdapter(Global.LabTest_s, getContext());
                     LabTestRecyclerview.setAdapter(labTestAdapter);
                 }
             }

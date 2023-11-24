@@ -58,6 +58,8 @@ public class Global {
     public static String GetItemStock = baseurl + "api/Masters/GetItemStock?";
     public static String GetRepairItems = baseurl + "api/Repairs/List?";
 
+    public static String GetLab_Test_Items = baseurl + "api/Lab/List?";
+
 
     public static ArrayList<zList> statearraylist;
     public static ArrayList<zList> cityarraylist;
@@ -67,7 +69,7 @@ public class Global {
     public static ArrayList<CommonModelClass> pumpdetails;
     public static ArrayList<ItemStockClass> Item_stock;
     public static ArrayList<RepairsClass> Repair_s;
-    public static ArrayList<LabTestClass> Lab_Test;
+    public static ArrayList<LabTestClass> LabTest_s;
 
     public static ArrayList<CommonModelClass> metersdetails;
 
