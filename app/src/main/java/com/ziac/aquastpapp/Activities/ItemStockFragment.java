@@ -59,7 +59,7 @@ public class ItemStockFragment extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, urlstock, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.consumables_stock = new ArrayList<ItemStockClass>();
+                Global.Item_stock = new ArrayList<ItemStockClass>();
                 itemStockClass = new ItemStockClass();
                 JSONArray jarray;
                 try {
@@ -84,9 +84,9 @@ public class ItemStockFragment extends Fragment {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.consumables_stock.add(itemStockClass);
+                    Global.Item_stock.add(itemStockClass);
                 }
-                ItemStockAdapter itemStockAdapter = new ItemStockAdapter(getContext(), Global.consumables_stock);
+                ItemStockAdapter itemStockAdapter = new ItemStockAdapter(getContext(), Global.Item_stock);
                 consumableRecyclerView.setAdapter(itemStockAdapter);
                 //progressDialog.dismiss();
             }

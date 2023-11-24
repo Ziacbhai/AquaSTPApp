@@ -17,7 +17,7 @@ import com.ziac.aquastpapp.R;
 public class SplashScreen extends AppCompatActivity {
 
     TextView textView;
-    LinearLayout Splashscreen;
+
 
     ImageView imageView;
 
@@ -27,14 +27,15 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        handlermethod();
-
         textView = findViewById(R.id.txt);
         imageView = findViewById(R.id.imageView);
         Animation myanimation = AnimationUtils.loadAnimation(SplashScreen.this, R.anim.animation);
         textView.startAnimation(myanimation);
         Animation animation = AnimationUtils.loadAnimation(SplashScreen.this, R.anim.animationlogo);
         imageView.startAnimation(animation);
+        handlermethod();
+
+
     }
 
     private void handlermethod() {
@@ -43,8 +44,9 @@ public class SplashScreen extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashScreen.this, SliderScreen.class));
-                finish();
+                Intent intent = new Intent(SplashScreen.this, SliderScreen.class);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                startActivity(intent);
             }
         } ,3000);
     }

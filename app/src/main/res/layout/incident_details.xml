@@ -27,33 +27,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-
-                        <TextView
-                            android:id="@+id/equipmentName_"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="Eqipment name"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/equip_slno"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="Equip_slno"
-                            android:textSize="12dp"/>
-
-
-                    </LinearLayout>
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"

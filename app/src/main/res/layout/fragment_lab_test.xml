@@ -86,24 +86,7 @@
                                                     android:text="STP name"
                                                     android:textStyle="bold"
                                                     android:textSize="12dp" />
-                                                <!-- <View
-                                                     android:layout_width="2dp"
-                                                     android:layout_height="12dp"/>
-
-                                                 <TextView
-                                                     android:textColor="@color/white"
-                                                     android:id="@+id/processname_"
-                                                     android:layout_weight="0.8"
-                                                     android:layout_marginStart="10dp"
-                                                     android:layout_width="0dp"
-                                                     android:layout_height="wrap_content"
-                                                     android:text= ":"
-                                                     android:textStyle="bold"
-                                                     android:textSize="12dp" />-->
-
-
                                             </LinearLayout>
-
                                         </LinearLayout>
                                         <TextView
                                             android:id="@+id/site_address"

@@ -14,14 +14,15 @@ import com.ziac.aquastpapp.R;
 import java.util.List;
 
 import Models.CommonModelClass;
+import Models.LabTestClass;
 
 
 public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewholder> {
-    private List<CommonModelClass> commonModelClassList;
+    private List<LabTestClass> labTestClasses;
     Context context;
 
-    public LabTestAdapter(List<CommonModelClass> commonModelClassList, Context context) {
-        this.commonModelClassList = commonModelClassList;
+    public LabTestAdapter(List<LabTestClass> labTestClasses, Context context) {
+        this.labTestClasses = labTestClasses;
         this.context = context;
     }
 
@@ -34,25 +35,26 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
 
     @Override
     public void onBindViewHolder(@NonNull LabTestAdapter.Viewholder holder, int position) {
-        holder.TRNO.setText(commonModelClassList.get(position).getTRNO());
-        holder.Refno.setText(commonModelClassList.get(position).getRefno());
-        holder.CustomerNo.setText(commonModelClassList.get(position).getCustomerNo());
+        holder.TRno.setText(labTestClasses.get(position).getTRno());
+        holder.Refno.setText(labTestClasses.get(position).getRefno());
+        holder.CustomerRef.setText(labTestClasses.get(position).getCustomerRef());
     }
 
     @Override
     public int getItemCount() {
-        return commonModelClassList.size();
+        return labTestClasses.size();
     }
 
     public static class Viewholder extends RecyclerView.ViewHolder {
+        private TextView TRno, Refno,LabDate,LabRefDate,CustomerRef,Sample_Received_Date,
+                Test_Start_Date,Test_Completion_Date,Sample_Received_By,Sample_Particular;
 
-        private TextView TRNO,Refno,CustomerNo,Site_,STP_;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
-            TRNO=itemView.findViewById(R.id.trno_);
+            TRno=itemView.findViewById(R.id.trno_);
             Refno=itemView.findViewById(R.id.lab_refno_);
-            CustomerNo=itemView.findViewById(R.id.lab_customerref_);
+            CustomerRef=itemView.findViewById(R.id.lab_customerref_);
 
         }
     }

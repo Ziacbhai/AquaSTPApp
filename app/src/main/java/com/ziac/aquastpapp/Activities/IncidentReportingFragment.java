@@ -28,7 +28,7 @@ public class IncidentReportingFragment extends Fragment {
     // private ImageView mImageView;
     private String userimage;
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
-    private String Personname,mail,Stpname ,Sitename ,SiteAddress,Process;
+    private String Personname,Mail,Stpname ,Sitename ,SiteAddress,Process,Mobile;
     private TextView Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
             FormFactor,Phase,CleaningRunningFrequencyHRS ,Address_M ,Process_name_;
     CommonModelClass commonModelClassList;
@@ -54,14 +54,13 @@ public class IncidentReportingFragment extends Fragment {
         Stpname = sharedPreferences.getString("stp_name", "");
         SiteAddress = sharedPreferences.getString("site_address", "");
         Process = sharedPreferences.getString("process_name", "");
-        String mail = Global.sharedPreferences.getString("user_email", "");
-        String mobile = Global.sharedPreferences.getString("user_mobile", "");
+        Mail = sharedPreferences.getString("user_email", "");
+        Mobile = sharedPreferences.getString("user_mobile", "");
         Personname = sharedPreferences.getString("person_name", "");
 
         usersiteH = view.findViewById(R.id.site_name);
         userstpH = view.findViewById(R.id.stp_name);
         usersiteaddressH = view.findViewById(R.id.site_address);
-        //uProcess = view.findViewById(R.id.processname_);
         Mailid = view.findViewById(R.id.email);
         Mobno = view.findViewById(R.id._mobile);
         personnameH = view.findViewById(R.id.person_name);
@@ -69,9 +68,8 @@ public class IncidentReportingFragment extends Fragment {
         usersiteH.setText(Sitename);
         userstpH.setText(Stpname + " / " + Process);
         usersiteaddressH.setText(SiteAddress);
-        //uProcess.setText(Process);
-        Mailid.setText(mail);
-        Mobno.setText(mobile);
+        Mailid.setText(Mail);
+        Mobno.setText(Mobile);
         personnameH.setText(Personname);
 
         Incident_recyclerview = view.findViewById(R.id.incident_recyclerview);

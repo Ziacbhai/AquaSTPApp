@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 import Models.CommonModelClass;
 import Models.ItemStockClass;
+import Models.LabTestClass;
+import Models.RepairsClass;
 import Models.StpModelClass;
 import Models.zList;
 
@@ -54,6 +56,7 @@ public class Global {
 
     public static String Equipment_Details_com_meters = baseurl + "api/Masters/GetMeters?";
     public static String GetItemStock = baseurl + "api/Masters/GetItemStock?";
+    public static String GetRepairItems = baseurl + "api/Repairs/List?";
 
 
     public static ArrayList<zList> statearraylist;
@@ -62,7 +65,9 @@ public class Global {
 
     public static ArrayList<StpModelClass> StpList;
     public static ArrayList<CommonModelClass> pumpdetails;
-    public static ArrayList<ItemStockClass> consumables_stock;
+    public static ArrayList<ItemStockClass> Item_stock;
+    public static ArrayList<RepairsClass> Repair_s;
+    public static ArrayList<LabTestClass> Lab_Test;
 
     public static ArrayList<CommonModelClass> metersdetails;
 

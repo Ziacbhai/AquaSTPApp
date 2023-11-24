@@ -36,12 +36,12 @@
         <item
             android:id="@+id/nav_lab"
             android:icon="@drawable/laboratory"
-            android:title="Lab" />
+            android:title="Lab Test" />
 
         <item
             android:id="@+id/nav_incident"
             android:icon="@drawable/warningsign"
-            android:title="Incident" />
+            android:title="Incidents" />
         <item
             android:id="@+id/nav_aboutus"
             android:icon="@drawable/baseline_about_icon"

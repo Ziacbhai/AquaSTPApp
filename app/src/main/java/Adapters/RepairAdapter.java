@@ -11,16 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ziac.aquastpapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Models.CommonModelClass;
+import Models.RepairsClass;
 
 public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder> {
-    private List<CommonModelClass> commonModelClassList;
+    private List<RepairsClass> repairS;
     Context context;
 
-    public RepairAdapter(List<CommonModelClass> commonModelClassList, Context context) {
-        this.commonModelClassList = commonModelClassList;
+
+    public RepairAdapter(List<RepairsClass> repairS, Context context) {
+        this.repairS = repairS;
         this.context = context;
     }
 
@@ -33,14 +36,14 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
 
     @Override
     public void onBindViewHolder(@NonNull RepairAdapter.Viewholder holder, int position) {
-        holder.Repno.setText(commonModelClassList.get(position).getREPNo());
-        holder.Amount.setText(commonModelClassList.get(position).getAmount());
+        holder.Repno.setText(repairS.get(position).getREPNo());
+        holder.Amount.setText(repairS.get(position).getRepair_Amount());
 
     }
 
     @Override
     public int getItemCount() {
-        return commonModelClassList.size();
+        return repairS.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
