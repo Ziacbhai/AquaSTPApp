@@ -15,6 +15,8 @@ import com.ziac.aquastpapp.R;
 import java.util.ArrayList;
 
 import Models.CommonModelClass;
+import Models.ConsumablesClass;
+import Models.IncidentsClass;
 import Models.ItemStockClass;
 import Models.LabTestClass;
 import Models.RepairsClass;
@@ -31,7 +33,7 @@ public class Global {
 
     //    Local url
    // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl="http://192.168.1.4:6968/";
+    public static String baseurl="http://192.168.1.8:6968/";
     public static String userImageurl = baseurl+"WebsiteData/Users/";
 
     public static String urlUpdateprofileImage = baseurl +"api/Users/UpdateProfilePhoto";
@@ -55,21 +57,30 @@ public class Global {
     public static String Equipment_Details_com_pumps = baseurl + "api/Masters/GetPumps?";
 
     public static String Equipment_Details_com_meters = baseurl + "api/Masters/GetMeters?";
+
     public static String GetItemStock = baseurl + "api/Masters/GetItemStock?";
     public static String GetRepairItems = baseurl + "api/Repairs/List?";
-
     public static String GetLab_Test_Items = baseurl + "api/Lab/List?";
+    public static String Get_Incidents = baseurl + "api/Incidents/List?";
+    public static String Get_Consumables= baseurl + "api/Consumables/List?";
+
+    public static String Get_Repairs_Details = baseurl + "api/Repairs/Details?";
+    public static String Get_Consumables_Details = baseurl + "api/Consumables/Details?";
+    public static String Get_Lab_Details = baseurl + "api/Lab/Details?";
+    public static String Get_Incidents_Details = baseurl + "api/Incidents/Details?";
 
 
     public static ArrayList<zList> statearraylist;
     public static ArrayList<zList> cityarraylist;
-    public static ArrayList<StpModelClass> stplistcompany;
 
     public static ArrayList<StpModelClass> StpList;
     public static ArrayList<CommonModelClass> pumpdetails;
     public static ArrayList<ItemStockClass> Item_stock;
     public static ArrayList<RepairsClass> Repair_s;
-    public static ArrayList<LabTestClass> LabTest_s;
+    public static ArrayList<LabTestClass> Labtest_s;
+    public static ArrayList<IncidentsClass> Incident_s;
+
+    public static ArrayList<ConsumablesClass> Consumables_s;
 
     public static ArrayList<CommonModelClass> metersdetails;
 

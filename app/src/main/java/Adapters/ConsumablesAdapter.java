@@ -1,85 +1,77 @@
 package Adapters;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ziac.aquastpapp.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import Models.RepairsClass;
+import Models.ConsumablesClass;
+import Models.IncidentsClass;
 
-public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder> {
-    private List<RepairsClass> repairS;
+public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.Viewholder> {
+
     Context context;
+    private List<ConsumablesClass> consumablesClasses;
 
-
-    public RepairAdapter(List<RepairsClass> repairS, Context context) {
-        this.repairS = repairS;
+    public ConsumablesAdapter(Context context, ArrayList<ConsumablesClass> consumablesS) {
         this.context = context;
+        this.consumablesClasses = consumablesS;
+
     }
+
 
     @NonNull
     @Override
-    public RepairAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repair_details, parent , false);
+    public ConsumablesAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.consumables_design, parent , false);
         return new Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RepairAdapter.Viewholder holder, int position) {
-        //holder.Repno.setText(repairS.get(position).getREPNo());
-        holder.Amount.setText(repairS.get(position).getRepair_Amount()+"0");
+    public void onBindViewHolder(@NonNull ConsumablesAdapter.Viewholder holder, int position) {
+       //holder.Con_no.setText(consumablesClasses.get(position).getCon_no());
+        holder.Amount.setText(consumablesClasses.get(position).getAmount()+"0");
 
-        String dateString = repairS.get(position).getRepair_Date();
+        holder.Remark.setText(consumablesClasses.get(position).getRemark());
 
-        String conNoString = repairS.get(position).getREPNo();
+        String conNoString = consumablesClasses.get(position).getCon_no();
+
+// Parse the string into a double
         double conNo;
         try {
             conNo = Double.parseDouble(conNoString);
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            return;
+            return; // Handle the parse exception
         }
+
         String formattedConNo = removeTrailingZero(conNo);
-        holder.Repno.setText(formattedConNo);
+        holder.Con_no.setText(formattedConNo);
 
-
+        String dateString = consumablesClasses.get(position).getDate();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date;
         try {date = inputFormat.parse(dateString);
             String Date = outputFormat.format(date);
-            holder.RepairDate.setText(Date);
+            holder.Date.setText(Date);
         } catch (ParseException e) {e.printStackTrace();
             return;
         }
-
-
-
-        holder.Repair_details.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-
     }
+
     private String removeTrailingZero(double value) {
         // Convert the double to a string
         String formattedValue = String.valueOf(value);
@@ -91,22 +83,22 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
 
         return formattedValue;
     }
+
     @Override
     public int getItemCount() {
-        return repairS.size();
+        return consumablesClasses.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        private TextView  Repno,Amount,RepairDate;
-        LinearLayout Repair_details;
+
+        TextView Con_no,Date,Amount,Remark;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
-            Repno=itemView.findViewById(R.id.repno_);
-            Amount=itemView.findViewById(R.id.amount_);
-            RepairDate=itemView.findViewById(R.id.repair_date);
-            Repair_details=itemView.findViewById(R.id.repair_details);
-
+            Con_no= itemView.findViewById(R.id.consumables_con_no);
+            Date= itemView.findViewById(R.id.consumables_date);
+            Amount= itemView.findViewById(R.id.consumables_amount);
+            Remark= itemView.findViewById(R.id.consumables_remark);
         }
     }
 }

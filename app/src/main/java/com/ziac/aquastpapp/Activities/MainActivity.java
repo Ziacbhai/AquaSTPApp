@@ -278,6 +278,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawers();
             return true;
         }
+        if (itemId == R.id.nav_consumable) {
+            ConsumablesFragment consumables = new ConsumablesFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, consumables);
+            fragmentTransaction.commit();
+            drawerLayout.closeDrawers();
+            return true;
+        }
         if (itemId == R.id.nav_share) {
             shareContent();
             return true;

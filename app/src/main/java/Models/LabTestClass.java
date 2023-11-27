@@ -3,7 +3,16 @@ package Models;
 public class LabTestClass {
 
     String TRno, Refno,LabDate,LabRefDate,CustomerRef,Sample_Received_Date,
-            Test_Start_Date,Test_Completion_Date,Sample_Received_By,Sample_Particular;
+            Test_Start_Date,Test_Completion_Date,Sample_Received_By,Sample_Particular,Status;
+
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
 
     public String getTRno() {
         return TRno;

@@ -32,20 +32,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import Adapters.LabTestAdapter;
+import Adapters.ConsumablesAdapter;
 import Adapters.RepairAdapter;
-import Models.CommonModelClass;
-import Models.LabTestClass;
+import Models.ConsumablesClass;
 import Models.RepairsClass;
-import Models.zList;
 
+public class ConsumablesFragment extends Fragment {
 
-public class LabTestFragment extends Fragment {
-
-    RecyclerView LabTestRecyclerview;
-    LabTestClass labTestClass;
+    ConsumablesClass  consumables_Class;
+    RecyclerView Consumables_rv;
+    TextView Con_no,Amount,Consumables_date,Remark;
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
-    private String Personname,mail,Stpname ,Sitename ,SiteAddress,Process ,Mobile;
+    private String Personname,Mail,Stpname ,Sitename ,SiteAddress,Process,Mobile;
 
     private ProgressDialog progressDialog;
     @SuppressLint("MissingInflatedId")
@@ -53,7 +51,7 @@ public class LabTestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_lab_test, container, false);
+        View view  =  inflater.inflate(R.layout.fragment_consumables, container, false);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
@@ -70,14 +68,13 @@ public class LabTestFragment extends Fragment {
         Stpname = sharedPreferences.getString("stp_name", "");
         SiteAddress = sharedPreferences.getString("site_address", "");
         Process = sharedPreferences.getString("process_name", "");
-        mail = sharedPreferences.getString("user_email", "");
+        Mail = sharedPreferences.getString("user_email", "");
         Mobile = sharedPreferences.getString("user_mobile", "");
         Personname = sharedPreferences.getString("person_name", "");
 
         usersiteH = view.findViewById(R.id.site_name);
         userstpH = view.findViewById(R.id.stp_name);
         usersiteaddressH = view.findViewById(R.id.site_address);
-
         Mailid = view.findViewById(R.id.email);
         Mobno = view.findViewById(R.id._mobile);
         personnameH = view.findViewById(R.id.person_name);
@@ -85,34 +82,33 @@ public class LabTestFragment extends Fragment {
         usersiteH.setText(Sitename);
         userstpH.setText(Stpname + " / " + Process);
         usersiteaddressH.setText(SiteAddress);
-
-        Mailid.setText(mail);
+        Mailid.setText(Mail);
         Mobno.setText(Mobile);
         personnameH.setText(Personname);
 
-        LabTestRecyclerview = view.findViewById(R.id.labTestRecyclerview);
-        LabTestRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        LabTestRecyclerview.setHasFixedSize(true);
-        LabTestRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        Consumables_rv = view.findViewById(R.id.consumables_recyclerview);
+        Consumables_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        Consumables_rv.setHasFixedSize(true);
+        Consumables_rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        getLabTestReports();
+        getConsumables();
         return view;
     }
 
-    private void getLabTestReports() {
+    private void getConsumables() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
-        String labTest = Global.GetLab_Test_Items;
+        String  consumables = Global.Get_Consumables;
 
-        String comcode = Global.sharedPreferences.getString("com_code", "");
+        String com_code = Global.sharedPreferences.getString("com_code", "0");
         String ayear = Global.sharedPreferences.getString("ayear", "2023");
-        String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "");
-        labTest = labTest + "comcode=" +  comcode  + "&ayear=" + ayear  + "&sstp1_code=" + sstp1_code ;
+        String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
+        consumables = consumables + "comcode=" + com_code + "&ayear=" +  ayear + "&sstp1_code=" + sstp1_code ;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, labTest, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, consumables, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Labtest_s = new ArrayList<LabTestClass>();
-                labTestClass = new LabTestClass();
+                Global.Consumables_s = new ArrayList<ConsumablesClass>();
+                consumables_Class = new ConsumablesClass();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -127,26 +123,18 @@ public class LabTestFragment extends Fragment {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    labTestClass = new LabTestClass();
+                    consumables_Class = new ConsumablesClass();
                     try {
-                        labTestClass.setTRno(e.getString("test_no"));
-                        labTestClass.setLabDate(e.getString("rcp_date"));
-                        labTestClass.setCustomerRef(e.getString("cus_ref"));
-                        labTestClass.setRefno(e.getString("ref_no"));
-                        labTestClass.setLabRefDate(e.getString("ref_date"));
-                        labTestClass.setSample_Received_Date(e.getString("rcp_date"));
-                        labTestClass.setTest_Start_Date(e.getString("start_date"));
-                        labTestClass.setTest_Completion_Date(e.getString("end_date"));
-                        labTestClass.setSample_Received_By(e.getString("sample_receivedby"));
-                        labTestClass.setSample_Particular(e.getString("sample_desc"));
-                        labTestClass.setStatus(e.getString("test_status"));
-
+                        consumables_Class.setCon_no(e.getString("con_no"));
+                        consumables_Class.setDate(e.getString("con_date"));
+                        consumables_Class.setAmount(e.getString("con_amt"));
+                        consumables_Class.setRemark(e.getString("remarks"));
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Labtest_s.add(labTestClass);
-                    LabTestAdapter labTestAdapter = new LabTestAdapter(Global.Labtest_s, getContext());
-                    LabTestRecyclerview.setAdapter(labTestAdapter);
+                    Global.Consumables_s.add(consumables_Class);
+                    ConsumablesAdapter consumablesAdapter = new ConsumablesAdapter(getContext(),Global.Consumables_s);
+                    Consumables_rv.setAdapter(consumablesAdapter);
                 }
             }
         }, new Response.ErrorListener() {

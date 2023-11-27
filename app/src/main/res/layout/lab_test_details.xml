@@ -27,33 +27,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-
-                        <TextView
-                            android:id="@+id/equipmentName_"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="Eqipment name"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/equip_slno"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="Equip_slno"
-                            android:textSize="12dp"/>
-
-
-                    </LinearLayout>
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -89,13 +62,13 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:drawablePadding="5dp"
-                                        android:text="TR No :"
+                                        android:text="TR No"
                                         android:textStyle="bold"
                                         android:textColor="#000"
                                         android:textSize="12dp" />
 
                                     <TextView
-                                        android:id="@+id/trno_"
+                                        android:id="@+id/tr_no"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:drawablePadding="5dp"
@@ -112,10 +85,36 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:text="Ref No :"
+                                        android:drawablePadding="5dp"
+                                        android:text="Date"
+                                        android:textStyle="bold"
+                                        android:textColor="#000"
+                                        android:textSize="12dp" />
+
+                                    <TextView
+                                        android:id="@+id/lab_date"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawablePadding="5dp"
+                                        android:text="trno"
+                                        android:textSize="12dp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Ref No"
                                         android:textStyle="bold"
                                         android:textColor="#000"
                                         android:textSize="12dp" />
@@ -125,7 +124,6 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:drawablePadding="5dp"
-                                        android:gravity="center_horizontal"
                                         android:text="refno"
                                         android:textSize="12dp" />
 
@@ -145,11 +143,35 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
                                 android:padding="5dp">
-
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
 
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:drawablePadding="5dp"
+                                        android:text="Ref Date"
+                                        android:textStyle="bold"
+                                        android:textColor="#000"
+                                        android:textSize="12dp" />
+
+                                    <TextView
+                                        android:id="@+id/lab_ref_date"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawablePadding="5dp"
+                                        android:hint="lab_refdate"
+                                        android:textSize="12dp" />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center_horizontal"
                                     android:orientation="vertical">
@@ -159,7 +181,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:text="Customer Ref :"
+                                        android:text="Customer Ref"
                                         android:textStyle="bold"
                                         android:textColor="#000"
                                         android:textSize="12dp" />
@@ -172,6 +194,46 @@
                                         android:textSize="12dp" />
 
                                 </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:drawablePadding="5dp"
+                                        android:text="Sample Received Date"
+                                        android:textStyle="bold"
+                                        android:textColor="#000"
+                                        android:textSize="11dp" />
+
+                                    <TextView
+                                        android:id="@+id/sample_Received_date"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawablePadding="5dp"
+                                        android:text="trno"
+                                        android:textSize="12dp" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:background="#01A3A3"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="5dp">
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -181,21 +243,72 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:text="Phase"
-                                        android:visibility="gone"
+                                        android:drawablePadding="5dp"
+                                        android:text="Test Start Date"
+                                        android:textStyle="bold"
+                                        android:textColor="#000"
+                                        android:textSize="11dp" />
+
+                                    <TextView
+                                        android:id="@+id/test_Start_Date"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawablePadding="5dp"
+                                        android:hint="testStartdate"
+                                        android:textSize="12dp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Test Completion date"
+                                        android:textStyle="bold"
+                                        android:textColor="#000"
+                                        android:textSize="11dp" />
+
+                                    <TextView
+                                        android:id="@+id/test_Completion_date"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawablePadding="5dp"
+                                        android:hint="Test Completion date"
+                                        android:textSize="12dp" />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:drawablePadding="5dp"
+                                        android:text="Sample ReceivedBy"
                                         android:textStyle="bold"
                                         android:textColor="#000"
                                         android:textSize="12dp" />
 
                                     <TextView
+                                        android:id="@+id/sample_ReceivedBy"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Phase"
-                                        android:visibility="gone"
-                                        android:gravity="center_horizontal"
+                                        android:drawablePadding="5dp"
+                                        android:text="trno"
                                         android:textSize="12dp" />
 
                                 </LinearLayout>
@@ -208,6 +321,45 @@
                                 android:layout_marginRight="10dp"
                                 android:layout_marginLeft="10dp"
                                 android:background="#01A3A3"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="5dp">
+
+
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:drawablePadding="5dp"
+                                        android:text="SampleParticulars"
+                                        android:textStyle="bold"
+                                        android:textColor="#000"
+                                        android:textSize="12dp" />
+
+                                    <TextView
+                                        android:id="@+id/sampleParticulars"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawablePadding="5dp"
+                                        android:text="trno"
+                                        android:textSize="12dp" />
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
