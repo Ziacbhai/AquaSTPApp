@@ -52,6 +52,21 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
                                 android:padding="5dp">
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.3"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+
+                                    <ImageView
+                                        android:id="@+id/repair_info"
+                                        android:layout_width="30dp"
+                                        android:layout_height="match_parent"
+                                        android:padding="6dp"
+                                        android:src="@drawable/i"
+                                        android:textSize="12dp" />
+                                </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -65,7 +80,8 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:drawablePadding="5dp"
-                                        android:text="REP No :"
+                                        android:text="REP No"
+                                        android:gravity="center"
                                         android:textStyle="bold"
                                         android:textColor="#000"
                                         android:textSize="12dp" />
@@ -76,6 +92,7 @@
                                         android:layout_height="wrap_content"
                                         android:drawablePadding="5dp"
                                         android:text="repno"
+                                        android:gravity="center"
                                         android:textSize="12dp" />
 
                                 </LinearLayout>

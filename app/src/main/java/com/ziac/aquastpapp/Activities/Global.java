@@ -33,7 +33,7 @@ public class Global {
 
     //    Local url
    // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl="http://192.168.1.8:6968/";
+    public static String baseurl="http://192.168.1.18:6968/";
     public static String userImageurl = baseurl+"WebsiteData/Users/";
 
     public static String urlUpdateprofileImage = baseurl +"api/Users/UpdateProfilePhoto";
@@ -77,10 +77,10 @@ public class Global {
     public static ArrayList<CommonModelClass> pumpdetails;
     public static ArrayList<ItemStockClass> Item_stock;
     public static ArrayList<RepairsClass> Repair_s;
+    public static ArrayList<ConsumablesClass> Consumables_s;
     public static ArrayList<LabTestClass> Labtest_s;
     public static ArrayList<IncidentsClass> Incident_s;
 
-    public static ArrayList<ConsumablesClass> Consumables_s;
 
     public static ArrayList<CommonModelClass> metersdetails;
 

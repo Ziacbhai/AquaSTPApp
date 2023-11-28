@@ -6,7 +6,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="480sp"
+        android:layout_height="450sp"
         android:src="@drawable/slide2" />
 
     <TextView
@@ -15,7 +15,7 @@
         android:text="Stay informed and in control, anytime, anywhere"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView

@@ -45,12 +45,27 @@
         android:theme="@style/Theme.AquaSTPApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-      <receiver android:name=".Activities.OTP_Receiver"
-          android:exported="false">
-       <intent-filter >
-           <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
-       </intent-filter>
-      </receiver>
+        <activity
+            android:name=".Activities.Consumables_Details_Design_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Incident_Details_Design_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Lab_Test_Details_Design_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Repair_Details_Design_Activity"
+            android:exported="false" />
+
+        <receiver
+            android:name=".Activities.OTP_Receiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".Activities.ChangePasswordActivity"
             android:exported="false"
@@ -141,6 +156,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

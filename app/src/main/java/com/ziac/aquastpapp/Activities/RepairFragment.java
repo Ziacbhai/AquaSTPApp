@@ -130,6 +130,12 @@ public class RepairFragment extends Fragment {
                         repair_s.setREPNo(e.getString("rep_no"));
                         repair_s.setRepair_Amount(e.getString("repaired_amt"));
                         repair_s.setRepair_Date(e.getString("rep_date"));
+                        repair_s.setRepair_code(e.getString("repair1_code"));
+                        String repair_code= repair_s.getRepair_code();
+                       // System.out.println(repair_code);
+                        Global.editor = Global.sharedPreferences.edit();
+                        Global.editor.putString("repair1_code",repair_code);
+                        Global.editor.commit();
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }

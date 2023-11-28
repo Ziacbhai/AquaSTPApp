@@ -34,7 +34,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
     @NonNull
     @Override
     public IncidentAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.incident_details, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.incident_design, parent , false);
         return new Viewholder(view);
     }
 

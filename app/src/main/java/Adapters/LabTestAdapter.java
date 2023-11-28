@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import Models.CommonModelClass;
 import Models.LabTestClass;
 
 
@@ -33,7 +32,7 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
     @NonNull
     @Override
     public LabTestAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lab_test_details, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lab_test_design, parent , false);
         return new Viewholder(view);
     }
 

@@ -54,6 +54,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="0.3"
+                                    android:visibility="gone"
                                     android:gravity="center_horizontal"
                                     android:orientation="vertical">
 
@@ -79,18 +80,18 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:drawablePadding="5dp"
-                                        android:text="Con no"
+                                        android:text="Equipment Name"
                                         android:gravity="center"
                                         android:textStyle="bold"
                                         android:textColor="#000"
                                         android:textSize="12dp" />
 
                                     <TextView
-                                        android:id="@+id/consumables_con_no"
+                                        android:id="@+id/repair_equipment_name"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:drawablePadding="5dp"
-                                        android:text="Con no"
+                                        android:text="equipment_name"
                                         android:gravity="center"
                                         android:textSize="12dp" />
 
@@ -106,18 +107,18 @@
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Date"
+                                        android:text="Equipmen Number"
                                         android:gravity="center"
                                         android:textStyle="bold"
                                         android:textColor="#000"
                                         android:textSize="12dp" />
 
                                     <TextView
-                                        android:id="@+id/consumables_date"
+                                        android:id="@+id/repair_equipment_number"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:drawablePadding="5dp"
-                                        android:hint="incident_date"
+                                        android:hint="Equipment Number"
                                         android:gravity="center"
                                         android:textSize="12dp" />
 
@@ -140,7 +141,7 @@
                                         android:textSize="12dp" />
 
                                     <TextView
-                                        android:id="@+id/consumables_amount"
+                                        android:id="@+id/repair_amount"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
@@ -167,19 +168,38 @@
                         android:orientation="horizontal"
                         android:layout_height="wrap_content">
 
+
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
+                            android:padding="5dp"
+                            android:layout_weight="1.1"
                             android:orientation="vertical">
 
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="match_parent"
-                                android:padding="6dp"
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawablePadding="5dp"
+                                android:text="Repaired"
+                                android:gravity="center"
+                                android:textStyle="bold"
+                                android:textColor="#000"
                                 android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/repair_repaired"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="5dp"
+                                android:hint="repaired"
+                                android:gravity="center"
+                                android:textSize="12dp" />
+
                         </LinearLayout>
+
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -200,7 +220,7 @@
                                 android:textSize="12dp" />
 
                             <TextView
-                                android:id="@+id/consumables_remark"
+                                android:id="@+id/repair_remark"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawablePadding="5dp"
@@ -230,40 +250,9 @@
                                 android:textSize="12dp" />
 
                             <TextView
-
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawablePadding="5dp"
-
-                                android:textSize="12dp" />
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:padding="5dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:drawablePadding="5dp"
-
-                                android:textStyle="bold"
-                                android:textColor="#000"
-                                android:textSize="12dp" />
-
-                            <TextView
-
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:drawablePadding="5dp"
-
                                 android:textSize="12dp" />
 
                         </LinearLayout>

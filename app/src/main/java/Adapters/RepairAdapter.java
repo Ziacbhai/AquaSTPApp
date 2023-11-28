@@ -1,18 +1,22 @@
 package Adapters;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ziac.aquastpapp.Activities.LoginSignupActivity;
+import com.ziac.aquastpapp.Activities.MainActivity;
+import com.ziac.aquastpapp.Activities.Repair_Details_Design_Activity;
 import com.ziac.aquastpapp.R;
 
 import java.text.ParseException;
@@ -36,7 +40,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
     @NonNull
     @Override
     public RepairAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repair_details, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repair_design, parent , false);
         return new Viewholder(view);
     }
 
@@ -71,15 +75,17 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
 
 
 
-        holder.Repair_details.setOnClickListener(new View.OnClickListener() {
+        holder.d_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+               Intent i = new Intent(context,Repair_Details_Design_Activity.class);
+               context.startActivity(i);
             }
         });
 
 
     }
+
     private String removeTrailingZero(double value) {
         // Convert the double to a string
         String formattedValue = String.valueOf(value);
@@ -98,6 +104,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
 
     public class Viewholder extends RecyclerView.ViewHolder {
         private TextView  Repno,Amount,RepairDate;
+        ImageView d_iv;
         LinearLayout Repair_details;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -106,6 +113,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
             Amount=itemView.findViewById(R.id.amount_);
             RepairDate=itemView.findViewById(R.id.repair_date);
             Repair_details=itemView.findViewById(R.id.repair_details);
+            d_iv=itemView.findViewById(R.id.repair_info);
 
         }
     }

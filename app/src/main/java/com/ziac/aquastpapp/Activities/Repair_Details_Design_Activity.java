@@ -2,18 +2,16 @@ package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.os.Bundle;
+import static java.security.AccessController.getContext;
 
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -32,35 +30,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import Adapters.ConsumablesAdapter;
 import Adapters.RepairAdapter;
-import Models.ConsumablesClass;
+import Adapters.Repair_details_Adapter;
 import Models.RepairsClass;
 
-public class ConsumablesFragment extends Fragment {
+public class Repair_Details_Design_Activity extends AppCompatActivity {
+    RepairsClass repair_s;
 
-    ConsumablesClass  consumables_Class;
-    RecyclerView Consumables_rv;
+
+    RecyclerView Repair_details_recyclerview;
 
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,Mail,Stpname ,Sitename ,SiteAddress,Process,Mobile;
 
+    Context context;
+
     private ProgressDialog progressDialog;
-    @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view  =  inflater.inflate(R.layout.fragment_consumables, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_repair_details_design);
 
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        if (!Global.isNetworkAvailable(getActivity())) {
-            Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (!Global.isNetworkAvailable(this)) {
+            Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
 
-        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
@@ -72,12 +71,12 @@ public class ConsumablesFragment extends Fragment {
         Mobile = sharedPreferences.getString("user_mobile", "");
         Personname = sharedPreferences.getString("person_name", "");
 
-        usersiteH = view.findViewById(R.id.site_name);
-        userstpH = view.findViewById(R.id.stp_name);
-        usersiteaddressH = view.findViewById(R.id.site_address);
-        Mailid = view.findViewById(R.id.email);
-        Mobno = view.findViewById(R.id._mobile);
-        personnameH = view.findViewById(R.id.person_name);
+        usersiteH = findViewById(R.id.site_name);
+        userstpH = findViewById(R.id.stp_name);
+        usersiteaddressH = findViewById(R.id.site_address);
+        Mailid = findViewById(R.id.email);
+        Mobno = findViewById(R.id._mobile);
+        personnameH = findViewById(R.id.person_name);
 
         usersiteH.setText(Sitename);
         userstpH.setText(Stpname + " / " + Process);
@@ -86,29 +85,25 @@ public class ConsumablesFragment extends Fragment {
         Mobno.setText(Mobile);
         personnameH.setText(Personname);
 
-        Consumables_rv = view.findViewById(R.id.consumables_recyclerview);
-        Consumables_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Consumables_rv.setHasFixedSize(true);
-        Consumables_rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        Repair_details_recyclerview = findViewById(R.id.repair_details_recyclerview);
+        Repair_details_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        Repair_details_recyclerview.setHasFixedSize(true);
+        Repair_details_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        get_Details_Repair();
 
-        getConsumables();
-        return view;
     }
 
-    private void getConsumables() {
-        RequestQueue queue = Volley.newRequestQueue(requireActivity());
-        String  consumables = Global.Get_Consumables;
+    private void get_Details_Repair() {
 
-        String com_code = Global.sharedPreferences.getString("com_code", "0");
-        String ayear = Global.sharedPreferences.getString("ayear", "2023");
-        String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
-        consumables = consumables + "comcode=" + com_code + "&ayear=" +  ayear + "&sstp1_code=" + sstp1_code ;
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = Global.Get_Repairs_Details;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, consumables, null, new Response.Listener<JSONObject>() {
+        String Repair_Details_API = url + "repair1_code=" + Global.sharedPreferences.getString("repair1_code", "0");
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Repair_Details_API, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Consumables_s = new ArrayList<ConsumablesClass>();
-                consumables_Class = new ConsumablesClass();
+                Global.Repair_s = new ArrayList<RepairsClass>();
+                repair_s = new RepairsClass();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -123,24 +118,24 @@ public class ConsumablesFragment extends Fragment {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    consumables_Class = new ConsumablesClass();
+                    repair_s = new RepairsClass();
                     try {
-                        consumables_Class.setCon_no(e.getString("con1_code"));
-                        consumables_Class.setDate(e.getString("con_date"));
-                        consumables_Class.setAmount(e.getString("con_amt"));
-                        consumables_Class.setRemark(e.getString("remarks"));
-
-                        String Con_code = consumables_Class.getCon_no();
+                        repair_s.setD_Equipment_Name(e.getString("equip_name"));
+                        repair_s.setD_Equipment_Number(e.getString("equip_slno"));
+                        repair_s.setD_Amount(e.getString("repaired_amt"));
+                        repair_s.setD_Repaired(e.getString("repaired_flag"));
+                        repair_s.setD_Remark(e.getString("repaired_remarks"));
+                        //String repair_code= repair_s.getRepair_code();
                         // System.out.println(repair_code);
-                        Global.editor = Global.sharedPreferences.edit();
-                        Global.editor.putString("con1_code", Con_code);
-                        Global.editor.commit();
+                      //  Global.editor = Global.sharedPreferences.edit();
+                       // Global.editor.putString("",repair_code);
+                       //Global.editor.commit();
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Consumables_s.add(consumables_Class);
-                    ConsumablesAdapter consumablesAdapter = new ConsumablesAdapter(getContext(),Global.Consumables_s);
-                    Consumables_rv.setAdapter(consumablesAdapter);
+                    Global.Repair_s.add(repair_s);
+                    Repair_details_Adapter repair_details_adapter = new Repair_details_Adapter(Global.Repair_s, context);
+                    Repair_details_recyclerview.setAdapter(repair_details_adapter);
                 }
             }
         }, new Response.ErrorListener() {
@@ -149,6 +144,7 @@ public class ConsumablesFragment extends Fragment {
 
             }
         }){
+
             public Map<String, String> getHeaders() {
                 // below line we are creating a map for
                 // storing our values in key and value pair.
@@ -159,11 +155,11 @@ public class ConsumablesFragment extends Fragment {
             }
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-
                 return params;
             }
         };
         queue.add(jsonObjectRequest);
+
 
     }
 }

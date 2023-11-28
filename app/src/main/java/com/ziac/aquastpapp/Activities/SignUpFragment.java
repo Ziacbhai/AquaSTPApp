@@ -245,12 +245,14 @@ public class SignUpFragment extends Fragment {
                         throw new RuntimeException(ex);
                     }
                     Global.statearraylist.add(statename);
+
                 }
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
 
             }
         });
@@ -558,6 +560,8 @@ public class SignUpFragment extends Fragment {
     }
 
     private void CreateNewUser() {
+
+        progressDialog.show();
         String company, cpperson, mobile, email, password, cpassword, adminname, state, city;
 
         company = Company.getText().toString();
@@ -573,11 +577,15 @@ public class SignUpFragment extends Fragment {
       //  progressDialog.show();
 
         if (company.isEmpty()) {
-            //Toast.makeText(getActivity(), "Company name field should not be empty!!", Toast.LENGTH_SHORT).show();
             Company.setError("Company Name should not be empty");
             Company.requestFocus();
             return;
-        }
+        } /*else if (company.contains(" ")) {
+            // Check if the company name contains spaces
+            Toast.makeText(requireActivity(), "Company Name should not contain spaces", Toast.LENGTH_SHORT).show();
+            return;
+        }*/
+
         if (cpperson.isEmpty()) {
             CPerson.setError("Please enter Contact Name");
             CPerson.requestFocus();
@@ -624,7 +632,7 @@ public class SignUpFragment extends Fragment {
         }
         if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
             Toast toast = Toast.makeText(getActivity().getApplicationContext(), "password must contain mix of upper and lower case letters as well as digits and one special charecter !!", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+           // toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
             return;
         }
@@ -663,6 +671,8 @@ public class SignUpFragment extends Fragment {
                                 Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_SHORT).show();
                                 //textViewError.setVisibility(View.VISIBLE);
                             }
+
+                            progressDialog.dismiss();
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -671,6 +681,7 @@ public class SignUpFragment extends Fragment {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
                 Toast.makeText(getActivity(), error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 /*textViewError.setText(error.getLocalizedMessage());
                 textViewError.setVisibility(View.VISIBLE);*/
@@ -706,17 +717,16 @@ public class SignUpFragment extends Fragment {
                 params.put("city_code", String.valueOf(cityname.get_code()));
                 params.put("com_name", Company.getText().toString());
 
-
-                 Log.d("params", params.toString());
-
+                 //Log.d("params", params.toString());
                 return params;
             }
         };
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
-                0,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                0, // timeout in milliseconds
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
 
         queue.add(stringRequest);
 

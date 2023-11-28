@@ -1,13 +1,17 @@
 package Adapters;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ziac.aquastpapp.Activities.Consumables_Details_Design_Activity;
+import com.ziac.aquastpapp.Activities.Repair_Details_Design_Activity;
 import com.ziac.aquastpapp.R;
 
 import java.text.ParseException;
@@ -70,6 +74,14 @@ public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.
         } catch (ParseException e) {e.printStackTrace();
             return;
         }
+
+        holder.Consumable_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, Consumables_Details_Design_Activity.class);
+                context.startActivity(i);
+            }
+        });
     }
 
     private String removeTrailingZero(double value) {
@@ -92,6 +104,7 @@ public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.
     public class Viewholder extends RecyclerView.ViewHolder {
 
         TextView Con_no,Date,Amount,Remark;
+        ImageView Consumable_info;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
@@ -99,6 +112,7 @@ public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.
             Date= itemView.findViewById(R.id.consumables_date);
             Amount= itemView.findViewById(R.id.consumables_amount);
             Remark= itemView.findViewById(R.id.consumables_remark);
+            Consumable_info= itemView.findViewById(R.id.consumable_info);
         }
     }
 }

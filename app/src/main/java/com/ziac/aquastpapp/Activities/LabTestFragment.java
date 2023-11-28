@@ -129,7 +129,7 @@ public class LabTestFragment extends Fragment {
                     }
                     labTestClass = new LabTestClass();
                     try {
-                        labTestClass.setTRno(e.getString("test_no"));
+                        labTestClass.setTRno(e.getString("test_code"));
                         labTestClass.setLabDate(e.getString("rcp_date"));
                         labTestClass.setCustomerRef(e.getString("cus_ref"));
                         labTestClass.setRefno(e.getString("ref_no"));
