@@ -1,0 +1,31 @@
+<!-- res/layout/custom_dialog_layout.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="3"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Field 1"/>
+
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Field 2"/>
+
+    <EditText
+        android:layout_weight="1"
+        android:id="@+id/editText3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Field 3"/>
+
+
+</LinearLayout>

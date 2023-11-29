@@ -4,16 +4,20 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -22,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONArray;
@@ -79,6 +84,15 @@ public class ConsumablesFragment extends Fragment {
         Mobno = view.findViewById(R.id._mobile);
         personnameH = view.findViewById(R.id.person_name);
 
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAddDetailsDialog();
+            }
+        });
+
         usersiteH.setText(Sitename);
         userstpH.setText(Stpname + " / " + Process);
         usersiteaddressH.setText(SiteAddress);
@@ -94,7 +108,33 @@ public class ConsumablesFragment extends Fragment {
         getConsumables();
         return view;
     }
+        private void showAddDetailsDialog () {
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+            View view = getLayoutInflater().inflate(R.layout.custom_dialog_layout, null);
+            builder.setView(view);
+            // Set up the input
 
+
+            builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+
+
+                    dialog.dismiss();
+                }
+            });
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    dialog.dismiss();
+                }
+            });
+
+            builder.show();
+    }
     private void getConsumables() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String  consumables = Global.Get_Consumables;
