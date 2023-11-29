@@ -32,6 +32,12 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
     private List<StpModelClass> stpModelClassList;
     Context context;
 
+    public void setFilteredList(List<StpModelClass> filteredList){
+        this.stpModelClassList = filteredList;
+        notifyDataSetChanged();
+
+    }
+
     public SiteLocationAdapter(List<StpModelClass> stpModelClassList, Context context) {
         this.stpModelClassList = stpModelClassList;
         this.context = context;
@@ -46,15 +52,16 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull SiteLocationAdapter.StpViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.Sucode.setText(stpModelClassList.get(position).getSucode());
+        holder.Sucode.setText(String.valueOf(stpModelClassList.get(position).getSucode()));
         holder.StpName.setText(stpModelClassList.get(position).getStpname());
         holder.SiteName.setText(stpModelClassList.get(position).getSitename());
+
         holder.Selectcompany.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                 Global.editor = Global.sharedPreferences.edit();
-                Global.editor.putString("su_code", Global.StpList.get(position).getSucode());
+                Global.editor.putInt("su_code", Global.StpList.get(position).getSucode());
                 Global.editor.putString("com_code", Global.StpList.get(position).getComcode());
                 Global.editor.putString("user_code", Global.StpList.get(position).getUsercode());
 
@@ -74,17 +81,16 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
 
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
-
             }
         });
 
-
     }
-
     @Override
     public int getItemCount() {
         return stpModelClassList.size();
     }
+
+
 
     public class StpViewHolder extends RecyclerView.ViewHolder {
 
@@ -96,6 +102,7 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
             StpName = itemView.findViewById(R.id.stpname);
             SiteName = itemView.findViewById(R.id.sitename);
             Selectcompany = itemView.findViewById(R.id.selectcompany);
+
 
 
         }

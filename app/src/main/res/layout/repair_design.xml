@@ -80,7 +80,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:drawablePadding="5dp"
-                                        android:text="REP No"
+                                        android:text="REP No."
                                         android:gravity="center"
                                         android:textStyle="bold"
                                         android:textColor="#000"

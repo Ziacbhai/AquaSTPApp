@@ -79,7 +79,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:drawablePadding="5dp"
-                                        android:text="Con no"
+                                        android:text="CON.No."
                                         android:gravity="center"
                                         android:textStyle="bold"
                                         android:textColor="#000"

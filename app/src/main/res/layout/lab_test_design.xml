@@ -64,7 +64,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:drawablePadding="5dp"
-                                        android:text="TR No"
+                                        android:text="TR No."
                                         android:textStyle="bold"
                                         android:textColor="#000"
                                         android:textSize="12dp" />
@@ -116,7 +116,7 @@
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Ref No"
+                                        android:text="Ref No."
                                         android:textStyle="bold"
                                         android:textColor="#000"
                                         android:textSize="12dp" />

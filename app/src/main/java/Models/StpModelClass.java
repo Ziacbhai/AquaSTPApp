@@ -2,16 +2,17 @@ package Models;
 
 public class StpModelClass {
 
-    String sucode ,stpname,comcode,usercode,personname,username,sstp1code,sitecode,stpactive,sitename,site_address,process__type;
+    int sucode;
+    String stpname,comcode,usercode,personname,username,sstp1code,sitecode,stpactive,sitename,site_address,process__type;
     public StpModelClass() {
 
     }
 
-    public String getSucode() {
+    public int getSucode() {
         return sucode;
     }
 
-    public void setSucode(String sucode) {
+    public void setSucode(int sucode) {
         this.sucode = sucode;
     }
 

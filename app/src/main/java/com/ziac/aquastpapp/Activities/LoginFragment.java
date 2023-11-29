@@ -313,7 +313,7 @@ public class LoginFragment extends Fragment {
                     //listofstp = new JSONObject(liststp[i]("site_code"));
                     stpModelClass = new StpModelClass();
 
-                    stpModelClass.setSucode(e.getString("su_code"));
+                    stpModelClass.setSucode(e.getInt("su_code"));
                     stpModelClass.setComcode(e.getString("com_code"));
                     stpModelClass.setUsercode(e.getString("user_code"));
                     stpModelClass.setPersonname(e.getString("person_name"));
