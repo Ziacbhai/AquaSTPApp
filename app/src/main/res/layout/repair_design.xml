@@ -116,6 +116,34 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
+                                        android:text="RepairDate"
+                                        android:gravity="center_horizontal"
+                                        android:textStyle="bold"
+                                        android:textColor="#000"
+                                        android:textSize="12dp" />
+
+                                    <TextView
+                                        android:id="@+id/repair_date"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawablePadding="5dp"
+                                        android:gravity="center_horizontal"
+                                        android:text="RepairDate"
+                                        android:textSize="12dp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
                                         android:text="Amount"
                                         android:gravity="center_horizontal"
                                         android:textStyle="bold"
@@ -138,33 +166,32 @@
                                     android:layout_height="match_parent"
                                     android:background="@color/my_light_primary" />
 
-                                <LinearLayout
-                                    android:layout_width="0dp"
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
+                                    android:drawablePadding="5dp"
+                                    android:text="Remarks:"
+                                    android:textStyle="bold"
+                                    android:textColor="#000"
+                                    android:textSize="12dp" />
 
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:text="RepairDate"
-                                        android:gravity="center_horizontal"
-                                        android:textStyle="bold"
-                                        android:textColor="#000"
-                                        android:textSize="12dp" />
-
-                                    <TextView
-                                        android:id="@+id/repair_date"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center_horizontal"
-                                        android:text="RepairDate"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
+                                <EditText
+                                    android:id="@+id/remarks_remark"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:background="@color/white"
+                                    android:drawablePadding="5dp"
+                                    android:hint="remark"
+                                    android:textSize="12dp" />
 
                             </LinearLayout>
 
