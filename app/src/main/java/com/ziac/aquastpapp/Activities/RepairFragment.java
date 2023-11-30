@@ -3,17 +3,29 @@ package com.ziac.aquastpapp.Activities;
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.graphics.Rect;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -22,6 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONArray;
@@ -30,24 +43,29 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
-import Adapters.ItemStockAdapter;
 import Adapters.RepairAdapter;
-import Models.CommonModelClass;
-import Models.ItemStockClass;
 import Models.RepairsClass;
-import Models.zList;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
 
 public class RepairFragment extends Fragment {
 
     RepairsClass repair_s;
+    TextView STP_A,Remark_A;
+    AppCompatButton Update_A,Cancel_A;
     RecyclerView RepairRecyclerview;
      TextView  Repno,Amount,RepairDate;
+    private AppCompatButton btnOpenDatePicker;
+    private TextView tvSelectedDate;
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,Mail,Stpname ,Sitename ,SiteAddress,Process,Mobile;
 
     private ProgressDialog progressDialog;
+
+    Context context;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,6 +105,14 @@ public class RepairFragment extends Fragment {
         Mailid.setText(Mail);
         Mobno.setText(Mobile);
         personnameH.setText(Personname);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAddDetailsDialog(context);
+            }
+        });
 
         RepairRecyclerview = view.findViewById(R.id.repair_recyclerview);
         RepairRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -97,6 +123,119 @@ public class RepairFragment extends Fragment {
         return view;
     }
 
+
+    @SuppressLint("MissingInflatedId")
+    private void showAddDetailsDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_dialog_repair_layout, null);
+
+        //btnOpenDatePicker = dialogView.findViewById(R.id.btnOpenDatePicker);
+        tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
+        Remark_A = dialogView.findViewById(R.id.remark_alert_r);
+        Update_A = dialogView.findViewById(R.id.update_alert_r);
+        Cancel_A = dialogView.findViewById(R.id.cancel_alert_r);
+
+        tvSelectedDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker();
+            }
+        });
+        builder.setView(dialogView);
+
+        AlertDialog dialog = builder.create();
+
+       /* if (dialog.getWindow() != null) {
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+            layoutParams.copyFrom(dialog.getWindow().getAttributes());
+            layoutParams.width = getResources().getDimensionPixelSize(R.dimen.dialog_width);
+            layoutParams.height = getResources().getDimensionPixelSize(R.dimen.dialog_height);
+
+            dialog.getWindow().setAttributes(layoutParams);
+
+            View decorView = dialog.getWindow().getDecorView();
+            decorView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+                @Override
+                public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                    Rect displayRectangle = new Rect();
+                    Window window = dialog.getWindow();
+                    decorView.getWindowVisibleDisplayFrame(displayRectangle);
+                    float maxHeight = displayRectangle.height() * 0.6f; // 60%
+
+                    if (v.getHeight() > maxHeight) {
+                        WindowManager.LayoutParams layoutParams = window.getAttributes();
+                        window.setLayout(layoutParams.width, (int) maxHeight);
+                    }
+                }
+            });
+        }*/
+
+        dialog.show();
+
+        Update_A.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle update button click
+                // You can add your logic here
+                dialog.dismiss(); // Close the dialog if needed
+            }
+        });
+
+        Cancel_A.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle cancel button click
+                // You can add your logic here
+                dialog.dismiss(); // Close the dialog if needed
+            }
+        });
+    }
+
+    private void showDatePicker() {
+        // Use the current date as the initial date
+        Calendar calendar = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            calendar = Calendar.getInstance();
+        }
+        int initialYear = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            initialYear = calendar.get(Calendar.YEAR);
+        }
+        int initialMonth = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            initialMonth = calendar.get(Calendar.MONTH);
+        }
+        int initialDay = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            initialDay = calendar.get(Calendar.DAY_OF_MONTH);
+        }
+
+        // Create a DatePickerDialog and set the listener
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        // Update your TextView with the selected date
+                        updateDateTextView(year, month, dayOfMonth);
+                    }
+                },
+                initialYear,
+                initialMonth,
+                initialDay
+        );
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+        // Show the date picker dialog
+        datePickerDialog.show();
+    }
+
+    // Update the TextView with the selected date
+    private void updateDateTextView(int year, int month, int day) {
+        String selectedDate = day + "-" + (month + 1) + "-" + year;
+        tvSelectedDate.setText(selectedDate);
+    }
     private void getRepair() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String repair = Global.GetRepairItems;

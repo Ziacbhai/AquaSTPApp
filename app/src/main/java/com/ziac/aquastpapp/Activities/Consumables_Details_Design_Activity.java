@@ -2,7 +2,9 @@ package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,6 +14,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -20,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONArray;
@@ -42,7 +48,8 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
 
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,Mail,Stpname ,Sitename ,SiteAddress,Process,Mobile;
-
+    TextView Date_A,STP_A,Remark_A;
+    AppCompatButton Update_A,Cancel_A;
     private ProgressDialog progressDialog;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -84,12 +91,66 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
         Mobno.setText(Mobile);
         personnameH.setText(Personname);
 
+        FloatingActionButton fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAddDetailsDialog(context);
+            }
+        });
+
         Consumables_D_Rv = findViewById(R.id.consumables_details_recyclerview);
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(this));
         Consumables_D_Rv.setHasFixedSize(true);
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         getConsumables_Details();
+
+    }
+
+    @SuppressLint("MissingInflatedId")
+    private void showAddDetailsDialog (Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_dialog_consumable_details_layout, null);
+
+        STP_A = dialogView.findViewById(R.id.stp_alert_cd);
+        Date_A = dialogView.findViewById(R.id.date_alert_cd);
+        Remark_A = dialogView.findViewById(R.id.remark_alert_cd);
+        Update_A = dialogView.findViewById(R.id.update_alert_cd);
+        Cancel_A = dialogView.findViewById(R.id.cancel_alert_cd);
+
+        builder.setView(dialogView);
+
+        AlertDialog dialog = builder.create();
+        if (dialog.getWindow() != null) {
+
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+            layoutParams.copyFrom(dialog.getWindow().getAttributes());
+            layoutParams.width = getResources().getDimensionPixelSize(R.dimen.dialog_width);
+            layoutParams.height = getResources().getDimensionPixelSize(R.dimen.dialog_height);
+            dialog.getWindow().setAttributes(layoutParams);
+        }
+
+        dialog.show();
+
+        Update_A.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle update button click
+                // You can add your logic here
+                dialog.dismiss(); // Close the dialog if needed
+            }
+        });
+        Cancel_A.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle cancel button click
+                // You can add your logic here
+                dialog.dismiss(); // Close the dialog if needed
+            }
+        });
 
     }
 
@@ -121,7 +182,7 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
                     try {
                         consumables_Class.setEquipment_Name(e.getString("equip_name"));
                         consumables_Class.setEquipment_id(e.getString("part_no"));
-                        consumables_Class.setAmount(e.getString("prd_amt"));
+                        consumables_Class.setD_Amount(e.getString("prd_amt"));
                         consumables_Class.setD_item(e.getString("item_code"));
                         consumables_Class.setD_item_name(e.getString("prd_name"));
                         consumables_Class.setD_qty(e.getString("qty"));

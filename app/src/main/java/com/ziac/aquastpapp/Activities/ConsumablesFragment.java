@@ -3,21 +3,24 @@ package com.ziac.aquastpapp.Activities;
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
+import android.content.Context;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.view.WindowManager;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -38,19 +41,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Adapters.ConsumablesAdapter;
-import Adapters.RepairAdapter;
 import Models.ConsumablesClass;
-import Models.RepairsClass;
 
 public class ConsumablesFragment extends Fragment {
 
     ConsumablesClass  consumables_Class;
     RecyclerView Consumables_rv;
+    private AppCompatButton btnOpenDatePicker;
+    private TextView tvSelectedDate;
+    TextView Date_A,STP_A,Remark_A;
+    AppCompatButton Update_A,Cancel_A;
 
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,Mail,Stpname ,Sitename ,SiteAddress,Process,Mobile;
 
     private ProgressDialog progressDialog;
+
+
+    Context context;
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,7 +99,7 @@ public class ConsumablesFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showAddDetailsDialog();
+                showAddDetailsDialog(context);
             }
         });
 
@@ -108,33 +118,97 @@ public class ConsumablesFragment extends Fragment {
         getConsumables();
         return view;
     }
-        private void showAddDetailsDialog () {
-            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-            View view = getLayoutInflater().inflate(R.layout.custom_dialog_layout, null);
-            builder.setView(view);
-            // Set up the input
+
+    private void showAddDetailsDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_dialog_repair_layout, null);
+
+       // btnOpenDatePicker = dialogView.findViewById(R.id.btnOpenDatePicker);
+        tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
+        Remark_A = dialogView.findViewById(R.id.remark_alert_r);
+        Update_A = dialogView.findViewById(R.id.update_alert_r);
+        Cancel_A = dialogView.findViewById(R.id.cancel_alert_r);
+
+        tvSelectedDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker();
+            }
+        });
+        builder.setView(dialogView);
+
+        AlertDialog dialog = builder.create();
 
 
-            builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
 
+        dialog.show();
 
+        Update_A.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle update button click
+                // You can add your logic here
+                dialog.dismiss(); // Close the dialog if needed
+            }
+        });
 
-                    dialog.dismiss();
-                }
-            });
-
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    dialog.dismiss();
-                }
-            });
-
-            builder.show();
+        Cancel_A.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle cancel button click
+                // You can add your logic here
+                dialog.dismiss(); // Close the dialog if needed
+            }
+        });
     }
+
+    private void showDatePicker() {
+        // Use the current date as the initial date
+        Calendar calendar = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            calendar = Calendar.getInstance();
+        }
+        int initialYear = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            initialYear = calendar.get(Calendar.YEAR);
+        }
+        int initialMonth = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            initialMonth = calendar.get(Calendar.MONTH);
+        }
+        int initialDay = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            initialDay = calendar.get(Calendar.DAY_OF_MONTH);
+        }
+
+        // Create a DatePickerDialog and set the listener
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        // Update your TextView with the selected date
+                        updateDateTextView(year, month, dayOfMonth);
+                    }
+                },
+                initialYear,
+                initialMonth,
+                initialDay
+        );
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+        // Show the date picker dialog
+        datePickerDialog.show();
+    }
+    private void updateDateTextView(int year, int month, int day) {
+        String selectedDate = day + "-" + (month + 1) + "-" + year;
+        tvSelectedDate.setText(selectedDate);
+    }
+
+
+    @SuppressLint("MissingInflatedId")
+
     private void getConsumables() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String  consumables = Global.Get_Consumables;

@@ -66,6 +66,11 @@
                                         android:textSize="12dp" />
                                 </LinearLayout>
 
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/my_light_primary" />
+
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -96,6 +101,11 @@
 
                                 </LinearLayout>
 
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/my_light_primary" />
+
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -122,6 +132,11 @@
                                         android:textSize="12dp" />
 
                                 </LinearLayout>
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/my_light_primary" />
 
                                 <LinearLayout
                                     android:layout_width="0dp"

@@ -4,8 +4,12 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +18,9 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -22,6 +29,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONArray;
@@ -44,10 +52,13 @@ public class LabTestFragment extends Fragment {
 
     RecyclerView LabTestRecyclerview;
     LabTestClass labTestClass;
+    AppCompatButton Update_A;
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,mail,Stpname ,Sitename ,SiteAddress,Process ,Mobile;
 
     private ProgressDialog progressDialog;
+    Context context ;
+    ImageView IMV;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,7 +100,15 @@ public class LabTestFragment extends Fragment {
         Mailid.setText(mail);
         Mobno.setText(Mobile);
         personnameH.setText(Personname);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+            }
+        });
         LabTestRecyclerview = view.findViewById(R.id.labTestRecyclerview);
         LabTestRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         LabTestRecyclerview.setHasFixedSize(true);
@@ -98,7 +117,6 @@ public class LabTestFragment extends Fragment {
         getLabTestReports();
         return view;
     }
-
     private void getLabTestReports() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String labTest = Global.GetLab_Test_Items;

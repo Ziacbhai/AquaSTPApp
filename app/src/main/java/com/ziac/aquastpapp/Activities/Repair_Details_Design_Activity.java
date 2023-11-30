@@ -4,14 +4,20 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import static java.security.AccessController.getContext;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -20,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONArray;
@@ -37,7 +44,8 @@ import Models.RepairsClass;
 public class Repair_Details_Design_Activity extends AppCompatActivity {
     RepairsClass repair_s;
 
-
+    TextView Date_A,STP_A,Remark_A;
+    AppCompatButton Update_A,Cancel_A;
     RecyclerView Repair_details_recyclerview;
 
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
@@ -85,6 +93,15 @@ public class Repair_Details_Design_Activity extends AppCompatActivity {
         Mobno.setText(Mobile);
         personnameH.setText(Personname);
 
+        FloatingActionButton fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAddDetailsDialog(context);
+            }
+        });
+
         Repair_details_recyclerview = findViewById(R.id.repair_details_recyclerview);
         Repair_details_recyclerview.setLayoutManager(new LinearLayoutManager(this));
         Repair_details_recyclerview.setHasFixedSize(true);
@@ -92,7 +109,50 @@ public class Repair_Details_Design_Activity extends AppCompatActivity {
         get_Details_Repair();
 
     }
+    @SuppressLint("MissingInflatedId")
+    private void showAddDetailsDialog (Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_dialog_repair_details_layout, null);
 
+
+        Date_A = dialogView.findViewById(R.id.date_alert_rd);
+        Remark_A = dialogView.findViewById(R.id.remark_alert_rd);
+        Update_A = dialogView.findViewById(R.id.update_alert_rd);
+        Cancel_A = dialogView.findViewById(R.id.cancel_alert_rd);
+
+        builder.setView(dialogView);
+
+        AlertDialog dialog = builder.create();
+        if (dialog.getWindow() != null) {
+
+            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+            layoutParams.copyFrom(dialog.getWindow().getAttributes());
+            layoutParams.width = getResources().getDimensionPixelSize(R.dimen.dialog_width);
+            layoutParams.height = getResources().getDimensionPixelSize(R.dimen.dialog_height);
+            dialog.getWindow().setAttributes(layoutParams);
+        }
+
+        dialog.show();
+
+        Update_A.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle update button click
+                // You can add your logic here
+                dialog.dismiss(); // Close the dialog if needed
+            }
+        });
+        Cancel_A.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle cancel button click
+                // You can add your logic here
+                dialog.dismiss(); // Close the dialog if needed
+            }
+        });
+
+    }
     private void get_Details_Repair() {
 
         RequestQueue queue = Volley.newRequestQueue(this);

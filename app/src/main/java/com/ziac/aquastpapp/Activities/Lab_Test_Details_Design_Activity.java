@@ -2,16 +2,26 @@ package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,6 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +49,9 @@ public class Lab_Test_Details_Design_Activity extends AppCompatActivity {
     RecyclerView Labtest_details_Rv;
     LabTestClass labTest_Dclass;
     Context context;
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private ImageView imageView;
+    private Uri selectedImageUr;
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,mail,Stpname ,Sitename ,SiteAddress,Process ,Mobile;
 
@@ -89,10 +103,44 @@ public class Lab_Test_Details_Design_Activity extends AppCompatActivity {
         Labtest_details_Rv.setHasFixedSize(true);
         Labtest_details_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        getLabTestDetails();
+       // getLabTestDetails();
+        imageView = findViewById(R.id.imageView);
+        Button btnChooseImage = findViewById(R.id.btnChooseImage);
+        btnChooseImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openImagePicker();
+            }
+        });
+
+
     }
 
-    private void getLabTestDetails() {
+    private void openImagePicker() {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            // Get the selected image URI
+            selectedImageUr = data.getData();
+
+            try {
+                // Load the selected image into the ImageView
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUr);
+                imageView.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /*private void getLabTestDetails() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String labTest_detail = Global.Get_Lab_Details;
         String Lab_Details_API = labTest_detail + "test_code=" + Global.sharedPreferences.getString("test_code", "0");
@@ -121,9 +169,9 @@ public class Lab_Test_Details_Design_Activity extends AppCompatActivity {
                     try {
                         labTest_Dclass.setTRno(e.getString(""));
 
-                      /*  Log.d("YourTag", "Equipment Name: " + consumables_Class.getEquipment_Name());
+                      *//*  Log.d("YourTag", "Equipment Name: " + consumables_Class.getEquipment_Name());
                         Log.d("YourTag", "Equipment ID: " + consumables_Class.getEquipment_id());
-                        Log.d("YourTag", "D Amount: " + consumables_Class.getD_Amount());*/
+                        Log.d("YourTag", "D Amount: " + consumables_Class.getD_Amount());*//*
 
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
@@ -154,5 +202,17 @@ public class Lab_Test_Details_Design_Activity extends AppCompatActivity {
             }
 
         };
+    }*/
+
+
+    public void uploadImage(View view) {
+        if (selectedImageUr != null) {
+            // TODO: Implement image upload logic here (e.g., using Retrofit, AsyncTask, etc.)
+            // For now, let's show a toast message
+            Toast.makeText(this, "Image upload logic will be implemented here", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Please choose an image first", Toast.LENGTH_SHORT).show();
+        }
     }
+
 }
