@@ -116,7 +116,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:text="RepairDate"
+                                        android:text="Date"
                                         android:gravity="center_horizontal"
                                         android:textStyle="bold"
                                         android:textColor="#000"
@@ -128,7 +128,7 @@
                                         android:layout_height="wrap_content"
                                         android:drawablePadding="5dp"
                                         android:gravity="center_horizontal"
-                                        android:text="RepairDate"
+                                        android:hint="Repair Date"
                                         android:textSize="12dp" />
 
                                 </LinearLayout>

@@ -96,7 +96,7 @@
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Equipmen Number"
+                                        android:text="Equipment Number"
                                         android:gravity="center"
                                         android:textStyle="bold"
                                         android:textColor="#000"
@@ -175,7 +175,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_weight="1.5"
                                 android:drawablePadding="5dp"
                                 android:text="Repaired"
                                 android:gravity="center"
@@ -205,7 +205,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:padding="5dp"
-                            android:layout_weight="1.1"
+                            android:layout_weight="2.1"
                             android:orientation="vertical">
 
                             <TextView
@@ -213,7 +213,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:drawablePadding="5dp"
-                                android:text="Remark"
+                                android:text="Remarks"
                                 android:gravity="center"
                                 android:textStyle="bold"
                                 android:textColor="#000"
@@ -224,35 +224,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawablePadding="5dp"
-                                android:hint="remark"
+                                android:hint="remarks"
                                 android:gravity="center"
-                                android:textSize="12dp" />
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:padding="5dp"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:drawablePadding="5dp"
-
-                                android:textStyle="bold"
-                                android:textColor="#000"
-                                android:textSize="12dp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:drawablePadding="5dp"
                                 android:textSize="12dp" />
 
                         </LinearLayout>
