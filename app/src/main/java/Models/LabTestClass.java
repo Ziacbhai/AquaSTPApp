@@ -2,8 +2,41 @@ package Models;
 
 public class LabTestClass {
 
-    String TRno, Refno,LabDate,LabRefDate,CustomerRef,Sample_Received_Date,
+    String  l_Test_Method,l_Units,l_KSPCB_Standard,l_result,TRno, Refno,LabDate,LabRefDate,CustomerRef,Sample_Received_Date,
             Test_Start_Date,Test_Completion_Date,Sample_Received_By,Sample_Particular,Status;
+
+    public String getL_result() {
+        return l_result;
+    }
+
+    public void setL_result(String l_result) {
+        this.l_result = l_result;
+    }
+
+    public String getL_Test_Method() {
+        return l_Test_Method;
+    }
+
+    public void setL_Test_Method(String l_Test_Method) {
+        this.l_Test_Method = l_Test_Method;
+    }
+
+    public String getL_Units() {
+        return l_Units;
+    }
+
+    public void setL_Units(String l_Units) {
+        this.l_Units = l_Units;
+    }
+
+    public String getL_KSPCB_Standard() {
+        return l_KSPCB_Standard;
+    }
+
+    public void setL_KSPCB_Standard(String l_KSPCB_Standard) {
+        this.l_KSPCB_Standard = l_KSPCB_Standard;
+    }
+
 
 
     public String getStatus() {

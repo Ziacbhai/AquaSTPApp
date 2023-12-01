@@ -3,9 +3,11 @@ package com.ziac.aquastpapp.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -15,10 +17,7 @@ import android.widget.TextView;
 import com.ziac.aquastpapp.R;
 
 public class SplashScreen extends AppCompatActivity {
-
     TextView textView;
-
-
     ImageView imageView;
 
     @Override
@@ -50,4 +49,35 @@ public class SplashScreen extends AppCompatActivity {
             }
         } ,3000);
     }
+
+
+///Login Code Direct
+/*    private void handlermethod() {
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            if (isUserLoggedIn(getApplicationContext())) {
+                startMainActivity();
+            } else {
+                startActivity(new Intent(getApplicationContext(), SliderScreen.class));
+                finish();
+            }
+        }, 3000);
+    }
+
+    private boolean isUserLoggedIn(Context context) {
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+        String username = Global.sharedPreferences.getString("username", "");
+        String password = Global.sharedPreferences.getString("password", "");
+        String accessToken = Global.sharedPreferences.getString("access_token", "");
+
+        return username != null && !username.isEmpty() &&
+                password != null && !password.isEmpty() &&
+                accessToken != null && !accessToken.isEmpty();
+    }
+
+    private void startMainActivity() {
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
+    }*/
 }

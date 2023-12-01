@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 popup.setOnMenuItemClickListener(item -> {
                     int itemId = item.getItemId();
                     if (itemId == R.id.my_profile) {
-                        startActivity(new Intent(MainActivity.this, WelcomeOwner.class));
+                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                         return true;
                     }
                     if (itemId == R.id.nav_logout) {

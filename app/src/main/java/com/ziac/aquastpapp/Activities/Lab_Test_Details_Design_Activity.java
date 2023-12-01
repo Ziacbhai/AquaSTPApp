@@ -17,15 +17,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -49,13 +52,12 @@ public class Lab_Test_Details_Design_Activity extends AppCompatActivity {
     RecyclerView Labtest_details_Rv;
     LabTestClass labTest_Dclass;
     Context context;
-    private static final int PICK_IMAGE_REQUEST = 1;
-    private ImageView imageView;
-    private Uri selectedImageUr;
-    TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
-    private String Personname,mail,Stpname ,Sitename ,SiteAddress,Process ,Mobile;
+
+    TextView usersiteH, userstpH, usersiteaddressH, Mailid, Mobno, personnameH;
+    private String Personname, mail, Stpname, Sitename, SiteAddress, Process, Mobile;
 
     private ProgressDialog progressDialog;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,49 +100,14 @@ public class Lab_Test_Details_Design_Activity extends AppCompatActivity {
         Mobno.setText(Mobile);
         personnameH.setText(Personname);
 
-        Labtest_details_Rv = findViewById(R.id.labTestRecyclerview);
+        Labtest_details_Rv = findViewById(R.id.labTest_details_Recyclerview);
         Labtest_details_Rv.setLayoutManager(new LinearLayoutManager(this));
         Labtest_details_Rv.setHasFixedSize(true);
         Labtest_details_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-       // getLabTestDetails();
-        imageView = findViewById(R.id.imageView);
-        Button btnChooseImage = findViewById(R.id.btnChooseImage);
-        btnChooseImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openImagePicker();
-            }
-        });
-
-
+        getLabTestDetails();
     }
 
-    private void openImagePicker() {
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
-            // Get the selected image URI
-            selectedImageUr = data.getData();
-
-            try {
-                // Load the selected image into the ImageView
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUr);
-                imageView.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /*private void getLabTestDetails() {
+    private void getLabTestDetails() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String labTest_detail = Global.Get_Lab_Details;
         String Lab_Details_API = labTest_detail + "test_code=" + Global.sharedPreferences.getString("test_code", "0");
@@ -167,11 +134,16 @@ public class Lab_Test_Details_Design_Activity extends AppCompatActivity {
                     }
                     labTest_Dclass = new LabTestClass();
                     try {
-                        labTest_Dclass.setTRno(e.getString(""));
 
-                      *//*  Log.d("YourTag", "Equipment Name: " + consumables_Class.getEquipment_Name());
-                        Log.d("YourTag", "Equipment ID: " + consumables_Class.getEquipment_id());
-                        Log.d("YourTag", "D Amount: " + consumables_Class.getD_Amount());*//*
+
+                        labTest_Dclass.setL_Test_Method(e.getString("test_method"));
+                        labTest_Dclass.setL_Units(e.getString("unit_name"));
+                        labTest_Dclass.setL_result(e.getString("result_value"));
+                        labTest_Dclass.setL_KSPCB_Standard(e.getString("param_code"));
+
+                        Log.d("YourTag", "Equipment Name: " + labTest_Dclass.getL_result());
+                        Log.d("YourTag", "Equipment ID: " + labTest_Dclass.getL_result());
+                        Log.d("YourTag", "D Amount: " + labTest_Dclass.getL_result());
 
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
@@ -185,10 +157,15 @@ public class Lab_Test_Details_Design_Activity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                if (error instanceof TimeoutError) {
+                    Log.e("Volley Error", "TimeoutError occurred");
+                } else if (error instanceof NoConnectionError) {
+                    Log.e("Volley Error", "NoConnectionError occurred");
 
+                }
 
             }
-        }){
+        }) {
             public Map<String, String> getHeaders() {
 
                 Map<String, String> headers = new HashMap<String, String>();
@@ -196,23 +173,14 @@ public class Lab_Test_Details_Design_Activity extends AppCompatActivity {
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 return params;
             }
 
         };
-    }*/
-
-
-    public void uploadImage(View view) {
-        if (selectedImageUr != null) {
-            // TODO: Implement image upload logic here (e.g., using Retrofit, AsyncTask, etc.)
-            // For now, let's show a toast message
-            Toast.makeText(this, "Image upload logic will be implemented here", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Please choose an image first", Toast.LENGTH_SHORT).show();
-        }
+        queue.add(jsonObjectRequest);
     }
 
 }

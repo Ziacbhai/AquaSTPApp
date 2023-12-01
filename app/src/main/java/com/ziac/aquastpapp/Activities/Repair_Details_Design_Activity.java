@@ -204,7 +204,6 @@ public class Repair_Details_Design_Activity extends AppCompatActivity {
 
             }
         }){
-
             public Map<String, String> getHeaders() {
                 // below line we are creating a map for
                 // storing our values in key and value pair.
@@ -219,7 +218,5 @@ public class Repair_Details_Design_Activity extends AppCompatActivity {
             }
         };
         queue.add(jsonObjectRequest);
-
-
     }
 }

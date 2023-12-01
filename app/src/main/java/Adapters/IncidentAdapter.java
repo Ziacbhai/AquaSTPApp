@@ -55,8 +55,6 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         String formattedConNo = removeTrailingZero(conNo);
         holder.Incno.setText(formattedConNo);
 
-
-
         String dateString = incidentsClasses.get(position).getInc_Date();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());

@@ -131,9 +131,15 @@ public class IncidentReportingFragment extends Fragment {
                     }
                     incidents = new IncidentsClass();
                     try {
-                        incidents.setInc_No(e.getString("incident_no"));
+                        incidents.setInc_No(e.getString("incident_code"));
                         incidents.setInc_Date(e.getString("incident_date"));
                         incidents.setIncidents_Particulars(e.getString("incident_desc"));
+
+                        String incident_code= incidents.getInc_No();
+                        Global.editor = Global.sharedPreferences.edit();
+                        Global.editor.putString("incident_code",incident_code);
+                        Global.editor.commit();
+
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }

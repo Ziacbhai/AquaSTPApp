@@ -181,9 +181,9 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
                     consumables_Class = new ConsumablesClass();
                     try {
                         consumables_Class.setEquipment_Name(e.getString("equip_name"));
-                        consumables_Class.setEquipment_id(e.getString("part_no"));
+                        consumables_Class.setEquipment_id(e.getString("equip_slno"));
                         consumables_Class.setD_Amount(e.getString("prd_amt"));
-                        consumables_Class.setD_item(e.getString("item_code"));
+                        consumables_Class.setD_item(e.getString("part_no"));
                         consumables_Class.setD_item_name(e.getString("prd_name"));
                         consumables_Class.setD_qty(e.getString("qty"));
                         consumables_Class.setD_unit(e.getString("unit_name"));

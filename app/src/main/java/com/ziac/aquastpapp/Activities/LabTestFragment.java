@@ -55,7 +55,7 @@ public class LabTestFragment extends Fragment {
     AppCompatButton Update_A;
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,mail,Stpname ,Sitename ,SiteAddress,Process ,Mobile;
-
+    LabTestAdapter labTestAdapter;
     private ProgressDialog progressDialog;
     Context context ;
     ImageView IMV;
@@ -109,7 +109,7 @@ public class LabTestFragment extends Fragment {
 
             }
         });
-        LabTestRecyclerview = view.findViewById(R.id.labTestRecyclerview);
+        LabTestRecyclerview = view.findViewById(R.id.labTest_Recyclerview);
         LabTestRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         LabTestRecyclerview.setHasFixedSize(true);
         LabTestRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -159,11 +159,17 @@ public class LabTestFragment extends Fragment {
                         labTestClass.setSample_Particular(e.getString("sample_desc"));
                         labTestClass.setStatus(e.getString("test_status"));
 
+                        String test_code= labTestClass.getTRno();
+                        // System.out.println(repair_code);
+                        Global.editor = Global.sharedPreferences.edit();
+                        Global.editor.putString("test_code",test_code);
+                        Global.editor.commit();
+
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
                     Global.Labtest_s.add(labTestClass);
-                    LabTestAdapter labTestAdapter = new LabTestAdapter(Global.Labtest_s, getContext());
+                    labTestAdapter = new LabTestAdapter(Global.Labtest_s, getContext());
                     LabTestRecyclerview.setAdapter(labTestAdapter);
                 }
             }
