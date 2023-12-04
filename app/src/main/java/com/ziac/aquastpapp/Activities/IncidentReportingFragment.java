@@ -4,8 +4,11 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,24 +45,25 @@ import Models.zList;
 
 
 public class IncidentReportingFragment extends Fragment {
-    private zList company_code ,location_code,stp1_code;
+
+
+
     RecyclerView Incident_recyclerview;
     IncidentsClass incidents;
     // private ImageView mImageView;
-    private String userimage;
+    IncidentAdapter incidentAdapter;
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,Mail,Stpname ,Sitename ,SiteAddress,Process,Mobile;
-    private TextView Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
-            FormFactor,Phase,CleaningRunningFrequencyHRS ,Address_M ,Process_name_;
-
     private ProgressDialog progressDialog;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_incident_reporting, container, false);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
 
         if (!Global.isNetworkAvailable(getActivity())) {
             Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
@@ -97,11 +101,13 @@ public class IncidentReportingFragment extends Fragment {
         Incident_recyclerview.setHasFixedSize(true);
         Incident_recyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        getIncidentReport();
+       // getIncidentReport();
         return view;
+
+
     }
 
-    private void getIncidentReport() {
+    /*private void getIncidentReport() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String incident = Global.Get_Incidents;
 
@@ -144,7 +150,7 @@ public class IncidentReportingFragment extends Fragment {
                         throw new RuntimeException(ex);
                     }
                     Global.Incident_s.add(incidents);
-                    IncidentAdapter incidentAdapter = new IncidentAdapter(getContext(),Global.Incident_s);
+                    incidentAdapter = new IncidentAdapter(requireContext(), Global.Incident_s);
                     Incident_recyclerview.setAdapter(incidentAdapter);
                 }
             }
@@ -169,5 +175,6 @@ public class IncidentReportingFragment extends Fragment {
         };
         queue.add(jsonObjectRequest);
 
-    }
+    }*/
+
 }

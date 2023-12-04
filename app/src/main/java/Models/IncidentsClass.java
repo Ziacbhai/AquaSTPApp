@@ -1,7 +1,23 @@
 package Models;
 
 public class IncidentsClass {
-    String Inc_No,Inc_Date,Incidents_Particulars;
+    String Inc_No,Inc_Date,Incidents_Particulars,In_info,In_upload;
+
+    public String getIn_info() {
+        return In_info;
+    }
+
+    public void setIn_info(String in_info) {
+        In_info = in_info;
+    }
+
+    public String getIn_upload() {
+        return In_upload;
+    }
+
+    public void setIn_upload(String in_upload) {
+        In_upload = in_upload;
+    }
 
     public String getInc_No() {
         return Inc_No;

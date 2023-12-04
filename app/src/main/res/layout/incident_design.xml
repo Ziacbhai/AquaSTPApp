@@ -17,6 +17,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="4"
                 android:background="@drawable/btnbgoutline"
                 android:orientation="horizontal"
                 android:padding="5dp">
@@ -24,17 +25,22 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.3"
+                    android:layout_weight="0.7"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/incident_info"
                         android:layout_width="30dp"
                         android:layout_height="match_parent"
                         android:padding="6dp"
-                        android:src="@drawable/i"
-                        android:textSize="12dp" />
+                        android:src="@drawable/i"/>
+
+                    <ImageView
+                        android:id="@+id/incident_photo_upload"
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/upload"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -47,7 +53,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:drawablePadding="5dp"
                         android:gravity="center"
                         android:text="INC No."
@@ -96,7 +101,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.3"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
