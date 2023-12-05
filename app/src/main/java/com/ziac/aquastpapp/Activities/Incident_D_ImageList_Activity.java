@@ -64,18 +64,14 @@ public class Incident_D_ImageList_Activity extends AppCompatActivity {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
-        Incident_Image_list_Rv = findViewById(R.id.Incident_Image_list_Rv);
-        Incident_Image_list_Rv.setLayoutManager(new LinearLayoutManager(this));
-        Incident_Image_list_Rv.setHasFixedSize(true);
-        Incident_Image_list_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        getIncident_image_list();
+
     }
 
-    private void getIncident_image_list() {
+    /*private void getIncident_image_list() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         //String Incident_Images = Global.Get_Incidents_Details+ "incident_code=" + Global.sharedPreferences.getString("incident_code" ,"0");
-        String Incident_Images = Global.Get_Incidents_Details+ "incident_code=" + "1";
+        String Incident_Images = Global.Get_Incidents_Details+ "incident_code=" + "0";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Incident_Images, null, new Response.Listener<JSONObject>() {
             @Override
@@ -137,5 +133,5 @@ public class Incident_D_ImageList_Activity extends AppCompatActivity {
 
         };
         queue.add(jsonObjectRequest);
-    }
+    }*/
 }
