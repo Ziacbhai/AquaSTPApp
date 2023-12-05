@@ -2,6 +2,8 @@ package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
+
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,13 +20,13 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -36,12 +38,10 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +52,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class IncidentReportingActivity extends AppCompatActivity{
     public static final int PICK_IMAGE_REQUEST = 0;
+    private ImagePickerCallback imagePickerCallback;
+    private static final int CAMERA_REQUEST = 1001;
     RecyclerView Incident_recyclerview;
     IncidentsClass incidents;
     // private ImageView mImageView;
@@ -64,8 +66,10 @@ public class IncidentReportingActivity extends AppCompatActivity{
     Picasso.Builder builder;
     Picasso picasso;
     Toolbar toolbar;
-    CircleImageView Profile;
+    CircleImageView Profile,circleImageView;
     Context context;
+
+    IncidentsClass incidentsClass;
     private String userimage, mail, Stpname, Sitename, Siteaddress, userref, person_name;
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,Mail ,SiteAddress,Process,Mobile;
@@ -81,6 +85,8 @@ public class IncidentReportingActivity extends AppCompatActivity{
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
+        context = this;
+        incidentsClass = new IncidentsClass();
 
         Profile = findViewById(R.id.profileIcon);
         if (!Global.isNetworkAvailable(this)) {
@@ -124,6 +130,8 @@ public class IncidentReportingActivity extends AppCompatActivity{
         ////
         Siteaddress = sharedPreferences.getString("site_address", "");
         Siteaddress = sharedPreferences.getString("process_name", "");
+
+
 
         Picasso.Builder builder = new Picasso.Builder(getApplication());
         Picasso picasso = builder.build();
@@ -187,12 +195,14 @@ public class IncidentReportingActivity extends AppCompatActivity{
         });
 
         Incident_recyclerview = findViewById(R.id.incident_recyclerview);
-        Incident_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        Incident_recyclerview.setLayoutManager(new LinearLayoutManager(context));
         Incident_recyclerview.setHasFixedSize(true);
         Incident_recyclerview.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 
         getIncidentReport();
     }
+
+
     private void getIncidentReport() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String incident = Global.Get_Incidents;
@@ -227,9 +237,11 @@ public class IncidentReportingActivity extends AppCompatActivity{
                         incidents.setInc_Date(e.getString("incident_date"));
                         incidents.setIncidents_Particulars(e.getString("incident_desc"));
 
-                        String incident_code= incidents.getInc_No();
+                        String incident_code= e.getString("incident_code");
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("incident_code",incident_code);
+                       // Log.d("YourTag", "incident_code" + incident_code);
+                        Toast.makeText(context, ""+incident_code, Toast.LENGTH_SHORT).show();
                         Global.editor.commit();
 
                     } catch (JSONException ex) {
@@ -263,19 +275,16 @@ public class IncidentReportingActivity extends AppCompatActivity{
 
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10 && resultCode == RESULT_OK) {
-            Uri uri = data.getData();
-            //imageList.add(uri);
-            try {
-                imageBitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            //postselelectedimage();
+
+        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK && data != null) {
+            // Get the captured image
+            imageBitmap = (Bitmap) data.getExtras().get("data");
+            // Notify the adapter or do whatever you need with the image
+            incidentAdapter.notifyDataSetChanged(); // Assuming you have a notifyDataSetChanged() method
         }
     }
-
 
 }

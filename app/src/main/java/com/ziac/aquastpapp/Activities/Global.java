@@ -33,7 +33,7 @@ public class Global {
 
     //    Local url
    // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl="http://192.168.1.8:6968/";
+    public static String baseurl="http://192.168.1.12:6968/";
 
     public static String userImageurl = baseurl+"WebsiteData/Users/";
 
@@ -71,6 +71,10 @@ public class Global {
     public static String Get_Lab_Details = baseurl + "api/Lab/Details?";
     public static String Get_Incidents_Details = baseurl + "api/Incidents/Details?";
 
+   // public static String Get_Incidents_ImageUploud = baseurl + "api/Incidents/Details?";
+
+    public static String Get_Incidents_delete = baseurl + "api/Incidents/DeleteImgOrDoc?";
+
 
     public static ArrayList<zList> statearraylist;
     public static ArrayList<zList> cityarraylist;
@@ -82,7 +86,6 @@ public class Global {
     public static ArrayList<ConsumablesClass> Consumables_s;
     public static ArrayList<LabTestClass> Labtest_s;
     public static ArrayList<IncidentsClass> Incident_s;
-
 
     public static ArrayList<CommonModelClass> metersdetails;
 

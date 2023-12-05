@@ -1,7 +1,5 @@
 package com.ziac.aquastpapp.Activities;
 
-import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,12 +30,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import Adapters.IncidentImageListAdapter;
 import Adapters.Lab_Test_Details_Adapter;
 import Models.IncidentsClass;
-import Models.LabTestClass;
 
-public class Incident_Details_Design_Activity extends AppCompatActivity {
-    RecyclerView Incident_details_Rv;
+public class Incident_D_ImageList_Activity extends AppCompatActivity {
+    RecyclerView Incident_Image_list_Rv;
     IncidentsClass incidentsClass;
     Context context;
 
@@ -45,11 +43,13 @@ public class Incident_Details_Design_Activity extends AppCompatActivity {
     private String Personname, mail, Stpname, Sitename, SiteAddress, Process, Mobile;
 
     private ProgressDialog progressDialog;
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_incident_details_design);
+        setContentView(R.layout.activity_incident_image_list);
 
         context = this;
 
@@ -64,43 +64,20 @@ public class Incident_Details_Design_Activity extends AppCompatActivity {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        SiteAddress = sharedPreferences.getString("site_address", "");
-        Process = sharedPreferences.getString("process_name", "");
-        mail = sharedPreferences.getString("user_email", "");
-        Mobile = sharedPreferences.getString("user_mobile", "");
-        Personname = sharedPreferences.getString("person_name", "");
-
-        usersiteH = findViewById(R.id.site_name);
-        userstpH = findViewById(R.id.stp_name);
-        usersiteaddressH = findViewById(R.id.site_address);
-
-        Mailid = findViewById(R.id.email);
-        Mobno = findViewById(R.id._mobile);
-        personnameH = findViewById(R.id.person_name);
-
-        usersiteH.setText(Sitename);
-        userstpH.setText(Stpname + " / " + Process);
-        usersiteaddressH.setText(SiteAddress);
-
-        Mailid.setText(mail);
-        Mobno.setText(Mobile);
-        personnameH.setText(Personname);
-
-        Incident_details_Rv = findViewById(R.id.Incident_details_Recyclerview);
-        Incident_details_Rv.setLayoutManager(new LinearLayoutManager(this));
-        Incident_details_Rv.setHasFixedSize(true);
-        Incident_details_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        getIncidentDetails();
+        Incident_Image_list_Rv = findViewById(R.id.Incident_Image_list_Rv);
+        Incident_Image_list_Rv.setLayoutManager(new LinearLayoutManager(this));
+        Incident_Image_list_Rv.setHasFixedSize(true);
+        Incident_Image_list_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        getIncident_image_list();
     }
 
-    private void getIncidentDetails() {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String Incedent_D_detail = Global.Get_Incidents_Details;
-        String Incident_Details_API = Incedent_D_detail + "incident_code=" + Global.sharedPreferences.getString("incident_code", "0");
+    private void getIncident_image_list() {
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Incident_Details_API, null, new Response.Listener<JSONObject>() {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        //String Incident_Images = Global.Get_Incidents_Details+ "incident_code=" + Global.sharedPreferences.getString("incident_code" ,"0");
+        String Incident_Images = Global.Get_Incidents_Details+ "incident_code=" + "1";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Incident_Images, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Global.Incident_s = new ArrayList<IncidentsClass>();
@@ -122,21 +99,14 @@ public class Incident_Details_Design_Activity extends AppCompatActivity {
                     }
                     incidentsClass = new IncidentsClass();
                     try {
-
-                        incidentsClass.setInc_Date(e.getString("incident_date"));
-                        incidentsClass.setIncidents_Particulars(e.getString("incident_desc"));
-
-
-                        Log.d("YourTag", "Equipment Name: " + incidentsClass.getInc_Date());
-                        Log.d("YourTag", "Equipment ID: " + incidentsClass.getIncidents_Particulars());
-
-
+                        incidentsClass.setImageList(e.getString("file_name"));
+                       //Log.d("YourTag", "file_name" + incidentsClass.getImageList());
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
                     Global.Incident_s.add(incidentsClass);
-                    Lab_Test_Details_Adapter labTestDetailsAdapter = new Lab_Test_Details_Adapter(context, Global.Labtest_s);
-                    Incident_details_Rv.setAdapter(labTestDetailsAdapter);
+                    IncidentImageListAdapter incidentImageListAdapter = new IncidentImageListAdapter(Global.Incident_s, context);
+                    Incident_Image_list_Rv.setAdapter(incidentImageListAdapter);
                 }
 
             }
@@ -168,5 +138,4 @@ public class Incident_Details_Design_Activity extends AppCompatActivity {
         };
         queue.add(jsonObjectRequest);
     }
-
 }
