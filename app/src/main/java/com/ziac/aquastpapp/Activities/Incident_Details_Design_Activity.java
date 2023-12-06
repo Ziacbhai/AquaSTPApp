@@ -97,8 +97,8 @@ public class Incident_Details_Design_Activity extends AppCompatActivity {
 
     private void getIncidentDetails() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String Incedent_D_detail = Global.Get_Incidents_Details;
-        String Incident_Details_API = Incedent_D_detail + "incident_code=" + Global.sharedPreferences.getString("incident_code", "0");
+        String Incident_D_detail = Global.Get_Incidents_Details;
+        String Incident_Details_API = Incident_D_detail + "incident_code=" + Global.sharedPreferences.getString("incident_code", "0");
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Incident_Details_API, null, new Response.Listener<JSONObject>() {
             @Override

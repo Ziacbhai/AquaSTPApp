@@ -73,15 +73,16 @@ public class ProfileActivity extends AppCompatActivity {
     AppCompatButton Updatebutton;
     CircleImageView circleImageView;
     Bitmap imageBitmap;
+    String userimage;
+    Picasso.Builder builder;
+    Picasso picasso;
 
     EditText uName, uNumber, uEmail;
     TextView Uref_code;
     //private static final int CAMERA_REQUEST = 0;
 
     ImageView Backarrowbtn;
-    String userimage;
-    Picasso.Builder builder;
-    Picasso picasso;
+
     @SuppressLint("MissingInflatedId")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override

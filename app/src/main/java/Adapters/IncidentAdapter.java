@@ -2,36 +2,20 @@ package Adapters;
 
 
 
-import static android.app.Activity.RESULT_OK;
-
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-import static androidx.core.content.ContextCompat.startActivity;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -40,22 +24,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.squareup.picasso.Picasso;
-import com.ziac.aquastpapp.Activities.AboutActivity;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.ImagePickerCallback;
 import com.ziac.aquastpapp.Activities.IncidentReportingActivity;
-import com.ziac.aquastpapp.Activities.Incident_D_ImageList_Activity;
+import com.ziac.aquastpapp.Activities.Incident_Image_doc_Select_Activity;
 import com.ziac.aquastpapp.Activities.Incident_Details_Design_Activity;
-import com.ziac.aquastpapp.Activities.MainActivity;
-import com.ziac.aquastpapp.Activities.ProfileActivity;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -172,23 +151,15 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         holder.Inupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent(context, Incident_D_ImageList_Activity.class);
+                Global.editor.putString("incident_code",incidentsClasses.get(position).getInc_No());
+                Global.editor.commit();
+                    Intent intent = new Intent(context, Incident_Image_doc_Select_Activity.class);
                     context.startActivity(intent);
             }
         });
 
 
-        /*holder.Inupload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (context != null) {
-                    openCamera();
-                } else {
-                    Log.e("Camera", "Context is null");
 
-                }
-            }
-        });*/
     }
 
     public void deleteItem(String incidentcode) {
@@ -233,24 +204,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         queue.add(jsonObjectRequest);
 
     }
-   /* private void openCamera() {
-        try {
-            if (context instanceof Activity) {
-                com.github.dhaval2404.imagepicker.ImagePicker.with((Activity) context)
-                        .crop()
-                        .compress(1024)
-                        .maxResultSize(1080, 1080)
-                        .start(10);
-            } else {
-                Log.e("Camera", "Context is not an instance of Activity");
-                // Handle the case where context is not an instance of Activity.
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("Camera", "Error opening camera: " + e.getMessage());
-            // Handle the exception as needed.
-        }
-    }*/
+
 
 
     private String removeTrailingZero(double value) {

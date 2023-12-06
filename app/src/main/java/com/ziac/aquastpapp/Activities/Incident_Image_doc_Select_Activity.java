@@ -1,43 +1,27 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
-import com.android.volley.NoConnectionError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import Adapters.IncidentImageListAdapter;
-import Adapters.Lab_Test_Details_Adapter;
 import Models.IncidentsClass;
 
-public class Incident_D_ImageList_Activity extends AppCompatActivity {
+public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
     RecyclerView Incident_Image_list_Rv;
     IncidentsClass incidentsClass;
     Context context;
+    CardView In_image_,In_docs_;
 
     TextView usersiteH, userstpH, usersiteaddressH, Mailid, Mobno, personnameH;
     private String Personname, mail, Stpname, Sitename, SiteAddress, Process, Mobile;
@@ -63,6 +47,23 @@ public class Incident_D_ImageList_Activity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
+        In_image_ = findViewById(R.id.in_images_);
+        In_docs_ = findViewById(R.id.in_docs_);
+
+
+        In_image_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Incident_Image_doc_Select_Activity.this, Incident_image_upload_Activity.class));
+            }
+        });
+
+        In_docs_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Incident_Image_doc_Select_Activity.this, Incident_documents_upload_Activity.class));
+            }
+        });
 
 
     }

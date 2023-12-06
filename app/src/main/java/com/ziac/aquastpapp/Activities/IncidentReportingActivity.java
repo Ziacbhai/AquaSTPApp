@@ -241,7 +241,7 @@ public class IncidentReportingActivity extends AppCompatActivity{
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("incident_code",incident_code);
                        // Log.d("YourTag", "incident_code" + incident_code);
-                        Toast.makeText(context, ""+incident_code, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, ""+incident_code, Toast.LENGTH_SHORT).show();
                         Global.editor.commit();
 
                     } catch (JSONException ex) {

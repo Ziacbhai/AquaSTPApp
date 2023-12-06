@@ -19,24 +19,24 @@ import java.util.Locale;
 
 import Models.IncidentsClass;
 
-public class Incident_D_Adapter extends RecyclerView.Adapter<Incident_D_Adapter.Viewholder> {
+public class Incident_Edit_D_Adapter extends RecyclerView.Adapter<Incident_Edit_D_Adapter.Viewholder> {
     private List<IncidentsClass> incidentsClasses;
     private Context context;
 
-    public Incident_D_Adapter(List<IncidentsClass> incidentsClasses, Context context) {
+    public Incident_Edit_D_Adapter(List<IncidentsClass> incidentsClasses, Context context) {
         this.incidentsClasses = incidentsClasses;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public Incident_D_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Incident_Edit_D_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.incident_details_design, parent , false);
         return new Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Incident_D_Adapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull Incident_Edit_D_Adapter.Viewholder holder, int position) {
         holder.Incident_Particlulars.setText(incidentsClasses.get(position).getIncidents_Particulars());
 
         String dateString = incidentsClasses.get(position).getInc_Date();

@@ -1,8 +1,41 @@
 package Models;
 
 public class IncidentsClass {
-    String Inc_No,Inc_Date,Incidents_Particulars,In_info,In_upload,In_Delete,ImageList;
+    String Inc_No,Inc_Date,Incidents_Particulars,In_info,In_upload,In_Delete,ImageList,In_image_name,
+            Inc_doc_name,Inc_doc_delete,In_doc_list;
 
+
+    public String getInc_doc_name() {
+        return Inc_doc_name;
+    }
+
+    public void setInc_doc_name(String inc_doc_name) {
+        Inc_doc_name = inc_doc_name;
+    }
+
+    public String getInc_doc_delete() {
+        return Inc_doc_delete;
+    }
+
+    public void setInc_doc_delete(String inc_doc_delete) {
+        Inc_doc_delete = inc_doc_delete;
+    }
+
+    public String getIn_doc_list() {
+        return In_doc_list;
+    }
+
+    public void setIn_doc_list(String in_doc_list) {
+        In_doc_list = in_doc_list;
+    }
+
+    public String getIn_image_name() {
+        return In_image_name;
+    }
+
+    public void setIn_image_name(String in_image_name) {
+        In_image_name = in_image_name;
+    }
 
     public String getImageList() {
         return ImageList;
