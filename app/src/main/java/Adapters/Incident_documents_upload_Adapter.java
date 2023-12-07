@@ -75,7 +75,7 @@ public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Inci
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String incident_code = Global.Incident_s.get(position).getInc_No();
-                        deleteItem(incident_code);
+                        //deleteItem(incident_code);
                     }
                 });
                 alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -95,48 +95,7 @@ public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Inci
         picasso.load(Uri.parse(Global.incident_image + incidentsClasses.get(position).getImageList())).error(R.drawable.no_image_available_icon).into(holder.In_doc_show);
     }
 
-    public void deleteItem(String incidentcode) {
 
-        RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
-        String url = Global.Get_Incidents_delete ;
-        url=url+"incident_code="+incidentcode;
-        //progressDialog.show();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                //JSONObject respObj = new JSONObject(response);
-                try {
-                    String msg = response.getString("msg");
-                    boolean isSuccess = response.getBoolean("isSuccess");
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
-                Intent intent = new Intent(context, Incident_image_upload_Activity.class);
-                context.startActivity(intent);
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //Global.customtoast(context.getApplicationContext(), getLayoutInflater(),"Failed to get my stock .." + error.getMessage());
-            }
-        })
-        {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<String, String>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", "");
-                headers.put("Authorization", "Bearer " + accesstoken);
-                return headers;
-            }
-
-
-        };
-        queue.add(jsonObjectRequest);
-
-    }
 
     @Override
     public int getItemCount() {

@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -72,7 +74,10 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
     @Override
     public IncidentAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.incident_design, parent , false);
-        return new Viewholder(view);
+        Viewholder viewHolder = new Viewholder(view);
+        Animation animation = AnimationUtils.loadAnimation(context,R.anim.fade_in);
+        viewHolder.itemView.startAnimation(animation);
+        return viewHolder;
     }
 
     @Override

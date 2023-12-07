@@ -59,6 +59,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/header_background"
         android:gravity="center"
+        android:onClick="buttonCreateFile"
         android:text="Upload Documents"
         android:textAllCaps="false"
         android:textColor="@color/white"

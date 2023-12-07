@@ -66,60 +66,7 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
         this.context = context;
     }
 
-    public void deleteItem(String incidentcode,int position) {
 
-        RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
-        String url = Global.Get_Incidents_delete;
-        url=url+"id="+incidentcode;
-
-         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                response -> {
-                    JSONObject jsonResponse;
-                    try {
-                        jsonResponse = new JSONObject(response);
-                        String msg = jsonResponse.getString("error");
-                        boolean isSuccess = jsonResponse.getBoolean("isSuccess");
-                        if (isSuccess) {
-                            incidentsClasses.remove(position);
-                            notifyDataSetChanged();
-                            Toast.makeText(context, "Images deleted successfully!!!", Toast.LENGTH_SHORT).show();
-                          //  Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-
-                },
-                error -> {
-                    Toast.makeText(context, "Unable to delete Images!!!", Toast.LENGTH_SHORT).show();
-                }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                String accessToken = Global.sharedPreferences.getString("access_token", "");
-                headers.put("Authorization", "Bearer " + accessToken);
-                return headers;
-            }
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                // params.put("Image_code", vehimage);
-                // Log.d("MyTag", "Image Code: " + vehimage);
-                return params;
-            }
-        };
-
-//        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-//                0, // timeout in milliseconds
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-//        ));
-        queue.add(stringRequest);
-    }
 
 
     @NonNull
@@ -174,6 +121,63 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
         });
 
 
+
+
+    }
+
+    public void deleteItem(String incidentcode,int position) {
+
+        RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
+        String url = Global.Get_Incidents_delete;
+        url=url+"id="+incidentcode;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    JSONObject jsonResponse;
+                    try {
+                        jsonResponse = new JSONObject(response);
+                        String msg = jsonResponse.getString("error");
+                        boolean isSuccess = jsonResponse.getBoolean("isSuccess");
+                        if (isSuccess) {
+                            incidentsClasses.remove(position);
+                            notifyDataSetChanged();
+                            Toast.makeText(context, "Images deleted successfully!!!", Toast.LENGTH_SHORT).show();
+                            //  Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                },
+                error -> {
+                    Toast.makeText(context, "Unable to delete Images!!!", Toast.LENGTH_SHORT).show();
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                String accessToken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                // params.put("Image_code", vehimage);
+                // Log.d("MyTag", "Image Code: " + vehimage);
+                return params;
+            }
+        };
+
+//        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+//                0, // timeout in milliseconds
+//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+//        ));
+        queue.add(stringRequest);
     }
 
     private void showImage(String imageUrl) {
@@ -208,53 +212,6 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
             // Handle onBitmapFailed and onPrepareLoad methods as needed
         });
     }
-
-
-
-
-//    public void deleteItem(String incidentcode) {
-//
-//        RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
-//        String url = Global.Get_Incidents_delete ;
-//        url=url+"incident_code="+incidentcode;
-//        //progressDialog.show();
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                //JSONObject respObj = new JSONObject(response);
-//                try {
-//                    String msg = response.getString("msg");
-//                    boolean isSuccess = response.getBoolean("isSuccess");
-//                } catch (JSONException e) {
-//                    throw new RuntimeException(e);
-//                }
-//
-//                Toast.makeText(context, "Image deleted successfully", Toast.LENGTH_SHORT).show();
-////                Intent intent = new Intent(context, Incident_image_upload_Activity.class);
-////                context.startActivity(intent);
-//
-//
-//            }
-//        }, new Response.ErrorListener() {
-//
-//
-//        })
-//        {
-//            @Override
-//            public Map<String, String> getHeaders() {
-//                Map<String, String> headers = new HashMap<String, String>();
-//                String accesstoken = Global.sharedPreferences.getString("access_token", "");
-//                headers.put("Authorization", "Bearer " + accesstoken);
-//                return headers;
-//            }
-//
-//
-//        };
-//        queue.add(jsonObjectRequest);
-//
-//    }
-
-
 
     @Override
     public int getItemCount() {

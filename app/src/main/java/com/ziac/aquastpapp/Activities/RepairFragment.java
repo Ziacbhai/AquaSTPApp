@@ -146,31 +146,6 @@ public class RepairFragment extends Fragment {
 
         AlertDialog dialog = builder.create();
 
-       /* if (dialog.getWindow() != null) {
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-            layoutParams.copyFrom(dialog.getWindow().getAttributes());
-            layoutParams.width = getResources().getDimensionPixelSize(R.dimen.dialog_width);
-            layoutParams.height = getResources().getDimensionPixelSize(R.dimen.dialog_height);
-
-            dialog.getWindow().setAttributes(layoutParams);
-
-            View decorView = dialog.getWindow().getDecorView();
-            decorView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-                @Override
-                public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                    Rect displayRectangle = new Rect();
-                    Window window = dialog.getWindow();
-                    decorView.getWindowVisibleDisplayFrame(displayRectangle);
-                    float maxHeight = displayRectangle.height() * 0.6f; // 60%
-
-                    if (v.getHeight() > maxHeight) {
-                        WindowManager.LayoutParams layoutParams = window.getAttributes();
-                        window.setLayout(layoutParams.width, (int) maxHeight);
-                    }
-                }
-            });
-        }*/
-
         dialog.show();
 
         Update_A.setOnClickListener(new View.OnClickListener() {
