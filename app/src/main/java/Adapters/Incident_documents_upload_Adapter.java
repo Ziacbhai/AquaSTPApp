@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,6 @@ public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Inci
     Picasso picasso;
 
 
-
     private Context context;
 
     private ArrayList<IncidentsClass> incidentsClasses;
@@ -61,6 +61,9 @@ public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Inci
 
     @Override
     public void onBindViewHolder(@NonNull Incident_documents_upload_Adapter.Viewholder holder, int position) {
+
+        IncidentsClass incidentsClass = incidentsClasses.get(position);
+        holder.In_doc_name.setText(incidentsClass.getInc_doc_name());
         holder.Incident_delete_doc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +89,10 @@ public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Inci
                 alertDialog.show();
             }
         });
+
+        Picasso.Builder builder=new Picasso.Builder(context);
+        Picasso picasso=builder.build();
+        picasso.load(Uri.parse(Global.incident_image + incidentsClasses.get(position).getImageList())).error(R.drawable.no_image_available_icon).into(holder.In_doc_show);
     }
 
     public void deleteItem(String incidentcode) {

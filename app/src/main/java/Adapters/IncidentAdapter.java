@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -61,19 +62,12 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
     Picasso.Builder builder;
     Picasso picasso;
     Context context;
-    private ImagePickerCallback imagePickerCallback;
-    private static final int CAMERA_REQUEST = 1001;
 
-    public IncidentAdapter(ImagePickerCallback imagePickerCallback) {
-        this.imagePickerCallback = imagePickerCallback;
-    }
 
     public IncidentAdapter(Context context, ArrayList<IncidentsClass> incidentsClasses) {
         this.context=context;
         this.incidentsClasses=incidentsClasses;
-
     }
-
     @NonNull
     @Override
     public IncidentAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -134,8 +128,6 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         } catch (ParseException e) {e.printStackTrace();
             return;
         }
-
-
         holder.Ininfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,15 +150,13 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             }
         });
 
-
-
     }
 
-    public void deleteItem(String incidentcode) {
+    public void deleteItem(String incident_code2) {
 
         RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
         String url = Global.Get_Incidents_delete ;
-        url=url+"incident_code="+incidentcode;
+        url=url+"incident_code="+incident_code2;
         //progressDialog.show();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -228,6 +218,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
     public class Viewholder extends RecyclerView.ViewHolder {
         private TextView Incno,Incedent_Particlulars,Inc_date;
         private ImageView Inupload,Ininfo,Inc_delete;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
@@ -237,6 +228,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             Ininfo=itemView.findViewById(R.id.incident_info);
             Inupload=itemView.findViewById(R.id.incident_photo_upload);
             Inc_delete=itemView.findViewById(R.id.incident_delete);
+
 
         }
     }

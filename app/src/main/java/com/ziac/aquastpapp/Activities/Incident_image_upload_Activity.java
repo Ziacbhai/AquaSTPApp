@@ -18,6 +18,9 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.NoConnectionError;
@@ -84,6 +87,11 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
         Incident_Images_Rv = findViewById(R.id.incident_Images_Rv);
         Incident_Images_Rv.setLayoutManager(new LinearLayoutManager(this));
         Incident_Images_Rv.setHasFixedSize(true);
+
+        Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        LayoutAnimationController layoutAnimationController = new LayoutAnimationController(fadeInAnimation);
+        layoutAnimationController.setOrder(LayoutAnimationController.ORDER_NORMAL);
+        Incident_Images_Rv.setLayoutAnimation(layoutAnimationController);
         Incident_Images_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         getIncidentImages();
     }
@@ -121,18 +129,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
         }
     }
 
-   /* protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10 && resultCode == RESULT_OK) {
-            Uri uri = data.getData();
-            List<Uri> incidentsClass = new ArrayList<>();
-            incidentsClass.add(uri);
-            // Assuming you have an instance of YourAdapter called yourAdapter
-            Incident_image_upload_Adapter.updateImageList(incidentsClass);
-            // Now your adapter is updated with the new image
-        }
-        Incident_postselelectedimage();
-    }*/
+
     private void Incident_postselelectedimage() {
         if (imageBitmap == null) {
             return;
@@ -231,6 +228,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
                     try {
                         incidentsClass.setImageList(e.getString("file_name"));
                         incidentsClass.setIn_image_name(e.getString("original_file_name"));
+                        incidentsClass.setDelete_Incident_code2(e.getString("incident_code2"));
 
                         // Toast.makeText(context, ""+ incidentsClass.getImageList(), Toast.LENGTH_SHORT).show();
 

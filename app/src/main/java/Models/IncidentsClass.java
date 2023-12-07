@@ -1,9 +1,28 @@
 package Models;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 public class IncidentsClass {
     String Inc_No,Inc_Date,Incidents_Particulars,In_info,In_upload,In_Delete,ImageList,In_image_name,
-            Inc_doc_name,Inc_doc_delete,In_doc_list;
+            Inc_doc_name,Inc_doc_delete,In_doc_list,Name,Delete_Incident_code2;
 
+    public String getDelete_Incident_code2() {
+        return Delete_Incident_code2;
+    }
+
+    public void setDelete_Incident_code2(String delete_Incident_code2) {
+        Delete_Incident_code2 = delete_Incident_code2;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
 
     public String getInc_doc_name() {
         return Inc_doc_name;
