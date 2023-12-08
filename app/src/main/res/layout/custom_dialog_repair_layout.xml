@@ -10,8 +10,7 @@
     <LinearLayout
         android:id="@+id/repair_alert"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
@@ -25,16 +24,6 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/btnbgoutline"
                 android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
 
 
                         <LinearLayout
@@ -50,19 +39,10 @@
                                     android:gravity="center"
                                     android:textStyle="bold"
                                     android:text="Selected Date"
-                                    android:textSize="12dp"/>
+                                    android:textSize="14dp"/>
 
 
                         </LinearLayout>
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -87,7 +67,6 @@
                                         android:layout_height="wrap_content"
                                         android:text="Remarks:"
                                         android:padding="5dp"
-                                        android:gravity="center"
                                         android:textStyle="bold"
                                         android:textColor="#000"
                                         android:textSize="12dp" />
@@ -97,24 +76,12 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:background="@drawable/btnbgedited"
-
-                                        android:gravity="center"
                                         android:padding="5dp"
                                         android:textSize="15dp" />
 
                                 </LinearLayout>
 
                     </LinearLayout>
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:orientation="vertical">
 
                     <View
                         android:layout_width="match_parent"
@@ -175,8 +142,6 @@
                             </LinearLayout>
 
                         </LinearLayout>
-
-                </LinearLayout>
 
             </LinearLayout>
 

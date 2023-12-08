@@ -48,7 +48,7 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
 
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
     private String Personname,Mail,Stpname ,Sitename ,SiteAddress,Process,Mobile;
-    TextView Date_A,STP_A,Remark_A;
+    TextView Equipmet_cd,Item_cd,Remark_A;
     AppCompatButton Update_A,Cancel_A;
     private ProgressDialog progressDialog;
     @SuppressLint("MissingInflatedId")
@@ -115,8 +115,8 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_consumable_details_layout, null);
 
-        STP_A = dialogView.findViewById(R.id.stp_alert_cd);
-        Date_A = dialogView.findViewById(R.id.date_alert_cd);
+        Equipmet_cd = dialogView.findViewById(R.id.equipment_alert_cd);
+        Item_cd = dialogView.findViewById(R.id.item_alert_cd);
         Remark_A = dialogView.findViewById(R.id.remark_alert_cd);
         Update_A = dialogView.findViewById(R.id.update_alert_cd);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_cd);

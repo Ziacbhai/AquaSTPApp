@@ -79,10 +79,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     EditText uName, uNumber, uEmail;
     TextView Uref_code;
-    //private static final int CAMERA_REQUEST = 0;
 
     ImageView Backarrowbtn;
-
     @SuppressLint("MissingInflatedId")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -98,15 +96,6 @@ public class ProfileActivity extends AppCompatActivity {
         Updatebutton = findViewById(R.id.updatebutton);
         Updatebutton.setOnClickListener(v -> updateprofile());
 
-
-        //username = Global.sharedPreferences.getString("username", "");
-
-        /*String personname = Global.sharedPreferences.getString("person_name", "");
-        String refcode = Global.sharedPreferences.getString("ref_code", "");
-        String mail = Global.sharedPreferences.getString("user_email", "");
-        String mobile = Global.sharedPreferences.getString("user_mobile", "");
-        String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-*/
         uName = findViewById(R.id._profilename);
         uNumber = findViewById(R.id.uNumber);
         uEmail = findViewById(R.id.uEmail);
@@ -138,8 +127,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         getuserdetails();
     }
-
-
     public void showImage(Picasso picasso, String userimage) {
         Dialog builder = new Dialog(this);
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -194,10 +181,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-
-
     private void opencamera() {
-
         com.github.dhaval2404.imagepicker.ImagePicker.with(ProfileActivity.this)
                 .crop()                    //Crop image(Optional), Check Customization for more option
                 .compress(1024)            //Final image size will be less than 1 MB(Optional)
@@ -248,10 +232,8 @@ public class ProfileActivity extends AppCompatActivity {
                         String errorMessage = resp.getString("error");
                         Toast.makeText(ProfileActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                         Toast.makeText(ProfileActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-
-
                     } else {
-                        Log.d("else","else");
+                        Log.d("else", "else");
                     }
                 }
             } catch (JSONException e) {
@@ -298,8 +280,6 @@ public class ProfileActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
-
-
             try {
                 JSONObject respObj1 = new JSONObject(response);
                 JSONObject respObj = new JSONObject(respObj1.getString("data"));
@@ -396,7 +376,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Global.updateProfile, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {
@@ -412,11 +391,8 @@ public class ProfileActivity extends AppCompatActivity {
                 Global.editor.putString("person_name", uName.getText().toString());
                 Global.editor.putString("user_mobile", uNumber.getText().toString());
                 Global.editor.putString("user_email", uEmail.getText().toString());
-                Global.editor.putString("ref_code",  Uref_code.getText().toString());
+                Global.editor.putString("ref_code", Uref_code.getText().toString());
                 Global.editor.commit();
-
-
-
                 try {
                     if (response.getBoolean("isSuccess")) {
                         Toast.makeText(ProfileActivity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
@@ -437,11 +413,8 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         }) {
-
             @Override
             public Map<String, String> getHeaders() {
-                // below line we are creating a map for
-                // storing our values in key and value pair.
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
@@ -455,9 +428,7 @@ public class ProfileActivity extends AppCompatActivity {
                 params.put("user_mobile", uNumber.getText().toString());
                 params.put("user_email", uEmail.getText().toString());
                 return params;
-
                 //  String user_image = respObj.getString("user_image");
-
             }
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
@@ -467,5 +438,4 @@ public class ProfileActivity extends AppCompatActivity {
 
         queue.add(stringRequest);
     }
-
 }

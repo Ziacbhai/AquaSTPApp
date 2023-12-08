@@ -132,9 +132,9 @@ public class RepairFragment extends Fragment {
 
         //btnOpenDatePicker = dialogView.findViewById(R.id.btnOpenDatePicker);
         tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
-        Remark_A = dialogView.findViewById(R.id.remark_alert_r);
+    /*    Remark_A = dialogView.findViewById(R.id.remark_alert_r);
         Update_A = dialogView.findViewById(R.id.update_alert_r);
-        Cancel_A = dialogView.findViewById(R.id.cancel_alert_r);
+        Cancel_A = dialogView.findViewById(R.id.cancel_alert_r);*/
 
         tvSelectedDate.setOnClickListener(new View.OnClickListener() {
             @Override

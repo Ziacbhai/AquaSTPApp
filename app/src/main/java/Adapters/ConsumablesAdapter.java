@@ -25,10 +25,8 @@ import Models.ConsumablesClass;
 import Models.IncidentsClass;
 
 public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.Viewholder> {
-
-    Context context;
     private List<ConsumablesClass> consumablesClasses;
-
+    Context context;
     public ConsumablesAdapter(Context context, ArrayList<ConsumablesClass> consumablesS) {
         this.context = context;
         this.consumablesClasses = consumablesS;

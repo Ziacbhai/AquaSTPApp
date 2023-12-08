@@ -10,33 +10,20 @@
     <LinearLayout
         android:id="@+id/repair_alert"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView_a"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
             app:cardMaxElevation="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/btnbgoutline"
-                android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/btnbgoutline"
                     android:padding="5dp"
                     android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
-
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -48,8 +35,6 @@
                                     android:layout_weight="1"
                                     android:gravity="center_horizontal"
                                     android:orientation="vertical">
-
-
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -60,7 +45,7 @@
                                         android:textSize="12dp" />
 
                                     <TextView
-                                        android:id="@+id/date_alert_cd"
+                                        android:id="@+id/equipment_alert_cd"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="equipment"
@@ -94,7 +79,7 @@
 
                                     <TextView
                                         android:layout_marginLeft="1dp"
-                                        android:id="@+id/stp_alert_cd"
+                                        android:id="@+id/item_alert_cd"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:drawablePadding="5dp"
@@ -105,9 +90,6 @@
                                 </LinearLayout>
 
                             </LinearLayout>
-                    </LinearLayout>
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -117,8 +99,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginLeft="8dp"
                         android:background="#01A3A3"/>
 
                             <LinearLayout
@@ -130,7 +112,7 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:gravity="center_horizontal"
+                                    android:gravity="center"
                                     android:orientation="vertical">
 
                                     <TextView
@@ -155,21 +137,13 @@
 
                     </LinearLayout>
 
-
                 </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:orientation="vertical">
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginLeft="8dp"
                         android:background="#01A3A3"/>
 
                         <LinearLayout
@@ -224,8 +198,6 @@
                             </LinearLayout>
 
                         </LinearLayout>
-
-                </LinearLayout>
 
             </LinearLayout>
 

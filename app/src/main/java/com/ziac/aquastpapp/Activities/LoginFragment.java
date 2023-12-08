@@ -276,6 +276,9 @@ public class LoginFragment extends Fragment {
             try {
                 JSONObject respObj1 = new JSONObject(response);
                 JSONObject respObj = new JSONObject(respObj1.getString("data"));
+                String ayear = respObj1.getString("ayear");
+                String finstdate = respObj1.getString("fin_stdate");
+                String fineddate = respObj1.getString("fin_eddate");
                 String user_code = respObj.getString("user_code");
                 String person_name = respObj.getString("person_name");
                 String com_code = respObj.getString("com_code");
@@ -297,6 +300,10 @@ public class LoginFragment extends Fragment {
                 Global.editor.putString("user_email", user_email);
                 Global.editor.putString("ref_code", ref_code);
                 Global.editor.putString("user_image", user_image);
+
+                Global.editor.putString("ayear", ayear);
+                Global.editor.putString("fin_stdate", finstdate);
+                Global.editor.putString("fin_eddate", fineddate);
                // preferences.edit().remove("text").commit();
                 Global.editor.commit();
 
