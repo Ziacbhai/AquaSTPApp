@@ -68,7 +68,7 @@ public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
 
     }
 
-    /*private void getIncident_image_list() {
+   /* private void getIncident_image_list() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         //String Incident_Images = Global.Get_Incidents_Details+ "incident_code=" + Global.sharedPreferences.getString("incident_code" ,"0");

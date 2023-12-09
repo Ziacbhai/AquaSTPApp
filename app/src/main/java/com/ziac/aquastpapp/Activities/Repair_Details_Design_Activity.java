@@ -18,13 +18,17 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
@@ -36,6 +40,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import Adapters.RepairAdapter;
 import Adapters.Repair_details_Adapter;
@@ -43,7 +48,7 @@ import Models.RepairsClass;
 
 public class Repair_Details_Design_Activity extends AppCompatActivity {
     RepairsClass repair_s;
-
+    EditText Equipment_name_cd,Item_cd,Qty_cb;
     TextView Date_A,STP_A,Remark_A;
     AppCompatButton Update_A,Cancel_A;
     RecyclerView Repair_details_recyclerview;
@@ -114,8 +119,6 @@ public class Repair_Details_Design_Activity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_repair_details_layout, null);
-
-
         Date_A = dialogView.findViewById(R.id.date_alert_rd);
         Remark_A = dialogView.findViewById(R.id.remark_alert_rd);
         Update_A = dialogView.findViewById(R.id.update_alert_rd);
@@ -138,8 +141,7 @@ public class Repair_Details_Design_Activity extends AppCompatActivity {
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Handle update button click
-                // You can add your logic here
+              // updateRepairdetails();
                 dialog.dismiss(); // Close the dialog if needed
             }
         });
@@ -219,4 +221,66 @@ public class Repair_Details_Design_Activity extends AppCompatActivity {
         };
         queue.add(jsonObjectRequest);
     }
+
+   /* private void updateRepairdetails() {
+        String remarks=Remark_A.getText().toString();
+        String equipment=Equipment_name_cd.getText().toString();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = Global."" + "type=" + "I";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String sresponse) {
+                JSONObject response;
+                try {
+                    response = new JSONObject(sresponse);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+                try {
+                    if (response.getBoolean("isSuccess")) {
+                        Toast.makeText(Repair_Details_Design_Activity.this, "Updated successfully !!",Toast.LENGTH_SHORT).show();
+                        get_Details_Repair();
+                    } else {
+                        Toast.makeText(Repair_Details_Design_Activity.this, response.getString("error"), Toast.LENGTH_SHORT).show();
+
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("", equipment);
+                params.put("",remarks);
+                params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
+                params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
+                params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
+                params.put("con1_code", "0");
+                return params;
+
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        queue.add(stringRequest);
+    }*/
 }

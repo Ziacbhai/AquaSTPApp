@@ -9,6 +9,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -27,12 +28,15 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
@@ -42,9 +46,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import Adapters.RepairAdapter;
 import Models.RepairsClass;
@@ -58,6 +64,7 @@ public class RepairFragment extends Fragment {
     AppCompatButton Update_A,Cancel_A;
     RecyclerView RepairRecyclerview;
      TextView  Repno,Amount,RepairDate;
+    String currentDatevalue;
     private AppCompatButton btnOpenDatePicker;
     private TextView tvSelectedDate;
     TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
@@ -119,6 +126,19 @@ public class RepairFragment extends Fragment {
         RepairRecyclerview.setHasFixedSize(true);
         RepairRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
+        Date currentDate = new Date();
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            dateFormat = new  SimpleDateFormat("dd-MM-yyyy");
+
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            currentDatevalue = dateFormat.format(currentDate);
+
+        }
+        Global.sharedPreferences.edit();
+        Global.editor.putString("current_date",currentDatevalue);
+        Global.editor.commit();
         getRepair();
         return view;
     }
@@ -130,12 +150,13 @@ public class RepairFragment extends Fragment {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_repair_layout, null);
 
-        //btnOpenDatePicker = dialogView.findViewById(R.id.btnOpenDatePicker);
+        // btnOpenDatePicker = dialogView.findViewById(R.id.btnOpenDatePicker);
         tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
-    /*    Remark_A = dialogView.findViewById(R.id.remark_alert_r);
+        Remark_A = dialogView.findViewById(R.id.remark_alert_r);
         Update_A = dialogView.findViewById(R.id.update_alert_r);
-        Cancel_A = dialogView.findViewById(R.id.cancel_alert_r);*/
+        Cancel_A = dialogView.findViewById(R.id.cancel_alert_r);
 
+        tvSelectedDate.setText(currentDatevalue);
         tvSelectedDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,9 +172,8 @@ public class RepairFragment extends Fragment {
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Handle update button click
-                // You can add your logic here
-                dialog.dismiss(); // Close the dialog if needed
+                //updateRepairs();
+                dialog.dismiss();
             }
         });
 
@@ -284,4 +304,69 @@ public class RepairFragment extends Fragment {
 
 
     }
+
+
+  /*  private void updateRepairs() {
+
+        String remarks=Remark_A.getText().toString();
+        String condate=currentDatevalue.toString();
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = Global."" + "type=" + "I";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String sresponse) {
+                JSONObject response;
+                try {
+                    response = new JSONObject(sresponse);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+                try {
+                    if (response.getBoolean("isSuccess")) {
+                        Toast.makeText(getActivity(), "Updated successfully !!",Toast.LENGTH_SHORT).show();
+                        getRepair();
+                    } else {
+                        Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_SHORT).show();
+
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("", condate);
+                params.put("",remarks);
+                params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
+                params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
+                params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
+                params.put("con1_code", "0");
+                return params;
+
+            }
+
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        queue.add(stringRequest);
+
+    }*/
 }

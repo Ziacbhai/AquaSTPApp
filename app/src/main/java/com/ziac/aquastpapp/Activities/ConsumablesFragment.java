@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -137,9 +139,10 @@ public class ConsumablesFragment extends Fragment {
             currentDatevalue = dateFormat.format(currentDate);
         }
 
-        Global.sharedPreferences.edit();
-        Global.editor.putString("current_date",currentDatevalue);
-        Global.editor.commit();
+//        Global.sharedPreferences.edit();
+//        Global.editor.putString("current_date",currentDatevalue);
+//        Global.editor.commit();
+
         getConsumables();
         return view;
     }
@@ -173,7 +176,7 @@ public class ConsumablesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 updateConsumables();
-
+                dialog.dismiss();
             }
         });
 
@@ -261,11 +264,10 @@ public class ConsumablesFragment extends Fragment {
     private void updateConsumables() {
 
         String remarks=Remark_A.getText().toString();
-        String condate=currentDatevalue.toString();
+        String condate =currentDatevalue.toString();
        // String Con_code = consumables_Class.getCon_no();
 
         RequestQueue queue = Volley.newRequestQueue(context);
-
         String url = Global.updateConsumables + "type=" + "I";
        // Toast.makeText(context, "network error", Toast.LENGTH_SHORT).show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -280,7 +282,6 @@ public class ConsumablesFragment extends Fragment {
                 }
 
                 /*Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-
                 Global.editor = Global.sharedPreferences.edit();
                 Global.editor.putString("con1_code","0");
                 Global.editor.putString("ayear",Global.sharedPreferences.getString("ayear", "0"));
@@ -293,7 +294,6 @@ public class ConsumablesFragment extends Fragment {
                     if (response.getBoolean("isSuccess")) {
                         Toast.makeText(getActivity(), "Updated successfully !!",Toast.LENGTH_SHORT).show();
                         getConsumables();
-                       // finish();
                     } else {
                         Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_SHORT).show();
 
@@ -319,14 +319,14 @@ public class ConsumablesFragment extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("con_date", condate);
+               // params.put("con_date", sharedPreferences.getString("current_date",""));
                 params.put("remarks",remarks);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
                 params.put("con1_code", "0");
 
-
-
+                Log.d("params", String.valueOf(params));
                 return params;
 
             }
@@ -366,7 +366,8 @@ public class ConsumablesFragment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         // Update your TextView with the selected date
-                        updateDateTextView(year, month, dayOfMonth);
+                        updateDateTextView(year, month+1, dayOfMonth);
+                        currentDatevalue = year +"-" + (month+1) + "-" + dayOfMonth;
                     }
                 },
                 initialYear,
@@ -379,10 +380,10 @@ public class ConsumablesFragment extends Fragment {
         datePickerDialog.show();
     }
     private void updateDateTextView(int year, int month, int day) {
-        String current_date = day + "-" + (month + 1) + "-" + year;
+        String current_date = day + "-" + month + "-" + year;
         tvSelectedDate.setText(current_date);
-        Global.sharedPreferences.edit();
+        /*Global.sharedPreferences.edit();
         Global.editor.putString("current_date",current_date);
-        Global.editor.commit();
+        Global.editor.commit();*/
     }
 }

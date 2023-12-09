@@ -62,6 +62,9 @@ public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.
         String formattedConNo = removeTrailingZero(conNo);
         holder.Con_no.setText(formattedConNo);
 
+       // holder.Date.setText(consumablesClasses.get(position).getDate());
+
+
         String dateString = consumablesClasses.get(position).getDate();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -69,9 +72,14 @@ public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.
         try {date = inputFormat.parse(dateString);
             String Date = outputFormat.format(date);
             holder.Date.setText(Date);
+            System.out.println(Date);
         } catch (ParseException e) {e.printStackTrace();
             return;
         }
+
+
+
+
 
         holder.Consumable_info.setOnClickListener(new View.OnClickListener() {
             @Override

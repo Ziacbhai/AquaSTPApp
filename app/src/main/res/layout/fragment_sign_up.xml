@@ -261,6 +261,7 @@
                                 android:layout_marginStart="5dp"
                                 android:hint="City" />
 
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:orientation="horizontal"
@@ -283,6 +284,7 @@
                                    />
 
                             </LinearLayout>
+
 
                         </LinearLayout>
 
