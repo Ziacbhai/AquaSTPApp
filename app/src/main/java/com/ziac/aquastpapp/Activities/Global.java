@@ -81,8 +81,11 @@ public class Global {
     public static String Get_Incidents_Details = baseurl + "api/Incidents/Details?";
 
    // public static String Get_Incidents_ImageUploud = baseurl + "api/Incidents/Details?";
-
     public static String Get_Incidents_delete = baseurl + "api/Incidents/DeleteImgOrDoc?";
+
+    public static String Get_Equipment_select = baseurl + "api/List/GetEquipments?";
+
+    public static String Get_Item_select = baseurl + "api/List/GetProducts?";
 
 
     public static ArrayList<zList> statearraylist;

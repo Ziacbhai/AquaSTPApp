@@ -279,6 +279,7 @@ public class LoginFragment extends Fragment {
                 String ayear = respObj1.getString("ayear");
                 String finstdate = respObj1.getString("fin_stdate");
                 String fineddate = respObj1.getString("fin_eddate");
+
                 String user_code = respObj.getString("user_code");
                 String person_name = respObj.getString("person_name");
                 String com_code = respObj.getString("com_code");

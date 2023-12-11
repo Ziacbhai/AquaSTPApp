@@ -192,8 +192,10 @@ public class ConsumablesFragment extends Fragment {
 
     @SuppressLint("MissingInflatedId")
     private void getConsumables() {
+
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String  consumables = Global.Get_Consumables;
+
 
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String ayear = Global.sharedPreferences.getString("ayear", "2023");
@@ -227,7 +229,6 @@ public class ConsumablesFragment extends Fragment {
                         consumables_Class.setRemark(e.getString("remarks"));
 
                         String Con_code = consumables_Class.getCon_no();
-                        // System.out.println(repair_code);
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("con1_code", Con_code);
                         Global.editor.commit();
@@ -238,6 +239,7 @@ public class ConsumablesFragment extends Fragment {
                     ConsumablesAdapter consumablesAdapter = new ConsumablesAdapter(context,Global.Consumables_s);
                     Consumables_rv.setAdapter(consumablesAdapter);
                 }
+
             }
         }, new Response.ErrorListener() {
             @Override

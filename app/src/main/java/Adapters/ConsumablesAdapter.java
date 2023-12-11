@@ -77,10 +77,6 @@ public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.
             return;
         }
 
-
-
-
-
         holder.Consumable_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -220,7 +220,6 @@ public class SignUpFragment extends Fragment {
         JsonArrayRequest jsonArrayrequest = new JsonArrayRequest(Request.Method.GET, urlGetStates, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-
                 Global.statearraylist = new ArrayList<zList>();
                 statename = new zList();
                 for (int i = 0; i < response.length(); i++) {
@@ -247,6 +246,7 @@ public class SignUpFragment extends Fragment {
                     Global.statearraylist.add(statename);
 
                 }
+
 
             }
         }, new Response.ErrorListener() {
