@@ -252,7 +252,8 @@ public class Consumables_Details_Activity extends AppCompatActivity {
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
-                params.put("con1_code", "0");
+                params.put("con1_code", Global.sharedPreferences.getString("con1_code", "0"));
+                params.put("con2_code", "0");
                 return params;
             }
 
