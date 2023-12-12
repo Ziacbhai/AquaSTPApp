@@ -15,7 +15,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,10 +28,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.Activities.Global;
-import com.ziac.aquastpapp.Activities.ImagePickerCallback;
 import com.ziac.aquastpapp.Activities.IncidentReportingActivity;
 import com.ziac.aquastpapp.Activities.Incident_Image_doc_Select_Activity;
-import com.ziac.aquastpapp.Activities.Incident_Details_Design_Activity;
+import com.ziac.aquastpapp.Activities.Incident_Details_Activity;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONException;
@@ -137,7 +135,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             @Override
             public void onClick(View v) {
                 if (context != null) {
-                    Intent intent = new Intent(context, Incident_Details_Design_Activity.class);
+                    Intent intent = new Intent(context, Incident_Details_Activity.class);
                     context.startActivity(intent);
                 } else {
                     Log.e("Info", "Context is null");

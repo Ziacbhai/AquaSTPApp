@@ -3,40 +3,127 @@
     android:id="@+id/rlayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
+
+  <!--  <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:background="@drawable/btnbgoutline"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tvsingle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:text="Display"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:typeface="sans" />
+
+        <View
+            android:layout_width="1dp"
+            android:background="@color/black"
+            android:layout_height="match_parent"/>
+
+
+        <TextView
+            android:id="@+id/tvtwoeq"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Display"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:typeface="sans" />
+
+    </LinearLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:background="@drawable/btnbgoutline"
+        android:orientation="vertical">
+
+      <!--  <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/consumables_border"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:text="Equipment Name"
+                android:textColor="#000000"
+                android:textSize="12dp"
+                android:typeface="sans" />
+
+            <View
+                android:layout_width="1dp"
+                android:background="@color/black"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:text="Equipment ID"
+                android:textColor="#000000"
+                android:textSize="12dp"
+                android:typeface="sans" />
+        </LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tvsingle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:padding="8dp"
-                    android:text="Display"
-                    android:textSize="10dp"
-                    android:textColor="#000000"
-                    android:typeface="sans" />
+            <TextView
+                android:id="@+id/tvsingle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Display"
+                android:textColor="#000000"
+                android:textSize="10dp"
+                android:typeface="sans" />
+            <View
+                android:layout_width="1dp"
+                android:background="@color/black"
+                android:layout_height="match_parent"/>
 
-                <View
-                    android:layout_width="1dp"
-                    android:background="@color/black"
-                    android:layout_height="match_parent"/>
-                <TextView
-                    android:id="@+id/tvtwo"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:padding="8dp"
-                    android:textSize="10dp"
-                    android:text="Display"
-                    android:textColor="#000000"
-                    android:typeface="sans" />
+            <TextView
+                android:id="@+id/tvtwoeq"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Display"
+                android:textColor="#000000"
+                android:textSize="10dp"
+                android:typeface="sans" />
         </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
 
 </LinearLayout>
 

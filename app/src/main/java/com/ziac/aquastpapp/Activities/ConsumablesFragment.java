@@ -72,6 +72,8 @@ public class ConsumablesFragment extends Fragment {
    String currentDatevalue;
     Context context;
 
+    ConsumablesAdapter consumablesAdapter;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -128,6 +130,7 @@ public class ConsumablesFragment extends Fragment {
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         Consumables_rv.setHasFixedSize(true);
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        Consumables_rv.setAdapter(consumablesAdapter);
 
         Date currentDate = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = null;
@@ -236,7 +239,7 @@ public class ConsumablesFragment extends Fragment {
                         throw new RuntimeException(ex);
                     }
                     Global.Consumables_s.add(consumables_Class);
-                    ConsumablesAdapter consumablesAdapter = new ConsumablesAdapter(context,Global.Consumables_s);
+                    consumablesAdapter = new ConsumablesAdapter(context,Global.Consumables_s);
                     Consumables_rv.setAdapter(consumablesAdapter);
                 }
 
@@ -328,7 +331,7 @@ public class ConsumablesFragment extends Fragment {
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
                 params.put("con1_code", "0");
 
-                Log.d("params", String.valueOf(params));
+                //Log.d("params", String.valueOf(params));
                 return params;
 
             }

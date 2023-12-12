@@ -23,7 +23,6 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,18 +56,20 @@ import java.util.concurrent.TimeUnit;
 
 import Adapters.Consumables_Details_Adapter;
 import Models.ConsumablesClass;
+import Models.EquipmentListClassConsumables;
+import Models.ItemListClassConsumables;
 
-public class Consumables_Details_Design_Activity extends AppCompatActivity {
+public class Consumables_Details_Activity extends AppCompatActivity {
     ConsumablesClass consumables_Class;
     RecyclerView Consumables_D_Rv;
     Context context;
-    private ConsumablesClass equipment_spinner;
-    private ConsumablesClass Item_spinner;
+    private EquipmentListClassConsumables equipment_spinner;
+    private ItemListClassConsumables Item_spinner;
     private Dialog zDialog;
-    TextView usersiteH, userstpH, usersiteaddressH, Mailid, Mobno, personnameH;
-    private String Personname, Mail, Stpname, Sitename, SiteAddress, Process, Mobile;
+    TextView usersiteH, userstpH, usersiteaddressH, Mailid, Mobno, personnameH,Equipment_name,Equipment_id;
+
     TextView Equipment_name_cd, Item_cd, Qty_cb;
-    ImageView Equipment_name_cd_spinner, Item_cd_spinner;
+    //ImageView Equipment_name_cd_spinner, Item_cd_spinner;
     AppCompatButton Update_A, Cancel_A;
     private ProgressDialog progressDialog;
 
@@ -91,7 +92,9 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
+        getConsumablesDetails();
 
+        String Personname, Mail, Stpname, Sitename, SiteAddress, Process, Mobile;
         Sitename = sharedPreferences.getString("site_name", "");
         Stpname = sharedPreferences.getString("stp_name", "");
         SiteAddress = sharedPreferences.getString("site_address", "");
@@ -99,6 +102,7 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
         Mail = sharedPreferences.getString("user_email", "");
         Mobile = sharedPreferences.getString("user_mobile", "");
         Personname = sharedPreferences.getString("person_name", "");
+
 
         usersiteH = findViewById(R.id.site_name);
         userstpH = findViewById(R.id.stp_name);
@@ -113,7 +117,8 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
         Mailid.setText(Mail);
         Mobno.setText(Mobile);
         personnameH.setText(Personname);
-        getConsumables_Details();
+
+
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +133,7 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
         Consumables_D_Rv.setHasFixedSize(true);
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 
+
     }
 
     @SuppressLint("MissingInflatedId")
@@ -137,22 +143,19 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
         View dialogView = inflater.inflate(R.layout.custom_dialog_consumable_details_layout, null);
         Equipment_name_cd = dialogView.findViewById(R.id.equipment_name_alert_spinner);
         Item_cd = dialogView.findViewById(R.id.item_name_alert_spinner);
-        getEquipmentsSpinner();
-       getItemSpinner();
         Equipment_name_cd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                getEquipmentsSpinnerPopup();
             }
         });
         Item_cd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               getItemSpinnerPopup();
+                getItemSpinnerPopup();
             }
         });
-
-
         Qty_cb = dialogView.findViewById(R.id.qty_alert_cd);
         Update_A = dialogView.findViewById(R.id.update_alert_cd);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_cd);
@@ -193,12 +196,11 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
         String item_cd = Item_cd.getText().toString();
 
         RequestQueue queue = Volley.newRequestQueue(context);
-
-        String url = Global.updateDConsumables + "type=" + "U";
-
+        String url = Global.updateDConsumables;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {
+                Log.d("Response", sresponse); // Add this line
                 JSONObject response;
                 try {
                     response = new JSONObject(sresponse);
@@ -208,7 +210,7 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
                 try {
                     if (response.getBoolean("isSuccess")) {
                         Toast.makeText(context, "Updated successfully !!", Toast.LENGTH_SHORT).show();
-                        getConsumables_Details();
+                        getConsumablesDetails();
                     } else {
                         Toast.makeText(context, response.getString("error"), Toast.LENGTH_SHORT).show();
 
@@ -220,7 +222,18 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
+                if (error instanceof TimeoutError) {
+                    Toast.makeText(Consumables_Details_Activity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NoConnectionError) {
+                    Toast.makeText(Consumables_Details_Activity.this, "No Connection Found", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(Consumables_Details_Activity.this, "Server Error", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NetworkError) {
+                    Toast.makeText(Consumables_Details_Activity.this, "Network Error", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(Consumables_Details_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();
+                }
             }
         }) {
             @Override
@@ -254,11 +267,13 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
 
     }
 
-    private void getConsumables_Details() {
+    private void getConsumablesDetails() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String consumables_d = Global.Get_Consumables_Details;
-        String Consumable_Details_API = consumables_d + "con1_code=" + Global.sharedPreferences.getString("con1_code", "0");
+      //  String Consumable_Details_API = consumables_d + "con1_code=" + Global.sharedPreferences.getString("con1_code", "0");
+        String Consumable_Details_API = consumables_d + "con1_code=" +  "2" ;
 
+        progressDialog.show();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Consumable_Details_API, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -290,18 +305,8 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
                         consumables_Class.setD_unit(e.getString("unit_name"));
                         consumables_Class.setD_rate(e.getString("prch_price"));
 
-                     /*   String equipslno = e.getString("equip_slno");
-                        Global.editor = Global.sharedPreferences.edit();
-                        Global.editor.putString("equip_slno",equipslno);
-                        // Log.d("YourTag", "incident_code" + incident_code);
-                        //Toast.makeText(context, ""+incident_code, Toast.LENGTH_SHORT).show();
-                        Global.editor.commit();*/
-
-                        Log.d("YourTag", "Equipment Name: " + consumables_Class.getEquipment_Name());
-                        Log.d("YourTag", "Equipment ID: " + consumables_Class.getEquipment_id());
-                        Log.d("YourTag", "D Amount: " + consumables_Class.getD_Amount());
-
                     } catch (JSONException ex) {
+                        progressDialog.dismiss();
                         throw new RuntimeException(ex);
                     }
                     Global.Consumables_s.add(consumables_Class);
@@ -309,23 +314,25 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
                     Consumables_D_Rv.setAdapter(consumablesDetailsAdapter);
                 }
 
-
+                getEquipmentsList();
+                getItemSpinner();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // Global.customtoast(Consumables_Details_Design_Activity.this,getLayoutInflater(), error.getMessage());
+                progressDialog.dismiss();
                 if (error instanceof TimeoutError) {
-                    Toast.makeText(Consumables_Details_Design_Activity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Consumables_Details_Activity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(Consumables_Details_Design_Activity.this, "No Connection Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Consumables_Details_Activity.this, "No Connection Found", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ServerError) {
-                    Toast.makeText(Consumables_Details_Design_Activity.this, "Server Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Consumables_Details_Activity.this, "Server Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NetworkError) {
-                    Toast.makeText(Consumables_Details_Design_Activity.this, "Network Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Consumables_Details_Activity.this, "Network Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ParseError) {
-                    Toast.makeText(Consumables_Details_Design_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Consumables_Details_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();
                 }
+
             }
         }) {
             public Map<String, String> getHeaders() {
@@ -345,9 +352,9 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
 
     }
 
-    private void getEquipmentsSpinner() {
+    private void getEquipmentsList() {
 
-        String Url = Global.Get_Equipment_select + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
+        String Url = Global.api_List_Get_Equipments + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
         Url = Url + "&sstp1_code=" + Global.sharedPreferences.getString("sstp1_code", "0");
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -356,26 +363,24 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        Global.Consumables_s = new ArrayList<>();
+                        Global.Consumabeles_equipment = new ArrayList<>();
 
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject equipmentJson = response.getJSONObject(i);
-                                ConsumablesClass equipment = new ConsumablesClass();
+                                EquipmentListClassConsumables equipment = new EquipmentListClassConsumables();
 
                                 equipment.setEquipment_id(equipmentJson.getString("equip_slno"));
                                 equipment.setEquipment_Name(equipmentJson.getString("equip_name"));
 
-                               /* Log.d("YourTag", "Name: " + equipmentJson.getString("equip_name"));
-                                Log.d("YourTag", "Code: " + equipmentJson.getString("sstp1_code"));*/
-
-
-                                Global.Consumables_s.add(equipment);
+                                Global.Consumabeles_equipment.add(equipment);
 
                             } catch (JSONException ex) {
                                 ex.printStackTrace();
                             }
                         }
+
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -398,22 +403,29 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
 
 
     private void getEquipmentsSpinnerPopup() {
+
+
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
 
-        zDialog.setContentView(R.layout.popup_select_equipment);
+        zDialog.setContentView(R.layout.equipment_item);
 
-        ListView lvEqName = zDialog.findViewById(R.id.lvequipment_name);
+        ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
+        TextView Equipment_name =zDialog.findViewById(R.id.euipment_name);
+        TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);
 
-        if (Global.Consumables_s == null || Global.Consumables_s.size() == 0) {
+        if (Global.Consumabeles_equipment == null || Global.Consumabeles_equipment.size() == 0) {
             Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
             return;
         }
-        final EquipmentSelect_Adapter laStates = new EquipmentSelect_Adapter(Global.Consumables_s);
-        lvEqName.setAdapter(laStates);
+        final EquipmentSelect_Adapter EqA = new EquipmentSelect_Adapter(Global.Consumabeles_equipment);
+        lvEqName.setAdapter(EqA);
+
+        Equipment_name.setText("Equipment Name");
+        Equipment_id.setText("Equipment ID");
         zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         zDialog.show();
 
-        SearchView sveq = zDialog.findViewById(R.id.sveq);
+        SearchView sveq = zDialog.findViewById(R.id.svequipment);
 
         sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -423,27 +435,28 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                laStates.getFilter().filter(newText);
+                EqA.getFilter().filter(newText);
                 return false;
             }
         });
     }
 
-    private class EquipmentSelect_Adapter extends BaseAdapter implements Filterable {
-        private ArrayList<ConsumablesClass> mDataArrayList;
+    private class EquipmentSelect_Adapter extends BaseAdapter implements Filterable{
 
-        public EquipmentSelect_Adapter(ArrayList<ConsumablesClass> mDataArrayList) {
-            this.mDataArrayList = mDataArrayList;
+        private ArrayList<EquipmentListClassConsumables> eQarrayList;
+
+        public EquipmentSelect_Adapter(ArrayList<EquipmentListClassConsumables> eQarrayList) {
+            this.eQarrayList = eQarrayList;
         }
 
         @Override
         public int getCount() {
-            return mDataArrayList.size();
+            return eQarrayList.size();
         }
 
         @Override
         public Object getItem(int i) {
-            return mDataArrayList.get(i);
+            return eQarrayList.get(i);
         }
 
         @Override
@@ -454,16 +467,15 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
         @Override
         public View getView(int i, View convertView, ViewGroup parent) {
             View v = getLayoutInflater().inflate(R.layout.popup_equipmentlist, null);
-            TextView tvequipmentnameitem = v.findViewById(R.id.tvsingle);
-            TextView tvenameitem = v.findViewById(R.id.tvtwo);
+            TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
+            TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
+            equipment_spinner = eQarrayList.get(i);
 
-            equipment_spinner = mDataArrayList.get(i);
+            equipmentnameitem.setText(equipment_spinner.getEquipment_Name());
+            eqnameitem.setText(equipment_spinner.getEquipment_id());
 
-            tvequipmentnameitem.setText(equipment_spinner.getEquipment_Name());
-            tvenameitem.setText(equipment_spinner.getEquipment_id());
-
-            tvequipmentnameitem.setOnClickListener(view1 -> {
-                equipment_spinner = mDataArrayList.get(i);
+            equipmentnameitem.setOnClickListener(view1 -> {
+                equipment_spinner = eQarrayList.get(i);
                 Equipment_name_cd.setText(equipment_spinner.getEquipment_Name());
                 zDialog.dismiss();
             });
@@ -471,18 +483,17 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
             return v;
         }
 
-
         @Override
         public Filter getFilter() {
             return new Filter() {
                 @Override
                 protected FilterResults performFiltering(CharSequence charSequence) {
-                    List<ConsumablesClass> mFilteredList = new ArrayList<>();
+                    ArrayList<EquipmentListClassConsumables> mFilteredList = new ArrayList<>();
                     String charString = charSequence.toString();
                     if (charString.isEmpty()) {
-                        mFilteredList = Global.Consumables_s;
+                        mFilteredList = Global.Consumabeles_equipment;
                     } else {
-                        for (ConsumablesClass dataList : Global.Consumables_s) {
+                        for (EquipmentListClassConsumables dataList : Global.Consumabeles_equipment) {
                             if (dataList.getEquipment_Name().toLowerCase().contains(charString) ||
                                     dataList.getEquipment_id().toLowerCase().contains(charString)) {
                                 mFilteredList.add(dataList);
@@ -498,35 +509,35 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
 
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                    mDataArrayList = (ArrayList<ConsumablesClass>) filterResults.values;
+                    eQarrayList = (ArrayList<EquipmentListClassConsumables>) filterResults.values;
                     notifyDataSetChanged();
                 }
             };
         }
     }
 
-
     private void getItemSpinner() {
-        String Url = Global.Get_Item_select + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
+        String Url = Global.api_List_Get_Item + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
 
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Global.Consumables_s = new ArrayList<>();
+                Global.Consumbeles_item = new ArrayList<>();
 
                 for (int i = 0; i < response.length(); i++) {
                     try {
-                        JSONObject equipmentJson = response.getJSONObject(i);
-                        ConsumablesClass equipment = new ConsumablesClass();
 
-                        equipment.setD_item(equipmentJson.getString("part_no"));
-                        equipment.setD_item_name(equipmentJson.getString("prd_name"));
+                        JSONObject equipmentJson = response.getJSONObject(i);
+                        ItemListClassConsumables item = new ItemListClassConsumables();
+
+                        item.setItem(equipmentJson.getString("part_no"));
+                        item.setItem_name(equipmentJson.getString("prd_name"));
 
                         //Log.d("YourTag", "Name: " + equipmentJson.getString("equip_name"));
                        // Log.d("YourTag", "Code: " + equipmentJson.getString("sstp1_code"));
 
-                        Global.Consumables_s.add(equipment);
+                        Global.Consumbeles_item.add(item);
 
                     } catch (JSONException ex) {
                         ex.printStackTrace();
@@ -537,15 +548,15 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof TimeoutError) {
-                    Toast.makeText(Consumables_Details_Design_Activity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Consumables_Details_Activity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(Consumables_Details_Design_Activity.this, "No Connection Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Consumables_Details_Activity.this, "No Connection Found", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ServerError) {
-                    Toast.makeText(Consumables_Details_Design_Activity.this, "Server Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Consumables_Details_Activity.this, "Server Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NetworkError) {
-                    Toast.makeText(Consumables_Details_Design_Activity.this, "Network Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Consumables_Details_Activity.this, "Network Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ParseError) {
-                    Toast.makeText(Consumables_Details_Design_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();}
+                    Toast.makeText(Consumables_Details_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();}
 
             }
         }) {
@@ -561,22 +572,26 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
     }
 
     private void getItemSpinnerPopup() {
+
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        zDialog.setContentView(R.layout.equipment_item);
+        ListView lvItem= zDialog.findViewById(R.id.lvequipment);
+        TextView Equipment_name =zDialog.findViewById(R.id.euipment_name);
+        TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);
 
-        zDialog.setContentView(R.layout.popup_list);
-
-        ListView lvItem= zDialog.findViewById(R.id.lvstates);
-
-        if (Global.Consumables_s == null || Global.Consumables_s.size() == 0) {
+        if (Global.Consumbeles_item == null || Global.Consumbeles_item.size() == 0) {
             Toast.makeText(getBaseContext(), "Item list not found !! Please try again !!", Toast.LENGTH_LONG).show();
             return;
         }
-        final ItemSelect_Adapter laItem = new ItemSelect_Adapter(Global.Consumables_s);
+        final ItemSelect_Adapter laItem = new ItemSelect_Adapter(Global.Consumbeles_item);
         lvItem.setAdapter(laItem);
+
+        Equipment_name.setText("Item Name");
+        Equipment_id.setText("Item ID");
         zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         zDialog.show();
 
-        SearchView sveq = zDialog.findViewById(R.id.svstate);
+        SearchView sveq = zDialog.findViewById(R.id.svequipment);
 
         sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -594,9 +609,9 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
 
     public class ItemSelect_Adapter extends BaseAdapter implements Filterable {
 
-        private ArrayList<ConsumablesClass> mDataArrayList;
+        private ArrayList<ItemListClassConsumables> mDataArrayList;
 
-        public ItemSelect_Adapter(ArrayList<ConsumablesClass> mDataArrayList) {
+        public ItemSelect_Adapter(ArrayList<ItemListClassConsumables> mDataArrayList) {
             this.mDataArrayList = mDataArrayList;
         }
 
@@ -621,16 +636,16 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
 
             View v = getLayoutInflater().inflate(R.layout.popup_itemlist_consumable, null);
            TextView tvequipmentnameitem = v.findViewById(R.id.tvitemfirst);
-           TextView tvenameitem = v.findViewById(R.id.tvitemtwo);
+           TextView tvenameitem = v.findViewById(R.id.tvitemtwoc);
 
             Item_spinner = mDataArrayList.get(i);
 
-            tvequipmentnameitem.setText(Item_spinner.getD_item_name());
-            tvenameitem.setText(Item_spinner.getD_item());
+            tvequipmentnameitem.setText(Item_spinner.getItem_name());
+            tvenameitem.setText(Item_spinner.getItem());
 
             tvequipmentnameitem.setOnClickListener(view1 -> {
                 Item_spinner = mDataArrayList.get(i);
-                Item_cd.setText(Item_spinner.getD_item_name());
+                Item_cd.setText(Item_spinner.getItem_name());
                 zDialog.dismiss();
             });
 
@@ -642,14 +657,14 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
             return new Filter() {
                 @Override
                 protected FilterResults performFiltering(CharSequence charSequence) {
-                    List<ConsumablesClass> mFilteredList = new ArrayList<>();
+                    List<ItemListClassConsumables> mFilteredList = new ArrayList<>();
                     String charString = charSequence.toString();
                     if (charString.isEmpty()) {
-                        mFilteredList = Global.Consumables_s;
+                        mFilteredList = Global.Consumbeles_item;
                     } else {
-                        for (ConsumablesClass dataList : Global.Consumables_s) {
-                            if (dataList.getD_item_name().toLowerCase().contains(charString) ||
-                                    dataList.getD_item().toLowerCase().contains(charString)) {
+                        for (ItemListClassConsumables dataList : Global.Consumbeles_item) {
+                            if (dataList.getItem_name().toLowerCase().contains(charString) ||
+                                    dataList.getItem().toLowerCase().contains(charString)) {
                                 mFilteredList.add(dataList);
                             }
                         }
@@ -663,12 +678,10 @@ public class Consumables_Details_Design_Activity extends AppCompatActivity {
 
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                    mDataArrayList = (ArrayList<ConsumablesClass>) filterResults.values;
+                    mDataArrayList = (ArrayList<ItemListClassConsumables>) filterResults.values;
                     notifyDataSetChanged();
                 }
             };
         }
     }
-
-
 }

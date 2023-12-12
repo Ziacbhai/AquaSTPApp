@@ -34,9 +34,8 @@ import java.util.Map;
 
 import Adapters.Lab_Test_Details_Adapter;
 import Models.IncidentsClass;
-import Models.LabTestClass;
 
-public class Incident_Details_Design_Activity extends AppCompatActivity {
+public class Incident_Details_Activity extends AppCompatActivity {
     RecyclerView Incident_details_Rv;
     IncidentsClass incidentsClass;
     Context context;

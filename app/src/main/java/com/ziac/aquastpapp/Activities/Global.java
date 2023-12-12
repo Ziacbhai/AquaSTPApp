@@ -16,7 +16,9 @@ import java.util.ArrayList;
 
 import Models.CommonModelClass;
 import Models.ConsumablesClass;
+import Models.EquipmentListClassConsumables;
 import Models.IncidentsClass;
+import Models.ItemListClassConsumables;
 import Models.ItemStockClass;
 import Models.LabTestClass;
 import Models.RepairsClass;
@@ -61,8 +63,6 @@ public class Global {
 
     public static String updateDConsumables = baseurl + "api/Consumables/AddEditConsumablesDetails";
 
-    public static String api_List_Get_Equipments = baseurl + "api/List/GetEquipments?";
-
     public static String tokenurl = baseurl+"TOKEN";
 
     public static String Equipment_Details_com_pumps = baseurl + "api/Masters/GetPumps?";
@@ -83,9 +83,9 @@ public class Global {
    // public static String Get_Incidents_ImageUploud = baseurl + "api/Incidents/Details?";
     public static String Get_Incidents_delete = baseurl + "api/Incidents/DeleteImgOrDoc?";
 
-    public static String Get_Equipment_select = baseurl + "api/List/GetEquipments?";
 
-    public static String Get_Item_select = baseurl + "api/List/GetProducts?";
+    public static String api_List_Get_Equipments = baseurl + "api/List/GetEquipments?";
+    public static String api_List_Get_Item = baseurl + "api/List/GetProducts?";
 
 
     public static ArrayList<zList> statearraylist;
@@ -96,6 +96,9 @@ public class Global {
     public static ArrayList<ItemStockClass> Item_stock;
     public static ArrayList<RepairsClass> Repair_s;
     public static ArrayList<ConsumablesClass> Consumables_s;
+
+    public static ArrayList<EquipmentListClassConsumables> Consumabeles_equipment;
+    public static ArrayList<ItemListClassConsumables> Consumbeles_item;
     public static ArrayList<LabTestClass> Labtest_s;
     public static ArrayList<IncidentsClass> Incident_s;
 

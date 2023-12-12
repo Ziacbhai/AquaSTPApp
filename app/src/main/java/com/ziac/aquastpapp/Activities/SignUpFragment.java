@@ -266,7 +266,7 @@ public class SignUpFragment extends Fragment {
 
         zDialog.setContentView(R.layout.popup_list);
 
-        ListView lvStates = zDialog.findViewById(R.id.lvstates);
+        ListView lvStates = zDialog.findViewById(R.id.lvequipment);
 
         if (Global.statearraylist == null || Global.statearraylist.size() == 0) {
             // Toast.makeText(getBaseContext(), "States list not found !! Please try again !!", Toast.LENGTH_LONG).show();
@@ -277,7 +277,7 @@ public class SignUpFragment extends Fragment {
         zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         zDialog.show();
 
-        SearchView svstate = zDialog.findViewById(R.id.svstate);
+        SearchView svstate = zDialog.findViewById(R.id.svequipment);
 
         svstate.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -452,7 +452,7 @@ public class SignUpFragment extends Fragment {
         //zDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         zDialog.setContentView(R.layout.popup_list);
 
-        ListView lvStates = zDialog.findViewById(R.id.lvstates);
+        ListView lvStates = zDialog.findViewById(R.id.lvequipment);
 
         if (Global.cityarraylist == null || Global.cityarraylist.size() == 0) {
 //            Toast.makeText(getBaseContext(), "City list not found !! Please try again !!", Toast.LENGTH_LONG).show();
@@ -466,7 +466,7 @@ public class SignUpFragment extends Fragment {
         zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         zDialog.show();
 
-        SearchView svstate = zDialog.findViewById(R.id.svstate);
+        SearchView svstate = zDialog.findViewById(R.id.svequipment);
 
         svstate.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

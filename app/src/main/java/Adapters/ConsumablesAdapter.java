@@ -10,8 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ziac.aquastpapp.Activities.Consumables_Details_Design_Activity;
-import com.ziac.aquastpapp.Activities.Repair_Details_Design_Activity;
+import com.ziac.aquastpapp.Activities.Consumables_Details_Activity;
 import com.ziac.aquastpapp.R;
 
 import java.text.ParseException;
@@ -22,7 +21,6 @@ import java.util.List;
 import java.util.Locale;
 
 import Models.ConsumablesClass;
-import Models.IncidentsClass;
 
 public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.Viewholder> {
     private List<ConsumablesClass> consumablesClasses;
@@ -72,7 +70,7 @@ public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.
         try {date = inputFormat.parse(dateString);
             String Date = outputFormat.format(date);
             holder.Date.setText(Date);
-            System.out.println(Date);
+
         } catch (ParseException e) {e.printStackTrace();
             return;
         }
@@ -80,7 +78,7 @@ public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.
         holder.Consumable_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, Consumables_Details_Design_Activity.class);
+                Intent i = new Intent(context, Consumables_Details_Activity.class);
                 context.startActivity(i);
             }
         });

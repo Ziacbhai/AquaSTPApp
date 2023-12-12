@@ -2,27 +2,17 @@ package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -38,17 +28,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import Adapters.Consumables_Details_Adapter;
 import Adapters.Lab_Test_Details_Adapter;
-import Models.ConsumablesClass;
 import Models.LabTestClass;
 
-public class Lab_Test_Details_Design_Activity extends AppCompatActivity {
+public class Lab_Test_Details_Activity extends AppCompatActivity {
     RecyclerView Labtest_details_Rv;
     LabTestClass labTest_Dclass;
     Context context;
