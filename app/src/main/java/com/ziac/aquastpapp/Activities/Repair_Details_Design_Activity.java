@@ -48,55 +48,23 @@ import Models.RepairsClass;
 
 public class Repair_Details_Design_Activity extends AppCompatActivity {
     RepairsClass repair_s;
-    EditText Equipment_name_cd,Item_cd,Qty_cb;
+
     TextView Date_A,STP_A,Remark_A;
     AppCompatButton Update_A,Cancel_A;
     RecyclerView Repair_details_recyclerview;
-
-    TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
-    private String Personname,Mail,Stpname ,Sitename ,SiteAddress,Process,Mobile;
-
     Context context;
-
     private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_details_design);
-
-
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        context = this;
+        user_topcard();
 
         if (!Global.isNetworkAvailable(this)) {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading !!");
-        progressDialog.setCancelable(true);
-
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        SiteAddress = sharedPreferences.getString("site_address", "");
-        Process = sharedPreferences.getString("process_name", "");
-        Mail = sharedPreferences.getString("user_email", "");
-        Mobile = sharedPreferences.getString("user_mobile", "");
-        Personname = sharedPreferences.getString("person_name", "");
-
-        usersiteH = findViewById(R.id.site_name);
-        userstpH = findViewById(R.id.stp_name);
-        usersiteaddressH = findViewById(R.id.site_address);
-        Mailid = findViewById(R.id.email);
-        Mobno = findViewById(R.id._mobile);
-        personnameH = findViewById(R.id.person_name);
-
-        usersiteH.setText(Sitename);
-        userstpH.setText(Stpname + " / " + Process);
-        usersiteaddressH.setText(SiteAddress);
-        Mailid.setText(Mail);
-        Mobno.setText(Mobile);
-        personnameH.setText(Personname);
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
@@ -113,6 +81,39 @@ public class Repair_Details_Design_Activity extends AppCompatActivity {
         Repair_details_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         get_Details_Repair();
 
+    }
+
+    private void user_topcard() {
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Loading !!");
+        progressDialog.setCancelable(true);
+
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        sitename = sharedPreferences.getString("site_name", "");
+        stpname = sharedPreferences.getString("stp_name", "");
+        siteaddress = sharedPreferences.getString("site_address", "");
+        processname = sharedPreferences.getString("process_name", "");
+        useremail = sharedPreferences.getString("user_email", "");
+        usermobile = sharedPreferences.getString("user_mobile", "");
+        personname = sharedPreferences.getString("person_name", "");
+
+        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+
+        txtsitename = findViewById(R.id.sitename);
+        txtstpname = findViewById(R.id.stpname);
+        txtsiteaddress = findViewById(R.id.siteaddress);
+        txtuseremail = findViewById(R.id.useremail);
+        txtusermobile = findViewById(R.id.usermobile);
+        txtpersonname = findViewById(R.id.personname);
+
+        txtsitename.setText(sitename);
+        txtstpname.setText(stpname + " / " + processname);
+        txtsiteaddress.setText(siteaddress);
+        txtuseremail.setText(useremail);
+        txtusermobile.setText(usermobile);
+        txtpersonname.setText(personname);
     }
     @SuppressLint("MissingInflatedId")
     private void showAddDetailsDialog (Context context) {
@@ -142,15 +143,13 @@ public class Repair_Details_Design_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
               // updateRepairdetails();
-                dialog.dismiss(); // Close the dialog if needed
+                dialog.dismiss();
             }
         });
         Cancel_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Handle cancel button click
-                // You can add your logic here
-                dialog.dismiss(); // Close the dialog if needed
+                dialog.dismiss();
             }
         });
 
@@ -204,11 +203,10 @@ public class Repair_Details_Design_Activity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+
             }
         }){
             public Map<String, String> getHeaders() {
-                // below line we are creating a map for
-                // storing our values in key and value pair.
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);

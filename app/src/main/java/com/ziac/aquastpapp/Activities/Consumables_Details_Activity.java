@@ -80,8 +80,6 @@ public class Consumables_Details_Activity extends AppCompatActivity {
         context = this;
         user_topcard();
 
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         if (!Global.isNetworkAvailable(this)) {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
         }

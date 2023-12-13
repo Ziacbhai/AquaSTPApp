@@ -49,66 +49,32 @@ import Models.zList;
 
 
 public class LabTestFragment extends Fragment {
-
     RecyclerView LabTestRecyclerview;
     LabTestClass labTestClass;
-    AppCompatButton Update_A;
-    TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
-    private String Personname,mail,Stpname ,Sitename ,SiteAddress,Process ,Mobile;
     LabTestAdapter labTestAdapter;
     private ProgressDialog progressDialog;
-    Context context ;
-    ImageView IMV;
+    Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_lab_test, container, false);
+        View view = inflater.inflate(R.layout.fragment_lab_test, container, false);
 
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        context = getContext();
+        user_topcard(view);
 
         if (!Global.isNetworkAvailable(getActivity())) {
             Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
-
-        progressDialog = new ProgressDialog(requireActivity());
-        progressDialog.setMessage("Loading !!");
-        progressDialog.setCancelable(true);
-
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        SiteAddress = sharedPreferences.getString("site_address", "");
-        Process = sharedPreferences.getString("process_name", "");
-        mail = sharedPreferences.getString("user_email", "");
-        Mobile = sharedPreferences.getString("user_mobile", "");
-        Personname = sharedPreferences.getString("person_name", "");
-
-        usersiteH = view.findViewById(R.id.site_name);
-        userstpH = view.findViewById(R.id.stp_name);
-        usersiteaddressH = view.findViewById(R.id.site_address);
-
-        Mailid = view.findViewById(R.id.email);
-        Mobno = view.findViewById(R.id._mobile);
-        personnameH = view.findViewById(R.id.person_name);
-
-        usersiteH.setText(Sitename);
-        userstpH.setText(Stpname + " / " + Process);
-        usersiteaddressH.setText(SiteAddress);
-
-        Mailid.setText(mail);
-        Mobno.setText(Mobile);
-        personnameH.setText(Personname);
         FloatingActionButton fab = view.findViewById(R.id.fab);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
             }
         });
+
         LabTestRecyclerview = view.findViewById(R.id.labTest_Recyclerview);
         LabTestRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         LabTestRecyclerview.setHasFixedSize(true);
@@ -117,6 +83,40 @@ public class LabTestFragment extends Fragment {
         getLabTestReports();
         return view;
     }
+
+    private void user_topcard(View view) {
+        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog.setMessage("Loading !!");
+        progressDialog.setCancelable(true);
+
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sitename = sharedPreferences.getString("site_name", "");
+        stpname = sharedPreferences.getString("stp_name", "");
+        siteaddress = sharedPreferences.getString("site_address", "");
+        processname = sharedPreferences.getString("process_name", "");
+        useremail = sharedPreferences.getString("user_email", "");
+        usermobile = sharedPreferences.getString("user_mobile", "");
+        personname = sharedPreferences.getString("person_name", "");
+
+        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
+
+        txtsitename = view.findViewById(R.id.sitename);
+        txtstpname = view.findViewById(R.id.stpname);
+        txtsiteaddress = view.findViewById(R.id.siteaddress);
+        txtuseremail = view.findViewById(R.id.useremail);
+        txtusermobile = view.findViewById(R.id.usermobile);
+        txtpersonname = view.findViewById(R.id.personname);
+
+        txtsitename.setText(sitename);
+        txtstpname.setText(stpname + " / " + processname);
+        txtsiteaddress.setText(siteaddress);
+        txtuseremail.setText(useremail);
+        txtusermobile.setText(usermobile);
+        txtpersonname.setText(personname);
+
+    }
+
     private void getLabTestReports() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String labTest = Global.GetLab_Test_Items;
@@ -124,7 +124,7 @@ public class LabTestFragment extends Fragment {
         String comcode = Global.sharedPreferences.getString("com_code", "");
         String ayear = Global.sharedPreferences.getString("ayear", "2023");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "");
-        labTest = labTest + "comcode=" +  comcode  + "&ayear=" + ayear  + "&sstp1_code=" + sstp1_code ;
+        labTest = labTest + "comcode=" + comcode + "&ayear=" + ayear + "&sstp1_code=" + sstp1_code;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, labTest, null, new Response.Listener<JSONObject>() {
             @Override
@@ -159,10 +159,10 @@ public class LabTestFragment extends Fragment {
                         labTestClass.setSample_Particular(e.getString("sample_desc"));
                         labTestClass.setStatus(e.getString("test_status"));
 
-                        String test_code= labTestClass.getTRno();
+                        String test_code = labTestClass.getTRno();
                         // System.out.println(repair_code);
                         Global.editor = Global.sharedPreferences.edit();
-                        Global.editor.putString("test_code",test_code);
+                        Global.editor.putString("test_code", test_code);
                         Global.editor.commit();
 
                     } catch (JSONException ex) {
@@ -178,7 +178,7 @@ public class LabTestFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             public Map<String, String> getHeaders() {
                 // below line we are creating a map for
                 // storing our values in key and value pair.
@@ -187,6 +187,7 @@ public class LabTestFragment extends Fragment {
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
 

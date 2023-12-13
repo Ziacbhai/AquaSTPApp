@@ -67,10 +67,7 @@ public class ConsumablesFragment extends Fragment {
 
    String currentDatevalue;
     Context context;
-
     ConsumablesAdapter consumablesAdapter;
-
-
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,7 +76,6 @@ public class ConsumablesFragment extends Fragment {
         View view  =  inflater.inflate(R.layout.fragment_consumables, container, false);
 
         context = getContext();
-
         user_topcard(view);
 
         if (!Global.isNetworkAvailable(getActivity())) {

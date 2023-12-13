@@ -62,7 +62,7 @@
                                             android:orientation="vertical">
 
                                             <TextView
-                                                android:id="@+id/site_name"
+                                                android:id="@+id/sitename"
                                                 android:textColor="@color/white"
                                                 android:layout_width="match_parent"
                                                 android:gravity="center_horizontal"
@@ -82,7 +82,7 @@
                                                     android:padding="5dp">
                                                     <TextView
                                                         android:textColor="@color/white"
-                                                        android:id="@+id/stp_name"
+                                                        android:id="@+id/stpname"
                                                         android:layout_weight="1.1"
                                                         android:layout_width="0dp"
                                                         android:gravity="center"
@@ -93,7 +93,7 @@
                                                 </LinearLayout>
                                             </LinearLayout>
                                             <TextView
-                                                android:id="@+id/site_address"
+                                                android:id="@+id/siteaddress"
                                                 android:textColor="@color/white"
                                                 android:layout_width="match_parent"
                                                 android:gravity="center_horizontal"
@@ -103,7 +103,7 @@
                                                 android:textSize="12dp" />
 
                                             <TextView
-                                                android:id="@+id/person_name"
+                                                android:id="@+id/personname"
                                                 android:textColor="@color/white"
                                                 android:layout_width="match_parent"
                                                 android:gravity="center_horizontal"
@@ -114,7 +114,7 @@
 
                                             <TextView
 
-                                                android:id="@+id/email"
+                                                android:id="@+id/useremail"
                                                 android:textColor="@color/white"
                                                 android:layout_width="match_parent"
                                                 android:gravity="center_horizontal"
@@ -124,7 +124,7 @@
                                                 android:textSize="12dp" />
 
                                             <TextView
-                                                android:id="@+id/_mobile"
+                                                android:id="@+id/usermobile"
                                                 android:textColor="@color/white"
                                                 android:layout_width="match_parent"
                                                 android:gravity="center_horizontal"

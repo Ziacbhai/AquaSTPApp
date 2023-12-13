@@ -70,9 +70,9 @@ public class IncidentReportingActivity extends AppCompatActivity{
     Context context;
 
     IncidentsClass incidentsClass;
-    private String userimage, mail, Stpname, Sitename, Siteaddress, userref, person_name;
-    TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
-    private String Personname,Mail ,SiteAddress,Process,Mobile;
+    private String userimage;
+
+
     private ProgressDialog progressDialog;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -80,12 +80,11 @@ public class IncidentReportingActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incident_reporting);
 
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        context = this;
+        user_topcard();
         toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
-        context = this;
         incidentsClass = new IncidentsClass();
 
         Profile = findViewById(R.id.profileIcon);
@@ -94,45 +93,7 @@ public class IncidentReportingActivity extends AppCompatActivity{
         }
         new InternetCheckTask().execute();
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading !!");
-        progressDialog.setCancelable(true);
-
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        SiteAddress = sharedPreferences.getString("site_address", "");
-        Process = sharedPreferences.getString("process_name", "");
-        Mail = sharedPreferences.getString("user_email", "");
-        Mobile = sharedPreferences.getString("user_mobile", "");
-        Personname = sharedPreferences.getString("person_name", "");
-
-        usersiteH = findViewById(R.id.site_name);
-        userstpH = findViewById(R.id.stp_name);
-        usersiteaddressH = findViewById(R.id.site_address);
-        Mailid = findViewById(R.id.email);
-        Mobno = findViewById(R.id._mobile);
-        personnameH = findViewById(R.id.person_name);
-
-        usersiteH.setText(Sitename);
-        userstpH.setText(Stpname + " / " + Process);
-        usersiteaddressH.setText(SiteAddress);
-        Mailid.setText(Mail);
-        Mobno.setText(Mobile);
-        personnameH.setText(Personname);
-
         userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
-        userref = sharedPreferences.getString("ref_code", "");
-        person_name = Global.sharedPreferences.getString("person_name", "");
-
-        mail = Global.sharedPreferences.getString("user_email", "");
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        ////
-        Siteaddress = sharedPreferences.getString("site_address", "");
-        Siteaddress = sharedPreferences.getString("process_name", "");
-
-
-
         Picasso.Builder builder = new Picasso.Builder(getApplication());
         Picasso picasso = builder.build();
         picasso.load(Uri.parse(userimage))
@@ -200,6 +161,38 @@ public class IncidentReportingActivity extends AppCompatActivity{
         Incident_recyclerview.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 
         getIncidentReport();
+    }
+
+    private void user_topcard() {
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Loading !!");
+        progressDialog.setCancelable(true);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+
+        sitename = sharedPreferences.getString("site_name", "");
+        stpname = sharedPreferences.getString("stp_name", "");
+        siteaddress = sharedPreferences.getString("site_address", "");
+        processname = sharedPreferences.getString("process_name", "");
+        useremail = sharedPreferences.getString("user_email", "");
+        usermobile = sharedPreferences.getString("user_mobile", "");
+        personname = sharedPreferences.getString("person_name", "");
+
+        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+
+        txtsitename = findViewById(R.id.sitename);
+        txtstpname = findViewById(R.id.stpname);
+        txtsiteaddress = findViewById(R.id.siteaddress);
+        txtuseremail = findViewById(R.id.useremail);
+        txtusermobile = findViewById(R.id.usermobile);
+        txtpersonname = findViewById(R.id.personname);
+
+        txtsitename.setText(sitename);
+        txtstpname.setText(stpname + " / " + processname);
+        txtsiteaddress.setText(siteaddress);
+        txtuseremail.setText(useremail);
+        txtusermobile.setText(usermobile);
+        txtpersonname.setText(personname);
     }
 
 

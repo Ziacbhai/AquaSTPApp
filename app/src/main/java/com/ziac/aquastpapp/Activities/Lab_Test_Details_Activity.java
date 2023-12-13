@@ -40,9 +40,6 @@ public class Lab_Test_Details_Activity extends AppCompatActivity {
     LabTestClass labTest_Dclass;
     Context context;
 
-    TextView usersiteH, userstpH, usersiteaddressH, Mailid, Mobno, personnameH;
-    private String Personname, mail, Stpname, Sitename, SiteAddress, Process, Mobile;
-
     private ProgressDialog progressDialog;
 
     @SuppressLint("MissingInflatedId")
@@ -50,48 +47,50 @@ public class Lab_Test_Details_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lab_test_details_design);
-
-
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        context = this;
+        user_topcard();
 
         if (!Global.isNetworkAvailable(this)) {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading !!");
-        progressDialog.setCancelable(true);
-
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        SiteAddress = sharedPreferences.getString("site_address", "");
-        Process = sharedPreferences.getString("process_name", "");
-        mail = sharedPreferences.getString("user_email", "");
-        Mobile = sharedPreferences.getString("user_mobile", "");
-        Personname = sharedPreferences.getString("person_name", "");
-
-        usersiteH = findViewById(R.id.site_name);
-        userstpH = findViewById(R.id.stp_name);
-        usersiteaddressH = findViewById(R.id.site_address);
-
-        Mailid = findViewById(R.id.email);
-        Mobno = findViewById(R.id._mobile);
-        personnameH = findViewById(R.id.person_name);
-
-        usersiteH.setText(Sitename);
-        userstpH.setText(Stpname + " / " + Process);
-        usersiteaddressH.setText(SiteAddress);
-
-        Mailid.setText(mail);
-        Mobno.setText(Mobile);
-        personnameH.setText(Personname);
-
         Labtest_details_Rv = findViewById(R.id.labTest_details_Recyclerview);
         Labtest_details_Rv.setLayoutManager(new LinearLayoutManager(this));
         Labtest_details_Rv.setHasFixedSize(true);
         Labtest_details_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         getLabTestDetails();
+    }
+
+    private void user_topcard() {
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Loading !!");
+        progressDialog.setCancelable(true);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        sitename = sharedPreferences.getString("site_name", "");
+        stpname = sharedPreferences.getString("stp_name", "");
+        siteaddress = sharedPreferences.getString("site_address", "");
+        processname = sharedPreferences.getString("process_name", "");
+        useremail = sharedPreferences.getString("user_email", "");
+        usermobile = sharedPreferences.getString("user_mobile", "");
+        personname = sharedPreferences.getString("person_name", "");
+
+        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+
+        txtsitename = findViewById(R.id.sitename);
+        txtstpname = findViewById(R.id.stpname);
+        txtsiteaddress = findViewById(R.id.siteaddress);
+        txtuseremail = findViewById(R.id.useremail);
+        txtusermobile = findViewById(R.id.usermobile);
+        txtpersonname = findViewById(R.id.personname);
+
+        txtsitename.setText(sitename);
+        txtstpname.setText(stpname + " / " + processname);
+        txtsiteaddress.setText(siteaddress);
+        txtuseremail.setText(useremail);
+        txtusermobile.setText(usermobile);
+        txtpersonname.setText(personname);
     }
 
     private void getLabTestDetails() {
