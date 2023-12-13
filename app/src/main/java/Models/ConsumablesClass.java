@@ -1,7 +1,32 @@
 package Models;
 
 public class ConsumablesClass {
-    String Remark,Date,Amount,Con_no,Equipment_Name,Equipment_id,D_Amount,D_unit,D_item,D_rate,D_qty ,D_item_name,con1_code,Sstp1_code;
+    String Remark,Date,Amount,Equipment_Name,Equipment_id,D_Amount,D_unit,D_item,D_rate,D_qty ,D_item_name,Sstp1_code,Equip_code,Item_code;
+     String Con1_code;
+
+    public String getCon1_code() {
+        return Con1_code;
+    }
+
+    public void setCon1_code(String con1_code) {
+        Con1_code = con1_code;
+    }
+
+    public String getItem_code() {
+        return Item_code;
+    }
+
+    public void setItem_code(String item_code) {
+        Item_code = item_code;
+    }
+
+    public String getEquip_code() {
+        return Equip_code;
+    }
+
+    public void setEquip_code(String equip_code) {
+        Equip_code = equip_code;
+    }
 
     public String getSstp1_code() {
         return Sstp1_code;
@@ -11,13 +36,9 @@ public class ConsumablesClass {
         Sstp1_code = sstp1_code;
     }
 
-    public String getCon1_code() {
-        return con1_code;
-    }
 
-    public void setCon1_code(String con1_code) {
-        this.con1_code = con1_code;
-    }
+
+
 
     public String getD_item_name() {
         return D_item_name;
@@ -107,11 +128,7 @@ public class ConsumablesClass {
         Amount = amount;
     }
 
-    public String getCon_no() {
-        return Con_no;
-    }
 
-    public void setCon_no(String con_no) {
-        Con_no = con_no;
-    }
+
+
 }

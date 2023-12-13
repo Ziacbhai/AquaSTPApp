@@ -2,7 +2,15 @@ package Models;
 
 public class ItemListClassConsumables {
 
-    String item ,item_name;
+    String item ,item_name,Item_code;
+
+    public String getItem_code() {
+        return Item_code;
+    }
+
+    public void setItem_code(String item_code) {
+        Item_code = item_code;
+    }
 
     public String getItem() {
         return item;

@@ -66,14 +66,11 @@ public class Consumables_Details_Activity extends AppCompatActivity {
     private EquipmentListClassConsumables equipment_spinner;
     private ItemListClassConsumables Item_spinner;
     private Dialog zDialog;
-    TextView usersiteH, userstpH, usersiteaddressH, Mailid, Mobno, personnameH,Equipment_name,Equipment_id;
+    TextView Equipment_code, Item_code, Qty_cb;
 
-    TextView Equipment_name_cd, Item_cd, Qty_cb;
-    //ImageView Equipment_name_cd_spinner, Item_cd_spinner;
     AppCompatButton Update_A, Cancel_A;
     private ProgressDialog progressDialog;
 
-    private ConsumablesClass equipment_;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -81,6 +78,7 @@ public class Consumables_Details_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consumables_details_design);
         context = this;
+        user_topcard();
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -88,36 +86,6 @@ public class Consumables_Details_Activity extends AppCompatActivity {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading !!");
-        progressDialog.setCancelable(true);
-        getConsumablesDetails();
-
-        String Personname, Mail, Stpname, Sitename, SiteAddress, Process, Mobile;
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        SiteAddress = sharedPreferences.getString("site_address", "");
-        Process = sharedPreferences.getString("process_name", "");
-        Mail = sharedPreferences.getString("user_email", "");
-        Mobile = sharedPreferences.getString("user_mobile", "");
-        Personname = sharedPreferences.getString("person_name", "");
-
-
-        usersiteH = findViewById(R.id.site_name);
-        userstpH = findViewById(R.id.stp_name);
-        usersiteaddressH = findViewById(R.id.site_address);
-        Mailid = findViewById(R.id.email);
-        Mobno = findViewById(R.id._mobile);
-        personnameH = findViewById(R.id.person_name);
-
-        usersiteH.setText(Sitename);
-        userstpH.setText(Stpname + " / " + Process);
-        usersiteaddressH.setText(SiteAddress);
-        Mailid.setText(Mail);
-        Mobno.setText(Mobile);
-        personnameH.setText(Personname);
-
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
@@ -127,13 +95,44 @@ public class Consumables_Details_Activity extends AppCompatActivity {
                 showAddDetailsDialog(context);
             }
         });
+        getConsumablesDetails();
 
         Consumables_D_Rv = findViewById(R.id.consumables_details_recyclerview);
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(context));
         Consumables_D_Rv.setHasFixedSize(true);
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 
+    }
 
+    private void user_topcard() {
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Loading !!");
+        progressDialog.setCancelable(true);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        sitename = sharedPreferences.getString("site_name", "");
+        stpname = sharedPreferences.getString("stp_name", "");
+        siteaddress = sharedPreferences.getString("site_address", "");
+        processname = sharedPreferences.getString("process_name", "");
+        useremail = sharedPreferences.getString("user_email", "");
+        usermobile = sharedPreferences.getString("user_mobile", "");
+        personname = sharedPreferences.getString("person_name", "");
+
+        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+
+        txtsitename = findViewById(R.id.sitename);
+        txtstpname = findViewById(R.id.stpname);
+        txtsiteaddress = findViewById(R.id.siteaddress);
+        txtuseremail = findViewById(R.id.useremail);
+        txtusermobile = findViewById(R.id.usermobile);
+        txtpersonname = findViewById(R.id.personname);
+
+        txtsitename.setText(sitename);
+        txtstpname.setText(stpname + " / " + processname);
+        txtsiteaddress.setText(siteaddress);
+        txtuseremail.setText(useremail);
+        txtusermobile.setText(usermobile);
+        txtpersonname.setText(personname);
     }
 
     @SuppressLint("MissingInflatedId")
@@ -141,16 +140,16 @@ public class Consumables_Details_Activity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_consumable_details_layout, null);
-        Equipment_name_cd = dialogView.findViewById(R.id.equipment_name_alert_spinner);
-        Item_cd = dialogView.findViewById(R.id.item_name_alert_spinner);
-        Equipment_name_cd.setOnClickListener(new View.OnClickListener() {
+        Equipment_code = dialogView.findViewById(R.id.equipment_name_alert_spinner);
+        Item_code = dialogView.findViewById(R.id.item_name_alert_spinner);
+        Equipment_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                getEquipmentsSpinnerPopup();
             }
         });
-        Item_cd.setOnClickListener(new View.OnClickListener() {
+        Item_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getItemSpinnerPopup();
@@ -191,9 +190,10 @@ public class Consumables_Details_Activity extends AppCompatActivity {
     }
 
     private void updateConsumables_details() {
-        String equipmentID = Equipment_name_cd.getText().toString();
+
         String qty = Qty_cb.getText().toString();
-        String item_cd = Item_cd.getText().toString();
+        String equipment_code = equipment_spinner.getEquipment_code();
+        String item_code = Item_spinner.getItem_code();
 
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.updateDConsumables;
@@ -218,6 +218,7 @@ public class Consumables_Details_Activity extends AppCompatActivity {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
+                getConsumablesDetails();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -246,14 +247,17 @@ public class Consumables_Details_Activity extends AppCompatActivity {
 
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("item_code", item_cd);
-                params.put("equip_code", equipmentID);
+                String con1_code = Global.ConsumablesClass.getCon1_code();
+                params.put("item_code", item_code);
+                params.put("equip_code", equipment_code);
                 params.put("qty", qty);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
-                params.put("con1_code", Global.sharedPreferences.getString("con1_code", "0"));
+                params.put("con1_code",con1_code);
                 params.put("con2_code", "0");
+
+                Log.d("params","parameter"+params);
                 return params;
             }
 
@@ -271,8 +275,8 @@ public class Consumables_Details_Activity extends AppCompatActivity {
     private void getConsumablesDetails() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String consumables_d = Global.Get_Consumables_Details;
-      //  String Consumable_Details_API = consumables_d + "con1_code=" + Global.sharedPreferences.getString("con1_code", "0");
-        String Consumable_Details_API = consumables_d + "con1_code=" +  "2" ;
+        String Consumable_Details_API = consumables_d + "con1_code=" + Global.ConsumablesClass.getCon1_code();
+       // Toast.makeText(context, ""+Global.ConsumablesClass.getCon_no(), Toast.LENGTH_SHORT).show();
 
         progressDialog.show();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Consumable_Details_API, null, new Response.Listener<JSONObject>() {
@@ -299,12 +303,27 @@ public class Consumables_Details_Activity extends AppCompatActivity {
                     try {
                         consumables_Class.setEquipment_Name(e.getString("equip_name"));
                         consumables_Class.setEquipment_id(e.getString("equip_slno"));
+
+                        consumables_Class.setEquip_code(e.getString("equip_code"));
+                        consumables_Class.setItem_code(e.getString("item_code"));
+                        consumables_Class.setD_qty(e.getString("qty"));
+
                         consumables_Class.setD_Amount(e.getString("prd_amt"));
                         consumables_Class.setD_item(e.getString("part_no"));
                         consumables_Class.setD_item_name(e.getString("prd_name"));
-                        consumables_Class.setD_qty(e.getString("qty"));
                         consumables_Class.setD_unit(e.getString("unit_name"));
                         consumables_Class.setD_rate(e.getString("prch_price"));
+
+
+                       // Toast.makeText(context, ""+consumables_Class.getD_item_name(), Toast.LENGTH_SHORT).show();
+
+
+                    /*    Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                        Global.editor = Global.sharedPreferences.edit();
+                        Global.editor.putString("equip_code", consumables_Class.getEquip_code());
+                        Global.editor.putString("item_code", consumables_Class.getItem_code());
+                        Global.editor.putString("qty", consumables_Class.getD_qty());
+                        Global.editor.commit();*/
 
                     } catch (JSONException ex) {
                         progressDialog.dismiss();
@@ -372,7 +391,9 @@ public class Consumables_Details_Activity extends AppCompatActivity {
                                 EquipmentListClassConsumables equipment = new EquipmentListClassConsumables();
 
                                 equipment.setEquipment_id(equipmentJson.getString("equip_slno"));
+                                equipment.setEquipment_code(equipmentJson.getString("equip_code"));
                                 equipment.setEquipment_Name(equipmentJson.getString("equip_name"));
+                                //equipment.setEquipment_Name(equipmentJson.getString("equip_name"));
 
                                 Global.Consumabeles_equipment.add(equipment);
 
@@ -477,7 +498,7 @@ public class Consumables_Details_Activity extends AppCompatActivity {
 
             equipmentnameitem.setOnClickListener(view1 -> {
                 equipment_spinner = eQarrayList.get(i);
-                Equipment_name_cd.setText(equipment_spinner.getEquipment_Name());
+                Equipment_code.setText(equipment_spinner.getEquipment_Name());
                 zDialog.dismiss();
             });
 
@@ -533,6 +554,7 @@ public class Consumables_Details_Activity extends AppCompatActivity {
                         ItemListClassConsumables item = new ItemListClassConsumables();
 
                         item.setItem(equipmentJson.getString("part_no"));
+                        item.setItem_code(equipmentJson.getString("item_code"));
                         item.setItem_name(equipmentJson.getString("prd_name"));
 
                         //Log.d("YourTag", "Name: " + equipmentJson.getString("equip_name"));
@@ -646,7 +668,7 @@ public class Consumables_Details_Activity extends AppCompatActivity {
 
             tvequipmentnameitem.setOnClickListener(view1 -> {
                 Item_spinner = mDataArrayList.get(i);
-                Item_cd.setText(Item_spinner.getItem_name());
+                Item_code.setText(Item_spinner.getItem_name());
                 zDialog.dismiss();
             });
 

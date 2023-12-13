@@ -1,7 +1,15 @@
 package Models;
 
 public class EquipmentListClassConsumables {
-    String Equipment_id ,Equipment_Name;
+    String Equipment_id ,Equipment_Name,Equipment_code;
+
+    public String getEquipment_code() {
+        return Equipment_code;
+    }
+
+    public void setEquipment_code(String equipment_code) {
+        Equipment_code = equipment_code;
+    }
 
     public String getEquipment_id() {
         return Equipment_id;

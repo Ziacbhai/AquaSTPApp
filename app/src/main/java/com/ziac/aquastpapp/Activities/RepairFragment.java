@@ -65,53 +65,23 @@ public class RepairFragment extends Fragment {
     RecyclerView RepairRecyclerview;
      TextView  Repno,Amount,RepairDate;
     String currentDatevalue;
-    private AppCompatButton btnOpenDatePicker;
-    private TextView tvSelectedDate;
-    TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
-    private String Personname,Mail,Stpname ,Sitename ,SiteAddress,Process,Mobile;
 
+    private TextView tvSelectedDate;
     private ProgressDialog progressDialog;
 
     Context context;
     @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_repair, container, false);
-
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        context = getContext();
+        user_topcard(view);
 
         if (!Global.isNetworkAvailable(getActivity())) {
             Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
 
-        progressDialog = new ProgressDialog(requireActivity());
-        progressDialog.setMessage("Loading !!");
-        progressDialog.setCancelable(true);
-
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        SiteAddress = sharedPreferences.getString("site_address", "");
-        Process = sharedPreferences.getString("process_name", "");
-        Mail = sharedPreferences.getString("user_email", "");
-        Mobile = sharedPreferences.getString("user_mobile", "");
-        Personname = sharedPreferences.getString("person_name", "");
-
-        usersiteH = view.findViewById(R.id.site_name);
-        userstpH = view.findViewById(R.id.stp_name);
-        usersiteaddressH = view.findViewById(R.id.site_address);
-        Mailid = view.findViewById(R.id.email);
-        Mobno = view.findViewById(R.id._mobile);
-        personnameH = view.findViewById(R.id.person_name);
-
-        usersiteH.setText(Sitename);
-        userstpH.setText(Stpname + " / " + Process);
-        usersiteaddressH.setText(SiteAddress);
-        Mailid.setText(Mail);
-        Mobno.setText(Mobile);
-        personnameH.setText(Personname);
         FloatingActionButton fab = view.findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +111,38 @@ public class RepairFragment extends Fragment {
         Global.editor.commit();
         getRepair();
         return view;
+    }
+
+    private void user_topcard(View view) {
+        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog.setMessage("Loading !!");
+        progressDialog.setCancelable(true);
+
+        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sitename = sharedPreferences.getString("site_name", "");
+        stpname = sharedPreferences.getString("stp_name", "");
+        siteaddress = sharedPreferences.getString("site_address", "");
+        processname = sharedPreferences.getString("process_name", "");
+        useremail = sharedPreferences.getString("user_email", "");
+        usermobile = sharedPreferences.getString("user_mobile", "");
+        personname = sharedPreferences.getString("person_name", "");
+
+        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+
+        txtsitename = view.findViewById(R.id.sitename);
+        txtstpname = view.findViewById(R.id.stpname);
+        txtsiteaddress = view.findViewById(R.id.siteaddress);
+        txtuseremail = view.findViewById(R.id.useremail);
+        txtusermobile = view.findViewById(R.id.usermobile);
+        txtpersonname = view.findViewById(R.id.personname);
+
+        txtsitename.setText(sitename);
+        txtstpname.setText(stpname + " / " + processname);
+        txtsiteaddress.setText(siteaddress);
+        txtuseremail.setText(useremail);
+        txtusermobile.setText(usermobile);
+        txtpersonname.setText(personname);
     }
 
 

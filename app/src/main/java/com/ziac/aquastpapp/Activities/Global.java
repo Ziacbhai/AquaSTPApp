@@ -97,6 +97,8 @@ public class Global {
     public static ArrayList<RepairsClass> Repair_s;
     public static ArrayList<ConsumablesClass> Consumables_s;
 
+    public static ConsumablesClass ConsumablesClass;
+
     public static ArrayList<EquipmentListClassConsumables> Consumabeles_equipment;
     public static ArrayList<ItemListClassConsumables> Consumbeles_item;
     public static ArrayList<LabTestClass> Labtest_s;

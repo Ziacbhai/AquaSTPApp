@@ -38,7 +38,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/site_name"
+                            android:id="@+id/sitename"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
@@ -59,7 +59,7 @@
                                 android:padding="5dp">
 
                                 <TextView
-                                    android:id="@+id/stp_name"
+                                    android:id="@+id/stpname"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
@@ -88,7 +88,7 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/site_address"
+                            android:id="@+id/siteaddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -98,7 +98,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/person_name"
+                            android:id="@+id/personname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
@@ -108,7 +108,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/email"
+                            android:id="@+id/useremail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
@@ -118,11 +118,11 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/_mobile"
+                            android:id="@+id/usermobile"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
-                            android:text="_mobile"
+                            android:text="mobile"
                             android:textColor="@color/white"
                             android:textSize="12dp"
                             android:textStyle="bold" />

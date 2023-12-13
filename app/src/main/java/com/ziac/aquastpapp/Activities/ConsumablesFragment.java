@@ -59,13 +59,9 @@ public class ConsumablesFragment extends Fragment {
 
     ConsumablesClass  consumables_Class;
     RecyclerView Consumables_rv;
-    private AppCompatButton btnOpenDatePicker;
     private TextView tvSelectedDate;
     TextView Date_A,STP_A,Remark_A;
     AppCompatButton Update_A,Cancel_A;
-
-    TextView usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
-    private String Personname,Mail,Stpname ,Sitename ,SiteAddress,Process,Mobile;
 
     private ProgressDialog progressDialog;
 
@@ -82,33 +78,15 @@ public class ConsumablesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view  =  inflater.inflate(R.layout.fragment_consumables, container, false);
 
-
         context = getContext();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        user_topcard(view);
 
         if (!Global.isNetworkAvailable(getActivity())) {
             Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
 
-        progressDialog = new ProgressDialog(requireActivity());
-        progressDialog.setMessage("Loading !!");
-        progressDialog.setCancelable(true);
-
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        SiteAddress = sharedPreferences.getString("site_address", "");
-        Process = sharedPreferences.getString("process_name", "");
-        Mail = sharedPreferences.getString("user_email", "");
-        Mobile = sharedPreferences.getString("user_mobile", "");
-        Personname = sharedPreferences.getString("person_name", "");
-
-        usersiteH = view.findViewById(R.id.site_name);
-        userstpH = view.findViewById(R.id.stp_name);
-        usersiteaddressH = view.findViewById(R.id.site_address);
-        Mailid = view.findViewById(R.id.email);
-        Mobno = view.findViewById(R.id._mobile);
-        personnameH = view.findViewById(R.id.person_name);
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
 
@@ -119,12 +97,6 @@ public class ConsumablesFragment extends Fragment {
             }
         });
 
-        usersiteH.setText(Sitename);
-        userstpH.setText(Stpname + " / " + Process);
-        usersiteaddressH.setText(SiteAddress);
-        Mailid.setText(Mail);
-        Mobno.setText(Mobile);
-        personnameH.setText(Personname);
 
         Consumables_rv = view.findViewById(R.id.consumables_recyclerview);
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -148,6 +120,39 @@ public class ConsumablesFragment extends Fragment {
 
         getConsumables();
         return view;
+    }
+
+    private void user_topcard(View view) {
+
+        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog.setMessage("Loading !!");
+        progressDialog.setCancelable(true);
+
+        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sitename = sharedPreferences.getString("site_name", "");
+        stpname = sharedPreferences.getString("stp_name", "");
+        siteaddress = sharedPreferences.getString("site_address", "");
+        processname = sharedPreferences.getString("process_name", "");
+        useremail = sharedPreferences.getString("user_email", "");
+        usermobile = sharedPreferences.getString("user_mobile", "");
+        personname = sharedPreferences.getString("person_name", "");
+
+        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+
+        txtsitename = view.findViewById(R.id.sitename);
+        txtstpname = view.findViewById(R.id.stpname);
+        txtsiteaddress = view.findViewById(R.id.siteaddress);
+        txtuseremail = view.findViewById(R.id.useremail);
+        txtusermobile = view.findViewById(R.id.usermobile);
+        txtpersonname = view.findViewById(R.id.personname);
+
+        txtsitename.setText(sitename);
+        txtstpname.setText(stpname + " / " + processname);
+        txtsiteaddress.setText(siteaddress);
+        txtuseremail.setText(useremail);
+        txtusermobile.setText(usermobile);
+        txtpersonname.setText(personname);
     }
 
     @SuppressLint("MissingInflatedId")
@@ -226,20 +231,20 @@ public class ConsumablesFragment extends Fragment {
                     }
                     consumables_Class = new ConsumablesClass();
                     try {
-                        consumables_Class.setCon_no(e.getString("con1_code"));
+                        consumables_Class.setCon1_code(e.getString("con1_code"));
                         consumables_Class.setDate(e.getString("con_date"));
                         consumables_Class.setAmount(e.getString("con_amt"));
                         consumables_Class.setRemark(e.getString("remarks"));
 
-                        String Con_code = consumables_Class.getCon_no();
+                        String Con1_code = consumables_Class.getCon1_code();
                         Global.editor = Global.sharedPreferences.edit();
-                        Global.editor.putString("con1_code", Con_code);
+                        Global.editor.putString("con1_code", Con1_code);
                         Global.editor.commit();
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
                     Global.Consumables_s.add(consumables_Class);
-                    consumablesAdapter = new ConsumablesAdapter(context,Global.Consumables_s);
+                    consumablesAdapter = new ConsumablesAdapter(Global.Consumables_s, context);
                     Consumables_rv.setAdapter(consumablesAdapter);
                 }
 
@@ -331,7 +336,7 @@ public class ConsumablesFragment extends Fragment {
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
                 params.put("con1_code", "0");
 
-                //Log.d("params", String.valueOf(params));
+                Log.d("params", String.valueOf(params));
                 return params;
 
             }
