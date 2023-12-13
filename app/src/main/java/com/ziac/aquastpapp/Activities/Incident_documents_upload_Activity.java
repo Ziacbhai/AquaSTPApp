@@ -2,6 +2,7 @@ package com.ziac.aquastpapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -82,6 +83,7 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incident_documents_uploud);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         In_doc_uploadbtn = findViewById(R.id.in_doc_uploadbtn);
 
         ActivityCompat.requestPermissions(this,

@@ -4,6 +4,7 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -77,6 +78,7 @@ public class Consumables_Details_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consumables_details_design);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         context = this;
         user_topcard();
 
@@ -153,12 +155,12 @@ public class Consumables_Details_Activity extends AppCompatActivity {
                 getItemSpinnerPopup();
             }
         });
+
         Qty_cb = dialogView.findViewById(R.id.qty_alert_cd);
         Update_A = dialogView.findViewById(R.id.update_alert_cd);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_cd);
 
         builder.setView(dialogView);
-
         AlertDialog dialog = builder.create();
         if (dialog.getWindow() != null) {
 
@@ -174,10 +176,23 @@ public class Consumables_Details_Activity extends AppCompatActivity {
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateConsumables_details();
-                dialog.dismiss(); // Close the dialog if needed
+                String enteredQty = Qty_cb.getText().toString().trim();
+                if (enteredQty.isEmpty()) {
+                    Qty_cb.setError("Quantity cannot be empty");
+                } else {
+                    try {
+                        int quantity = Integer.parseInt(enteredQty);
+                        updateConsumables_details();
+                        dialog.dismiss(); // Close the dialog if needed
+                    } catch (NumberFormatException e) {
+                        Qty_cb.setError("Invalid quantity");
+                    }
+                }
             }
         });
+
+
+
         Cancel_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -50,17 +50,7 @@ import Models.IncidentsClass;
 public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewholder> {
 
     private List<IncidentsClass> incidentsClasses;
-    Bitmap imageBitmap;
 
-    EditText uName, uNumber, uEmail;
-    TextView Uref_code;
-
-
-
-    ImageView Backarrowbtn;
-    String userimage;
-    Picasso.Builder builder;
-    Picasso picasso;
     Context context;
 
 

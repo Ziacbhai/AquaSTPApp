@@ -46,14 +46,11 @@ import Models.zList;
 
 
 public class PumpsFragment extends Fragment {
-    private zList company_code ,location_code,stp1_code;
+
     RecyclerView PumpRecyclerview;
-   // private ImageView mImageView;
-    private String userimage;
     TextView  usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
-    private String Personname,mail,Stpname ,Sitename ,SiteAddress,Process;
-    private TextView Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
-            FormFactor,Phase,CleaningRunningFrequencyHRS ,Address_M ,Process_name_;
+    private String Personname,Stpname ,Sitename ,SiteAddress,Process;
+
     CommonModelClass commonModelClassList;
     private ProgressDialog progressDialog;
     @SuppressLint("MissingInflatedId")
@@ -62,7 +59,6 @@ public class PumpsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_pump, container, false);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        //mImageView = view.findViewById(R.id._image1);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         if (!Global.isNetworkAvailable(getActivity())) {
@@ -94,13 +90,10 @@ public class PumpsFragment extends Fragment {
         usersiteH.setText(Sitename);
         userstpH.setText(Stpname + " / " + Process);
         usersiteaddressH.setText(SiteAddress);
-        //uProcess.setText(Process);
+
         Mailid.setText(mail);
         Mobno.setText(mobile);
         personnameH.setText(Personname);
-
-
-
         PumpRecyclerview = view.findViewById(R.id.pump_recyclerview);
         PumpRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         PumpRecyclerview.setHasFixedSize(true);
@@ -119,7 +112,6 @@ public class PumpsFragment extends Fragment {
         String site_code = Global.sharedPreferences.getString("site_code", "0");
 
         url = url + "com_code=" + com_code + "&sstp1_code=" + sstp1_code + "&site_code=" + site_code ;
-
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
