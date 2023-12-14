@@ -46,16 +46,15 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="Equipment"
-
                                         android:textStyle="bold"
                                         android:textColor="#000"
                                         android:textSize="15dp" />
 
-                                    <TextView
+                                    <EditText
+                                        android:background="@drawable/btnbgedited"
                                         android:id="@+id/date_alert_rd"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-
+                                        android:layout_height="match_parent"
                                         android:hint="equipment"
                                         android:textSize="12dp" />
 

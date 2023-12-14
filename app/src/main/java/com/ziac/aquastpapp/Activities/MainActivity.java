@@ -42,26 +42,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentManager fragmentManager;
     Toolbar toolbar;
     LinearLayout layout;
-    FloatingActionButton fab;
     NavigationView navigationView;
     CircleImageView Profile;
     ActionBarDrawerToggle toggle;
-    TextView usernameH, usermailH;
-    Intent intent;
-    PopupWindow popUp;
-    private boolean doubleBackToExitPressedOnce;
 
     boolean click = true;
-    private String userimage, mail, Stpname, Sitename, Siteaddress, userref, person_name;
+    private String userimage, usermail, stpname, sitename, siteaddress, userref, personname,processname;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //if (!isNetworkAvailable()) {showToast("Internet connection lost !!");}
-
         // getSupportActionBar().setDisplayShowTitleEnabled(false);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         toolbar = findViewById(R.id.toolbar);
@@ -79,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         /*Menu menu = navigationView.getMenu();
         MenuItem RefItem = menu.findItem(R.id.refaral_code);
         View RefView = RefItem.getActionView();
@@ -90,14 +81,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
         userref = sharedPreferences.getString("ref_code", "");
-        person_name = Global.sharedPreferences.getString("person_name", "");
-
-        String mail = Global.sharedPreferences.getString("user_email", "");
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        ////
-        Siteaddress = sharedPreferences.getString("site_address", "");
-        Siteaddress = sharedPreferences.getString("process_name", "");
+        personname = Global.sharedPreferences.getString("person_name", "");
+        usermail = Global.sharedPreferences.getString("user_email", "");
+        sitename = sharedPreferences.getString("site_name", "");
+        stpname = sharedPreferences.getString("stp_name", "");
+        siteaddress = sharedPreferences.getString("site_address", "");
+        processname = sharedPreferences.getString("process_name", "");
 
         Picasso.Builder builder = new Picasso.Builder(getApplication());
         Picasso picasso = builder.build();
@@ -168,23 +157,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
                 CircleImageView ProfileH;
-                TextView personnameH, usermailH, usersiteH, userstpH;
+                TextView person_name, user_mail, user_site, user_stp;
                 ProfileH = drawerLayout.findViewById(R.id.profileH);
                 layout = findViewById(R.id.headeProfile);
 
                 userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
                 Picasso.get().load(userimage).into(ProfileH);
 
-                personnameH = drawerLayout.findViewById(R.id._profilename);
-                usermailH = drawerLayout.findViewById(R.id.headeremail);
-                usersiteH = drawerLayout.findViewById(R.id.site_name);
-                userstpH = drawerLayout.findViewById(R.id.stp_name);
+                person_name = drawerLayout.findViewById(R.id._profilename);
+                user_mail = drawerLayout.findViewById(R.id.headeremail);
+                user_site = drawerLayout.findViewById(R.id.site_name);
+                user_stp = drawerLayout.findViewById(R.id.stp_name);
 
 
-                personnameH.setText(person_name);
-                usermailH.setText(mail);
-                usersiteH.setText(Sitename);
-                userstpH.setText(Stpname);
+                person_name.setText(personname);
+                user_mail.setText(usermail);
+                user_site.setText(sitename);
+                user_stp.setText(stpname);
 
 
                 layout.setOnClickListener(new View.OnClickListener() {

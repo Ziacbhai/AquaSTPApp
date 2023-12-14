@@ -2,8 +2,6 @@ package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
-import static java.security.AccessController.getContext;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -18,17 +16,13 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
@@ -40,13 +34,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import Adapters.RepairAdapter;
 import Adapters.Repair_details_Adapter;
 import Models.RepairsClass;
 
-public class Repair_Details_Design_Activity extends AppCompatActivity {
+public class Repair_Details_Activity extends AppCompatActivity {
     RepairsClass repair_s;
 
     TextView Date_A,STP_A,Remark_A;

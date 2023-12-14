@@ -1,7 +1,5 @@
 package Adapters;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,9 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ziac.aquastpapp.Activities.LoginSignupActivity;
-import com.ziac.aquastpapp.Activities.MainActivity;
-import com.ziac.aquastpapp.Activities.Repair_Details_Design_Activity;
+import com.ziac.aquastpapp.Activities.Repair_Details_Activity;
 import com.ziac.aquastpapp.R;
 
 import java.text.ParseException;
@@ -78,7 +74,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
         holder.d_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent i = new Intent(context,Repair_Details_Design_Activity.class);
+               Intent i = new Intent(context, Repair_Details_Activity.class);
                context.startActivity(i);
             }
         });

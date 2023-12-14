@@ -76,7 +76,7 @@
             android:name=".Activities.Lab_Test_Details_Activity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Repair_Details_Design_Activity"
+            android:name=".Activities.Repair_Details_Activity"
             android:exported="false" />
 
         <receiver

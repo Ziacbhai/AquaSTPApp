@@ -57,18 +57,12 @@ import Models.StpModelClass;
 
 public class LoginFragment extends Fragment {
 
-    EditText Log_User,Log_pwd ;
+    EditText Login_User,Login_pwd ;
     private CheckBox RememberMe;
     Button Login_btn;
     TextView TermsOfUse, privacy, forgotpwd;
     boolean passwordVisible;
     String username, pwd;
-
-    RecyclerView siteLocationRecyclerView;
-
-    private SiteLocationAdapter siteLocationAdapter;
-
-
     StpModelClass stpModelClass;
     @Override
     public void onAttach(@NonNull Context context) {
@@ -80,36 +74,23 @@ public class LoginFragment extends Fragment {
         super.onStart();
     }
     private ProgressDialog progressDialog;
-
-    //SharedPreferences sharedPreferences;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+
         Context context = getContext();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Logging in...");
         progressDialog.setCancelable(true);
-        Log_User = view.findViewById(R.id.Luser);
-        Log_pwd = view.findViewById(R.id.password2);
+        Login_User = view.findViewById(R.id.Luser);
+        Login_pwd = view.findViewById(R.id.password2);
         Login_btn = view.findViewById(R.id.loginbtn);
         TermsOfUse = view.findViewById(R.id.terms);
         privacy = view.findViewById(R.id.privacy);
         forgotpwd = view.findViewById(R.id.btnftpass);
         RememberMe = view.findViewById(R.id.RcheckBox);
-
-
-
-       /* siteLocationRecyclerView = view.findViewById(R.id.stp_recyclerview);
-        siteLocationRecyclerView.setHasFixedSize(true);
-        siteLocationRecyclerView.setAdapter(siteLocationAdapter);
-        siteLocationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL , false));*/
-
-
-//      COMMENTED BELOW LINE FOR TESTING
-//      siteLocationAdapter = new SiteLocationAdapter(Global.StpList, getContext());
-
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         TextView versionName = view.findViewById(R.id.version);
@@ -119,17 +100,17 @@ public class LoginFragment extends Fragment {
         Login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username = Log_User.getText().toString();
-                pwd = Log_pwd.getText().toString();
-                username = Log_User.getText().toString();
-                pwd = Log_pwd.getText().toString();
+                username = Login_User.getText().toString();
+                pwd = Login_pwd.getText().toString();
+                username = Login_User.getText().toString();
+                pwd = Login_pwd.getText().toString();
                 if (username.isEmpty()) {
-                    Log_User.setError("Please enter the User name");
-                    Log_User.requestFocus();
+                    Login_User.setError("Please enter the User name");
+                    Login_User.requestFocus();
                     return;
                 } else if (pwd.isEmpty()) {
-                    Log_pwd.setError("Please enter the Password");
-                    Log_pwd.requestFocus();
+                    Login_pwd.setError("Please enter the Password");
+                    Login_pwd.requestFocus();
                     return;
                 }
 
@@ -153,8 +134,8 @@ public class LoginFragment extends Fragment {
             Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             username = Global.sharedPreferences.getString("username", "");
             pwd = Global.sharedPreferences.getString("password", "");
-            Log_User.setText(username);
-            Log_pwd.setText(pwd);
+            Login_User.setText(username);
+            Login_pwd.setText(pwd);
             if (username.length() == 0) {
                 RememberMe.setChecked(false);
             } else {
@@ -180,21 +161,21 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        Log_pwd.setOnTouchListener((v, event) -> {
+        Login_pwd.setOnTouchListener((v, event) -> {
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
-                if (event.getRawX() >= Log_pwd.getRight() - Log_pwd.getCompoundDrawables()[Right].getBounds().width()) {
-                    int selection = Log_pwd.getSelectionEnd();
+                if (event.getRawX() >= Login_pwd.getRight() - Login_pwd.getCompoundDrawables()[Right].getBounds().width()) {
+                    int selection = Login_pwd.getSelectionEnd();
                     if (passwordVisible) {
-                        Log_pwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
-                        Log_pwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        Login_pwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
+                        Login_pwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                         passwordVisible = false;
                     } else {
-                        Log_pwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
-                        Log_pwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        Login_pwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
+                        Login_pwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                         passwordVisible = true;
                     }
-                    Log_pwd.setSelection(selection);
+                    Login_pwd.setSelection(selection);
                     return true;
                 }
             }
@@ -213,8 +194,8 @@ public class LoginFragment extends Fragment {
     }
     private void dologinVolley() {
 
-        username = Log_User.getText().toString();
-        pwd = Log_pwd.getText().toString();
+        username = Login_User.getText().toString();
+        pwd = Login_pwd.getText().toString();
         progressDialog.show();
         //new InternetCheckTask().execute();
 
@@ -401,6 +382,4 @@ public class LoginFragment extends Fragment {
         ));
         queue.add(request);
     }
-
-
 }
