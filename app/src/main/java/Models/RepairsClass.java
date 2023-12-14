@@ -2,7 +2,15 @@ package Models;
 
 public class RepairsClass {
 
-    String Repair_code,REPNo,Repair_Amount,Repair_Date,D_Equipment_Name,D_Equipment_Number,D_Amount ,D_Repaired,D_Remark;
+    String Repair_code,REPNo,Repair_Amount,Repair_Date,Remark,D_Equipment_Name,D_Equipment_Number,D_Amount ,D_Repaired,D_Remark;
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 
     public String getRepair_code() {
         return Repair_code;

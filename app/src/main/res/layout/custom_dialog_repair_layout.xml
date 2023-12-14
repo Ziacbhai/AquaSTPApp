@@ -1,10 +1,10 @@
 <!-- res/layout/custom_dialog_layout.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="#eaeff5"
+    android:orientation="vertical"
     android:padding="5dp">
 
     <LinearLayout
@@ -19,6 +19,7 @@
             android:layout_height="match_parent"
             app:cardCornerRadius="12dp"
             app:cardMaxElevation="10dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -26,122 +27,127 @@
                 android:orientation="vertical">
 
 
-                        <LinearLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/tvSelectedDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="Selected Date"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#01A3A3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
-                            android:orientation="vertical">
-                                <TextView
-                                    android:textColor="@color/black"
-                                    android:id="@+id/tvSelectedDate"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:gravity="center"
-                                    android:textStyle="bold"
-                                    android:text="Selected Date"
-                                    android:textSize="14dp"/>
+                            android:text="Remarks:"
+                            android:textColor="#000"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
 
-
-                        </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="#01A3A3"/>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="5dp">
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Remarks:"
-                                        android:padding="5dp"
-                                        android:textStyle="bold"
-                                        android:textColor="#000"
-                                        android:textSize="12dp" />
-
-                                    <EditText
-                                        android:id="@+id/remark_alert_r"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/btnbgedited"
-                                        android:padding="5dp"
-                                        android:textSize="15dp" />
-
-                                </LinearLayout>
+                        <EditText
+                            android:id="@+id/remark_alert_r"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/btnbgedited"
+                            android:padding="5dp"
+                            android:textSize="15dp" />
 
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:background="#01A3A3"/>
+                </LinearLayout>
 
-                        <LinearLayout
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#01A3A3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/update_alert_r"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btnbg"
+                            android:drawablePadding="5dp"
+                            android:gravity="center"
+                            android:text="Update"
+                            android:textColor="@color/white"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/cancel_alert_r"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="12dp"
-                            android:padding="5dp">
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center_horizontal"
-                                android:orientation="vertical">
-
-                                <androidx.appcompat.widget.AppCompatButton
-                                    android:id="@+id/update_alert_r"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="30dp"
-                                    android:layout_weight="1"
-                                    android:drawablePadding="5dp"
-                                    android:text="Update"
-                                    android:background="@drawable/btnbg"                                   android:gravity="center"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/white"
-                                    android:textSize="12dp" />
-
-                            </LinearLayout>
+                            android:layout_weight="1"
+                            android:background="@drawable/btnbg"
+                            android:gravity="center"
+                            android:text="Cancel"
+                            android:textColor="@color/white"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
 
 
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_marginLeft="5dp"
-                                android:gravity="center_horizontal"
-                                android:orientation="vertical">
+                    </LinearLayout>
 
-                                <androidx.appcompat.widget.AppCompatButton
-                                    android:id="@+id/cancel_alert_r"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Cancel"
-                                    android:background="@drawable/btnbg"                                   android:gravity="center"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/white"
-                                    android:textSize="12dp" />
-
-
-
-                            </LinearLayout>
-
-                        </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
 

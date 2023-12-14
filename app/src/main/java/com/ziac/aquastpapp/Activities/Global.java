@@ -16,7 +16,9 @@ import java.util.ArrayList;
 
 import Models.CommonModelClass;
 import Models.ConsumablesClass;
+
 import Models.EquipmentListClassConsumables;
+import Models.EquipmentRepairListClass;
 import Models.IncidentsClass;
 import Models.ItemListClassConsumables;
 import Models.ItemStockClass;
@@ -59,10 +61,11 @@ public class Global {
     public static String getuserprofileurl = baseurl + "api/Users/GetUserProfile";
     public static String getSearchSiteOrSTPByName = baseurl + "api/Users/SearchSiteOrSTPByName?";
     public static String updateProfile = baseurl + "api/Users/UpdateProfile";
-    public static String updateConsumables = baseurl + "api/Consumables/AddEditConsumables?";
-
+    public static String updateConsumables = baseurl + "api/Consumables/AddEditConsumables";
     public static String updateDConsumables = baseurl + "api/Consumables/AddEditConsumablesDetails";
-
+    public static String GetRepairItems = baseurl + "api/Repairs/List?";
+    public static String updateRepairAddUpdate = baseurl + "api/Repairs/RepairAddUpdate";
+    public static String updateRepairDAddUpdate = baseurl + "api/Repairs/RepairDetailsAddUPdate";
     public static String tokenurl = baseurl+"TOKEN";
 
     public static String Equipment_Details_com_pumps = baseurl + "api/Masters/GetPumps?";
@@ -70,7 +73,8 @@ public class Global {
     public static String Equipment_Details_com_meters = baseurl + "api/Masters/GetMeters?";
 
     public static String GetItemStock = baseurl + "api/Masters/GetItemStock?";
-    public static String GetRepairItems = baseurl + "api/Repairs/List?";
+
+
     public static String GetLab_Test_Items = baseurl + "api/Lab/List?";
     public static String Get_Incidents = baseurl + "api/Incidents/List?";
     public static String Get_Consumables= baseurl + "api/Consumables/List?";
@@ -82,8 +86,6 @@ public class Global {
 
    // public static String Get_Incidents_ImageUploud = baseurl + "api/Incidents/Details?";
     public static String Get_Incidents_delete = baseurl + "api/Incidents/DeleteImgOrDoc?";
-
-
     public static String api_List_Get_Equipments = baseurl + "api/List/GetEquipments?";
     public static String api_List_Get_Item = baseurl + "api/List/GetProducts?";
 
@@ -100,6 +102,8 @@ public class Global {
     public static ConsumablesClass ConsumablesClass;
 
     public static ArrayList<EquipmentListClassConsumables> Consumabeles_equipment;
+    public static ArrayList<EquipmentRepairListClass> Repair_equipment;
+
     public static ArrayList<ItemListClassConsumables> Consumbeles_item;
     public static ArrayList<LabTestClass> Labtest_s;
     public static ArrayList<IncidentsClass> Incident_s;

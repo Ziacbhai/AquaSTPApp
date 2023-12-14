@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,14 +62,10 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 public class RepairFragment extends Fragment {
 
     RepairsClass repair_s;
-    TextView STP_A,Remark_A;
-    AppCompatButton Update_A,Cancel_A;
     RecyclerView RepairRecyclerview;
-     TextView  Repno,Amount,RepairDate;
+     TextView  Repno, Amount,RepairDate,tvSelectedDate,Remark_A;;
     String currentDatevalue;
-
-    private TextView tvSelectedDate;
-    private ProgressDialog progressDialog;
+     ProgressDialog progressDialog;
 
     Context context;
     @SuppressLint("MissingInflatedId")
@@ -99,16 +97,17 @@ public class RepairFragment extends Fragment {
         Date currentDate = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            dateFormat = new  SimpleDateFormat("dd-MM-yyyy");
+            dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             currentDatevalue = dateFormat.format(currentDate);
-
         }
-        Global.sharedPreferences.edit();
+
+        /*Global.sharedPreferences.edit();
         Global.editor.putString("current_date",currentDatevalue);
-        Global.editor.commit();
+        Global.editor.commit();*/
+
         getRepair();
         return view;
     }
@@ -152,7 +151,8 @@ public class RepairFragment extends Fragment {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_repair_layout, null);
 
-        // btnOpenDatePicker = dialogView.findViewById(R.id.btnOpenDatePicker);
+        AppCompatButton Update_A,Cancel_A;
+
         tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
         Remark_A = dialogView.findViewById(R.id.remark_alert_r);
         Update_A = dialogView.findViewById(R.id.update_alert_r);
@@ -174,7 +174,7 @@ public class RepairFragment extends Fragment {
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //updateRepairs();
+                updateRepairs();
                 dialog.dismiss();
             }
         });
@@ -188,7 +188,6 @@ public class RepairFragment extends Fragment {
             }
         });
     }
-
     private void showDatePicker() {
         // Use the current date as the initial date
         Calendar calendar = null;
@@ -215,7 +214,8 @@ public class RepairFragment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         // Update your TextView with the selected date
-                        updateDateTextView(year, month, dayOfMonth);
+                        updateDateTextView(year, month + 1, dayOfMonth);
+                        currentDatevalue = year + "-" + (month + 1) + "-" + dayOfMonth;
                     }
                 },
                 initialYear,
@@ -230,8 +230,11 @@ public class RepairFragment extends Fragment {
 
     // Update the TextView with the selected date
     private void updateDateTextView(int year, int month, int day) {
-        String selectedDate = day + "-" + (month + 1) + "-" + year;
-        tvSelectedDate.setText(selectedDate);
+      /*  String selectedDate = day + "-" + (month + 1) + "-" + year;
+        tvSelectedDate.setText(selectedDate);*/
+
+        String current_date = day + "-" + month + "-" + year;
+        tvSelectedDate.setText(current_date);
     }
     private void getRepair() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
@@ -267,8 +270,9 @@ public class RepairFragment extends Fragment {
                         repair_s.setRepair_Amount(e.getString("repaired_amt"));
                         repair_s.setRepair_Date(e.getString("rep_date"));
                         repair_s.setRepair_code(e.getString("repair1_code"));
+                        repair_s.setRemark(e.getString("remarks"));
+
                         String repair_code= repair_s.getRepair_code();
-                       // System.out.println(repair_code);
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("repair1_code",repair_code);
                         Global.editor.commit();
@@ -306,15 +310,13 @@ public class RepairFragment extends Fragment {
 
 
     }
-
-
-  /*  private void updateRepairs() {
+    private void updateRepairs() {
 
         String remarks=Remark_A.getText().toString();
         String condate=currentDatevalue.toString();
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = Global."" + "type=" + "I";
+        String url = Global.updateRepairAddUpdate;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {
@@ -352,16 +354,20 @@ public class RepairFragment extends Fragment {
             }
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("", condate);
-                params.put("",remarks);
+                params.put("rep_date", condate);
+                params.put("remarks",remarks);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
-                params.put("con1_code", "0");
+               // params.put("repair1_code", Global.sharedPreferences.getString("repair1_code", "0"));
+                params.put("repair1_code", "0");
+
+                Log.d("rep_date", "rep_date: " + params.toString());
+                Log.d("com_code", "com_code: " + params.toString());
+                Log.d("ayear", "ayear: " + params.toString());
+
                 return params;
-
             }
-
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
                 (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
@@ -370,5 +376,5 @@ public class RepairFragment extends Fragment {
 
         queue.add(stringRequest);
 
-    }*/
+    }
 }

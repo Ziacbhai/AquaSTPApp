@@ -45,6 +45,8 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
         //holder.Repno.setText(repairS.get(position).getREPNo());
         holder.Amount.setText(repairS.get(position).getRepair_Amount()+"0");
 
+        holder.Repair_remark.setText(repairS.get(position).getRemark());
+
         String dateString = repairS.get(position).getRepair_Date();
 
         String conNoString = repairS.get(position).getREPNo();
@@ -99,16 +101,16 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        private TextView  Repno,Amount,RepairDate;
+         TextView  Repno,Amount,RepairDate,Repair_remark;
         ImageView d_iv;
-        LinearLayout Repair_details;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
             Repno=itemView.findViewById(R.id.repno_);
             Amount=itemView.findViewById(R.id.amount_);
             RepairDate=itemView.findViewById(R.id.repair_date);
-            Repair_details=itemView.findViewById(R.id.repair_details);
+            Repair_remark=itemView.findViewById(R.id.remarks_remark);
             d_iv=itemView.findViewById(R.id.repair_info);
 
         }

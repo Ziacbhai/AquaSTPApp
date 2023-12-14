@@ -144,7 +144,6 @@ public class Consumables_Details_Activity extends AppCompatActivity {
         Equipment_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                getEquipmentsSpinnerPopup();
             }
         });
@@ -230,7 +229,7 @@ public class Consumables_Details_Activity extends AppCompatActivity {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-                getConsumablesDetails();
+                //getConsumablesDetails();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -395,7 +394,7 @@ public class Consumables_Details_Activity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        Global.Consumabeles_equipment = new ArrayList<>();
+                        Global.Consumabeles_equipment = new ArrayList<EquipmentListClassConsumables>();
 
                         for (int i = 0; i < response.length(); i++) {
                             try {
