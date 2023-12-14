@@ -73,7 +73,7 @@
             android:name=".Activities.Incident_Details_Activity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Lab_Test_Details_Activity"
+            android:name=".Activities.LabTest_Details_Activity"
             android:exported="false" />
         <activity
             android:name=".Activities.Repair_Details_Activity"

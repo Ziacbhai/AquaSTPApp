@@ -32,9 +32,8 @@ import java.util.Map;
 
 public class ResetPasswordNumber extends AppCompatActivity {
     AppCompatButton GetOTPBtn;
-    EditText FMobile;
-    String mobile;
-    //SharedPreferences sharedPreferences;
+    EditText ForgotMobile;
+    String usermobile;
     ProgressBar progressBar;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -42,7 +41,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_number);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        FMobile = findViewById(R.id.fmobile);
+        ForgotMobile = findViewById(R.id.fmobile);
         GetOTPBtn = findViewById(R.id.n_OTPbtn);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -54,7 +53,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
         GetOTPBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mobile = FMobile.getText().toString();
+                usermobile = ForgotMobile.getText().toString();
                // progressBar.setVisibility(View.VISIBLE);
 //                 if (mobile.isEmpty()) {
 //                     ForgotPass.setError("Please Enter Password");
@@ -82,7 +81,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
                     String error = respObj.getString("error");
 
                     Global.editor = Global.sharedPreferences.edit();
-                    Global.editor.putString("mobile", mobile);
+                    Global.editor.putString("mobile", usermobile);
                     Global.editor.commit();
 
                     if (issuccess.equals("true")) {
@@ -113,7 +112,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("UserName", "");
-                params.put("Mobile", mobile);
+                params.put("Mobile", usermobile);
                 params.put("FPType", "M");
                 params.put("user_email", "");
                 return params;

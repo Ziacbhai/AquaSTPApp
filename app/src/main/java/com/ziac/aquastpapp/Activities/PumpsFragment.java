@@ -48,52 +48,25 @@ import Models.zList;
 public class PumpsFragment extends Fragment {
 
     RecyclerView PumpRecyclerview;
-    TextView  usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
-    private String Personname,Stpname ,Sitename ,SiteAddress,Process;
+    TextView usersiteH, userstpH, usersiteaddressH, Mailid, Mobno, personnameH;
+    private String Personname, Stpname, Sitename, SiteAddress, Process;
 
     CommonModelClass commonModelClassList;
+    Context context;
     private ProgressDialog progressDialog;
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pump, container, false);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        context = getContext();
+        user_topcard(view);
 
         if (!Global.isNetworkAvailable(getActivity())) {
             Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
-
-        progressDialog = new ProgressDialog(requireActivity());
-        progressDialog.setMessage("Loading !!");
-        progressDialog.setCancelable(true);
-
-
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        SiteAddress = sharedPreferences.getString("site_address", "");
-        Process = sharedPreferences.getString("process_name", "");
-        String mail = Global.sharedPreferences.getString("user_email", "");
-        String mobile = Global.sharedPreferences.getString("user_mobile", "");
-        Personname = sharedPreferences.getString("person_name", "");
-
-        usersiteH = view.findViewById(R.id.site_name);
-        userstpH = view.findViewById(R.id.stp_name);
-        usersiteaddressH = view.findViewById(R.id.site_address);
-        //uProcess = view.findViewById(R.id.processname_);
-        Mailid = view.findViewById(R.id.email);
-        Mobno = view.findViewById(R.id._mobile);
-        personnameH = view.findViewById(R.id.person_name);
-
-        usersiteH.setText(Sitename);
-        userstpH.setText(Stpname + " / " + Process);
-        usersiteaddressH.setText(SiteAddress);
-
-        Mailid.setText(mail);
-        Mobno.setText(mobile);
-        personnameH.setText(Personname);
         PumpRecyclerview = view.findViewById(R.id.pump_recyclerview);
         PumpRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         PumpRecyclerview.setHasFixedSize(true);
@@ -102,16 +75,49 @@ public class PumpsFragment extends Fragment {
         getpump();
         return view;
     }
+
+    private void user_topcard(View view) {
+        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog.setMessage("Loading !!");
+        progressDialog.setCancelable(true);
+
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sitename = sharedPreferences.getString("site_name", "");
+        stpname = sharedPreferences.getString("stp_name", "");
+        siteaddress = sharedPreferences.getString("site_address", "");
+        processname = sharedPreferences.getString("process_name", "");
+        useremail = sharedPreferences.getString("user_email", "");
+        usermobile = sharedPreferences.getString("user_mobile", "");
+        personname = sharedPreferences.getString("person_name", "");
+
+        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
+
+        txtsitename = view.findViewById(R.id.sitename);
+        txtstpname = view.findViewById(R.id.stpname);
+        txtsiteaddress = view.findViewById(R.id.siteaddress);
+        txtuseremail = view.findViewById(R.id.useremail);
+        txtusermobile = view.findViewById(R.id.usermobile);
+        txtpersonname = view.findViewById(R.id.personname);
+
+        txtsitename.setText(sitename);
+        txtstpname.setText(stpname + " / " + processname);
+        txtsiteaddress.setText(siteaddress);
+        txtuseremail.setText(useremail);
+        txtusermobile.setText(usermobile);
+        txtpersonname.setText(personname);
+    }
+
     private void getpump() {
 
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
-        String url = Global.Equipment_Details_com_pumps ;
+        String url = Global.Equipment_Details_com_pumps;
 
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
         String site_code = Global.sharedPreferences.getString("site_code", "0");
 
-        url = url + "com_code=" + com_code + "&sstp1_code=" + sstp1_code + "&site_code=" + site_code ;
+        url = url + "com_code=" + com_code + "&sstp1_code=" + sstp1_code + "&site_code=" + site_code;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -134,7 +140,7 @@ public class PumpsFragment extends Fragment {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                   commonModelClassList = new CommonModelClass();
+                    commonModelClassList = new CommonModelClass();
                     try {
 
                         commonModelClassList.setImage(e.getString("name_plate"));
@@ -164,7 +170,7 @@ public class PumpsFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             public Map<String, String> getHeaders() {
                 // below line we are creating a map for
                 // storing our values in key and value pair.
@@ -174,6 +180,7 @@ public class PumpsFragment extends Fragment {
 
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
 
@@ -190,8 +197,5 @@ public class PumpsFragment extends Fragment {
         };
         queue.add(jsonObjectRequest);
     }
-
-
-
 
 }

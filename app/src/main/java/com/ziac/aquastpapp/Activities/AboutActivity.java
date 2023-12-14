@@ -21,10 +21,7 @@ public class AboutActivity extends AppCompatActivity {
    private CardView Website ,CallUs,MailUs,ChatUs,LinkedIn,FaceBook,Instagram,WhatsApp;
 
     LinearLayout Locate;
-
     LottieAnimationView Ziac ;
-
-    String Gmail;
 
     @SuppressLint("MissingInflatedId")
     @Override

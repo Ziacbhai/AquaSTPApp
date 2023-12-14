@@ -41,16 +41,13 @@ import java.util.Map;
 
 public class VerifyNumberOTP extends AppCompatActivity {
     boolean passwordVisible;
-    String username,mobile,otp ,Newpassword;
+    String otp ,Newpassword;
     TextView Resendotp;
     PinView pinView;
     AppCompatButton Verify;
     ProgressBar progressBar;
-    boolean passwordvisible;
-    SharedPreferences sharedPreferences;
-    private TextInputEditText Newpwd, Confirmpwd,Dusrname,Dusrmobile;
-    String mobileno;
 
+    private TextInputEditText Newpwd;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +55,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
         setContentView(R.layout.activity_verify_number_otp);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
        // displayMobno();
+
         pinView=findViewById(R.id.pinview);
         Verify=findViewById(R.id.verifyotp);
         progressBar = findViewById(R.id.progressbr);
@@ -107,71 +105,6 @@ public class VerifyNumberOTP extends AppCompatActivity {
         });
 
     }
-
-    /*private void postDataUsingVolley(String otp) {
-        String url = Global.validateotpurl;
-       progressBar.setVisibility(View.VISIBLE);
-
-        RequestQueue queue= Volley.newRequestQueue(this);
-
-        StringRequest request = new StringRequest(Request.Method.POST, url,new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-            //  Toast.makeText(VerifyNumberOTP.this, "Data added to API", Toast.LENGTH_SHORT).show();
-                try {
-
-                    JSONObject respObj = new JSONObject(response);
-                    String issuccess = respObj.getString("isSuccess");
-                    String error = respObj.getString("error");
-//                    Global.editor = sharedPreferences.edit();
-//                    Global.editor.putString("username", username);
-//                    Global.editor.putString("mobile", mobileno);
-//                    Global.editor.commit();
-                    Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(),error);
-                    progressBar.setVisibility(View.GONE);
-                    if(issuccess.equals("true")){
-                        startActivity(new Intent(VerifyNumberOTP.this, LoginSignupActivity.class));
-
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    progressBar.setVisibility(View.GONE);
-                    Global.customtoast(VerifyNumberOTP.this,getLayoutInflater(), e.getMessage());
-                }
-
-            }
-
-        }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressBar.setVisibility(View.GONE);
-               // Global.customtoast(VerifyNumberOTP.this,getLayoutInflater(), error.getMessage());
-
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("otp", otp);
-                params.put("Mobile",Global.sharedPreferences.getString("mobile", ""));
-                //params.put("Mobile","9703879108");
-                params.put("FPType", "M");
-                params.put("NewPassword", Newpassword);
-
-                 Log.d("params", params.toString());
-
-                // params.put("NewPassword", "Siva126@Ziac");
-                // params.put("UserName", username);
-
-
-                return params;
-            }
-        };
-        queue.add(request);
-    }*/
     private void postDataUsingVolley(String otp) {
         String url = Global.validateotpurl;
         progressBar.setVisibility(View.VISIBLE);
@@ -248,13 +181,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
 
     // Helper method to check if there are multiple logins linked to the mobile number
     private boolean hasMultipleLogins() {
-        // Implement your logic to check if there are multiple logins linked to the mobile number
-        // For example, you may make another API call or check a local database
-        // If multiple logins are found, return true; otherwise, return false
-        return false; // Replace with your actual implementation
+
+        return false;
     }
-
-
-
-
 }

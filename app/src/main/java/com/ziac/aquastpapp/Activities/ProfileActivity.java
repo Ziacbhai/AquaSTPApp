@@ -76,10 +76,8 @@ public class ProfileActivity extends AppCompatActivity {
     String userimage;
     Picasso.Builder builder;
     Picasso picasso;
-
-    EditText uName, uNumber, uEmail;
-    TextView Uref_code;
-
+    EditText Person_name, Person_number, Person_email;
+    TextView Person_ref_code;
     ImageView Backarrowbtn;
     @SuppressLint("MissingInflatedId")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -87,26 +85,22 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        fab = findViewById(R.id.floating);
-        //Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        fab = findViewById(R.id.floating);
         Backarrowbtn = findViewById(R.id.backarrowbtn);
-
-
         Updatebutton = findViewById(R.id.updatebutton);
-        Updatebutton.setOnClickListener(v -> updateprofile());
 
-        uName = findViewById(R.id._profilename);
-        uNumber = findViewById(R.id.uNumber);
-        uEmail = findViewById(R.id.uEmail);
-        Uref_code = findViewById(R.id.Uref);
+        Person_name = findViewById(R.id._profilename);
+        Person_number = findViewById(R.id.uNumber);
+        Person_email = findViewById(R.id.uEmail);
+        Person_ref_code = findViewById(R.id.Uref);
         circleImageView = findViewById(R.id.imageVie);
 
-
+        Updatebutton.setOnClickListener(v -> updateprofile());
         fab.setOnClickListener(v -> {
             opencamera();
         });
-
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,16 +109,12 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-
-
         Backarrowbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-
-
         getuserdetails();
     }
     public void showImage(Picasso picasso, String userimage) {
@@ -142,8 +132,6 @@ public class ProfileActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
-
-        // Load the image using Picasso
         picasso.load(Uri.parse(userimage)).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -309,11 +297,10 @@ public class ProfileActivity extends AppCompatActivity {
                 String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
                 //Picasso.get().load(userimage).into(circleImageView);
 
-
-                uName.setText(person_name);
-                uEmail.setText(mail);
-                uNumber.setText(mobile);
-                Uref_code.setText(refcode);
+                Person_name.setText(person_name);
+                Person_email.setText(mail);
+                Person_number.setText(mobile);
+                Person_ref_code.setText(refcode);
 
 
                 builder = new Picasso.Builder(getApplication());
@@ -361,9 +348,9 @@ public class ProfileActivity extends AppCompatActivity {
     private void updateprofile() {
         String personname, email, mobile;
 
-        personname = uName.getText().toString();
-        mobile = uNumber.getText().toString();
-        email = uEmail.getText().toString();
+        personname = Person_name.getText().toString();
+        mobile = Person_number.getText().toString();
+        email = Person_email.getText().toString();
 
         if (personname.isEmpty() || mobile.isEmpty() || email.isEmpty()) {
 
@@ -388,10 +375,10 @@ public class ProfileActivity extends AppCompatActivity {
 
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 Global.editor = Global.sharedPreferences.edit();
-                Global.editor.putString("person_name", uName.getText().toString());
-                Global.editor.putString("user_mobile", uNumber.getText().toString());
-                Global.editor.putString("user_email", uEmail.getText().toString());
-                Global.editor.putString("ref_code", Uref_code.getText().toString());
+                Global.editor.putString("person_name", Person_name.getText().toString());
+                Global.editor.putString("user_mobile", Person_number.getText().toString());
+                Global.editor.putString("user_email", Person_email.getText().toString());
+                Global.editor.putString("ref_code", Person_ref_code.getText().toString());
                 Global.editor.commit();
                 try {
                     if (response.getBoolean("isSuccess")) {
@@ -424,9 +411,9 @@ public class ProfileActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
-                params.put("person_name", uName.getText().toString());
-                params.put("user_mobile", uNumber.getText().toString());
-                params.put("user_email", uEmail.getText().toString());
+                params.put("person_name", Person_name.getText().toString());
+                params.put("user_mobile", Person_number.getText().toString());
+                params.put("user_email", Person_email.getText().toString());
                 return params;
                 //  String user_image = respObj.getString("user_image");
             }

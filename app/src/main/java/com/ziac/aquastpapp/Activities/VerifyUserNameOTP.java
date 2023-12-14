@@ -36,32 +36,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VerifyUserNameOTP extends AppCompatActivity {
-    String username,mobile,otp ,Newpassword;
+    String otp, Newpassword;
     TextView Resendotp;
     PinView mPinView;
     boolean passwordVisible;
     AppCompatButton UVerify;
     ProgressBar progressBar;
-    boolean passwordvisible;
-    String email;
-    SharedPreferences sharedPreferences;
-    private TextInputEditText UNewpwd,Dusrname,Dusrmobile;
-    String mobileno;
+
+    private TextInputEditText UNewpwd;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_user_name_otp);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        mPinView=findViewById(R.id.pinview);
-        UVerify=findViewById(R.id.uverifyotp);
+        mPinView = findViewById(R.id.pinview);
+        UVerify = findViewById(R.id.uverifyotp);
 
         progressBar = findViewById(R.id.progressbr);
         UNewpwd = findViewById(R.id.usernewpassword);
-
         Resendotp = findViewById(R.id.resendUotp);
-
-       Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyUserNameOTP.this, ResetPasswordUserName.class)));
+        Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyUserNameOTP.this, ResetPasswordUserName.class)));
         UNewpwd.setOnTouchListener((v, event) -> {
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -88,7 +84,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
             public void onClick(View view) {
                 // getting the PinView data
                 Newpassword = UNewpwd.getText().toString();
-               // username = UNewpwd.getText().toString();
+                // username = UNewpwd.getText().toString();
                 otp = mPinView.getText().toString();
 
               /*  if (Newpassword.length() < 6 ){
@@ -112,12 +108,12 @@ public class VerifyUserNameOTP extends AppCompatActivity {
         String Uurl = Global.validateotpurl;
         progressBar.setVisibility(View.VISIBLE);
 
-        RequestQueue queue= Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest request = new StringRequest(Request.Method.POST, Uurl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-               // Toast.makeText(VerifyUserNameOTP.this, "Data added to API", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(VerifyUserNameOTP.this, "Data added to API", Toast.LENGTH_SHORT).show();
                 try {
 
                     JSONObject respObj = new JSONObject(response);
@@ -127,12 +123,12 @@ public class VerifyUserNameOTP extends AppCompatActivity {
 //                    Global.editor.putString("username", username);
 //                    Global.editor.putString("mobile", mobileno);
 //                    Global.editor.commit();
-                    Global.customtoast(VerifyUserNameOTP.this, getLayoutInflater(),error);
+                    Global.customtoast(VerifyUserNameOTP.this, getLayoutInflater(), error);
                     progressBar.setVisibility(View.GONE);
-                    if(issuccess.equals("true")){
+                    if (issuccess.equals("true")) {
                         startActivity(new Intent(VerifyUserNameOTP.this, LoginSignupActivity.class));
 
-                    }else {
+                    } else {
                         showAlertDialog("Wrong OTP", "The entered OTP is incorrect. Please try again.");
 
                     }
@@ -140,7 +136,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     progressBar.setVisibility(View.GONE);
-                    Global.customtoast(VerifyUserNameOTP.this,getLayoutInflater(), e.getMessage());
+                    Global.customtoast(VerifyUserNameOTP.this, getLayoutInflater(), e.getMessage());
                 }
             }
         }, new Response.ErrorListener() {
@@ -148,7 +144,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -169,6 +165,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
         queue.add(request);
 
     }
+
     private void showAlertDialog(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title)

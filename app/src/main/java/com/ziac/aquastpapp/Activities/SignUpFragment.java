@@ -17,6 +17,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -66,22 +67,18 @@ import Models.zList;
 
 public class SignUpFragment extends Fragment {
 
-    TextView TermsOfUse, privacy;
     private Dialog zDialog;
-    EditText Company, CPerson, Mobile, Email, AUname, RPassword, Cpassword, Ccode;
+    EditText Company, CPerson, Mobile, Email, Adminname, RPassword, Cpassword;
     AppCompatButton Registerbtn;
-
-    TextView tvState, tvCity, Site_address, Process_type, Contact_name;
+    TextView tvState, tvCity, Site_address,TermsOfUse, Privacy ;
     ImageView DDstate, DDcity;
-    private zList statename;
-    private zList cityname;
+    private zList statename,cityname;
     private boolean passwordvisible = false;
-    boolean passwordVisible;
     String citycode;
-
     ProgressDialog progressDialog;
+    private CheckBox CheckBox;
 
-    private CheckBox checkBox;
+    Context context;
 
 
     @SuppressLint("MissingInflatedId")
@@ -91,29 +88,25 @@ public class SignUpFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-        Company = view.findViewById(R.id.company);
-        CPerson = view.findViewById(R.id.cperson);
-        Mobile = view.findViewById(R.id.mobile);
-        Email = view.findViewById(R.id.emailr);
-        AUname = view.findViewById(R.id.auname);
-        checkBox = view.findViewById(R.id.ccheckbox);
-
-        Site_address = view.findViewById(R.id.site_address);
-        // Process_type= view.findViewById(R.id.name_process);
+        context = getContext();
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(true);
 
+        Company = view.findViewById(R.id.company);
+        CPerson = view.findViewById(R.id.cperson);
+        Mobile = view.findViewById(R.id.mobile);
+        Email = view.findViewById(R.id.emailr);
+        Adminname = view.findViewById(R.id.auname);
+        CheckBox = view.findViewById(R.id.ccheckbox);
+        Site_address = view.findViewById(R.id.site_address);
         Registerbtn = view.findViewById(R.id.registerbtn);
-
         RPassword = view.findViewById(R.id.rpassword);
         Cpassword = view.findViewById(R.id.rcpassword);
-        // Ccode = view.findViewById(R.id.rccode);
-
         TermsOfUse = view.findViewById(R.id.terms);
-        privacy = view.findViewById(R.id.privacy);
+        Privacy = view.findViewById(R.id.privacy);
 
         //////Call Api State And City/////
         tvState = view.findViewById(R.id.tvstate);
@@ -177,9 +170,6 @@ public class SignUpFragment extends Fragment {
             return false;
         });
 
-        //Registerbtn.setOnClickListener(v -> Registration());
-
-
         TermsOfUse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,7 +179,7 @@ public class SignUpFragment extends Fragment {
             }
         });
 
-        privacy.setOnClickListener(new View.OnClickListener() {
+        Privacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
@@ -235,8 +225,6 @@ public class SignUpFragment extends Fragment {
                         // getting the state name from the object
                         statename.set_name(e.getString("state_name"));
                         statename.set_code(e.getString("state_code"));
-
-
                        /* Log.d("YourTag", "State Name: " + statename.get_name());
                         Log.d("YourTag", "State Code: " + statename.get_code());*/
 
@@ -246,13 +234,10 @@ public class SignUpFragment extends Fragment {
                     Global.statearraylist.add(statename);
 
                 }
-
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
 
             }
         });
@@ -419,7 +404,6 @@ public class SignUpFragment extends Fragment {
 
             }
 
-
         }) {
             @Override
             protected Map<String, String> getParams() {
@@ -568,7 +552,7 @@ public class SignUpFragment extends Fragment {
         cpperson = CPerson.getText().toString();
         mobile = Mobile.getText().toString();
         email = Email.getText().toString();
-        adminname = AUname.getText().toString();
+        adminname = Adminname.getText().toString();
         state = tvState.getText().toString().trim();
         city = tvCity.getText().toString().trim();
         password = RPassword.getText().toString();
@@ -603,8 +587,8 @@ public class SignUpFragment extends Fragment {
             return;
         }
         if (adminname.isEmpty()) {
-            AUname.setError("Admin name field should not be empty!!");
-            AUname.requestFocus();
+            Adminname.setError("Admin name field should not be empty!!");
+            Adminname.requestFocus();
             //Toast.makeText(getActivity(), "Contact person field should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -642,7 +626,7 @@ public class SignUpFragment extends Fragment {
             //Toast.makeText(getActivity(), "Confirm password field should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (!checkBox.isChecked()) {
+        if (!CheckBox.isChecked()) {
             Toast.makeText(getActivity(), "You are not  agree with the terms and conditions of Aqua to move further  ", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -710,7 +694,7 @@ public class SignUpFragment extends Fragment {
                 params.put("com_contact", CPerson.getText().toString());
                 params.put("com_contact_mobno", Mobile.getText().toString());
                 params.put("com_email", emailValue);
-                params.put("username", AUname.getText().toString());
+                params.put("username", Adminname.getText().toString());
                 params.put("password", RPassword.getText().toString());
                 params.put("confirm_password", Cpassword.getText().toString());
                 params.put("state_code", String.valueOf(statename.get_code()));

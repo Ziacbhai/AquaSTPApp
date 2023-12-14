@@ -3,6 +3,8 @@ package com.ziac.aquastpapp.Activities;
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -22,48 +24,19 @@ import com.ziac.aquastpapp.R;
 
 public class EquipmentsFragment extends Fragment {
     private CardView Pump ,Meters;
-    private String mail,Stpname ,Sitename ,mobile_;
-    TextView personnameH ,usersiteH,userstpH  ;
-    TextView  usersiteaddressH,Mailid,Mobno;
-    //uProcess
-    private String Personname  ,SiteAddress,Process;
+    ProgressDialog progressDialog;
+    Context context;
 
     @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_equipments, container, false);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        context=getContext();
+        user_topcard(view);
+
         Pump = view.findViewById(R.id.pump_p);
         Meters = view.findViewById(R.id.moter_s);
-
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        SiteAddress = sharedPreferences.getString("site_address", "");
-        Process = sharedPreferences.getString("process_name", "");
-         mail = sharedPreferences.getString("user_email", "");
-        mobile_ = sharedPreferences.getString("user_mobile", "");
-        Personname = sharedPreferences.getString("person_name", "");
-
-        usersiteH = view.findViewById(R.id.site_name);
-        Mailid = view.findViewById(R.id.email);
-        Mobno = view.findViewById(R.id._mobile);
-        userstpH = view.findViewById(R.id.stp_name);
-      //  uProcess = view.findViewById(R.id.processname_);
-        usersiteaddressH = view.findViewById(R.id.site_address);
-        personnameH = view.findViewById(R.id.person_name);
-
-        Mailid.setText(mail);
-        Mobno.setText(mobile_);
-        usersiteaddressH.setText(SiteAddress);
-        userstpH.setText(Stpname + " / " + Process);
-       // userstpH.setText(Stpname);
-       // uProcess.setText(Process);
-        usersiteH.setText(Sitename);
-        personnameH.setText(Personname);
-
         Pump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,5 +60,37 @@ public class EquipmentsFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void user_topcard(View view) {
+        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog.setMessage("Loading !!");
+        progressDialog.setCancelable(true);
+
+        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sitename = sharedPreferences.getString("site_name", "");
+        stpname = sharedPreferences.getString("stp_name", "");
+        siteaddress = sharedPreferences.getString("site_address", "");
+        processname = sharedPreferences.getString("process_name", "");
+        useremail = sharedPreferences.getString("user_email", "");
+        usermobile = sharedPreferences.getString("user_mobile", "");
+        personname = sharedPreferences.getString("person_name", "");
+
+        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+
+        txtsitename = view.findViewById(R.id.sitename);
+        txtstpname = view.findViewById(R.id.stpname);
+        txtsiteaddress = view.findViewById(R.id.siteaddress);
+        txtuseremail = view.findViewById(R.id.useremail);
+        txtusermobile = view.findViewById(R.id.usermobile);
+        txtpersonname = view.findViewById(R.id.personname);
+
+        txtsitename.setText(sitename);
+        txtstpname.setText(stpname + " / " + processname);
+        txtsiteaddress.setText(siteaddress);
+        txtuseremail.setText(useremail);
+        txtusermobile.setText(usermobile);
+        txtpersonname.setText(personname);
     }
 }

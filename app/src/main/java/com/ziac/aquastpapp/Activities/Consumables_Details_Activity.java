@@ -68,7 +68,6 @@ public class Consumables_Details_Activity extends AppCompatActivity {
     private ItemListClassConsumables Item_spinner;
     private Dialog zDialog;
     TextView Equipment_code, Item_code, Qty_cb;
-
     AppCompatButton Update_A, Cancel_A;
     private ProgressDialog progressDialog;
 

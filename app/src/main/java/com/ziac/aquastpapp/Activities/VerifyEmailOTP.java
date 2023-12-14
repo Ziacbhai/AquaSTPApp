@@ -41,48 +41,46 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VerifyEmailOTP extends AppCompatActivity {
-    String username,mobile,otp ,Newpassword;
+    String otp ,Newpassword;
     TextView Resendotp;
-    PinView Et_pinView;
+    PinView Enter_pinnumber;
     AppCompatButton EVerify;
     ProgressBar progressBar;
     boolean passwordVisible;
-    String email;
-    SharedPreferences sharedPreferences;
-    private TextInputEditText ENewpwd,Dusrname,Dusrmobile;
-    String mobileno;
+    private TextInputEditText EnterNewpwd;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verifiy_email_otp);
 
-        Et_pinView=findViewById(R.id.et_pinview);
-        new OTP_Receiver().setPinView(Et_pinView);
+        Enter_pinnumber=findViewById(R.id.et_pinview);
+        new OTP_Receiver().setPinView(Enter_pinnumber);
         requestSMSPermission();
 
         EVerify=findViewById(R.id.everifyotp);
         progressBar = findViewById(R.id.progressbr);
-        ENewpwd = findViewById(R.id.enewpassword);
+        EnterNewpwd = findViewById(R.id.enewpassword);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Resendotp = findViewById(R.id.resendEotp);
 
         Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyEmailOTP.this, ResetPasswordEmail.class)));
-        ENewpwd.setOnTouchListener((v, event) -> {
+        EnterNewpwd.setOnTouchListener((v, event) -> {
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
-                if (event.getRawX() >= ENewpwd.getRight() - ENewpwd.getCompoundDrawables()[Right].getBounds().width()) {
-                    int selection = ENewpwd.getSelectionEnd();
+                if (event.getRawX() >= EnterNewpwd.getRight() - EnterNewpwd.getCompoundDrawables()[Right].getBounds().width()) {
+                    int selection = EnterNewpwd.getSelectionEnd();
                     if (passwordVisible) {
-                        ENewpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
-                        ENewpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        EnterNewpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
+                        EnterNewpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                         passwordVisible = false;
                     } else {
-                        ENewpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
-                        ENewpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        EnterNewpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
+                        EnterNewpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                         passwordVisible = true;
                     }
-                    ENewpwd.setSelection(selection);
+                    EnterNewpwd.setSelection(selection);
                     return true;
                 }
             }
@@ -93,8 +91,8 @@ public class VerifyEmailOTP extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // getting the PinView data
-                Newpassword = ENewpwd.getText().toString();
-                otp = Et_pinView.getText().toString();
+                Newpassword = EnterNewpwd.getText().toString();
+                otp = Enter_pinnumber.getText().toString();
 
               /*  if (Newpassword.length() < 6 ){
                     Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(), "Password should not be less than 6 digits !!");

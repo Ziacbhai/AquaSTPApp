@@ -41,7 +41,7 @@ import Models.RepairsClass;
 public class Repair_Details_Activity extends AppCompatActivity {
     RepairsClass repair_s;
 
-    TextView Date_A,STP_A,Remark_A;
+    TextView Date_A,Remark_A;
     AppCompatButton Update_A,Cancel_A;
     RecyclerView Repair_details_recyclerview;
     Context context;

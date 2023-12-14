@@ -14,7 +14,7 @@ import com.ziac.aquastpapp.R;
 
 public class RecoveryPasswordWith extends AppCompatActivity {
 
-    CardView Remail,Rusername,Rmobile;
+    CardView Rcemail,Rcusername,Rcmobile;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -22,11 +22,11 @@ public class RecoveryPasswordWith extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recovery_password_with);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        Remail = findViewById(R.id.emailr);
-        Rusername = findViewById(R.id.usernamer);
-        Rmobile = findViewById(R.id.mobiler);
+        Rcemail = findViewById(R.id.emailr);
+        Rcusername = findViewById(R.id.usernamer);
+        Rcmobile = findViewById(R.id.mobiler);
 
-       Remail.setOnClickListener(new View.OnClickListener() {
+       Rcemail.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                Intent re = new Intent(RecoveryPasswordWith.this,ResetPasswordEmail.class);
@@ -34,7 +34,7 @@ public class RecoveryPasswordWith extends AppCompatActivity {
            }
        });
 
-        Rusername.setOnClickListener(new View.OnClickListener() {
+        Rcusername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent run = new Intent(RecoveryPasswordWith.this, ResetPasswordUserName.class);
@@ -42,7 +42,7 @@ public class RecoveryPasswordWith extends AppCompatActivity {
             }
         });
 
-        Rmobile.setOnClickListener(new View.OnClickListener() {
+        Rcmobile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent rnum = new Intent(RecoveryPasswordWith.this, ResetPasswordNumber.class);

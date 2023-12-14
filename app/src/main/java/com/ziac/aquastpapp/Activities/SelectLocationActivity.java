@@ -49,8 +49,7 @@ import Adapters.SiteLocationAdapter;
 import Models.StpModelClass;
 
 public class SelectLocationActivity extends AppCompatActivity {
-    private boolean doubleBackToExitPressedOnce;
-    String username;
+
     LinearLayout Scr;
     SiteLocationAdapter siteLocationAdapter;
     RecyclerView siteLocationRecyclerView;
@@ -65,6 +64,8 @@ public class SelectLocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_company);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        context =this;
 
         //Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         stpModelClassList = new StpModelClass();

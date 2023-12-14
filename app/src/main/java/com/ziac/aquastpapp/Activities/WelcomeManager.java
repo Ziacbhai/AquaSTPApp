@@ -56,10 +56,9 @@ import java.util.Map;
 
 public class WelcomeManager extends AppCompatActivity {
 
-    private TextView Mname,Mmail,Mph,ClickHere;
+    private TextView Managername,Managermail,Managermobile,ClickHere;
     ImageView ImageView ,ManagerExit;
     AppCompatButton mContinue;
-    private String username;
     Context context;
     Bitmap imageBitmap;
     FloatingActionButton fab;
@@ -70,6 +69,8 @@ public class WelcomeManager extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_manager);
+
+        context = this;
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         fab = findViewById(R.id.floating);
@@ -89,9 +90,9 @@ public class WelcomeManager extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        Mname = findViewById(R.id.Mname);
-        Mmail = findViewById(R.id.Mmail);
-        Mph = findViewById(R.id.Mph);
+        Managername = findViewById(R.id.Mname);
+        Managermail = findViewById(R.id.Mmail);
+        Managermobile = findViewById(R.id.Mph);
         ImageView = findViewById(R.id.imageView);
 
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
@@ -106,9 +107,9 @@ public class WelcomeManager extends AppCompatActivity {
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(ImageView );
-        Mname.setText(person);
-        Mmail.setText(mail);
-        Mph.setText(mobile);
+        Managername.setText(person);
+        Managermail.setText(mail);
+        Managermobile.setText(mobile);
 
 
         ///2

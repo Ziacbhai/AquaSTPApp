@@ -60,7 +60,7 @@ public class LoginFragment extends Fragment {
     EditText Login_User,Login_pwd ;
     private CheckBox RememberMe;
     Button Login_btn;
-    TextView TermsOfUse, privacy, forgotpwd;
+    TextView termsOfuse, privacy, forgotpwd;
     boolean passwordVisible;
     String username, pwd;
     StpModelClass stpModelClass;
@@ -81,16 +81,19 @@ public class LoginFragment extends Fragment {
 
         Context context = getContext();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Logging in...");
         progressDialog.setCancelable(true);
+
         Login_User = view.findViewById(R.id.Luser);
         Login_pwd = view.findViewById(R.id.password2);
         Login_btn = view.findViewById(R.id.loginbtn);
-        TermsOfUse = view.findViewById(R.id.terms);
+        RememberMe = view.findViewById(R.id.RcheckBox);
+
+        termsOfuse = view.findViewById(R.id.terms);
         privacy = view.findViewById(R.id.privacy);
         forgotpwd = view.findViewById(R.id.btnftpass);
-        RememberMe = view.findViewById(R.id.RcheckBox);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         TextView versionName = view.findViewById(R.id.version);
@@ -146,7 +149,7 @@ public class LoginFragment extends Fragment {
             RememberMe.setChecked(false);
         }
 
-        TermsOfUse.setOnClickListener(new View.OnClickListener() {
+        termsOfuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
@@ -189,16 +192,12 @@ public class LoginFragment extends Fragment {
             }
         });
         return view;
-
-
     }
     private void dologinVolley() {
-
         username = Login_User.getText().toString();
         pwd = Login_pwd.getText().toString();
         progressDialog.show();
         //new InternetCheckTask().execute();
-
         String url = Global.tokenurl;
         RequestQueue queue= Volley.newRequestQueue(getActivity());
 

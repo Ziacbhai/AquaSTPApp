@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle toggle;
 
     boolean click = true;
-    private String userimage, usermail, stpname, sitename, siteaddress, userref, personname,processname;
+    String userimage, usermail, stpname, sitename, siteaddress, userref, personname, processname;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // getSupportActionBar().setDisplayShowTitleEnabled(false);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         toolbar = findViewById(R.id.toolbar);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+       Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
 
@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
         userref = sharedPreferences.getString("ref_code", "");
-        personname = Global.sharedPreferences.getString("person_name", "");
-        usermail = Global.sharedPreferences.getString("user_email", "");
+        personname = sharedPreferences.getString("person_name", "");
+        usermail = sharedPreferences.getString("user_email", "");
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         siteaddress = sharedPreferences.getString("site_address", "");
@@ -183,6 +183,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
             }
+
             @Override
             public void onDrawerClosed(@NonNull View drawerView) {
                 //Toast.makeText(NewMainActivity.this, "On onDrawerClosed", Toast.LENGTH_SHORT).show();
@@ -207,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // bottomNavigationView=findViewById(R.id.bottomNavigationView);
         // bottomNavigationView.setBackground(null);
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
@@ -242,7 +244,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
-        }if (itemId == R.id.nav_repair) {
+        }
+        if (itemId == R.id.nav_repair) {
             RepairFragment repairFragment = new RepairFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -250,7 +253,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
-        }if (itemId == R.id.nav_lab) {
+        }
+        if (itemId == R.id.nav_lab) {
             LabTestFragment labTestFragment = new LabTestFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -258,7 +262,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
-        }if (itemId == R.id.nav_incident) {
+        }
+        if (itemId == R.id.nav_incident) {
          /*   IncidentReportingFragment inFragment = new IncidentReportingFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -335,18 +340,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
     }
-
-    private void loadHomeFragment() {
-        HomeFragment homeFragment = new HomeFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, homeFragment);
-        fragmentTransaction.commit();
-    }
-
-
-
-
     @Override
     public void onBackPressed() {
 

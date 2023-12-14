@@ -16,8 +16,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -59,11 +57,10 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WelcomeSupervisor extends AppCompatActivity {
-    private TextView Sname,Smail,Sph,ClickHere;
+    private TextView Sname,Smail,Smobile,ClickHere;
     CircleImageView ImageView;
-    ImageView Supervisorexit ;
+    ImageView SupervisorExit;
     AppCompatButton sContinue;
-    private String username;
     Context context;
     Bitmap imageBitmap;
     FloatingActionButton fab;
@@ -73,6 +70,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_supervisor);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        context = this;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         ImageView = findViewById(R.id.imageView);
@@ -80,9 +78,9 @@ public class WelcomeSupervisor extends AppCompatActivity {
         // ClickHere = findViewById(R.id.Clickhere);
         sContinue = findViewById(R.id.sContinue);
         fab = findViewById(R.id.floating);
-        Supervisorexit = findViewById(R.id.supervisorexit);
+        SupervisorExit = findViewById(R.id.supervisorexit);
 
-        Supervisorexit.setOnClickListener(new View.OnClickListener() {
+        SupervisorExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //finishAffinity();
@@ -94,7 +92,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
 
 
         Smail = findViewById(R.id.sMail);
-        Sph = findViewById(R.id.sPh);
+        Smobile = findViewById(R.id.sPh);
         ClickHere = findViewById(R.id.Clickhere);
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
@@ -104,7 +102,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
 
         Sname.setText(usrname);
         Smail.setText(mail);
-        Sph.setText(mobile);
+        Smobile.setText(mobile);
 
         Picasso.Builder builder=new Picasso.Builder(getApplication());
         Picasso picasso=builder.build();

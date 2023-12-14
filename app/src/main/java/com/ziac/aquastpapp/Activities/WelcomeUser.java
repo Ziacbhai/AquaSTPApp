@@ -52,10 +52,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WelcomeUser extends AppCompatActivity {
-    private TextView _Person, Umail, Uph, ClickHere;
+    private TextView userpersonname, usermail, usermobile, ClickHere;
     ImageView ImageView, Userexit;
-    AppCompatButton uContinue;
-    private String personname;
+    AppCompatButton ucontinue;
+
     Context context;
 
     Bitmap imageBitmap;
@@ -69,13 +69,15 @@ public class WelcomeUser extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+        context = this;
+
         fab = findViewById(R.id.floating);
         ImageView = findViewById(R.id.imageView);
-        _Person = findViewById(R.id._person);
+        userpersonname = findViewById(R.id._person);
         ClickHere = findViewById(R.id.Clickhere);
-        uContinue = findViewById(R.id.uContinue);
-        Umail = findViewById(R.id.uMail);
-        Uph = findViewById(R.id.uPh);
+        ucontinue = findViewById(R.id.uContinue);
+        usermail = findViewById(R.id.uMail);
+        usermobile = findViewById(R.id.uPh);
         Userexit = findViewById(R.id.userexit);
         Userexit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,19 +87,19 @@ public class WelcomeUser extends AppCompatActivity {
             }
         });
 
+        String person_name,user_mail,user_mobile,user_image;
+        person_name = Global.sharedPreferences.getString("person_name", "");
+        user_mail = Global.sharedPreferences.getString("user_email", "");
+        user_mobile = Global.sharedPreferences.getString("user_mobile", "");
+        user_image = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
-        personname = Global.sharedPreferences.getString("person_name", "");
-        String mail = Global.sharedPreferences.getString("user_email", "");
-        String mobile = Global.sharedPreferences.getString("user_mobile", "");
-        String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-
-        _Person.setText(personname);
-        Umail.setText(mail);
-        Uph.setText(mobile);
+        userpersonname.setText(person_name);
+        usermail.setText(user_mail);
+        usermobile.setText(user_mobile);
 
         Picasso.Builder builder = new Picasso.Builder(getApplication());
         Picasso picasso = builder.build();
-        picasso.load(Uri.parse(userimage))
+        picasso.load(Uri.parse(user_image))
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(ImageView);
@@ -124,7 +126,7 @@ public class WelcomeUser extends AppCompatActivity {
             }
         });
 
-        uContinue.setOnClickListener(new View.OnClickListener() {
+        ucontinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(WelcomeUser.this, SelectLocationActivity.class);
@@ -333,10 +335,4 @@ public class WelcomeUser extends AppCompatActivity {
         queue.add(request);
     }
 
-    private String imageToString(Bitmap imageBitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
-        byte[] imgBytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
-    }
 }

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ziac.aquastpapp.Activities.Lab_Test_Details_Activity;
+import com.ziac.aquastpapp.Activities.LabTest_Details_Activity;
 import com.ziac.aquastpapp.R;
 
 import java.text.ParseException;
@@ -50,7 +50,7 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
         holder.Lab_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, Lab_Test_Details_Activity.class);
+                Intent i = new Intent(context, LabTest_Details_Activity.class);
                 context.startActivity(i);
             }
         });

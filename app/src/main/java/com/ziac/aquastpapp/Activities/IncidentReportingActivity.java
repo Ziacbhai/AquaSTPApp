@@ -52,26 +52,16 @@ import Models.IncidentsClass;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class IncidentReportingActivity extends AppCompatActivity{
-    public static final int PICK_IMAGE_REQUEST = 0;
-    private ImagePickerCallback imagePickerCallback;
     private static final int CAMERA_REQUEST = 1001;
     RecyclerView Incident_recyclerview;
     IncidentsClass incidents;
-    // private ImageView mImageView;
     IncidentAdapter incidentAdapter;
     Bitmap imageBitmap;
-
-    EditText uName, uNumber, uEmail;
-    TextView Uref_code;
-    //private static final int CAMERA_REQUEST = 0;
-    Picasso.Builder builder;
-    Picasso picasso;
     Toolbar toolbar;
-    CircleImageView Profile,circleImageView;
+    CircleImageView Profile;
     Context context;
-
     IncidentsClass incidentsClass;
-    private String userimage;
+    String userimage;
 
 
     private ProgressDialog progressDialog;
@@ -236,8 +226,6 @@ public class IncidentReportingActivity extends AppCompatActivity{
                         Global.editor.putString("incident_code",incident_code);
                        // Log.d("YourTag", "incident_code" + incident_code);
                         //Toast.makeText(context, ""+incident_code, Toast.LENGTH_SHORT).show();
-
-
                         Global.editor.commit();
 
                     } catch (JSONException ex) {

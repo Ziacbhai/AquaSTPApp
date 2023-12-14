@@ -46,17 +46,19 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     EditText Newpwd ,Rpwd;
     AppCompatButton Pwdconfirm;
-    boolean passwordVisible;
+
     ProgressBar progressBar;
     ImageView Backarrowbtn;
     private boolean passwordvisible = false;
-    String username,Newpassword,repeatmpassword;
+    String username,newpassword,repeatmpassword;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+
         Newpwd = findViewById(R.id.newpwd);
         Rpwd = findViewById(R.id.rpwd);
         Pwdconfirm = findViewById(R.id.pwdconfirm);
@@ -121,11 +123,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
         Pwdconfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Newpassword = Newpwd.getText().toString();
+                newpassword = Newpwd.getText().toString();
                 repeatmpassword = Rpwd.getText().toString();
                 username = Newpwd.getText().toString();
                 repeatmpassword = Rpwd.getText().toString();
-                if (Newpassword.isEmpty()) {
+                if (newpassword.isEmpty()) {
                     Newpwd.setError("Please enter the New Password");
                     Newpwd.requestFocus();
                     return;
@@ -133,18 +135,18 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     Rpwd.setError("Please enter the New Password");
                     Rpwd.requestFocus();
                     return;
-                } else if (Newpassword.length() < 6) {
+                } else if (newpassword.length() < 6) {
                     Toast.makeText(ChangePasswordActivity.this, "Password must be at least 6 characters long.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                else if (!Newpassword.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
+                else if (!newpassword.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
                     Toast toast = Toast.makeText(ChangePasswordActivity.this, "password must contain mix of upper and lower case letters as well as digits and one special charecter !!", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
                     toast.show();
                     return;
                 }
 
-                if (Newpassword.equals(repeatmpassword)) {
+                if (newpassword.equals(repeatmpassword)) {
                     username = Global.sharedPreferences.getString("username", null);
                     updatepassword();
                 } else {
@@ -215,7 +217,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("UserName", username);
-                params.put("NewPassword",Newpassword);
+                params.put("NewPassword",newpassword);
                 return params;
             }
         };

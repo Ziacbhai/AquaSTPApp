@@ -36,7 +36,7 @@ import java.util.Map;
 import Adapters.Lab_Test_Details_Adapter;
 import Models.LabTestClass;
 
-public class Lab_Test_Details_Activity extends AppCompatActivity {
+public class LabTest_Details_Activity extends AppCompatActivity {
     RecyclerView Labtest_details_Rv;
     LabTestClass labTest_Dclass;
     Context context;
@@ -63,7 +63,6 @@ public class Lab_Test_Details_Activity extends AppCompatActivity {
         Labtest_details_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         getLabTestDetails();
     }
-
     private void user_topcard() {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading !!");

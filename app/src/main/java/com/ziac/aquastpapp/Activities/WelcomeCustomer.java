@@ -51,11 +51,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WelcomeCustomer extends AppCompatActivity {
-    private TextView Cname,Cmail,Cph,ClickHere;
-    ImageView ImageView ,Customerexit;
+    private TextView Customer_name, Customer_mail, Customer_mobile, ClickHere;
+    ImageView ImageView, Customerexit;
     AppCompatButton cContinue;
     Bitmap imageBitmap;
     FloatingActionButton fab;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +66,12 @@ public class WelcomeCustomer extends AppCompatActivity {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         ImageView = findViewById(R.id.imageView);
-        Cname = findViewById(R.id.cname);
+        Customer_name = findViewById(R.id.cname);
         ClickHere = findViewById(R.id.Clickhere);
         cContinue = findViewById(R.id.cContinue);
         fab = findViewById(R.id.floating);
-        Cmail = findViewById(R.id.cmail);
-        Cph = findViewById(R.id.cph);
+        Customer_mail = findViewById(R.id.cmail);
+        Customer_mobile = findViewById(R.id.cph);
 
         Customerexit = findViewById(R.id.customerexit);
         Customerexit.setOnClickListener(new View.OnClickListener() {
@@ -80,21 +81,23 @@ public class WelcomeCustomer extends AppCompatActivity {
             }
         });
 
-        String usrname = Global.sharedPreferences.getString("person_name", "");
-        String mail = Global.sharedPreferences.getString("user_email", "");
-        String mobile = Global.sharedPreferences.getString("user_mobile", "");
-        String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+        String username, usermail, usermobile, userimage;
 
-        Cname.setText(usrname);
-        Cmail.setText(mail);
-        Cph.setText(mobile);
+        username = Global.sharedPreferences.getString("person_name", "");
+        usermail = Global.sharedPreferences.getString("user_email", "");
+        usermobile = Global.sharedPreferences.getString("user_mobile", "");
+        userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
-        Picasso.Builder builder=new Picasso.Builder(getApplication());
-        Picasso picasso=builder.build();
+        Customer_name.setText(username);
+        Customer_mail.setText(usermail);
+        Customer_mobile.setText(usermobile);
+
+        Picasso.Builder builder = new Picasso.Builder(getApplication());
+        Picasso picasso = builder.build();
         picasso.load(Uri.parse(userimage))
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
-                .into(ImageView );
+                .into(ImageView);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,14 +108,14 @@ public class WelcomeCustomer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-                showImage(picasso,userimage);
+                showImage(picasso, userimage);
 
             }
         });
         ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeCustomer.this,ProfileActivity.class);
+                Intent in = new Intent(WelcomeCustomer.this, ProfileActivity.class);
                 startActivity(in);
 
             }
@@ -182,6 +185,7 @@ public class WelcomeCustomer extends AppCompatActivity {
             }
         });
     }
+
     private void opencamera() {
 
         ImagePicker.with(WelcomeCustomer.this)
@@ -190,6 +194,7 @@ public class WelcomeCustomer extends AppCompatActivity {
                 .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
                 .start(10);
     }
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10 && resultCode == RESULT_OK) {
@@ -206,7 +211,9 @@ public class WelcomeCustomer extends AppCompatActivity {
 
     private void postselelectedimage() {
 
-        if (imageBitmap == null) {return;}
+        if (imageBitmap == null) {
+            return;
+        }
 
         String url = Global.urlUpdateprofileImage;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -222,9 +229,8 @@ public class WelcomeCustomer extends AppCompatActivity {
                 if (resp.getBoolean("success")) {
 
 
-
                     Global.customtoast(WelcomeCustomer.this, getLayoutInflater(), "Image uploaded successfully");
-                     getuserdetails();
+                    getuserdetails();
 
                 } else {
                     if (resp.has("error")) {
@@ -263,11 +269,10 @@ public class WelcomeCustomer extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
-                params.put("username", Global.sharedPreferences.getString("username",null));
-               // params.put("fileName",image);
+                params.put("username", Global.sharedPreferences.getString("username", null));
+                // params.put("fileName",image);
 
-               // Log.d("YourTag", "Key: fileName, Value: " + image);
-
+                // Log.d("YourTag", "Key: fileName, Value: " + image);
 
 
                 return params;
@@ -280,7 +285,7 @@ public class WelcomeCustomer extends AppCompatActivity {
     private void getuserdetails() {
 
         String url = Global.getuserprofileurl;
-        RequestQueue queue= Volley.newRequestQueue(WelcomeCustomer.this);
+        RequestQueue queue = Volley.newRequestQueue(WelcomeCustomer.this);
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
 
@@ -319,7 +324,7 @@ public class WelcomeCustomer extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("username", Global.sharedPreferences.getString("username",null));
+                params.put("username", Global.sharedPreferences.getString("username", null));
                 return params;
             }
         };

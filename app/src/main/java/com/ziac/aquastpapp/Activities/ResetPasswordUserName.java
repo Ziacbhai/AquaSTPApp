@@ -34,8 +34,7 @@ import java.util.Map;
 
 public class ResetPasswordUserName extends AppCompatActivity {
 
-   // EditText Username ;
-    EditText etusername;
+    EditText entertusername;
     AppCompatButton Getotp1;
     ProgressBar progressBar;
     String username;
@@ -47,7 +46,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
         setContentView(R.layout.activity_reset_password_user_name);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Getotp1 = findViewById(R.id.submitotp);
-        etusername = findViewById(R.id.fgusername);
+        entertusername = findViewById(R.id.fgusername);
         progressBar = findViewById(R.id.progressbr);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -59,10 +58,10 @@ public class ResetPasswordUserName extends AppCompatActivity {
         Getotp1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username = etusername.getText().toString();
+                username = entertusername.getText().toString();
                if (username.isEmpty()) {
-                   etusername.setError("Please Enter User Name");
-                   etusername.requestFocus();
+                   entertusername.setError("Please Enter User Name");
+                   entertusername.requestFocus();
                     return;
                 }
                 postDataUsingVolley();

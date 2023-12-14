@@ -30,10 +30,9 @@ import java.util.Map;
 
 public class ResetPasswordEmail extends AppCompatActivity {
 
-    AppCompatButton E_OTPbtn;
-    EditText Femail;
-
-    String email;
+    AppCompatButton EnterOTPbtn;
+    EditText Forgotemail;
+    String useremail;
     //SharedPreferences sharedPreferences;
     ProgressBar progressBar;
 
@@ -43,25 +42,20 @@ public class ResetPasswordEmail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_email);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        E_OTPbtn = findViewById(R.id.eotpbtn);
-        Femail = findViewById(R.id.Femail);
+
+        EnterOTPbtn = findViewById(R.id.eotpbtn);
+        Forgotemail = findViewById(R.id.Femail);
         progressBar = findViewById(R.id.progressbr);
 
        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        //String emailId = Global.sharedPreferences.getString("email", "");
-
-
-       // Femail.setText(emailId);
-
-        E_OTPbtn.setOnClickListener(new View.OnClickListener() {
+        EnterOTPbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email = Femail.getText().toString();
+                useremail = Forgotemail.getText().toString();
                // progressBar.setVisibility(View.VISIBLE);
-                if (email.isEmpty()) {
-                    Femail.setError("Please Enter Email");
-                    Femail.requestFocus();
+                if (useremail.isEmpty()) {
+                    Forgotemail.setError("Please Enter Email");
+                    Forgotemail.requestFocus();
                     return;
                 } else {
 
@@ -91,7 +85,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
                     String error = respObj.getString("error");
 
                     Global.editor = Global.sharedPreferences.edit();
-                    Global.editor.putString("user_email", email);
+                    Global.editor.putString("user_email", useremail);
                     //Global.editor.remove("Email").commit();
 
                     Global.editor.commit();
@@ -128,7 +122,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
                // params.put("Email", email);
                 params.put("Mobile", "");
                 params.put("FPType", "E");
-                params.put("user_email", email);
+                params.put("user_email", useremail);
                 return params;
             }
         };

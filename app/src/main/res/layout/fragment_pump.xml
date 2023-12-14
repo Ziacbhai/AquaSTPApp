@@ -58,7 +58,7 @@
                                         android:orientation="vertical">
 
                                         <TextView
-                                            android:id="@+id/site_name"
+                                            android:id="@+id/sitename"
                                             android:textColor="@color/white"
                                             android:layout_width="match_parent"
                                             android:gravity="center_horizontal"
@@ -78,7 +78,7 @@
                                                 android:padding="5dp">
                                                 <TextView
                                                     android:textColor="@color/white"
-                                                    android:id="@+id/stp_name"
+                                                    android:id="@+id/stpname"
                                                     android:layout_weight="1.1"
                                                     android:layout_width="0dp"
                                                     android:gravity="center"
@@ -86,27 +86,12 @@
                                                     android:text="STP name"
                                                     android:textStyle="bold"
                                                     android:textSize="12dp" />
-                                               <!-- <View
-                                                    android:layout_width="2dp"
-                                                    android:layout_height="12dp"/>
-
-                                                <TextView
-                                                    android:textColor="@color/white"
-                                                    android:id="@+id/processname_"
-                                                    android:layout_weight="0.8"
-                                                    android:layout_marginStart="10dp"
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:text= ":"
-                                                    android:textStyle="bold"
-                                                    android:textSize="12dp" />-->
-
 
                                             </LinearLayout>
 
                                         </LinearLayout>
                                         <TextView
-                                            android:id="@+id/site_address"
+                                            android:id="@+id/siteaddress"
                                             android:textColor="@color/white"
                                             android:layout_width="match_parent"
                                             android:gravity="center_horizontal"
@@ -116,7 +101,7 @@
                                             android:textSize="12dp" />
 
                                         <TextView
-                                            android:id="@+id/person_name"
+                                            android:id="@+id/personname"
                                             android:textColor="@color/white"
                                             android:layout_width="match_parent"
                                             android:gravity="center_horizontal"
@@ -127,7 +112,7 @@
 
                                         <TextView
 
-                                            android:id="@+id/email"
+                                            android:id="@+id/useremail"
                                             android:textColor="@color/white"
                                             android:layout_width="match_parent"
                                             android:gravity="center_horizontal"
@@ -137,12 +122,12 @@
                                             android:textSize="12dp" />
 
                                         <TextView
-                                            android:id="@+id/_mobile"
+                                            android:id="@+id/usermobile"
                                             android:textColor="@color/white"
                                             android:layout_width="match_parent"
                                             android:gravity="center_horizontal"
                                             android:layout_height="wrap_content"
-                                            android:text="_mobile"
+                                            android:text="mobile"
                                             android:textStyle="bold"
                                             android:textSize="12dp" />
 
