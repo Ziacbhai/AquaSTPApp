@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eaeff5"
+    android:layout_margin="2dp"
     android:orientation="vertical"
     tools:context=".Activities.RepairTwoImageUploadActivity">
 
@@ -42,28 +43,30 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
-        <TextView
-            android:layout_width="match_parent"
+        <EditText
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Upload Images"
+            android:text="Remarks"
             android:textSize="26sp"
+            android:textStyle="bold" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/repair_image_uploadbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/header_background"
+            android:gravity="center"
+            android:text="Upload Image"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/repair_image_uploadbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/header_background"
-        android:gravity="center"
-        android:text="Upload Image"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        android:textStyle="bold" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -77,17 +80,120 @@
             android:orientation="vertical"
             android:padding="5dp">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="20dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/repair_Images_Rv"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp" />
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/repair_image_show"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/imageupload" />
+
+                    <EditText
+                        android:id="@+id/repair_image_remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:background="@drawable/btnbgedited"
+                        android:hint="HelloZiac"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/imageupload" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:background="@drawable/btnbgedited"
+                        android:hint="HelloZiac"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/imageupload" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:background="@drawable/btnbgedited"
+                        android:hint="HelloZiac"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:id="@+id/repair_image_uploadbtn"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:background="@drawable/header_background"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Upload Image"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="22sp"-->
+<!--                android:textStyle="bold" />-->
 
         </LinearLayout>
 

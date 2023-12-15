@@ -23,6 +23,9 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NetworkError;
@@ -60,6 +63,12 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
     RepairsClass repairsClass;
     AppCompatButton Repair_image_uploadbtn;
     private ProgressDialog progressDialog;
+
+    ImageView RepairImage;
+
+    EditText Remark_repair;
+
+    AppCompatButton CompatButton;
     Context context;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -70,6 +79,10 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
         context = this;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+        RepairImage = findViewById(R.id.repair_image_show);
+        Remark_repair = findViewById(R.id.repair_image_remark);
+        Repair_image_uploadbtn = findViewById(R.id.repair_image_uploadbtn);
+
         if (!Global.isNetworkAvailable(this)) {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
         }
@@ -79,8 +92,8 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
-        Repair_image_uploadbtn = findViewById(R.id.repair_image_uploadbtn);
-        Repair_image_uploadbtn.setOnClickListener(new View.OnClickListener() {
+
+        RepairImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (context != null) {
@@ -91,11 +104,6 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
                 }
             }
         });
-
-        Repair_Images_Rv = findViewById(R.id.repair_Images_Rv);
-        Repair_Images_Rv.setLayoutManager(new LinearLayoutManager(this));
-        Repair_Images_Rv.setHasFixedSize(true);
-        Repair_Images_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
     private void openCamera() {
@@ -146,7 +154,7 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
             try {
                 if (resp.getBoolean("success")) {
                     Global.customtoast(RepairTwoImageUploadActivity.this, getLayoutInflater(), "Image uploaded successfully");
-                    getRepairImages();
+                   // getRepairImages();
 
                 } else {
                     if (resp.has("error")) {
@@ -192,11 +200,12 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
-                String remark = imageToString(imageBitmap);
+               // String remark = imageToString(imageBitmap);
                 params.put("fileName", image);
-                params.put("repaired_remarks", remark);
+                params.put("repaired_remarks", String.valueOf(Remark_repair));
                 params.put("repair2_code", Global.sharedPreferences.getString("repair2_code", ""));
                 params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
+
                 Log.d("YourTag", "Key: fileName, Value: " + image);
                 return params;
             }
@@ -204,10 +213,9 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
 
         requestQueue.add(stringRequest);
     }
-    private void getRepairImages() {
+  /*  private void getRepairImages() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = Global.Get_Repairs_Details + "repair1_code=" + Global.sharedPreferences.getString("repair1_code",
-                "0") + "&file_type=" + "I";
+        String url = Global.Get_Repairs_Details + "repair1_code=" + Global.sharedPreferences.getString("repair1_code", "0");
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -275,7 +283,7 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
 
         };
         queue.add(jsonObjectRequest);
-    }
+    }*/
 
     private String imageToString(Bitmap imageBitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
