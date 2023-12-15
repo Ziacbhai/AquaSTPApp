@@ -43,20 +43,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Remarks"
-            android:textSize="26sp"
-            android:textStyle="bold" />
-
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/repair_image_uploadbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:background="@drawable/header_background"
             android:gravity="center"
             android:text="Upload Image"
@@ -70,6 +60,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
+        android:layout_margin="5dp"
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:scrollbars="none">
@@ -80,6 +71,7 @@
             android:orientation="vertical"
             android:padding="5dp">
 
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -95,7 +87,6 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/repair_image_show"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_margin="5dp"
@@ -103,74 +94,6 @@
 
                     <EditText
                         android:id="@+id/repair_image_remark"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:background="@drawable/btnbgedited"
-                        android:hint="HelloZiac"
-                        android:textSize="20sp" />
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:layout_margin="5dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_margin="5dp"
-                        android:src="@drawable/imageupload" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:background="@drawable/btnbgedited"
-                        android:hint="HelloZiac"
-                        android:textSize="20sp" />
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="20dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:layout_margin="5dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_margin="5dp"
-                        android:src="@drawable/imageupload" />
-
-                    <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"

@@ -67,8 +67,6 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
     ImageView RepairImage;
 
     EditText Remark_repair;
-
-    AppCompatButton CompatButton;
     Context context;
     @SuppressLint("MissingInflatedId")
     @Override
