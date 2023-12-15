@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="#eaeff5"
     android:orientation="vertical"
-    tools:context=".Activities.Incident_image_upload_Activity">
-
+    tools:context=".Activities.RepairTwoImageUploadActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,7 +53,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/in_image_uploadbtn"
+        android:id="@+id/repair_image_uploadbtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -84,7 +83,7 @@
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/incident_Images_Rv"
+                    android:id="@+id/repair_Images_Rv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp" />

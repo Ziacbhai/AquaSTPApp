@@ -1,29 +1,29 @@
 package Models;
 
 public class EquipmentRepairListClass {
-    String   REquipment_id ,REquipment_Name,REquipment_code;
+    String   Equipment_id ,Equipment_Name,Equipment_code;
 
-    public String getREquipment_id() {
-        return REquipment_id;
+    public String getEquipment_id() {
+        return Equipment_id;
     }
 
-    public void setREquipment_id(String REquipment_id) {
-        this.REquipment_id = REquipment_id;
+    public void setEquipment_id(String equipment_id) {
+        Equipment_id = equipment_id;
     }
 
-    public String getREquipment_Name() {
-        return REquipment_Name;
+    public String getEquipment_Name() {
+        return Equipment_Name;
     }
 
-    public void setREquipment_Name(String REquipment_Name) {
-        this.REquipment_Name = REquipment_Name;
+    public void setEquipment_Name(String equipment_Name) {
+        Equipment_Name = equipment_Name;
     }
 
-    public String getREquipment_code() {
-        return REquipment_code;
+    public String getEquipment_code() {
+        return Equipment_code;
     }
 
-    public void setREquipment_code(String REquipment_code) {
-        this.REquipment_code = REquipment_code;
+    public void setEquipment_code(String equipment_code) {
+        Equipment_code = equipment_code;
     }
 }

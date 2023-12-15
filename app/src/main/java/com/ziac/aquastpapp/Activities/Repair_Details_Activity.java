@@ -48,27 +48,26 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import Adapters.Repair_details_Adapter;
-import Models.EquipmentListClassConsumables;
 import Models.EquipmentRepairListClass;
 import Models.RepairsClass;
 
 public class Repair_Details_Activity extends AppCompatActivity {
     RepairsClass repair_s;
 
-    TextView Equipment_name,Remark_A,Equipment_code;
-    AppCompatButton Update_A,Cancel_A;
+    TextView Remark_A, Equipment_code;
+    AppCompatButton Update_A, Cancel_A;
     RecyclerView Repair_details_recyclerview;
     private Dialog zDialog;
     EquipmentRepairListClass equipment_spinner;
     Context context;
     private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_details_design);
         context = this;
         user_topcard();
-
         if (!Global.isNetworkAvailable(this)) {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
         }
@@ -98,7 +97,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         siteaddress = sharedPreferences.getString("site_address", "");
@@ -107,7 +106,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("person_name", "");
 
-        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
@@ -123,12 +122,13 @@ public class Repair_Details_Activity extends AppCompatActivity {
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);
     }
+
     @SuppressLint("MissingInflatedId")
-    private void showAddDetailsDialog (Context context) {
+    private void showAddDetailsDialog(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_repair_details_layout, null);
-        Equipment_name = dialogView.findViewById(R.id.equipment_name_alert);
+        Equipment_code = dialogView.findViewById(R.id.equipment_name_alert);
         Remark_A = dialogView.findViewById(R.id.remark_alert_rd);
         Update_A = dialogView.findViewById(R.id.update_alert_rd);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_rd);
@@ -147,7 +147,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
         dialog.show();
 
-        Equipment_name.setOnClickListener(new View.OnClickListener() {
+        Equipment_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getRepairEquipmentsSpinnerPopup();
@@ -157,7 +157,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             updateRepairdetails();
+                updateRepairdetails();
                 dialog.dismiss();
             }
         });
@@ -169,6 +169,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
         });
 
     }
+
     private void get_Details_Repair() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -201,11 +202,14 @@ public class Repair_Details_Activity extends AppCompatActivity {
                         repair_s.setD_Amount(e.getString("repaired_amt"));
                         repair_s.setD_Repaired(e.getString("repaired_flag"));
                         repair_s.setD_Remark(e.getString("repaired_remarks"));
-                        //String repair_code= repair_s.getRepair_code();
-                        // System.out.println(repair_code);
-                        //  Global.editor = Global.sharedPreferences.edit();
-                        // Global.editor.putString("",repair_code);
-                        //Global.editor.commit();
+                        repair_s.setD_Repairedtwo(e.getString("repair2_code"));
+
+
+                        String repair2_code = repair_s.getD_Repairedtwo();
+                        Global.editor = Global.sharedPreferences.edit();
+                        Global.editor.putString("repair2_code", repair2_code);
+                        Global.editor.commit();
+
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -221,13 +225,14 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
 
             }
-        }){
+        }) {
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 return params;
@@ -235,13 +240,14 @@ public class Repair_Details_Activity extends AppCompatActivity {
         };
         queue.add(jsonObjectRequest);
     }
+
     private void getRepairEquipmentsSpinnerPopup() {
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
 
         zDialog.setContentView(R.layout.equipment_item);
 
         ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
-        TextView Equipment_name =zDialog.findViewById(R.id.euipment_name);
+        TextView Equipment_Name = zDialog.findViewById(R.id.euipment_name);
         TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);
 
         if (Global.Repair_equipment == null || Global.Repair_equipment.size() == 0) {
@@ -251,7 +257,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
         final Repair_Details_Activity.EquipmentSelectRepair_Adapter EqA = new Repair_Details_Activity.EquipmentSelectRepair_Adapter(Global.Repair_equipment);
         lvEqName.setAdapter(EqA);
 
-        Equipment_name.setText("Equipment Name");
+        Equipment_Name.setText("Equipment Name");
         Equipment_id.setText("Equipment ID");
         zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         zDialog.show();
@@ -273,8 +279,8 @@ public class Repair_Details_Activity extends AppCompatActivity {
     }
 
     private void updateRepairdetails() {
-        String remarks=Remark_A.getText().toString();
-        String equipment_code = equipment_spinner.getREquipment_code();
+        String remarks = Remark_A.getText().toString();
+        String equipment_code = equipment_spinner.getEquipment_code();
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.updateRepairDAddUpdate;
 
@@ -290,7 +296,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
                 try {
                     if (response.getBoolean("isSuccess")) {
-                        Toast.makeText(Repair_Details_Activity.this, "Updated successfully !!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Repair_Details_Activity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
                         get_Details_Repair();
                     } else {
                         Toast.makeText(Repair_Details_Activity.this, response.getString("error"), Toast.LENGTH_SHORT).show();
@@ -305,7 +311,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
@@ -317,11 +323,11 @@ public class Repair_Details_Activity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("equip_code", equipment_code);
-                params.put("repaired_remarks",remarks);
+                params.put("repaired_remarks", remarks);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
-                params.put("repair2_code ", "0");
+                params.put("repair1_code", "0");
                 return params;
 
             }
@@ -352,9 +358,9 @@ public class Repair_Details_Activity extends AppCompatActivity {
                                 JSONObject equipmentJson = response.getJSONObject(i);
                                 EquipmentRepairListClass equipment = new EquipmentRepairListClass();
 
-                                equipment.setREquipment_id(equipmentJson.getString("equip_slno"));
-                                equipment.setREquipment_code(equipmentJson.getString("equip_code"));
-                                equipment.setREquipment_Name(equipmentJson.getString("equip_name"));
+                                equipment.setEquipment_id(equipmentJson.getString("equip_slno"));
+                                equipment.setEquipment_code(equipmentJson.getString("equip_code"));
+                                equipment.setEquipment_Name(equipmentJson.getString("equip_name"));
                                 //equipment.setEquipment_Name(equipmentJson.getString("equip_name"));
 
                                 Global.Repair_equipment.add(equipment);
@@ -386,7 +392,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
     }
 
 
-    public class EquipmentSelectRepair_Adapter extends BaseAdapter implements Filterable{
+    public class EquipmentSelectRepair_Adapter extends BaseAdapter implements Filterable {
 
         private ArrayList<EquipmentRepairListClass> eQarrayList;
 
@@ -415,12 +421,12 @@ public class Repair_Details_Activity extends AppCompatActivity {
             TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
             equipment_spinner = eQarrayList.get(i);
 
-            equipmentnameitem.setText(equipment_spinner.getREquipment_Name());
-            eqnameitem.setText(equipment_spinner.getREquipment_id());
+            equipmentnameitem.setText(equipment_spinner.getEquipment_Name());
+            eqnameitem.setText(equipment_spinner.getEquipment_id());
 
             equipmentnameitem.setOnClickListener(view1 -> {
                 equipment_spinner = eQarrayList.get(i);
-                Equipment_name.setText(equipment_spinner.getREquipment_Name());
+                Equipment_code.setText(equipment_spinner.getEquipment_Name());
                 zDialog.dismiss();
             });
 
@@ -438,8 +444,8 @@ public class Repair_Details_Activity extends AppCompatActivity {
                         mFilteredList = Global.Repair_equipment;
                     } else {
                         for (EquipmentRepairListClass dataList : Global.Repair_equipment) {
-                            if (dataList.getREquipment_Name().toLowerCase().contains(charString) ||
-                                    dataList.getREquipment_id().toLowerCase().contains(charString)) {
+                            if (dataList.getEquipment_Name().toLowerCase().contains(charString) ||
+                                    dataList.getEquipment_id().toLowerCase().contains(charString)) {
                                 mFilteredList.add(dataList);
                             }
                         }
@@ -449,6 +455,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
                     filterResults.count = mFilteredList.size();
                     return filterResults;
                 }
+
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                     eQarrayList = (ArrayList<EquipmentRepairListClass>) filterResults.values;

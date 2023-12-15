@@ -66,9 +66,6 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
         this.context = context;
     }
 
-
-
-
     @NonNull
     @Override
     public Incident_image_upload_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -83,9 +80,10 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
 
         Picasso.Builder builder=new Picasso.Builder(context);
         Picasso picasso=builder.build();
-        picasso.load(Uri.parse(Global.incident_image + incidentsClasses.get(position).getImageList())).error(R.drawable.no_image_available_icon).into(holder.In_image_show);
-        holder.In_image_name.setText(incidentsClasses.get(position).getIn_image_name());
+        picasso.load(Uri.parse(Global.incident_image + incidentsClasses.get(position).getImageList()))
+                .error(R.drawable.no_image_available_icon).into(holder.In_image_show);
 
+        holder.In_image_name.setText(incidentsClasses.get(position).getIn_image_name());
 
         holder.In_image_show.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,9 +117,6 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
                 alertDialog.show();
             }
         });
-
-
-
 
     }
 

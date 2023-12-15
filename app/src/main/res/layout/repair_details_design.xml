@@ -38,6 +38,103 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:background="#01A3A3" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:padding="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical"
+                                        android:padding="5dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:drawablePadding="5dp"
+                                            android:gravity="center"
+                                            android:text="Equipment Name"
+                                            android:textColor="#000"
+                                            android:textSize="12dp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:id="@+id/repair_equipment_name"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:drawablePadding="5dp"
+                                            android:gravity="center"
+                                            android:textSize="12dp" />
+
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/my_light_primary" />
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical"
+                                        android:padding="5dp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:drawablePadding="5dp"
+                                            android:gravity="center"
+                                            android:text="Equipment ID"
+                                            android:textColor="#000"
+                                            android:textSize="12dp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:id="@+id/repair_equipment_id"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:drawablePadding="5dp"
+                                            android:gravity="center"
+                                            android:textSize="12dp" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="#01A3A3" />
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -56,100 +153,88 @@
                                 android:padding="5dp">
 
                                 <LinearLayout
-                                    android:layout_width="0dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="3dp"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
+                                    android:gravity="center"
                                     android:orientation="vertical">
 
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_weight="1"
                                         android:drawablePadding="5dp"
+                                        android:text="Remarks"
                                         android:gravity="center"
-                                        android:text="Equipment Name"
                                         android:textColor="#000"
                                         android:textSize="12dp"
                                         android:textStyle="bold" />
 
-                                    <TextView
-                                        android:id="@+id/repair_equipment_name"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center"
-                                        android:hint="equipment_name"
-                                        android:textSize="12dp" />
-
+                                        <TextView
+                                            android:id="@+id/repair_remark"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:hint="equipment_name"
+                                            android:textSize="10dp" />
                                 </LinearLayout>
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/my_light_primary" />
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1.1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="Equipment ID"
-                                        android:textColor="#000"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/repair_equipment_number"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center"
-                                        android:hint="Equipment ID"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
-
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/my_light_primary" />
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="0.9"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="Amount"
-                                        android:textColor="#000"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/repair_amount"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:hint="amount"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
-
                             </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="#01A3A3" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <ImageView
+                                android:id="@+id/repair2_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:src="@drawable/imageupload"/>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/my_light_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Repaired"
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
+
+                            <CheckBox
+                                android:id="@+id/repair_repaired"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:gravity="center"/>
 
                         </LinearLayout>
 
@@ -166,35 +251,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-
-
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1.1"
+                            android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:orientation="vertical"
                             android:padding="5dp">
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
+                            <ImageView
+                                android:id="@+id/repair_breakup"
+                                android:layout_width="40dp"
+                                android:layout_height="28dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/rupee"
                                 android:drawablePadding="5dp"
                                 android:gravity="center"
-                                android:text="Repair"
-                                android:textColor="#000"
-                                android:textSize="12dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/repair_repaired"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:drawablePadding="5dp"
-                                android:gravity="center"
-                                android:hint="repaired"
-                                android:textSize="12dp" />
+                                android:text="Break Up"/>
 
                         </LinearLayout>
 
@@ -203,11 +276,10 @@
                             android:layout_height="match_parent"
                             android:background="@color/my_light_primary" />
 
-
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2.1"
+                            android:layout_weight="1"
                             android:gravity="center_horizontal"
                             android:orientation="vertical"
                             android:padding="5dp">
@@ -216,15 +288,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:drawablePadding="5dp"
                                 android:gravity="center"
-                                android:text="Remarks:"
+                                android:text="Amount"
                                 android:textColor="#000"
                                 android:textSize="12dp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/repair_remark"
+                                android:id="@+id/repair_amount"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawablePadding="5dp"
