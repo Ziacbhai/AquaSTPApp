@@ -24,34 +24,37 @@ import com.ziac.aquastpapp.R;
 
 import java.util.ArrayList;
 
-import Models.IncidentsClass;
 import Models.RepairsClass;
 
-public class Repairtwo_image_upload_Adapter extends RecyclerView.Adapter<Repairtwo_image_upload_Adapter.Viewholder> {
+public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo_image_list_Adapter.Viewholder> {
      ArrayList<RepairsClass> repairsClasses;
      Context context;
 
 
-    public Repairtwo_image_upload_Adapter(ArrayList<RepairsClass> repairsClasses, Context context) {
+    public Repairtwo_image_list_Adapter(ArrayList<RepairsClass> repairsClasses, Context context) {
         this.repairsClasses = repairsClasses;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public Repairtwo_image_upload_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repairtwoimage, parent , false);
+    public Repairtwo_image_list_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repairtwoimagelist, parent , false);
         return new Viewholder(view);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Repairtwo_image_upload_Adapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull Repairtwo_image_list_Adapter.Viewholder holder, int position) {
         Picasso.Builder builder=new Picasso.Builder(context);
         Picasso picasso=builder.build();
-        picasso.load(Uri.parse(Global.incident_image + repairsClasses.get(position).getR_ImageList())).error(R.drawable.no_image_available_icon).into(holder.repair_image_show);
-        holder.repair_image_remark.setText(repairsClasses.get(position).getD_Repairedtwo());
+        String originalImageUrl = repairsClasses.get(position).getRepairtwo_image();
+        String trimmedImageUrl = originalImageUrl.replace('~', ' ').trim();
+        picasso.load(Uri.parse(Global.repair_images + trimmedImageUrl))
+                .error(R.drawable.no_image_available_icon)
+                .into(holder.repair_image_show);
 
+        holder.repair_image_remark.setText(repairsClasses.get(position).getD_Remark());
         holder.repair_image_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +70,7 @@ public class Repairtwo_image_upload_Adapter extends RecyclerView.Adapter<Repairt
         builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         // Load the image using Picasso or your preferred image loading library
-        Picasso.get().load(Uri.parse(Global.incident_image + imageUrl)).into(new Target() {
+        Picasso.get().load(Uri.parse(Global.repair_images + imageUrl)).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 // Display the image in a larger size
@@ -105,7 +108,7 @@ public class Repairtwo_image_upload_Adapter extends RecyclerView.Adapter<Repairt
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
-            repair_image_show = itemView.findViewById(R.id.repair_image_show);
+            repair_image_show = itemView.findViewById(R.id.repairtqo_image_list);
             repair_image_remark = itemView.findViewById(R.id.repair_image_remark);
         }
     }

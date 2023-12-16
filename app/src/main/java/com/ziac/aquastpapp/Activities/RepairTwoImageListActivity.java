@@ -20,12 +20,8 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NetworkError;
@@ -52,12 +48,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import Adapters.Incident_image_upload_Adapter;
-import Adapters.Repairtwo_image_upload_Adapter;
-import Models.IncidentsClass;
+import Adapters.Repairtwo_image_list_Adapter;
 import Models.RepairsClass;
 
-public class RepairTwoImageUploadActivity extends AppCompatActivity {
+public class RepairTwoImageListActivity extends AppCompatActivity {
     Bitmap imageBitmap;
     RecyclerView Repair_Images_Rv;
     RepairsClass repairsClass;
@@ -68,30 +62,29 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
 
     EditText Remark_repair;
     Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_repair_two_image_upload);
+        setContentView(R.layout.activity_repair_two_image_list);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading !!");
+        progressDialog.setCancelable(true);
 
         context = this;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        RepairImage = findViewById(R.id.repair_image_show);
-        Remark_repair = findViewById(R.id.repair_image_remark);
-        Repair_image_uploadbtn = findViewById(R.id.repair_image_uploadbtn);
+        //RepairImage = findViewById(R.id.repairtqo_image_list);
+        //Remark_repair = findViewById(R.id.repair_image_remark);
+         Repair_image_uploadbtn = findViewById(R.id.repair_image_uploadbtn);
 
         if (!Global.isNetworkAvailable(this)) {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading !!");
-        progressDialog.setCancelable(true);
-
-
-        RepairImage.setOnClickListener(new View.OnClickListener() {
+        Repair_image_uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (context != null) {
@@ -100,8 +93,15 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
                     Log.e("Camera", "Context is null");
 
                 }
+
             }
         });
+
+        Repair_Images_Rv = findViewById(R.id.repair_two_imagelist_recyclerview);
+        Repair_Images_Rv.setLayoutManager(new LinearLayoutManager(this));
+        Repair_Images_Rv.setHasFixedSize(true);
+        Repair_Images_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        getRepairImages();
     }
 
     private void openCamera() {
@@ -136,6 +136,7 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
             Repair_postselelectedimage();
         }
     }
+
     private void Repair_postselelectedimage() {
         if (imageBitmap == null) {
             return;
@@ -151,14 +152,14 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
             }
             try {
                 if (resp.getBoolean("success")) {
-                    Global.customtoast(RepairTwoImageUploadActivity.this, getLayoutInflater(), "Image uploaded successfully");
-                   // getRepairImages();
+                    Global.customtoast(RepairTwoImageListActivity.this, getLayoutInflater(), "Image uploaded successfully");
+                    // getRepairImages();
 
                 } else {
                     if (resp.has("error")) {
                         String errorMessage = resp.getString("error");
                         //Toast.makeText(RepairTwoImageUploadActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                        Toast.makeText(RepairTwoImageUploadActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RepairTwoImageListActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
 
                     } else {
                         Log.d("else", "else");
@@ -173,15 +174,15 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
                 if (error instanceof TimeoutError) {
-                    Toast.makeText(RepairTwoImageUploadActivity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RepairTwoImageListActivity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(RepairTwoImageUploadActivity.this, "No Connection Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RepairTwoImageListActivity.this, "No Connection Found", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ServerError) {
-                    Toast.makeText(RepairTwoImageUploadActivity.this, "Server Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RepairTwoImageListActivity.this, "Server Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NetworkError) {
-                    Toast.makeText(RepairTwoImageUploadActivity.this, "Network Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RepairTwoImageListActivity.this, "Network Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ParseError) {
-                    Toast.makeText(RepairTwoImageUploadActivity.this, "Parse Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RepairTwoImageListActivity.this, "Parse Error", Toast.LENGTH_LONG).show();
                 }
             }
         }) {
@@ -198,7 +199,7 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
-               // String remark = imageToString(imageBitmap);
+                // String remark = imageToString(imageBitmap);
                 params.put("fileName", image);
                 params.put("repaired_remarks", String.valueOf(Remark_repair));
                 params.put("repair2_code", Global.sharedPreferences.getString("repair2_code", ""));
@@ -211,10 +212,11 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
 
         requestQueue.add(stringRequest);
     }
-  /*  private void getRepairImages() {
+
+    private void getRepairImages() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = Global.Get_Repairs_Details + "repair1_code=" + Global.sharedPreferences.getString("repair1_code", "0");
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+        String url = Global.Repair_two_Imagelist + "repair2_code=" + Global.sharedPreferences.getString("repair2_code", "0");
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -237,17 +239,14 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
                     }
                     repairsClass = new RepairsClass();
                     try {
-                        repairsClass.setR_ImageList(e.getString("file_name"));
-                        repairsClass.setRepairtwo_image(e.getString("original_file_name"));
-
-                        // Toast.makeText(context, ""+ incidentsClass.getImageList(), Toast.LENGTH_SHORT).show();
-
-
+                        repairsClass.setRepairtwo_image(e.getString("image_name"));
+                        repairsClass.setD_Remark(e.getString("image_remarks"));
+                      //  Toast.makeText(context, "image_name" + repairsClass.getR_ImageList(), Toast.LENGTH_SHORT).show();
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
                     Global.Repair_s.add(repairsClass);
-                    Repairtwo_image_upload_Adapter repairtwoImageUploadAdapter = new Repairtwo_image_upload_Adapter(Global.Repair_s, context);
+                    Repairtwo_image_list_Adapter repairtwoImageUploadAdapter = new Repairtwo_image_list_Adapter(Global.Repair_s, context);
                     Repair_Images_Rv.setAdapter(repairtwoImageUploadAdapter);
                 }
 
@@ -259,7 +258,6 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
                     Toast.makeText(context, "TimeoutError", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof NoConnectionError) {
                     Toast.makeText(context, "NoConnectionError occurred", Toast.LENGTH_SHORT).show();
-
                 }
 
             }
@@ -281,7 +279,7 @@ public class RepairTwoImageUploadActivity extends AppCompatActivity {
 
         };
         queue.add(jsonObjectRequest);
-    }*/
+    }
 
     private String imageToString(Bitmap imageBitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

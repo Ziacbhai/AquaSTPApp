@@ -59,7 +59,7 @@
             android:name=".Activities.RepairBreakUpActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.RepairTwoImageUploadActivity"
+            android:name=".Activities.RepairTwoImageListActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.Incident_documents_upload_Activity"

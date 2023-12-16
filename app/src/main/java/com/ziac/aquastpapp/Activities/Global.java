@@ -36,13 +36,16 @@ public class Global {
     // public static String baseurl = "https://api.AquaSTP/";
     //    Local url
    // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl="http://192.168.1.14:9396/";
+    public static String baseurl="http://192.168.1.11:9396/";
 
     public static String userImageurl = baseurl+"WebsiteData/Users/";
     public static String incident_image = baseurl+"WebsiteData/IncidentReportDocs/";
+    public static String repair_images = baseurl;
 
     public static String incident_UploadImage = baseurl+"api/Incidents/UploadImage";
     public static String Repair_UploadImage = baseurl+"api/Repairs/UploadImage";
+
+    public static String Repair_two_Imagelist = baseurl+"api/Repairs/RepairImageList?";
 
     public static String In_UploadDoc = baseurl+"api/Incidents/UploadDoc";
 

@@ -12,9 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ziac.aquastpapp.Activities.Incident_Details_Activity;
+
 import com.ziac.aquastpapp.Activities.RepairBreakUpActivity;
-import com.ziac.aquastpapp.Activities.RepairTwoImageUploadActivity;
+import com.ziac.aquastpapp.Activities.RepairTwoImageListActivity;
+
 import com.ziac.aquastpapp.R;
 
 import java.util.List;
@@ -43,19 +44,15 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
 
         holder.Eq_Name.setText(repairsClassList.get(position).getD_Equipment_Name());
         holder.Eq_number.setText(repairsClassList.get(position).getD_Equipment_Number());
-       // holder.Repaired.setText(repairsClassList.get(position).getD_Repaired());
+        holder.Repaired.setText(repairsClassList.get(position).getD_Repaired());
         holder.Remark.setText(repairsClassList.get(position).getD_Remark());
         holder.Amount.setText(repairsClassList.get(position).getD_Amount());
 
         holder.RImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (context != null) {
-                    Intent intent = new Intent(context, RepairTwoImageUploadActivity.class);
+                    Intent intent = new Intent(context, RepairTwoImageListActivity.class);
                     context.startActivity(intent);
-                } else {
-                    Log.e("Info", "Context is null");
-                }
             }
         });
         holder.Rbreakup.setOnClickListener(new View.OnClickListener() {
