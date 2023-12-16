@@ -253,7 +253,10 @@ public class ProfileActivity extends AppCompatActivity {
                 return params;
             }
         };
-
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
     }
     private void updateprofile() {

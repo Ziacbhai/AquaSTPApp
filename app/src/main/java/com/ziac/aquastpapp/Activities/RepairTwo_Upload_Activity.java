@@ -172,6 +172,9 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
     }
 */
     private void updateRepairImage() {
+        if (imageBitmap == null) {
+            return;
+        }
         String repair_remark = Repair_two_Remark.getText().toString();
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.Repair_UploadImage ;
@@ -184,7 +187,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
                     if (response.getBoolean("isSuccess")) {
                         Toast.makeText(RepairTwo_Upload_Activity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(RepairTwo_Upload_Activity.this, RepairTwoImageListActivity.class));
-                        //finish();
+                        finish();
                     } else {
                         if (response.has("error")) {
                             String errorMessage = response.getString("error");
@@ -231,8 +234,17 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
 
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        queue.add(stringRequest);
+
         queue.add(stringRequest);
     }
+
+
 
     private String imageToString(Bitmap imageBitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
