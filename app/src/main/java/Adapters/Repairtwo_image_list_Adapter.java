@@ -24,6 +24,7 @@ import com.ziac.aquastpapp.R;
 
 import java.util.ArrayList;
 
+import Models.LabTestClass;
 import Models.RepairsClass;
 
 public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo_image_list_Adapter.Viewholder> {
@@ -35,6 +36,8 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
         this.repairsClasses = repairsClasses;
         this.context = context;
     }
+
+
 
     @NonNull
     @Override
@@ -108,7 +111,7 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
-            repair_image_show = itemView.findViewById(R.id.repairtqo_image_list);
+            repair_image_show = itemView.findViewById(R.id.repairtwo_image_list);
             repair_image_remark = itemView.findViewById(R.id.repair_image_remark);
         }
     }

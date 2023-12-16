@@ -56,6 +56,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.RepairTwo_Upload_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.RepairBreakUpActivity"
             android:exported="false" />
         <activity

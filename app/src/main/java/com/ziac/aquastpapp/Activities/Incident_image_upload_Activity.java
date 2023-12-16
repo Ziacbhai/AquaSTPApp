@@ -153,7 +153,6 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
             }
             try {
                 if (resp.getBoolean("success")) {
-
                     Global.customtoast(Incident_image_upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
                     getIncidentImages();
 

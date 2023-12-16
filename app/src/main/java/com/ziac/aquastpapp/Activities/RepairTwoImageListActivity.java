@@ -88,7 +88,8 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (context != null) {
-                    openCamera();
+                    Intent i = new Intent(context, RepairTwo_Upload_Activity.class);
+                    context.startActivity(i);
                 } else {
                     Log.e("Camera", "Context is null");
 
@@ -104,25 +105,6 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         getRepairImages();
     }
 
-    private void openCamera() {
-        try {
-            if (context instanceof Activity) {
-                com.github.dhaval2404.imagepicker.ImagePicker.with((Activity) context)
-                        .crop()
-                        .compress(1024)
-                        .maxResultSize(1080, 1080)
-                        .start(10);
-            } else {
-                // Log.e("Camera", "Context is not an instance of Activity");
-                // Handle the case where context is not an instance of Activity.
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            //Log.e("Camera", "Error opening camera: " + e.getMessage());
-            // Handle the exception as needed.
-        }
-    }
-
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10 && resultCode == RESULT_OK) {
@@ -133,85 +115,11 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            Repair_postselelectedimage();
+            //Repair_postselelectedimage();
         }
     }
 
-    private void Repair_postselelectedimage() {
-        if (imageBitmap == null) {
-            return;
-        }
-        String url = Global.Repair_UploadImage;
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
-            JSONObject resp;
-            try {
-                resp = new JSONObject(response);
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                if (resp.getBoolean("success")) {
-                    Global.customtoast(RepairTwoImageListActivity.this, getLayoutInflater(), "Image uploaded successfully");
-                    // getRepairImages();
 
-                } else {
-                    if (resp.has("error")) {
-                        String errorMessage = resp.getString("error");
-                        //Toast.makeText(RepairTwoImageUploadActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                        Toast.makeText(RepairTwoImageListActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        Log.d("else", "else");
-                    }
-                }
-            } catch (JSONException e) {
-
-                e.printStackTrace();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                if (error instanceof TimeoutError) {
-                    Toast.makeText(RepairTwoImageListActivity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
-                } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(RepairTwoImageListActivity.this, "No Connection Found", Toast.LENGTH_LONG).show();
-                } else if (error instanceof ServerError) {
-                    Toast.makeText(RepairTwoImageListActivity.this, "Server Error", Toast.LENGTH_LONG).show();
-                } else if (error instanceof NetworkError) {
-                    Toast.makeText(RepairTwoImageListActivity.this, "Network Error", Toast.LENGTH_LONG).show();
-                } else if (error instanceof ParseError) {
-                    Toast.makeText(RepairTwoImageListActivity.this, "Parse Error", Toast.LENGTH_LONG).show();
-                }
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<String, String>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", null);
-                headers.put("Authorization", "Bearer " + accesstoken);
-                return headers;
-            }
-
-            @NonNull
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                String image = imageToString(imageBitmap);
-                // String remark = imageToString(imageBitmap);
-                params.put("fileName", image);
-                params.put("repaired_remarks", String.valueOf(Remark_repair));
-                params.put("repair2_code", Global.sharedPreferences.getString("repair2_code", ""));
-                params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
-
-                Log.d("YourTag", "Key: fileName, Value: " + image);
-                return params;
-            }
-        };
-
-        requestQueue.add(stringRequest);
-    }
 
     private void getRepairImages() {
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -281,10 +189,5 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
-    private String imageToString(Bitmap imageBitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
-        byte[] imgBytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
-    }
+
 }

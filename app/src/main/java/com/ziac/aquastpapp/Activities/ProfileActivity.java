@@ -209,8 +209,6 @@ public class ProfileActivity extends AppCompatActivity {
 
             try {
                 if (resp.getBoolean("success")) {
-
-
                     Global.customtoast(ProfileActivity.this, getLayoutInflater(), "Image uploaded successfully");
                     getuserdetails();
 
@@ -250,18 +248,94 @@ public class ProfileActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
-
                 params.put("fileName", image);
-
                 Log.d("YourTag", "Key: fileName, Value: " + image);
-
                 return params;
             }
         };
 
         requestQueue.add(stringRequest);
     }
+    private void updateprofile() {
+        String personname, email, mobile;
 
+        personname = Person_name.getText().toString();
+        mobile = Person_number.getText().toString();
+        email = Person_email.getText().toString();
+
+        if (personname.isEmpty() || mobile.isEmpty() || email.isEmpty()) {
+
+            Toast.makeText(ProfileActivity.this, "Complete the information and try again !!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (mobile.length() < 10) {
+            Toast.makeText(ProfileActivity.this, "Mobile number should not be less than 10 digits !!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Global.updateProfile, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String sresponse) {
+                JSONObject response;
+                try {
+                    response = new JSONObject(sresponse);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                Global.editor = Global.sharedPreferences.edit();
+                Global.editor.putString("person_name", Person_name.getText().toString());
+                Global.editor.putString("user_mobile", Person_number.getText().toString());
+                Global.editor.putString("user_email", Person_email.getText().toString());
+                Global.editor.putString("ref_code", Person_ref_code.getText().toString());
+                Global.editor.commit();
+                try {
+                    if (response.getBoolean("isSuccess")) {
+                        Toast.makeText(ProfileActivity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                        finish();
+                    } else {
+                        //textViewError.setText(response.getString("error"));
+                        Toast.makeText(ProfileActivity.this, response.getString("error"), Toast.LENGTH_SHORT).show();
+                        //textViewError.setVisibility(View.VISIBLE);
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
+                params.put("person_name", Person_name.getText().toString());
+                params.put("user_mobile", Person_number.getText().toString());
+                params.put("user_email", Person_email.getText().toString());
+                return params;
+                //  String user_image = respObj.getString("user_image");
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        queue.add(stringRequest);
+    }
     private void getuserdetails() {
 
         String url = Global.getuserprofileurl;
@@ -344,85 +418,4 @@ public class ProfileActivity extends AppCompatActivity {
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 
-
-    private void updateprofile() {
-        String personname, email, mobile;
-
-        personname = Person_name.getText().toString();
-        mobile = Person_number.getText().toString();
-        email = Person_email.getText().toString();
-
-        if (personname.isEmpty() || mobile.isEmpty() || email.isEmpty()) {
-
-            Toast.makeText(ProfileActivity.this, "Complete the information and try again !!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (mobile.length() < 10) {
-            Toast.makeText(ProfileActivity.this, "Mobile number should not be less than 10 digits !!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Global.updateProfile, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String sresponse) {
-                JSONObject response;
-                try {
-                    response = new JSONObject(sresponse);
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
-                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                Global.editor = Global.sharedPreferences.edit();
-                Global.editor.putString("person_name", Person_name.getText().toString());
-                Global.editor.putString("user_mobile", Person_number.getText().toString());
-                Global.editor.putString("user_email", Person_email.getText().toString());
-                Global.editor.putString("ref_code", Person_ref_code.getText().toString());
-                Global.editor.commit();
-                try {
-                    if (response.getBoolean("isSuccess")) {
-                        Toast.makeText(ProfileActivity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(ProfileActivity.this, MainActivity.class));
-                        finish();
-                    } else {
-                        //textViewError.setText(response.getString("error"));
-                        Toast.makeText(ProfileActivity.this, response.getString("error"), Toast.LENGTH_SHORT).show();
-                        //textViewError.setVisibility(View.VISIBLE);
-                    }
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<String, String>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", "");
-                headers.put("Authorization", "Bearer " + accesstoken);
-                return headers;
-            }
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
-                params.put("person_name", Person_name.getText().toString());
-                params.put("user_mobile", Person_number.getText().toString());
-                params.put("user_email", Person_email.getText().toString());
-                return params;
-                //  String user_image = respObj.getString("user_image");
-            }
-        };
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
-                0,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        queue.add(stringRequest);
-    }
 }
