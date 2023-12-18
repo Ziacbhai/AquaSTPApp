@@ -71,8 +71,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
+                                android:textAllCaps="false"
+                                android:inputType="textCapSentences|text"
                                 android:background="@drawable/btnbgedited"
-                                android:inputType="textCapCharacters"
                                 android:maxLength="50"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
@@ -111,7 +112,8 @@
                                 android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ."
                                 android:layout_marginStart="5dp"
                                 android:maxLength="50"
-                                android:inputType="textCapCharacters"
+                                android:inputType="textCapSentences|text"
+                                android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
 
@@ -149,6 +151,7 @@
                                 android:layout_marginStart="5dp"
                                 android:background="@drawable/btnbgedited"
                                 android:inputType="number"
+                                android:textAllCaps="false"
                                 android:maxLength="10"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
@@ -181,6 +184,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLength="150"
+                                android:textAllCaps="false"
                                 android:inputType="textEmailAddress"
                                 android:layout_marginStart="5dp"
                                 android:background="@drawable/btnbgedited"
@@ -321,8 +325,8 @@
                                 android:layout_marginStart="5dp"
                                 android:includeFontPadding="false"
                                 android:maxLength="25"
-                                android:inputType="textCapCharacters"
-
+                                android:inputType="textCapSentences|text"
+                                android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
 
@@ -364,6 +368,7 @@
                                 android:drawableRight="@drawable/ic_baseline_remove_red_eye_on"
                                 android:inputType="textPassword"
                                 android:maxLength="25"
+                                android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
 
@@ -405,6 +410,7 @@
                                 android:drawableRight="@drawable/ic_baseline_remove_red_eye_on"
                                 android:inputType="textPassword"
                                 android:maxLength="25"
+                                android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
 
@@ -444,6 +450,7 @@
                                 android:background="@drawable/btnbgedited"
                                 android:layout_marginStart="5dp"
                                 android:inputType="textEmailAddress"
+                                android:textAllCaps="false"
                                 android:maxLength="20"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />

@@ -68,6 +68,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST_CODE = 10;
     private static final int CAMERA_REQUEST_CODE = 1;
     private ProgressDialog progressDialog;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,108 +99,39 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
             }
         });
     }
-
- /*   private void updateRepairhImage() {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = Repair_UploadImage;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Global.Repair_s = new ArrayList<RepairsClass>();
-                repairsClass = new RepairsClass();
-                JSONArray jarray;
-                try {
-                    jarray = response.getJSONArray("data");
-
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
-                for (int i = 0; i < jarray.length(); i++) {
-                    final JSONObject e;
-                    try {
-                        e = jarray.getJSONObject(i);
-                    } catch (JSONException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    repairsClass = new RepairsClass();
-                    try {
-
-                        repairsClass.setRepairtwo_image(e.getString("image_name"));
-                        repairsClass.setD_Remark(e.getString("image_remarks"));
-
-
-                        Log.d("YourTag", "Equipment Name: " + repairsClass.getRepairtwo_image());
-                        Log.d("YourTag", "Equipment ID: " + repairsClass.getD_Remark());
-
-
-                    } catch (JSONException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    Global.Repair_s.add(repairsClass);
-                    Repairtwo_image_list_Adapter repairtwoImageListAdapter = new Repairtwo_image_list_Adapter(Global.Repair_s, context);
-                    Repair_Images_Rv.setAdapter(repairtwoImageListAdapter);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-
-            public Map<String, String> getHeaders() {
-
-                Map<String, String> headers = new HashMap<String, String>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", "");
-                headers.put("Authorization", "Bearer " + accesstoken);
-                return headers;
-            }
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                String image = imageToString(imageBitmap);
-                params.put("fileName", image);
-                params.put("image_remarks", String.valueOf(Repair_two_Remark));
-                params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
-                params.put("repair2_code", Global.sharedPreferences.getString("repair2_code", "0"));
-                return params;
-            }
-
-        };
-        queue.add(jsonObjectRequest);
-
-    }
-*/
     private void updateRepairImage() {
         if (imageBitmap == null) {
             return;
         }
         String repair_remark = Repair_two_Remark.getText().toString();
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = Global.Repair_UploadImage ;
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String sresponse) {
-
-                try {
-                    JSONObject response = new JSONObject(sresponse);
-                    if (response.getBoolean("isSuccess")) {
-                        Toast.makeText(RepairTwo_Upload_Activity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RepairTwo_Upload_Activity.this, RepairTwoImageListActivity.class));
-                        finish();
-                    } else {
-                        if (response.has("error")) {
-                            String errorMessage = response.getString("error");
-                            Toast.makeText(RepairTwo_Upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Log.d("else", "else");
-                        }
-                    }
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
+        String url = Global.Repair_UploadImage;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            JSONObject resp;
+            try {
+                resp = new JSONObject(response);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
             }
+            try {
+                if (resp.getBoolean("success")) {
+                    Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
+                    startActivity(new Intent(RepairTwo_Upload_Activity.this, RepairTwoImageListActivity.class));
+                    finish();
+                } else {
+                    if (resp.has("error")) {
+                        String errorMessage = resp.getString("error");
+                        //Toast.makeText(RepairTwo_Upload_Activity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RepairTwo_Upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.d("else", "else");
+                    }
+                }
+            } catch (JSONException e) {
+
+                e.printStackTrace();
+            }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -212,9 +144,10 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
                 } else if (error instanceof NetworkError) {
                     Toast.makeText(RepairTwo_Upload_Activity.this, "Network Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ParseError) {
-                    Toast.makeText(RepairTwo_Upload_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();}
+                    Toast.makeText(RepairTwo_Upload_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();
+                }
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
@@ -227,11 +160,10 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
                 params.put("fileName", image);
-                params.put("image_remarks",repair_remark );
+                params.put("image_remarks", repair_remark);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("repair2_code", Global.sharedPreferences.getString("repair2_code", "0"));
                 return params;
-
             }
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
@@ -240,11 +172,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         queue.add(stringRequest);
-
-        queue.add(stringRequest);
     }
-
-
 
     private String imageToString(Bitmap imageBitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -273,6 +201,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
         }
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

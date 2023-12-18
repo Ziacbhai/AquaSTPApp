@@ -55,7 +55,6 @@ public class SelectLocationActivity extends AppCompatActivity {
     RecyclerView siteLocationRecyclerView;
     private SearchView searchView;
     StpModelClass stpModelClassList;
-    String url;
     Context context;
 
     @SuppressLint("MissingInflatedId")
@@ -66,12 +65,11 @@ public class SelectLocationActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         context =this;
-
-        //Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         stpModelClassList = new StpModelClass();
         searchView = findViewById(R.id.searchView);
         Scr = findViewById(R.id.search);
-        //searchView.clearFocus();
+        searchView.clearFocus();
 
         Scr.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,8 +96,6 @@ public class SelectLocationActivity extends AppCompatActivity {
             }
         });
 
-
-
         siteLocationRecyclerView = findViewById(R.id.stp_recyclerview);
         siteLocationRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL , false));
         siteLocationAdapter = new SiteLocationAdapter(Global.StpList, SelectLocationActivity.this);
@@ -107,30 +103,22 @@ public class SelectLocationActivity extends AppCompatActivity {
     }
 
     private void performSearch(String query) {
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.getSearchSiteOrSTPByName;
-        url=url+"name="+query;
-
-        StringRequest jsonObjectrequest = new StringRequest(Request.Method.POST,
-                url,
-                response -> {
-                    // progressDialog.dismiss();
-
+        url=url+"name="+query + "&com_code=" + Global.sharedPreferences.getString("com_code", "");
+        StringRequest jsonObjectrequest = new StringRequest(Request.Method.POST,url,response -> {
                     JSONObject jobj;
                     try {
                         jobj = new JSONObject(response);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
-
                     JSONArray jarrrecent;
                     try {
                         jarrrecent = jobj.getJSONArray("data2");
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
-
                     Global.StpList = new ArrayList<>();
                     for (int i = 0; i < jarrrecent.length(); i++) {
                         final JSONObject e;
@@ -142,9 +130,6 @@ public class SelectLocationActivity extends AppCompatActivity {
 
                         stpModelClassList =  new StpModelClass();
                         try {
-
-                            // getting the values from the object
-
                             stpModelClassList.setStpname(e.getString("stp_name"));
                             stpModelClassList.setSitename(e.getString("site_name"));
                             stpModelClassList.setSitecode(e.getString("site_code"));
@@ -153,18 +138,17 @@ public class SelectLocationActivity extends AppCompatActivity {
                             stpModelClassList.setSstp1code(e.getString("sstp1_code"));
                             stpModelClassList.setSucode(e.getInt("su_code"));
 
-                            /*String su_code = e.getString("su_code");
+                          /*  String su_code = e.getString("su_code");
                             if (su_code.startsWith("0")) {
                                 su_code = su_code.substring(1);
                             }
-                            stpModelClassList.setSucode(su_code);*/
+                            stpModelClassList.setSucode(Integer.parseInt(su_code));*/
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
-                        Global.StpList.add((StpModelClass) stpModelClassList);
+                        Global.StpList.add(stpModelClassList);
                     }
-
                     siteLocationAdapter = new SiteLocationAdapter(Global.StpList,this);
                     siteLocationRecyclerView.setAdapter(siteLocationAdapter);
                 }, error -> {
@@ -205,17 +189,8 @@ public class SelectLocationActivity extends AppCompatActivity {
                 Log.d("params", params.toString());
 
                 return params;
-
-
-
             }
         };
         queue.add(jsonObjectrequest);
-
     }
-
-
-
-
-
 }

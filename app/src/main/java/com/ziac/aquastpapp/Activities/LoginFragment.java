@@ -57,23 +57,27 @@ import Models.StpModelClass;
 
 public class LoginFragment extends Fragment {
 
-    EditText Login_User,Login_pwd ;
-    private CheckBox RememberMe;
+    EditText Login_User, Login_pwd;
+    CheckBox RememberMe;
     Button Login_btn;
     TextView termsOfuse, privacy, forgotpwd;
     boolean passwordVisible;
     String username, pwd;
     StpModelClass stpModelClass;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
     }
-//ramesh
+
+    //ramesh
     @Override
     public void onStart() {
         super.onStart();
     }
+
     private ProgressDialog progressDialog;
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -82,24 +86,20 @@ public class LoginFragment extends Fragment {
         Context context = getContext();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        TextView versionName = view.findViewById(R.id.version);
+        versionName.setText("v1.0.0" + BuildConfig.VERSION_NAME);
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Logging in...");
         progressDialog.setCancelable(true);
-
         Login_User = view.findViewById(R.id.Luser);
         Login_pwd = view.findViewById(R.id.password2);
         Login_btn = view.findViewById(R.id.loginbtn);
         RememberMe = view.findViewById(R.id.RcheckBox);
-
         termsOfuse = view.findViewById(R.id.terms);
         privacy = view.findViewById(R.id.privacy);
         forgotpwd = view.findViewById(R.id.btnftpass);
-
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        TextView versionName = view.findViewById(R.id.version);
-        versionName.setText("v1.0.0" + BuildConfig.VERSION_NAME);
-
-
+        RememberMe.setChecked(false);
         Login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,10 +119,10 @@ public class LoginFragment extends Fragment {
 
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                 Global.editor = Global.sharedPreferences.edit();
-                if (RememberMe.isChecked()){
+                if (RememberMe.isChecked()) {
                     Global.editor.putString("username", username);
                     Global.editor.putString("password", pwd);
-                }else {
+                } else {
                     Global.editor.putString("username", "");
                     Global.editor.putString("password", "");
                 }
@@ -130,9 +130,6 @@ public class LoginFragment extends Fragment {
                 dologinVolley();
             }
         });
-
-
-        RememberMe.setChecked(false);
         try {
             Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             username = Global.sharedPreferences.getString("username", "");
@@ -148,7 +145,6 @@ public class LoginFragment extends Fragment {
         } catch (Exception e) {
             RememberMe.setChecked(false);
         }
-
         termsOfuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,10 +156,9 @@ public class LoginFragment extends Fragment {
         privacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://ziacsoft.com/privacy.html")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://ziacsoft.com/privacy.html")));
             }
         });
-
         Login_pwd.setOnTouchListener((v, event) -> {
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -184,7 +179,6 @@ public class LoginFragment extends Fragment {
             }
             return false;
         });
-
         forgotpwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,13 +187,13 @@ public class LoginFragment extends Fragment {
         });
         return view;
     }
+
     private void dologinVolley() {
         username = Login_User.getText().toString();
         pwd = Login_pwd.getText().toString();
         progressDialog.show();
-        //new InternetCheckTask().execute();
         String url = Global.tokenurl;
-        RequestQueue queue= Volley.newRequestQueue(getActivity());
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -211,7 +205,6 @@ public class LoginFragment extends Fragment {
                     Global.editor = Global.sharedPreferences.edit();
                     Global.editor.putString("access_token", access_token);
                     Global.editor.commit();
-                    //startActivity(new Intent(getActivity(), MainActivity.class));
                     getuserprofile();
 
                 } catch (JSONException e) {
@@ -221,7 +214,7 @@ public class LoginFragment extends Fragment {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Global.customtoast(getActivity(), getLayoutInflater(),"Invalid username / password error");
+                Global.customtoast(getActivity(), getLayoutInflater(), "Invalid username / password error");
                 progressDialog.dismiss();
             }
         }) {
@@ -248,8 +241,8 @@ public class LoginFragment extends Fragment {
     private void getuserprofile() {
 
         String url = Global.getuserprofileurl;
-        RequestQueue queue= Volley.newRequestQueue(getActivity());
-       // progressDialog.show();
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        // progressDialog.show();
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
             progressDialog.dismiss();
 
@@ -285,13 +278,13 @@ public class LoginFragment extends Fragment {
                 Global.editor.putString("ayear", ayear);
                 Global.editor.putString("fin_stdate", finstdate);
                 Global.editor.putString("fin_eddate", fineddate);
-               // preferences.edit().remove("text").commit();
+                // preferences.edit().remove("text").commit();
                 Global.editor.commit();
 
                 JSONArray liststp = new JSONArray(respObj1.getString("data2"));
                 int i;
                 Global.StpList = new ArrayList<>();
-                for (i = 0;i<liststp.length();i++){
+                for (i = 0; i < liststp.length(); i++) {
                     final JSONObject e;
                     try {
                         e = liststp.getJSONObject(i);
@@ -337,12 +330,12 @@ public class LoginFragment extends Fragment {
                         getActivity().startActivity(s);
                         break;
                     case "M":
-                        Intent m =(new Intent(getActivity(), WelcomeManager.class));
+                        Intent m = (new Intent(getActivity(), WelcomeManager.class));
                         m.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(m);
                         break;
                     case "U":
-                        Intent u =(new Intent(getActivity(), WelcomeUser.class));
+                        Intent u = (new Intent(getActivity(), WelcomeUser.class));
                         u.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(u);
                         break;
@@ -353,7 +346,7 @@ public class LoginFragment extends Fragment {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-               // progressDialog.dismiss();
+                // progressDialog.dismiss();
 
             }
         }) {
@@ -375,7 +368,7 @@ public class LoginFragment extends Fragment {
         };
 
         request.setRetryPolicy(new DefaultRetryPolicy(
-                8000, // timeout in milliseconds
+                3000, // timeout in milliseconds
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));

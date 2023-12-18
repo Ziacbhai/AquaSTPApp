@@ -70,9 +70,9 @@ public class SignUpFragment extends Fragment {
     private Dialog zDialog;
     EditText Company, CPerson, Mobile, Email, Adminname, RPassword, Cpassword;
     AppCompatButton Registerbtn;
-    TextView tvState, tvCity, Site_address,TermsOfUse, Privacy ;
+    TextView tvState, tvCity, Site_address, TermsOfUse, Privacy;
     ImageView DDstate, DDcity;
-    private zList statename,cityname;
+    private zList statename, cityname;
     private boolean passwordvisible = false;
     String citycode;
     ProgressDialog progressDialog;
@@ -542,10 +542,9 @@ public class SignUpFragment extends Fragment {
         }
 
     }
-
     private void CreateNewUser() {
 
-        progressDialog.show();
+
         String company, cpperson, mobile, email, password, cpassword, adminname, state, city;
 
         company = Company.getText().toString();
@@ -558,7 +557,7 @@ public class SignUpFragment extends Fragment {
         password = RPassword.getText().toString();
         cpassword = Cpassword.getText().toString();
 
-      //  progressDialog.show();
+        //  progressDialog.show();
 
         if (company.isEmpty()) {
             Company.setError("Company Name should not be empty");
@@ -616,7 +615,7 @@ public class SignUpFragment extends Fragment {
         }
         if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
             Toast toast = Toast.makeText(getActivity().getApplicationContext(), "password must contain mix of upper and lower case letters as well as digits and one special charecter !!", Toast.LENGTH_SHORT);
-           // toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+            // toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
             return;
         }
@@ -630,9 +629,10 @@ public class SignUpFragment extends Fragment {
             Toast.makeText(getActivity(), "You are not  agree with the terms and conditions of Aqua to move further  ", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        progressDialog.show();
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Global.registration,
-                new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Global.registration, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String sresponse) {
                         progressDialog.dismiss();
@@ -653,6 +653,7 @@ public class SignUpFragment extends Fragment {
                             } else {
                                 //textViewError.setText(response.getString("error"));
                                 Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
                                 //textViewError.setVisibility(View.VISIBLE);
                             }
 
@@ -688,9 +689,6 @@ public class SignUpFragment extends Fragment {
                 if (emailValue.isEmpty()) {
                     emailValue = "notprovided@gmail.com";
                 }
-
-
-
                 params.put("com_contact", CPerson.getText().toString());
                 params.put("com_contact_mobno", Mobile.getText().toString());
                 params.put("com_email", emailValue);
@@ -701,7 +699,7 @@ public class SignUpFragment extends Fragment {
                 params.put("city_code", String.valueOf(cityname.get_code()));
                 params.put("com_name", Company.getText().toString());
 
-                 //Log.d("params", params.toString());
+                //Log.d("params", params.toString());
                 return params;
             }
         };
@@ -715,5 +713,4 @@ public class SignUpFragment extends Fragment {
         queue.add(stringRequest);
 
     }
-
 }
