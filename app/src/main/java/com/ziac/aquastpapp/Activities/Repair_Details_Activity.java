@@ -54,11 +54,12 @@ import Models.RepairsClass;
 public class Repair_Details_Activity extends AppCompatActivity {
     RepairsClass repair_s;
 
-    TextView Remark_A, Equipment_code;
+    TextView Remark_A;
+    static TextView Equipment_code;
     AppCompatButton Update_A, Cancel_A;
     RecyclerView Repair_details_recyclerview;
-    private Dialog zDialog;
-    EquipmentRepairListClass equipment_spinner;
+    private static Dialog zDialog;
+    static EquipmentRepairListClass equipment_spinner;
     Context context;
     private ProgressDialog progressDialog;
 
@@ -361,8 +362,6 @@ public class Repair_Details_Activity extends AppCompatActivity {
                                 equipment.setEquipment_id(equipmentJson.getString("equip_slno"));
                                 equipment.setEquipment_code(equipmentJson.getString("equip_code"));
                                 equipment.setEquipment_Name(equipmentJson.getString("equip_name"));
-                                //equipment.setEquipment_Name(equipmentJson.getString("equip_name"));
-
                                 Global.Repair_equipment.add(equipment);
 
                             } catch (JSONException ex) {

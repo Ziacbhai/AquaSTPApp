@@ -46,35 +46,41 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
-                        android:layout_marginTop="10dp"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="8dp">
 
+
+
+
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="5dp">
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:orientation="vertical">
 
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:text="UserName" />
+                                android:text="Username" />
+
 
                             <EditText
                                 android:id="@+id/Luser"
-                                android:inputType="textCapSentences|text"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
+                                android:layout_height="match_parent"
+                                android:autofillHints=""
                                 android:background="@drawable/btnbgedited"
-                                android:textAllCaps="false"
+                                android:inputType="textEmailAddress"
+                                android:longClickable="true"
+                                android:maxLength="25"
                                 android:textColor="@color/black"
-                                android:textColorHint="@color/black" />
+                                android:textColorHint="@color/black"
+                                android:textStyle="bold" />
+
 
                         </LinearLayout>
+
 
 
                     </androidx.cardview.widget.CardView>
@@ -107,7 +113,6 @@
                                 android:background="@drawable/btnbgedited"
                                 android:drawableRight="@drawable/ic_baseline_remove_red_eye_on"
                                 android:inputType="textPassword"
-                                android:longClickable="true"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black"
                                 android:textStyle="bold" />

@@ -2,7 +2,8 @@ package Models;
 
 public class RepairsClass {
 
-    String R_ImageList,Repairtwo_image,Repair_code,REPNo,Repair_Amount,Repair_Date,Remark,D_Equipment_Name,D_Equipment_Number,D_Amount ,D_Repaired,D_Remark,D_Repairedtwo;
+    String R_ImageList,Repairtwo_image,Repair_code,REPNo,Repair_Amount,Repair_Date,Remark,D_Equipment_Name,D_Equipment_Number,D_Amount ,D_Repaired,D_Remark,D_Repairedtwo
+            ,Repair_Breakup_Item,Repair_Breakup_Unit,Repair_Breakup_Qty,Repair_Breakup_Price,Repair_Breakup_Remark,Repair_Breakup_amount,Repair_Breakup_total;
 
     public String getR_ImageList() {
         return R_ImageList;
@@ -20,22 +21,6 @@ public class RepairsClass {
         Repairtwo_image = repairtwo_image;
     }
 
-    public String getD_Repairedtwo() {
-        return D_Repairedtwo;
-    }
-
-    public void setD_Repairedtwo(String d_Repairedtwo) {
-        D_Repairedtwo = d_Repairedtwo;
-    }
-
-    public String getRemark() {
-        return Remark;
-    }
-
-    public void setRemark(String remark) {
-        Remark = remark;
-    }
-
     public String getRepair_code() {
         return Repair_code;
     }
@@ -44,12 +29,36 @@ public class RepairsClass {
         Repair_code = repair_code;
     }
 
-    public String getD_Remark() {
-        return D_Remark;
+    public String getREPNo() {
+        return REPNo;
     }
 
-    public void setD_Remark(String d_Remark) {
-        D_Remark = d_Remark;
+    public void setREPNo(String REPNo) {
+        this.REPNo = REPNo;
+    }
+
+    public String getRepair_Amount() {
+        return Repair_Amount;
+    }
+
+    public void setRepair_Amount(String repair_Amount) {
+        Repair_Amount = repair_Amount;
+    }
+
+    public String getRepair_Date() {
+        return Repair_Date;
+    }
+
+    public void setRepair_Date(String repair_Date) {
+        Repair_Date = repair_Date;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
     }
 
     public String getD_Equipment_Name() {
@@ -84,27 +93,75 @@ public class RepairsClass {
         D_Repaired = d_Repaired;
     }
 
-    public String getREPNo() {
-        return REPNo;
+    public String getD_Remark() {
+        return D_Remark;
     }
 
-    public void setREPNo(String REPNo) {
-        this.REPNo = REPNo;
+    public void setD_Remark(String d_Remark) {
+        D_Remark = d_Remark;
     }
 
-    public String getRepair_Amount() {
-        return Repair_Amount;
+    public String getD_Repairedtwo() {
+        return D_Repairedtwo;
     }
 
-    public void setRepair_Amount(String repair_Amount) {
-        Repair_Amount = repair_Amount;
+    public void setD_Repairedtwo(String d_Repairedtwo) {
+        D_Repairedtwo = d_Repairedtwo;
     }
 
-    public String getRepair_Date() {
-        return Repair_Date;
+    public String getRepair_Breakup_Item() {
+        return Repair_Breakup_Item;
     }
 
-    public void setRepair_Date(String repair_Date) {
-        Repair_Date = repair_Date;
+    public void setRepair_Breakup_Item(String repair_Breakup_Item) {
+        Repair_Breakup_Item = repair_Breakup_Item;
+    }
+
+    public String getRepair_Breakup_Unit() {
+        return Repair_Breakup_Unit;
+    }
+
+    public void setRepair_Breakup_Unit(String repair_Breakup_Unit) {
+        Repair_Breakup_Unit = repair_Breakup_Unit;
+    }
+
+    public String getRepair_Breakup_Qty() {
+        return Repair_Breakup_Qty;
+    }
+
+    public void setRepair_Breakup_Qty(String repair_Breakup_Qty) {
+        Repair_Breakup_Qty = repair_Breakup_Qty;
+    }
+
+    public String getRepair_Breakup_Price() {
+        return Repair_Breakup_Price;
+    }
+
+    public void setRepair_Breakup_Price(String repair_Breakup_Price) {
+        Repair_Breakup_Price = repair_Breakup_Price;
+    }
+
+    public String getRepair_Breakup_Remark() {
+        return Repair_Breakup_Remark;
+    }
+
+    public void setRepair_Breakup_Remark(String repair_Breakup_Remark) {
+        Repair_Breakup_Remark = repair_Breakup_Remark;
+    }
+
+    public String getRepair_Breakup_amount() {
+        return Repair_Breakup_amount;
+    }
+
+    public void setRepair_Breakup_amount(String repair_Breakup_amount) {
+        Repair_Breakup_amount = repair_Breakup_amount;
+    }
+
+    public String getRepair_Breakup_total() {
+        return Repair_Breakup_total;
+    }
+
+    public void setRepair_Breakup_total(String repair_Breakup_total) {
+        Repair_Breakup_total = repair_Breakup_total;
     }
 }

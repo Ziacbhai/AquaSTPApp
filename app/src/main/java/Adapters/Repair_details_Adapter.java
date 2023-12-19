@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.RepairBreakUpActivity;
 import com.ziac.aquastpapp.Activities.RepairTwoImageListActivity;
 
@@ -58,12 +59,9 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
         holder.Rbreakup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (context != null) {
+                Global.repairsClass = repairsClassList.get(position);
                     Intent intent = new Intent(context, RepairBreakUpActivity.class);
                     context.startActivity(intent);
-                } else {
-                    Log.e("Info", "Context is null");
-                }
             }
         });
 

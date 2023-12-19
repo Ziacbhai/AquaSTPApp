@@ -37,7 +37,7 @@ public class Global {
     //    Local url
    // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
 
-   public static String baseurl="http://192.168.1.16:9396/";
+   public static String baseurl="http://192.168.1.7:9396/";
 
     public static String userImageurl = baseurl+"WebsiteData/Users/";
     public static String incident_image = baseurl+"WebsiteData/IncidentReportDocs/";
@@ -71,6 +71,7 @@ public class Global {
     public static String GetRepairItems = baseurl + "api/Repairs/List?";
     public static String updateRepairAddUpdate = baseurl + "api/Repairs/RepairAddUpdate";
     public static String updateRepairDAddUpdate = baseurl + "api/Repairs/RepairDetailsAddUPdate";
+    public static String RepairsRepairBreakUp = baseurl + "api/Repairs/RepairBreakUp?";
     public static String tokenurl = baseurl+"TOKEN";
 
     public static String Equipment_Details_com_pumps = baseurl + "api/Masters/GetPumps?";
@@ -105,6 +106,7 @@ public class Global {
     public static ArrayList<ConsumablesClass> Consumables_s;
 
     public static ConsumablesClass ConsumablesClass;
+    public static RepairsClass repairsClass;
 
     public static ArrayList<EquipmentListClassConsumables> Consumabeles_equipment;
     public static ArrayList<EquipmentRepairListClass> Repair_equipment;

@@ -1,7 +1,7 @@
 package Models;
 
 public class EquipmentRepairListClass {
-    String   Equipment_id ,Equipment_Name,Equipment_code;
+    String   Equipment_id ,Equipment_Name,Equipment_code ;
 
     public String getEquipment_id() {
         return Equipment_id;
