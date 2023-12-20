@@ -54,7 +54,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verifiy_email_otp);
-
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Enter_pinnumber=findViewById(R.id.et_pinview);
         new OTP_Receiver().setPinView(Enter_pinnumber);
         requestSMSPermission();

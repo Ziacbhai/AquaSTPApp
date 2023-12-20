@@ -13,6 +13,8 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -72,6 +74,8 @@ public class RepairFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_repair, container, false);
+        AppCompatDelegate delegate = ((AppCompatActivity) getActivity()).getDelegate();
+        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         context = getContext();
         user_topcard(view);
 

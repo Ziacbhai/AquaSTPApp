@@ -5,6 +5,7 @@ import static com.ziac.aquastpapp.Activities.Global.Repair_UploadImage;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,8 +74,8 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_repair_two_upload);
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         context = this;
 
         progressDialog = new ProgressDialog(this);

@@ -61,7 +61,7 @@
                         android:layout_weight="1"
                         android:drawablePadding="5dp"
                         android:gravity="center"
-                        android:text="CON.No."
+                        android:text="No."
                         android:textColor="#000"
                         android:textSize="12dp"
                         android:textStyle="bold" />

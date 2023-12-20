@@ -1,6 +1,6 @@
 package Models;
 
-public class ConsumablesClass {
+public class ConsumptionClass {
     String Remark,Date,Amount,Equipment_Name,Equipment_id,D_Amount,D_unit,D_item,D_rate,D_qty ,D_item_name,Sstp1_code,Equip_code,Item_code;
      String Con1_code;
 

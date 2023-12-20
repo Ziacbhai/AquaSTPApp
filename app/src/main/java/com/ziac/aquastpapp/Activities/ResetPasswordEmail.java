@@ -41,7 +41,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_email);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         EnterOTPbtn = findViewById(R.id.eotpbtn);
         Forgotemail = findViewById(R.id.Femail);

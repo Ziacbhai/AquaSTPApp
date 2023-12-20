@@ -50,7 +50,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_user_name_otp);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mPinView = findViewById(R.id.pinview);
         UVerify = findViewById(R.id.uverifyotp);
 

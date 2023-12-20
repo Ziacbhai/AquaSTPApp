@@ -22,7 +22,7 @@
         <item
             android:id="@+id/nav_consumable"
             android:icon="@drawable/shoppingbag"
-            android:title="Consumables" />
+            android:title="Consumption" />
         <item
             android:id="@+id/nav_itemstock"
             android:icon="@drawable/select"

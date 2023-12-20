@@ -11,43 +11,42 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ziac.aquastpapp.Activities.Consumables_Details_Activity;
+import com.ziac.aquastpapp.Activities.Consumption_Details_Activity;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import Models.ConsumablesClass;
+import Models.ConsumptionClass;
 
-public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.Viewholder> {
-    private final List<ConsumablesClass> consumablesClasses;
+public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.Viewholder> {
+    private final List<ConsumptionClass> consumptionClasses;
     Context context;
 
-    public ConsumablesAdapter(List<ConsumablesClass> consumablesClasses, Context context) {
-        this.consumablesClasses = consumablesClasses;
+    public ConsumptionAdapter(List<ConsumptionClass> consumptionClasses, Context context) {
+        this.consumptionClasses = consumptionClasses;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ConsumablesAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.consumables_design, parent , false);
+    public ConsumptionAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.consumption_design, parent , false);
         return new Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ConsumablesAdapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ConsumptionAdapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
 
-        holder.Amount.setText(consumablesClasses.get(position).getAmount()+"0");
+        holder.Amount.setText(consumptionClasses.get(position).getAmount()+"0");
 
-        holder.Remark.setText(consumablesClasses.get(position).getRemark());
+        holder.Remark.setText(consumptionClasses.get(position).getRemark());
 
-        String conNoString = consumablesClasses.get(position).getCon1_code();
+        String conNoString = consumptionClasses.get(position).getCon1_code();
 
 // Parse the string into a double
         double conNo;
@@ -63,7 +62,7 @@ public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.
 
        // holder.Date.setText(consumablesClasses.get(position).getDate());
 
-        String dateString = consumablesClasses.get(position).getDate();
+        String dateString = consumptionClasses.get(position).getDate();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date;
@@ -78,8 +77,8 @@ public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.
         holder.Consumable_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Global.ConsumablesClass = consumablesClasses.get(position);
-                Intent i = new Intent(context, Consumables_Details_Activity.class);
+                Global.ConsumptionClass = consumptionClasses.get(position);
+                Intent i = new Intent(context, Consumption_Details_Activity.class);
                 context.startActivity(i);
             }
         });
@@ -99,7 +98,7 @@ public class ConsumablesAdapter extends RecyclerView.Adapter<ConsumablesAdapter.
 
     @Override
     public int getItemCount() {
-        return consumablesClasses.size();
+        return consumptionClasses.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {

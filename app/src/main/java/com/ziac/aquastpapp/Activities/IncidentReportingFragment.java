@@ -5,11 +5,9 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,29 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import Adapters.ConsumablesAdapter;
-import Adapters.IncidentAdapter;
-import Models.CommonModelClass;
-import Models.ConsumablesClass;
-import Models.IncidentsClass;
-import Models.RepairsClass;
-import Models.zList;
 
 
 public class IncidentReportingFragment extends Fragment {
@@ -59,10 +35,12 @@ public class IncidentReportingFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_incident_reporting, container, false);
+        AppCompatDelegate delegate = ((AppCompatActivity) getActivity()).getDelegate();
+        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         context = getContext();
         user_topcard(view);
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
 
         if (!Global.isNetworkAvailable(getActivity())) {

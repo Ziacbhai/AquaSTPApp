@@ -16,5 +16,7 @@
     <color name="bagcolour">#FCE4F0</color>
     <color name="your_color">#01A3A3</color>
     <color name="your_color_for_profile_title">#01A3A3</color>
+    <color name="disabled_background_color">#CCCCCC</color>
+    <color name="disabled_text_color">#999999</color>
 
 </resources>

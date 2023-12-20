@@ -15,12 +15,13 @@ import com.ziac.aquastpapp.R;
 import java.util.ArrayList;
 
 import Models.CommonModelClass;
-import Models.ConsumablesClass;
+import Models.ConsumptionClass;
 
-import Models.EquipmentListClassConsumables;
+import Models.EquipmentListClassConsumption;
 import Models.EquipmentRepairListClass;
 import Models.IncidentsClass;
 import Models.ItemListClassConsumables;
+import Models.ItemListClassRepair_BreakUp;
 import Models.ItemStockClass;
 import Models.LabTestClass;
 import Models.RepairsClass;
@@ -32,12 +33,12 @@ public class Global {
     public static SharedPreferences sharedPreferences;
     public static SharedPreferences.Editor editor;
 
-     //Server url
-   // public static String baseurl = "http://aquastp.ziaconline.com/";
-    //    Local url
-   // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
+    //Server url
+    //public static String baseurl = "http://aquastp.ziaconline.com/";
+    //Local url
+    // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
 
-   public static String baseurl="http://192.168.1.7:9396/";
+   public static String baseurl="http://192.168.1.11:9396/";
 
     public static String userImageurl = baseurl+"WebsiteData/Users/";
     public static String incident_image = baseurl+"WebsiteData/IncidentReportDocs/";
@@ -72,6 +73,7 @@ public class Global {
     public static String updateRepairAddUpdate = baseurl + "api/Repairs/RepairAddUpdate";
     public static String updateRepairDAddUpdate = baseurl + "api/Repairs/RepairDetailsAddUPdate";
     public static String RepairsRepairBreakUp = baseurl + "api/Repairs/RepairBreakUp?";
+    public static String RepairBreakUp_update = baseurl + "api/Repairs/RepairBreakUpAddUPdate";
     public static String tokenurl = baseurl+"TOKEN";
 
     public static String Equipment_Details_com_pumps = baseurl + "api/Masters/GetPumps?";
@@ -103,13 +105,15 @@ public class Global {
     public static ArrayList<CommonModelClass> pumpdetails;
     public static ArrayList<ItemStockClass> Item_stock;
     public static ArrayList<RepairsClass> Repair_s;
-    public static ArrayList<ConsumablesClass> Consumables_s;
+    public static ArrayList<ConsumptionClass> Consumables_s;
 
-    public static ConsumablesClass ConsumablesClass;
+    public static ConsumptionClass ConsumptionClass;
     public static RepairsClass repairsClass;
 
-    public static ArrayList<EquipmentListClassConsumables> Consumabeles_equipment;
+    public static ArrayList<EquipmentListClassConsumption> Consumabeles_equipment;
     public static ArrayList<EquipmentRepairListClass> Repair_equipment;
+
+    public static ArrayList<ItemListClassRepair_BreakUp> Repair_Item_Breakup;
 
     public static ArrayList<ItemListClassConsumables> Consumbeles_item;
     public static ArrayList<LabTestClass> Labtest_s;

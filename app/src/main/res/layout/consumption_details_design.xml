@@ -82,7 +82,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
-                                            android:text="Eqipment ID"
+                                            android:text="Equipment ID"
                                             android:textColor="#000"
                                             android:textSize="12dp"
                                             android:textStyle="bold" />

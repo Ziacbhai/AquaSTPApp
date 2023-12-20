@@ -6,17 +6,16 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +24,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,20 +43,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import Adapters.ConsumablesAdapter;
-import Adapters.Incident_image_upload_Adapter;
-import Models.ConsumablesClass;
+import Adapters.ConsumptionAdapter;
+import Models.ConsumptionClass;
 
-public class ConsumablesFragment extends Fragment {
+public class Consumption_Fragment extends Fragment {
 
-    ConsumablesClass  consumables_Class;
+    ConsumptionClass consumables_Class;
     RecyclerView Consumables_rv;
     private TextView tvSelectedDate;
     TextView Date_A,STP_A,Remark_A;
@@ -68,14 +64,15 @@ public class ConsumablesFragment extends Fragment {
 
    String currentDatevalue;
     Context context;
-    ConsumablesAdapter consumablesAdapter;
+    ConsumptionAdapter consumptionAdapter;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view  =  inflater.inflate(R.layout.fragment_consumables, container, false);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        View view  =  inflater.inflate(R.layout.fragment_consumption, container, false);
+        AppCompatDelegate delegate = ((AppCompatActivity) getActivity()).getDelegate();
+        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         context = getContext();
         user_topcard(view);
@@ -100,7 +97,7 @@ public class ConsumablesFragment extends Fragment {
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         Consumables_rv.setHasFixedSize(true);
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        Consumables_rv.setAdapter(consumablesAdapter);
+        Consumables_rv.setAdapter(consumptionAdapter);
 
         Date currentDate = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = null;
@@ -157,7 +154,7 @@ public class ConsumablesFragment extends Fragment {
     private void showAddDetailsDialog(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.custom_dialog_consumable_layout, null);
+        View dialogView = inflater.inflate(R.layout.custom_dialog_consumption_layout, null);
 
        // btnOpenDatePicker = dialogView.findViewById(R.id.btnOpenDatePicker);
         tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
@@ -211,8 +208,8 @@ public class ConsumablesFragment extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, consumables, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Consumables_s = new ArrayList<ConsumablesClass>();
-                consumables_Class = new ConsumablesClass();
+                Global.Consumables_s = new ArrayList<ConsumptionClass>();
+                consumables_Class = new ConsumptionClass();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -227,23 +224,23 @@ public class ConsumablesFragment extends Fragment {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    consumables_Class = new ConsumablesClass();
+                    consumables_Class = new ConsumptionClass();
                     try {
                         consumables_Class.setCon1_code(e.getString("con1_code"));
                         consumables_Class.setDate(e.getString("con_date"));
                         consumables_Class.setAmount(e.getString("con_amt"));
                         consumables_Class.setRemark(e.getString("remarks"));
 
-                        String Con1_code = consumables_Class.getCon1_code();
+                       /* String Con1_code = consumables_Class.getCon1_code();
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("con1_code", Con1_code);
-                        Global.editor.commit();
+                        Global.editor.commit();*/
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
                     Global.Consumables_s.add(consumables_Class);
-                    consumablesAdapter = new ConsumablesAdapter(Global.Consumables_s, context);
-                    Consumables_rv.setAdapter(consumablesAdapter);
+                    consumptionAdapter = new ConsumptionAdapter(Global.Consumables_s, context);
+                    Consumables_rv.setAdapter(consumptionAdapter);
                 }
 
             }

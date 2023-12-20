@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -65,7 +66,7 @@ public class LoginFragment extends Fragment {
     String username, pwd;
     StpModelClass stpModelClass;
     Context context;
-    @Override
+ /*   @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
     }
@@ -73,15 +74,16 @@ public class LoginFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-    }
+    }*/
     private ProgressDialog progressDialog;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+        AppCompatDelegate delegate = ((AppCompatActivity) getActivity()).getDelegate();
+        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-         context = getContext();
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        context = getContext();
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Logging in...");

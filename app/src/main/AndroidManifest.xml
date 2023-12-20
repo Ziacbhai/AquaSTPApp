@@ -77,7 +77,7 @@
             android:name=".Activities.IncidentReportingActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Consumables_Details_Activity"
+            android:name=".Activities.Consumption_Details_Activity"
             android:exported="false" />
         <activity
             android:name=".Activities.Incident_Details_Activity"

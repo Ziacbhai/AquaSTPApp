@@ -40,7 +40,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_number);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         ForgotMobile = findViewById(R.id.fmobile);
         GetOTPBtn = findViewById(R.id.n_OTPbtn);
 

@@ -1,7 +1,7 @@
 <!-- res/layout/custom_dialog_layout.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#eaeff5"
@@ -241,6 +241,7 @@
                                     android:textStyle="bold" />
 
                                 <EditText
+                                    android:id="@+id/remark_breakup"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:background="@drawable/btnbgedited"
@@ -275,7 +276,7 @@
                                 android:orientation="vertical">
 
                                 <androidx.appcompat.widget.AppCompatButton
-                                    android:id="@+id/update_alert_cd"
+                                    android:id="@+id/update_alert_breakup"
                                     android:layout_width="match_parent"
                                     android:layout_height="30dp"
                                     android:layout_weight="1"
@@ -298,7 +299,7 @@
                                 android:orientation="vertical">
 
                                 <androidx.appcompat.widget.AppCompatButton
-                                    android:id="@+id/cancel_alert_cd"
+                                    android:id="@+id/cancel_alert_breakup"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"

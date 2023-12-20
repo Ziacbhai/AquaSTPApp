@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.Repair_Details_Activity;
 import com.ziac.aquastpapp.R;
 
@@ -73,9 +75,10 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
 
 
 
-        holder.d_iv.setOnClickListener(new View.OnClickListener() {
+        holder.Repair_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Global.repairsClass = repairS.get(position);
                Intent i = new Intent(context, Repair_Details_Activity.class);
                context.startActivity(i);
             }
@@ -102,7 +105,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
 
     public class Viewholder extends RecyclerView.ViewHolder {
          TextView  Repno,Amount,RepairDate,Repair_remark;
-        ImageView d_iv;
+        ImageView Repair_info;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -111,7 +114,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
             Amount=itemView.findViewById(R.id.amount_);
             RepairDate=itemView.findViewById(R.id.repair_date);
             Repair_remark=itemView.findViewById(R.id.remarks_remark);
-            d_iv=itemView.findViewById(R.id.repair_info);
+            Repair_info=itemView.findViewById(R.id.repair_info);
 
         }
     }

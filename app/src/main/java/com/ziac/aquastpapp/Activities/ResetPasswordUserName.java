@@ -44,7 +44,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_user_name);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Getotp1 = findViewById(R.id.submitotp);
         entertusername = findViewById(R.id.fgusername);
         progressBar = findViewById(R.id.progressbr);

@@ -3,6 +3,7 @@ package com.ziac.aquastpapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -68,6 +69,7 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_two_image_list);
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
@@ -123,7 +125,7 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
 
     private void getRepairImages() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = Global.Repair_two_Imagelist + "repair2_code=" + Global.sharedPreferences.getString("repair2_code", "0");
+        String url = Global.Repair_two_Imagelist + "repair2_code=" + Global.repairsClass.getD_Repairedtwo();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,41 +13,41 @@ import com.ziac.aquastpapp.R;
 
 import java.util.List;
 
-import Models.ConsumablesClass;
+import Models.ConsumptionClass;
 
-public class Consumables_Details_Adapter extends RecyclerView.Adapter<Consumables_Details_Adapter.Viewholder> {
+public class Consumption_Details_Adapter extends RecyclerView.Adapter<Consumption_Details_Adapter.Viewholder> {
 
     Context context;
-    private List<ConsumablesClass> consumablesClassList;
+    private List<ConsumptionClass> consumptionClassList;
 
-    public Consumables_Details_Adapter(Context context, List<ConsumablesClass> consumablesClassList) {
+    public Consumption_Details_Adapter(Context context, List<ConsumptionClass> consumptionClassList) {
         this.context = context;
-        this.consumablesClassList = consumablesClassList;
+        this.consumptionClassList = consumptionClassList;
     }
 
     @NonNull
     @Override
-    public Consumables_Details_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.consumables_details_design, parent , false);
+    public Consumption_Details_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.consumption_details_design, parent , false);
         return new Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Consumables_Details_Adapter.Viewholder holder, int position) {
-      holder.C_eq_name.setText(consumablesClassList.get(position).getEquipment_Name());
-      holder.C_eq_id.setText(consumablesClassList.get(position).getEquipment_id());
-      holder.C_item.setText(consumablesClassList.get(position).getD_item() +" / "+ consumablesClassList.get(position).getD_item_name() );
-      holder.C_rate.setText(consumablesClassList.get(position).getD_rate());
-      holder.C_unit.setText(consumablesClassList.get(position).getD_unit());
-      holder.C_qty.setText(consumablesClassList.get(position).getD_qty());
-      holder.C_amount.setText(consumablesClassList.get(position).getD_Amount()+"0");
+    public void onBindViewHolder(@NonNull Consumption_Details_Adapter.Viewholder holder, int position) {
+      holder.C_eq_name.setText(consumptionClassList.get(position).getEquipment_Name());
+      holder.C_eq_id.setText(consumptionClassList.get(position).getEquipment_id());
+      holder.C_item.setText(consumptionClassList.get(position).getD_item() +" / "+ consumptionClassList.get(position).getD_item_name() );
+      holder.C_rate.setText(consumptionClassList.get(position).getD_rate());
+      holder.C_unit.setText(consumptionClassList.get(position).getD_unit());
+      holder.C_qty.setText(consumptionClassList.get(position).getD_qty());
+      holder.C_amount.setText(consumptionClassList.get(position).getD_Amount()+"0");
      // holder.C_item_name.setText(consumablesClassList.get(position).getD_item_name());
 
     }
 
     @Override
     public int getItemCount() {
-        return consumablesClassList.size();
+        return consumptionClassList.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {

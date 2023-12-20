@@ -69,12 +69,12 @@ public class WelcomeManager extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_manager);
-
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         context = this;
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         fab = findViewById(R.id.floating);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         ClickHere = findViewById(R.id.Clickhere);
         mContinue = findViewById(R.id.mContinue);

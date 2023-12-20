@@ -83,7 +83,7 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incident_documents_uploud);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         In_doc_uploadbtn = findViewById(R.id.in_doc_uploadbtn);
 
         ActivityCompat.requestPermissions(this,

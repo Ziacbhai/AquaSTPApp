@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#eaeff5"
     android:orientation="vertical"
-    tools:context=".Activities.ConsumablesFragment">
+    tools:context=".Activities.Consumption_Fragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -156,7 +156,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_weight="3.4"
                                             android:gravity="center"
-                                            android:text="Consumables"
+                                            android:text="Consumption"
                                             android:textColor="@color/white"
                                             android:textSize="18sp"
                                             android:textStyle="bold" />

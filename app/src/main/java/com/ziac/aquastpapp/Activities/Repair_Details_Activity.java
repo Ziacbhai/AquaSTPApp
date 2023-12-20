@@ -4,6 +4,7 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -67,6 +68,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_details_design);
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         context = this;
         user_topcard();
         if (!Global.isNetworkAvailable(this)) {
@@ -176,7 +178,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.Get_Repairs_Details;
 
-        String Repair_Details_API = url + "repair1_code=" + Global.sharedPreferences.getString("repair1_code", "0");
+        String Repair_Details_API = url + "repair1_code=" +Global.repairsClass.getRepair_code();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Repair_Details_API, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -205,10 +207,9 @@ public class Repair_Details_Activity extends AppCompatActivity {
                         repair_s.setD_Remark(e.getString("repaired_remarks"));
                         repair_s.setD_Repairedtwo(e.getString("repair2_code"));
 
-
-                        String repair2_code = repair_s.getD_Repairedtwo();
-                        Global.editor = Global.sharedPreferences.edit();
-                        Global.editor.putString("repair2_code", repair2_code);
+                       String repair2_code = repair_s.getD_Repairedtwo();
+                       Global.editor = Global.sharedPreferences.edit();
+                       Global.editor.putString("repair2_code", repair2_code);
                         Global.editor.commit();
 
                     } catch (JSONException ex) {
@@ -248,8 +249,8 @@ public class Repair_Details_Activity extends AppCompatActivity {
         zDialog.setContentView(R.layout.equipment_item);
 
         ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
-        TextView Equipment_Name = zDialog.findViewById(R.id.euipment_name);
-        TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);
+       /* TextView Equipment_Name = zDialog.findViewById(R.id.euipment_name);
+        TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);*/
 
         if (Global.Repair_equipment == null || Global.Repair_equipment.size() == 0) {
             Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
@@ -258,8 +259,8 @@ public class Repair_Details_Activity extends AppCompatActivity {
         final Repair_Details_Activity.EquipmentSelectRepair_Adapter EqA = new Repair_Details_Activity.EquipmentSelectRepair_Adapter(Global.Repair_equipment);
         lvEqName.setAdapter(EqA);
 
-        Equipment_Name.setText("Equipment Name");
-        Equipment_id.setText("Equipment ID");
+       /* Equipment_Name.setText("Equipment Name");
+        Equipment_id.setText("Equipment ID");*/
         zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         zDialog.show();
 

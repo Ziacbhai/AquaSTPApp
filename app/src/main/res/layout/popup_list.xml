@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="#EA1515"
+            android:background="@drawable/btn_gradient"
             android:gravity="center"
             android:padding="10dp"
             android:text="Select"

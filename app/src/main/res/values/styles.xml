@@ -16,6 +16,16 @@
         <item name="android:textColor">@color/appcolor</item>
         <item name="android:textSize">@color/appcolor</item>
     </style>
+    <style name="DisabledDatePickerStyle" parent="ThemeOverlay.AppCompat.Dialog">
+        <item name="android:datePickerStyle">@style/DisabledDatePicker</item>
+    </style>
+
+    <style name="DisabledDatePicker">
+        <!-- Customize the appearance of the DatePicker for disabled state -->
+        <item name="android:background">@color/disabled_background_color</item>
+        <item name="android:textColor">@color/disabled_text_color</item>
+        <!-- Add any other attributes you want to customize -->
+    </style>
 
 
 

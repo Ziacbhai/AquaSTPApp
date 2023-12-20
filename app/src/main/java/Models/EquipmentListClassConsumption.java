@@ -1,6 +1,6 @@
 package Models;
 
-public class EquipmentListClassConsumables {
+public class EquipmentListClassConsumption {
     String Equipment_id ,Equipment_Name,Equipment_code;
 
     public String getEquipment_code() {
