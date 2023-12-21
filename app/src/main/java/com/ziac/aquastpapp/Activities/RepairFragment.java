@@ -66,7 +66,7 @@ public class RepairFragment extends Fragment {
     RepairsClass repair_s;
     RecyclerView RepairRecyclerview;
      TextView  Repno, Amount,RepairDate,tvSelectedDate,Remark_A;;
-    String currentDatevalue;
+    String currentDatevalue,currentDateValue2;
      ProgressDialog progressDialog;
 
     Context context;
@@ -98,15 +98,27 @@ public class RepairFragment extends Fragment {
         RepairRecyclerview.setHasFixedSize(true);
         RepairRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        Date currentDate = new Date();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
+
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat1 = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            dateFormat1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            currentDatevalue = dateFormat.format(currentDate);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            currentDatevalue = dateFormat1.format(currentDate);
         }
+
+
+        SimpleDateFormat dateFormat2 = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            dateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+             currentDateValue2 = dateFormat2.format(currentDate);
+        }
+
+
 
         /*Global.sharedPreferences.edit();
         Global.editor.putString("current_date",currentDatevalue);
@@ -162,11 +174,13 @@ public class RepairFragment extends Fragment {
         Update_A = dialogView.findViewById(R.id.update_alert_r);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_r);
 
-        tvSelectedDate.setText(currentDatevalue);
+        tvSelectedDate.setText(currentDateValue2);
+       // tvSelectedDate.setText(currentDatevalue);
         tvSelectedDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePicker();
+
+//                showDatePicker();
             }
         });
         builder.setView(dialogView);
@@ -276,10 +290,10 @@ public class RepairFragment extends Fragment {
                         repair_s.setRepair_code(e.getString("repair1_code"));
                         repair_s.setRemark(e.getString("remarks"));
 
-                        String repair_code= repair_s.getRepair_code();
+                       /* String repair_code= repair_s.getRepair_code();
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("repair1_code",repair_code);
-                        Global.editor.commit();
+                        Global.editor.commit();*/
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }

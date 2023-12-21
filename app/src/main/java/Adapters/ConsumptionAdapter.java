@@ -45,6 +45,7 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
         holder.Amount.setText(consumptionClasses.get(position).getAmount()+"0");
 
         holder.Remark.setText(consumptionClasses.get(position).getRemark());
+        holder.Created_by.setText(consumptionClasses.get(position).getCreated_by());
 
         String conNoString = consumptionClasses.get(position).getCon1_code();
 
@@ -103,7 +104,7 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView Con1_code,Date,Amount,Remark;
+        TextView Con1_code,Date,Amount,Remark,Created_by;
         ImageView Consumable_info;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -113,6 +114,7 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
             Amount= itemView.findViewById(R.id.consumables_amount);
             Remark= itemView.findViewById(R.id.consumables_remark);
             Consumable_info= itemView.findViewById(R.id.consumable_info);
+            Created_by= itemView.findViewById(R.id.consumables_createdby);
         }
     }
 }

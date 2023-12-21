@@ -49,9 +49,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -70,7 +74,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     TextView Equipment_code, Item_code, Qty_cb;
     AppCompatButton Update_A, Cancel_A;
     private ProgressDialog progressDialog;
-
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -102,22 +105,44 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 
     }
-
     private void user_topcard() {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String stpname,sitename,processname;
+        String stpname,sitename,processname,consumption_date,consumption_no,consumption_amount;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         processname = sharedPreferences.getString("process_name", "");
 
-        TextView txtsitename,txtstpname;
+        consumption_date = Global.ConsumptionClass.getDate();
+        consumption_no =  Global.ConsumptionClass.getCon1_code();
+        consumption_amount =  Global.ConsumptionClass.getAmount();
+
+        TextView txtsitename,txtstpname,textno,textdate,texamount;
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
+        textno=findViewById(R.id.consumption_no);
+        textdate=findViewById(R.id.consumption_date);
+        texamount=findViewById(R.id.consumption_amount);
         txtsitename.setText(sitename);
         txtstpname.setText(stpname + " / " + processname);
+
+        textno.setText(consumption_no);
+        textdate.setText(consumption_date);
+        texamount.setText(consumption_amount);
+
+        String dateString = "2023-12-22T12:30:00";
+        // Parsing and formatting date
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        try {
+            Date date = inputFormat.parse(dateString);
+            String formattedDate = outputFormat.format(date);
+            textdate.setText(formattedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -175,7 +200,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 }
             }
         });
-
 
 
         Cancel_A.setOnClickListener(new View.OnClickListener() {
@@ -311,11 +335,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                         consumables_Class.setD_item_name(e.getString("prd_name"));
                         consumables_Class.setD_unit(e.getString("unit_name"));
                         consumables_Class.setD_rate(e.getString("prch_price"));
-
-
                        // Toast.makeText(context, ""+consumables_Class.getD_item_name(), Toast.LENGTH_SHORT).show();
-
-
                     /*    Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("equip_code", consumables_Class.getEquip_code());

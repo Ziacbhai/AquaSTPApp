@@ -28,8 +28,6 @@ import Models.RepairsClass;
 public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder> {
     private List<RepairsClass> repairS;
     Context context;
-
-
     public RepairAdapter(List<RepairsClass> repairS, Context context) {
         this.repairS = repairS;
         this.context = context;
@@ -61,8 +59,6 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
         }
         String formattedConNo = removeTrailingZero(conNo);
         holder.Repno.setText(formattedConNo);
-
-
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date;
@@ -72,9 +68,6 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
         } catch (ParseException e) {e.printStackTrace();
             return;
         }
-
-
-
         holder.Repair_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,39 +76,30 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
                context.startActivity(i);
             }
         });
-
-
     }
-
     private String removeTrailingZero(double value) {
         // Convert the double to a string
         String formattedValue = String.valueOf(value);
-
         // Remove trailing zero if it's a decimal number
         if (formattedValue.indexOf(".") > 0) {
             formattedValue = formattedValue.replaceAll("0*$", "").replaceAll("\\.$", "");
         }
-
         return formattedValue;
     }
     @Override
     public int getItemCount() {
         return repairS.size();
     }
-
     public class Viewholder extends RecyclerView.ViewHolder {
          TextView  Repno,Amount,RepairDate,Repair_remark;
         ImageView Repair_info;
-
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-
             Repno=itemView.findViewById(R.id.repno_);
             Amount=itemView.findViewById(R.id.amount_);
             RepairDate=itemView.findViewById(R.id.repair_date);
             Repair_remark=itemView.findViewById(R.id.remarks_remark);
             Repair_info=itemView.findViewById(R.id.repair_info);
-
         }
     }
 }

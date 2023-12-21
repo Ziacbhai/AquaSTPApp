@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Build;
@@ -46,6 +47,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -62,7 +64,7 @@ public class Consumption_Fragment extends Fragment {
 
     private ProgressDialog progressDialog;
 
-   String currentDatevalue;
+   String currentDatevalue,currentDateValue2;
     Context context;
     ConsumptionAdapter consumptionAdapter;
     @SuppressLint("MissingInflatedId")
@@ -71,9 +73,9 @@ public class Consumption_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view  =  inflater.inflate(R.layout.fragment_consumption, container, false);
+
         AppCompatDelegate delegate = ((AppCompatActivity) getActivity()).getDelegate();
         delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
         context = getContext();
         user_topcard(view);
 
@@ -84,15 +86,12 @@ public class Consumption_Fragment extends Fragment {
 
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAddDetailsDialog(context);
             }
         });
-
-
         Consumables_rv = view.findViewById(R.id.consumables_recyclerview);
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         Consumables_rv.setHasFixedSize(true);
@@ -100,13 +99,21 @@ public class Consumption_Fragment extends Fragment {
         Consumables_rv.setAdapter(consumptionAdapter);
 
         Date currentDate = new Date();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = null;
+        SimpleDateFormat dateFormat1 = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            dateFormat = new  SimpleDateFormat("dd-MM-yyyy");
-
+            dateFormat1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            currentDatevalue = dateFormat.format(currentDate);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            currentDatevalue = dateFormat1.format(currentDate);
+        }
+
+
+        SimpleDateFormat dateFormat2 = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            dateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            currentDateValue2 = dateFormat2.format(currentDate);
         }
 
 //        Global.sharedPreferences.edit();
@@ -162,11 +169,12 @@ public class Consumption_Fragment extends Fragment {
         Update_A = dialogView.findViewById(R.id.update_alert);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert);
 
-        tvSelectedDate.setText(currentDatevalue);
+       // tvSelectedDate.setText(currentDatevalue);
+        tvSelectedDate.setText(currentDateValue2);
         tvSelectedDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePicker();
+               // showDatePicker();
             }
         });
         builder.setView(dialogView);
@@ -230,11 +238,20 @@ public class Consumption_Fragment extends Fragment {
                         consumables_Class.setDate(e.getString("con_date"));
                         consumables_Class.setAmount(e.getString("con_amt"));
                         consumables_Class.setRemark(e.getString("remarks"));
+                        //consumables_Class.setCreated_by(e.getString(""));
+
+                      /*  Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("con_date", consumables_Class.getDate());
+                        editor.putString("con_amt", consumables_Class.getAmount());
+                        editor.putString("con1_code", consumables_Class.getCon1_code());
+                        editor.apply();*/
 
                        /* String Con1_code = consumables_Class.getCon1_code();
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("con1_code", Con1_code);
                         Global.editor.commit();*/
+
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }

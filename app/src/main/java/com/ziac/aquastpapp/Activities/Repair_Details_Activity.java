@@ -43,8 +43,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -100,30 +104,42 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,repair_date,repair_no,repair_amount;;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
-        siteaddress = sharedPreferences.getString("site_address", "");
         processname = sharedPreferences.getString("process_name", "");
-        useremail = sharedPreferences.getString("user_email", "");
-        usermobile = sharedPreferences.getString("user_mobile", "");
-        personname = sharedPreferences.getString("person_name", "");
 
-        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
+        repair_date = Global.repairsClass.getRepair_Date();
+        repair_no =  Global.repairsClass.getRepair_code();
+        repair_amount =  Global.repairsClass.getRepair_Amount();
+
+        TextView txtsitename, txtstpname, textno,textdate,texamount;
 
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
-        txtsiteaddress = findViewById(R.id.siteaddress);
-        txtuseremail = findViewById(R.id.useremail);
-        txtusermobile = findViewById(R.id.usermobile);
-        txtpersonname = findViewById(R.id.personname);
-
         txtsitename.setText(sitename);
         txtstpname.setText(stpname + " / " + processname);
-        txtsiteaddress.setText(siteaddress);
-        txtuseremail.setText(useremail);
-        txtusermobile.setText(usermobile);
-        txtpersonname.setText(personname);
+
+        textno=findViewById(R.id.repair_no);
+        textdate=findViewById(R.id.repair_date);
+        texamount=findViewById(R.id.repair_amount);
+
+        textno.setText(repair_no);
+        textdate.setText(repair_date);
+        texamount.setText(repair_amount);
+
+        String dateString = "2023-12-22T12:30:00"; // Replace with your actual date string
+        // Parsing and formatting date
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        try {
+            Date date = inputFormat.parse(dateString);
+            String formattedDate = outputFormat.format(date);
+            textdate.setText(formattedDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @SuppressLint("MissingInflatedId")

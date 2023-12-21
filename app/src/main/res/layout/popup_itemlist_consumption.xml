@@ -12,31 +12,26 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tvitemfirst"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:padding="8dp"
+                android:textStyle="bold"
                 android:text="Display"
                 android:textColor="#000000"
-                android:textSize="10dp"
+                android:textSize="12dp"
                 android:typeface="sans" />
-
-
             <TextView
                 android:id="@+id/tvitemtwoc"
-                android:layout_weight="1"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:padding="8dp"
                 android:text="Display"
                 android:textColor="#000000"
-                android:textSize="10dp"
+                android:textSize="12dp"
                 android:typeface="sans" />
         </LinearLayout>
 
