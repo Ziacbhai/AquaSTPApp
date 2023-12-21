@@ -49,6 +49,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,6 +90,10 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         }
         new InternetCheckTask().execute();
 
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Loading please wait...");
+        progressDialog.setCancelable(true);
+
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -106,9 +111,10 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
     }
     private void user_topcard() {
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage("Loading !!");
-        progressDialog.setCancelable(true);
+//        progressDialog = new ProgressDialog(context);
+//        progressDialog.setMessage("Loading !!");
+//        progressDialog.setCancelable(true);
+
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String stpname,sitename,processname,consumption_date,consumption_no,consumption_amount;
         sitename = sharedPreferences.getString("site_name", "");
@@ -133,7 +139,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         texamount.setText(consumption_amount);
 
         String dateString = "2023-12-22T12:30:00";
-        // Parsing and formatting date
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         try {
@@ -143,6 +148,43 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+/*
+        Global.ConsumptionClass consumptionClass = Global.ConsumptionClass;
+
+        // Get the amount from ConsumptionClass
+        consumption_amount = consumptionClass.get();
+
+        // Append "0" to the amount
+        String modifiedAmount = consumption_amount + "0";
+
+        // Set the modified amount to the TextView
+        texamount.setText(modifiedAmount);*/
+
+        consumption_no = Global.ConsumptionClass.getCon1_code();
+
+        // Parse the string into a double
+        double conNo;
+        try {
+            conNo = Double.parseDouble(consumption_no);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            // Handle the parse exception, if needed
+            return;
+        }
+
+        // Format the double and remove trailing zeros
+        String formattedConNo = removeTrailingZero(conNo);
+
+        // Set the formatted conNo to the TextView
+        textno.setText(formattedConNo);
+    }
+
+    private String removeTrailingZero(double value) {
+        // Use DecimalFormat to remove trailing zeros
+        DecimalFormat decimalFormat = new DecimalFormat("#.###"); // Adjust the format as needed
+        return decimalFormat.format(value);
+
 
     }
 
@@ -723,6 +765,18 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     notifyDataSetChanged();
                 }
             };
+        }
+    }
+
+    private void showProgressDialog() {
+        if (progressDialog != null && !progressDialog.isShowing()) {
+            progressDialog.show();
+        }
+    }
+
+    private void hideProgressDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
         }
     }
 }

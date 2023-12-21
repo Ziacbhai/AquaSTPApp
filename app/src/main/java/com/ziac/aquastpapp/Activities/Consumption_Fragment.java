@@ -62,7 +62,7 @@ public class Consumption_Fragment extends Fragment {
     TextView Date_A,STP_A,Remark_A;
     AppCompatButton Update_A,Cancel_A;
 
-    private ProgressDialog progressDialog;
+     ProgressDialog progressDialog;
 
    String currentDatevalue,currentDateValue2;
     Context context;
@@ -85,6 +85,11 @@ public class Consumption_Fragment extends Fragment {
         new InternetCheckTask().execute();
 
 
+        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog.setMessage("Loading please wait...");
+        progressDialog.setCancelable(true);
+
+
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +97,7 @@ public class Consumption_Fragment extends Fragment {
                 showAddDetailsDialog(context);
             }
         });
+
         Consumables_rv = view.findViewById(R.id.consumables_recyclerview);
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         Consumables_rv.setHasFixedSize(true);
@@ -122,13 +128,12 @@ public class Consumption_Fragment extends Fragment {
 
         getConsumables();
         return view;
+
+
     }
 
     private void user_topcard(View view) {
 
-        progressDialog = new ProgressDialog(requireActivity());
-        progressDialog.setMessage("Loading !!");
-        progressDialog.setCancelable(true);
 
         String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -204,6 +209,8 @@ public class Consumption_Fragment extends Fragment {
     @SuppressLint("MissingInflatedId")
     private void getConsumables() {
 
+        showProgressDialog();
+
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String  consumables = Global.Get_Consumables;
 
@@ -258,13 +265,14 @@ public class Consumption_Fragment extends Fragment {
                     Global.Consumables_s.add(consumables_Class);
                     consumptionAdapter = new ConsumptionAdapter(Global.Consumables_s, context);
                     Consumables_rv.setAdapter(consumptionAdapter);
+                    hideProgressDialog();
                 }
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                hideProgressDialog();
             }
         }){
             public Map<String, String> getHeaders() {
@@ -407,5 +415,17 @@ public class Consumption_Fragment extends Fragment {
         /*Global.sharedPreferences.edit();
         Global.editor.putString("current_date",current_date);
         Global.editor.commit();*/
+    }
+
+    private void showProgressDialog() {
+        if (progressDialog != null && !progressDialog.isShowing()) {
+            progressDialog.show();
+        }
+    }
+
+    private void hideProgressDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 }

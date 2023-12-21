@@ -57,7 +57,6 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
             e.printStackTrace();
             return; // Handle the parse exception
         }
-
         String formattedConNo = removeTrailingZero(conNo);
         holder.Con1_code.setText(formattedConNo);
 
