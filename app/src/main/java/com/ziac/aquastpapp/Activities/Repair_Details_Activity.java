@@ -43,6 +43,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -95,6 +96,8 @@ public class Repair_Details_Activity extends AppCompatActivity {
         Repair_details_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         get_Details_Repair();
 
+
+
     }
 
     private void user_topcard() {
@@ -140,6 +143,27 @@ public class Repair_Details_Activity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        repair_no = Global.repairsClass.getRepair_code();
+        // Parse the string into a double
+        double conNo;
+        try {
+            conNo = Double.parseDouble(repair_no);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            // Handle the parse exception, if needed
+            return;
+        }
+        // Format the double and remove trailing zeros
+        String formattedConNo = removeTrailingZero(conNo);
+        // Set the formatted conNo to the TextView
+        textno.setText(formattedConNo);
+
+    }
+
+    private String removeTrailingZero(double value) {
+        // Use DecimalFormat to remove trailing zeros
+        DecimalFormat decimalFormat = new DecimalFormat("#.###"); // Adjust the format as needed
+        return decimalFormat.format(value);
     }
 
     @SuppressLint("MissingInflatedId")

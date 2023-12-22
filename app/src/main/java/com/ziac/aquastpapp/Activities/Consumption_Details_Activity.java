@@ -148,44 +148,32 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
 /*
         Global.ConsumptionClass consumptionClass = Global.ConsumptionClass;
-
         // Get the amount from ConsumptionClass
         consumption_amount = consumptionClass.get();
-
         // Append "0" to the amount
         String modifiedAmount = consumption_amount + "0";
-
         // Set the modified amount to the TextView
         texamount.setText(modifiedAmount);*/
 
         consumption_no = Global.ConsumptionClass.getCon1_code();
-
         // Parse the string into a double
         double conNo;
         try {
             conNo = Double.parseDouble(consumption_no);
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            // Handle the parse exception, if needed
             return;
         }
 
-        // Format the double and remove trailing zeros
         String formattedConNo = removeTrailingZero(conNo);
-
-        // Set the formatted conNo to the TextView
         textno.setText(formattedConNo);
     }
 
     private String removeTrailingZero(double value) {
-        // Use DecimalFormat to remove trailing zeros
         DecimalFormat decimalFormat = new DecimalFormat("#.###"); // Adjust the format as needed
         return decimalFormat.format(value);
-
-
     }
 
     @SuppressLint("MissingInflatedId")

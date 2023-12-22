@@ -83,8 +83,6 @@ public class Consumption_Fragment extends Fragment {
             Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
-
-
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading please wait...");
         progressDialog.setCancelable(true);
@@ -112,8 +110,6 @@ public class Consumption_Fragment extends Fragment {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             currentDatevalue = dateFormat1.format(currentDate);
         }
-
-
         SimpleDateFormat dateFormat2 = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             dateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -128,7 +124,6 @@ public class Consumption_Fragment extends Fragment {
 
         getConsumables();
         return view;
-
 
     }
 
@@ -245,7 +240,7 @@ public class Consumption_Fragment extends Fragment {
                         consumables_Class.setDate(e.getString("con_date"));
                         consumables_Class.setAmount(e.getString("con_amt"));
                         consumables_Class.setRemark(e.getString("remarks"));
-                        //consumables_Class.setCreated_by(e.getString(""));
+                        consumables_Class.setCreated_by(e.getString("createdby"));
 
                       /*  Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                         SharedPreferences.Editor editor = sharedPreferences.edit();

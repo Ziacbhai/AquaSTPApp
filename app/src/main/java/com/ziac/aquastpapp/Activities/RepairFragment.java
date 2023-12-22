@@ -289,6 +289,7 @@ public class RepairFragment extends Fragment {
                         repair_s.setRepair_Date(e.getString("rep_date"));
                         repair_s.setRepair_code(e.getString("repair1_code"));
                         repair_s.setRemark(e.getString("remarks"));
+                        repair_s.setR_createdby(e.getString("createdby"));
 
                        /* String repair_code= repair_s.getRepair_code();
                         Global.editor = Global.sharedPreferences.edit();

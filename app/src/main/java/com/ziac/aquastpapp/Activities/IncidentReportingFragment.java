@@ -19,29 +19,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import Adapters.IncidentAdapter;
+import Models.IncidentsClass;
 
 
 public class IncidentReportingFragment extends Fragment {
     RecyclerView Incident_recyclerview;
     Context context;
-
+    IncidentsClass incidents;
     private ProgressDialog progressDialog;
+    IncidentAdapter incidentAdapter;
 
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_incident_reporting, container, false);
         AppCompatDelegate delegate = ((AppCompatActivity) getActivity()).getDelegate();
         delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         context = getContext();
         user_topcard(view);
-
-
-
 
         if (!Global.isNetworkAvailable(getActivity())) {
             Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
@@ -54,10 +67,8 @@ public class IncidentReportingFragment extends Fragment {
         Incident_recyclerview.setHasFixedSize(true);
         Incident_recyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        // getIncidentReport();
+        getIncidentReport();
         return view;
-
-
     }
 
     private void user_topcard(View view) {
@@ -92,7 +103,7 @@ public class IncidentReportingFragment extends Fragment {
         txtpersonname.setText(personname);
     }
 
-    /*private void getIncidentReport() {
+    private void getIncidentReport() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String incident = Global.Get_Incidents;
 
@@ -159,7 +170,5 @@ public class IncidentReportingFragment extends Fragment {
             }
         };
         queue.add(jsonObjectRequest);
-
-    }*/
-
+    }
 }

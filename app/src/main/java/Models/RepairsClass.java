@@ -1,6 +1,18 @@
 package Models;
 
 public class RepairsClass {
+
+    String R_ImageList,Repairtwo_image,Repair_code,REPNo,Repair_Amount,Repair_Date,Remark,D_Equipment_Name,D_Equipment_Number,D_Amount ,D_Repaired,D_Remark,D_Repairedtwo
+            ,Repair_Breakup_Item,Repair_Breakup_Unit,Repair_Breakup_Qty,Repair_Breakup_Price,Repair_Breakup_Remark,Repair_Breakup_amount,Repair_Breakup_total,R_createdby;
+
+    public String getR_createdby() {
+        return R_createdby;
+    }
+
+    public void setR_createdby(String r_createdby) {
+        R_createdby = r_createdby;
+    }
+
     private boolean isRepaired;
 
     public boolean isRepaired() {
@@ -11,8 +23,6 @@ public class RepairsClass {
         isRepaired = repaired;
     }
 
-    String R_ImageList,Repairtwo_image,Repair_code,REPNo,Repair_Amount,Repair_Date,Remark,D_Equipment_Name,D_Equipment_Number,D_Amount ,D_Repaired,D_Remark,D_Repairedtwo
-            ,Repair_Breakup_Item,Repair_Breakup_Unit,Repair_Breakup_Qty,Repair_Breakup_Price,Repair_Breakup_Remark,Repair_Breakup_amount,Repair_Breakup_total;
 
     public String getR_ImageList() {
         return R_ImageList;

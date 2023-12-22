@@ -46,6 +46,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
         holder.Amount.setText(repairS.get(position).getRepair_Amount()+"0");
 
         holder.Repair_remark.setText(repairS.get(position).getRemark());
+        holder.Created_by.setText(repairS.get(position).getR_createdby());
 
         String dateString = repairS.get(position).getRepair_Date();
 
@@ -91,7 +92,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
         return repairS.size();
     }
     public class Viewholder extends RecyclerView.ViewHolder {
-         TextView  Repno,Amount,RepairDate,Repair_remark;
+         TextView  Repno,Amount,RepairDate,Repair_remark,Created_by;
         ImageView Repair_info;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -100,6 +101,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
             RepairDate=itemView.findViewById(R.id.repair_date);
             Repair_remark=itemView.findViewById(R.id.remarks_remark);
             Repair_info=itemView.findViewById(R.id.repair_info);
+            Created_by=itemView.findViewById(R.id.repair_createdby);
         }
     }
 }

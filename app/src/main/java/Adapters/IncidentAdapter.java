@@ -48,9 +48,7 @@ import java.util.Map;
 import Models.IncidentsClass;
 
 public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewholder> {
-
     private List<IncidentsClass> incidentsClasses;
-
     Context context;
 
 
