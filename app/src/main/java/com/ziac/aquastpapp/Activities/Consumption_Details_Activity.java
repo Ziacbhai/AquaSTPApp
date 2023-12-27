@@ -81,7 +81,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consumption_details_design);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         context = this;
         user_topcard();
 
@@ -135,19 +135,32 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         txtstpname.setText(stpname + " / " + processname);
 
         textno.setText(consumption_no);
-        textdate.setText(consumption_date);
-        texamount.setText(consumption_amount);
+        texamount.setText(consumption_amount + "0") ;
 
-        String dateString = "2023-12-22T12:30:00";
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        try {
+            Date date = inputFormat.parse(consumption_date);
+            String formattedDate = outputFormat.format(date);
+            String onlyDate = formattedDate.split(" ")[0];
+            textdate.setText(onlyDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+  /*      String dateString = "2023-12-22T12:30:00";
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         try {
             Date date = inputFormat.parse(dateString);
             String formattedDate = outputFormat.format(date);
-            textdate.setText(formattedDate);
+            // Extracting only the date part
+            String onlyDate = formattedDate.split(" ")[0];
+
+            textdate.setText(onlyDate);
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
 /*
         Global.ConsumptionClass consumptionClass = Global.ConsumptionClass;
         // Get the amount from ConsumptionClass
@@ -170,6 +183,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         String formattedConNo = removeTrailingZero(conNo);
         textno.setText(formattedConNo);
     }
+
+
+
 
     private String removeTrailingZero(double value) {
         DecimalFormat decimalFormat = new DecimalFormat("#.###"); // Adjust the format as needed

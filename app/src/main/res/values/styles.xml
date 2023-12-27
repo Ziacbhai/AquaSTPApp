@@ -26,6 +26,19 @@
         <item name="android:textColor">@color/disabled_text_color</item>
         <!-- Add any other attributes you want to customize -->
     </style>
+    <!-- Light mode -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your light mode styles here -->
+    </style>
+
+    <!-- Dark mode -->
+    <style name="AppTheme.Dark" parent="Theme.AppCompat">
+        <!-- Customize your dark mode styles here -->
+        <item name="android:windowBackground">@color/black</item> <!-- Set the background color to black -->
+        <item name="colorPrimary">@color/your_dark_primary_color</item> <!-- Customize primary color for dark mode -->
+        <!-- Add more customizations as needed -->
+    </style>
+
 
 
 

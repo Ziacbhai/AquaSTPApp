@@ -1,15 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Light mode -->
     <style name="Theme.AquaSTPApp" parent="Base.Theme.AquaSTPApp">
         <!-- Transparent system bars for edge-to-edge. -->
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+        <!-- Customize other light mode styles here -->
     </style>
 
-    <style name="CardView." parent="CardView">
-
-        <item name="android:foreground">@drawable/card_view</item>
+    <!-- Dark mode -->
+    <style name="Theme.AquaSTPApp.Dark" parent="Base.Theme.AquaSTPApp">
+        <!-- Transparent system bars for edge-to-edge. -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item> <!-- Dark status bar text color in dark mode -->
+        <!-- Customize other dark mode styles here -->
     </style>
+
 
 </resources>

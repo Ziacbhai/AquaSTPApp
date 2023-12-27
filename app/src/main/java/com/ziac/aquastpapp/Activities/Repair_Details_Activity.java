@@ -73,7 +73,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_details_design);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         context = this;
         user_topcard();
         if (!Global.isNetworkAvailable(this)) {
@@ -126,36 +126,30 @@ public class Repair_Details_Activity extends AppCompatActivity {
         textno=findViewById(R.id.repair_no);
         textdate=findViewById(R.id.repair_date);
         texamount=findViewById(R.id.repair_amount);
-
         textno.setText(repair_no);
-        textdate.setText(repair_date);
-        texamount.setText(repair_amount);
+        texamount.setText(repair_amount + "0");
 
-        String dateString = "2023-12-22T12:30:00"; // Replace with your actual date string
-        // Parsing and formatting date
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         try {
-            Date date = inputFormat.parse(dateString);
+            Date date = inputFormat.parse(repair_date);
             String formattedDate = outputFormat.format(date);
-            textdate.setText(formattedDate);
+            String onlyDate = formattedDate.split(" ")[0];
+
+            textdate.setText(onlyDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         repair_no = Global.repairsClass.getRepair_code();
-        // Parse the string into a double
         double conNo;
         try {
             conNo = Double.parseDouble(repair_no);
         } catch (NumberFormatException e) {
             e.printStackTrace();
-            // Handle the parse exception, if needed
             return;
         }
-        // Format the double and remove trailing zeros
         String formattedConNo = removeTrailingZero(conNo);
-        // Set the formatted conNo to the TextView
         textno.setText(formattedConNo);
 
     }

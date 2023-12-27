@@ -4,6 +4,8 @@ public class ConsumptionClass {
     String Remark,Date,Amount,Equipment_Name,Equipment_id,D_Amount,D_unit,D_item,D_rate,D_qty ,D_item_name,Sstp1_code,Equip_code,Item_code;
      String Con1_code,Created_by;
 
+
+
     public String getCreated_by() {
         return Created_by;
     }
@@ -43,10 +45,6 @@ public class ConsumptionClass {
     public void setSstp1_code(String sstp1_code) {
         Sstp1_code = sstp1_code;
     }
-
-
-
-
 
     public String getD_item_name() {
         return D_item_name;

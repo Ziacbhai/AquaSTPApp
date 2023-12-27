@@ -14,6 +14,5 @@ public class OwnerDashBoard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_dash_board);
 
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 }

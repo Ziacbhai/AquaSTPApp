@@ -46,8 +46,9 @@ public class Incident_Details_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incident_details_design);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         context = this;
+
+
         user_topcard();
         if (!Global.isNetworkAvailable(this)) {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");

@@ -1,10 +1,13 @@
 package com.ziac.aquastpapp.Activities;
 
+import static com.google.android.material.internal.ContextUtils.getActivity;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,13 +27,16 @@ public class LoginSignupActivity extends AppCompatActivity {
     ViewPager2 viewPager2;
     ViewPagerAdapter loginadapter;
     private boolean doubleBackToExitPressedOnce;
-
+Context context;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        context= this;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginsignup);
+
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
         tabLayout = findViewById(R.id.tablayout);
         tabLayout.setSelectedTabIndicatorHeight(0);
@@ -86,6 +92,9 @@ public class LoginSignupActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
     public void onBackPressed() {
 
 

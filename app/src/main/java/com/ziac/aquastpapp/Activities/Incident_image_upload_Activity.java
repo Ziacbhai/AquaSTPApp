@@ -65,12 +65,13 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_incident_image_uploud);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
         context = this;
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        setContentView(R.layout.activity_incident_image_uploud);
 
+        AppCompatDelegate delegate = ((AppCompatActivity) context).getDelegate();
+        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (!Global.isNetworkAvailable(this)) {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
         }

@@ -74,8 +74,6 @@ public class Consumption_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view  =  inflater.inflate(R.layout.fragment_consumption, container, false);
 
-        AppCompatDelegate delegate = ((AppCompatActivity) getActivity()).getDelegate();
-        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         context = getContext();
         user_topcard(view);
 
@@ -238,11 +236,13 @@ public class Consumption_Fragment extends Fragment {
                     try {
                         consumables_Class.setCon1_code(e.getString("con1_code"));
                         consumables_Class.setDate(e.getString("con_date"));
+
                         consumables_Class.setAmount(e.getString("con_amt"));
+
                         consumables_Class.setRemark(e.getString("remarks"));
                         consumables_Class.setCreated_by(e.getString("createdby"));
 
-                      /*  Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                      /* Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("con_date", consumables_Class.getDate());
                         editor.putString("con_amt", consumables_Class.getAmount());

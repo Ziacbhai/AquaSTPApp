@@ -19,8 +19,6 @@ public class SensorsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sensors, container, false);
-        AppCompatDelegate delegate = ((AppCompatActivity) getActivity()).getDelegate();
-        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         return view;
     }
 }

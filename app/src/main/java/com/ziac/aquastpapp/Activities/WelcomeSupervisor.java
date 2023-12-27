@@ -69,7 +69,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_supervisor);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         context = this;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -83,8 +83,6 @@ public class WelcomeSupervisor extends AppCompatActivity {
         SupervisorExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //finishAffinity();
-
                 Intent i = new Intent(WelcomeSupervisor.this,LoginSignupActivity.class);
                 startActivity(i);
             }

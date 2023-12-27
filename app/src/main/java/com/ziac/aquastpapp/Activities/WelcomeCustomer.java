@@ -56,13 +56,14 @@ public class WelcomeCustomer extends AppCompatActivity {
     AppCompatButton cContinue;
     Bitmap imageBitmap;
     FloatingActionButton fab;
+    Context context;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_customer);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         ImageView = findViewById(R.id.imageView);

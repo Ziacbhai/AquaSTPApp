@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     CircleImageView Profile;
     ActionBarDrawerToggle toggle;
 
+    Context context;
+
     boolean click = true;
     String userimage, usermail, stpname, sitename, siteaddress, userref, personname, processname;
 
@@ -52,8 +55,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this;
         // getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         toolbar = findViewById(R.id.toolbar);
        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         setSupportActionBar(toolbar);

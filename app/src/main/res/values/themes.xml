@@ -1,21 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.AquaSTPApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item>-->
+    <style name="Base.Theme.AquaSTPApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
     </style>
-
     <style name="Theme.AquaSTPApp" parent="Base.Theme.AquaSTPApp" />
-
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
         <!-- API 14 theme customizations can go here. -->
-
         <item name="popupMenuStyle">@style/MyPopupMenu</item>
-
     </style>
-
     <style name="MyPopupMenu" parent="@style/Widget.AppCompat.PopupMenu">
         <item name="android:popupBackground">#0F213F</item>
     </style>
-
 </resources>

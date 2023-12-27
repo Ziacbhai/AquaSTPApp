@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -38,13 +39,13 @@ public class ResetPasswordUserName extends AppCompatActivity {
     AppCompatButton Getotp1;
     ProgressBar progressBar;
     String username;
+    Context context;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_user_name);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Getotp1 = findViewById(R.id.submitotp);
         entertusername = findViewById(R.id.fgusername);
         progressBar = findViewById(R.id.progressbr);

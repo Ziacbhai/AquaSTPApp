@@ -28,11 +28,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        AppCompatDelegate delegate = ((AppCompatActivity) getActivity()).getDelegate();
-        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
        // Pump.setCardBackgroundColor(Color.parseColor("#FF6363"));
-
         return view;
     }
 }

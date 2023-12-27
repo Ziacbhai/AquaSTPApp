@@ -62,8 +62,7 @@ public class LabTestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lab_test, container, false);
-        AppCompatDelegate delegate = ((AppCompatActivity) getActivity()).getDelegate();
-        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         context = getContext();
         user_topcard(view);
 

@@ -55,9 +55,7 @@ public class WelcomeUser extends AppCompatActivity {
     private TextView userpersonname, usermail, usermobile, ClickHere;
     ImageView ImageView, Userexit;
     AppCompatButton ucontinue;
-
     Context context;
-
     Bitmap imageBitmap;
     FloatingActionButton fab;
 
@@ -66,10 +64,9 @@ public class WelcomeUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_user);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         context = this;
+
 
         fab = findViewById(R.id.floating);
         ImageView = findViewById(R.id.imageView);

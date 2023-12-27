@@ -74,7 +74,6 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
         } catch (ParseException e) {e.printStackTrace();
             return;
         }
-
         holder.Consumable_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,12 +87,10 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
     private String removeTrailingZero(double value) {
         // Convert the double to a string
         String formattedValue = String.valueOf(value);
-
         // Remove trailing zero if it's a decimal number
         if (formattedValue.indexOf(".") > 0) {
             formattedValue = formattedValue.replaceAll("0*$", "").replaceAll("\\.$", "");
         }
-
         return formattedValue;
     }
 
@@ -109,12 +106,12 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
-            Con1_code= itemView.findViewById(R.id.consumables_con_no);
-            Date= itemView.findViewById(R.id.consumables_date);
-            Amount= itemView.findViewById(R.id.consumables_amount);
-            Remark= itemView.findViewById(R.id.consumables_remark);
-            Consumable_info= itemView.findViewById(R.id.consumable_info);
-            Created_by= itemView.findViewById(R.id.consumables_createdby);
+            Con1_code= itemView.findViewById(R.id.consumption_con_no);
+            Date= itemView.findViewById(R.id.consumption_date);
+            Amount= itemView.findViewById(R.id.consumption_amount);
+            Remark= itemView.findViewById(R.id.consumption_remark);
+            Consumable_info= itemView.findViewById(R.id.consumption_info);
+            Created_by= itemView.findViewById(R.id.consumption_createdby);
         }
     }
 }

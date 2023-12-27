@@ -69,12 +69,11 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_two_image_list);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
-
         context = this;
+
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         //RepairImage = findViewById(R.id.repairtqo_image_list);

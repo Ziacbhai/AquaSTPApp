@@ -97,7 +97,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             Repno=itemView.findViewById(R.id.repno_);
-            Amount=itemView.findViewById(R.id.amount_);
+            Amount=itemView.findViewById(R.id.repairamount);
             RepairDate=itemView.findViewById(R.id.repair_date);
             Repair_remark=itemView.findViewById(R.id.remarks_remark);
             Repair_info=itemView.findViewById(R.id.repair_info);

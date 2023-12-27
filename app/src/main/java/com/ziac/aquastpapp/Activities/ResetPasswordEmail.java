@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -35,13 +36,14 @@ public class ResetPasswordEmail extends AppCompatActivity {
     String useremail;
     //SharedPreferences sharedPreferences;
     ProgressBar progressBar;
+    Context context;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_email);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         EnterOTPbtn = findViewById(R.id.eotpbtn);
         Forgotemail = findViewById(R.id.Femail);

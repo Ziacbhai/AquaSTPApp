@@ -51,12 +51,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
     ImageView Backarrowbtn;
     private boolean passwordvisible = false;
     String username,newpassword,repeatmpassword;
+
+    Context context;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
         Newpwd = findViewById(R.id.newpwd);

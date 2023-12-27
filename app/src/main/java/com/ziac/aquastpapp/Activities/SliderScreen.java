@@ -7,6 +7,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,13 +24,11 @@ public class SliderScreen extends AppCompatActivity {
     private ViewPager viewPager;
     private static final String TAG = "SliderActivity";
     private TextView Next,Skip;
-
+Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slider_screen);
-
 
         Next = findViewById(R.id.next);
         Skip = findViewById(R.id.skip);

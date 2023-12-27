@@ -35,10 +35,7 @@ public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incident_image_list);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
         context = this;
-
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         if (!Global.isNetworkAvailable(this)) {

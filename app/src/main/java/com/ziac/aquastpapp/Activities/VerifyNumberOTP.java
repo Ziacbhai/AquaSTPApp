@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -48,12 +49,13 @@ public class VerifyNumberOTP extends AppCompatActivity {
     ProgressBar progressBar;
 
     private TextInputEditText Newpwd;
+    Context context;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_number_otp);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
        // displayMobno();
 
         pinView=findViewById(R.id.pinview);

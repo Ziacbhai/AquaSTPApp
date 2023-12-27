@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,6 +43,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
     boolean passwordVisible;
     AppCompatButton UVerify;
     ProgressBar progressBar;
+   Context context;
 
     private TextInputEditText UNewpwd;
 
@@ -50,7 +52,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_user_name_otp);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         mPinView = findViewById(R.id.pinview);
         UVerify = findViewById(R.id.uverifyotp);
 

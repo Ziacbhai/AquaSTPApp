@@ -38,7 +38,7 @@ public class Global {
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
 
-   public static String baseurl="http://192.168.1.5:9396/";
+   public static String baseurl="http://192.168.1.4:9396/";
 
     public static String userImageurl = baseurl+"WebsiteData/Users/";
     public static String incident_image = baseurl+"WebsiteData/IncidentReportDocs/";

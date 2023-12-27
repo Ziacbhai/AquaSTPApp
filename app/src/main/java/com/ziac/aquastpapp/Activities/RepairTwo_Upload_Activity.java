@@ -75,8 +75,9 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_two_upload);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         context = this;
+
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");

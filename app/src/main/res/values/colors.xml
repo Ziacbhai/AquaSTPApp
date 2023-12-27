@@ -5,7 +5,6 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="appcolor">#01A3A3</color>
     <color name="lavender">#8692f7</color>
@@ -18,5 +17,7 @@
     <color name="your_color_for_profile_title">#01A3A3</color>
     <color name="disabled_background_color">#CCCCCC</color>
     <color name="disabled_text_color">#999999</color>
+    <color name="black">#000000</color>
+    <color name="your_dark_primary_color">#2196F3</color>
 
 </resources>

@@ -33,6 +33,76 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawablePadding="5dp"
+                                android:gravity="center"
+                                android:text="Repair Item"
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/breakup_item"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="5dp"
+                                android:gravity="center"
+                                android:text="repair_item"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/my_light_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:text="Unit"
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/breakup_unit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="5dp"
+                                android:gravity="center_horizontal"
+                                android:hint="Repair Unit"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -43,225 +113,134 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="5dp">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
                             android:orientation="vertical">
 
-                            <LinearLayout
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="5dp">
+                                android:layout_weight="1"
+                                android:drawablePadding="5dp"
+                                android:gravity="center"
+                                android:text="Price"
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
 
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center"
-                                        android:text="Repair Item"
-                                        android:textColor="#000"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/breakup_item"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center"
-                                        android:text="repair_item"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/my_light_primary" />
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:gravity="center_horizontal"
-                                        android:text="Unit"
-                                        android:textColor="#000"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/breakup_unit"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center_horizontal"
-                                        android:hint="Repair Unit"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                android:background="#01A3A3" />
-
-                            <LinearLayout
+                            <TextView
+                                android:id="@+id/breakup_price"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="5dp">
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center"
-                                        android:text="Price"
-                                        android:textColor="#000"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/breakup_price"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center"
-                                        android:text="price"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/my_light_primary" />
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:gravity="center_horizontal"
-                                        android:text="Total"
-                                        android:textColor="#000"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/breakup_total"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center_horizontal"
-                                        android:hint="total"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/my_light_primary" />
-
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="0.8"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_horizontal"
-                                        android:text="Qty"
-                                        android:textColor="#000"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/breakup_qty"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center_horizontal"
-                                        android:text="qty"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                android:background="#01A3A3" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="5dp">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Remarks:"
-                                    android:textColor="#000"
-                                    android:textSize="12dp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:id="@+id/breakup_remark"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="30dp"
-                                    android:background="@color/white"
-                                    android:drawablePadding="5dp"
-                                    android:textSize="12dp" />
-
-                            </LinearLayout>
+                                android:drawablePadding="5dp"
+                                android:gravity="center"
+                                android:text="price"
+                                android:textSize="12dp" />
 
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/my_light_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:text="Total"
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/breakup_total"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="5dp"
+                                android:gravity="center_horizontal"
+                                android:hint="total"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/my_light_primary" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Qty"
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/breakup_qty"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="5dp"
+                                android:gravity="center_horizontal"
+                                android:text="qty"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="#01A3A3" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Remarks:"
+                            android:textColor="#000"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/breakup_remark"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:background="@color/white"
+                            android:drawablePadding="5dp"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 

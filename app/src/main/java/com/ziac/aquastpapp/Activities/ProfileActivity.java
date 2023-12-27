@@ -85,7 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         fab = findViewById(R.id.floating);
         Backarrowbtn = findViewById(R.id.backarrowbtn);

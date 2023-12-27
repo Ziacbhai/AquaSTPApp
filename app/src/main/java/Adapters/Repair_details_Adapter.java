@@ -121,8 +121,6 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
             Amount = itemView.findViewById(R.id.repair_amount);
             RImage = itemView.findViewById(R.id.repair2_image);
             RBreakup = itemView.findViewById(R.id.repair_breakup);
-
-
         }
     }
 }

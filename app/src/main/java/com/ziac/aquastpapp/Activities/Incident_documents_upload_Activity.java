@@ -83,15 +83,10 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incident_documents_uploud);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        In_doc_uploadbtn = findViewById(R.id.in_doc_uploadbtn);
-
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE},
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
                 PackageManager.PERMISSION_GRANTED);
-
         context = this;
+        In_doc_uploadbtn = findViewById(R.id.in_doc_uploadbtn);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         if (!Global.isNetworkAvailable(this)) {

@@ -51,8 +51,7 @@ public class IncidentReportingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_incident_reporting, container, false);
-        AppCompatDelegate delegate = ((AppCompatActivity) getActivity()).getDelegate();
-        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         context = getContext();
         user_topcard(view);
 

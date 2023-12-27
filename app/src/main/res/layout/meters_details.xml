@@ -25,14 +25,11 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/btnbgoutline"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_height="match_parent">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -76,7 +73,6 @@
 
                         </LinearLayout>
 
-                    </LinearLayout>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -122,7 +118,6 @@
                                     android:orientation="vertical">
 
                                     <TextView
-
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"

@@ -49,20 +49,19 @@ public class VerifyEmailOTP extends AppCompatActivity {
     boolean passwordVisible;
     private TextInputEditText EnterNewpwd;
 
+    Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verifiy_email_otp);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Enter_pinnumber=findViewById(R.id.et_pinview);
         new OTP_Receiver().setPinView(Enter_pinnumber);
         requestSMSPermission();
-
         EVerify=findViewById(R.id.everifyotp);
         progressBar = findViewById(R.id.progressbr);
         EnterNewpwd = findViewById(R.id.enewpassword);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Resendotp = findViewById(R.id.resendEotp);
 
         Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyEmailOTP.this, ResetPasswordEmail.class)));

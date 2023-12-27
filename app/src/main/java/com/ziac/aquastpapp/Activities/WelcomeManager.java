@@ -63,13 +63,12 @@ public class WelcomeManager extends AppCompatActivity {
     Bitmap imageBitmap;
     FloatingActionButton fab;
 
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_manager);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         context = this;
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);

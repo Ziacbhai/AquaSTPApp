@@ -105,47 +105,6 @@
                                                         android:textSize="12dp" />
                                                 </LinearLayout>
                                             </LinearLayout>
-                                            <TextView
-                                                android:id="@+id/siteaddress"
-                                                android:textColor="@color/white"
-                                                android:layout_width="match_parent"
-                                                android:gravity="center_horizontal"
-                                                android:layout_height="wrap_content"
-                                                android:text="Site_address"
-                                                android:textStyle="bold"
-                                                android:textSize="12dp" />
-
-                                            <TextView
-                                                android:id="@+id/personname"
-                                                android:textColor="@color/white"
-                                                android:layout_width="match_parent"
-                                                android:gravity="center_horizontal"
-                                                android:layout_height="wrap_content"
-                                                android:text="Personname"
-                                                android:textStyle="bold"
-                                                android:textSize="16dp" />
-
-                                            <TextView
-
-                                                android:id="@+id/useremail"
-                                                android:textColor="@color/white"
-                                                android:layout_width="match_parent"
-                                                android:gravity="center_horizontal"
-                                                android:layout_height="wrap_content"
-                                                android:text="email"
-                                                android:textStyle="bold"
-                                                android:textSize="12dp" />
-
-                                            <TextView
-                                                android:id="@+id/usermobile"
-                                                android:textColor="@color/white"
-                                                android:layout_width="match_parent"
-                                                android:gravity="center_horizontal"
-                                                android:layout_height="wrap_content"
-                                                android:text="_mobile"
-                                                android:textStyle="bold"
-                                                android:textSize="12dp" />
-
                                         </LinearLayout>
                                     </LinearLayout>
 

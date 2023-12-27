@@ -61,7 +61,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
 
     RepairsClass repair_s;
 
-    TextView Equipment_Item,Breakup_Unit,Breakup_qty,Breakup_price,Breakup_remark;
+    TextView Equipment_Item, Breakup_Unit, Breakup_qty, Breakup_price, Breakup_remark;
     AppCompatButton Update_A, Cancel_A;
     RecyclerView Repair_breakup_recyclerview;
     private Dialog zDialog;
@@ -70,19 +70,20 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     private ItemListClassRepair_BreakUp Item_spinner;
     Context context;
     private ProgressDialog progressDialog;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_break_up);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         context = this;
         user_topcard();
         if (!Global.isNetworkAvailable(this)) {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
-       FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,27 +111,18 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
-        siteaddress = sharedPreferences.getString("site_address", "");
         processname = sharedPreferences.getString("process_name", "");
-        useremail = sharedPreferences.getString("user_email", "");
-        usermobile = sharedPreferences.getString("user_mobile", "");
-        personname = sharedPreferences.getString("person_name", "");
 
-        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
+
+        TextView txtsitename, txtstpname, txtpersonname;
 
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
-        txtsiteaddress = findViewById(R.id.siteaddress);
-        txtuseremail = findViewById(R.id.useremail);
-        txtusermobile = findViewById(R.id.usermobile);
         txtpersonname = findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
         txtstpname.setText(stpname + " / " + processname);
-        txtsiteaddress.setText(siteaddress);
-        txtuseremail.setText(useremail);
-        txtusermobile.setText(usermobile);
-        txtpersonname.setText(personname);
+
     }
 
     @SuppressLint("MissingInflatedId")
@@ -150,7 +142,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         Breakup_Unit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               getItemSpinnerPopup();
+                getItemSpinnerPopup();
             }
         });
 
@@ -176,7 +168,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateRepairbreakupdetails();
+                updateRepairBreakupdetails();
                 get_Breakup_Details_Repair();
                 dialog.dismiss();
             }
@@ -194,7 +186,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String Repair_Breakup_API = Global.RepairsRepairBreakUp;
         String url = Repair_Breakup_API + "repair2_code=" + Global.repairsClass.getD_Repairedtwo();
-      // String url = Repair_Breakup_API + "repair2_code=" +"2";
+        // String url = Repair_Breakup_API + "repair2_code=" +"2";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -202,8 +194,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 repair_s = new RepairsClass();
                 JSONArray jarray;
                 try {
-                    jarray = response.getJSONArray("data");
-
+                    jarray = response.getJSONArray("dummy");
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -230,7 +221,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                     Repair_BreakUp_Adapter repairBreakUpAdapter = new Repair_BreakUp_Adapter(Global.Repair_s, context);
                     Repair_breakup_recyclerview.setAdapter(repairBreakUpAdapter);
                 }
-               // getEquipmentsListRepairdetails();
+                // getEquipmentsListRepairdetails();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -244,10 +235,11 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 } else if (error instanceof NetworkError) {
                     Toast.makeText(RepairBreakUpActivity.this, "Network Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ParseError) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Parse Error", Toast.LENGTH_LONG).show();}
+                    Toast.makeText(RepairBreakUpActivity.this, "Parse Error", Toast.LENGTH_LONG).show();
+                }
 
             }
-        }){
+        }) {
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
@@ -257,13 +249,14 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         };
         queue.add(jsonObjectRequest);
     }
-    private void updateRepairbreakupdetails() {
 
-        String qty,remarks,equipment_code,repair_item_code,unit_code;
+    private void updateRepairBreakupdetails() {
+
+        String qty, remarks, equipment_code, repair_item_code, unit_code;
         qty = Breakup_qty.getText().toString();
         remarks = Breakup_remark.getText().toString();
         equipment_code = equipment_spinner.getEquipment_code();
-       repair_item_code = Item_spinner.getBreakup_Item_code();
+        repair_item_code = Item_spinner.getBreakup_Item_code();
         unit_code = Breakup_Unit.getText().toString();
 
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -312,7 +305,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 params.put("qty", qty);
                 params.put("unit_code", unit_code);
                 params.put("repaired_remarks", remarks);
-                params.put("repair2_code",repair2_code);
+                params.put("repair2_code", repair2_code);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
@@ -328,6 +321,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
 
         queue.add(stringRequest);
     }
+
     private void getRepairBreakupSpinnerPopup() {
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         zDialog.setContentView(R.layout.equipment_item);
@@ -364,41 +358,41 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         });
     }
 
-private void getItemSpinnerPopup() {
+    private void getItemSpinnerPopup() {
 
-    zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
-    zDialog.setContentView(R.layout.equipment_item);
-    ListView lvItem= zDialog.findViewById(R.id.lvequipment);
+        zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        zDialog.setContentView(R.layout.equipment_item);
+        ListView lvItem = zDialog.findViewById(R.id.lvequipment);
    /* TextView Equipment_name =zDialog.findViewById(R.id.euipment_name);
     TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);*/
 
-    if (Global.Repair_Item_Breakup == null || Global.Repair_Item_Breakup.size() == 0) {
-        Toast.makeText(getBaseContext(), "Item list not found !! Please try again !!", Toast.LENGTH_LONG).show();
-        return;
-    }
-    final RepairBreakUpActivity.ItemSelect_Breakup_Adapter laItem = new RepairBreakUpActivity.ItemSelect_Breakup_Adapter(Global.Repair_Item_Breakup);
-    lvItem.setAdapter(laItem);
+        if (Global.Repair_Item_Breakup == null || Global.Repair_Item_Breakup.size() == 0) {
+            Toast.makeText(getBaseContext(), "Item list not found !! Please try again !!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        final RepairBreakUpActivity.ItemSelect_Breakup_Adapter laItem = new RepairBreakUpActivity.ItemSelect_Breakup_Adapter(Global.Repair_Item_Breakup);
+        lvItem.setAdapter(laItem);
 
    /* Equipment_name.setText("Item Name");
     Equipment_id.setText("Item ID");*/
-    zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-    zDialog.show();
+        zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        zDialog.show();
 
-    SearchView sveq = zDialog.findViewById(R.id.svequipment);
+        SearchView sveq = zDialog.findViewById(R.id.svequipment);
 
-    sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-        @Override
-        public boolean onQueryTextSubmit(String query) {
-            return false;
-        }
+        sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
-        @Override
-        public boolean onQueryTextChange(String newText) {
-            laItem.getFilter().filter(newText);
-            return false;
-        }
-    });
-}
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                laItem.getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
 
     public class EquipmentSelect_breakupRepair_Adapter extends BaseAdapter implements Filterable {
 
@@ -472,6 +466,7 @@ private void getItemSpinnerPopup() {
             };
         }
     }
+
     public class ItemSelect_Breakup_Adapter extends BaseAdapter implements Filterable {
 
         private ArrayList<ItemListClassRepair_BreakUp> eQarrayList;

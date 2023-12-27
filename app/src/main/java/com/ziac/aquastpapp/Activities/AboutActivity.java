@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,12 +24,13 @@ public class AboutActivity extends AppCompatActivity {
     LinearLayout Locate;
     LottieAnimationView Ziac ;
 
+    Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         Website = findViewById(R.id.websiteaqua);
         CallUs = findViewById(R.id.callUs);

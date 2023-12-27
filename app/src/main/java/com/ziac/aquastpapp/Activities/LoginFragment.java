@@ -80,10 +80,9 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        AppCompatDelegate delegate = ((AppCompatActivity) getActivity()).getDelegate();
-        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+       context = getContext();
 
-        context = getContext();
+
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Logging in...");
@@ -101,7 +100,6 @@ public class LoginFragment extends Fragment {
 
         TextView versionName = view.findViewById(R.id.version);
         versionName.setText("v1.0.0" + BuildConfig.VERSION_NAME);
-
 
         Login_btn.setOnClickListener(new View.OnClickListener() {
             @Override

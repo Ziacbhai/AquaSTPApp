@@ -55,6 +55,7 @@
         android:theme="@style/Theme.AquaSTPApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <!--android:theme="@style/AppTheme"-->
         <activity
             android:name=".Activities.RepairTwo_Upload_Activity"
             android:exported="false" />
@@ -204,6 +205,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts"
             android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

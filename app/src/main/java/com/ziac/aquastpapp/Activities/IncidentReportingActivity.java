@@ -69,8 +69,7 @@ public class IncidentReportingActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_incident_reporting);
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         context = this;
         user_topcard();
         toolbar = findViewById(R.id.toolbar);
