@@ -6,17 +6,16 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/select"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="1dp"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+        android:orientation="horizontal">
+
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/tvsingle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Display"
@@ -24,16 +23,18 @@
                 android:textColor="#000000"
                 android:textSize="12dp"
                 android:typeface="sans" />
+
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/tvtwoeq"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Display"
                 android:textColor="#000000"
                 android:textSize="12dp"
                 android:typeface="sans" />
-        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>
 

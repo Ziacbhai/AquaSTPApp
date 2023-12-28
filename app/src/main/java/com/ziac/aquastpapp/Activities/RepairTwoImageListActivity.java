@@ -1,15 +1,10 @@
 package com.ziac.aquastpapp.Activities;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,52 +13,40 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import Adapters.Repairtwo_image_list_Adapter;
-import Models.RepairsClass;
+import Models.RepairClass2;
+
 
 public class RepairTwoImageListActivity extends AppCompatActivity {
     Bitmap imageBitmap;
     RecyclerView Repair_Images_Rv;
-    RepairsClass repairsClass;
+    RepairClass2 repairClass2;
     AppCompatButton Repair_image_uploadbtn;
-    private ProgressDialog progressDialog;
-
+    ProgressDialog progressDialog;
     ImageView RepairImage;
-
     EditText Remark_repair;
     Context context;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +56,7 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
         context = this;
-
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         //RepairImage = findViewById(R.id.repairtqo_image_list);
         //Remark_repair = findViewById(R.id.repair_image_remark);
          Repair_image_uploadbtn = findViewById(R.id.repair_image_uploadbtn);
@@ -88,17 +69,10 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         Repair_image_uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (context != null) {
                     Intent i = new Intent(context, RepairTwo_Upload_Activity.class);
                     context.startActivity(i);
-                } else {
-                    Log.e("Camera", "Context is null");
-
-                }
-
             }
         });
-
         Repair_Images_Rv = findViewById(R.id.repair_two_imagelist_recyclerview);
         Repair_Images_Rv.setLayoutManager(new LinearLayoutManager(this));
         Repair_Images_Rv.setHasFixedSize(true);
@@ -119,18 +93,15 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
             //Repair_postselelectedimage();
         }
     }
-
-
-
     private void getRepairImages() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = Global.Repair_two_Imagelist + "repair2_code=" + Global.repairsClass.getD_Repairedtwo();
+        String url = Global.Repair_two_Imagelist + "repair2_code=" + Global.repairClass2.getD_Repairedtwo();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
-                Global.Repair_s = new ArrayList<RepairsClass>();
-                repairsClass = new RepairsClass();
+                Global.repair2list = new ArrayList<RepairClass2>();
+                repairClass2 = new RepairClass2();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -146,16 +117,16 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    repairsClass = new RepairsClass();
+                    repairClass2 = new RepairClass2();
                     try {
-                        repairsClass.setRepairtwo_image(e.getString("image_name"));
-                        repairsClass.setD_Remark(e.getString("image_remarks"));
-                      //  Toast.makeText(context, "image_name" + repairsClass.getR_ImageList(), Toast.LENGTH_SHORT).show();
+                        repairClass2.setI_Repair_image(e.getString("image_name"));
+                        repairClass2.setD_Remark(e.getString("image_remarks"));
+                        Toast.makeText(context, (e.getString("image_remarks")), Toast.LENGTH_SHORT).show();
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Repair_s.add(repairsClass);
-                    Repairtwo_image_list_Adapter repairtwoImageUploadAdapter = new Repairtwo_image_list_Adapter(Global.Repair_s, context);
+                    Global.repair2list.add(repairClass2);
+                    Repairtwo_image_list_Adapter repairtwoImageUploadAdapter = new Repairtwo_image_list_Adapter(Global.repair2list, context);
                     Repair_Images_Rv.setAdapter(repairtwoImageUploadAdapter);
                 }
 

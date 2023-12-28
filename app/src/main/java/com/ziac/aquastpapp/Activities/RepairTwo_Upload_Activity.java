@@ -1,8 +1,6 @@
 package com.ziac.aquastpapp.Activities;
 
-import static com.ziac.aquastpapp.Activities.Global.Repair_UploadImage;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -47,22 +45,17 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import Adapters.Lab_Test_Details_Adapter;
-import Adapters.Repairtwo_image_list_Adapter;
-import Models.IncidentsClass;
-import Models.RepairsClass;
 
 public class RepairTwo_Upload_Activity extends AppCompatActivity {
 
     ImageView RtwoImage;
     EditText Repair_two_Remark;
     RecyclerView Repair_Images_Rv;
-    RepairsClass repairsClass;
+
     Bitmap imageBitmap;
     AppCompatButton Repair_two_image_upload_btn;
     Context context;
@@ -75,10 +68,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair_two_upload);
-
         context = this;
-
-
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
@@ -101,6 +91,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
             }
         });
     }
+
     private void updateRepairImage() {
         if (imageBitmap == null) {
             return;
@@ -118,6 +109,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
             try {
                 if (resp.getBoolean("success")) {
                     Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
+                    Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), response);
                     startActivity(new Intent(RepairTwo_Upload_Activity.this, RepairTwoImageListActivity.class));
                     finish();
                 } else {

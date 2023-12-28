@@ -6,31 +6,22 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.Rect;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,13 +48,13 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import Adapters.RepairAdapter;
-import Models.RepairsClass;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import Models.RepairClass1;
 
 
 public class RepairFragment extends Fragment {
 
-    RepairsClass repair_s;
+    RepairClass1 repairClass1;
     RecyclerView RepairRecyclerview;
      TextView  Repno, Amount,RepairDate,tvSelectedDate,Remark_A;;
     String currentDatevalue,currentDateValue2;
@@ -83,6 +74,9 @@ public class RepairFragment extends Fragment {
             Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
+        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog.setMessage("Loading please wait...");
+        progressDialog.setCancelable(true);
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
 
@@ -117,8 +111,6 @@ public class RepairFragment extends Fragment {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
              currentDateValue2 = dateFormat2.format(currentDate);
         }
-
-
 
         /*Global.sharedPreferences.edit();
         Global.editor.putString("current_date",currentDatevalue);
@@ -255,6 +247,7 @@ public class RepairFragment extends Fragment {
         tvSelectedDate.setText(current_date);
     }
     private void getRepair() {
+        showProgressDialog();
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String repair = Global.GetRepairItems;
 
@@ -266,8 +259,8 @@ public class RepairFragment extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, repair, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Repair_s = new ArrayList<RepairsClass>();
-                repair_s = new RepairsClass();
+                Global.repair1list = new ArrayList<RepairClass1>();
+                repairClass1 = new RepairClass1();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -282,25 +275,26 @@ public class RepairFragment extends Fragment {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    repair_s = new RepairsClass();
+                    repairClass1 = new RepairClass1();
                     try {
-                        repair_s.setREPNo(e.getString("rep_no"));
-                        repair_s.setRepair_Amount(e.getString("repaired_amt"));
-                        repair_s.setRepair_Date(e.getString("rep_date"));
-                        repair_s.setRepair_code(e.getString("repair1_code"));
-                        repair_s.setRemark(e.getString("remarks"));
-                        repair_s.setR_createdby(e.getString("createdby"));
+                        repairClass1.setREPNo(e.getString("rep_no"));
+                        repairClass1.setRepair_Amount(e.getString("repaired_amt"));
+                        repairClass1.setRepair_Date(e.getString("rep_date"));
+                        repairClass1.setRepair_code(e.getString("repair1_code"));
+                        repairClass1.setRemark(e.getString("remarks"));
+                        repairClass1.setR_createdby(e.getString("createdby"));
 
-                       /* String repair_code= repair_s.getRepair_code();
+                        /*String repair_code= repair_s.getRepair_code();
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("repair1_code",repair_code);
                         Global.editor.commit();*/
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Repair_s.add(repair_s);
-                    RepairAdapter repairAdapter = new RepairAdapter(Global.Repair_s, getContext());
+                    Global.repair1list.add(repairClass1);
+                    RepairAdapter repairAdapter = new RepairAdapter(Global.repair1list, getContext());
                     RepairRecyclerview.setAdapter(repairAdapter);
+                    hideProgressDialog();
                 }
             }
         }, new Response.ErrorListener() {
@@ -310,8 +304,6 @@ public class RepairFragment extends Fragment {
             }
         }){
             public Map<String, String> getHeaders() {
-                // below line we are creating a map for
-                // storing our values in key and value pair.
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
@@ -319,9 +311,9 @@ public class RepairFragment extends Fragment {
             }
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("rep_no", Repno.getText().toString());
+             /*   params.put("rep_no", Repno.getText().toString());
                 params.put("repaired_amt",Amount.getText().toString());
-                params.put("rep_date", RepairDate.getText().toString());
+                params.put("rep_date", RepairDate.getText().toString());*/
                 return params;
             }
         };
@@ -378,8 +370,8 @@ public class RepairFragment extends Fragment {
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
-               // params.put("repair1_code", Global.sharedPreferences.getString("repair1_code", "0"));
                 params.put("repair1_code", "0");
+                // params.put("repair1_code", Global.sharedPreferences.getString("repair1_code", "0"));
 
                 Log.d("rep_date", "rep_date: " + params.toString());
                 Log.d("com_code", "com_code: " + params.toString());
@@ -395,5 +387,17 @@ public class RepairFragment extends Fragment {
 
         queue.add(stringRequest);
 
+    }
+
+    private void showProgressDialog() {
+        if (progressDialog != null && !progressDialog.isShowing()) {
+            progressDialog.show();
+        }
+    }
+
+    private void hideProgressDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 }

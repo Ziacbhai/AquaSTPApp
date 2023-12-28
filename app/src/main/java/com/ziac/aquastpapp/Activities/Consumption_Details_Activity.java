@@ -24,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,11 +63,12 @@ import java.util.concurrent.TimeUnit;
 
 import Adapters.Consumption_Details_Adapter;
 import Models.ConsumptionClass;
+import Models.ConsumptionClass2;
 import Models.EquipmentListClassConsumption;
 import Models.ItemListClassConsumables;
 
 public class Consumption_Details_Activity extends AppCompatActivity {
-    ConsumptionClass consumables_Class;
+    ConsumptionClass2 consumptionClass2;
     RecyclerView Consumables_D_Rv;
     Context context;
     private EquipmentListClassConsumption equipment_spinner;
@@ -211,7 +213,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 getItemSpinnerPopup();
             }
         });
-
         Qty_cb = dialogView.findViewById(R.id.qty_alert_cd);
         Update_A = dialogView.findViewById(R.id.update_alert_cd);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_cd);
@@ -226,9 +227,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             layoutParams.height = getResources().getDimensionPixelSize(R.dimen.dialog_height);
             dialog.getWindow().setAttributes(layoutParams);
         }
-
         dialog.show();
-
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -246,19 +245,14 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 }
             }
         });
-
-
         Cancel_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
             }
         });
-
     }
-
     private void updateConsumables_details() {
-
         String qty = Qty_cb.getText().toString();
         String equipment_code = equipment_spinner.getEquipment_code();
         String item_code = Item_spinner.getItem_code();
@@ -332,14 +326,13 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
                 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         queue.add(stringRequest);
 
     }
-
     private void getConsumablesDetails() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String consumables_d = Global.Get_Consumables_Details;
@@ -351,8 +344,8 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 progressDialog.dismiss();
-                Global.Consumables_s = new ArrayList<ConsumptionClass>();
-                consumables_Class = new ConsumptionClass();
+                Global.Consumption2list = new ArrayList<ConsumptionClass2>();
+                consumptionClass2 = new ConsumptionClass2();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -367,20 +360,21 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    consumables_Class = new ConsumptionClass();
+                    consumptionClass2 = new ConsumptionClass2();
                     try {
-                        consumables_Class.setEquipment_Name(e.getString("equip_name"));
-                        consumables_Class.setEquipment_id(e.getString("equip_slno"));
+                        consumptionClass2.setEquipment_Name(e.getString("equip_name"));
+                        consumptionClass2.setEquipment_id(e.getString("equip_slno"));
 
-                        consumables_Class.setEquip_code(e.getString("equip_code"));
-                        consumables_Class.setItem_code(e.getString("item_code"));
-                        consumables_Class.setD_qty(e.getString("qty"));
+                        consumptionClass2.setEquip_code(e.getString("equip_code"));
+                        consumptionClass2.setItem_code(e.getString("item_code"));
 
-                        consumables_Class.setD_Amount(e.getString("prd_amt"));
-                        consumables_Class.setD_item(e.getString("part_no"));
-                        consumables_Class.setD_item_name(e.getString("prd_name"));
-                        consumables_Class.setD_unit(e.getString("unit_name"));
-                        consumables_Class.setD_rate(e.getString("prch_price"));
+                        consumptionClass2.setD_qty(e.getString("qty"));
+                        consumptionClass2.setD_Amount(e.getString("prd_amt"));
+                        consumptionClass2.setD_item(e.getString("part_no"));
+                        consumptionClass2.setD_item_name(e.getString("prd_name"));
+                        consumptionClass2.setD_unit(e.getString("unit_name"));
+                        consumptionClass2.setD_rate(e.getString("prch_price"));
+
                        // Toast.makeText(context, ""+consumables_Class.getD_item_name(), Toast.LENGTH_SHORT).show();
                     /*    Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                         Global.editor = Global.sharedPreferences.edit();
@@ -393,8 +387,8 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                         progressDialog.dismiss();
                         throw new RuntimeException(ex);
                     }
-                    Global.Consumables_s.add(consumables_Class);
-                    Consumption_Details_Adapter consumablesDetailsAdapter = new Consumption_Details_Adapter(context, Global.Consumables_s);
+                    Global.Consumption2list.add(consumptionClass2);
+                    Consumption_Details_Adapter consumablesDetailsAdapter = new Consumption_Details_Adapter(context, Global.Consumption2list);
                     Consumables_D_Rv.setAdapter(consumablesDetailsAdapter);
                 }
 
@@ -435,7 +429,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
 
     }
-
     private void getEquipmentsList() {
 
         String Url = Global.api_List_Get_Equipments + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
@@ -486,8 +479,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
         queue.add(jsonArrayRequest);
     }
-
-
     private void getEquipmentsSpinnerPopup() {
 
 
@@ -553,6 +544,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         @Override
         public View getView(int i, View convertView, ViewGroup parent) {
             View v = getLayoutInflater().inflate(R.layout.popup_equipmentlist, null);
+
+            LinearLayout layout =  v.findViewById(R.id.select);
+
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
             TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
             equipment_spinner = eQarrayList.get(i);
@@ -560,7 +554,16 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             equipmentnameitem.setText(equipment_spinner.getEquipment_Name());
             eqnameitem.setText(equipment_spinner.getEquipment_id());
 
-            equipmentnameitem.setOnClickListener(view1 -> {
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    equipment_spinner = eQarrayList.get(i);
+                    Equipment_code.setText(equipment_spinner.getEquipment_Name());
+                    zDialog.dismiss();
+                }
+            });
+
+            layout.setOnClickListener(view1 -> {
                 equipment_spinner = eQarrayList.get(i);
                 Equipment_code.setText(equipment_spinner.getEquipment_Name());
                 zDialog.dismiss();
@@ -601,7 +604,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             };
         }
     }
-
     private void getItemSpinner() {
         String Url = Global.api_List_Get_Item + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
 
@@ -657,7 +659,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
 
     }
-
     private void getItemSpinnerPopup() {
 
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
@@ -693,7 +694,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             }
         });
     }
-
     public class ItemSelect_Adapter extends BaseAdapter implements Filterable {
 
         private ArrayList<ItemListClassConsumables> mDataArrayList;
@@ -722,6 +722,8 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         public View getView(int i, View convertView, ViewGroup parent) {
 
             View v = getLayoutInflater().inflate(R.layout.popup_itemlist_consumption, null);
+
+
            TextView tvequipmentnameitem = v.findViewById(R.id.tvitemfirst);
            TextView tvenameitem = v.findViewById(R.id.tvitemtwoc);
 
@@ -771,7 +773,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             };
         }
     }
-
     private void showProgressDialog() {
         if (progressDialog != null && !progressDialog.isShowing()) {
             progressDialog.show();

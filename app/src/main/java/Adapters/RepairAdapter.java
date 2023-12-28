@@ -6,30 +6,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.Repair_Details_Activity;
 import com.ziac.aquastpapp.R;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import Models.RepairsClass;
+import Models.RepairClass1;
 
 public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder> {
-    private List<RepairsClass> repairS;
+    private List<RepairClass1> repairClass1;
     Context context;
-    public RepairAdapter(List<RepairsClass> repairS, Context context) {
-        this.repairS = repairS;
+
+    public RepairAdapter(List<RepairClass1> repairClass1, Context context) {
+        this.repairClass1 = repairClass1;
         this.context = context;
     }
 
@@ -43,23 +38,24 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
     @Override
     public void onBindViewHolder(@NonNull RepairAdapter.Viewholder holder, int position) {
         //holder.Repno.setText(repairS.get(position).getREPNo());
-        holder.Amount.setText(repairS.get(position).getRepair_Amount()+"0");
+        holder.Amount.setText(repairClass1.get(position).getRepair_Amount()+"0");
 
-        holder.Repair_remark.setText(repairS.get(position).getRemark());
-        holder.Created_by.setText(repairS.get(position).getR_createdby());
+        holder.Repair_remark.setText(repairClass1.get(position).getRemark());
+        holder.Created_by.setText(repairClass1.get(position).getR_createdby());
 
-        String dateString = repairS.get(position).getRepair_Date();
+        String dateString = repairClass1.get(position).getRepair_Date();
 
-        String conNoString = repairS.get(position).getREPNo();
-        double conNo;
+        String conNoString = repairClass1.get(position).getREPNo();
+        double conrepNo;
         try {
-            conNo = Double.parseDouble(conNoString);
+            conrepNo = Double.parseDouble(conNoString);
         } catch (NumberFormatException e) {
             e.printStackTrace();
             return;
         }
-        String formattedConNo = removeTrailingZero(conNo);
-        holder.Repno.setText(formattedConNo);
+        String formattedRepNo = removeTrailingZero(conrepNo);
+        holder.Repno.setText(formattedRepNo);
+
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date;
@@ -72,7 +68,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
         holder.Repair_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Global.repairsClass = repairS.get(position);
+                Global.repairClass1 = repairClass1.get(position);
                Intent i = new Intent(context, Repair_Details_Activity.class);
                context.startActivity(i);
             }
@@ -89,7 +85,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
     }
     @Override
     public int getItemCount() {
-        return repairS.size();
+        return repairClass1.size();
     }
     public class Viewholder extends RecyclerView.ViewHolder {
          TextView  Repno,Amount,RepairDate,Repair_remark,Created_by;

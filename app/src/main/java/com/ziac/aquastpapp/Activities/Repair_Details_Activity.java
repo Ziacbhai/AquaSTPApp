@@ -1,7 +1,6 @@
 package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -9,7 +8,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -23,10 +21,10 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,11 +36,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,14 +48,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import Adapters.Repair_details_Adapter;
 import Models.EquipmentRepairListClass;
-import Models.RepairsClass;
-
+import Models.RepairClass1;
+import Models.RepairClass2;
 public class Repair_Details_Activity extends AppCompatActivity {
-    RepairsClass repair_s;
-
+    RepairClass2 repairClass2;
     TextView Remark_A;
     static TextView Equipment_code;
     AppCompatButton Update_A, Cancel_A;
@@ -95,37 +89,33 @@ public class Repair_Details_Activity extends AppCompatActivity {
         Repair_details_recyclerview.setHasFixedSize(true);
         Repair_details_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         get_Details_Repair();
-
-
-
     }
 
     private void user_topcard() {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
-
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,repair_date,repair_no,repair_amount;;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, repair_date, repair_no, repair_amount;
+        ;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         processname = sharedPreferences.getString("process_name", "");
 
-        repair_date = Global.repairsClass.getRepair_Date();
-        repair_no =  Global.repairsClass.getRepair_code();
-        repair_amount =  Global.repairsClass.getRepair_Amount();
+        repair_date = Global.repairClass1.getRepair_Date();
+        repair_no = Global.repairClass1.getRepair_code();
+        repair_amount = Global.repairClass1.getRepair_Amount();
 
-        TextView txtsitename, txtstpname, textno,textdate,texamount;
+        TextView txtsitename, txtstpname, textno, textdate, texamount;
 
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
         txtsitename.setText(sitename);
         txtstpname.setText(stpname + " / " + processname);
 
-        textno=findViewById(R.id.repair_no);
-        textdate=findViewById(R.id.repair_date);
-        texamount=findViewById(R.id.repair_amount);
+        textno = findViewById(R.id.repair_no);
+        textdate = findViewById(R.id.repair_date);
+        texamount = findViewById(R.id.repair_amount);
         textno.setText(repair_no);
         texamount.setText(repair_amount + "0");
 
@@ -141,7 +131,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        repair_no = Global.repairsClass.getRepair_code();
+        repair_no = Global.repairClass1.getRepair_code();
         double conNo;
         try {
             conNo = Double.parseDouble(repair_no);
@@ -208,16 +198,15 @@ public class Repair_Details_Activity extends AppCompatActivity {
     }
 
     private void get_Details_Repair() {
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.Get_Repairs_Details;
 
-        String Repair_Details_API = url + "repair1_code=" +Global.repairsClass.getRepair_code();
+        String Repair_Details_API = url + "repair1_code=" + Global.repairClass1.getRepair_code();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Repair_Details_API, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Repair_s = new ArrayList<RepairsClass>();
-                repair_s = new RepairsClass();
+                Global.repair2list = new ArrayList<RepairClass2>();
+                repairClass2 = new RepairClass2();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -232,25 +221,25 @@ public class Repair_Details_Activity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    repair_s = new RepairsClass();
+                    repairClass2 = new RepairClass2();
                     try {
-                        repair_s.setD_Equipment_Name(e.getString("equip_name"));
-                        repair_s.setD_Equipment_Number(e.getString("equip_slno"));
-                        repair_s.setD_Amount(e.getString("repaired_amt"));
-                        repair_s.setD_Repaired(e.getString("repaired_flag"));
-                        repair_s.setD_Remark(e.getString("repaired_remarks"));
-                        repair_s.setD_Repairedtwo(e.getString("repair2_code"));
+                        repairClass2.setD_Equipment_Name(e.getString("equip_name"));
+                        repairClass2.setD_Equipment_Number(e.getString("equip_slno"));
+                        repairClass2.setD_Amount(e.getString("repaired_amt"));
+                        repairClass2.setD_Repaired(e.getString("repaired_flag"));
+                        repairClass2.setD_Remark(e.getString("repaired_remarks"));
+                        repairClass2.setD_Repairedtwo(e.getString("repair2_code"));
 
-                       String repair2_code = repair_s.getD_Repairedtwo();
-                       Global.editor = Global.sharedPreferences.edit();
-                       Global.editor.putString("repair2_code", repair2_code);
+                        String repair2_code = repairClass2.getD_Repairedtwo();
+                        Global.editor = Global.sharedPreferences.edit();
+                        Global.editor.putString("repair2_code", repair2_code);
                         Global.editor.commit();
 
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Repair_s.add(repair_s);
-                    Repair_details_Adapter repair_details_adapter = new Repair_details_Adapter(Global.Repair_s, context);
+                    Global.repair2list.add(repairClass2);
+                    Repair_details_Adapter repair_details_adapter = new Repair_details_Adapter(Global.repair2list, context);
                     Repair_details_recyclerview.setAdapter(repair_details_adapter);
                 }
                 getEquipmentsListRepairdetails();
@@ -336,7 +325,6 @@ public class Repair_Details_Activity extends AppCompatActivity {
                         get_Details_Repair();
                     } else {
                         Toast.makeText(Repair_Details_Activity.this, response.getString("error"), Toast.LENGTH_SHORT).show();
-
                     }
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
@@ -363,13 +351,13 @@ public class Repair_Details_Activity extends AppCompatActivity {
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
-                params.put("repair1_code",Global.sharedPreferences.getString("repair1_code", "0") );
+                params.put("repair1_code", Global.repairClass1.getRepair_code());
+               //params.put("repair1_code", "22");
                 return params;
-
             }
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
                 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
@@ -451,19 +439,26 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
         public View getView(int i, View convertView, ViewGroup parent) {
             View v = getLayoutInflater().inflate(R.layout.popup_equipmentlist, null);
+            LinearLayout layout = v.findViewById(R.id.select);
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
             TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
             equipment_spinner = eQarrayList.get(i);
 
             equipmentnameitem.setText(equipment_spinner.getEquipment_Name());
             eqnameitem.setText(equipment_spinner.getEquipment_id());
-
-            equipmentnameitem.setOnClickListener(view1 -> {
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    equipment_spinner = eQarrayList.get(i);
+                    Equipment_code.setText(equipment_spinner.getEquipment_Name());
+                    zDialog.dismiss();
+                }
+            });
+            layout.setOnClickListener(view1 -> {
                 equipment_spinner = eQarrayList.get(i);
                 Equipment_code.setText(equipment_spinner.getEquipment_Name());
                 zDialog.dismiss();
             });
-
             return v;
         }
 

@@ -57,7 +57,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/consumables_eq_name"
+                                android:id="@+id/consumption_d_eq_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawablePadding="5dp"
@@ -90,7 +90,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/consumables_d_eq_id"
+                                android:id="@+id/cconsumption_d_eq_id"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawablePadding="5dp"
@@ -137,7 +137,7 @@
 
 
                         <TextView
-                            android:id="@+id/consumables_d_item"
+                            android:id="@+id/consumption_d_item"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -183,7 +183,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/consumables_d_qty"
+                            android:id="@+id/consumption_d_qty"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="5dp"
@@ -227,7 +227,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/consumables_d_unit"
+                            android:id="@+id/consumption_d_unit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="5dp"
@@ -261,7 +261,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/consumables_d_rate"
+                            android:id="@+id/consumption_d_rate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="5dp"
@@ -297,7 +297,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/consumables_d_amount"
+                            android:id="@+id/consumption_d_amount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="5dp"

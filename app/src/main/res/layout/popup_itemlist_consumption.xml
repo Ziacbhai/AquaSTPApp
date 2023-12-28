@@ -12,11 +12,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_height="wrap_content">
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/tvitemfirst"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:textStyle="bold"
@@ -25,8 +26,9 @@
                 android:textSize="12dp"
                 android:typeface="sans" />
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/tvitemtwoc"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Display"

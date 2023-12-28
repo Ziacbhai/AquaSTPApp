@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import Models.CommonModelClass;
 import Models.ConsumptionClass;
 
+import Models.ConsumptionClass2;
 import Models.EquipmentListClassConsumption;
 import Models.EquipmentRepairListClass;
 import Models.IncidentsClass;
@@ -24,7 +25,9 @@ import Models.ItemListClassConsumables;
 import Models.ItemListClassRepair_BreakUp;
 import Models.ItemStockClass;
 import Models.LabTestClass;
-import Models.RepairsClass;
+import Models.RepairClass2;
+import Models.RepairClass1;
+import Models.RepairClass3;
 import Models.StpModelClass;
 import Models.zList;
 
@@ -38,7 +41,7 @@ public class Global {
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
 
-   public static String baseurl="http://192.168.1.4:9396/";
+   public static String baseurl="http://192.168.1.9:9396/";
 
     public static String userImageurl = baseurl+"WebsiteData/Users/";
     public static String incident_image = baseurl+"WebsiteData/IncidentReportDocs/";
@@ -104,11 +107,21 @@ public class Global {
     public static ArrayList<StpModelClass> StpList;
     public static ArrayList<CommonModelClass> pumpdetails;
     public static ArrayList<ItemStockClass> Item_stock;
-    public static ArrayList<RepairsClass> Repair_s;
-    public static ArrayList<ConsumptionClass> Consumables_s;
+    public static ArrayList<RepairClass1> repair1list;
+    public static ArrayList<RepairClass2> repair2list;
+    public static ArrayList<RepairClass3> repair3list;
+
 
     public static ConsumptionClass ConsumptionClass;
-    public static RepairsClass repairsClass;
+    public static ConsumptionClass2 consumptionClass2;
+
+    public static RepairClass1 repairClass1;
+    public static RepairClass2 repairClass2;
+    public static RepairClass3 repairClass3;
+
+
+    public static ArrayList<ConsumptionClass> Consumption1list;
+    public static ArrayList<ConsumptionClass2> Consumption2list;
 
     public static ArrayList<EquipmentListClassConsumption> Consumabeles_equipment;
     public static ArrayList<EquipmentRepairListClass> Repair_equipment;

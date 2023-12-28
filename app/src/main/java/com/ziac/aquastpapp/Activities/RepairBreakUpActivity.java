@@ -55,11 +55,12 @@ import java.util.concurrent.TimeUnit;
 import Adapters.Repair_BreakUp_Adapter;
 import Models.EquipmentRepairListClass;
 import Models.ItemListClassRepair_BreakUp;
-import Models.RepairsClass;
+import Models.RepairClass3;
+
 
 public class RepairBreakUpActivity extends AppCompatActivity {
 
-    RepairsClass repair_s;
+    RepairClass3 repairClass3;
 
     TextView Equipment_Item, Breakup_Unit, Breakup_qty, Breakup_price, Breakup_remark;
     AppCompatButton Update_A, Cancel_A;
@@ -185,13 +186,13 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     private void get_Breakup_Details_Repair() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String Repair_Breakup_API = Global.RepairsRepairBreakUp;
-        String url = Repair_Breakup_API + "repair2_code=" + Global.repairsClass.getD_Repairedtwo();
+        String url = Repair_Breakup_API + "repair2_code=" + Global.repairClass2.getD_Repairedtwo();
         // String url = Repair_Breakup_API + "repair2_code=" +"2";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Repair_s = new ArrayList<RepairsClass>();
-                repair_s = new RepairsClass();
+                Global.repair3list = new ArrayList<RepairClass3>();
+                repairClass3 = new RepairClass3();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("dummy");
@@ -205,20 +206,20 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    repair_s = new RepairsClass();
+                    repairClass3 = new RepairClass3();
                     try {
-                        repair_s.setRepair_Breakup_Item(e.getString("repair_item_code"));
-                        repair_s.setRepair_Breakup_Unit(e.getString("unit_code"));
-                        repair_s.setRepair_Breakup_Qty(e.getString("qty"));
-                        repair_s.setRepair_Breakup_Price(e.getString("price"));
-                        repair_s.setRepair_Breakup_Remark(e.getString("remarks"));
-                        repair_s.setRepair_Breakup_amount(e.getString("amt"));
+                        repairClass3.setRepair_Breakup_Item(e.getString("repair_item_code"));
+                        repairClass3.setRepair_Breakup_Unit(e.getString("unit_code"));
+                        repairClass3.setRepair_Breakup_Qty(e.getString("qty"));
+                        repairClass3.setRepair_Breakup_Price(e.getString("price"));
+                        repairClass3.setRepair_Breakup_Remark(e.getString("remarks"));
+                        repairClass3.setRepair_Breakup_amount(e.getString("amt"));
 
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Repair_s.add(repair_s);
-                    Repair_BreakUp_Adapter repairBreakUpAdapter = new Repair_BreakUp_Adapter(Global.Repair_s, context);
+                    Global.repair3list.add(repairClass3);
+                    Repair_BreakUp_Adapter repairBreakUpAdapter = new Repair_BreakUp_Adapter(Global.repair3list, context);
                     Repair_breakup_recyclerview.setAdapter(repairBreakUpAdapter);
                 }
                 // getEquipmentsListRepairdetails();
@@ -299,7 +300,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
 
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                String repair2_code = Global.repairsClass.getD_Repairedtwo();
+                String repair2_code = Global.repairClass2.getD_Repairedtwo();
                 params.put("repair_item_code", repair_item_code);
                 params.put("equip_code", equipment_code);
                 params.put("qty", qty);

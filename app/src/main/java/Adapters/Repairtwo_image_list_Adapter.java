@@ -13,10 +13,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.ziac.aquastpapp.Activities.Global;
@@ -24,44 +22,36 @@ import com.ziac.aquastpapp.R;
 
 import java.util.ArrayList;
 
-import Models.LabTestClass;
-import Models.RepairsClass;
 
+import Models.RepairClass2;
 public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo_image_list_Adapter.Viewholder> {
-     ArrayList<RepairsClass> repairsClasses;
+     ArrayList<RepairClass2> repairClasses2;
      Context context;
-
-
-    public Repairtwo_image_list_Adapter(ArrayList<RepairsClass> repairsClasses, Context context) {
-        this.repairsClasses = repairsClasses;
+    public Repairtwo_image_list_Adapter(ArrayList<RepairClass2> repairClasses2, Context context) {
+        this.repairClasses2 = repairClasses2;
         this.context = context;
     }
-
-
-
     @NonNull
     @Override
     public Repairtwo_image_list_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repairtwoimagelist, parent , false);
         return new Viewholder(view);
-
     }
-
     @Override
     public void onBindViewHolder(@NonNull Repairtwo_image_list_Adapter.Viewholder holder, int position) {
         Picasso.Builder builder=new Picasso.Builder(context);
         Picasso picasso=builder.build();
-        String originalImageUrl = repairsClasses.get(position).getRepairtwo_image();
+        String originalImageUrl = repairClasses2.get(position).getI_Repair_image();
         String trimmedImageUrl = originalImageUrl.replace('~', ' ').trim();
         picasso.load(Uri.parse(Global.repair_images + trimmedImageUrl))
                 .error(R.drawable.no_image_available_icon)
                 .into(holder.repair_image_show);
 
-        holder.repair_image_remark.setText(repairsClasses.get(position).getD_Remark());
+        holder.repair_image_remark.setText(repairClasses2.get(position).getD_Remark());
         holder.repair_image_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showImage(repairsClasses.get(position).getR_ImageList());
+                showImage(repairClasses2.get(position).getIImageList());
             }
         });
 
@@ -95,14 +85,12 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
             public void onPrepareLoad(Drawable placeHolderDrawable) {
 
             }
-
-            // Handle onBitmapFailed and onPrepareLoad methods as needed
         });
     }
 
     @Override
     public int getItemCount() {
-        return repairsClasses.size();
+        return repairClasses2.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {

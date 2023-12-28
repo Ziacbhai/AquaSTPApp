@@ -201,22 +201,17 @@ public class Consumption_Fragment extends Fragment {
 
     @SuppressLint("MissingInflatedId")
     private void getConsumables() {
-
         showProgressDialog();
-
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String  consumables = Global.Get_Consumables;
-
-
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String ayear = Global.sharedPreferences.getString("ayear", "2023");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
         consumables = consumables + "comcode=" + com_code + "&ayear=" +  ayear + "&sstp1_code=" + sstp1_code ;
-
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, consumables, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Consumables_s = new ArrayList<ConsumptionClass>();
+                Global.Consumption1list = new ArrayList<ConsumptionClass>();
                 consumables_Class = new ConsumptionClass();
                 JSONArray jarray;
                 try {
@@ -236,9 +231,7 @@ public class Consumption_Fragment extends Fragment {
                     try {
                         consumables_Class.setCon1_code(e.getString("con1_code"));
                         consumables_Class.setDate(e.getString("con_date"));
-
                         consumables_Class.setAmount(e.getString("con_amt"));
-
                         consumables_Class.setRemark(e.getString("remarks"));
                         consumables_Class.setCreated_by(e.getString("createdby"));
 
@@ -248,7 +241,6 @@ public class Consumption_Fragment extends Fragment {
                         editor.putString("con_amt", consumables_Class.getAmount());
                         editor.putString("con1_code", consumables_Class.getCon1_code());
                         editor.apply();*/
-
                        /* String Con1_code = consumables_Class.getCon1_code();
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("con1_code", Con1_code);
@@ -257,12 +249,11 @@ public class Consumption_Fragment extends Fragment {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Consumables_s.add(consumables_Class);
-                    consumptionAdapter = new ConsumptionAdapter(Global.Consumables_s, context);
+                    Global.Consumption1list.add(consumables_Class);
+                    consumptionAdapter = new ConsumptionAdapter(Global.Consumption1list, context);
                     Consumables_rv.setAdapter(consumptionAdapter);
                     hideProgressDialog();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -278,7 +269,6 @@ public class Consumption_Fragment extends Fragment {
             }
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-
                 return params;
             }
         };

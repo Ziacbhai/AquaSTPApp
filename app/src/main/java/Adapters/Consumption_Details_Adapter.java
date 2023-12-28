@@ -14,15 +14,16 @@ import com.ziac.aquastpapp.R;
 import java.util.List;
 
 import Models.ConsumptionClass;
+import Models.ConsumptionClass2;
 
 public class Consumption_Details_Adapter extends RecyclerView.Adapter<Consumption_Details_Adapter.Viewholder> {
 
     Context context;
-    private List<ConsumptionClass> consumptionClassList;
+    private List<ConsumptionClass2> consumptionClass2;
 
-    public Consumption_Details_Adapter(Context context, List<ConsumptionClass> consumptionClassList) {
+    public Consumption_Details_Adapter(Context context, List<ConsumptionClass2> consumptionClass2) {
         this.context = context;
-        this.consumptionClassList = consumptionClassList;
+        this.consumptionClass2 = consumptionClass2;
     }
 
     @NonNull
@@ -34,36 +35,36 @@ public class Consumption_Details_Adapter extends RecyclerView.Adapter<Consumptio
 
     @Override
     public void onBindViewHolder(@NonNull Consumption_Details_Adapter.Viewholder holder, int position) {
-      holder.C_eq_name.setText(consumptionClassList.get(position).getEquipment_Name());
-      holder.C_eq_id.setText(consumptionClassList.get(position).getEquipment_id());
-      holder.C_item.setText(consumptionClassList.get(position).getD_item() +" / "+ consumptionClassList.get(position).getD_item_name() );
-      holder.C_rate.setText(consumptionClassList.get(position).getD_rate());
-      holder.C_unit.setText(consumptionClassList.get(position).getD_unit());
-      holder.C_qty.setText(consumptionClassList.get(position).getD_qty());
-      holder.C_amount.setText(consumptionClassList.get(position).getD_Amount()+"0");
+      holder.Consumption_eq_name.setText(consumptionClass2.get(position).getEquipment_Name());
+      holder.Consumption_eq_id.setText(consumptionClass2.get(position).getEquipment_id());
+      holder.Consumption_item.setText(consumptionClass2.get(position).getD_item() +" / "+ consumptionClass2.get(position).getD_item_name() );
+      holder.Consumption_rate.setText(consumptionClass2.get(position).getD_rate());
+      holder.Consumption_unit.setText(consumptionClass2.get(position).getD_unit());
+      holder.Consumption_qty.setText(consumptionClass2.get(position).getD_qty());
+      holder.Consumptionamount.setText(consumptionClass2.get(position).getD_Amount()+"0");
      // holder.C_item_name.setText(consumablesClassList.get(position).getD_item_name());
 
     }
 
     @Override
     public int getItemCount() {
-        return consumptionClassList.size();
+        return consumptionClass2.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView C_eq_name,C_eq_id,C_item,C_rate,C_unit,C_qty,C_item_name,C_amount;
+        TextView Consumption_eq_name,Consumption_eq_id,Consumption_item,Consumption_rate,Consumption_unit,Consumption_qty,Consumption_item_name,Consumptionamount;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-            C_eq_name= itemView.findViewById(R.id.consumables_eq_name);
-            C_eq_id= itemView.findViewById(R.id.consumables_d_eq_id);
-            C_item= itemView.findViewById(R.id.consumables_d_item);
-            C_rate= itemView.findViewById(R.id.consumables_d_rate);
-            C_unit= itemView.findViewById(R.id.consumables_d_unit);
-            C_qty= itemView.findViewById(R.id.consumables_d_qty);
+            Consumption_eq_name= itemView.findViewById(R.id.consumption_d_eq_name);
+            Consumption_eq_id= itemView.findViewById(R.id.cconsumption_d_eq_id);
+            Consumption_item= itemView.findViewById(R.id.consumption_d_item);
+            Consumption_rate= itemView.findViewById(R.id.consumption_d_rate);
+            Consumption_unit= itemView.findViewById(R.id.consumption_d_unit);
+            Consumption_qty= itemView.findViewById(R.id.consumption_d_qty);
            // C_item_name= itemView.findViewById(R.id.consumables_d_item_name);
-            C_amount= itemView.findViewById(R.id.consumables_d_amount);
+            Consumptionamount= itemView.findViewById(R.id.consumption_d_amount);
 
         }
     }
