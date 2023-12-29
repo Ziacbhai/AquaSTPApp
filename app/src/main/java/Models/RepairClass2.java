@@ -2,31 +2,8 @@ package Models;
 
 public class RepairClass2 {
 
-    String D_Equipment_Name,D_Equipment_Number,D_Amount ,D_Repaired,D_Repairedtwo,D_Remark,I_Remark,I_Repair_image,IImageList;
+    String D_Equipment_Name,D_Equipment_Number,D_Amount ,D_Repaired,D_Repairedtwo,D_Remark;
 
-    public String getI_Remark() {
-        return I_Remark;
-    }
-
-    public void setI_Remark(String i_Remark) {
-        I_Remark = i_Remark;
-    }
-
-    public String getI_Repair_image() {
-        return I_Repair_image;
-    }
-
-    public void setI_Repair_image(String i_Repair_image) {
-        I_Repair_image = i_Repair_image;
-    }
-
-    public String getIImageList() {
-        return IImageList;
-    }
-
-    public void setIImageList(String IImageList) {
-        this.IImageList = IImageList;
-    }
 
     public String getD_Remark() {
         return D_Remark;

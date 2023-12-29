@@ -2,14 +2,14 @@ package Models;
 
 public class RepairClass3 {
 
-    String Repair_Breakup_Item,Repair_Breakup_Unit,Repair_Breakup_Qty,Repair_Breakup_Price,Repair_Breakup_Remark,Repair_Breakup_amount,Repair_Breakup_total;
+    String Repair_Breakup_Item_name,Repair_Breakup_Unit,Repair_Breakup_Qty,Repair_Breakup_Price,Repair_Breakup_Remark,Repair_Breakup_amount,Repair_Breakup_total;
 
-    public String getRepair_Breakup_Item() {
-        return Repair_Breakup_Item;
+    public String getRepair_Breakup_Item_name() {
+        return Repair_Breakup_Item_name;
     }
 
-    public void setRepair_Breakup_Item(String repair_Breakup_Item) {
-        Repair_Breakup_Item = repair_Breakup_Item;
+    public void setRepair_Breakup_Item_name(String repair_Breakup_Item_name) {
+        Repair_Breakup_Item_name = repair_Breakup_Item_name;
     }
 
     public String getRepair_Breakup_Unit() {

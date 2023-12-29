@@ -34,10 +34,10 @@ public class Repair_BreakUp_Adapter extends RecyclerView.Adapter<Repair_BreakUp_
 
     @Override
     public void onBindViewHolder(@NonNull Repair_BreakUp_Adapter.Viewholder holder, int position) {
-        holder.Breakup_Item.setText(repairClass3.get(position).getRepair_Breakup_Item());
-        holder.Breakup_qty.setText(repairClass3.get(position).getRepair_Breakup_Qty());
-        holder.Breakup_price.setText(repairClass3.get(position).getRepair_Breakup_Price());
-        holder.Breakup_total.setText(repairClass3.get(position).getRepair_Breakup_amount());
+        holder.Breakup_Item_name.setText(repairClass3.get(position).getRepair_Breakup_Item_name());
+        holder.Breakup_qty.setText(repairClass3.get(position).getRepair_Breakup_Qty() + 0);
+        holder.Breakup_price.setText(repairClass3.get(position).getRepair_Breakup_Price() + 0);
+        holder.Breakup_total.setText(repairClass3.get(position).getRepair_Breakup_amount() +0);
         holder.Breakup_unit.setText(repairClass3.get(position).getRepair_Breakup_Unit());
         holder.Breakup_remark.setText(repairClass3.get(position).getRepair_Breakup_Remark());
     }
@@ -48,11 +48,11 @@ public class Repair_BreakUp_Adapter extends RecyclerView.Adapter<Repair_BreakUp_
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView Breakup_Item,Breakup_qty,Breakup_price,Breakup_total ,Breakup_unit,Breakup_remark;
+        TextView Breakup_Item_name,Breakup_qty,Breakup_price,Breakup_total ,Breakup_unit,Breakup_remark;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
-            Breakup_Item = itemView.findViewById(R.id.breakup_item);
+            Breakup_Item_name = itemView.findViewById(R.id.breakup_item);
             Breakup_qty = itemView.findViewById(R.id.breakup_qty);
             Breakup_price = itemView.findViewById(R.id.breakup_price);
             Breakup_total = itemView.findViewById(R.id.breakup_total);

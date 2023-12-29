@@ -10,34 +10,30 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="20dp">
+        app:cardElevation="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left"
-            android:layout_margin="5dp"
+            android:gravity="center"
+            android:padding="10dp"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/repairtwo_image_list"
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:layout_margin="5dp"
+                android:layout_height="150dp"
                 android:src="@drawable/imageupload" />
 
             <TextView
                 android:id="@+id/repair_image_remark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
                 android:background="@drawable/btnbgedited"
-                android:hint="HelloZiac"
-                android:textSize="20sp" />
-
-
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="15sp" />
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

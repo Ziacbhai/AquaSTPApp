@@ -57,7 +57,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
     RecyclerView Repair_Images_Rv;
 
     Bitmap imageBitmap;
-    AppCompatButton Repair_two_image_upload_btn;
+    AppCompatButton Repair_two_image_upload_btn,Repairtwo_image_cancel_btn;
     Context context;
     private static final int PICK_IMAGE_REQUEST_CODE = 10;
     private static final int CAMERA_REQUEST_CODE = 1;
@@ -72,10 +72,10 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
-
         RtwoImage = findViewById(R.id.repairtwo_image_upload);
         Repair_two_Remark = findViewById(R.id.repair_two_Remark);
         Repair_two_image_upload_btn = findViewById(R.id.repairtwo_image_upload_btn);
+        Repairtwo_image_cancel_btn = findViewById(R.id.repairtwo_image_cancel_btn);
 
         RtwoImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +88,12 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateRepairImage();
+            }
+        });
+        Repairtwo_image_cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RepairTwo_Upload_Activity.this, RepairTwoImageListActivity.class));
             }
         });
     }
@@ -109,7 +115,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
             try {
                 if (resp.getBoolean("success")) {
                     Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
-                    Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), response);
+                   // Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), response);
                     startActivity(new Intent(RepairTwo_Upload_Activity.this, RepairTwoImageListActivity.class));
                     finish();
                 } else {
@@ -161,7 +167,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
             }
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
                 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
@@ -180,7 +186,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
             // Use image picker library
             com.github.dhaval2404.imagepicker.ImagePicker.with(RepairTwo_Upload_Activity.this)
                     .crop()
-                    .compress(1024)
+                    .compress(800)
                     .maxResultSize(1080, 1080)
                     .start(10);
         } catch (Exception e) {
@@ -224,4 +230,8 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+     finish();
+    }
 }

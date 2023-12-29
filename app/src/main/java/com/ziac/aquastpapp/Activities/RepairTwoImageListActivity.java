@@ -36,12 +36,13 @@ import java.util.HashMap;
 import java.util.Map;
 import Adapters.Repairtwo_image_list_Adapter;
 import Models.RepairClass2;
+import Models.RepairClass4;
 
 
 public class RepairTwoImageListActivity extends AppCompatActivity {
     Bitmap imageBitmap;
     RecyclerView Repair_Images_Rv;
-    RepairClass2 repairClass2;
+    RepairClass4 repairClass4;
     AppCompatButton Repair_image_uploadbtn;
     ProgressDialog progressDialog;
     ImageView RepairImage;
@@ -100,8 +101,8 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                Global.repair2list = new ArrayList<RepairClass2>();
-                repairClass2 = new RepairClass2();
+                Global.repair4list = new ArrayList<RepairClass4>();
+                repairClass4 = new RepairClass4();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -117,16 +118,16 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    repairClass2 = new RepairClass2();
+                    repairClass4 = new RepairClass4();
                     try {
-                        repairClass2.setI_Repair_image(e.getString("image_name"));
-                        repairClass2.setD_Remark(e.getString("image_remarks"));
-                        Toast.makeText(context, (e.getString("image_remarks")), Toast.LENGTH_SHORT).show();
+                        repairClass4.setI_Repair_image(e.getString("image_name"));
+                        repairClass4.setI_Remark(e.getString("image_remarks"));
+                        //Toast.makeText(context, (e.getString("image_remarks")), Toast.LENGTH_SHORT).show();
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.repair2list.add(repairClass2);
-                    Repairtwo_image_list_Adapter repairtwoImageUploadAdapter = new Repairtwo_image_list_Adapter(Global.repair2list, context);
+                    Global.repair4list.add(repairClass4);
+                    Repairtwo_image_list_Adapter repairtwoImageUploadAdapter = new Repairtwo_image_list_Adapter(Global.repair4list, context);
                     Repair_Images_Rv.setAdapter(repairtwoImageUploadAdapter);
                 }
 
@@ -161,5 +162,9 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(RepairTwoImageListActivity.this, Repair_Details_Activity.class));
+        finish();
+    }
 }

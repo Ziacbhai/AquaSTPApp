@@ -186,9 +186,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         textno.setText(formattedConNo);
     }
 
-
-
-
     private String removeTrailingZero(double value) {
         DecimalFormat decimalFormat = new DecimalFormat("#.###"); // Adjust the format as needed
         return decimalFormat.format(value);
@@ -625,7 +622,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
                         //Log.d("YourTag", "Name: " + equipmentJson.getString("equip_name"));
                        // Log.d("YourTag", "Code: " + equipmentJson.getString("sstp1_code"));
-
                         Global.Consumbeles_item.add(item);
 
                     } catch (JSONException ex) {

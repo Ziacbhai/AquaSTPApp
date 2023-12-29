@@ -18,6 +18,7 @@ import Models.CommonModelClass;
 import Models.ConsumptionClass;
 
 import Models.ConsumptionClass2;
+import Models.EquipmentClassRepairBreakUp;
 import Models.EquipmentListClassConsumption;
 import Models.EquipmentRepairListClass;
 import Models.IncidentsClass;
@@ -28,6 +29,7 @@ import Models.LabTestClass;
 import Models.RepairClass2;
 import Models.RepairClass1;
 import Models.RepairClass3;
+import Models.RepairClass4;
 import Models.StpModelClass;
 import Models.zList;
 
@@ -41,7 +43,7 @@ public class Global {
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
 
-   public static String baseurl="http://192.168.1.9:9396/";
+   public static String baseurl="http://192.168.1.7:9396/";
 
     public static String userImageurl = baseurl+"WebsiteData/Users/";
     public static String incident_image = baseurl+"WebsiteData/IncidentReportDocs/";
@@ -76,7 +78,7 @@ public class Global {
     public static String updateRepairAddUpdate = baseurl + "api/Repairs/RepairAddUpdate";
     public static String updateRepairDAddUpdate = baseurl + "api/Repairs/RepairDetailsAddUPdate";
     public static String RepairsRepairBreakUp = baseurl + "api/Repairs/RepairBreakUp?";
-    public static String RepairBreakUp_update = baseurl + "api/Repairs/RepairBreakUpAddUPdate";
+    public static String Repair_BreakUp_update = baseurl + "api/Repairs/RepairBreakUpAddUPdate";
     public static String tokenurl = baseurl+"TOKEN";
 
     public static String Equipment_Details_com_pumps = baseurl + "api/Masters/GetPumps?";
@@ -99,6 +101,10 @@ public class Global {
     public static String Get_Incidents_delete = baseurl + "api/Incidents/DeleteImgOrDoc?";
     public static String api_List_Get_Equipments = baseurl + "api/List/GetEquipments?";
     public static String api_List_Get_Item = baseurl + "api/List/GetProducts?";
+    public static String api_Repair_List_Get_Equipments = baseurl + "api/List/GetRepairItems?";
+
+    public static String api_Repair_List_Get_Units = baseurl + "api/List/GetUnits?";
+
 
 
     public static ArrayList<zList> statearraylist;
@@ -110,6 +116,7 @@ public class Global {
     public static ArrayList<RepairClass1> repair1list;
     public static ArrayList<RepairClass2> repair2list;
     public static ArrayList<RepairClass3> repair3list;
+    public static ArrayList<RepairClass4> repair4list;
 
 
     public static ConsumptionClass ConsumptionClass;
@@ -118,17 +125,18 @@ public class Global {
     public static RepairClass1 repairClass1;
     public static RepairClass2 repairClass2;
     public static RepairClass3 repairClass3;
+    public static RepairClass4 repairClass4;
 
 
     public static ArrayList<ConsumptionClass> Consumption1list;
     public static ArrayList<ConsumptionClass2> Consumption2list;
 
     public static ArrayList<EquipmentListClassConsumption> Consumabeles_equipment;
-    public static ArrayList<EquipmentRepairListClass> Repair_equipment;
-
-    public static ArrayList<ItemListClassRepair_BreakUp> Repair_Item_Breakup;
-
     public static ArrayList<ItemListClassConsumables> Consumbeles_item;
+    public static ArrayList<EquipmentRepairListClass> Repair_equipment;
+    public static ArrayList<ItemListClassRepair_BreakUp> Repair_Item_Breakup;
+    public static ArrayList<EquipmentClassRepairBreakUp> Repair_Equipment_Breakup;
+
     public static ArrayList<LabTestClass> Labtest_s;
     public static ArrayList<IncidentsClass> Incident_s;
 

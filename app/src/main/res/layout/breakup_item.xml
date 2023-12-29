@@ -8,20 +8,19 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/btn_gradient"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Select"
+            android:textStyle="bold"
+            android:text="Equipment Select"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/svequipment"
+            android:id="@+id/svequipmentbreakup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -30,7 +29,7 @@
             app:queryHint="Search" />
 
         <ListView
-            android:id="@+id/lvequipment"
+            android:id="@+id/breaklvequipment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/black">

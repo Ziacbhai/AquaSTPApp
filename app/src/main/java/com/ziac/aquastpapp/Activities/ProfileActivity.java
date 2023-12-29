@@ -136,7 +136,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 ImageView imageView = new ImageView(getApplicationContext());
-
                 // Calculate dimensions to fit the image within the screen
                 int imageWidth = bitmap.getWidth();
                 int imageHeight = bitmap.getHeight();
