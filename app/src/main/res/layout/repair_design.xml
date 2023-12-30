@@ -33,185 +33,186 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                            <LinearLayout
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.4"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/repair_info"
+                                android:layout_width="40dp"
+                                android:layout_height="match_parent"
+                                android:padding="6dp"
+                                android:src="@drawable/i"
+                                android:textSize="12dp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/my_light_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="5dp">
+                                android:layout_weight="1"
+                                android:drawablePadding="5dp"
+                                android:gravity="center"
+                                android:text="No."
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
 
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.4"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <ImageView
-                                        android:id="@+id/repair_info"
-                                        android:layout_width="40dp"
-                                        android:layout_height="match_parent"
-                                        android:padding="6dp"
-                                        android:src="@drawable/i"
-                                        android:textSize="12dp" />
-                                </LinearLayout>
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/my_light_primary" />
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center"
-                                        android:text="No."
-                                        android:textColor="#000"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/repno_"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center"
-                                        android:text="repno"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/my_light_primary" />
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:gravity="center_horizontal"
-                                        android:text="Date"
-                                        android:textColor="#000"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/repair_date"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center_horizontal"
-                                        android:hint="Repair Date"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/my_light_primary" />
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="0.8"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_horizontal"
-                                        android:text="Amount"
-                                        android:textColor="#000"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/repairamount"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center_horizontal"
-                                        android:text="amount"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                android:background="#01A3A3" />
-
-                            <LinearLayout
+                            <TextView
+                                android:id="@+id/repno_"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="5dp">
+                                android:drawablePadding="5dp"
+                                android:gravity="center"
+                                android:text="repno"
+                                android:textSize="12dp" />
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:drawablePadding="5dp"
-                                    android:text="Remarks:"
-                                    android:textColor="#000"
-                                    android:textSize="12dp"
-                                    android:textStyle="bold" />
+                        </LinearLayout>
 
-                                    <TextView
-                                        android:id="@+id/remarks_remark"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="25dp"
-                                        android:background="@color/white"
-                                        android:drawablePadding="5dp"
-                                        android:hint="remark"
-                                        android:textSize="12dp" />
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/my_light_primary" />
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:orientation="horizontal"
-                                    android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
 
-                                    <TextView
-                                        android:layout_weight="2"
-                                        android:layout_width="0dp"
-                                        android:gravity="right"
-                                        android:layout_height="wrap_content"
-                                        android:background="@color/white"
-                                        android:text="By:"
-                                        android:textSize="8dp" />
-                                    <TextView
-                                        android:layout_weight="0.5"
-                                        android:id="@+id/repair_createdby"
-                                        android:layout_width="0dp"
-                                        android:hint="ziacsoftware"
-                                        android:gravity="center_horizontal"
-                                        android:layout_height="wrap_content"
-                                        android:background="@color/white"
-                                        android:textSize="8dp" />
-                                </LinearLayout>
-                            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:text="Date"
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/repair_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="5dp"
+                                android:gravity="center_horizontal"
+                                android:hint="Repair Date"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/my_light_primary" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Amount"
+                                android:textColor="#000"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/repairamount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="5dp"
+                                android:gravity="center_horizontal"
+                                android:text="amount"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="#01A3A3" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawablePadding="5dp"
+                            android:text="Remarks:"
+                            android:textColor="#000"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/remarks_remark"
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:background="@color/white"
+                            android:drawablePadding="5dp"
+                            android:hint="remark"
+                            android:textSize="12dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:background="@color/white"
+                                android:gravity="right"
+                                android:text="By:"
+                                android:textSize="8dp" />
+
+                            <TextView
+                                android:id="@+id/repair_createdby"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:background="@color/white"
+                                android:gravity="center_horizontal"
+                                android:hint="ziacsoftware"
+                                android:textSize="8dp" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>

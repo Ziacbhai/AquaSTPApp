@@ -10,8 +10,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -26,6 +27,7 @@
                 android:padding="5dp"
                 android:src="@drawable/aquatoolbar" />
         </androidx.appcompat.widget.Toolbar>
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -47,22 +49,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+
                             <androidx.cardview.widget.CardView
                                 android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_margin="5dp"
                                 app:cardCornerRadius="10dp"
-                                app:cardElevation="10dp"
-                                android:layout_height="wrap_content">
+                                app:cardElevation="10dp">
 
                                 <LinearLayout
-                                    android:background="@drawable/btn_gradient"
                                     android:layout_width="match_parent"
-                                    android:orientation="vertical"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/btn_gradient"
+                                    android:orientation="vertical">
+
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -77,33 +82,35 @@
 
                                             <TextView
                                                 android:id="@+id/sitename"
-                                                android:textColor="@color/white"
                                                 android:layout_width="match_parent"
-                                                android:gravity="center_horizontal"
                                                 android:layout_height="wrap_content"
+                                                android:gravity="center_horizontal"
                                                 android:text="Site name"
-                                                android:textStyle="bold"
-                                                android:textSize="16dp" />
+                                                android:textColor="@color/white"
+                                                android:textSize="16dp"
+                                                android:textStyle="bold" />
 
                                             <LinearLayout
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:orientation="horizontal">
+
                                                 <LinearLayout
                                                     android:layout_width="match_parent"
                                                     android:layout_height="wrap_content"
                                                     android:orientation="horizontal"
                                                     android:padding="5dp">
+
                                                     <TextView
-                                                        android:textColor="@color/white"
                                                         android:id="@+id/stpname"
-                                                        android:layout_weight="1.1"
                                                         android:layout_width="0dp"
-                                                        android:gravity="center"
                                                         android:layout_height="wrap_content"
+                                                        android:layout_weight="1.1"
+                                                        android:gravity="center"
                                                         android:text="STP name"
-                                                        android:textStyle="bold"
-                                                        android:textSize="12dp" />
+                                                        android:textColor="@color/white"
+                                                        android:textSize="12dp"
+                                                        android:textStyle="bold" />
                                                 </LinearLayout>
                                             </LinearLayout>
                                         </LinearLayout>
@@ -111,10 +118,11 @@
 
                                     <View
                                         android:layout_width="match_parent"
-                                        android:layout_marginRight="20dp"
-                                        android:layout_marginLeft="20dp"
                                         android:layout_height="1dp"
+                                        android:layout_marginLeft="20dp"
+                                        android:layout_marginRight="20dp"
                                         android:background="@color/my_light_primary" />
+
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="40dp"
@@ -138,11 +146,12 @@
 
                                         </LinearLayout>
                                     </LinearLayout>
+
                                     <View
                                         android:layout_width="match_parent"
-                                        android:layout_marginRight="20dp"
-                                        android:layout_marginLeft="20dp"
                                         android:layout_height="1dp"
+                                        android:layout_marginLeft="20dp"
+                                        android:layout_marginRight="20dp"
                                         android:background="@color/my_light_primary" />
 
                                     <LinearLayout
@@ -173,9 +182,9 @@
                                                 android:id="@+id/repair_no"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:textColor="#fff"
                                                 android:gravity="center"
                                                 android:text="Rep no"
+                                                android:textColor="#fff"
                                                 android:textSize="12dp" />
 
                                         </LinearLayout>
@@ -206,9 +215,9 @@
                                                 android:id="@+id/repair_date"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-                                                android:textColor="#fff"
                                                 android:gravity="center"
                                                 android:text="incident_date"
+                                                android:textColor="#fff"
                                                 android:textSize="12dp" />
 
                                         </LinearLayout>
@@ -217,6 +226,7 @@
                                             android:layout_width="1dp"
                                             android:layout_height="match_parent"
                                             android:background="#fff" />
+
                                         <LinearLayout
                                             android:layout_width="0dp"
                                             android:layout_height="wrap_content"
@@ -238,8 +248,8 @@
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:gravity="center"
-                                                android:textColor="#fff"
                                                 android:text="amount"
+                                                android:textColor="#fff"
                                                 android:textSize="12dp" />
 
                                         </LinearLayout>
@@ -249,6 +259,7 @@
 
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/repair_details_recyclerview"
                             android:layout_width="match_parent"
@@ -262,14 +273,15 @@
         </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        app:srcCompat="@android:drawable/ic_input_add"
         app:backgroundTint="@color/white"
         app:elevation="6dp"
-        app:pressedTranslationZ="12dp"/>
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

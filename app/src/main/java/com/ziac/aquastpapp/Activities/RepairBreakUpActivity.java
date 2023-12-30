@@ -630,4 +630,8 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             };
         }
     }
+    @Override
+    public void onBackPressed() {
+       finish();
+    }
 }

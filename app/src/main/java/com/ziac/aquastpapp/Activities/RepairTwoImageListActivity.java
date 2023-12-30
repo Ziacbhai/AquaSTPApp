@@ -70,8 +70,8 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         Repair_image_uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent i = new Intent(context, RepairTwo_Upload_Activity.class);
-                    context.startActivity(i);
+                startActivity(new Intent(RepairTwoImageListActivity.this,RepairTwo_Upload_Activity.class));
+                finish();
             }
         });
         Repair_Images_Rv = findViewById(R.id.repair_two_imagelist_recyclerview);
@@ -162,9 +162,6 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(RepairTwoImageListActivity.this, Repair_Details_Activity.class));
-        finish();
-    }
+
+
 }

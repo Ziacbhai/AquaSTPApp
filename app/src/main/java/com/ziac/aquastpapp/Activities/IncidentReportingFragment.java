@@ -43,7 +43,7 @@ public class IncidentReportingFragment extends Fragment {
     RecyclerView Incident_recyclerview;
     Context context;
     IncidentsClass incidents;
-    private ProgressDialog progressDialog;
+     ProgressDialog progressDialog;
     IncidentAdapter incidentAdapter;
 
     @SuppressLint("MissingInflatedId")
@@ -61,7 +61,7 @@ public class IncidentReportingFragment extends Fragment {
         new InternetCheckTask().execute();
 
 
-        Incident_recyclerview = view.findViewById(R.id.incident_recyclerview);
+        Incident_recyclerview = view.findViewById(R.id.fragment_incident_recyclerview);
         Incident_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         Incident_recyclerview.setHasFixedSize(true);
         Incident_recyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -75,12 +75,14 @@ public class IncidentReportingFragment extends Fragment {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
         sitename = sharedPreferences.getString("site_name", "");
+
         stpname = sharedPreferences.getString("stp_name", "");
-        siteaddress = sharedPreferences.getString("site_address", "");
         processname = sharedPreferences.getString("process_name", "");
+
+        siteaddress = sharedPreferences.getString("site_address", "");
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("person_name", "");

@@ -256,7 +256,6 @@ public class LoginFragment extends Fragment {
                 String ayear = respObj1.getString("ayear");
                 String finstdate = respObj1.getString("fin_stdate");
                 String fineddate = respObj1.getString("fin_eddate");
-
                 String user_code = respObj.getString("user_code");
                 String person_name = respObj.getString("person_name");
                 String com_code = respObj.getString("com_code");
@@ -270,7 +269,7 @@ public class LoginFragment extends Fragment {
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 Global.editor = Global.sharedPreferences.edit();
                 Global.editor.putString("user_code", user_code);
-                Global.editor.putString("person_name", person_name);
+                Global.editor.putString("person_name",person_name);
                 Global.editor.putString("com_code", com_code);
                 Global.editor.putString("user_image", user_image);
                 Global.editor.putString("user_type", user_type);
@@ -278,7 +277,6 @@ public class LoginFragment extends Fragment {
                 Global.editor.putString("user_email", user_email);
                 Global.editor.putString("ref_code", ref_code);
                 Global.editor.putString("user_image", user_image);
-
                 Global.editor.putString("ayear", ayear);
                 Global.editor.putString("fin_stdate", finstdate);
                 Global.editor.putString("fin_eddate", fineddate);
@@ -308,7 +306,6 @@ public class LoginFragment extends Fragment {
                     stpModelClass.setSitecode(e.getString("site_code"));
                     stpModelClass.setSitename(e.getString("site_name"));
                     stpModelClass.setStpactive(e.getString("stp_active"));
-
                     stpModelClass.setSite_address(e.getString("site_address"));
                     stpModelClass.setProcess__type(e.getString("process_name"));
 
@@ -371,7 +368,7 @@ public class LoginFragment extends Fragment {
         };
 
         request.setRetryPolicy(new DefaultRetryPolicy(
-                3000, // timeout in milliseconds
+                0, // timeout in milliseconds
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));

@@ -266,7 +266,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         if (itemId == R.id.nav_incident) {
-            startActivity(new Intent(MainActivity.this, IncidentReportingActivity.class));
+            //startActivity(new Intent(MainActivity.this, IncidentReportingFragment.class));
+            IncidentReportingFragment reportingFragment = new IncidentReportingFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frame_layout, reportingFragment);
+            fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
         }

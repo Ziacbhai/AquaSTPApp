@@ -10,8 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -20,15 +20,18 @@
             android:background="@drawable/btnbgoutline"
             app:cardCornerRadius="12dp"
             app:cardMaxElevation="10dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btnbgoutline"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -51,7 +54,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:text="Equip_slno"
-                            android:textSize="12dp"/>
+                            android:textSize="12dp" />
 
                         <TextView
                             android:id="@+id/manufacturer_"
@@ -67,19 +70,20 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
-                        android:background="#01A3A3"/>
+                        android:layout_marginRight="10dp"
+                        android:background="#01A3A3" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="80dp"
-                            android:orientation="vertical"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
                             <ImageView
                                 android:id="@+id/image_"
                                 android:layout_width="80dp"
@@ -92,8 +96,8 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="vertical"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -114,9 +118,9 @@
                                         android:layout_weight="1"
                                         android:drawablePadding="5dp"
                                         android:text="Form Factor"
-                                        android:textStyle="bold"
                                         android:textColor="#000"
-                                        android:textSize="12dp" />
+                                        android:textSize="12dp"
+                                        android:textStyle="bold" />
 
                                     <TextView
                                         android:id="@+id/formFactor_"
@@ -140,9 +144,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="Capacity"
-                                        android:textStyle="bold"
                                         android:textColor="#000"
-                                        android:textSize="12dp" />
+                                        android:textSize="12dp"
+                                        android:textStyle="bold" />
 
                                     <TextView
                                         android:id="@+id/rating_capacity_"
@@ -160,9 +164,9 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:layout_marginRight="10dp"
                                 android:layout_marginLeft="10dp"
-                                android:background="#01A3A3"/>
+                                android:layout_marginRight="10dp"
+                                android:background="#01A3A3" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -184,9 +188,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="Frequency"
-                                        android:textStyle="bold"
                                         android:textColor="#000"
-                                        android:textSize="12dp" />
+                                        android:textSize="12dp"
+                                        android:textStyle="bold" />
 
                                     <TextView
                                         android:id="@+id/cleaning_Running_"
@@ -209,16 +213,16 @@
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:text="Phase"
-                                        android:textStyle="bold"
                                         android:textColor="#000"
-                                        android:textSize="12dp" />
+                                        android:textSize="12dp"
+                                        android:textStyle="bold" />
 
                                     <TextView
                                         android:id="@+id/phase_"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Phase"
                                         android:gravity="center_horizontal"
+                                        android:text="Phase"
                                         android:textSize="12dp" />
 
                                 </LinearLayout>
@@ -228,14 +232,15 @@
                             <View
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
-                                android:layout_marginRight="10dp"
                                 android:layout_marginLeft="10dp"
-                                android:background="#01A3A3"/>
+                                android:layout_marginRight="10dp"
+                                android:background="#01A3A3" />
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:orientation="horizontal">
+                                android:orientation="horizontal"
+                                android:padding="5dp">
 
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -248,17 +253,17 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
-                                        android:textStyle="bold"
                                         android:text="Specification"
                                         android:textColor="#000"
-                                        android:textSize="12dp" />
+                                        android:textSize="12dp"
+                                        android:textStyle="bold" />
 
                                     <TextView
                                         android:id="@+id/specification_"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Specification"
                                         android:padding="3dp"
+                                        android:text="Specification"
                                         android:textSize="12dp" />
 
                                 </LinearLayout>

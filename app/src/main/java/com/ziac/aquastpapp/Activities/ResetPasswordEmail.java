@@ -34,7 +34,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
     AppCompatButton EnterOTPbtn;
     EditText Forgotemail;
     String useremail;
-    //SharedPreferences sharedPreferences;
+
     ProgressBar progressBar;
     Context context;
 

@@ -173,18 +173,20 @@
                     android:background="@color/white"
                     android:hint="Enter your remarks for this consumption"
                     android:textSize="12dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/consumption_createdby"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.5"
-                        android:padding="3dp"
                         android:background="@color/white"
                         android:gravity="right"
+                        android:padding="3dp"
                         android:textSize="8dp" />
                 </LinearLayout>
             </LinearLayout>

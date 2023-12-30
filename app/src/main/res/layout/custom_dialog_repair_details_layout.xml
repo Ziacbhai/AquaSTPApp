@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="#eaeff5"
+    android:orientation="vertical"
     android:padding="5dp">
 
     <LinearLayout
@@ -11,58 +11,63 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView_a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp"
             app:cardMaxElevation="10dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btnbgoutline"
-                android:padding="5dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="5dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:padding="5dp">
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Equipment"
-                            android:textStyle="bold"
                             android:padding="5dp"
+                            android:text="Equipment"
                             android:textColor="#000"
-                            android:textSize="12dp" />
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
 
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/equipment_name_alert"                                android:layout_width="0dp"
-                                android:layout_weight="1"
+                                android:id="@+id/equipment_name_alert"
+                                android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:textSize="12dp"
-                                android:gravity="center"
                                 android:layout_marginStart="5dp"
-                                android:textColor="@color/black" />
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textColor="@color/black"
+                                android:textSize="12dp" />
 
                             <ImageView
                                 android:layout_width="30dp"
-                                android:src="@drawable/baseline_arrow_drop_down_24"
                                 android:layout_height="match_parent"
-                                />
+                                android:src="@drawable/baseline_arrow_drop_down_24" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -76,15 +81,16 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginRight="8dp"
                         android:layout_marginLeft="8dp"
-                        android:background="#01A3A3"/>
+                        android:layout_marginRight="8dp"
+                        android:background="#01A3A3" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="5dp">
+
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -119,16 +125,17 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginRight="8dp"
                     android:layout_marginLeft="8dp"
-                    android:background="#01A3A3"/>
+                    android:layout_marginRight="8dp"
+                    android:background="#01A3A3" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
                     android:padding="5dp">
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -141,12 +148,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_weight="1"
+                            android:background="@drawable/btnbg"
                             android:drawablePadding="5dp"
+                            android:gravity="center"
                             android:text="Update"
-                            android:background="@drawable/btnbg"                                   android:gravity="center"
-                            android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:textSize="12dp" />
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -154,8 +162,8 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
 
@@ -164,12 +172,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:background="@drawable/btnbg"
+                            android:gravity="center"
                             android:text="Cancel"
-                            android:background="@drawable/btnbg"                                   android:gravity="center"
-                            android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:textSize="12dp" />
-
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
 
 
                     </LinearLayout>

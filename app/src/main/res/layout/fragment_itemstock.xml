@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="#eaeff5"
     android:layout_height="match_parent"
+    android:background="#eaeff5"
+    android:orientation="vertical"
     tools:context=".Activities.ItemStockFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
             app:cardCornerRadius="5dp"
-            app:cardElevation="10dp"
-            android:layout_height="wrap_content">
+            app:cardElevation="10dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,29 +31,31 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.1"
                     android:layout_marginStart="3dp"
+                    android:layout_weight="1.1"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginStart="1dp"
                         android:gravity="center_horizontal"
                         android:text="Product"
-                        android:layout_marginStart="1dp"
                         android:textColor="@color/white"
                         android:textSize="12dp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginStart="1dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:background="@color/my_light_primary" />
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -76,6 +80,7 @@
             android:layout_height="match_parent"
             android:fillViewport="true"
             android:scrollbars="none">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,14 +91,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="5dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/consumable_recyclerview"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

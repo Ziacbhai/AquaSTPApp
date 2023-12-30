@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#eaeff5"
+    android:orientation="vertical"
     tools:context=".Activities.WelcomeCustomer">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="20dp" />
 
 
     <RelativeLayout
@@ -67,7 +67,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,47 +78,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textSize="22sp"
-            android:textStyle="italic"
+            android:text="Welcome Back,Valued Customer"
             android:textColor="#01a4a3"
-            android:text="Welcome Back,Valued Customer"/>
-       <View
-        android:layout_width="100dp"
-        android:background="#F44336"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:layout_height="2dp"/>
+            android:textSize="22sp"
+            android:textStyle="italic" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:background="#F44336" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+            android:layout_height="10dp" />
+
         <TextView
             android:id="@+id/cname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:fontFamily="@font/amaranth_bold"
+            android:gravity="center_horizontal"
+            android:text="xxxxxxxxxxx"
             android:textSize="16sp"
-            android:textStyle="italic"
-            android:text="xxxxxxxxxxx"/>
+            android:textStyle="italic" />
+
         <TextView
             android:id="@+id/cmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textSize="16sp"
-            android:text="xxxxxxxxxxx"/>
+            android:text="xxxxxxxxxxx"
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/cph"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textSize="16sp"
-            android:text="xxxxxxxxxxx"/>
+            android:text="xxxxxxxxxxx"
+            android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+            android:layout_height="10dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -133,48 +138,54 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
-            android:textSize="15dp"
-            android:padding="2dp"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:padding="2dp"
             android:text="View your stats and insights here."
-            android:layout_height="wrap_content"/>
+            android:textSize="15dp" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="40dp"/>
+        android:layout_height="40dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cContinue"
         android:layout_width="180dp"
+        android:layout_height="55dp"
         android:layout_gravity="center_horizontal"
-        android:text="Continue"
         android:background="@drawable/profilebtnupdate"
-        android:textStyle="bold"
+        android:text="Continue"
         android:textColor="@color/white"
-        android:layout_height="55dp"/>
+        android:textStyle="bold" />
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="5dp"/>
+        android:layout_height="5dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
             android:layout_weight="1"
             android:gravity="end"
-            android:layout_marginStart="25dp"
-            android:text="Update Profile ?"
-            android:layout_height="wrap_content"/>
+            android:text="Update Profile ?" />
+
         <TextView
             android:id="@+id/Clickhere"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text=" Click here"
-            android:textColor="#F44336"
-            android:layout_height="wrap_content"/>
+            android:textColor="#F44336" />
     </LinearLayout>
 
 </LinearLayout>

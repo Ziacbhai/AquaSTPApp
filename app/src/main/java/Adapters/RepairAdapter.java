@@ -1,5 +1,6 @@
 package Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -71,6 +72,8 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
                 Global.repairClass1 = repairClass1.get(position);
                Intent i = new Intent(context, Repair_Details_Activity.class);
                context.startActivity(i);
+//                ((Activity) context).finish();
+
             }
         });
     }

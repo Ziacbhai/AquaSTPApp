@@ -10,35 +10,33 @@
     tools:context=".Activities.LoginSignupActivity">
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/btnbgoutline"
+        android:padding="5dp"
+        android:src="@drawable/aqua_logo" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:padding="5dp"
-            android:background="@drawable/btnbgoutline"
-            android:src="@drawable/aqua_logo" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabTextColor="@color/appcolor"
-            android:animateLayoutChanges="true"
-            android:layout_marginTop="10dp"
-            android:padding="8dp"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@android:color/transparent"
-            app:tabIndicatorHeight="0dp"
-            app:tabMode="fixed"/>
-        <!--android:background="@drawable/btn_gradient"-->
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewpagerlogin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:animateLayoutChanges="true"
-            app:layout_anchorGravity="bottom" />
-
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:animateLayoutChanges="true"
+        android:padding="8dp"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@android:color/transparent"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabTextColor="@color/appcolor" />
+    <!--android:background="@drawable/btn_gradient"-->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpagerlogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:animateLayoutChanges="true"
+        app:layout_anchorGravity="bottom" />
 
 
 </LinearLayout>

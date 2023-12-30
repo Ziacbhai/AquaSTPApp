@@ -49,9 +49,6 @@ import Models.zList;
 public class PumpsFragment extends Fragment {
 
     RecyclerView PumpRecyclerview;
-    TextView usersiteH, userstpH, usersiteaddressH, Mailid, Mobno, personnameH;
-    private String Personname, Stpname, Sitename, SiteAddress, Process;
-
     CommonModelClass commonModelClassList;
     Context context;
     private ProgressDialog progressDialog;

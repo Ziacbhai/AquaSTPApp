@@ -1,7 +1,6 @@
 package Adapters;
 
 
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -53,15 +52,16 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
 
 
     public IncidentAdapter(Context context, ArrayList<IncidentsClass> incidentsClasses) {
-        this.context=context;
-        this.incidentsClasses=incidentsClasses;
+        this.context = context;
+        this.incidentsClasses = incidentsClasses;
     }
+
     @NonNull
     @Override
     public IncidentAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.incident_design, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.incident_design, parent, false);
         Viewholder viewHolder = new Viewholder(view);
-        Animation animation = AnimationUtils.loadAnimation(context,R.anim.fade_in);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
         viewHolder.itemView.startAnimation(animation);
         return viewHolder;
     }
@@ -77,7 +77,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
                 android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(v.getContext());
                 alertDialogBuilder.setTitle("Delete Confirmation");
                 alertDialogBuilder.setMessage("Are you sure you want to delete?");
-               // alertDialogBuilder.setIcon(R.drawable.swasticars_logo);
+                // alertDialogBuilder.setIcon(R.drawable.swasticars_logo);
                 alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -113,10 +113,12 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date;
-        try {date = inputFormat.parse(dateString);
+        try {
+            date = inputFormat.parse(dateString);
             String Date = outputFormat.format(date);
             holder.Inc_date.setText(Date);
-        } catch (ParseException e) {e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
             return;
         }
         holder.Ininfo.setOnClickListener(new View.OnClickListener() {
@@ -134,20 +136,19 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         holder.Inupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Global.editor.putString("incident_code",incidentsClasses.get(position).getInc_No());
+                Global.editor.putString("incident_code", incidentsClasses.get(position).getInc_No());
                 Global.editor.commit();
-                    Intent intent = new Intent(context, Incident_Image_doc_Select_Activity.class);
-                    context.startActivity(intent);
+                Intent intent = new Intent(context, Incident_Image_doc_Select_Activity.class);
+                context.startActivity(intent);
             }
         });
 
     }
 
     public void deleteItem(String incident_code2) {
-
         RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
-        String url = Global.Get_Incidents_delete ;
-        url=url+"incident_code="+incident_code2;
+        String url = Global.Get_Incidents_delete;
+        url = url + "incident_code=" + incident_code2;
         //progressDialog.show();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -170,8 +171,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             public void onErrorResponse(VolleyError error) {
                 //Global.customtoast(context.getApplicationContext(), getLayoutInflater(),"Failed to get my stock .." + error.getMessage());
             }
-        })
-        {
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
@@ -185,7 +185,6 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         queue.add(jsonObjectRequest);
 
     }
-
 
 
     private String removeTrailingZero(double value) {
@@ -207,18 +206,18 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
 
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        private TextView Incno,Incedent_Particlulars,Inc_date;
-        private ImageView Inupload,Ininfo,Inc_delete;
+        private TextView Incno, Incedent_Particlulars, Inc_date;
+        private ImageView Inupload, Ininfo, Inc_delete;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
-            Incno=itemView.findViewById(R.id.incident_incno);
-            Incedent_Particlulars=itemView.findViewById(R.id.incident_perticulars);
-            Inc_date=itemView.findViewById(R.id.incident_date);
-            Ininfo=itemView.findViewById(R.id.incident_info);
-            Inupload=itemView.findViewById(R.id.incident_photo_upload);
-            Inc_delete=itemView.findViewById(R.id.incident_delete);
+            Incno = itemView.findViewById(R.id.incident_incno);
+            Incedent_Particlulars = itemView.findViewById(R.id.incident_perticulars);
+            Inc_date = itemView.findViewById(R.id.incident_date);
+            Ininfo = itemView.findViewById(R.id.incident_info);
+            Inupload = itemView.findViewById(R.id.incident_photo_upload);
+            Inc_delete = itemView.findViewById(R.id.incident_delete);
 
 
         }

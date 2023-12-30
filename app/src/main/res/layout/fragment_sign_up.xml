@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#eaeff5"
     android:orientation="vertical"
     android:padding="10dp"
@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
@@ -29,8 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:padding="5dp"
                 android:background="@drawable/btn_gradient"
+                android:padding="5dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="10dp"
                 app:cardMaxElevation="12dp">
@@ -38,10 +39,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:background="@drawable/btn_gradient"
-                    android:padding="10dp"
-                    android:orientation="vertical">
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
 
                     <androidx.cardview.widget.CardView
@@ -54,8 +55,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
 
                             <TextView
@@ -69,10 +70,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
-                                android:textAllCaps="false"
-                                android:inputType="textCapSentences|text"
                                 android:background="@drawable/btnbgedited"
+                                android:inputType="textCapSentences|text"
                                 android:maxLength="50"
+                                android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
 
@@ -106,11 +107,11 @@
                                 android:id="@+id/cperson"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
                                 android:background="@drawable/btnbgedited"
                                 android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ."
-                                android:layout_marginStart="5dp"
-                                android:maxLength="50"
                                 android:inputType="textCapSentences|text"
+                                android:maxLength="50"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
@@ -132,8 +133,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
 
                             <TextView
@@ -149,8 +150,8 @@
                                 android:layout_marginStart="5dp"
                                 android:background="@drawable/btnbgedited"
                                 android:inputType="number"
-                                android:textAllCaps="false"
                                 android:maxLength="10"
+                                android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
                         </LinearLayout>
@@ -167,8 +168,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
 
                             <TextView
@@ -181,11 +182,11 @@
                                 android:id="@+id/emailr"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:maxLength="150"
-                                android:textAllCaps="false"
-                                android:inputType="textEmailAddress"
                                 android:layout_marginStart="5dp"
                                 android:background="@drawable/btnbgedited"
+                                android:inputType="textEmailAddress"
+                                android:maxLength="150"
+                                android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
                         </LinearLayout>
@@ -202,8 +203,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
 
                             <TextView
@@ -215,24 +216,24 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/tvstate"
                                     android:layout_width="0dp"
-                                    android:layout_weight="1"
-                                    android:layout_marginStart="5dp"
                                     android:layout_height="match_parent"
-                                    android:textSize="16dp"
-                                    android:textColor="@color/black" />
+                                    android:layout_marginStart="5dp"
+                                    android:layout_weight="1"
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp" />
 
 
                                 <ImageView
                                     android:id="@+id/dd_state"
                                     android:layout_width="30dp"
-                                    android:src="@drawable/baseline_arrow_drop_down_24"
-                                    android:layout_height="match_parent"/>
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/baseline_arrow_drop_down_24" />
 
                             </LinearLayout>
 
@@ -240,7 +241,6 @@
 
 
                     </androidx.cardview.widget.CardView>
-
 
 
                     <androidx.cardview.widget.CardView
@@ -253,8 +253,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
 
                             <TextView
@@ -266,24 +266,23 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:orientation="horizontal"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
 
                                 <TextView
                                     android:id="@+id/tvcity"
                                     android:layout_width="0dp"
-                                    android:layout_weight="1"
                                     android:layout_height="match_parent"
-                                    android:textSize="16dp"
                                     android:layout_marginStart="5dp"
-                                    android:textColor="@color/black" />
+                                    android:layout_weight="1"
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp" />
 
                                 <ImageView
                                     android:id="@+id/dd_city"
                                     android:layout_width="30dp"
-                                    android:src="@drawable/baseline_arrow_drop_down_24"
                                     android:layout_height="match_parent"
-                                   />
+                                    android:src="@drawable/baseline_arrow_drop_down_24" />
 
                             </LinearLayout>
 
@@ -292,7 +291,6 @@
 
 
                     </androidx.cardview.widget.CardView>
-
 
 
                     <androidx.cardview.widget.CardView
@@ -305,8 +303,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
 
                             <TextView
@@ -319,22 +317,20 @@
                                 android:id="@+id/auname"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/btnbgedited"
                                 android:layout_marginStart="5dp"
+                                android:background="@drawable/btnbgedited"
                                 android:includeFontPadding="false"
-                                android:maxLength="25"
                                 android:inputType="textCapSentences|text"
+                                android:maxLength="25"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
-
 
 
                         </LinearLayout>
 
 
                     </androidx.cardview.widget.CardView>
-
 
 
                     <androidx.cardview.widget.CardView
@@ -347,8 +343,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
 
                             <TextView
@@ -371,12 +367,10 @@
                                 android:textColorHint="@color/black" />
 
 
-
                         </LinearLayout>
 
 
                     </androidx.cardview.widget.CardView>
-
 
 
                     <androidx.cardview.widget.CardView
@@ -389,8 +383,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
 
                             <TextView
@@ -413,12 +407,10 @@
                                 android:textColorHint="@color/black" />
 
 
-
                         </LinearLayout>
 
 
                     </androidx.cardview.widget.CardView>
-
 
 
                     <androidx.cardview.widget.CardView
@@ -431,8 +423,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
 
                             <TextView
@@ -445,14 +437,13 @@
                                 android:id="@+id/couponcode"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/btnbgedited"
                                 android:layout_marginStart="5dp"
+                                android:background="@drawable/btnbgedited"
                                 android:inputType="textEmailAddress"
-                                android:textAllCaps="false"
                                 android:maxLength="20"
+                                android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
-
 
 
                         </LinearLayout>
