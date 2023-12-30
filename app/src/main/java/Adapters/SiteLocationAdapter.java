@@ -64,19 +64,15 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
                 Global.editor.putInt("su_code", Global.StpList.get(position).getSucode());
                 Global.editor.putString("com_code", Global.StpList.get(position).getComcode());
                 Global.editor.putString("user_code", Global.StpList.get(position).getUsercode());
-
                 Global.editor.putString("person_name", Global.StpList.get(position).getPersonname());
                 Global.editor.putString("username", Global.StpList.get(position).getUsername());
                 Global.editor.putString("sstp1_code", Global.StpList.get(position).getSstp1code());
-
                 Global.editor.putString("stp_name", Global.StpList.get(position).getStpname());
                 Global.editor.putString("site_code", Global.StpList.get(position).getSitecode());
                 Global.editor.putString("site_name", Global.StpList.get(position).getSitename());
                 Global.editor.putString("stp_active", Global.StpList.get(position).getStpactive());
-
                 Global.editor.putString("site_address", Global.StpList.get(position).getSite_address());
                 Global.editor.putString("process_name", Global.StpList.get(position).getProcess__type());
-
                 Global.editor.commit();
 
                 Intent intent = new Intent(context, MainActivity.class);
