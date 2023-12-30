@@ -42,7 +42,7 @@ import java.util.Map;
 
 public class VerifyNumberOTP extends AppCompatActivity {
     boolean passwordVisible;
-    String otp ,Newpassword;
+    String otp, Newpassword;
     TextView Resendotp;
     PinView pinView;
     AppCompatButton Verify;
@@ -50,16 +50,17 @@ public class VerifyNumberOTP extends AppCompatActivity {
 
     private TextInputEditText Newpwd;
     Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_number_otp);
 
-       // displayMobno();
+        // displayMobno();
 
-        pinView=findViewById(R.id.pinview);
-        Verify=findViewById(R.id.verifyotp);
+        pinView = findViewById(R.id.pinview);
+        Verify = findViewById(R.id.verifyotp);
         progressBar = findViewById(R.id.progressbr);
         Newpwd = findViewById(R.id.newpassword);
 
@@ -93,11 +94,11 @@ public class VerifyNumberOTP extends AppCompatActivity {
                 Newpassword = Newpwd.getText().toString();
                 otp = pinView.getText().toString();
 
-                if (Newpassword.length() < 6 ){
+                if (Newpassword.length() < 6) {
                     Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), "Password should not be less than 6 digits !!");
                     return;
-                }else {
-                   // Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), "Passwords doesn't match !!");
+                } else {
+                    // Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), "Passwords doesn't match !!");
 
                 }
                 //Toast.makeText(OTPActivity.this, otp, Toast.LENGTH_SHORT).show();
@@ -107,6 +108,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
         });
 
     }
+
     private void postDataUsingVolley(String otp) {
         String url = Global.validateotpurl;
         progressBar.setVisibility(View.VISIBLE);

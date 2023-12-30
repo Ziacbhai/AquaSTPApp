@@ -47,8 +47,6 @@ import Adapters.LabTestAdapter;
 import Models.LabTestClass;
 
 
-
-
 public class LabTestFragment extends Fragment {
     RecyclerView LabTestRecyclerview;
     LabTestClass labTestClass;

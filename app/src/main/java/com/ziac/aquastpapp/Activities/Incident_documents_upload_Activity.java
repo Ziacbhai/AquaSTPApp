@@ -78,12 +78,13 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private static final int REQUEST_PICK_DOCUMENT = 1;
     Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incident_documents_uploud);
-        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
                 PackageManager.PERMISSION_GRANTED);
         context = this;
         In_doc_uploadbtn = findViewById(R.id.in_doc_uploadbtn);
@@ -123,7 +124,6 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
         startActivityForResult(intent, REQUEST_PICK_DOCUMENT);
     }
-
 
 
     @Override
@@ -188,12 +188,12 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof TimeoutError) {
-                    Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(),"Request Time-Out");
+                    Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "Request Time-Out");
                 } else if (error instanceof ServerError) {
-                    Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(),"Invalid Username or Password");
-                }  else if (error instanceof ParseError) {
-                    Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(),"Parse Error ");
-                }  else if (error instanceof AuthFailureError) {
+                    Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "Invalid Username or Password");
+                } else if (error instanceof ParseError) {
+                    Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "Parse Error ");
+                } else if (error instanceof AuthFailureError) {
                     Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "AuthFailureError");
                 }
 
@@ -241,6 +241,7 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
         }
         return null;
     }
+
     private void getIncidentDocuments() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.Get_Incidents_Details + "incident_code=" + Global.sharedPreferences.getString("incident_code",
@@ -303,8 +304,8 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
                 return headers;
             }
 
-           protected Map<String, String> getParams() {
-               Map<String, String> params = new HashMap<>();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
                 /*params.put("incident_code", Global.sharedPreferences.getString("incident_code", "0"));
                 params.put("file_type", "I");*/
                 return params;

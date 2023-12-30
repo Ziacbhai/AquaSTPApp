@@ -23,8 +23,9 @@ public class SliderScreen extends AppCompatActivity {
 
     private ViewPager viewPager;
     private static final String TAG = "SliderActivity";
-    private TextView Next,Skip;
-Context context;
+    private TextView Next, Skip;
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +107,6 @@ Context context;
         };
 
 
-
         Skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,8 +122,7 @@ Context context;
             if (current < layouts.length) {
                 // move to next screen
                 viewPager.setCurrentItem(current);
-            }
-            else {
+            } else {
 
                 gotosignin();
             }

@@ -57,7 +57,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
     RecyclerView Repair_Images_Rv;
 
     Bitmap imageBitmap;
-    AppCompatButton Repair_two_image_upload_btn,Repairtwo_image_cancel_btn;
+    AppCompatButton Repair_two_image_upload_btn, Repairtwo_image_cancel_btn;
     Context context;
     private static final int PICK_IMAGE_REQUEST_CODE = 10;
     private static final int CAMERA_REQUEST_CODE = 1;
@@ -115,7 +115,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
             try {
                 if (resp.getBoolean("success")) {
                     Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
-                   // Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), response);
+                    // Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), response);
                     startActivity(new Intent(RepairTwo_Upload_Activity.this, RepairTwoImageListActivity.class));
                     finish();
                 } else {

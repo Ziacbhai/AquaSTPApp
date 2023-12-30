@@ -59,20 +59,21 @@ public class Consumption_Fragment extends Fragment {
     ConsumptionClass consumables_Class;
     RecyclerView Consumables_rv;
     private TextView tvSelectedDate;
-    TextView Date_A,STP_A,Remark_A;
-    AppCompatButton Update_A,Cancel_A;
+    TextView Date_A, STP_A, Remark_A;
+    AppCompatButton Update_A, Cancel_A;
 
-     ProgressDialog progressDialog;
+    ProgressDialog progressDialog;
 
-   String currentDatevalue,currentDateValue2;
+    String currentDatevalue, currentDateValue2;
     Context context;
     ConsumptionAdapter consumptionAdapter;
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view  =  inflater.inflate(R.layout.fragment_consumption, container, false);
+        View view = inflater.inflate(R.layout.fragment_consumption, container, false);
 
         context = getContext();
         user_topcard(view);
@@ -128,7 +129,7 @@ public class Consumption_Fragment extends Fragment {
     private void user_topcard(View view) {
 
 
-        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
@@ -138,7 +139,7 @@ public class Consumption_Fragment extends Fragment {
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("person_name", "");
 
-        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
         txtsitename = view.findViewById(R.id.sitename);
         txtstpname = view.findViewById(R.id.stpname);
@@ -161,18 +162,18 @@ public class Consumption_Fragment extends Fragment {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_consumption_layout, null);
 
-       // btnOpenDatePicker = dialogView.findViewById(R.id.btnOpenDatePicker);
+        // btnOpenDatePicker = dialogView.findViewById(R.id.btnOpenDatePicker);
         tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
         Remark_A = dialogView.findViewById(R.id.remark_alert);
         Update_A = dialogView.findViewById(R.id.update_alert);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert);
 
-       // tvSelectedDate.setText(currentDatevalue);
+        // tvSelectedDate.setText(currentDatevalue);
         tvSelectedDate.setText(currentDateValue2);
         tvSelectedDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // showDatePicker();
+                // showDatePicker();
             }
         });
         builder.setView(dialogView);
@@ -203,11 +204,11 @@ public class Consumption_Fragment extends Fragment {
     private void getConsumables() {
         showProgressDialog();
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
-        String  consumables = Global.Get_Consumables;
+        String consumables = Global.Get_Consumables;
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String ayear = Global.sharedPreferences.getString("ayear", "2023");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
-        consumables = consumables + "comcode=" + com_code + "&ayear=" +  ayear + "&sstp1_code=" + sstp1_code ;
+        consumables = consumables + "comcode=" + com_code + "&ayear=" + ayear + "&sstp1_code=" + sstp1_code;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, consumables, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -260,13 +261,14 @@ public class Consumption_Fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 hideProgressDialog();
             }
-        }){
+        }) {
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 return params;
@@ -278,13 +280,13 @@ public class Consumption_Fragment extends Fragment {
 
     private void updateConsumables() {
 
-        String remarks=Remark_A.getText().toString();
-        String condate =currentDatevalue.toString();
-       // String Con_code = consumables_Class.getCon_no();
+        String remarks = Remark_A.getText().toString();
+        String condate = currentDatevalue.toString();
+        // String Con_code = consumables_Class.getCon_no();
 
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.updateConsumables;
-       // Toast.makeText(context, "network error", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(context, "network error", Toast.LENGTH_SHORT).show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {
@@ -307,7 +309,7 @@ public class Consumption_Fragment extends Fragment {
                 Global.editor.commit();*/
                 try {
                     if (response.getBoolean("isSuccess")) {
-                        Toast.makeText(getActivity(), "Updated successfully !!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Updated successfully !!", Toast.LENGTH_SHORT).show();
                         getConsumables();
                     } else {
                         Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_SHORT).show();
@@ -323,7 +325,7 @@ public class Consumption_Fragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
@@ -331,11 +333,12 @@ public class Consumption_Fragment extends Fragment {
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("con_date", condate);
-               // params.put("con_date", sharedPreferences.getString("current_date",""));
-                params.put("remarks",remarks);
+                // params.put("con_date", sharedPreferences.getString("current_date",""));
+                params.put("remarks", remarks);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
@@ -381,8 +384,8 @@ public class Consumption_Fragment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         // Update your TextView with the selected date
-                        updateDateTextView(year, month+1, dayOfMonth);
-                        currentDatevalue = year +"-" + (month+1) + "-" + dayOfMonth;
+                        updateDateTextView(year, month + 1, dayOfMonth);
+                        currentDatevalue = year + "-" + (month + 1) + "-" + dayOfMonth;
                     }
                 },
                 initialYear,
@@ -394,6 +397,7 @@ public class Consumption_Fragment extends Fragment {
         // Show the date picker dialog
         datePickerDialog.show();
     }
+
     private void updateDateTextView(int year, int month, int day) {
         String current_date = day + "-" + month + "-" + year;
         tvSelectedDate.setText(current_date);

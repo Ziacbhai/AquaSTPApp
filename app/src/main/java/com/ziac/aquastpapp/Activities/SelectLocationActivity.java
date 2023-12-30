@@ -62,7 +62,7 @@ public class SelectLocationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_company);
-        context =this;
+        context = this;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         stpModelClassList = new StpModelClass();
         searchView = findViewById(R.id.searchView);
@@ -80,7 +80,7 @@ public class SelectLocationActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 performSearch(query);
-                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (inputMethodManager != null) {
                     inputMethodManager.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
                 }
@@ -95,7 +95,7 @@ public class SelectLocationActivity extends AppCompatActivity {
         });
 
         siteLocationRecyclerView = findViewById(R.id.stp_recyclerview);
-        siteLocationRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL , false));
+        siteLocationRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         siteLocationAdapter = new SiteLocationAdapter(Global.StpList, SelectLocationActivity.this);
         siteLocationRecyclerView.setAdapter(siteLocationAdapter);
     }
@@ -103,38 +103,38 @@ public class SelectLocationActivity extends AppCompatActivity {
     private void performSearch(String query) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.getSearchSiteOrSTPByName;
-        url=url+"name="+query + "&com_code=" + Global.sharedPreferences.getString("com_code", "");
-        StringRequest jsonObjectrequest = new StringRequest(Request.Method.POST,url,response -> {
-                    JSONObject jobj;
-                    try {
-                        jobj = new JSONObject(response);
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                    JSONArray jarrrecent;
-                    try {
-                        jarrrecent = jobj.getJSONArray("data2");
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                    Global.StpList = new ArrayList<>();
-                    for (int i = 0; i < jarrrecent.length(); i++) {
-                        final JSONObject e;
-                        try {
-                            e = jarrrecent.getJSONObject(i);
-                        } catch (JSONException ex) {
-                            throw new RuntimeException(ex);
-                        }
+        url = url + "name=" + query + "&com_code=" + Global.sharedPreferences.getString("com_code", "");
+        StringRequest jsonObjectrequest = new StringRequest(Request.Method.POST, url, response -> {
+            JSONObject jobj;
+            try {
+                jobj = new JSONObject(response);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+            JSONArray jarrrecent;
+            try {
+                jarrrecent = jobj.getJSONArray("data2");
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+            Global.StpList = new ArrayList<>();
+            for (int i = 0; i < jarrrecent.length(); i++) {
+                final JSONObject e;
+                try {
+                    e = jarrrecent.getJSONObject(i);
+                } catch (JSONException ex) {
+                    throw new RuntimeException(ex);
+                }
 
-                        stpModelClassList =  new StpModelClass();
-                        try {
-                            stpModelClassList.setStpname(e.getString("stp_name"));
-                            stpModelClassList.setSitename(e.getString("site_name"));
-                            stpModelClassList.setSitecode(e.getString("site_code"));
-                            stpModelClassList.setComcode(e.getString("com_code"));
-                            stpModelClassList.setUsercode(e.getString("user_code"));
-                            stpModelClassList.setSstp1code(e.getString("sstp1_code"));
-                            stpModelClassList.setSucode(e.getInt("su_code"));
+                stpModelClassList = new StpModelClass();
+                try {
+                    stpModelClassList.setStpname(e.getString("stp_name"));
+                    stpModelClassList.setSitename(e.getString("site_name"));
+                    stpModelClassList.setSitecode(e.getString("site_code"));
+                    stpModelClassList.setComcode(e.getString("com_code"));
+                    stpModelClassList.setUsercode(e.getString("user_code"));
+                    stpModelClassList.setSstp1code(e.getString("sstp1_code"));
+                    stpModelClassList.setSucode(e.getInt("su_code"));
 
                           /*  String su_code = e.getString("su_code");
                             if (su_code.startsWith("0")) {
@@ -142,31 +142,30 @@ public class SelectLocationActivity extends AppCompatActivity {
                             }
                             stpModelClassList.setSucode(Integer.parseInt(su_code));*/
 
-                        } catch (JSONException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        Global.StpList.add(stpModelClassList);
-                    }
-                    siteLocationAdapter = new SiteLocationAdapter(Global.StpList,this);
-                    siteLocationRecyclerView.setAdapter(siteLocationAdapter);
-                }, error -> {
+                } catch (JSONException ex) {
+                    throw new RuntimeException(ex);
+                }
+                Global.StpList.add(stpModelClassList);
+            }
+            siteLocationAdapter = new SiteLocationAdapter(Global.StpList, this);
+            siteLocationRecyclerView.setAdapter(siteLocationAdapter);
+        }, error -> {
 
             if (error instanceof TimeoutError) {
 
-                Global.customtoast(this, getLayoutInflater(),"Request Time-Out !!");
+                Global.customtoast(this, getLayoutInflater(), "Request Time-Out !!");
             } else if (error instanceof NoConnectionError) {
-                Global.customtoast(this, getLayoutInflater(),"No Connection !!");
+                Global.customtoast(this, getLayoutInflater(), "No Connection !!");
             } else if (error instanceof ServerError) {
-                Global.customtoast(this, getLayoutInflater(),"Server Error ");
+                Global.customtoast(this, getLayoutInflater(), "Server Error ");
             } else if (error instanceof NetworkError) {
-                Global.customtoast(this, getLayoutInflater(),"Network Error ");
+                Global.customtoast(this, getLayoutInflater(), "Network Error ");
             } else if (error instanceof ParseError) {
-                Global.customtoast(this, getLayoutInflater(),"Parse Error ");
+                Global.customtoast(this, getLayoutInflater(), "Parse Error ");
             }
 
             // Global.customtoast(getContext(), getLayoutInflater(),"Failed to get latest vehicle .." + error.getMessage());
-        })
-        {
+        }) {
 
             @Override
             public Map<String, String> getHeaders() {
@@ -183,7 +182,7 @@ public class SelectLocationActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
 
-                params.put("name",query);
+                params.put("name", query);
                 Log.d("params", params.toString());
 
                 return params;

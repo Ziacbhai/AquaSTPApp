@@ -44,10 +44,9 @@ public class MetersFragment extends Fragment {
     RecyclerView MetersRecyclerview;
     CommonModelClass commonModelClassList;
     private ProgressDialog progressDialog;
-    TextView  usersiteH,userstpH,usersiteaddressH ,Mailid,Mobno,personnameH;
-    private String Personname,mail,Stpname ,Sitename ,SiteAddress,Process;
-    private TextView Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
-            FormFactor,Phase,CleaningRunningFrequencyHRS,Address_M;
+    TextView usersiteH, userstpH, usersiteaddressH, Mailid, Mobno, personnameH;
+    private String Personname, Stpname, Sitename, SiteAddress, Process;
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,7 +92,6 @@ public class MetersFragment extends Fragment {
         personnameH.setText(Personname);
 
 
-
         MetersRecyclerview = view.findViewById(R.id.meters_recyclerview);
         MetersRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         MetersRecyclerview.setHasFixedSize(true);
@@ -105,13 +103,13 @@ public class MetersFragment extends Fragment {
     private void getmeters() {
 
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
-        String url = Global.Equipment_Details_com_meters ;
+        String url = Global.Equipment_Details_com_meters;
 
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
         String site_code = Global.sharedPreferences.getString("site_code", "0");
 
-        url = url + "com_code=" + com_code + "&sstp1_code=" + sstp1_code + "&site_code=" + site_code ;
+        url = url + "com_code=" + com_code + "&sstp1_code=" + sstp1_code + "&site_code=" + site_code;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -159,7 +157,7 @@ public class MetersFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             public Map<String, String> getHeaders() {
                 // below line we are creating a map for
                 // storing our values in key and value pair.
@@ -169,6 +167,7 @@ public class MetersFragment extends Fragment {
 
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 /*params.put("equip_name", EquipmentName.getText().toString());

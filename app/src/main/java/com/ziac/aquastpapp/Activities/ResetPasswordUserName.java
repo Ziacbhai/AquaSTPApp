@@ -1,7 +1,6 @@
 package com.ziac.aquastpapp.Activities;
 
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
@@ -60,9 +59,9 @@ public class ResetPasswordUserName extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 username = entertusername.getText().toString();
-               if (username.isEmpty()) {
-                   entertusername.setError("Please Enter User Name");
-                   entertusername.requestFocus();
+                if (username.isEmpty()) {
+                    entertusername.setError("Please Enter User Name");
+                    entertusername.requestFocus();
                     return;
                 }
                 postDataUsingVolley();
@@ -75,7 +74,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
         String urlUsername = Global.forgotpasswordurl;
         progressBar.setVisibility(View.VISIBLE);
 
-        RequestQueue queue= Volley.newRequestQueue(ResetPasswordUserName.this);
+        RequestQueue queue = Volley.newRequestQueue(ResetPasswordUserName.this);
         StringRequest request = new StringRequest(Request.Method.POST, urlUsername, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -91,11 +90,11 @@ public class ResetPasswordUserName extends AppCompatActivity {
                     Global.editor.commit();
 
                     if (issuccess.equals("true")) {
-                        Global.customtoast(ResetPasswordUserName.this, getLayoutInflater(),respObj.getString("error"));
+                        Global.customtoast(ResetPasswordUserName.this, getLayoutInflater(), respObj.getString("error"));
                         startActivity(new Intent(ResetPasswordUserName.this, VerifyUserNameOTP.class));
                     } else {
                         progressBar.setVisibility(View.GONE);
-                        Global.customtoast(ResetPasswordUserName.this, getLayoutInflater(),respObj.getString("error"));
+                        Global.customtoast(ResetPasswordUserName.this, getLayoutInflater(), respObj.getString("error"));
                         // Show a toast message for wrong username or password
 
                     }
@@ -112,7 +111,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 progressBar.setVisibility(View.GONE);
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();

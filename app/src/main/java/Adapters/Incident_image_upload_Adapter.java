@@ -69,17 +69,18 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
     @NonNull
     @Override
     public Incident_image_upload_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.incident_image_list_upload, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.incident_image_list_upload, parent, false);
         Viewholder viewHolder = new Viewholder(view);
-        Animation animation = AnimationUtils.loadAnimation(context,R.anim.fade_in);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
         viewHolder.itemView.startAnimation(animation);
         return viewHolder;
     }
+
     @Override
     public void onBindViewHolder(@NonNull Incident_image_upload_Adapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
 
-        Picasso.Builder builder=new Picasso.Builder(context);
-        Picasso picasso=builder.build();
+        Picasso.Builder builder = new Picasso.Builder(context);
+        Picasso picasso = builder.build();
         picasso.load(Uri.parse(Global.incident_image + incidentsClasses.get(position).getImageList()))
                 .error(R.drawable.no_image_available_icon).into(holder.In_image_show);
 
@@ -103,7 +104,7 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String incident_code = Global.Incident_s.get(position).getDelete_Incident_code2();
-                        deleteItem(incident_code,position);
+                        deleteItem(incident_code, position);
                     }
                 });
                 alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -120,11 +121,11 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
 
     }
 
-    public void deleteItem(String incidentcode,int position) {
+    public void deleteItem(String incidentcode, int position) {
 
         RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
         String url = Global.Get_Incidents_delete;
-        url=url+"id="+incidentcode;
+        url = url + "id=" + incidentcode;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
@@ -215,7 +216,7 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        ImageView Incident_delete_image,In_image_show;
+        ImageView Incident_delete_image, In_image_show;
         TextView In_image_name;
 
         public Viewholder(@NonNull View itemView) {

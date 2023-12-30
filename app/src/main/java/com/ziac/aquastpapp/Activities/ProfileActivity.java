@@ -79,6 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
     EditText Person_name, Person_number, Person_email;
     TextView Person_ref_code;
     ImageView Backarrowbtn;
+
     @SuppressLint("MissingInflatedId")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -117,6 +118,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
         getuserdetails();
     }
+
     public void showImage(Picasso picasso, String userimage) {
         Dialog builder = new Dialog(this);
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -168,6 +170,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
     private void opencamera() {
         com.github.dhaval2404.imagepicker.ImagePicker.with(ProfileActivity.this)
                 .crop()                    //Crop image(Optional), Check Customization for more option
@@ -258,6 +261,7 @@ public class ProfileActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
     }
+
     private void updateprofile() {
         String personname, email, mobile;
 
@@ -338,6 +342,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         queue.add(stringRequest);
     }
+
     private void getuserdetails() {
 
         String url = Global.getuserprofileurl;

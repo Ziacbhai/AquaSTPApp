@@ -63,12 +63,13 @@ public class LabTest_Details_Activity extends AppCompatActivity {
         Labtest_details_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         getLabTestDetails();
     }
+
     private void user_topcard() {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         siteaddress = sharedPreferences.getString("site_address", "");
@@ -77,7 +78,7 @@ public class LabTest_Details_Activity extends AppCompatActivity {
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("person_name", "");
 
-        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);

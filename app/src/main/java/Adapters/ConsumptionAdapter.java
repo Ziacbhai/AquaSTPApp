@@ -1,4 +1,5 @@
 package Adapters;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -35,14 +36,14 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
     @NonNull
     @Override
     public ConsumptionAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.consumption_design, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.consumption_design, parent, false);
         return new Viewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ConsumptionAdapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
 
-        holder.Amount.setText(consumptionClasses.get(position).getAmount()+"0");
+        holder.Amount.setText(consumptionClasses.get(position).getAmount() + "0");
 
         holder.Remark.setText(consumptionClasses.get(position).getRemark());
 
@@ -59,17 +60,19 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
         String formattedConNo = removeTrailingZero(conNo);
         holder.Con1_code.setText(formattedConNo);
 
-       // holder.Date.setText(consumablesClasses.get(position).getDate());
+        // holder.Date.setText(consumablesClasses.get(position).getDate());
 
         String dateString = consumptionClasses.get(position).getDate();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date;
-        try {date = inputFormat.parse(dateString);
+        try {
+            date = inputFormat.parse(dateString);
             String Date = outputFormat.format(date);
             holder.Date.setText(Date);
 
-        } catch (ParseException e) {e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
             return;
         }
         holder.Consumable_info.setOnClickListener(new View.OnClickListener() {
@@ -99,17 +102,18 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView Con1_code,Date,Amount,Remark,Created_by;
+        TextView Con1_code, Date, Amount, Remark, Created_by;
         ImageView Consumable_info;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
-            Con1_code= itemView.findViewById(R.id.consumption_con_no);
-            Date= itemView.findViewById(R.id.consumption_date);
-            Amount= itemView.findViewById(R.id.consumption_amount);
-            Remark= itemView.findViewById(R.id.consumption_remark);
-            Consumable_info= itemView.findViewById(R.id.consumption_info);
-            Created_by= itemView.findViewById(R.id.consumption_createdby);
+            Con1_code = itemView.findViewById(R.id.consumption_con_no);
+            Date = itemView.findViewById(R.id.consumption_date);
+            Amount = itemView.findViewById(R.id.consumption_amount);
+            Remark = itemView.findViewById(R.id.consumption_remark);
+            Consumable_info = itemView.findViewById(R.id.consumption_info);
+            Created_by = itemView.findViewById(R.id.consumption_createdby);
         }
     }
 }

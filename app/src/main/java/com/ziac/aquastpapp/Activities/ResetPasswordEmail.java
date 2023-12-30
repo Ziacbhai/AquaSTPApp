@@ -49,12 +49,12 @@ public class ResetPasswordEmail extends AppCompatActivity {
         Forgotemail = findViewById(R.id.Femail);
         progressBar = findViewById(R.id.progressbr);
 
-       Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         EnterOTPbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 useremail = Forgotemail.getText().toString();
-               // progressBar.setVisibility(View.VISIBLE);
+                // progressBar.setVisibility(View.VISIBLE);
                 if (useremail.isEmpty()) {
                     Forgotemail.setError("Please Enter Email");
                     Forgotemail.requestFocus();
@@ -73,7 +73,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
         String urlemail = Global.forgotpasswordurl;
         progressBar.setVisibility(View.VISIBLE);
 
-        RequestQueue queue= Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest request = new StringRequest(Request.Method.POST, urlemail, new Response.Listener<String>() {
             @Override
@@ -93,12 +93,12 @@ public class ResetPasswordEmail extends AppCompatActivity {
                     Global.editor.commit();
 
                     if (issuccess.equals("true")) {
-                        Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(),respObj.getString("error"));
+                        Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(), respObj.getString("error"));
                         startActivity(new Intent(ResetPasswordEmail.this, VerifyEmailOTP.class));
                     } else {
                         progressBar.setVisibility(View.GONE);
                         // Show a toast message for wrong username or password
-                        Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(),respObj.getString("error"));
+                        Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(), respObj.getString("error"));
 
                     }
 
@@ -116,12 +116,12 @@ public class ResetPasswordEmail extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("UserName", "");
-               // params.put("Email", email);
+                // params.put("Email", email);
                 params.put("Mobile", "");
                 params.put("FPType", "E");
                 params.put("user_email", useremail);

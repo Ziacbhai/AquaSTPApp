@@ -252,6 +252,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
 
         queue.add(stringRequest);
     }
+
     private void get_Breakup_Details_Repair() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String Repair_Breakup_API = Global.RepairsRepairBreakUp;
@@ -291,8 +292,8 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                     Repair_BreakUp_Adapter repairBreakUpAdapter = new Repair_BreakUp_Adapter(Global.repair3list, context);
                     Repair_breakup_recyclerview.setAdapter(repairBreakUpAdapter);
                 }
-                 getEquipmentsRepairlist();
-                 getItemRepairList();
+                getEquipmentsRepairlist();
+                getItemRepairList();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -352,7 +353,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
@@ -362,6 +363,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         };
         queue.add(jsonArrayRequest);
     }
+
     private void getEquipmentBreakupSpinnerPopup() {
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
 
@@ -395,28 +397,34 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             }
         });
     }
-    private class EquipmentSelect_Adapter extends BaseAdapter implements Filterable{
+
+    private class EquipmentSelect_Adapter extends BaseAdapter implements Filterable {
         private ArrayList<EquipmentClassRepairBreakUp> eQarrayList;
+
         public EquipmentSelect_Adapter(ArrayList<EquipmentClassRepairBreakUp> eQarrayList) {
             this.eQarrayList = eQarrayList;
         }
+
         @Override
         public int getCount() {
             return eQarrayList.size();
         }
+
         @Override
         public Object getItem(int i) {
             return eQarrayList.get(i);
         }
+
         @Override
         public long getItemId(int i) {
             return i;
         }
+
         @Override
         public View getView(int i, View convertView, ViewGroup parent) {
             View v = getLayoutInflater().inflate(R.layout.popup_equipmentlist, null);
 
-            LinearLayout layout =  v.findViewById(R.id.select);
+            LinearLayout layout = v.findViewById(R.id.select);
 
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
             TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
@@ -475,6 +483,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             };
         }
     }
+
     private void getItemRepairList() {
         String Url = Global.api_Repair_List_Get_Units + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -505,7 +514,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
@@ -515,6 +524,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         };
         queue.add(jsonArrayRequest);
     }
+
     private void getItemBreakUpSpinnerPopup() {
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
 
@@ -548,7 +558,8 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             }
         });
     }
-    private class ItemSelect_Adapter extends BaseAdapter implements Filterable{
+
+    private class ItemSelect_Adapter extends BaseAdapter implements Filterable {
         private ArrayList<ItemListClassRepair_BreakUp> eQarrayList;
 
         public ItemSelect_Adapter(ArrayList<ItemListClassRepair_BreakUp> eQarrayList) {
@@ -559,19 +570,22 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         public int getCount() {
             return eQarrayList.size();
         }
+
         @Override
         public Object getItem(int i) {
             return eQarrayList.get(i);
         }
+
         @Override
         public long getItemId(int i) {
             return i;
         }
+
         @Override
         public View getView(int i, View convertView, ViewGroup parent) {
             View v = getLayoutInflater().inflate(R.layout.popup_equipmentlist, null);
 
-            LinearLayout layout =  v.findViewById(R.id.select);
+            LinearLayout layout = v.findViewById(R.id.select);
 
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
             TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
@@ -630,8 +644,9 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             };
         }
     }
+
     @Override
     public void onBackPressed() {
-       finish();
+        finish();
     }
 }

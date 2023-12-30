@@ -34,32 +34,33 @@ import java.util.List;
 import Models.CommonModelClass;
 
 public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.CommonViewHolder> {
-    private  List<CommonModelClass> commonModelClassList;
+    private List<CommonModelClass> commonModelClassList;
     Context context;
 
     CardView dc;
+
     public PumpDetailsAdapter(List<CommonModelClass> commonModelClassList, Context context) {
         this.commonModelClassList = commonModelClassList;
-        this.context =context;
+        this.context = context;
     }
 
     @SuppressLint("MissingInflatedId")
     @NonNull
     @Override
     public PumpDetailsAdapter.CommonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pump_details, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pump_details, parent, false);
         //dc = view.findViewById(R.id.cardView);
-       // dc.setCardBackgroundColor(Color.parseColor("#FF6363"));
+        // dc.setCardBackgroundColor(Color.parseColor("#FF6363"));
         return new CommonViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PumpDetailsAdapter.CommonViewHolder holder, int position) {
 
-      //  String userimage = Global.userImageurl + Global.sharedPreferences.getString("name_plate", "");
+        //  String userimage = Global.userImageurl + Global.sharedPreferences.getString("name_plate", "");
 
-        Picasso.Builder builder=new Picasso.Builder(context);
-        Picasso picasso=builder.build();
+        Picasso.Builder builder = new Picasso.Builder(context);
+        Picasso picasso = builder.build();
         //picasso.load(Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2))).error(R.drawable.no_image_available_icon).into(holder.ImageView);
 
         try {
@@ -68,7 +69,7 @@ public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.
                     .memoryPolicy(MemoryPolicy.NO_CACHE)
                     .networkPolicy(NetworkPolicy.NO_CACHE)
                     .into(holder.ImageView);
-        }catch (Exception e){
+        } catch (Exception e) {
             picasso.load(R.drawable.no_image).error(R.drawable.no_image)
                     .memoryPolicy(MemoryPolicy.NO_CACHE)
                     .networkPolicy(NetworkPolicy.NO_CACHE)
@@ -96,7 +97,7 @@ public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.
 
                 int pos = holder.getAdapterPosition();
                 String userimage = Global.baseurl + commonModelClassList.get(pos).getImage().substring(2);
-                showImage(picasso,userimage);
+                showImage(picasso, userimage);
 
             }
         });
@@ -163,22 +164,22 @@ public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.
     }
 
     public class CommonViewHolder extends RecyclerView.ViewHolder {
-     private    ImageView ImageView;
-     private    TextView Manufacturer,EquipmentName,Specification,Rating_Capacity,Equipment_id,
-             FormFactor,Phase,CleaningRunningFrequencyHRS,Process_name;
+        private ImageView ImageView;
+        private TextView Manufacturer, EquipmentName, Specification, Rating_Capacity, Equipment_id,
+                FormFactor, Phase, CleaningRunningFrequencyHRS, Process_name;
 
         public CommonViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ImageView=itemView.findViewById(R.id.image_);
-            Manufacturer=itemView.findViewById(R.id.manufacturer_);
-            EquipmentName=itemView.findViewById(R.id.equipmentName_);
-            Equipment_id=itemView.findViewById(R.id.equip_slno);
-            Specification=itemView.findViewById(R.id.specification_);
-            Rating_Capacity=itemView.findViewById(R.id.rating_capacity_);
-            FormFactor=itemView.findViewById(R.id.formFactor_);
-            Phase=itemView.findViewById(R.id.phase_);
-            CleaningRunningFrequencyHRS=itemView.findViewById(R.id.cleaning_Running_);
+            ImageView = itemView.findViewById(R.id.image_);
+            Manufacturer = itemView.findViewById(R.id.manufacturer_);
+            EquipmentName = itemView.findViewById(R.id.equipmentName_);
+            Equipment_id = itemView.findViewById(R.id.equip_slno);
+            Specification = itemView.findViewById(R.id.specification_);
+            Rating_Capacity = itemView.findViewById(R.id.rating_capacity_);
+            FormFactor = itemView.findViewById(R.id.formFactor_);
+            Phase = itemView.findViewById(R.id.phase_);
+            CleaningRunningFrequencyHRS = itemView.findViewById(R.id.cleaning_Running_);
         }
     }
 }

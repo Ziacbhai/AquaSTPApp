@@ -57,13 +57,14 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WelcomeSupervisor extends AppCompatActivity {
-    private TextView Sname,Smail,Smobile,ClickHere;
+    private TextView Sname, Smail, Smobile, ClickHere;
     CircleImageView ImageView;
     ImageView SupervisorExit;
     AppCompatButton sContinue;
     Context context;
     Bitmap imageBitmap;
     FloatingActionButton fab;
+
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
         SupervisorExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(WelcomeSupervisor.this,LoginSignupActivity.class);
+                Intent i = new Intent(WelcomeSupervisor.this, LoginSignupActivity.class);
                 startActivity(i);
             }
         });
@@ -102,12 +103,12 @@ public class WelcomeSupervisor extends AppCompatActivity {
         Smail.setText(mail);
         Smobile.setText(mobile);
 
-        Picasso.Builder builder=new Picasso.Builder(getApplication());
-        Picasso picasso=builder.build();
+        Picasso.Builder builder = new Picasso.Builder(getApplication());
+        Picasso picasso = builder.build();
         picasso.load(Uri.parse(userimage))
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
-                .into(ImageView );
+                .into(ImageView);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +121,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-                showImage(picasso,userimage);
+                showImage(picasso, userimage);
 
             }
         });
@@ -128,7 +129,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
         ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeSupervisor.this,ProfileActivity.class);
+                Intent in = new Intent(WelcomeSupervisor.this, ProfileActivity.class);
                 startActivity(in);
             }
         });
@@ -198,6 +199,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
             }
         });
     }
+
     private void opencamera() {
 
         ImagePicker.with(WelcomeSupervisor.this)
@@ -206,6 +208,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
                 .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
                 .start(10);
     }
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10 && resultCode == RESULT_OK) {
@@ -222,7 +225,9 @@ public class WelcomeSupervisor extends AppCompatActivity {
 
     private void postselelectedimage() {
 
-        if (imageBitmap == null) {return;}
+        if (imageBitmap == null) {
+            return;
+        }
 
         String url = Global.urlUpdateprofileImage;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -236,7 +241,6 @@ public class WelcomeSupervisor extends AppCompatActivity {
 
             try {
                 if (resp.getBoolean("success")) {
-
 
 
                     Global.customtoast(WelcomeSupervisor.this, getLayoutInflater(), "Image uploaded successfully");
@@ -280,7 +284,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
 
-                params.put("fileName",image);
+                params.put("fileName", image);
 
                 Log.d("YourTag", "Key: fileName, Value: " + image);
 
@@ -294,7 +298,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
     private void getuserdetails() {
 
         String url = Global.getuserprofileurl;
-        RequestQueue queue= Volley.newRequestQueue(WelcomeSupervisor.this);
+        RequestQueue queue = Volley.newRequestQueue(WelcomeSupervisor.this);
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
 
@@ -319,12 +323,12 @@ public class WelcomeSupervisor extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof TimeoutError) {
-                    Global.customtoast(WelcomeSupervisor.this, getLayoutInflater(),"Request Time-Out");
+                    Global.customtoast(WelcomeSupervisor.this, getLayoutInflater(), "Request Time-Out");
                 } else if (error instanceof ServerError) {
-                    Global.customtoast(WelcomeSupervisor.this, getLayoutInflater(),"Invalid Username or Password");
-                }  else if (error instanceof ParseError) {
-                    Global.customtoast(WelcomeSupervisor.this, getLayoutInflater(),"Parse Error ");
-                }  else if (error instanceof AuthFailureError) {
+                    Global.customtoast(WelcomeSupervisor.this, getLayoutInflater(), "Invalid Username or Password");
+                } else if (error instanceof ParseError) {
+                    Global.customtoast(WelcomeSupervisor.this, getLayoutInflater(), "Parse Error ");
+                } else if (error instanceof AuthFailureError) {
                     Global.customtoast(WelcomeSupervisor.this, getLayoutInflater(), "AuthFailureError");
                 }
             }
@@ -341,8 +345,8 @@ public class WelcomeSupervisor extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("username", Global.sharedPreferences.getString("username",null));
-                params.put("person_name", Global.sharedPreferences.getString("person_name",null));
+                params.put("username", Global.sharedPreferences.getString("username", null));
+                params.put("person_name", Global.sharedPreferences.getString("person_name", null));
 
                 return params;
             }

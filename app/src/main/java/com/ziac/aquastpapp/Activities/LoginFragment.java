@@ -58,7 +58,7 @@ import Models.StpModelClass;
 
 public class LoginFragment extends Fragment {
 
-    EditText Login_User,Login_pwd ;
+    EditText Login_User, Login_pwd;
     private CheckBox RememberMe;
     Button Login_btn;
     TextView termsOfuse, privacy, forgotpwd;
@@ -75,12 +75,14 @@ public class LoginFragment extends Fragment {
     public void onStart() {
         super.onStart();
     }*/
+
     private ProgressDialog progressDialog;
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-       context = getContext();
+        context = getContext();
 
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -120,10 +122,10 @@ public class LoginFragment extends Fragment {
 
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                 Global.editor = Global.sharedPreferences.edit();
-                if (RememberMe.isChecked()){
+                if (RememberMe.isChecked()) {
                     Global.editor.putString("user_name", username);
                     Global.editor.putString("password", pwd);
-                }else {
+                } else {
                     Global.editor.putString("user_name", "");
                     Global.editor.putString("password", "");
                 }
@@ -160,7 +162,7 @@ public class LoginFragment extends Fragment {
         privacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://ziacsoft.com/privacy.html")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://ziacsoft.com/privacy.html")));
             }
         });
 
@@ -193,12 +195,13 @@ public class LoginFragment extends Fragment {
         });
         return view;
     }
+
     private void dologinVolley() {
         username = Login_User.getText().toString();
         pwd = Login_pwd.getText().toString();
         progressDialog.show();
         String url = Global.tokenurl;
-        RequestQueue queue= Volley.newRequestQueue(getActivity());
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -218,7 +221,7 @@ public class LoginFragment extends Fragment {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Global.customtoast(getActivity(), getLayoutInflater(),"Invalid username / password error");
+                Global.customtoast(getActivity(), getLayoutInflater(), "Invalid username / password error");
                 progressDialog.dismiss();
             }
         }) {
@@ -245,8 +248,8 @@ public class LoginFragment extends Fragment {
     private void getuserprofile() {
 
         String url = Global.getuserprofileurl;
-        RequestQueue queue= Volley.newRequestQueue(getActivity());
-       // progressDialog.show();
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        // progressDialog.show();
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
             progressDialog.dismiss();
 
@@ -269,7 +272,7 @@ public class LoginFragment extends Fragment {
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 Global.editor = Global.sharedPreferences.edit();
                 Global.editor.putString("user_code", user_code);
-                Global.editor.putString("person_name",person_name);
+                Global.editor.putString("person_name", person_name);
                 Global.editor.putString("com_code", com_code);
                 Global.editor.putString("user_image", user_image);
                 Global.editor.putString("user_type", user_type);
@@ -280,13 +283,13 @@ public class LoginFragment extends Fragment {
                 Global.editor.putString("ayear", ayear);
                 Global.editor.putString("fin_stdate", finstdate);
                 Global.editor.putString("fin_eddate", fineddate);
-               // preferences.edit().remove("text").commit();
+                // preferences.edit().remove("text").commit();
                 Global.editor.commit();
 
                 JSONArray liststp = new JSONArray(respObj1.getString("data2"));
                 int i;
                 Global.StpList = new ArrayList<>();
-                for (i = 0;i<liststp.length();i++){
+                for (i = 0; i < liststp.length(); i++) {
                     final JSONObject e;
                     try {
                         e = liststp.getJSONObject(i);
@@ -331,12 +334,12 @@ public class LoginFragment extends Fragment {
                         getActivity().startActivity(s);
                         break;
                     case "M":
-                        Intent m =(new Intent(getActivity(), WelcomeManager.class));
+                        Intent m = (new Intent(getActivity(), WelcomeManager.class));
                         m.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(m);
                         break;
                     case "U":
-                        Intent u =(new Intent(getActivity(), WelcomeUser.class));
+                        Intent u = (new Intent(getActivity(), WelcomeUser.class));
                         u.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(u);
                         break;
@@ -347,7 +350,7 @@ public class LoginFragment extends Fragment {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-               // progressDialog.dismiss();
+                // progressDialog.dismiss();
 
             }
         }) {

@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.ziac.aquastpapp.R;
 
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class Repair_BreakUp_Adapter extends RecyclerView.Adapter<Repair_BreakUp_
     @NonNull
     @Override
     public Repair_BreakUp_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repair_breakup_design, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repair_breakup_design, parent, false);
         return new Viewholder(view);
     }
 
@@ -37,10 +39,11 @@ public class Repair_BreakUp_Adapter extends RecyclerView.Adapter<Repair_BreakUp_
         holder.Breakup_Item_name.setText(repairClass3.get(position).getRepair_Breakup_Item_name());
         holder.Breakup_qty.setText(repairClass3.get(position).getRepair_Breakup_Qty() + 0);
         holder.Breakup_price.setText(repairClass3.get(position).getRepair_Breakup_Price() + 0);
-        holder.Breakup_total.setText(repairClass3.get(position).getRepair_Breakup_amount() +0);
+        holder.Breakup_total.setText(repairClass3.get(position).getRepair_Breakup_amount() + 0);
         holder.Breakup_unit.setText(repairClass3.get(position).getRepair_Breakup_Unit());
         holder.Breakup_remark.setText(repairClass3.get(position).getRepair_Breakup_Remark());
     }
+
     @Override
     public int getItemCount() {
         return repairClass3.size();
@@ -48,7 +51,8 @@ public class Repair_BreakUp_Adapter extends RecyclerView.Adapter<Repair_BreakUp_
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView Breakup_Item_name,Breakup_qty,Breakup_price,Breakup_total ,Breakup_unit,Breakup_remark;
+        TextView Breakup_Item_name, Breakup_qty, Breakup_price, Breakup_total, Breakup_unit, Breakup_remark;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 

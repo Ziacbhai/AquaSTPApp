@@ -8,16 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.Repair_Details_Activity;
 import com.ziac.aquastpapp.R;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
 import Models.RepairClass1;
 
 public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder> {
@@ -32,14 +36,14 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
     @NonNull
     @Override
     public RepairAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repair_design, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repair_design, parent, false);
         return new Viewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RepairAdapter.Viewholder holder, int position) {
         //holder.Repno.setText(repairS.get(position).getREPNo());
-        holder.Amount.setText(repairClass1.get(position).getRepair_Amount()+"0");
+        holder.Amount.setText(repairClass1.get(position).getRepair_Amount() + "0");
 
         holder.Repair_remark.setText(repairClass1.get(position).getRemark());
         holder.Created_by.setText(repairClass1.get(position).getR_createdby());
@@ -60,23 +64,26 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date;
-        try {date = inputFormat.parse(dateString);
+        try {
+            date = inputFormat.parse(dateString);
             String Date = outputFormat.format(date);
             holder.RepairDate.setText(Date);
-        } catch (ParseException e) {e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
             return;
         }
         holder.Repair_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Global.repairClass1 = repairClass1.get(position);
-               Intent i = new Intent(context, Repair_Details_Activity.class);
-               context.startActivity(i);
+                Intent i = new Intent(context, Repair_Details_Activity.class);
+                context.startActivity(i);
 //                ((Activity) context).finish();
 
             }
         });
     }
+
     private String removeTrailingZero(double value) {
         // Convert the double to a string
         String formattedValue = String.valueOf(value);
@@ -86,21 +93,24 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
         }
         return formattedValue;
     }
+
     @Override
     public int getItemCount() {
         return repairClass1.size();
     }
+
     public class Viewholder extends RecyclerView.ViewHolder {
-         TextView  Repno,Amount,RepairDate,Repair_remark,Created_by;
+        TextView Repno, Amount, RepairDate, Repair_remark, Created_by;
         ImageView Repair_info;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-            Repno=itemView.findViewById(R.id.repno_);
-            Amount=itemView.findViewById(R.id.repairamount);
-            RepairDate=itemView.findViewById(R.id.repair_date);
-            Repair_remark=itemView.findViewById(R.id.remarks_remark);
-            Repair_info=itemView.findViewById(R.id.repair_info);
-            Created_by=itemView.findViewById(R.id.repair_createdby);
+            Repno = itemView.findViewById(R.id.repno_);
+            Amount = itemView.findViewById(R.id.repairamount);
+            RepairDate = itemView.findViewById(R.id.repair_date);
+            Repair_remark = itemView.findViewById(R.id.remarks_remark);
+            Repair_info = itemView.findViewById(R.id.repair_info);
+            Created_by = itemView.findViewById(R.id.repair_createdby);
         }
     }
 }

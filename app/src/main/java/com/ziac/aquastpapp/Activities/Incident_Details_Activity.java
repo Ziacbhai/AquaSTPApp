@@ -41,6 +41,7 @@ public class Incident_Details_Activity extends AppCompatActivity {
     IncidentsClass incidentsClass;
     Context context;
     private ProgressDialog progressDialog;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class Incident_Details_Activity extends AppCompatActivity {
         progressDialog.setCancelable(true);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         siteaddress = sharedPreferences.getString("site_address", "");
@@ -76,7 +77,7 @@ public class Incident_Details_Activity extends AppCompatActivity {
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("person_name", "");
 
-        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);

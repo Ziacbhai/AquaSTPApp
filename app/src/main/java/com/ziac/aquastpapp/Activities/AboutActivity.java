@@ -19,10 +19,10 @@ import com.ziac.aquastpapp.R;
 
 public class AboutActivity extends AppCompatActivity {
 
-   private CardView Website ,CallUs,MailUs,ChatUs,LinkedIn,FaceBook,Instagram,WhatsApp;
+    private CardView Website, CallUs, MailUs, ChatUs, LinkedIn, FaceBook, Instagram, WhatsApp;
 
     LinearLayout Locate;
-    LottieAnimationView Ziac ;
+    LottieAnimationView Ziac;
 
     Context context;
 
@@ -44,13 +44,13 @@ public class AboutActivity extends AppCompatActivity {
         WhatsApp = findViewById(R.id.whatsApp);
 
         Ziac = findViewById(R.id.animationView);
-       // Declaring the animation view
+        // Declaring the animation view
         LottieAnimationView animationView
                 = findViewById(R.id.animationView);
         animationView.addAnimatorUpdateListener(
-                        (animation) -> {
-                           // Global.customtoast(this,getLayoutInflater(), "Working");
-                          });
+                (animation) -> {
+                    // Global.customtoast(this,getLayoutInflater(), "Working");
+                });
         animationView.playAnimation();
 
         if (animationView.isAnimating()) {
@@ -60,9 +60,9 @@ public class AboutActivity extends AppCompatActivity {
         Locate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://maps.google.com/maps?daddr="+ "#5, 2nd Cross, CSI Compound,\n" +
+                String url = "http://maps.google.com/maps?daddr=" + "#5, 2nd Cross, CSI Compound,\n" +
                         "Mission Road, Bangalore 560 027";
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,  Uri.parse(url));
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
         });
@@ -76,8 +76,8 @@ public class AboutActivity extends AppCompatActivity {
         CallUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phno="+91 9845258746";
-                Intent i=new Intent(Intent.ACTION_DIAL,(Uri.parse("tel:" +phno)));
+                String phno = "+91 9845258746";
+                Intent i = new Intent(Intent.ACTION_DIAL, (Uri.parse("tel:" + phno)));
                 startActivity(i);
             }
         });

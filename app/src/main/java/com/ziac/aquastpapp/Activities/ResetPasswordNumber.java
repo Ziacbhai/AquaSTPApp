@@ -37,6 +37,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
     String usermobile;
     ProgressBar progressBar;
     Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +48,16 @@ public class ResetPasswordNumber extends AppCompatActivity {
         GetOTPBtn = findViewById(R.id.n_OTPbtn);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-     //   String mobileno = Global.sharedPreferences.getString("mobile", "");
+        //   String mobileno = Global.sharedPreferences.getString("mobile", "");
 
-       // FMobile.setText(mobileno);
+        // FMobile.setText(mobileno);
         progressBar = findViewById(R.id.progressbr);
 
         GetOTPBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 usermobile = ForgotMobile.getText().toString();
-               // progressBar.setVisibility(View.VISIBLE);
+                // progressBar.setVisibility(View.VISIBLE);
 //                 if (mobile.isEmpty()) {
 //                     ForgotPass.setError("Please Enter Password");
 //                     ForgotPass.requestFocus();
@@ -68,10 +69,11 @@ public class ResetPasswordNumber extends AppCompatActivity {
             }
         });
     }
+
     private void postDataUsingVolley() {
         String urlnumber = Global.forgotpasswordurl;
         progressBar.setVisibility(View.VISIBLE);
-        RequestQueue queue= Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, urlnumber, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -87,12 +89,12 @@ public class ResetPasswordNumber extends AppCompatActivity {
                     Global.editor.commit();
 
                     if (issuccess.equals("true")) {
-                        Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(),respObj.getString("error"));
+                        Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(), respObj.getString("error"));
                         startActivity(new Intent(ResetPasswordNumber.this, VerifyNumberOTP.class));
                     } else {
                         progressBar.setVisibility(View.GONE);
                         // Show a toast message for wrong username or password
-                        Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(),respObj.getString("error"));
+                        Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(), respObj.getString("error"));
                     }
 
                 } catch (JSONException e) {

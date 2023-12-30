@@ -12,14 +12,19 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.RepairBreakUpActivity;
 import com.ziac.aquastpapp.Activities.RepairTwoImageListActivity;
 import com.ziac.aquastpapp.R;
+
 import java.util.List;
+
 import Models.RepairClass2;
+
 public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_Adapter.Viewholder> {
 
     private List<RepairClass2> repairClass2;
@@ -33,7 +38,7 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
     @NonNull
     @Override
     public Repair_details_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repair_details_design, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repair_details_design, parent, false);
         return new Viewholder(view);
     }
 
@@ -42,7 +47,7 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
 
         holder.Eq_Name.setText(repairClass2.get(position).getD_Equipment_Name());
         holder.Eq_number.setText(repairClass2.get(position).getD_Equipment_Number());
-      //  holder.Repair_repaired_check.setText(repairsClassList.get(position).getD_Repaired());
+        //  holder.Repair_repaired_check.setText(repairsClassList.get(position).getD_Repaired());
         holder.Remark.setText(repairClass2.get(position).getD_Remark());
         holder.Amount.setText(repairClass2.get(position).getD_Amount());
 
@@ -73,21 +78,20 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
         holder.RImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Global.repairClass2 = repairClass2.get(position);
-                    Intent intent = new Intent(context, RepairTwoImageListActivity.class);
-                    context.startActivity(intent);
+                Global.repairClass2 = repairClass2.get(position);
+                Intent intent = new Intent(context, RepairTwoImageListActivity.class);
+                context.startActivity(intent);
             }
         });
         holder.RBreakup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Global.repairClass2 = repairClass2.get(position);
-                    Intent intent = new Intent(context, RepairBreakUpActivity.class);
-                    context.startActivity(intent);
+                Intent intent = new Intent(context, RepairBreakUpActivity.class);
+                context.startActivity(intent);
             }
         });
     }
-
 
 
     @Override
@@ -97,10 +101,11 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView Eq_Name,Eq_number,Repaired,Remark,Amount;
+        TextView Eq_Name, Eq_number, Repaired, Remark, Amount;
 
         CheckBox Repair_repaired_check;
-        ImageView RImage,RBreakup;
+        ImageView RImage, RBreakup;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 

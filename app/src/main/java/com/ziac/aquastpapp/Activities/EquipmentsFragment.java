@@ -24,18 +24,17 @@ import android.widget.TextView;
 import com.ziac.aquastpapp.R;
 
 public class EquipmentsFragment extends Fragment {
-    private CardView Pump ,Meters;
+    private CardView Pump, Meters;
     ProgressDialog progressDialog;
     Context context;
 
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_equipments, container, false);
+        View view = inflater.inflate(R.layout.fragment_equipments, container, false);
 
 
-
-        context=getContext();
+        context = getContext();
         user_topcard(view);
 
         Pump = view.findViewById(R.id.pump_p);
@@ -70,7 +69,7 @@ public class EquipmentsFragment extends Fragment {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
-        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
@@ -80,7 +79,7 @@ public class EquipmentsFragment extends Fragment {
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("person_name", "");
 
-        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
         txtsitename = view.findViewById(R.id.sitename);
         txtstpname = view.findViewById(R.id.stpname);

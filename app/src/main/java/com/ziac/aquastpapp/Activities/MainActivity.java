@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         toolbar = findViewById(R.id.toolbar);
-       Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
 
@@ -342,6 +342,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
     }
+
     @Override
     public void onBackPressed() {
 

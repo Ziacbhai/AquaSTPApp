@@ -56,8 +56,8 @@ import java.util.Map;
 
 public class WelcomeManager extends AppCompatActivity {
 
-    private TextView Managername,Managermail,Managermobile,ClickHere;
-    ImageView ImageView ,ManagerExit;
+    private TextView Managername, Managermail, Managermobile, ClickHere;
+    ImageView ImageView, ManagerExit;
     AppCompatButton mContinue;
     Context context;
     Bitmap imageBitmap;
@@ -85,7 +85,7 @@ public class WelcomeManager extends AppCompatActivity {
             public void onClick(View v) {
                 /*finishAffinity();*/
 
-                Intent i = new Intent(WelcomeManager.this,LoginSignupActivity.class);
+                Intent i = new Intent(WelcomeManager.this, LoginSignupActivity.class);
                 startActivity(i);
             }
         });
@@ -100,12 +100,12 @@ public class WelcomeManager extends AppCompatActivity {
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
 
         ///1
-        Picasso.Builder builder=new Picasso.Builder(getApplication());
-        Picasso picasso=builder.build();
+        Picasso.Builder builder = new Picasso.Builder(getApplication());
+        Picasso picasso = builder.build();
         picasso.load(Uri.parse(userimage))
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
-                .into(ImageView );
+                .into(ImageView);
         Managername.setText(person);
         Managermail.setText(mail);
         Managermobile.setText(mobile);
@@ -128,14 +128,14 @@ public class WelcomeManager extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-                showImage(picasso,userimage);
+                showImage(picasso, userimage);
 
             }
         });
         ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeManager.this,ProfileActivity.class);
+                Intent in = new Intent(WelcomeManager.this, ProfileActivity.class);
                 startActivity(in);
             }
         });
@@ -205,6 +205,7 @@ public class WelcomeManager extends AppCompatActivity {
             }
         });
     }
+
     private void opencamera() {
 
         ImagePicker.with(WelcomeManager.this)
@@ -213,6 +214,7 @@ public class WelcomeManager extends AppCompatActivity {
                 .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
                 .start(10);
     }
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10 && resultCode == RESULT_OK) {
@@ -229,7 +231,9 @@ public class WelcomeManager extends AppCompatActivity {
 
     private void postselelectedimage() {
 
-        if (imageBitmap == null) {return;}
+        if (imageBitmap == null) {
+            return;
+        }
 
         String url = Global.urlUpdateprofileImage;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -282,7 +286,7 @@ public class WelcomeManager extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
-                params.put("fileName",image);
+                params.put("fileName", image);
                 Log.d("YourTag", "Key: fileName, Value: " + image);
 
                 return params;
@@ -295,7 +299,7 @@ public class WelcomeManager extends AppCompatActivity {
     private void getuserdetails() {
 
         String url = Global.getuserprofileurl;
-        RequestQueue queue= Volley.newRequestQueue(WelcomeManager.this);
+        RequestQueue queue = Volley.newRequestQueue(WelcomeManager.this);
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
 
@@ -334,7 +338,7 @@ public class WelcomeManager extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
 
-                params.put("username", Global.sharedPreferences.getString("username",null));
+                params.put("username", Global.sharedPreferences.getString("username", null));
                 return params;
             }
         };
@@ -348,8 +352,9 @@ public class WelcomeManager extends AppCompatActivity {
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
+
     public void onBackPressed() {
-        Intent i = new Intent(WelcomeManager.this,LoginSignupActivity.class);
+        Intent i = new Intent(WelcomeManager.this, LoginSignupActivity.class);
         startActivity(i);
     }
 

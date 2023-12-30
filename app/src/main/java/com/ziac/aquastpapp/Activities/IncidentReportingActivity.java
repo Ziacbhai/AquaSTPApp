@@ -3,7 +3,6 @@ package com.ziac.aquastpapp.Activities;
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +38,7 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,7 +51,7 @@ import Adapters.IncidentAdapter;
 import Models.IncidentsClass;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class IncidentReportingActivity extends AppCompatActivity{
+public class IncidentReportingActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST = 1001;
     RecyclerView Incident_recyclerview;
     IncidentsClass incidents;
@@ -65,6 +65,7 @@ public class IncidentReportingActivity extends AppCompatActivity{
 
 
     private ProgressDialog progressDialog;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,7 @@ public class IncidentReportingActivity extends AppCompatActivity{
         Profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(IncidentReportingActivity.this,v);
+                PopupMenu popup = new PopupMenu(IncidentReportingActivity.this, v);
                 popup.getMenuInflater().inflate(R.menu.profile_pop_up, popup.getMenu());
 
                 // Retrieve data from SharedPreferences
@@ -158,7 +159,7 @@ public class IncidentReportingActivity extends AppCompatActivity{
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
 
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
@@ -168,7 +169,7 @@ public class IncidentReportingActivity extends AppCompatActivity{
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("person_name", "");
 
-        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
@@ -193,7 +194,7 @@ public class IncidentReportingActivity extends AppCompatActivity{
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String ayear = Global.sharedPreferences.getString("ayear", "2023");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
-        incident = incident + "comcode=" + com_code + "&ayear=" +  ayear + "&sstp1_code=" + sstp1_code ;
+        incident = incident + "comcode=" + com_code + "&ayear=" + ayear + "&sstp1_code=" + sstp1_code;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, incident, null, new Response.Listener<JSONObject>() {
             @Override
@@ -220,10 +221,10 @@ public class IncidentReportingActivity extends AppCompatActivity{
                         incidents.setInc_Date(e.getString("incident_date"));
                         incidents.setIncidents_Particulars(e.getString("incident_desc"));
 
-                        String incident_code= e.getString("incident_code");
+                        String incident_code = e.getString("incident_code");
                         Global.editor = Global.sharedPreferences.edit();
-                        Global.editor.putString("incident_code",incident_code);
-                       // Log.d("YourTag", "incident_code" + incident_code);
+                        Global.editor.putString("incident_code", incident_code);
+                        // Log.d("YourTag", "incident_code" + incident_code);
                         //Toast.makeText(context, ""+incident_code, Toast.LENGTH_SHORT).show();
                         Global.editor.commit();
 
@@ -240,7 +241,7 @@ public class IncidentReportingActivity extends AppCompatActivity{
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             public Map<String, String> getHeaders() {
 
                 Map<String, String> headers = new HashMap<String, String>();
@@ -248,6 +249,7 @@ public class IncidentReportingActivity extends AppCompatActivity{
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
 

@@ -27,11 +27,12 @@ public class LoginSignupActivity extends AppCompatActivity {
     ViewPager2 viewPager2;
     ViewPagerAdapter loginadapter;
     private boolean doubleBackToExitPressedOnce;
-Context context;
+    Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        context= this;
+        context = this;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginsignup);
@@ -56,12 +57,12 @@ Context context;
         registerTab.setText("REGISTER");
         tabLayout.addTab(registerTab);
 
-        loginTab.view.setBackgroundColor( Color.rgb(1,163,163) );
-        tabLayout.setTabTextColors(Color.rgb(1,163,163),Color.WHITE );
+        loginTab.view.setBackgroundColor(Color.rgb(1, 163, 163));
+        tabLayout.setTabTextColors(Color.rgb(1, 163, 163), Color.WHITE);
         //tabLayout.setSelectedTabIndicatorColor(Color.rgb(1,163,163));
 
         viewPager2 = findViewById(R.id.viewpagerlogin);
-        loginadapter  =  new ViewPagerAdapter(this);
+        loginadapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(loginadapter);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -69,7 +70,7 @@ Context context;
             public void onTabSelected(TabLayout.Tab tab) {
                 // Change the indicator color when a tab is selected
                 viewPager2.setCurrentItem(tab.getPosition());
-                tab.view.setBackgroundColor(Color.rgb(1,163,163) );
+                tab.view.setBackgroundColor(Color.rgb(1, 163, 163));
 
                 /*for (int i = 0; i < tabLayout.getTabCount(); i++) {
                     if (i == tab.getPosition()) {
@@ -92,7 +93,6 @@ Context context;
             }
         });
     }
-
 
 
     public void onBackPressed() {

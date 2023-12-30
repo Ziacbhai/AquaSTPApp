@@ -112,32 +112,33 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 
     }
+
     private void user_topcard() {
 //        progressDialog = new ProgressDialog(context);
 //        progressDialog.setMessage("Loading !!");
 //        progressDialog.setCancelable(true);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String stpname,sitename,processname,consumption_date,consumption_no,consumption_amount;
+        String stpname, sitename, processname, consumption_date, consumption_no, consumption_amount;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         processname = sharedPreferences.getString("process_name", "");
 
         consumption_date = Global.ConsumptionClass.getDate();
-        consumption_no =  Global.ConsumptionClass.getCon1_code();
-        consumption_amount =  Global.ConsumptionClass.getAmount();
+        consumption_no = Global.ConsumptionClass.getCon1_code();
+        consumption_amount = Global.ConsumptionClass.getAmount();
 
-        TextView txtsitename,txtstpname,textno,textdate,texamount;
+        TextView txtsitename, txtstpname, textno, textdate, texamount;
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
-        textno=findViewById(R.id.consumption_no);
-        textdate=findViewById(R.id.consumption_date);
-        texamount=findViewById(R.id.consumption_amount);
+        textno = findViewById(R.id.consumption_no);
+        textdate = findViewById(R.id.consumption_date);
+        texamount = findViewById(R.id.consumption_amount);
         txtsitename.setText(sitename);
         txtstpname.setText(stpname + " / " + processname);
 
         textno.setText(consumption_no);
-        texamount.setText(consumption_amount + "0") ;
+        texamount.setText(consumption_amount + "0");
 
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -201,7 +202,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         Equipment_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               getEquipmentsSpinnerPopup();
+                getEquipmentsSpinnerPopup();
             }
         });
         Item_code.setOnClickListener(new View.OnClickListener() {
@@ -249,6 +250,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             }
         });
     }
+
     private void updateConsumables_details() {
         String qty = Qty_cb.getText().toString();
         String equipment_code = equipment_spinner.getEquipment_code();
@@ -282,7 +284,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-               // Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
                 if (error instanceof TimeoutError) {
                     Toast.makeText(Consumption_Details_Activity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NoConnectionError) {
@@ -313,10 +315,10 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
-                params.put("con1_code",con1_code);
+                params.put("con1_code", con1_code);
                 params.put("con2_code", "0");
 
-                Log.d("params","parameter"+params);
+                Log.d("params", "parameter" + params);
                 return params;
             }
 
@@ -330,11 +332,12 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         queue.add(stringRequest);
 
     }
+
     private void getConsumablesDetails() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String consumables_d = Global.Get_Consumables_Details;
         String Consumable_Details_API = consumables_d + "con1_code=" + Global.ConsumptionClass.getCon1_code();
-       // Toast.makeText(context, ""+Global.ConsumablesClass.getCon_no(), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(context, ""+Global.ConsumablesClass.getCon_no(), Toast.LENGTH_SHORT).show();
 
         progressDialog.show();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Consumable_Details_API, null, new Response.Listener<JSONObject>() {
@@ -372,7 +375,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                         consumptionClass2.setD_unit(e.getString("unit_name"));
                         consumptionClass2.setD_rate(e.getString("prch_price"));
 
-                       // Toast.makeText(context, ""+consumables_Class.getD_item_name(), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(context, ""+consumables_Class.getD_item_name(), Toast.LENGTH_SHORT).show();
                     /*    Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("equip_code", consumables_Class.getEquip_code());
@@ -426,6 +429,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
 
     }
+
     private void getEquipmentsList() {
 
         String Url = Global.api_List_Get_Equipments + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
@@ -476,6 +480,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
         queue.add(jsonArrayRequest);
     }
+
     private void getEquipmentsSpinnerPopup() {
 
 
@@ -515,7 +520,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         });
     }
 
-    private class EquipmentSelect_Adapter extends BaseAdapter implements Filterable{
+    private class EquipmentSelect_Adapter extends BaseAdapter implements Filterable {
 
         private ArrayList<EquipmentListClassConsumption> eQarrayList;
 
@@ -542,7 +547,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         public View getView(int i, View convertView, ViewGroup parent) {
             View v = getLayoutInflater().inflate(R.layout.popup_equipmentlist, null);
 
-            LinearLayout layout =  v.findViewById(R.id.select);
+            LinearLayout layout = v.findViewById(R.id.select);
 
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
             TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
@@ -601,6 +606,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             };
         }
     }
+
     private void getItemSpinner() {
         String Url = Global.api_List_Get_Item + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
 
@@ -621,7 +627,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                         item.setItem_name(equipmentJson.getString("prd_name"));
 
                         //Log.d("YourTag", "Name: " + equipmentJson.getString("equip_name"));
-                       // Log.d("YourTag", "Code: " + equipmentJson.getString("sstp1_code"));
+                        // Log.d("YourTag", "Code: " + equipmentJson.getString("sstp1_code"));
                         Global.Consumbeles_item.add(item);
 
                     } catch (JSONException ex) {
@@ -641,7 +647,8 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 } else if (error instanceof NetworkError) {
                     Toast.makeText(Consumption_Details_Activity.this, "Network Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ParseError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();}
+                    Toast.makeText(Consumption_Details_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();
+                }
 
             }
         }) {
@@ -655,11 +662,12 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         queue.add(jsonArrayRequest);
 
     }
+
     private void getItemSpinnerPopup() {
 
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         zDialog.setContentView(R.layout.equipment_item);
-        ListView lvItem= zDialog.findViewById(R.id.lvequipment);
+        ListView lvItem = zDialog.findViewById(R.id.lvequipment);
        /* TextView Equipment_name =zDialog.findViewById(R.id.euipment_name);
         TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);*/
 
@@ -690,6 +698,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             }
         });
     }
+
     public class ItemSelect_Adapter extends BaseAdapter implements Filterable {
 
         private ArrayList<ItemListClassConsumables> mDataArrayList;
@@ -720,8 +729,8 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             View v = getLayoutInflater().inflate(R.layout.popup_itemlist_consumption, null);
 
 
-           TextView tvequipmentnameitem = v.findViewById(R.id.tvitemfirst);
-           TextView tvenameitem = v.findViewById(R.id.tvitemtwoc);
+            TextView tvequipmentnameitem = v.findViewById(R.id.tvitemfirst);
+            TextView tvenameitem = v.findViewById(R.id.tvitemtwoc);
 
             Item_spinner = mDataArrayList.get(i);
 
@@ -769,6 +778,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             };
         }
     }
+
     private void showProgressDialog() {
         if (progressDialog != null && !progressDialog.isShowing()) {
             progressDialog.show();

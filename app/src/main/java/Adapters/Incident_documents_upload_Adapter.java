@@ -55,7 +55,7 @@ public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Inci
     @NonNull
     @Override
     public Incident_documents_upload_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.incident_docs_list_upload, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.incident_docs_list_upload, parent, false);
         return new Viewholder(view);
     }
 
@@ -90,11 +90,10 @@ public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Inci
             }
         });
 
-        Picasso.Builder builder=new Picasso.Builder(context);
-        Picasso picasso=builder.build();
+        Picasso.Builder builder = new Picasso.Builder(context);
+        Picasso picasso = builder.build();
         picasso.load(Uri.parse(Global.incident_image + incidentsClasses.get(position).getImageList())).error(R.drawable.no_image_available_icon).into(holder.In_doc_show);
     }
-
 
 
     @Override
@@ -104,8 +103,9 @@ public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Inci
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        ImageView Incident_delete_doc,In_doc_show;
+        ImageView Incident_delete_doc, In_doc_show;
         TextView In_doc_name;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 

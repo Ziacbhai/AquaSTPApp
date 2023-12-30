@@ -41,7 +41,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VerifyEmailOTP extends AppCompatActivity {
-    String otp ,Newpassword;
+    String otp, Newpassword;
     TextView Resendotp;
     PinView Enter_pinnumber;
     AppCompatButton EVerify;
@@ -56,10 +56,10 @@ public class VerifyEmailOTP extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verifiy_email_otp);
-        Enter_pinnumber=findViewById(R.id.et_pinview);
+        Enter_pinnumber = findViewById(R.id.et_pinview);
         new OTP_Receiver().setPinView(Enter_pinnumber);
         requestSMSPermission();
-        EVerify=findViewById(R.id.everifyotp);
+        EVerify = findViewById(R.id.everifyotp);
         progressBar = findViewById(R.id.progressbr);
         EnterNewpwd = findViewById(R.id.enewpassword);
         Resendotp = findViewById(R.id.resendEotp);
@@ -113,7 +113,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
         String Eurl = Global.validateotpurl;
         progressBar.setVisibility(View.VISIBLE);
 
-        RequestQueue queue= Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest request = new StringRequest(Request.Method.POST, Eurl, new Response.Listener<String>() {
             @Override
@@ -128,12 +128,12 @@ public class VerifyEmailOTP extends AppCompatActivity {
 //                    Global.editor.putString("username", username);
 //                    Global.editor.putString("mobile", mobileno);
 //                    Global.editor.commit();
-                    Global.customtoast(VerifyEmailOTP.this, getLayoutInflater(),error);
+                    Global.customtoast(VerifyEmailOTP.this, getLayoutInflater(), error);
                     progressBar.setVisibility(View.GONE);
-                    if(issuccess.equals("true")){
+                    if (issuccess.equals("true")) {
                         startActivity(new Intent(VerifyEmailOTP.this, LoginSignupActivity.class));
 
-                    }else {
+                    } else {
                         showAlertDialog("Wrong OTP", "The entered OTP is incorrect. Please try again.");
 
                     }
@@ -141,7 +141,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     progressBar.setVisibility(View.GONE);
-                    Global.customtoast(VerifyEmailOTP.this,getLayoutInflater(), e.getMessage());
+                    Global.customtoast(VerifyEmailOTP.this, getLayoutInflater(), e.getMessage());
                 }
             }
         }, new Response.ErrorListener() {
@@ -150,12 +150,12 @@ public class VerifyEmailOTP extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("otp", otp);
-                params.put("Mobile","");
+                params.put("Mobile", "");
                 params.put("FPType", "E");
                 params.put("UserName", "");
                 params.put("NewPassword", Newpassword);
@@ -171,14 +171,16 @@ public class VerifyEmailOTP extends AppCompatActivity {
         };
         queue.add(request);
     }
+
     private void requestSMSPermission() {
-        if (ContextCompat.checkSelfPermission(VerifyEmailOTP.this,Manifest.permission.RECEIVE_SMS)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(VerifyEmailOTP.this,new String[]{
+        if (ContextCompat.checkSelfPermission(VerifyEmailOTP.this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(VerifyEmailOTP.this, new String[]{
                     Manifest.permission.RECEIVE_SMS
-            },100);
+            }, 100);
         }
 
     }
+
     private void showAlertDialog(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title)

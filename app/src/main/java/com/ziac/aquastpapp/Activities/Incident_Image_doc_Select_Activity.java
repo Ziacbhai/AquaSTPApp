@@ -22,7 +22,7 @@ public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
     RecyclerView Incident_Image_list_Rv;
     IncidentsClass incidentsClass;
     Context context;
-    CardView In_image_,In_docs_;
+    CardView In_image_, In_docs_;
 
     TextView usersiteH, userstpH, usersiteaddressH, Mailid, Mobno, personnameH;
     private String Personname, mail, Stpname, Sitename, SiteAddress, Process, Mobile;

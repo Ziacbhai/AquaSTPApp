@@ -44,15 +44,16 @@ import java.util.concurrent.TimeUnit;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
-    EditText Newpwd ,Rpwd;
+    EditText Newpwd, Rpwd;
     AppCompatButton Pwdconfirm;
 
     ProgressBar progressBar;
     ImageView Backarrowbtn;
     private boolean passwordvisible = false;
-    String username,newpassword,repeatmpassword;
+    String username, newpassword, repeatmpassword;
 
     Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,8 +140,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 } else if (newpassword.length() < 6) {
                     Toast.makeText(ChangePasswordActivity.this, "Password must be at least 6 characters long.", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if (!newpassword.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
+                } else if (!newpassword.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
                     Toast toast = Toast.makeText(ChangePasswordActivity.this, "password must contain mix of upper and lower case letters as well as digits and one special charecter !!", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
                     toast.show();
@@ -152,7 +152,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     updatepassword();
                 } else {
                     Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Passwords do not match!!");
-                }            }
+                }
+            }
         });
 
     }
@@ -160,15 +161,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private void updatepassword() {
 
         String url = Global.changetpasswordurl;
-       progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
 
         // creating a new variable for our request queue
-        RequestQueue queue= Volley.newRequestQueue(ChangePasswordActivity.this);
+        RequestQueue queue = Volley.newRequestQueue(ChangePasswordActivity.this);
 
 
         progressBar.setVisibility(View.GONE);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,url , new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {
                 JSONObject response = null;
@@ -205,7 +206,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 // below line we are creating a map for
@@ -215,10 +216,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("UserName", username);
-                params.put("NewPassword",newpassword);
+                params.put("NewPassword", newpassword);
                 return params;
             }
         };

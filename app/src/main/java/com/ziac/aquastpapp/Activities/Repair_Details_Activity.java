@@ -1,6 +1,7 @@
 package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -8,6 +9,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -26,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,9 +40,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -49,10 +54,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
 import Adapters.Repair_details_Adapter;
 import Models.EquipmentRepairListClass;
 import Models.RepairClass1;
 import Models.RepairClass2;
+
 public class Repair_Details_Activity extends AppCompatActivity {
     RepairClass2 repairClass2;
     TextView Remark_A;
@@ -353,7 +360,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
                 params.put("repair1_code", Global.repairClass1.getRepair_code());
-               //params.put("repair1_code", "22");
+                //params.put("repair1_code", "22");
                 return params;
             }
         };
@@ -495,5 +502,5 @@ public class Repair_Details_Activity extends AppCompatActivity {
         }
     }
 
-   
+
 }

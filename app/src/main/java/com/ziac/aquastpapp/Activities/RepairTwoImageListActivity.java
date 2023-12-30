@@ -1,9 +1,11 @@
 package com.ziac.aquastpapp.Activities;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,13 +30,16 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import Adapters.Repairtwo_image_list_Adapter;
 import Models.RepairClass2;
 import Models.RepairClass4;
@@ -48,6 +54,7 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
     ImageView RepairImage;
     EditText Remark_repair;
     Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +67,7 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //RepairImage = findViewById(R.id.repairtqo_image_list);
         //Remark_repair = findViewById(R.id.repair_image_remark);
-         Repair_image_uploadbtn = findViewById(R.id.repair_image_uploadbtn);
+        Repair_image_uploadbtn = findViewById(R.id.repair_image_uploadbtn);
 
         if (!Global.isNetworkAvailable(this)) {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
@@ -70,7 +77,7 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         Repair_image_uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RepairTwoImageListActivity.this,RepairTwo_Upload_Activity.class));
+                startActivity(new Intent(RepairTwoImageListActivity.this, RepairTwo_Upload_Activity.class));
                 finish();
             }
         });
@@ -94,6 +101,7 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
             //Repair_postselelectedimage();
         }
     }
+
     private void getRepairImages() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.Repair_two_Imagelist + "repair2_code=" + Global.repairClass2.getD_Repairedtwo();
@@ -161,7 +169,6 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         };
         queue.add(jsonObjectRequest);
     }
-
 
 
 }

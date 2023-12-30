@@ -542,6 +542,7 @@ public class SignUpFragment extends Fragment {
         }
 
     }
+
     private void CreateNewUser() {
 
 
@@ -633,37 +634,37 @@ public class SignUpFragment extends Fragment {
         progressDialog.show();
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Global.registration, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String sresponse) {
+            @Override
+            public void onResponse(String sresponse) {
+                progressDialog.dismiss();
+                JSONObject response = null;
+                try {
+                    response = new JSONObject(sresponse);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+                //Log.d("Register", sresponse);
+
+                try {
+                    if (response.getBoolean("isSuccess")) {
+                        Toast.makeText(getActivity(), "Registration successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getActivity(), LoginSignupActivity.class));
+                        //finish();
+                    } else {
+                        //textViewError.setText(response.getString("error"));
+                        Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
-                        JSONObject response = null;
-                        try {
-                            response = new JSONObject(sresponse);
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-
-                        //Log.d("Register", sresponse);
-
-                        try {
-                            if (response.getBoolean("isSuccess")) {
-                                Toast.makeText(getActivity(), "Registration successfully", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getActivity(), LoginSignupActivity.class));
-                                //finish();
-                            } else {
-                                //textViewError.setText(response.getString("error"));
-                                Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_SHORT).show();
-                                progressDialog.dismiss();
-                                //textViewError.setVisibility(View.VISIBLE);
-                            }
-
-                            progressDialog.dismiss();
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-
+                        //textViewError.setVisibility(View.VISIBLE);
                     }
-                }, new Response.ErrorListener() {
+
+                    progressDialog.dismiss();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();

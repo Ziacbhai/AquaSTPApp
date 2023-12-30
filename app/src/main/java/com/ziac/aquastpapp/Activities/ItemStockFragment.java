@@ -1,7 +1,6 @@
 package com.ziac.aquastpapp.Activities;
 
 
-
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,12 +8,14 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,23 +23,27 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import Adapters.ItemStockAdapter;
 import Models.ItemStockClass;
 
 public class ItemStockFragment extends Fragment {
     RecyclerView consumableRecyclerView;
     ItemStockClass itemStockClass;
-    TextView Consumables_Code ,Consumables_Name,Consumables_Stock,Consumables_Units;
+    TextView Consumables_Code, Consumables_Name, Consumables_Stock, Consumables_Units;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        View view =  inflater.inflate(R.layout.fragment_itemstock, container, false);
+        View view = inflater.inflate(R.layout.fragment_itemstock, container, false);
 
         consumableRecyclerView = view.findViewById(R.id.consumable_recyclerview);
         consumableRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -48,15 +53,16 @@ public class ItemStockFragment extends Fragment {
         GetItemStockItems();
         return view;
     }
+
     private void GetItemStockItems() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
-        String urlstock = Global.GetItemStock ;
+        String urlstock = Global.GetItemStock;
 
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String site_code = Global.sharedPreferences.getString("site_code", "0");
-        urlstock = urlstock + "com_code=" + com_code  + "&site_code=" + site_code ;
+        urlstock = urlstock + "com_code=" + com_code + "&site_code=" + site_code;
 
-        Log.d("SITECODE","Site code"+site_code);
+        Log.d("SITECODE", "Site code" + site_code);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, urlstock, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -95,7 +101,7 @@ public class ItemStockFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
             }
-        }){
+        }) {
             public Map<String, String> getHeaders() {
                 // below line we are creating a map for
                 // storing our values in key and value pair.
@@ -104,6 +110,7 @@ public class ItemStockFragment extends Fragment {
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 /*params.put("part_no", Consumables_Code.getText().toString());

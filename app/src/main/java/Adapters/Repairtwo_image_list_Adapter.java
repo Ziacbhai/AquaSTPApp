@@ -19,8 +19,10 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.ziac.aquastpapp.Activities.Global;
@@ -33,8 +35,8 @@ import Models.RepairClass2;
 import Models.RepairClass4;
 
 public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo_image_list_Adapter.Viewholder> {
-     ArrayList<RepairClass4> repairClasses4;
-     Context context;
+    ArrayList<RepairClass4> repairClasses4;
+    Context context;
     Picasso.Builder builder;
     Picasso picasso;
 
@@ -46,13 +48,14 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
     @NonNull
     @Override
     public Repairtwo_image_list_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repairtwoimagelist, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repairtwoimagelist, parent, false);
         return new Viewholder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull Repairtwo_image_list_Adapter.Viewholder holder, int position) {
-        Picasso.Builder builder=new Picasso.Builder(context);
-        Picasso picasso=builder.build();
+        Picasso.Builder builder = new Picasso.Builder(context);
+        Picasso picasso = builder.build();
         String originalImageUrl = repairClasses4.get(position).getI_Repair_image();
         String trimmedImageUrl = originalImageUrl.replace('~', ' ').trim();
         picasso.load(Uri.parse(Global.repair_images + trimmedImageUrl))
@@ -63,7 +66,7 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
         holder.repair_image_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showImage(picasso,repairClasses4.get(position).getIImageList());
+                showImage(picasso, repairClasses4.get(position).getIImageList());
             }
         });
 
@@ -151,8 +154,6 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
     }
 
 
-
-
     @Override
     public int getItemCount() {
         return repairClasses4.size();
@@ -161,6 +162,7 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
     public class Viewholder extends RecyclerView.ViewHolder {
         ImageView repair_image_show;
         TextView repair_image_remark;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             repair_image_show = itemView.findViewById(R.id.repairtwo_image_list);

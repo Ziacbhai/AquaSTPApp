@@ -43,7 +43,7 @@ public class IncidentReportingFragment extends Fragment {
     RecyclerView Incident_recyclerview;
     Context context;
     IncidentsClass incidents;
-     ProgressDialog progressDialog;
+    ProgressDialog progressDialog;
     IncidentAdapter incidentAdapter;
 
     @SuppressLint("MissingInflatedId")
@@ -111,7 +111,7 @@ public class IncidentReportingFragment extends Fragment {
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String ayear = Global.sharedPreferences.getString("ayear", "2023");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
-        incident = incident + "comcode=" + com_code + "&ayear=" +  ayear + "&sstp1_code=" + sstp1_code ;
+        incident = incident + "comcode=" + com_code + "&ayear=" + ayear + "&sstp1_code=" + sstp1_code;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, incident, null, new Response.Listener<JSONObject>() {
             @Override
@@ -138,9 +138,9 @@ public class IncidentReportingFragment extends Fragment {
                         incidents.setInc_Date(e.getString("incident_date"));
                         incidents.setIncidents_Particulars(e.getString("incident_desc"));
 
-                        String incident_code= incidents.getInc_No();
+                        String incident_code = incidents.getInc_No();
                         Global.editor = Global.sharedPreferences.edit();
-                        Global.editor.putString("incident_code",incident_code);
+                        Global.editor.putString("incident_code", incident_code);
                         Global.editor.commit();
 
                     } catch (JSONException ex) {
@@ -156,7 +156,7 @@ public class IncidentReportingFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             public Map<String, String> getHeaders() {
 
                 Map<String, String> headers = new HashMap<String, String>();
@@ -164,6 +164,7 @@ public class IncidentReportingFragment extends Fragment {
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
 

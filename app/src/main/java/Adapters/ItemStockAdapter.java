@@ -23,12 +23,14 @@ public class ItemStockAdapter extends RecyclerView.Adapter<ItemStockAdapter.View
         this.context = context;
         this.itemStockClasses = itemStockClasses;
     }
+
     @NonNull
     @Override
     public ItemStockAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemstock_design, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemstock_design, parent, false);
         return new Viewholder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull ItemStockAdapter.Viewholder holder, int position) {
 
@@ -37,12 +39,15 @@ public class ItemStockAdapter extends RecyclerView.Adapter<ItemStockAdapter.View
         holder.Consumables_Stock.setText(itemStockClasses.get(position).get_Stock());
         holder.Consumables_Units.setText(itemStockClasses.get(position).get_Units());
     }
+
     @Override
     public int getItemCount() {
         return itemStockClasses.size();
     }
+
     public class Viewholder extends RecyclerView.ViewHolder {
-        TextView Consumables_Code ,Consumables_Name,Consumables_Stock,Consumables_Units;
+        TextView Consumables_Code, Consumables_Name, Consumables_Stock, Consumables_Units;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             Consumables_Code = itemView.findViewById(R.id.code_);

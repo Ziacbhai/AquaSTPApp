@@ -14,7 +14,7 @@ import com.ziac.aquastpapp.R;
 
 public class RecoveryPasswordWith extends AppCompatActivity {
 
-    CardView Rcemail,Rcusername,Rcmobile;
+    CardView Rcemail, Rcusername, Rcmobile;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -25,13 +25,13 @@ public class RecoveryPasswordWith extends AppCompatActivity {
         Rcusername = findViewById(R.id.usernamer);
         Rcmobile = findViewById(R.id.mobiler);
 
-       Rcemail.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent re = new Intent(RecoveryPasswordWith.this,ResetPasswordEmail.class);
-               startActivity(re);
-           }
-       });
+        Rcemail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent re = new Intent(RecoveryPasswordWith.this, ResetPasswordEmail.class);
+                startActivity(re);
+            }
+        });
 
         Rcusername.setOnClickListener(new View.OnClickListener() {
             @Override

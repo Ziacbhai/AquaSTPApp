@@ -28,7 +28,7 @@ public class Lab_Test_Details_Adapter extends RecyclerView.Adapter<Lab_Test_Deta
     @NonNull
     @Override
     public Lab_Test_Details_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lab_test_details_design, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lab_test_details_design, parent, false);
         return new Viewholder(view);
     }
 
@@ -46,7 +46,8 @@ public class Lab_Test_Details_Adapter extends RecyclerView.Adapter<Lab_Test_Deta
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        TextView TestMethod_d,Result_d,Units_d,Kspcb_Standard;
+        TextView TestMethod_d, Result_d, Units_d, Kspcb_Standard;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             TestMethod_d = itemView.findViewById(R.id.d_lab_testmethod);

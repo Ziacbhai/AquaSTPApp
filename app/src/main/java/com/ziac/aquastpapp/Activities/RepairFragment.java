@@ -56,15 +56,17 @@ public class RepairFragment extends Fragment {
 
     RepairClass1 repairClass1;
     RecyclerView RepairRecyclerview;
-     TextView  Repno, Amount,RepairDate,tvSelectedDate,Remark_A;;
-    String currentDatevalue,currentDateValue2;
-     ProgressDialog progressDialog;
+    TextView Repno, Amount, RepairDate, tvSelectedDate, Remark_A;
+    ;
+    String currentDatevalue, currentDateValue2;
+    ProgressDialog progressDialog;
 
     Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_repair, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_repair, container, false);
         context = getContext();
 
 
@@ -93,7 +95,6 @@ public class RepairFragment extends Fragment {
         RepairRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
 
-
         Date currentDate = new Date();
         SimpleDateFormat dateFormat1 = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -109,7 +110,7 @@ public class RepairFragment extends Fragment {
             dateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         }
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-             currentDateValue2 = dateFormat2.format(currentDate);
+            currentDateValue2 = dateFormat2.format(currentDate);
         }
 
         /*Global.sharedPreferences.edit();
@@ -125,7 +126,7 @@ public class RepairFragment extends Fragment {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
-        String personname,useremail,stpname,sitename,siteaddress,processname,usermobile;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
@@ -135,7 +136,7 @@ public class RepairFragment extends Fragment {
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("person_name", "");
 
-        TextView txtsitename,txtstpname,txtsiteaddress,txtuseremail,txtusermobile,txtpersonname;
+        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
         txtsitename = view.findViewById(R.id.sitename);
         txtstpname = view.findViewById(R.id.stpname);
@@ -159,7 +160,7 @@ public class RepairFragment extends Fragment {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_repair_layout, null);
 
-        AppCompatButton Update_A,Cancel_A;
+        AppCompatButton Update_A, Cancel_A;
 
         tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
         Remark_A = dialogView.findViewById(R.id.remark_alert_r);
@@ -167,7 +168,7 @@ public class RepairFragment extends Fragment {
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_r);
 
         tvSelectedDate.setText(currentDateValue2);
-       // tvSelectedDate.setText(currentDatevalue);
+        // tvSelectedDate.setText(currentDatevalue);
         tvSelectedDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,6 +199,7 @@ public class RepairFragment extends Fragment {
             }
         });
     }
+
     private void showDatePicker() {
         // Use the current date as the initial date
         Calendar calendar = null;
@@ -246,6 +248,7 @@ public class RepairFragment extends Fragment {
         String current_date = day + "-" + month + "-" + year;
         tvSelectedDate.setText(current_date);
     }
+
     private void getRepair() {
         showProgressDialog();
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
@@ -254,7 +257,7 @@ public class RepairFragment extends Fragment {
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String ayear = Global.sharedPreferences.getString("ayear", "2023");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
-        repair = repair + "comcode=" + com_code + "&ayear=" +  ayear + "&sstp1_code=" + sstp1_code ;
+        repair = repair + "comcode=" + com_code + "&ayear=" + ayear + "&sstp1_code=" + sstp1_code;
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, repair, null, new Response.Listener<JSONObject>() {
             @Override
@@ -302,13 +305,14 @@ public class RepairFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
              /*   params.put("rep_no", Repno.getText().toString());
@@ -321,10 +325,11 @@ public class RepairFragment extends Fragment {
 
 
     }
+
     private void updateRepairs() {
 
-        String remarks=Remark_A.getText().toString();
-        String condate=currentDatevalue.toString();
+        String remarks = Remark_A.getText().toString();
+        String condate = currentDatevalue.toString();
 
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.updateRepairAddUpdate;
@@ -340,7 +345,7 @@ public class RepairFragment extends Fragment {
 
                 try {
                     if (response.getBoolean("isSuccess")) {
-                        Toast.makeText(getActivity(), "Updated successfully !!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Updated successfully !!", Toast.LENGTH_SHORT).show();
                         getRepair();
                     } else {
                         Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_SHORT).show();
@@ -355,7 +360,7 @@ public class RepairFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
@@ -363,10 +368,11 @@ public class RepairFragment extends Fragment {
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("rep_date", condate);
-                params.put("remarks",remarks);
+                params.put("remarks", remarks);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));

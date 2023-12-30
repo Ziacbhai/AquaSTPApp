@@ -43,7 +43,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
     boolean passwordVisible;
     AppCompatButton UVerify;
     ProgressBar progressBar;
-   Context context;
+    Context context;
 
     private TextInputEditText UNewpwd;
 

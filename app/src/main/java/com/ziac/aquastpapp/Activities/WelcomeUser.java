@@ -84,7 +84,7 @@ public class WelcomeUser extends AppCompatActivity {
             }
         });
 
-        String person_name,user_mail,user_mobile,user_image;
+        String person_name, user_mail, user_mobile, user_image;
         person_name = Global.sharedPreferences.getString("person_name", "");
         user_mail = Global.sharedPreferences.getString("user_email", "");
         user_mobile = Global.sharedPreferences.getString("user_mobile", "");

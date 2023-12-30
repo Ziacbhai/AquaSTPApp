@@ -32,7 +32,7 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
     private List<StpModelClass> stpModelClassList;
     Context context;
 
-    public void setFilteredList(List<StpModelClass> filteredList){
+    public void setFilteredList(List<StpModelClass> filteredList) {
         this.stpModelClassList = filteredList;
         notifyDataSetChanged();
 
@@ -46,7 +46,7 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
     @NonNull
     @Override
     public SiteLocationAdapter.StpViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.companydetails, parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.companydetails, parent, false);
         return new StpViewHolder(view);
     }
 
@@ -85,24 +85,24 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
         });
 
     }
+
     @Override
     public int getItemCount() {
         return stpModelClassList.size();
     }
 
 
-
     public class StpViewHolder extends RecyclerView.ViewHolder {
 
-        TextView Sucode,SiteName,StpName ;
+        TextView Sucode, SiteName, StpName;
         AppCompatButton Selectcompany;
+
         public StpViewHolder(@NonNull View itemView) {
             super(itemView);
             Sucode = itemView.findViewById(R.id.sucode);
             StpName = itemView.findViewById(R.id.stpname);
             SiteName = itemView.findViewById(R.id.sitename);
             Selectcompany = itemView.findViewById(R.id.selectcompany);
-
 
 
         }
