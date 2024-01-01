@@ -158,10 +158,9 @@ public class Consumption_Fragment extends Fragment {
 
     @SuppressLint("MissingInflatedId")
     private void showAddDetailsDialog(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_consumption_layout, null);
-
         // btnOpenDatePicker = dialogView.findViewById(R.id.btnOpenDatePicker);
         tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
         Remark_A = dialogView.findViewById(R.id.remark_alert);
@@ -248,14 +247,15 @@ public class Consumption_Fragment extends Fragment {
                         Global.editor.commit();*/
 
                     } catch (JSONException ex) {
-                        throw new RuntimeException(ex);
+                        Toast.makeText(context, "No Data Available", Toast.LENGTH_SHORT).show();
                     }
                     Global.Consumption1list.add(consumables_Class);
                     consumptionAdapter = new ConsumptionAdapter(Global.Consumption1list, context);
                     Consumables_rv.setAdapter(consumptionAdapter);
-                    hideProgressDialog();
                 }
+                hideProgressDialog();
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -312,6 +312,7 @@ public class Consumption_Fragment extends Fragment {
                         Toast.makeText(getActivity(), "Updated successfully !!", Toast.LENGTH_SHORT).show();
                         getConsumables();
                     } else {
+                        progressDialog.dismiss();
                         Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_SHORT).show();
 
                     }
@@ -320,6 +321,7 @@ public class Consumption_Fragment extends Fragment {
                 }
 
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -408,10 +410,9 @@ public class Consumption_Fragment extends Fragment {
 
     private void showProgressDialog() {
         if (progressDialog != null && !progressDialog.isShowing()) {
-            progressDialog.show();
+            progressDialog.dismiss();
         }
     }
-
     private void hideProgressDialog() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();

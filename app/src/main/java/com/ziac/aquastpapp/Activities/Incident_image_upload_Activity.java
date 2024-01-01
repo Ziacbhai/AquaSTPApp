@@ -215,7 +215,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                Global.Incident_s = new ArrayList<IncidentsClass>();
+                Global.Incident_Class = new ArrayList<IncidentsClass>();
                 incidentsClass = new IncidentsClass();
                 JSONArray jarray;
                 try {
@@ -244,8 +244,8 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Incident_s.add(incidentsClass);
-                    Incident_image_upload_Adapter incidentImageUploadAdapter = new Incident_image_upload_Adapter(Global.Incident_s, context);
+                    Global.Incident_Class.add(incidentsClass);
+                    Incident_image_upload_Adapter incidentImageUploadAdapter = new Incident_image_upload_Adapter(Global.Incident_Class, context);
                     Incident_Images_Rv.setAdapter(incidentImageUploadAdapter);
                 }
 

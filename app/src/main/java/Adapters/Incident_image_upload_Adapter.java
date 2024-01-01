@@ -93,7 +93,7 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
             }
         });
 
-        holder.Incident_delete_image.setOnClickListener(new View.OnClickListener() {
+       /* holder.Incident_delete_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(v.getContext());
@@ -117,11 +117,11 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
             }
-        });
+        });*/
 
     }
 
-    public void deleteItem(String incidentcode, int position) {
+   /* public void deleteItem(String incidentcode, int position) {
 
         RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
         String url = Global.Get_Incidents_delete;
@@ -174,7 +174,7 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
 //                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
 //        ));
         queue.add(stringRequest);
-    }
+    }*/
 
     private void showImage(String imageUrl) {
         Dialog builder = new Dialog(context);
@@ -223,7 +223,7 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
             super(itemView);
 
             In_image_show = itemView.findViewById(R.id.in_image_show);
-            Incident_delete_image = itemView.findViewById(R.id.incident_delete_image);
+          //  Incident_delete_image = itemView.findViewById(R.id.incident_delete_image);
             In_image_name = itemView.findViewById(R.id.in_image_name);
 
         }

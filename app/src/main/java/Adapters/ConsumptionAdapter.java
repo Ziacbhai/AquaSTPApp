@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,18 +39,18 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
     @Override
     public ConsumptionAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.consumption_design, parent, false);
-        return new Viewholder(view);
+        Viewholder viewholder = new Viewholder(view);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
+        viewholder.itemView.startAnimation(animation);
+        return viewholder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ConsumptionAdapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.Amount.setText(consumptionClasses.get(position).getAmount() + "0");
-
         holder.Remark.setText(consumptionClasses.get(position).getRemark());
-
-        holder.Created_by.setText("By " + consumptionClasses.get(position).getCreated_by());
-
+        holder.Created_by.setText("By" + consumptionClasses.get(position).getCreated_by());
         String conNoString = consumptionClasses.get(position).getCon1_code();
         double conNo;
         try {
@@ -59,9 +61,7 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
         }
         String formattedConNo = removeTrailingZero(conNo);
         holder.Con1_code.setText(formattedConNo);
-
         // holder.Date.setText(consumablesClasses.get(position).getDate());
-
         String dateString = consumptionClasses.get(position).getDate();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -107,7 +107,6 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-
             Con1_code = itemView.findViewById(R.id.consumption_con_no);
             Date = itemView.findViewById(R.id.consumption_date);
             Amount = itemView.findViewById(R.id.consumption_amount);

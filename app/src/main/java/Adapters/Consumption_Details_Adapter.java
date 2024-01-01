@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,7 +32,10 @@ public class Consumption_Details_Adapter extends RecyclerView.Adapter<Consumptio
     @Override
     public Consumption_Details_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.consumption_details_design, parent, false);
-        return new Viewholder(view);
+        Viewholder viewholder = new Viewholder(view);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
+        viewholder.itemView.startAnimation(animation);
+        return viewholder;
     }
 
     @Override

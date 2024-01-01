@@ -20,7 +20,7 @@
             android:title="Equipments" />
 
         <item
-            android:id="@+id/nav_consumable"
+            android:id="@+id/nav_consumption"
             android:icon="@drawable/shoppingbag"
             android:title="Consumption" />
         <item

@@ -5,8 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IncidentsClass {
-    String Inc_No,Inc_Date,Incidents_Particulars,In_info,In_upload,In_Delete,ImageList,In_image_name,
+    String Inc_No,Inc_Date,Incidents_Particulars,In_info,In_upload,In_Delete,ImageList,In_image_name,Inc_Created_by,
             Inc_doc_name,Inc_doc_delete,In_doc_list,Name,Delete_Incident_code2;
+
+    public String getInc_Created_by() {
+        return Inc_Created_by;
+    }
+
+    public void setInc_Created_by(String inc_Created_by) {
+        Inc_Created_by = inc_Created_by;
+    }
 
     public String getDelete_Incident_code2() {
         return Delete_Incident_code2;

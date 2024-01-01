@@ -199,7 +199,7 @@ public class IncidentReportingActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, incident, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Incident_s = new ArrayList<IncidentsClass>();
+                Global.Incident_Class = new ArrayList<IncidentsClass>();
                 incidents = new IncidentsClass();
                 JSONArray jarray;
                 try {
@@ -231,8 +231,8 @@ public class IncidentReportingActivity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Incident_s.add(incidents);
-                    incidentAdapter = new IncidentAdapter(context, Global.Incident_s);
+                    Global.Incident_Class.add(incidents);
+                    incidentAdapter = new IncidentAdapter(context, Global.Incident_Class);
                     Incident_recyclerview.setAdapter(incidentAdapter);
                 }
             }

@@ -73,6 +73,8 @@ public class Global {
     public static String getSearchSiteOrSTPByName = baseurl + "api/Users/SearchSiteOrSTPByName?";
     public static String updateProfile = baseurl + "api/Users/UpdateProfile";
     public static String updateConsumables = baseurl + "api/Consumables/AddEditConsumables";
+
+    public static String updateIncidents = baseurl + "api/Incidents/IncidentsAddUpdate";
     public static String updateDConsumables = baseurl + "api/Consumables/AddEditConsumablesDetails";
     public static String GetRepairItems = baseurl + "api/Repairs/List?";
     public static String updateRepairAddUpdate = baseurl + "api/Repairs/RepairAddUpdate";
@@ -138,7 +140,8 @@ public class Global {
     public static ArrayList<EquipmentClassRepairBreakUp> Repair_Equipment_Breakup;
 
     public static ArrayList<LabTestClass> Labtest_s;
-    public static ArrayList<IncidentsClass> Incident_s;
+
+    public static ArrayList<IncidentsClass> Incident_Class;
 
     public static ArrayList<CommonModelClass> metersdetails;
 

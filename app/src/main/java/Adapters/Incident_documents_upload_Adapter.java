@@ -74,7 +74,7 @@ public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Inci
                 alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String incident_code = Global.Incident_s.get(position).getInc_No();
+                        String incident_code = Global.Incident_Class.get(position).getInc_No();
                         //deleteItem(incident_code);
                     }
                 });

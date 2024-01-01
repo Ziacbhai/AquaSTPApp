@@ -1,18 +1,13 @@
 package Adapters;
 
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,11 +20,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.IncidentReportingActivity;
 import com.ziac.aquastpapp.Activities.Incident_Image_doc_Select_Activity;
-import com.ziac.aquastpapp.Activities.Incident_Details_Activity;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONException;
@@ -71,7 +64,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
 
         holder.Incedent_Particlulars.setText(incidentsClasses.get(position).getIncidents_Particulars());
 
-        holder.Inc_delete.setOnClickListener(new View.OnClickListener() {
+       /* holder.Inc_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(v.getContext());
@@ -95,7 +88,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
             }
-        });
+        });*/
 
 
         String conNoString = incidentsClasses.get(position).getInc_No();
@@ -121,15 +114,13 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             e.printStackTrace();
             return;
         }
+        holder.Inc_created.setText("By" +incidentsClasses.get(position).getInc_Created_by());
+
         holder.Ininfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (context != null) {
-                    Intent intent = new Intent(context, Incident_Details_Activity.class);
-                    context.startActivity(intent);
-                } else {
-                    Log.e("Info", "Context is null");
-                }
+                    /*Intent intent = new Intent(context, Incident_Details_Activity.class);
+                    context.startActivity(intent);*/
             }
         });
 
@@ -206,7 +197,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
 
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        private TextView Incno, Incedent_Particlulars, Inc_date;
+        private TextView Incno, Incedent_Particlulars, Inc_date,Inc_created,Inc_Amount;
         private ImageView Inupload, Ininfo, Inc_delete;
 
         public Viewholder(@NonNull View itemView) {
@@ -217,7 +208,8 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             Inc_date = itemView.findViewById(R.id.incident_date);
             Ininfo = itemView.findViewById(R.id.incident_info);
             Inupload = itemView.findViewById(R.id.incident_photo_upload);
-            Inc_delete = itemView.findViewById(R.id.incident_delete);
+            Inc_created = itemView.findViewById(R.id.incident_createdby);
+           // Inc_delete = itemView.findViewById(R.id.incident_delete);
 
 
         }

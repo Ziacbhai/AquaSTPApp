@@ -150,31 +150,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-  /*      String dateString = "2023-12-22T12:30:00";
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        try {
-            Date date = inputFormat.parse(dateString);
-            String formattedDate = outputFormat.format(date);
-            // Extracting only the date part
-            String onlyDate = formattedDate.split(" ")[0];
-
-            textdate.setText(onlyDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-/*
-        Global.ConsumptionClass consumptionClass = Global.ConsumptionClass;
-        // Get the amount from ConsumptionClass
-        consumption_amount = consumptionClass.get();
-        // Append "0" to the amount
-        String modifiedAmount = consumption_amount + "0";
-        // Set the modified amount to the TextView
-        texamount.setText(modifiedAmount);*/
-
         consumption_no = Global.ConsumptionClass.getCon1_code();
-        // Parse the string into a double
         double conNo;
         try {
             conNo = Double.parseDouble(consumption_no);
@@ -250,7 +226,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             }
         });
     }
-
     private void updateConsumables_details() {
         String qty = Qty_cb.getText().toString();
         String equipment_code = equipment_spinner.getEquipment_code();
@@ -364,10 +339,8 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     try {
                         consumptionClass2.setEquipment_Name(e.getString("equip_name"));
                         consumptionClass2.setEquipment_id(e.getString("equip_slno"));
-
                         consumptionClass2.setEquip_code(e.getString("equip_code"));
                         consumptionClass2.setItem_code(e.getString("item_code"));
-
                         consumptionClass2.setD_qty(e.getString("qty"));
                         consumptionClass2.setD_Amount(e.getString("prd_amt"));
                         consumptionClass2.setD_item(e.getString("part_no"));
@@ -385,6 +358,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
                     } catch (JSONException ex) {
                         progressDialog.dismiss();
+                        Toast.makeText(context, "No Data Available", Toast.LENGTH_SHORT).show();
                         throw new RuntimeException(ex);
                     }
                     Global.Consumption2list.add(consumptionClass2);
@@ -410,11 +384,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 } else if (error instanceof ParseError) {
                     Toast.makeText(Consumption_Details_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();
                 }
-
             }
         }) {
             public Map<String, String> getHeaders() {
-
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);

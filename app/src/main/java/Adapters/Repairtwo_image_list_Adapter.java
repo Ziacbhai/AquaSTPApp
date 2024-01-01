@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -49,7 +51,10 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
     @Override
     public Repairtwo_image_list_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repairtwoimagelist, parent, false);
-        return new Viewholder(view);
+        Viewholder viewholder = new Viewholder(view);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
+        viewholder.itemView.startAnimation(animation);
+        return viewholder;
     }
 
     @Override

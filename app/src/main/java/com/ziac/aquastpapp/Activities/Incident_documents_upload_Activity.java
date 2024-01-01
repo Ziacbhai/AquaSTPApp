@@ -250,7 +250,7 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                Global.Incident_s = new ArrayList<IncidentsClass>();
+                Global.Incident_Class = new ArrayList<IncidentsClass>();
                 incidentsClass = new IncidentsClass();
                 JSONArray jarray;
                 try {
@@ -278,8 +278,8 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Incident_s.add(incidentsClass);
-                    Incident_documents_upload_Adapter Incident_documents_upload_Adapter = new Incident_documents_upload_Adapter(context, Global.Incident_s);
+                    Global.Incident_Class.add(incidentsClass);
+                    Incident_documents_upload_Adapter Incident_documents_upload_Adapter = new Incident_documents_upload_Adapter(context, Global.Incident_Class);
                     Incident_Documents_Rv.setAdapter(Incident_documents_upload_Adapter);
                 }
 
