@@ -56,7 +56,7 @@ public class RepairFragment extends Fragment {
 
     RepairClass1 repairClass1;
     RecyclerView RepairRecyclerview;
-    TextView Repno, Amount, RepairDate, tvSelectedDate, Remark_A;
+    TextView  tvSelectedDate, Remark_A;
     ;
     String currentDatevalue, currentDateValue2;
     ProgressDialog progressDialog;
@@ -193,9 +193,7 @@ public class RepairFragment extends Fragment {
         Cancel_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Handle cancel button click
-                // You can add your logic here
-                dialog.dismiss(); // Close the dialog if needed
+                dialog.dismiss();
             }
         });
     }
@@ -244,7 +242,6 @@ public class RepairFragment extends Fragment {
     private void updateDateTextView(int year, int month, int day) {
       /*  String selectedDate = day + "-" + (month + 1) + "-" + year;
         tvSelectedDate.setText(selectedDate);*/
-
         String current_date = day + "-" + month + "-" + year;
         tvSelectedDate.setText(current_date);
     }

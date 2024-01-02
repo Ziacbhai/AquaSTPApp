@@ -285,7 +285,7 @@ public class Consumption_Fragment extends Fragment {
         // String Con_code = consumables_Class.getCon_no();
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = Global.updateConsumables;
+        String url = Global.updateConsumption;
         // Toast.makeText(context, "network error", Toast.LENGTH_SHORT).show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override

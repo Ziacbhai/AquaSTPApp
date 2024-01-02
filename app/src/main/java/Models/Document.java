@@ -4,9 +4,8 @@ public class Document {
     private String name;
     private String filePath;
 
-    public Document(String name, String filePath) {
-        this.name = name;
-        this.filePath = filePath;
+    public Document() {
+
     }
 
     public String getName() {

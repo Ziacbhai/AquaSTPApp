@@ -37,14 +37,8 @@ import java.util.Map;
 import Models.IncidentsClass;
 
 public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Incident_documents_upload_Adapter.Viewholder> {
-    String userimage;
-
-    Picasso.Builder builder;
-    Picasso picasso;
-
 
     private Context context;
-
     private ArrayList<IncidentsClass> incidentsClasses;
 
     public Incident_documents_upload_Adapter(Context context, ArrayList<IncidentsClass> incidentsClasses) {
@@ -64,31 +58,6 @@ public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Inci
 
         IncidentsClass incidentsClass = incidentsClasses.get(position);
         holder.In_doc_name.setText(incidentsClass.getInc_doc_name());
-        holder.Incident_delete_doc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(v.getContext());
-                alertDialogBuilder.setTitle("Delete Confirmation");
-                alertDialogBuilder.setMessage("Are you sure you want to delete?");
-                //alertDialogBuilder.setIcon(R.drawable.aqua_logo);
-                alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String incident_code = Global.Incident_Class.get(position).getInc_No();
-                        //deleteItem(incident_code);
-                    }
-                });
-                alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing (dismiss the dialog)
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-            }
-        });
 
         Picasso.Builder builder = new Picasso.Builder(context);
         Picasso picasso = builder.build();
@@ -109,8 +78,8 @@ public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Inci
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
-            In_doc_show = itemView.findViewById(R.id.in_doc_show);
-            Incident_delete_doc = itemView.findViewById(R.id.incident_delete_doc);
+            In_doc_show = itemView.findViewById(R.id.in_upload);
+          //  Incident_delete_doc = itemView.findViewById(R.id.incident_delete_doc);
             In_doc_name = itemView.findViewById(R.id.in_doc_name);
         }
     }

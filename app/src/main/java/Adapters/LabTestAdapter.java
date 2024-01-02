@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.LabTest_Details_Activity;
 import com.ziac.aquastpapp.R;
 
@@ -50,6 +51,7 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
         holder.Lab_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Global.labTestClass1 = labTestClasses.get(position);
                 Intent i = new Intent(context, LabTest_Details_Activity.class);
                 context.startActivity(i);
             }
@@ -66,13 +68,12 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
         String formattedConNo = removeTrailingZero(conNo);
         holder.TRno.setText(formattedConNo);
 
-
-        String labdate = labTestClasses.get(position).getLabDate();
+        String dateString = labTestClasses.get(position).getLabDate();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date;
         try {
-            date = inputFormat.parse(labdate);
+            date = inputFormat.parse(dateString);
             String Date = outputFormat.format(date);
             holder.LabDate.setText(Date);
         } catch (ParseException e) {
@@ -170,9 +171,9 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
             Lab_info = itemView.findViewById(R.id.lab_info);
             TRno = itemView.findViewById(R.id.tr_no);
             LabDate = itemView.findViewById(R.id.lab_date);
-            Refno = itemView.findViewById(R.id.lab_refno_);
+            Refno = itemView.findViewById(R.id.lab_refno);
             LabRefDate = itemView.findViewById(R.id.lab_ref_date);
-            CustomerRef = itemView.findViewById(R.id.lab_customerref_);
+            CustomerRef = itemView.findViewById(R.id.lab_customerref);
             Sample_Received_Date = itemView.findViewById(R.id.sample_Received_date);
             Test_Start_Date = itemView.findViewById(R.id.test_Start_Date);
             Test_Completion_Date = itemView.findViewById(R.id.test_Completion_date);

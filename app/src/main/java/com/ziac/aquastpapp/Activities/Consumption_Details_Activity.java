@@ -232,7 +232,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         String item_code = Item_spinner.getItem_code();
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = Global.updateDConsumables;
+        String url = Global.updateDConsumption;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {

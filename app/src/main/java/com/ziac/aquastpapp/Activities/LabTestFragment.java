@@ -3,9 +3,12 @@ package com.ziac.aquastpapp.Activities;
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Rect;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -22,6 +25,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,7 +44,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import Adapters.LabTestAdapter;
@@ -53,6 +60,9 @@ public class LabTestFragment extends Fragment {
     LabTestAdapter labTestAdapter;
     private ProgressDialog progressDialog;
     Context context;
+    AppCompatButton Update_A, Cancel_A;
+    TextView Ref_no, Ref_date, Rcp_date, Start_date, End_date, tvSelectedDate,Date;
+    String currentDatevalue, currentDateValue2;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -68,9 +78,29 @@ public class LabTestFragment extends Fragment {
         }
         new InternetCheckTask().execute();
         FloatingActionButton fab = view.findViewById(R.id.fab);
+
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat1 = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            dateFormat1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            currentDatevalue = dateFormat1.format(currentDate);
+        }
+
+
+        SimpleDateFormat dateFormat2 = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            dateFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            currentDateValue2 = dateFormat2.format(currentDate);
+        }
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                showAddDetailsDialog(context);
             }
         });
 
@@ -113,13 +143,135 @@ public class LabTestFragment extends Fragment {
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);
+    }
 
+    @SuppressLint("MissingInflatedId")
+    private void showAddDetailsDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_dialog_labtest_layout, null);
+        Ref_no = dialogView.findViewById(R.id.lab_refno_update);
+        tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
+        Rcp_date = dialogView.findViewById(R.id.sample_Received_date_update);
+        Start_date = dialogView.findViewById(R.id.test_Start_Date_update);
+        End_date = dialogView.findViewById(R.id.test_Completion_date_update);
+        Date = dialogView.findViewById(R.id.lab_date);
+
+        Update_A = dialogView.findViewById(R.id.update_alert_lab);
+        Cancel_A = dialogView.findViewById(R.id.cancel_alert_lab);
+
+        tvSelectedDate.setText(currentDateValue2);
+        Rcp_date.setText(currentDateValue2);
+        Start_date.setText(currentDateValue2);
+        End_date.setText(currentDateValue2);
+        // tvSelectedDate.setText(currentDatevalue);
+
+        builder.setView(dialogView);
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
+
+        tvSelectedDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker();
+            }
+        });
+        Rcp_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker();
+            }
+        });
+
+        Start_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker();
+            }
+        });
+
+        End_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePicker();
+            }
+        });
+        Update_A.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateLabTest();
+                dialog.dismiss();
+            }
+        });
+
+        Cancel_A.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle cancel button click
+                // You can add your logic here
+                dialog.dismiss(); // Close the dialog if needed
+            }
+        });
+    }
+
+    private void updateLabTest() {
+
+
+    }
+
+    private void showDatePicker() {
+        // Use the current date as the initial date
+        Calendar calendar = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            calendar = Calendar.getInstance();
+        }
+        int initialYear = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            initialYear = calendar.get(Calendar.YEAR);
+        }
+        int initialMonth = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            initialMonth = calendar.get(Calendar.MONTH);
+        }
+        int initialDay = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            initialDay = calendar.get(Calendar.DAY_OF_MONTH);
+        }
+
+        // Create a DatePickerDialog and set the listener
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        // Update your TextView with the selected date
+                        updateDateTextView(year, month + 1, dayOfMonth);
+                        currentDatevalue = year + "-" + (month + 1) + "-" + dayOfMonth;
+                    }
+                },
+                initialYear,
+                initialMonth,
+                initialDay
+        );
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+        // Show the date picker dialog
+        datePickerDialog.show();
+    }
+
+    // Update the TextView with the selected date
+    private void updateDateTextView(int year, int month, int day) {
+      /*  String selectedDate = day + "-" + (month + 1) + "-" + year;
+        tvSelectedDate.setText(selectedDate);*/
+        String current_date = day + "-" + month + "-" + year;
+        tvSelectedDate.setText(current_date);
     }
 
     private void getLabTestReports() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String labTest = Global.GetLab_Test_Items;
-
         String comcode = Global.sharedPreferences.getString("com_code", "");
         String ayear = Global.sharedPreferences.getString("ayear", "2023");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "");
@@ -128,7 +280,7 @@ public class LabTestFragment extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, labTest, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Labtest_s = new ArrayList<LabTestClass>();
+                Global.LabTest_Class = new ArrayList<LabTestClass>();
                 labTestClass = new LabTestClass();
                 JSONArray jarray;
                 try {
@@ -158,17 +310,16 @@ public class LabTestFragment extends Fragment {
                         labTestClass.setSample_Particular(e.getString("sample_desc"));
                         labTestClass.setStatus(e.getString("test_status"));
 
-                        String test_code = labTestClass.getTRno();
-                        // System.out.println(repair_code);
+                      /*  String test_code = labTestClass.getTRno();
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("test_code", test_code);
-                        Global.editor.commit();
+                        Global.editor.commit();*/
 
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Labtest_s.add(labTestClass);
-                    labTestAdapter = new LabTestAdapter(Global.Labtest_s, getContext());
+                    Global.LabTest_Class.add(labTestClass);
+                    labTestAdapter = new LabTestAdapter(Global.LabTest_Class, getContext());
                     LabTestRecyclerview.setAdapter(labTestAdapter);
                 }
             }

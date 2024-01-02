@@ -192,7 +192,6 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
                 params.put("fileName", image);
                 params.put("incident_code", Global.sharedPreferences.getString("incident_code", ""));
                 params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
-                Log.d("YourTag", "Key: fileName, Value: " + image);
                 return params;
             }
         };

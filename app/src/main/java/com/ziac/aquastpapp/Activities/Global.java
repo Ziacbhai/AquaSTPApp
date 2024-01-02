@@ -43,7 +43,7 @@ public class Global {
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
 
-   public static String baseurl="http://192.168.1.7:9396/";
+   public static String baseurl="http://192.168.1.18:9396/";
 
     public static String userImageurl = baseurl+"WebsiteData/Users/";
     public static String incident_image = baseurl+"WebsiteData/IncidentReportDocs/";
@@ -54,7 +54,7 @@ public class Global {
 
     public static String Repair_two_Imagelist = baseurl+"api/Repairs/RepairImageList?";
 
-    public static String In_UploadDoc = baseurl+"api/Incidents/UploadDoc";
+    public static String Incident_UploadDocuments = baseurl+"api/Incidents/UploadDoc";
 
     public static String urlUpdateprofileImage = baseurl +"api/Users/UpdateProfilePhoto";
 
@@ -72,10 +72,10 @@ public class Global {
     public static String getuserprofileurl = baseurl + "api/Users/GetUserProfile";
     public static String getSearchSiteOrSTPByName = baseurl + "api/Users/SearchSiteOrSTPByName?";
     public static String updateProfile = baseurl + "api/Users/UpdateProfile";
-    public static String updateConsumables = baseurl + "api/Consumables/AddEditConsumables";
+    public static String updateConsumption= baseurl + "api/Consumables/AddEditConsumables";
 
     public static String updateIncidents = baseurl + "api/Incidents/IncidentsAddUpdate";
-    public static String updateDConsumables = baseurl + "api/Consumables/AddEditConsumablesDetails";
+    public static String updateDConsumption = baseurl + "api/Consumables/AddEditConsumablesDetails";
     public static String GetRepairItems = baseurl + "api/Repairs/List?";
     public static String updateRepairAddUpdate = baseurl + "api/Repairs/RepairAddUpdate";
     public static String updateRepairDAddUpdate = baseurl + "api/Repairs/RepairDetailsAddUPdate";
@@ -91,6 +91,8 @@ public class Global {
 
 
     public static String GetLab_Test_Items = baseurl + "api/Lab/List?";
+
+    public static String Lab_Test_Update = baseurl + "api/Lab/AddUpdate";
     public static String Get_Incidents = baseurl + "api/Incidents/List?";
     public static String Get_Consumables= baseurl + "api/Consumables/List?";
 
@@ -129,6 +131,8 @@ public class Global {
     public static RepairClass3 repairClass3;
     public static RepairClass4 repairClass4;
 
+    public static LabTestClass labTestClass1;
+
 
     public static ArrayList<ConsumptionClass> Consumption1list;
     public static ArrayList<ConsumptionClass2> Consumption2list;
@@ -139,7 +143,7 @@ public class Global {
     public static ArrayList<ItemListClassRepair_BreakUp> Repair_Item_Breakup;
     public static ArrayList<EquipmentClassRepairBreakUp> Repair_Equipment_Breakup;
 
-    public static ArrayList<LabTestClass> Labtest_s;
+    public static ArrayList<LabTestClass> LabTest_Class;
 
     public static ArrayList<IncidentsClass> Incident_Class;
 

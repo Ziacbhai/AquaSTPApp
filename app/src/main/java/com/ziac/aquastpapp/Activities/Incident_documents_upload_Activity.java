@@ -1,18 +1,16 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.os.Build;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -24,10 +22,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,7 +49,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -60,21 +57,21 @@ import java.util.List;
 import java.util.Map;
 
 import Adapters.Incident_documents_upload_Adapter;
+import Models.Document;
 import Models.IncidentsClass;
 
 public class Incident_documents_upload_Activity extends AppCompatActivity {
-    Bitmap imageBitmap;
+    Bitmap documentBitmap;
     private List<IncidentsClass> fileList;
-    private static final int PICK_FILE_REQUEST = 1;
-    private static final int REQUEST_PERMISSION = 100;
+    ImageView upload;
+    Uri pdfUri ;
+    ProgressDialog dialog;
     private Incident_documents_upload_Adapter documentAdapter;
     IncidentsClass incidentsClass;
     TextView In_doc_uploadbtn;
-
-    Uri uri;
+    Uri documentUri;
     private RecyclerView Incident_Documents_Rv;
 
-    private static final int FILE_SELECT_CODE = 1;
     private ProgressDialog progressDialog;
     private static final int REQUEST_PICK_DOCUMENT = 1;
     Context context;
@@ -88,6 +85,7 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
                 PackageManager.PERMISSION_GRANTED);
         context = this;
         In_doc_uploadbtn = findViewById(R.id.in_doc_uploadbtn);
+        //upload = findViewById(R.id.in_upload);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         if (!Global.isNetworkAvailable(this)) {
@@ -107,13 +105,34 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
             }
         });
 
+      /*  upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("application/pdf");
+                startActivityForResult(galleryIntent, 1);
+            }
+        });*/
+
         Incident_Documents_Rv = findViewById(R.id.incident_Documents_Rv);
         Incident_Documents_Rv.setLayoutManager(new LinearLayoutManager(this));
         Incident_Documents_Rv.setHasFixedSize(true);
         Incident_Documents_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         getIncidentDocuments();
 
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            dialog = new ProgressDialog(this);
+            dialog.setMessage("Uploading");
+            dialog.show();
+            pdfUri = data.getData();
+            uploadToDatabase(Uri.parse(String.valueOf(pdfUri)));
+        }
     }
 
     private void showDocumentPicker() {
@@ -126,40 +145,50 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_PICK_DOCUMENT && resultCode == Activity.RESULT_OK) {
-            if (data != null && data.getData() != null) {
-                Uri selectedFileUri = data.getData();
-                // Handle the selected file URI (e.g., display the file name)
-                String fileName = getFileName(selectedFileUri);
-                Toast.makeText(this, "Selected file: " + fileName, Toast.LENGTH_SHORT).show();
-                // Call your method with the documentUri
-                Incident_postselelecteddocuments(selectedFileUri);
+    private void uploadToDatabase(Uri pdfUri) {
+        String url = Global.Incident_UploadDocuments; // Replace with your server URL
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    // Handle the response from the server
+                    dialog.dismiss();
+                    Toast.makeText(Incident_documents_upload_Activity.this, "PDF uploaded to database", Toast.LENGTH_SHORT).show();
+                },
+                error -> {
+                    dialog.dismiss();
+                    Toast.makeText(Incident_documents_upload_Activity.this, "Error uploading to database", Toast.LENGTH_SHORT).show();
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("fileName", pdfUri.toString());
+                params.put("incident_code", Global.sharedPreferences.getString("incident_code", ""));
+                params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
+                return params;
             }
-        }
+        };
+
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    @SuppressLint("Range")
-    private String getFileName(Uri uri) {
-        String result = null;
-        if (uri.getScheme().equals("content")) {
-            try (Cursor cursor = getContentResolver().query(uri, null, null, null, null)) {
-                if (cursor != null && cursor.moveToFirst()) {
-                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-                }
-            }
-        }
-        if (result == null) {
-            result = uri.getLastPathSegment();
-        }
-        return result;
-    }
 
-    private void Incident_postselelecteddocuments(Uri documentUri) {
-        String url = Global.In_UploadDoc;
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 10 && resultCode == RESULT_OK) {
+//            Uri uri = data.getData();
+//            // imageList.add(uri);
+//            try {
+//                documentBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//            Incident_postselectedDocument();
+//        }
+//    }
+   /* private void Incident_postselectedDocument() {
+        if (documentUri == null) {
+            return;
+        }
+        String url = Global.Incident_UploadDocuments;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
             JSONObject resp;
@@ -174,8 +203,6 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
                     getIncidentDocuments();
                 } else {
                     if (resp.has("error")) {
-                        String errorMessage = resp.getString("error");
-                        Toast.makeText(Incident_documents_upload_Activity.this, errorMessage, Toast.LENGTH_SHORT).show();
                         Toast.makeText(Incident_documents_upload_Activity.this, "Document upload failed", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.d("else", "else");
@@ -206,42 +233,30 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
-
             @NonNull
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                // Convert the document file to Base64 string
-                String docBase64 = documentToBase64(documentUri);
-                params.put("fileName", docBase64);
-                params.put("incident_code", Global.sharedPreferences.getString("incident_code", ""));
-                params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
-                Log.d("YourTag", "Key: document, Value: " + docBase64);
+                try {
+                    String document = documentToString(documentUri);
+                    params.put("fileName", document);
+                    params.put("incident_code", Global.sharedPreferences.getString("incident_code", ""));
+                    params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 return params;
             }
         };
-
         requestQueue.add(stringRequest);
-    }
+    }*/
 
-
-    private String documentToBase64(Uri documentUri) {
-        try {
-            InputStream inputStream = getContentResolver().openInputStream(documentUri);
-            if (inputStream != null) {
-                byte[] buffer = new byte[inputStream.available()];
-                inputStream.read(buffer);
-                inputStream.close();
-                String base64String = Base64.encodeToString(buffer, Base64.DEFAULT);
-                Log.d("YourTag", "Base64 Document: " + base64String);
-                return base64String;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
+    /* private String documentToString(Uri documentUri) throws IOException {
+         InputStream inputStream = getContentResolver().openInputStream(documentUri);
+         byte[] bytes = new byte[inputStream.available()];
+         inputStream.read(bytes);
+         return Base64.encodeToString(bytes, Base64.DEFAULT);
+     }*/
     private void getIncidentDocuments() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.Get_Incidents_Details + "incident_code=" + Global.sharedPreferences.getString("incident_code",
@@ -291,9 +306,7 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
                     Toast.makeText(context, "TimeoutError", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof NoConnectionError) {
                     Toast.makeText(context, "NoConnectionError occurred", Toast.LENGTH_SHORT).show();
-
                 }
-
             }
         }) {
             public Map<String, String> getHeaders() {

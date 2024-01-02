@@ -103,7 +103,7 @@ public class LabTest_Details_Activity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Lab_Details_API, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Labtest_s = new ArrayList<LabTestClass>();
+                Global.LabTest_Class = new ArrayList<LabTestClass>();
                 labTest_Dclass = new LabTestClass();
                 JSONArray jarray;
                 try {
@@ -122,22 +122,16 @@ public class LabTest_Details_Activity extends AppCompatActivity {
                     }
                     labTest_Dclass = new LabTestClass();
                     try {
-
-
                         labTest_Dclass.setL_Test_Method(e.getString("test_method"));
                         labTest_Dclass.setL_Units(e.getString("unit_name"));
                         labTest_Dclass.setL_result(e.getString("result_value"));
                         labTest_Dclass.setL_KSPCB_Standard(e.getString("param_code"));
 
-                        Log.d("YourTag", "Equipment Name: " + labTest_Dclass.getL_result());
-                        Log.d("YourTag", "Equipment ID: " + labTest_Dclass.getL_result());
-                        Log.d("YourTag", "D Amount: " + labTest_Dclass.getL_result());
-
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Labtest_s.add(labTest_Dclass);
-                    Lab_Test_Details_Adapter labTestDetailsAdapter = new Lab_Test_Details_Adapter(context, Global.Labtest_s);
+                    Global.LabTest_Class.add(labTest_Dclass);
+                    Lab_Test_Details_Adapter labTestDetailsAdapter = new Lab_Test_Details_Adapter(context, Global.LabTest_Class);
                     Labtest_details_Rv.setAdapter(labTestDetailsAdapter);
                 }
 

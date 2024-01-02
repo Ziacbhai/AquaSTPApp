@@ -42,29 +42,21 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/in_doc_uploadbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/inputbg"
             android:gravity="center"
             android:text="Upload Documents"
-            android:textSize="26sp"
+            android:textAllCaps="false"
+            android:textColor="#009688"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/in_doc_uploadbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/header_background"
-        android:gravity="center"
-        android:onClick="buttonCreateFile"
-        android:text="Upload Documents"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
