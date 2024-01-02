@@ -50,21 +50,19 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:drawablePadding="5dp"
                                 android:gravity="center"
-                                android:text="Ref No"
+                                android:text="Date"
                                 android:textColor="#000"
                                 android:textSize="11dp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/lab_refno_update"
+                                android:id="@+id/lab_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:drawablePadding="5dp"
                                 android:gravity="center"
-                                android:hint="ref_date"
-                                android:textSize="11dp" />
+                                android:text="Date"
+                                android:textSize="12dp" />
 
                         </LinearLayout>
 
@@ -85,21 +83,25 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:drawablePadding="5dp"
                                 android:gravity="center"
-                                android:text="Date"
+                                android:text="Ref No"
                                 android:textColor="#000"
                                 android:textSize="11dp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/lab_date"
+                                android:id="@+id/lab_refno_update"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:drawablePadding="5dp"
                                 android:gravity="center"
-                                android:text="Date"
-                                android:textSize="12dp" />
+                                android:hint="ref_date"
+                                android:textSize="11dp" />
 
                         </LinearLayout>
+
+
                     </LinearLayout>
 
                     <View
@@ -271,15 +273,17 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="Particulars"
+                            android:text="Particulars:"
                             android:textColor="#000"
                             android:textSize="11dp"
                             android:textStyle="bold" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/lab_particles"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
+                            android:gravity="left"
+                            android:background="@drawable/btnbgoutline"
                             android:hint="particulars"
                             android:padding="5dp"
                             android:textSize="11dp" />
