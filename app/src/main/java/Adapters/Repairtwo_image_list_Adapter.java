@@ -74,7 +74,7 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
             @Override
             public void onClick(View v) {
 
-                showImage(repairClasses4.get(position).getIImageList());
+                showImage(repairClasses4.get(position).getI_Repair_image());
             }
         });
 
@@ -118,7 +118,8 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int screenWidth = displayMetrics.widthPixels;
         int screenHeight = displayMetrics.heightPixels;
-        Picasso.get().load(Uri.parse(Global.repair_images + imageUrl)).into(new Target() {
+        String trimmedImageUrl = imageUrl.replace('~', ' ').trim();
+        Picasso.get().load(Uri.parse(Global.repair_images + trimmedImageUrl)).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 ImageView imageView = new ImageView(context);

@@ -202,81 +202,77 @@ public class Consumption_Fragment extends Fragment {
     @SuppressLint("MissingInflatedId")
     private void getConsumables() {
         showProgressDialog();
+
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
-        String consumables = Global.Get_Consumables;
-        String com_code = Global.sharedPreferences.getString("com_code", "0");
-        String ayear = Global.sharedPreferences.getString("ayear", "2023");
-        String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
-        consumables = consumables + "comcode=" + com_code + "&ayear=" + ayear + "&sstp1_code=" + sstp1_code;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, consumables, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Global.Consumption1list = new ArrayList<ConsumptionClass>();
-                consumables_Class = new ConsumptionClass();
-                JSONArray jarray;
-                try {
-                    jarray = response.getJSONArray("data");
+        String consumablesUrl = Global.Get_Consumables;
 
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-                for (int i = 0; i < jarray.length(); i++) {
-                    final JSONObject e;
-                    try {
-                        e = jarray.getJSONObject(i);
-                    } catch (JSONException ex) {
-                        throw new RuntimeException(ex);
+        String comCode = Global.sharedPreferences.getString("com_code", "0");
+        String aYear = Global.sharedPreferences.getString("ayear", "2023");
+        String sstp1Code = Global.sharedPreferences.getString("sstp1_code", "0");
+
+        consumablesUrl += "comcode=" + comCode + "&ayear=" + aYear + "&sstp1_code=" + sstp1Code;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.POST,
+                consumablesUrl,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray dataArray = response.getJSONArray("data");
+
+                            Global.Consumption1list = new ArrayList<>();
+
+                            for (int i = 0; i < dataArray.length(); i++) {
+                                JSONObject dataObject = dataArray.getJSONObject(i);
+                                ConsumptionClass consumablesClass = new ConsumptionClass();
+
+                                consumablesClass.setCon1_code(dataObject.getString("con1_code"));
+                                consumablesClass.setDate(dataObject.getString("con_date"));
+                                consumablesClass.setAmount(dataObject.getString("con_amt"));
+                                consumablesClass.setRemark(dataObject.getString("remarks"));
+                                consumablesClass.setCreated_by(dataObject.getString("createdby"));
+
+                                Global.Consumption1list.add(consumablesClass);
+                            }
+
+                            if (Global.Consumption1list.isEmpty()) {
+                                Toast.makeText(context, "No Data Available", Toast.LENGTH_SHORT).show();
+                            } else {
+                                consumptionAdapter = new ConsumptionAdapter(Global.Consumption1list, context);
+                                Consumables_rv.setAdapter(consumptionAdapter);
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        } finally {
+                            hideProgressDialog();
+                        }
                     }
-                    consumables_Class = new ConsumptionClass();
-                    try {
-                        consumables_Class.setCon1_code(e.getString("con1_code"));
-                        consumables_Class.setDate(e.getString("con_date"));
-                        consumables_Class.setAmount(e.getString("con_amt"));
-                        consumables_Class.setRemark(e.getString("remarks"));
-                        consumables_Class.setCreated_by(e.getString("createdby"));
-
-                      /* Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("con_date", consumables_Class.getDate());
-                        editor.putString("con_amt", consumables_Class.getAmount());
-                        editor.putString("con1_code", consumables_Class.getCon1_code());
-                        editor.apply();*/
-                       /* String Con1_code = consumables_Class.getCon1_code();
-                        Global.editor = Global.sharedPreferences.edit();
-                        Global.editor.putString("con1_code", Con1_code);
-                        Global.editor.commit();*/
-
-                    } catch (JSONException ex) {
-                        Toast.makeText(context, "No Data Available", Toast.LENGTH_SHORT).show();
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        hideProgressDialog();
                     }
-                    Global.Consumption1list.add(consumables_Class);
-                    consumptionAdapter = new ConsumptionAdapter(Global.Consumption1list, context);
-                    Consumables_rv.setAdapter(consumptionAdapter);
-                }
-                hideProgressDialog();
-            }
-
-        }, new Response.ErrorListener() {
+                }) {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                hideProgressDialog();
-            }
-        }) {
             public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<String, String>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", "");
-                headers.put("Authorization", "Bearer " + accesstoken);
+                Map<String, String> headers = new HashMap<>();
+                String accessToken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accessToken);
                 return headers;
             }
 
+            @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                return params;
+                return new HashMap<>();
             }
         };
-        queue.add(jsonObjectRequest);
 
+        queue.add(jsonObjectRequest);
     }
+
 
     private void updateConsumables() {
 

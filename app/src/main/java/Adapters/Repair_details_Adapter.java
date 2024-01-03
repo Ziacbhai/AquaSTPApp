@@ -16,14 +16,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.RepairBreakUpActivity;
 import com.ziac.aquastpapp.Activities.RepairTwoImageListActivity;
 import com.ziac.aquastpapp.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Models.RepairClass2;
 
@@ -36,6 +50,53 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
         this.repairClass2 = repairClass2;
         this.context = context;
     }
+
+//    public void setasChecked() {
+//
+//        RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
+//        String url = Global.urldeletevehicle ;
+//        url=url+"vehmas_code="+vehmascode;
+//        //progressDialog.show();
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                //JSONObject respObj = new JSONObject(response);
+//                try {
+//                    String msg = response.getString("msg");
+//                    boolean isSuccess = response.getBoolean("isSuccess");
+//                } catch (JSONException e) {
+//                    throw new RuntimeException(e);
+//                }
+//
+////                StockFragment stockFragment = new StockFragment();
+////                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+////                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+////                fragmentTransaction.replace(R.id.frame_layout, stockFragment);
+////                fragmentTransaction.addToBackStack(null);
+////                fragmentTransaction.commit();
+//
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                //Global.customtoast(context.getApplicationContext(), getLayoutInflater(),"Failed to get my stock .." + error.getMessage());
+//            }
+//        })
+//        {
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                Map<String, String> headers = new HashMap<String, String>();
+//                String accesstoken = Global.sharedPreferences.getString("access_token", "");
+//                headers.put("Authorization", "Bearer " + accesstoken);
+//                return headers;
+//            }
+//
+//
+//        };
+//        queue.add(jsonObjectRequest);
+//
+//    }
 
     @NonNull
     @Override
@@ -61,23 +122,28 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
         holder.Repair_repaired_check.setChecked(isRepaired);*/
 
         String repairedStatus = repairClass2.get(position).getD_Repaired();
-        boolean isRepaired = Boolean.parseBoolean(repairedStatus);
-        holder.Repair_repaired_check.setChecked(isRepaired);
-        if (!isRepaired) {
-            holder.Repair_repaired_check.setClickable(true);
-            holder.Repair_repaired_check.setFocusable(true);
-            holder.Repair_repaired_check.setEnabled(true);
-        } else {
-            holder.Repair_repaired_check.setClickable(false);
-            holder.Repair_repaired_check.setFocusable(true);
-            holder.Repair_repaired_check.setEnabled(false);
-        }
+
+//        boolean isRepaired = Boolean.parseBoolean(repairedStatus);
+//        holder.Repair_repaired_check.setChecked(isRepaired);
+//        if (!isRepaired) {
+//            holder.Repair_repaired_check.setClickable(true);
+//            holder.Repair_repaired_check.setFocusable(true);
+//            holder.Repair_repaired_check.setEnabled(true);
+//        } else {
+//            holder.Repair_repaired_check.setClickable(false);
+//            holder.Repair_repaired_check.setFocusable(true);
+//            holder.Repair_repaired_check.setEnabled(false);
+//        }
+
 
         holder.Repair_repaired_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                repairClass2.get(position).setD_Repaired(String.valueOf(holder.Repair_repaired_check.isChecked()));
-                notifyItemChanged(position);
+                if (holder.Repair_repaired_check.isChecked()) {
+                    Toast.makeText(context, "checked", Toast.LENGTH_SHORT).show();
+                    holder.Repair_repaired_check.setEnabled(false);
+                    // setasChecked();  // Uncomment this line if it's a custom method you need to call
+                }
             }
         });
 
@@ -109,7 +175,7 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
 
         TextView Eq_Name, Eq_number, Repaired, Remark, Amount;
 
-        CheckBox Repair_repaired_check;
+         CheckBox Repair_repaired_check;
         ImageView RImage, RBreakup;
 
         public Viewholder(@NonNull View itemView) {

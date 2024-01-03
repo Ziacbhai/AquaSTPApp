@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.AquaSTPApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.AquaSTPApp" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
     <style name="Theme.AquaSTPApp" parent="Base.Theme.AquaSTPApp" />
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">

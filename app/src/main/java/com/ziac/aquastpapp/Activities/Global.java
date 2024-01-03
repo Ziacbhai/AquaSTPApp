@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.R;
 
 import java.util.ArrayList;
@@ -38,12 +39,14 @@ public class Global {
     public static SharedPreferences sharedPreferences;
     public static SharedPreferences.Editor editor;
 
+    private static Picasso picassoInstance;
+
     //Server url
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
 
-   public static String baseurl="http://192.168.1.24:9396/";
+   public static String baseurl="http://192.168.1.9:9396/";
 
     public static String userImageurl = baseurl+"WebsiteData/Users/";
     public static String incident_image = baseurl+"WebsiteData/IncidentReportDocs/";
@@ -175,5 +178,18 @@ public class Global {
             return activeNetworkInfo != null && activeNetworkInfo.isConnected();
         }
         return false;
+    }
+    private static Picasso getPicassoInstance(Context context) {
+        if (picassoInstance == null) {
+
+            picassoInstance = new Picasso.Builder(context.getApplicationContext()).build();
+        }
+        return picassoInstance;
+    }
+    public static void loadWithPicasso(Context context, ImageView imageView, String imageUrl) {
+        Picasso picasso = getPicassoInstance(context);
+        picasso.load(imageUrl)
+                .error(R.drawable.no_image_available_icon)
+                .into(imageView);
     }
 }

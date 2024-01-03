@@ -79,10 +79,9 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
     @Override
     public void onBindViewHolder(@NonNull Incident_image_upload_Adapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
 
-        Picasso.Builder builder = new Picasso.Builder(context);
-        Picasso picasso = builder.build();
-        picasso.load(Uri.parse(Global.incident_image + incidentsClasses.get(position).getImageList()))
-                .error(R.drawable.no_image_available_icon).into(holder.In_image_show);
+        Global.loadWithPicasso(context, holder.In_image_show, Global.incident_image + incidentsClasses.get(position).getImageList());
+//        picasso.load(Uri.parse(Global.incident_image + incidentsClasses.get(position).getImageList()))
+//                .error(R.drawable.no_image_available_icon).into(holder.In_image_show);
 
         holder.In_image_name.setText(incidentsClasses.get(position).getIn_image_name());
 
