@@ -5,14 +5,14 @@ public class ItemStockClass {
 
     }
 
-    private String _Code ,_Name ,_Stock ,_Units;
+    private String _Number ,_Name ,_Stock ,_Units;
 
-    public String get_Code() {
-        return _Code;
+    public String get_Number() {
+        return _Number;
     }
 
-    public void set_Code(String _Code) {
-        this._Code = _Code;
+    public void set_Number(String _Number) {
+        this._Number = _Number;
     }
 
     public String get_Name() {

@@ -115,7 +115,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/lab_date"
+                        android:id="@+id/test_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="5dp"
@@ -390,7 +390,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="  By  "
-                    android:layout_marginRight="10dp"
                     android:gravity="right"
                     android:textColor="#000"
                     android:textSize="7dp"

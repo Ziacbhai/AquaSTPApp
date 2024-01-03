@@ -170,7 +170,7 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
 
             Lab_info = itemView.findViewById(R.id.lab_info);
             TRno = itemView.findViewById(R.id.tr_no);
-            LabDate = itemView.findViewById(R.id.lab_date);
+            LabDate = itemView.findViewById(R.id.test_date);
             Refno = itemView.findViewById(R.id.lab_refno);
             LabRefDate = itemView.findViewById(R.id.lab_ref_date);
             CustomerRef = itemView.findViewById(R.id.lab_customerref);

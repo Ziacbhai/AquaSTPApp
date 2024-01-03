@@ -57,7 +57,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/lab_date"
+                                android:id="@+id/lab_test_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -137,12 +137,48 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/tvSelectedDate"
+                                android:id="@+id/lab_ref_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawablePadding="5dp"
                                 android:gravity="center"
                                 android:hint="ref_date"
+                                android:textSize="11dp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/my_light_primary" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawablePadding="5dp"
+                                android:gravity="center"
+                                android:text="Customer Ref"
+                                android:textColor="#000"
+                                android:textSize="11dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/lab_customerRef"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="5dp"
+                                android:gravity="center"
+                                android:hint="customerRef"
                                 android:textSize="11dp" />
 
                         </LinearLayout>
@@ -171,7 +207,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/sample_Received_date_update"
+                                android:id="@+id/received_date_update"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"

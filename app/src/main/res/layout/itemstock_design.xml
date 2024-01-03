@@ -16,7 +16,6 @@
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/btnbgoutline"
             app:cardCornerRadius="5dp"
             app:cardMaxElevation="10dp">
 
@@ -24,74 +23,84 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/btnbgoutline"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:padding="5dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:weightSum="2">
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/part_number"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1.3"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        android:weightSum="2">
-
-                        <TextView
-                            android:id="@+id/code_"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:text="Code"
-                            android:textColor="#000"
-                            android:textSize="11dp" />
-
-                        <TextView
-                            android:id="@+id/namelist_"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:text="NameList"
-                            android:textColor="#000"
-                            android:textSize="11dp" />
-                    </LinearLayout>
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Number"
+                        android:textColor="#000"
+                        android:textSize="11dp" />
 
                     <View
-                        android:layout_width="2dp"
+                        android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:background="#01A3A3" />
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/namelist_"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center|left"
                         android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:gravity="center"
+                        android:text="NameList"
+                        android:textColor="#000"
+                        android:textSize="11dp" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/stock_"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="Stock"
-                            android:textColor="#000"
-                            android:textSize="11dp" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#01A3A3" />
 
-                        <TextView
-                            android:id="@+id/units_"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="Units"
-                            android:textColor="#000"
-                            android:textSize="11dp" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/stock_"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Stock"
+                        android:textColor="#000"
+                        android:textSize="11dp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="#01A3A3" />
+
+                    <TextView
+                        android:id="@+id/units_"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Units"
+                        android:textColor="#000"
+                        android:textSize="11dp" />
+
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

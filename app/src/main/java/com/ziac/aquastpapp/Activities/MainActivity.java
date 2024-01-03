@@ -256,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawerLayout.closeDrawers();
             return true;
         }
-        if (itemId == R.id.nav_lab) {
+        /*if (itemId == R.id.nav_lab) {
             LabTestFragment labTestFragment = new LabTestFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -264,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
-        }
+        }*/
         if (itemId == R.id.nav_incident) {
             //startActivity(new Intent(MainActivity.this, IncidentReportingFragment.class));
             IncidentReportingFragment reportingFragment = new IncidentReportingFragment();

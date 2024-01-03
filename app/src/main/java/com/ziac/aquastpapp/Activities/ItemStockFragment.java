@@ -84,7 +84,7 @@ public class ItemStockFragment extends Fragment {
                     }
                     itemStockClass = new ItemStockClass();
                     try {
-                        itemStockClass.set_Code(e.getString("part_no"));
+                        itemStockClass.set_Number(e.getString("part_no"));
                         itemStockClass.set_Name(e.getString("prd_name"));
                         itemStockClass.set_Stock(e.getString("stk_ycb"));
                         itemStockClass.set_Units(e.getString("unit_name"));

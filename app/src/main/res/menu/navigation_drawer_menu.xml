@@ -33,10 +33,10 @@
             android:icon="@drawable/toolbox"
             android:title="Repairs" />
 
-        <item
+       <!-- <item
             android:id="@+id/nav_lab"
             android:icon="@drawable/laboratory"
-            android:title="Lab Test" />
+            android:title="Lab Test" />-->
 
         <item
             android:id="@+id/nav_incident"

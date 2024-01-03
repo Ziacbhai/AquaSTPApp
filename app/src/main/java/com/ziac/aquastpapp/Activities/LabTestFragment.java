@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +31,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
@@ -48,6 +51,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import Adapters.LabTestAdapter;
 
@@ -61,7 +65,7 @@ public class LabTestFragment extends Fragment {
     private ProgressDialog progressDialog;
     Context context;
     AppCompatButton Update_A, Cancel_A;
-    TextView Ref_no, Ref_date, Rcp_date, Start_date, End_date, tvSelectedDate,Date;
+    TextView Ref_no, Ref_date, testdate,Rcp_date, Start_date, End_date, tvSelectedDate,Particulars,CustomerRef,RecivedOn;
     String currentDatevalue, currentDateValue2;
 
     @SuppressLint("MissingInflatedId")
@@ -151,20 +155,24 @@ public class LabTestFragment extends Fragment {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_labtest_layout, null);
         Ref_no = dialogView.findViewById(R.id.lab_refno_update);
-        tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
-        Rcp_date = dialogView.findViewById(R.id.sample_Received_date_update);
+        tvSelectedDate = dialogView.findViewById(R.id.test_date);
         Start_date = dialogView.findViewById(R.id.test_Start_Date_update);
         End_date = dialogView.findViewById(R.id.test_Completion_date_update);
-        Date = dialogView.findViewById(R.id.lab_date);
+        Rcp_date = dialogView.findViewById(R.id.lab_test_date);
+        CustomerRef = dialogView.findViewById(R.id.lab_customerRef);
+        RecivedOn = dialogView.findViewById(R.id.received_date_update);
+        Ref_date = dialogView.findViewById(R.id.lab_ref_date);
+
 
         Update_A = dialogView.findViewById(R.id.update_alert_lab);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_lab);
 
         tvSelectedDate.setText(currentDateValue2);
-        Rcp_date.setText(currentDateValue2);
+        Ref_date.setText(currentDateValue2);
         Start_date.setText(currentDateValue2);
         End_date.setText(currentDateValue2);
-        // tvSelectedDate.setText(currentDatevalue);
+        RecivedOn.setText(currentDateValue2);
+
 
         builder.setView(dialogView);
 
@@ -218,6 +226,63 @@ public class LabTestFragment extends Fragment {
 
     private void updateLabTest() {
 
+        String testdate = currentDatevalue.toString();
+        String refno = Ref_no.toString().toString();
+        String customer_ref = CustomerRef.getText().toString();
+        String starting_date = currentDatevalue.toString();
+        String ending_date = currentDatevalue.toString();
+        String particulars = Particulars.getText().toString();
+        String sample_Received_Date = currentDatevalue.toString();
+        String ref_date = currentDatevalue.toString();
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = Global.updateRepairAddUpdate;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("ref_no", refno);
+                params.put("test_date", testdate);
+                params.put("cus_ref", customer_ref);
+                params.put("rcp_date", sample_Received_Date);
+                params.put("ref_date", ref_date);
+                params.put("sample_desc", particulars);
+                params.put("start_date", starting_date);
+                params.put("end_date", ending_date);
+                params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
+                params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
+                params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
+                params.put("test_code", "0");
+
+                // params.put("repair1_code", Global.sharedPreferences.getString("repair1_code", "0"));
+                Log.d("rep_date", "rep_date: " + params.toString());
+                return params;
+            }
+
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        queue.add(stringRequest);
 
     }
 
@@ -299,15 +364,19 @@ public class LabTestFragment extends Fragment {
                     labTestClass = new LabTestClass();
                     try {
                         labTestClass.setTRno(e.getString("test_code"));
-                        labTestClass.setLabDate(e.getString("rcp_date"));
-                        labTestClass.setCustomerRef(e.getString("cus_ref"));
+                        labTestClass.setLabDate(e.getString("test_date"));
                         labTestClass.setRefno(e.getString("ref_no"));
+                        labTestClass.setCustomerRef(e.getString("cus_ref"));
                         labTestClass.setLabRefDate(e.getString("ref_date"));
+
                         labTestClass.setSample_Received_Date(e.getString("rcp_date"));
+
                         labTestClass.setTest_Start_Date(e.getString("start_date"));
                         labTestClass.setTest_Completion_Date(e.getString("end_date"));
+
                         labTestClass.setSample_Received_By(e.getString("sample_receivedby"));
                         labTestClass.setSample_Particular(e.getString("sample_desc"));
+
                         labTestClass.setStatus(e.getString("test_status"));
 
                       /*  String test_code = labTestClass.getTRno();

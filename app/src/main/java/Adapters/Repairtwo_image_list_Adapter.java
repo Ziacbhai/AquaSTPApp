@@ -2,6 +2,7 @@ package Adapters;
 
 import static com.ziac.aquastpapp.Activities.Global.repairClass4;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +22,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,7 +60,7 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Repairtwo_image_list_Adapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull Repairtwo_image_list_Adapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
         Picasso.Builder builder = new Picasso.Builder(context);
         Picasso picasso = builder.build();
         String originalImageUrl = repairClasses4.get(position).getI_Repair_image();
@@ -71,7 +73,8 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
         holder.repair_image_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showImage(picasso, repairClasses4.get(position).getIImageList());
+
+                showImage(repairClasses4.get(position).getIImageList());
             }
         });
 
@@ -106,17 +109,11 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
 
     }*/
 
-    public void showImage(Picasso picasso, String imageUrl) {
+    public void showImage(String imageUrl) {
+
         Dialog builder = new Dialog(context);
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
         builder.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                // Nothing
-            }
-        });
-
         // Calculate display dimensions
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int screenWidth = displayMetrics.widthPixels;
