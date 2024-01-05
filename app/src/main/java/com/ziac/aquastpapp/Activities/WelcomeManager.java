@@ -72,7 +72,7 @@ public class WelcomeManager extends AppCompatActivity {
         context = this;
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        fab = findViewById(R.id.floating);
+       /* fab = findViewById(R.id.floating);*/
 
 
         ClickHere = findViewById(R.id.Clickhere);
@@ -95,7 +95,7 @@ public class WelcomeManager extends AppCompatActivity {
         ImageView = findViewById(R.id.imageView);
 
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-        String person = Global.sharedPreferences.getString("person_name", "");
+        String person = Global.sharedPreferences.getString("person_nameu", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
 
@@ -118,12 +118,12 @@ public class WelcomeManager extends AppCompatActivity {
 
         // Log.d("MyTag", "SVG image: " + userimage);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+       /* fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 opencamera();
             }
-        });
+        });*/
         ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

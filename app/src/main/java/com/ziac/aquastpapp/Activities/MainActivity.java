@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
         userref = sharedPreferences.getString("ref_code", "");
-        personname = sharedPreferences.getString("person_name", "");
+        personname = sharedPreferences.getString("person_nameu", "");
         usermail = sharedPreferences.getString("user_email", "");
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
                 Picasso.get().load(userimage).into(ProfileH);
 
-                person_name = drawerLayout.findViewById(R.id._profilename);
+                person_name = drawerLayout.findViewById(R.id.profilename);
                 user_mail = drawerLayout.findViewById(R.id.headeremail);
                 user_site = drawerLayout.findViewById(R.id.site_name);
                 user_stp = drawerLayout.findViewById(R.id.stp_name);

@@ -134,7 +134,7 @@ public class RepairFragment extends Fragment {
         processname = sharedPreferences.getString("process_name", "");
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
-        personname = sharedPreferences.getString("person_name", "");
+        personname = sharedPreferences.getString("person_names", "");
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
@@ -245,7 +245,7 @@ public class RepairFragment extends Fragment {
     }
 
     private void getRepair() {
-        showProgressDialog();
+
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String repair = Global.GetRepairItems;
 
@@ -259,46 +259,41 @@ public class RepairFragment extends Fragment {
             public void onResponse(JSONObject response) {
                 Global.repair1list = new ArrayList<RepairClass1>();
                 repairClass1 = new RepairClass1();
-                JSONArray jarray;
+
                 try {
-                    jarray = response.getJSONArray("data");
+                    JSONArray jarray = response.getJSONArray("data");
 
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-                for (int i = 0; i < jarray.length(); i++) {
-                    final JSONObject e;
-                    try {
-                        e = jarray.getJSONObject(i);
-                    } catch (JSONException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    repairClass1 = new RepairClass1();
-                    try {
-                        repairClass1.setREPNo(e.getString("rep_no"));
-                        repairClass1.setRepair_Amount(e.getString("repaired_amt"));
-                        repairClass1.setRepair_Date(e.getString("rep_date"));
-                        repairClass1.setRepair_code(e.getString("repair1_code"));
-                        repairClass1.setRemark(e.getString("remarks"));
-                        repairClass1.setR_createdby(e.getString("createdby"));
+                    if (jarray.length() > 0) {
+                        for (int i = 0; i < jarray.length(); i++) {
+                            final JSONObject e = jarray.getJSONObject(i);
+                            repairClass1 = new RepairClass1();
 
-                        /*String repair_code= repair_s.getRepair_code();
-                        Global.editor = Global.sharedPreferences.edit();
-                        Global.editor.putString("repair1_code",repair_code);
-                        Global.editor.commit();*/
-                    } catch (JSONException ex) {
-                        throw new RuntimeException(ex);
+                            repairClass1.setREPNo(e.getString("rep_no"));
+                            repairClass1.setRepair_Amount(e.getString("repaired_amt"));
+                            repairClass1.setRepair_Date(e.getString("rep_date"));
+                            repairClass1.setRepair_code(e.getString("repair1_code"));
+                            repairClass1.setRemark(e.getString("remarks"));
+                            repairClass1.setR_createdby(e.getString("createdby"));
+
+                            Global.repair1list.add(repairClass1);
+                        }
+
+                        RepairAdapter repairAdapter = new RepairAdapter(Global.repair1list, getContext());
+                        RepairRecyclerview.setAdapter(repairAdapter);
+                        hideProgressDialog();
+                    } else {
+                        // Display toast message for no data
+                        Toast.makeText(getContext(), "No repair data available", Toast.LENGTH_SHORT).show();
                     }
-                    Global.repair1list.add(repairClass1);
-                    RepairAdapter repairAdapter = new RepairAdapter(Global.repair1list, getContext());
-                    RepairRecyclerview.setAdapter(repairAdapter);
-                    hideProgressDialog();
+                } catch (JSONException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                // Handle error response
+                Toast.makeText(getContext(), "Error fetching repair data", Toast.LENGTH_SHORT).show();
             }
         }) {
             public Map<String, String> getHeaders() {
@@ -310,16 +305,15 @@ public class RepairFragment extends Fragment {
 
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-             /*   params.put("rep_no", Repno.getText().toString());
-                params.put("repaired_amt",Amount.getText().toString());
-                params.put("rep_date", RepairDate.getText().toString());*/
+            /*params.put("rep_no", Repno.getText().toString());
+            params.put("repaired_amt",Amount.getText().toString());
+            params.put("rep_date", RepairDate.getText().toString());*/
                 return params;
             }
         };
         queue.add(jsonObjectRequest);
-
-
     }
+
 
     private void updateRepairs() {
 

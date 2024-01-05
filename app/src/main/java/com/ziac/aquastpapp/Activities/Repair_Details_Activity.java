@@ -111,7 +111,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
         processname = sharedPreferences.getString("process_name", "");
 
         repair_date = Global.repairClass1.getRepair_Date();
-        repair_no = Global.repairClass1.getRepair_code();
+        repair_no = Global.repairClass1.getREPNo();
         repair_amount = Global.repairClass1.getRepair_Amount();
 
         TextView txtsitename, txtstpname, textno, textdate, texamount;
@@ -139,7 +139,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        repair_no = Global.repairClass1.getRepair_code();
+        repair_no = Global.repairClass1.getREPNo();
         double conNo;
         try {
             conNo = Double.parseDouble(repair_no);
@@ -205,7 +205,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
     }
 
-    private void get_Details_Repair() {
+   /* private void get_Details_Repair() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.Get_Repairs_Details;
 
@@ -272,7 +272,74 @@ public class Repair_Details_Activity extends AppCompatActivity {
             }
         };
         queue.add(jsonObjectRequest);
+    }*/
+
+    private void get_Details_Repair() {
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = Global.Get_Repairs_Details;
+
+        String Repair_Details_API = url + "repair1_code=" + Global.repairClass1.getRepair_code();
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Repair_Details_API, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Global.repair2list = new ArrayList<RepairClass2>();
+                repairClass2 = new RepairClass2();
+
+                try {
+                    JSONArray jarray = response.getJSONArray("data");
+
+                    if (jarray.length() > 0) {
+                        for (int i = 0; i < jarray.length(); i++) {
+                            final JSONObject e = jarray.getJSONObject(i);
+                            repairClass2 = new RepairClass2();
+
+                            repairClass2.setD_Equipment_Name(e.getString("equip_name"));
+                            repairClass2.setD_Equipment_Number(e.getString("equip_slno"));
+                            repairClass2.setD_Amount(e.getString("repaired_amt"));
+                            repairClass2.setD_Repaired(e.getString("repaired_flag"));
+                            repairClass2.setD_Remark(e.getString("repaired_remarks"));
+                            repairClass2.setD_Repairedtwo(e.getString("repair2_code"));
+
+                           /* String repair2_code = repairClass2.getD_Repairedtwo();
+                            Global.editor = Global.sharedPreferences.edit();
+                            Global.editor.putString("repair2_code", repair2_code);
+                            Global.editor.commit();*/
+
+                            Global.repair2list.add(repairClass2);
+                        }
+                        Repair_details_Adapter repair_details_adapter = new Repair_details_Adapter(Global.repair2list, context);
+                        Repair_details_recyclerview.setAdapter(repair_details_adapter);
+                        getEquipmentsListRepairdetails();
+                    } else {
+                        Toast.makeText(context, "No data available", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Handle error response
+                Toast.makeText(context, "Error fetching data", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+        queue.add(jsonObjectRequest);
     }
+
 
     private void getRepairEquipmentsSpinnerPopup() {
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
@@ -361,6 +428,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
                 params.put("repair1_code", Global.repairClass1.getRepair_code());
                 //params.put("repair1_code", "22");
+                System.out.println(params);
                 return params;
             }
         };

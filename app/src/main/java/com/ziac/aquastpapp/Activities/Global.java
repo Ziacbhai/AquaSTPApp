@@ -46,7 +46,7 @@ public class Global {
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
 
-   public static String baseurl="http://192.168.1.9:9396/";
+   public static String baseurl="http://192.168.1.6:9396/";
 
     public static String userImageurl = baseurl+"WebsiteData/Users/";
     public static String incident_image = baseurl+"WebsiteData/IncidentReportDocs/";
@@ -112,14 +112,9 @@ public class Global {
     public static String api_List_Get_Equipments = baseurl + "api/List/GetEquipments?";
     public static String api_List_Get_Item = baseurl + "api/List/GetProducts?";
     public static String api_Repair_List_Get_Equipments = baseurl + "api/List/GetRepairItems?";
-
     public static String api_Repair_List_Get_Units = baseurl + "api/List/GetUnits?";
-
-
-
     public static ArrayList<zList> statearraylist;
     public static ArrayList<zList> cityarraylist;
-
     public static ArrayList<StpModelClass> StpList;
     public static ArrayList<CommonModelClass> pumpdetails;
     public static ArrayList<ItemStockClass> Item_stock;
@@ -127,19 +122,13 @@ public class Global {
     public static ArrayList<RepairClass2> repair2list;
     public static ArrayList<RepairClass3> repair3list;
     public static ArrayList<RepairClass4> repair4list;
-
-
     public static ConsumptionClass ConsumptionClass;
     public static ConsumptionClass2 consumptionClass2;
-
     public static RepairClass1 repairClass1;
     public static RepairClass2 repairClass2;
     public static RepairClass3 repairClass3;
     public static RepairClass4 repairClass4;
-
     public static LabTestClass labTestClass1;
-
-
     public static ArrayList<ConsumptionClass> Consumption1list;
     public static ArrayList<ConsumptionClass2> Consumption2list;
 

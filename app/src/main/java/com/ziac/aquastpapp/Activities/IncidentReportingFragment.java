@@ -237,7 +237,7 @@ public class IncidentReportingFragment extends Fragment {
         siteaddress = sharedPreferences.getString("site_address", "");
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
-        personname = sharedPreferences.getString("person_name", "");
+        personname = sharedPreferences.getString("person_names", "");
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 

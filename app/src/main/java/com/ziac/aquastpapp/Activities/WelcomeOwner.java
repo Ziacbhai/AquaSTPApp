@@ -80,7 +80,7 @@ public class WelcomeOwner extends AppCompatActivity {
         Oname = findViewById(R.id.wname);
         ClickHere = findViewById(R.id.Clickhere);
         oContinue = findViewById(R.id.oContinue);
-        fab = findViewById(R.id.floating);
+       // fab = findViewById(R.id.floating);
 
         Ownerexit = findViewById(R.id.ownerexit);
         Ownerexit.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +93,7 @@ public class WelcomeOwner extends AppCompatActivity {
         Ownermail = findViewById(R.id.wemail);
         Owanarmobile = findViewById(R.id.wph);
 
-        String usrname = Global.sharedPreferences.getString("person_name", "");
+        String usrname = Global.sharedPreferences.getString("person_nameu", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
@@ -110,12 +110,12 @@ public class WelcomeOwner extends AppCompatActivity {
                 .into(ImageView);
 
 
-        fab.setOnClickListener(new View.OnClickListener() {
+       /* fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 opencamera();
             }
-        });
+        });*/
         ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -300,6 +300,14 @@ public class WelcomeOwner extends AppCompatActivity {
 
                     Global.customtoast(WelcomeOwner.this, getLayoutInflater(), "Image uploaded successfully");
                     getuserdetails();
+                    String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+                    Picasso.Builder builder = new Picasso.Builder(getApplication());
+                    Picasso picasso = builder.build();
+                    picasso.load(Uri.parse(userimage))
+                            .memoryPolicy(MemoryPolicy.NO_CACHE)
+                            .networkPolicy(NetworkPolicy.NO_CACHE)
+                            .into(ImageView);
+
 
                 } else {
                     if (resp.has("error")) {

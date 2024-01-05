@@ -70,7 +70,7 @@ public class WelcomeCustomer extends AppCompatActivity {
         Customer_name = findViewById(R.id.cname);
         ClickHere = findViewById(R.id.Clickhere);
         cContinue = findViewById(R.id.cContinue);
-        fab = findViewById(R.id.floating);
+        /*fab = findViewById(R.id.floating);*/
         Customer_mail = findViewById(R.id.cmail);
         Customer_mobile = findViewById(R.id.cph);
 
@@ -84,7 +84,7 @@ public class WelcomeCustomer extends AppCompatActivity {
 
         String username, usermail, usermobile, userimage;
 
-        username = Global.sharedPreferences.getString("person_name", "");
+        username = Global.sharedPreferences.getString("person_nameu", "");
         usermail = Global.sharedPreferences.getString("user_email", "");
         usermobile = Global.sharedPreferences.getString("user_mobile", "");
         userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
@@ -99,12 +99,12 @@ public class WelcomeCustomer extends AppCompatActivity {
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(ImageView);
-        fab.setOnClickListener(new View.OnClickListener() {
+       /* fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 opencamera();
             }
-        });
+        });*/
         ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

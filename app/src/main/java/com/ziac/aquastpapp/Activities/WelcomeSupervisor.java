@@ -78,7 +78,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
         Sname = findViewById(R.id.sName);
         // ClickHere = findViewById(R.id.Clickhere);
         sContinue = findViewById(R.id.sContinue);
-        fab = findViewById(R.id.floating);
+       /* fab = findViewById(R.id.floating);*/
         SupervisorExit = findViewById(R.id.supervisorexit);
 
         SupervisorExit.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +95,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
         ClickHere = findViewById(R.id.Clickhere);
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
-        String usrname = Global.sharedPreferences.getString("person_name", "");
+        String usrname = Global.sharedPreferences.getString("person_nameu", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
 
@@ -110,12 +110,12 @@ public class WelcomeSupervisor extends AppCompatActivity {
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(ImageView);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+       /* fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 opencamera();
             }
-        });
+        });*/
 
         ImageView.setOnClickListener(new View.OnClickListener() {
             @Override

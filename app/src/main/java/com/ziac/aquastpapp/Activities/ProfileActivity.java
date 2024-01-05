@@ -92,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
         Backarrowbtn = findViewById(R.id.backarrowbtn);
         Updatebutton = findViewById(R.id.updatebutton);
 
-        Person_name = findViewById(R.id._profilename);
+        Person_name = findViewById(R.id.profilename);
         Person_number = findViewById(R.id.uNumber);
         Person_email = findViewById(R.id.uEmail);
         Person_ref_code = findViewById(R.id.Uref);
@@ -256,7 +256,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
                 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
@@ -375,7 +375,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Global.editor.putString("user_email", mail);
                 Global.editor.putString("user_mobile", mobile);
                 Global.editor.commit();
-                String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+                userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
                 //Picasso.get().load(userimage).into(circleImageView);
 
                 Person_name.setText(person_name);
@@ -411,7 +411,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("username", Global.sharedPreferences.getString("username", null));
+                params.put("user_name", Global.sharedPreferences.getString("user_name", null));
                 return params;
             }
         };

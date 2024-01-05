@@ -90,8 +90,8 @@ public class LoginFragment extends Fragment {
         progressDialog.setMessage("Logging in...");
         progressDialog.setCancelable(true);
 
-        Login_User = view.findViewById(R.id.Luser);
-        Login_pwd = view.findViewById(R.id.password2);
+        Login_User = view.findViewById(R.id.loginuser);
+        Login_pwd = view.findViewById(R.id.loginpassword);
         Login_btn = view.findViewById(R.id.loginbtn);
         RememberMe = view.findViewById(R.id.RcheckBox);
 
@@ -272,7 +272,7 @@ public class LoginFragment extends Fragment {
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
                 Global.editor = Global.sharedPreferences.edit();
                 Global.editor.putString("user_code", user_code);
-                Global.editor.putString("person_name", person_name);
+                Global.editor.putString("person_nameu", person_name);
                 Global.editor.putString("com_code", com_code);
                 Global.editor.putString("user_image", user_image);
                 Global.editor.putString("user_type", user_type);

@@ -137,7 +137,7 @@ public class Consumption_Fragment extends Fragment {
         processname = sharedPreferences.getString("process_name", "");
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
-        personname = sharedPreferences.getString("person_name", "");
+        personname = sharedPreferences.getString("person_names", "");
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
@@ -212,18 +212,13 @@ public class Consumption_Fragment extends Fragment {
 
         consumablesUrl += "comcode=" + comCode + "&ayear=" + aYear + "&sstp1_code=" + sstp1Code;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.POST,
-                consumablesUrl,
-                null,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, consumablesUrl, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray dataArray = response.getJSONArray("data");
-
                             Global.Consumption1list = new ArrayList<>();
-
                             for (int i = 0; i < dataArray.length(); i++) {
                                 JSONObject dataObject = dataArray.getJSONObject(i);
                                 ConsumptionClass consumablesClass = new ConsumptionClass();

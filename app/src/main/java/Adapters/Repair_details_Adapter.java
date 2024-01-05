@@ -149,7 +149,7 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
             @Override
             public void onClick(View view) {
                 if (holder.Repair_repaired_check.isChecked()) {
-                    Toast.makeText(context, "checked", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "checked", Toast.LENGTH_SHORT).show();
                     holder.Repair_repaired_check.setEnabled(false);
 
                     // Save the state in SharedPreferences
