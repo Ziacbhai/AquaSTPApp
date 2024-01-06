@@ -115,7 +115,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
-        processname = sharedPreferences.getString("process_name", "");
+        processname = sharedPreferences.getString("person_nameu", "");
 
 
         TextView txtsitename, txtstpname, txtpersonname;

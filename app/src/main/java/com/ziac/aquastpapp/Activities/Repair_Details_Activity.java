@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -16,6 +17,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +73,8 @@ public class Repair_Details_Activity extends AppCompatActivity {
     static EquipmentRepairListClass equipment_spinner;
     Context context;
     private ProgressDialog progressDialog;
+    Repair_details_Adapter repairDetailsAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +89,13 @@ public class Repair_Details_Activity extends AppCompatActivity {
         new InternetCheckTask().execute();
 
         FloatingActionButton fab = findViewById(R.id.fab);
-
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshScreen();
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +119,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
         ;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
-        processname = sharedPreferences.getString("process_name", "");
+        processname = sharedPreferences.getString("person_nameu", "");
 
         repair_date = Global.repairClass1.getRepair_Date();
         repair_no = Global.repairClass1.getREPNo();
@@ -149,6 +160,21 @@ public class Repair_Details_Activity extends AppCompatActivity {
         }
         String formattedConNo = removeTrailingZero(conNo);
         textno.setText(formattedConNo);
+
+    }
+
+    private void refreshScreen() {
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+                Global.repair2list.clear();
+                Repair_details_Adapter repair_details_adapter = new Repair_details_Adapter(Global.repair2list, context);
+                Repair_details_recyclerview.setAdapter(repair_details_adapter);
+                repair_details_adapter.notifyDataSetChanged();
+                get_Details_Repair();
+            }
+        }, 2000);
 
     }
 
@@ -310,6 +336,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
                         }
                         Repair_details_Adapter repair_details_adapter = new Repair_details_Adapter(Global.repair2list, context);
                         Repair_details_recyclerview.setAdapter(repair_details_adapter);
+                        repair_details_adapter.notifyDataSetChanged();
                         getEquipmentsListRepairdetails();
                     } else {
                         Toast.makeText(context, "No data available", Toast.LENGTH_SHORT).show();

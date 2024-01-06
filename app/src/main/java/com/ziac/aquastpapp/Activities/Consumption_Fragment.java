@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
@@ -19,7 +20,10 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,6 +56,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import Adapters.ConsumptionAdapter;
+import Adapters.Consumption_Details_Adapter;
 import Models.ConsumptionClass;
 
 public class Consumption_Fragment extends Fragment {
@@ -67,11 +72,13 @@ public class Consumption_Fragment extends Fragment {
     String currentDatevalue, currentDateValue2;
     Context context;
     ConsumptionAdapter consumptionAdapter;
-
+    private SwipeRefreshLayout swipeRefreshLayout;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_consumption, container, false);
 
@@ -85,6 +92,15 @@ public class Consumption_Fragment extends Fragment {
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading please wait...");
         progressDialog.setCancelable(true);
+
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshScreen();
+            }
+        });
 
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
@@ -126,6 +142,23 @@ public class Consumption_Fragment extends Fragment {
 
     }
 
+
+
+     private void refreshScreen() {
+         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+             @Override
+             public void run() {
+                 swipeRefreshLayout.setRefreshing(false);
+                 Global.Consumption1list.clear();
+                 ConsumptionAdapter consumablesAdapter = new ConsumptionAdapter(Global.Consumption1list, context);
+                 Consumables_rv.setAdapter(consumablesAdapter);
+                 consumablesAdapter.notifyDataSetChanged();
+                 getConsumables();
+             }
+         },2000);
+
+     }
+
     private void user_topcard(View view) {
 
 
@@ -137,7 +170,7 @@ public class Consumption_Fragment extends Fragment {
         processname = sharedPreferences.getString("process_name", "");
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
-        personname = sharedPreferences.getString("person_names", "");
+        personname = sharedPreferences.getString("person_nameu", "");
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
@@ -202,7 +235,6 @@ public class Consumption_Fragment extends Fragment {
     @SuppressLint("MissingInflatedId")
     private void getConsumables() {
         showProgressDialog();
-
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String consumablesUrl = Global.Get_Consumables;
 

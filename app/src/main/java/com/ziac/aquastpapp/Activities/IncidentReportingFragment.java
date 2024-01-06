@@ -15,7 +15,10 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,10 +62,10 @@ public class IncidentReportingFragment extends Fragment {
     IncidentAdapter incidentAdapter;
 
     private TextView tvSelectedDate;
-    TextView Date_A, STP_A ;
+    TextView Date_A, STP_A;
     EditText Remark_A;
     AppCompatButton Update_A, Cancel_A;
-
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     String currentDatevalue, currentDateValue2;
 
@@ -76,6 +79,15 @@ public class IncidentReportingFragment extends Fragment {
         user_topcard(view);
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
+
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshScreen();
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,7 +117,6 @@ public class IncidentReportingFragment extends Fragment {
         }
 
 
-
         Incident_recyclerview = view.findViewById(R.id.fragment_incident_recyclerview);
         Incident_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         Incident_recyclerview.setHasFixedSize(true);
@@ -114,6 +125,20 @@ public class IncidentReportingFragment extends Fragment {
         getIncidentReport();
         return view;
 
+    }
+
+    private void refreshScreen() {
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+                Global.Incident_Class.clear();
+                IncidentAdapter incidentAdapter1 = new IncidentAdapter(context, Global.Incident_Class);
+                Incident_recyclerview.setAdapter(incidentAdapter1);
+                incidentAdapter1.notifyDataSetChanged();
+                getIncidentReport();
+            }
+        }, 2000);
 
     }
 
@@ -188,7 +213,7 @@ public class IncidentReportingFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
 
             @Override
             public Map<String, String> getHeaders() {
@@ -206,7 +231,7 @@ public class IncidentReportingFragment extends Fragment {
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
                 params.put("site_code", Global.sharedPreferences.getString("site_code", "0"));
-                params.put("incident_code","0");
+                params.put("incident_code", "0");
                 Log.d("params", String.valueOf(params));
                 return params;
 
@@ -237,7 +262,7 @@ public class IncidentReportingFragment extends Fragment {
         siteaddress = sharedPreferences.getString("site_address", "");
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
-        personname = sharedPreferences.getString("person_names", "");
+        personname = sharedPreferences.getString("person_nameu", "");
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 

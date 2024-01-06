@@ -15,7 +15,10 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,13 +58,16 @@ import Models.RepairClass1;
 public class RepairFragment extends Fragment {
 
     RepairClass1 repairClass1;
+
+    RepairAdapter repairAdapter;
     RecyclerView RepairRecyclerview;
-    TextView  tvSelectedDate, Remark_A;
+    TextView tvSelectedDate, Remark_A;
     ;
     String currentDatevalue, currentDateValue2;
     ProgressDialog progressDialog;
 
     Context context;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -81,6 +87,15 @@ public class RepairFragment extends Fragment {
         progressDialog.setCancelable(true);
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
+
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshScreen();
+            }
+        });
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +136,21 @@ public class RepairFragment extends Fragment {
         return view;
     }
 
+    private void refreshScreen() {
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+                Global.repair1list.clear();
+                RepairAdapter repairAdapter1 = new RepairAdapter(Global.repair1list, context);
+                RepairRecyclerview.setAdapter(repairAdapter1);
+                repairAdapter1.notifyDataSetChanged();
+                getRepair();
+            }
+        }, 2000);
+
+    }
+
     private void user_topcard(View view) {
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading !!");
@@ -134,7 +164,7 @@ public class RepairFragment extends Fragment {
         processname = sharedPreferences.getString("process_name", "");
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
-        personname = sharedPreferences.getString("person_names", "");
+        personname = sharedPreferences.getString("person_nameu", "");
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
@@ -275,6 +305,12 @@ public class RepairFragment extends Fragment {
                             repairClass1.setRemark(e.getString("remarks"));
                             repairClass1.setR_createdby(e.getString("createdby"));
 
+
+                            String repair1_code = repairClass1.getRepair_code();
+                            Global.editor = Global.sharedPreferences.edit();
+                            Global.editor.putString("repair1_code", repair1_code);
+                            Global.editor.commit();
+
                             Global.repair1list.add(repairClass1);
                         }
 
@@ -283,7 +319,7 @@ public class RepairFragment extends Fragment {
                         hideProgressDialog();
                     } else {
                         // Display toast message for no data
-                        Toast.makeText(getContext(), "No repair data available", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "No data available", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException ex) {
                     throw new RuntimeException(ex);

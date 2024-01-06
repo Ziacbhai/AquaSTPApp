@@ -93,12 +93,12 @@ public class WelcomeOwner extends AppCompatActivity {
         Ownermail = findViewById(R.id.wemail);
         Owanarmobile = findViewById(R.id.wph);
 
-        String usrname = Global.sharedPreferences.getString("person_nameu", "");
+        String username = Global.sharedPreferences.getString("person_nameu", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
-        Oname.setText(usrname);
+        Oname.setText(username);
         Ownermail.setText(mail);
         Owanarmobile.setText(mobile);
 

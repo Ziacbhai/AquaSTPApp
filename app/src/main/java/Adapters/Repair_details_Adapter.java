@@ -1,5 +1,7 @@
 package Adapters;
 
+import static com.ziac.aquastpapp.Activities.Global.repair2list;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -105,7 +107,7 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
     public Repair_details_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repair_details_design, parent, false);
         Viewholder viewholder = new Viewholder(view);
-        Animation animation = AnimationUtils.loadAnimation(context,R.anim.fade_in);
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
         viewholder.itemView.startAnimation(animation);
         return viewholder;
     }
@@ -118,63 +120,6 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
         //  holder.Repair_repaired_check.setText(repairsClassList.get(position).getD_Repaired());
         holder.Remark.setText(repairClass2.get(position).getD_Remark());
         holder.Amount.setText(repairClass2.get(position).getD_Amount());
-
-    /*    String repairedStatus = repairsClassList.get(position).getD_Repaired();
-        boolean isRepaired = Boolean.parseBoolean(repairedStatus);
-        holder.Repair_repaired_check.setChecked(isRepaired);*/
-
-        String repairedStatus = repairClass2.get(position).getD_Repaired();
-
-//        boolean isRepaired = Boolean.parseBoolean(repairedStatus);
-//        holder.Repair_repaired_check.setChecked(isRepaired);
-//        if (!isRepaired) {
-//            holder.Repair_repaired_check.setClickable(true);
-//            holder.Repair_repaired_check.setFocusable(true);
-//            holder.Repair_repaired_check.setEnabled(true);
-//        } else {
-//            holder.Repair_repaired_check.setClickable(false);
-//            holder.Repair_repaired_check.setFocusable(true);
-//            holder.Repair_repaired_check.setEnabled(false);
-//        }
-
-
-        // Inside your Activity or Fragment
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean isChecked = Global.sharedPreferences.getBoolean("checkboxState", false);
-
-        holder.Repair_repaired_check.setChecked(isChecked);
-        holder.Repair_repaired_check.setEnabled(!isChecked);
-
-        holder.Repair_repaired_check.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (holder.Repair_repaired_check.isChecked()) {
-                    //Toast.makeText(context, "checked", Toast.LENGTH_SHORT).show();
-                    holder.Repair_repaired_check.setEnabled(false);
-
-                    // Save the state in SharedPreferences
-                    Global.editor = Global.sharedPreferences.edit();
-                    Global.editor.putBoolean("checkboxState", true);
-                    Global.editor.commit();
-
-
-                }
-            }
-        });
-
-
-
-//        holder.Repair_repaired_check.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (holder.Repair_repaired_check.isChecked()) {
-//                    Toast.makeText(context, "checked", Toast.LENGTH_SHORT).show();
-//                    holder.Repair_repaired_check.setEnabled(false);
-//                    // setasChecked();  // Uncomment this line if it's a custom method you need to call
-//                }
-//            }
-//        });
-
         holder.RImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,6 +136,17 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
                 context.startActivity(intent);
             }
         });
+
+        holder.Repair_repaired_check.setEnabled(false);
+        holder.Repair_repaired_check.setOnCheckedChangeListener(null); // Prevent triggering onCheckedChanged during initialization
+        holder.Repair_repaired_check.setChecked(repairClass2.get(position).getD_Repaired().equals("true"));
+        holder.Repair_repaired_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                repairClass2.get(position).setD_Repaired(isChecked ? "true" : "false");
+                repair2list.set(position, (RepairClass2) repairClass2);
+            }
+        });
     }
 
 
@@ -203,7 +159,7 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
 
         TextView Eq_Name, Eq_number, Repaired, Remark, Amount;
 
-         CheckBox Repair_repaired_check;
+        CheckBox Repair_repaired_check;
         ImageView RImage, RBreakup;
 
         public Viewholder(@NonNull View itemView) {

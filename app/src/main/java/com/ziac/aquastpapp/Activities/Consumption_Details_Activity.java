@@ -9,12 +9,15 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -77,6 +80,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     TextView Equipment_code, Item_code, Qty_cb;
     AppCompatButton Update_A, Cancel_A;
     private ProgressDialog progressDialog;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private boolean isSwipeRefreshTriggered = false;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -96,6 +102,15 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         progressDialog.setMessage("Loading please wait...");
         progressDialog.setCancelable(true);
 
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshScreen();
+            }
+        });
+
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +119,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 showAddDetailsDialog(context);
             }
         });
+        isSwipeRefreshTriggered = true;
         getConsumablesDetails();
 
         Consumables_D_Rv = findViewById(R.id.consumables_details_recyclerview);
@@ -226,6 +242,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             }
         });
     }
+
     private void updateConsumables_details() {
         String qty = Qty_cb.getText().toString();
         String equipment_code = equipment_spinner.getEquipment_code();
@@ -308,6 +325,20 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
     }
 
+    private void refreshScreen() {
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+                Global.Consumption2list.clear();
+                Consumption_Details_Adapter consumablesDetailsAdapter = new Consumption_Details_Adapter(context, Global.Consumption2list);
+                Consumables_D_Rv.setAdapter(consumablesDetailsAdapter);
+                consumablesDetailsAdapter.notifyDataSetChanged();
+                getConsumablesDetails();
+            }
+        }, 2000);
+    }
+
     private void getConsumablesDetails() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String consumables_d = Global.Get_Consumables_Details;
@@ -365,9 +396,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     Consumption_Details_Adapter consumablesDetailsAdapter = new Consumption_Details_Adapter(context, Global.Consumption2list);
                     Consumables_D_Rv.setAdapter(consumablesDetailsAdapter);
                 }
-
                 getEquipmentsList();
                 getItemSpinner();
+
             }
         }, new Response.ErrorListener() {
             @Override
