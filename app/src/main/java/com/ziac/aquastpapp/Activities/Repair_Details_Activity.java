@@ -27,6 +27,7 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -72,9 +73,10 @@ public class Repair_Details_Activity extends AppCompatActivity {
     private static Dialog zDialog;
     static EquipmentRepairListClass equipment_spinner;
     Context context;
-    private ProgressDialog progressDialog;
-    Repair_details_Adapter repairDetailsAdapter;
-    private SwipeRefreshLayout swipeRefreshLayout;
+     ProgressDialog progressDialog;
+     SwipeRefreshLayout swipeRefreshLayout;
+
+     ImageView Repair_back_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,14 @@ public class Repair_Details_Activity extends AppCompatActivity {
                 refreshScreen();
             }
         });
+
+        Repair_back_btn = findViewById(R.id.repair_back_btn);
+        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              finish();
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,11 +125,11 @@ public class Repair_Details_Activity extends AppCompatActivity {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, repair_date, repair_no, repair_amount;
+        String  stpname, sitename, processname,repair_date, repair_no, repair_amount;
         ;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
-        processname = sharedPreferences.getString("person_nameu", "");
+        processname = sharedPreferences.getString("process_name", "");
 
         repair_date = Global.repairClass1.getRepair_Date();
         repair_no = Global.repairClass1.getREPNo();
@@ -228,77 +238,8 @@ public class Repair_Details_Activity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
+        getEquipmentsListRepairdetails();
     }
-
-   /* private void get_Details_Repair() {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = Global.Get_Repairs_Details;
-
-        String Repair_Details_API = url + "repair1_code=" + Global.repairClass1.getRepair_code();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Repair_Details_API, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Global.repair2list = new ArrayList<RepairClass2>();
-                repairClass2 = new RepairClass2();
-                JSONArray jarray;
-                try {
-                    jarray = response.getJSONArray("data");
-
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-                for (int i = 0; i < jarray.length(); i++) {
-                    final JSONObject e;
-                    try {
-                        e = jarray.getJSONObject(i);
-                    } catch (JSONException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    repairClass2 = new RepairClass2();
-                    try {
-                        repairClass2.setD_Equipment_Name(e.getString("equip_name"));
-                        repairClass2.setD_Equipment_Number(e.getString("equip_slno"));
-                        repairClass2.setD_Amount(e.getString("repaired_amt"));
-                        repairClass2.setD_Repaired(e.getString("repaired_flag"));
-                        repairClass2.setD_Remark(e.getString("repaired_remarks"));
-                        repairClass2.setD_Repairedtwo(e.getString("repair2_code"));
-
-                        String repair2_code = repairClass2.getD_Repairedtwo();
-                        Global.editor = Global.sharedPreferences.edit();
-                        Global.editor.putString("repair2_code", repair2_code);
-                        Global.editor.commit();
-
-                    } catch (JSONException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    Global.repair2list.add(repairClass2);
-                    Repair_details_Adapter repair_details_adapter = new Repair_details_Adapter(Global.repair2list, context);
-                    Repair_details_recyclerview.setAdapter(repair_details_adapter);
-                }
-                getEquipmentsListRepairdetails();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-
-            }
-        }) {
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<String, String>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", "");
-                headers.put("Authorization", "Bearer " + accesstoken);
-                return headers;
-            }
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
-        };
-        queue.add(jsonObjectRequest);
-    }*/
 
     private void get_Details_Repair() {
 
@@ -367,43 +308,6 @@ public class Repair_Details_Activity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
-
-    private void getRepairEquipmentsSpinnerPopup() {
-        zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
-
-        zDialog.setContentView(R.layout.equipment_item);
-
-        ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
-       /* TextView Equipment_Name = zDialog.findViewById(R.id.euipment_name);
-        TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);*/
-
-        if (Global.Repair_equipment == null || Global.Repair_equipment.size() == 0) {
-            Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
-            return;
-        }
-        final Repair_Details_Activity.EquipmentSelectRepair_Adapter EqA = new Repair_Details_Activity.EquipmentSelectRepair_Adapter(Global.Repair_equipment);
-        lvEqName.setAdapter(EqA);
-
-       /* Equipment_Name.setText("Equipment Name");
-        Equipment_id.setText("Equipment ID");*/
-        zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        zDialog.show();
-
-        SearchView sveq = zDialog.findViewById(R.id.svequipment);
-
-        sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                EqA.getFilter().filter(newText);
-                return false;
-            }
-        });
-    }
 
     private void updateRepairdetails() {
         String remarks = Remark_A.getText().toString();
@@ -595,6 +499,43 @@ public class Repair_Details_Activity extends AppCompatActivity {
                 }
             };
         }
+    }
+
+    private void getRepairEquipmentsSpinnerPopup() {
+        zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+
+        zDialog.setContentView(R.layout.equipment_item);
+
+        ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
+       /* TextView Equipment_Name = zDialog.findViewById(R.id.euipment_name);
+        TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);*/
+
+        if (Global.Repair_equipment == null || Global.Repair_equipment.size() == 0) {
+            Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        final Repair_Details_Activity.EquipmentSelectRepair_Adapter EqA = new Repair_Details_Activity.EquipmentSelectRepair_Adapter(Global.Repair_equipment);
+        lvEqName.setAdapter(EqA);
+
+       /* Equipment_Name.setText("Equipment Name");
+        Equipment_id.setText("Equipment ID");*/
+        zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        zDialog.show();
+
+        SearchView sveq = zDialog.findViewById(R.id.svequipment);
+
+        sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                EqA.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
 

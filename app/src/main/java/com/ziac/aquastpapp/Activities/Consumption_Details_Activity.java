@@ -4,7 +4,6 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -65,17 +65,16 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import Adapters.Consumption_Details_Adapter;
-import Models.ConsumptionClass;
 import Models.ConsumptionClass2;
 import Models.EquipmentListClassConsumption;
-import Models.ItemListClassConsumables;
+import Models.ItemListClassConsumption;
 
 public class Consumption_Details_Activity extends AppCompatActivity {
     ConsumptionClass2 consumptionClass2;
     RecyclerView Consumables_D_Rv;
     Context context;
     private EquipmentListClassConsumption equipment_spinner;
-    private ItemListClassConsumables Item_spinner;
+    private ItemListClassConsumption Item_spinner;
     private Dialog zDialog;
     TextView Equipment_code, Item_code, Qty_cb;
     AppCompatButton Update_A, Cancel_A;
@@ -83,7 +82,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private boolean isSwipeRefreshTriggered = false;
 
-
+    ImageView Repair_back_btn;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +100,13 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading please wait...");
         progressDialog.setCancelable(true);
-
+        Repair_back_btn = findViewById(R.id.repair_back_btn);
+        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -241,6 +246,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+
+        getEquipmentsList();
+        getItemSpinner();
     }
 
     private void updateConsumables_details() {
@@ -264,6 +272,8 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     if (response.getBoolean("isSuccess")) {
                         Toast.makeText(context, "Updated successfully !!", Toast.LENGTH_SHORT).show();
                         getConsumablesDetails();
+
+
                     } else {
                         Toast.makeText(context, response.getString("error"), Toast.LENGTH_SHORT).show();
 
@@ -437,14 +447,13 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
         String Url = Global.api_List_Get_Equipments + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
         Url = Url + "&sstp1_code=" + Global.sharedPreferences.getString("sstp1_code", "0");
-
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
 
-                        Global.Consumabeles_equipment = new ArrayList<EquipmentListClassConsumption>();
+                        Global.Consumption_equipment = new ArrayList<EquipmentListClassConsumption>();
 
                         for (int i = 0; i < response.length(); i++) {
                             try {
@@ -456,7 +465,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                                 equipment.setEquipment_Name(equipmentJson.getString("equip_name"));
                                 //equipment.setEquipment_Name(equipmentJson.getString("equip_name"));
 
-                                Global.Consumabeles_equipment.add(equipment);
+                                Global.Consumption_equipment.add(equipment);
 
                             } catch (JSONException ex) {
                                 ex.printStackTrace();
@@ -488,18 +497,16 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
 
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
-
         zDialog.setContentView(R.layout.equipment_item);
-
         ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
         /*TextView Equipment_name =zDialog.findViewById(R.id.euipment_name);
         TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);*/
-
-        if (Global.Consumabeles_equipment == null || Global.Consumabeles_equipment.size() == 0) {
+         getEquipmentsList();
+        if (Global.Consumption_equipment == null || Global.Consumption_equipment.size() == 0) {
             Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
             return;
         }
-        final EquipmentSelect_Adapter EqA = new EquipmentSelect_Adapter(Global.Consumabeles_equipment);
+        EquipmentSelect_Adapter EqA = new EquipmentSelect_Adapter(Global.Consumption_equipment);
         lvEqName.setAdapter(EqA);
 
        /* Equipment_name.setText("Equipment Name");
@@ -585,9 +592,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     ArrayList<EquipmentListClassConsumption> mFilteredList = new ArrayList<>();
                     String charString = charSequence.toString();
                     if (charString.isEmpty()) {
-                        mFilteredList = Global.Consumabeles_equipment;
+                        mFilteredList = Global.Consumption_equipment;
                     } else {
-                        for (EquipmentListClassConsumption dataList : Global.Consumabeles_equipment) {
+                        for (EquipmentListClassConsumption dataList : Global.Consumption_equipment) {
                             if (dataList.getEquipment_Name().toLowerCase().contains(charString) ||
                                     dataList.getEquipment_id().toLowerCase().contains(charString)) {
                                 mFilteredList.add(dataList);
@@ -617,13 +624,13 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Global.Consumbeles_item = new ArrayList<>();
+                Global.Consumption_item = new ArrayList<>();
 
                 for (int i = 0; i < response.length(); i++) {
                     try {
 
                         JSONObject equipmentJson = response.getJSONObject(i);
-                        ItemListClassConsumables item = new ItemListClassConsumables();
+                        ItemListClassConsumption item = new ItemListClassConsumption();
 
                         item.setItem(equipmentJson.getString("part_no"));
                         item.setItem_code(equipmentJson.getString("item_code"));
@@ -631,7 +638,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
                         //Log.d("YourTag", "Name: " + equipmentJson.getString("equip_name"));
                         // Log.d("YourTag", "Code: " + equipmentJson.getString("sstp1_code"));
-                        Global.Consumbeles_item.add(item);
+                        Global.Consumption_item.add(item);
 
                     } catch (JSONException ex) {
                         ex.printStackTrace();
@@ -674,11 +681,11 @@ public class Consumption_Details_Activity extends AppCompatActivity {
        /* TextView Equipment_name =zDialog.findViewById(R.id.euipment_name);
         TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);*/
 
-        if (Global.Consumbeles_item == null || Global.Consumbeles_item.size() == 0) {
+        if (Global.Consumption_item == null || Global.Consumption_item.size() == 0) {
             Toast.makeText(getBaseContext(), "Item list not found !! Please try again !!", Toast.LENGTH_LONG).show();
             return;
         }
-        final ItemSelect_Adapter laItem = new ItemSelect_Adapter(Global.Consumbeles_item);
+        ItemSelect_Adapter laItem = new ItemSelect_Adapter(Global.Consumption_item);
         lvItem.setAdapter(laItem);
 
        /* Equipment_name.setText("Item Name");
@@ -704,9 +711,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
     public class ItemSelect_Adapter extends BaseAdapter implements Filterable {
 
-        private ArrayList<ItemListClassConsumables> mDataArrayList;
+        private ArrayList<ItemListClassConsumption> mDataArrayList;
 
-        public ItemSelect_Adapter(ArrayList<ItemListClassConsumables> mDataArrayList) {
+        public ItemSelect_Adapter(ArrayList<ItemListClassConsumption> mDataArrayList) {
             this.mDataArrayList = mDataArrayList;
         }
 
@@ -754,12 +761,12 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             return new Filter() {
                 @Override
                 protected FilterResults performFiltering(CharSequence charSequence) {
-                    List<ItemListClassConsumables> mFilteredList = new ArrayList<>();
+                    List<ItemListClassConsumption> mFilteredList = new ArrayList<>();
                     String charString = charSequence.toString();
                     if (charString.isEmpty()) {
-                        mFilteredList = Global.Consumbeles_item;
+                        mFilteredList = Global.Consumption_item;
                     } else {
-                        for (ItemListClassConsumables dataList : Global.Consumbeles_item) {
+                        for (ItemListClassConsumption dataList : Global.Consumption_item) {
                             if (dataList.getItem_name().toLowerCase().contains(charString) ||
                                     dataList.getItem().toLowerCase().contains(charString)) {
                                 mFilteredList.add(dataList);
@@ -775,7 +782,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                    mDataArrayList = (ArrayList<ItemListClassConsumables>) filterResults.values;
+                    mDataArrayList = (ArrayList<ItemListClassConsumption>) filterResults.values;
                     notifyDataSetChanged();
                 }
             };

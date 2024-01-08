@@ -306,10 +306,10 @@ public class RepairFragment extends Fragment {
                             repairClass1.setR_createdby(e.getString("createdby"));
 
 
-                            String repair1_code = repairClass1.getRepair_code();
+                            /*String repair1_code = repairClass1.getRepair_code();
                             Global.editor = Global.sharedPreferences.edit();
                             Global.editor.putString("repair1_code", repair1_code);
-                            Global.editor.commit();
+                            Global.editor.commit();*/
 
                             Global.repair1list.add(repairClass1);
                         }

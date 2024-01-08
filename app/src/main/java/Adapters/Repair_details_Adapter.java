@@ -55,53 +55,6 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
         this.context = context;
     }
 
-//    public void setasChecked() {
-//
-//        RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
-//        String url = Global.urldeletevehicle ;
-//        url=url+"vehmas_code="+vehmascode;
-//        //progressDialog.show();
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                //JSONObject respObj = new JSONObject(response);
-//                try {
-//                    String msg = response.getString("msg");
-//                    boolean isSuccess = response.getBoolean("isSuccess");
-//                } catch (JSONException e) {
-//                    throw new RuntimeException(e);
-//                }
-//
-////                StockFragment stockFragment = new StockFragment();
-////                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-////                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-////                fragmentTransaction.replace(R.id.frame_layout, stockFragment);
-////                fragmentTransaction.addToBackStack(null);
-////                fragmentTransaction.commit();
-//
-//
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                //Global.customtoast(context.getApplicationContext(), getLayoutInflater(),"Failed to get my stock .." + error.getMessage());
-//            }
-//        })
-//        {
-//            @Override
-//            public Map<String, String> getHeaders() {
-//                Map<String, String> headers = new HashMap<String, String>();
-//                String accesstoken = Global.sharedPreferences.getString("access_token", "");
-//                headers.put("Authorization", "Bearer " + accesstoken);
-//                return headers;
-//            }
-//
-//
-//        };
-//        queue.add(jsonObjectRequest);
-//
-//    }
-
     @NonNull
     @Override
     public Repair_details_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

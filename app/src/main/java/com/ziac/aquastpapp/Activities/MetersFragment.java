@@ -73,7 +73,7 @@ public class MetersFragment extends Fragment {
         Process = sharedPreferences.getString("process_name", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
-        Personname = sharedPreferences.getString("person_name", "");
+        Personname = sharedPreferences.getString("person_nameu", "");
 
         usersiteH = view.findViewById(R.id.site_name);
         userstpH = view.findViewById(R.id.stp_name);

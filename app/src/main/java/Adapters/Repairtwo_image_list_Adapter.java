@@ -80,34 +80,7 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
 
     }
 
-   /* private void showImage(String imageUrl) {
-        Dialog builder = new Dialog(context);
-        builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        // Create an ImageView
-        ImageView imageView = new ImageView(context);
-        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        // Load the image using Picasso or your preferred image loading library
-        Picasso.get().load(Uri.parse(Global.repair_images + imageUrl)).into(imageView);
 
-        // Set the ImageView as the content view of the dialog
-        builder.setContentView(imageView);
-
-        // Set layout parameters to fit the image within the screen
-        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
-
-        int dialogWidth = screenWidth;
-        int dialogHeight = screenHeight;
-
-        builder.getWindow().setLayout(dialogWidth, dialogHeight);
-        // Show the dialog
-        builder.show();
-
-
-
-    }*/
 
     public void showImage(String imageUrl) {
 

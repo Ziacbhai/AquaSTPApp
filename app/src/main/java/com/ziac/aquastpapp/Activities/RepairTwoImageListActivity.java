@@ -152,20 +152,11 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
             }
         }) {
             public Map<String, String> getHeaders() {
-
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
-
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("incident_code", Global.sharedPreferences.getString("incident_code", "0"));
-//                params.put("file_type", "I");
-//                return params;
-//            }
-
         };
         queue.add(jsonObjectRequest);
     }

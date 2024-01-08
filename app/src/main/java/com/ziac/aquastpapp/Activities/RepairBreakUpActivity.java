@@ -50,15 +50,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import Adapters.Repair_BreakUp_Adapter;
 import Models.EquipmentClassRepairBreakUp;
-import Models.EquipmentListClassConsumption;
-import Models.EquipmentRepairListClass;
-import Models.ItemListClassConsumables;
 import Models.ItemListClassRepair_BreakUp;
 import Models.RepairClass3;
 

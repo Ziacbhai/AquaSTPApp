@@ -71,7 +71,7 @@ public class MetersDetailsAdapter extends RecyclerView.Adapter<MetersDetailsAdap
         holder.Specification.setText(commonModelClassList.get(position).getSpecification());
         holder.Rating_Capacity.setText(commonModelClassList.get(position).getRating_Capacity());
         holder.CleaningRunningFrequencyHRS.setText(commonModelClassList.get(position).getCleaning_RunningFrequency_HRS());
-        holder.ImageView.setOnClickListener(new View.OnClickListener() {
+       /* holder.ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -80,7 +80,7 @@ public class MetersDetailsAdapter extends RecyclerView.Adapter<MetersDetailsAdap
                 showImage(picasso, userimage);
 
             }
-        });
+        });*/
     }
 
     public void showImage(Picasso picasso, String userimage) {

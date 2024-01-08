@@ -198,7 +198,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (imageBitmap == null) {
             return;
         }
-
+        String image = imageToString(imageBitmap);
         String url = Global.urlUpdateprofileImage;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
@@ -249,7 +249,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                String image = imageToString(imageBitmap);
+
                 params.put("fileName", image);
                 Log.d("YourTag", "Key: fileName, Value: " + image);
                 return params;

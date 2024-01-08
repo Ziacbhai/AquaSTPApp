@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,7 +59,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
     IncidentsClass incidentsClass;
     AppCompatButton In_image_uploadbtn;
     Context context;
-
+ImageView Repair_back_btn;
     private ProgressDialog progressDialog;
 
     @SuppressLint("MissingInflatedId")
@@ -76,7 +77,13 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
-
+        Repair_back_btn = findViewById(R.id.repair_back_btn);
+        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
@@ -84,12 +91,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
         In_image_uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (context != null) {
                     openCamera();
-                } else {
-                    Log.e("Camera", "Context is null");
-
-                }
             }
         });
 

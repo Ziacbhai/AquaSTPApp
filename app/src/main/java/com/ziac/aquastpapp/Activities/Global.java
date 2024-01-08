@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.R;
 
@@ -23,7 +25,7 @@ import Models.EquipmentClassRepairBreakUp;
 import Models.EquipmentListClassConsumption;
 import Models.EquipmentRepairListClass;
 import Models.IncidentsClass;
-import Models.ItemListClassConsumables;
+import Models.ItemListClassConsumption;
 import Models.ItemListClassRepair_BreakUp;
 import Models.ItemStockClass;
 import Models.LabTestClass;
@@ -129,21 +131,17 @@ public class Global {
     public static RepairClass3 repairClass3;
     public static RepairClass4 repairClass4;
     public static LabTestClass labTestClass1;
+    public static IncidentsClass incidentsClass;
     public static ArrayList<ConsumptionClass> Consumption1list;
     public static ArrayList<ConsumptionClass2> Consumption2list;
-
-    public static ArrayList<EquipmentListClassConsumption> Consumabeles_equipment;
-    public static ArrayList<ItemListClassConsumables> Consumbeles_item;
+    public static ArrayList<EquipmentListClassConsumption> Consumption_equipment;
+    public static ArrayList<ItemListClassConsumption> Consumption_item;
     public static ArrayList<EquipmentRepairListClass> Repair_equipment;
     public static ArrayList<ItemListClassRepair_BreakUp> Repair_Item_Breakup;
     public static ArrayList<EquipmentClassRepairBreakUp> Repair_Equipment_Breakup;
-
     public static ArrayList<LabTestClass> LabTest_Class;
-
     public static ArrayList<IncidentsClass> Incident_Class;
-
     public static ArrayList<CommonModelClass> metersdetails;
-
     public static void  customtoast(Context context, LayoutInflater inflater, String msg){
         //LayoutInflater inflater = getLayoutInflater();
         View customToastView = inflater.inflate(R.layout.costom_toast, null);
@@ -158,7 +156,6 @@ public class Global {
         customToast.setView(customToastView);
         customToast.show();
     }
-
     public static boolean isNetworkAvailable(Context context) {
 
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -168,7 +165,7 @@ public class Global {
         }
         return false;
     }
-    private static Picasso getPicassoInstance(Context context) {
+    public static Picasso getPicassoInstance(Context context) {
         if (picassoInstance == null) {
 
             picassoInstance = new Picasso.Builder(context.getApplicationContext()).build();
@@ -179,6 +176,8 @@ public class Global {
         Picasso picasso = getPicassoInstance(context);
         picasso.load(imageUrl)
                 .error(R.drawable.no_image_available_icon)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(imageView);
     }
 }

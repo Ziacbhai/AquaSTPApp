@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ziac.aquastpapp.R;
@@ -19,16 +20,11 @@ import com.ziac.aquastpapp.R;
 import Models.IncidentsClass;
 
 public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
-    RecyclerView Incident_Image_list_Rv;
-    IncidentsClass incidentsClass;
+
     Context context;
     CardView In_image_, In_docs_;
-
-    TextView usersiteH, userstpH, usersiteaddressH, Mailid, Mobno, personnameH;
-    private String Personname, mail, Stpname, Sitename, SiteAddress, Process, Mobile;
-
     private ProgressDialog progressDialog;
-
+    ImageView Repair_back_btn;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -49,7 +45,13 @@ public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
         In_image_ = findViewById(R.id.in_images_);
         In_docs_ = findViewById(R.id.in_docs_);
 
-
+        Repair_back_btn = findViewById(R.id.repair_back_btn);
+        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         In_image_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

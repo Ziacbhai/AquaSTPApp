@@ -19,7 +19,7 @@ import com.ziac.aquastpapp.R;
 
 public class AboutActivity extends AppCompatActivity {
 
-    private CardView Website, CallUs, MailUs, ChatUs, LinkedIn, FaceBook, Instagram, WhatsApp;
+    private CardView Website, CallUs, MailUs, ChatUs, LinkedIn, FaceBook, Instagram, X;
 
     LinearLayout Locate;
     LottieAnimationView Ziac;
@@ -41,7 +41,7 @@ public class AboutActivity extends AppCompatActivity {
         LinkedIn = findViewById(R.id.linkedIn);
         FaceBook = findViewById(R.id.Facebook);
         Instagram = findViewById(R.id.instagram);
-        WhatsApp = findViewById(R.id.whatsApp);
+        X = findViewById(R.id.X);
 
         Ziac = findViewById(R.id.animationView);
         // Declaring the animation view
@@ -60,12 +60,15 @@ public class AboutActivity extends AppCompatActivity {
         Locate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "http://maps.google.com/maps?daddr=" + "#5, 2nd Cross, CSI Compound,\n" +
-                        "Mission Road, Bangalore 560 027";
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url));
+                String address = "Ziac Software No. 5, 2nd Cross, CSI compound, Mission Rd, Bengaluru, Karnataka 560027";
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + address);
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, gmmIntentUri);
+                intent.setPackage("com.google.android.apps.maps");
                 startActivity(intent);
             }
         });
+
+
         Website.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +125,7 @@ public class AboutActivity extends AppCompatActivity {
                         Uri.parse("https://in.linkedin.com/company/ziacsoft")));
             }
         });
-        WhatsApp.setOnClickListener(new View.OnClickListener() {
+        X.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
@@ -131,5 +134,13 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onLocateClicked(View view) {
+        String address = "Ziac Software No. 5, 2nd Cross, CSI compound, Mission Rd, Bengaluru, Karnataka 560027";
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + address);
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, gmmIntentUri);
+        intent.setPackage("com.google.android.apps.maps");
+        startActivity(intent);
     }
 }

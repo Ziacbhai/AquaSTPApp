@@ -21,7 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.Activities.Global;
-import com.ziac.aquastpapp.Activities.IncidentReportingActivity;
+import com.ziac.aquastpapp.Activities.IncidentReportingFragment;
 import com.ziac.aquastpapp.Activities.Incident_Image_doc_Select_Activity;
 import com.ziac.aquastpapp.R;
 
@@ -127,8 +127,6 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         holder.Inupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Global.editor.putString("incident_code", incidentsClasses.get(position).getInc_No());
-                Global.editor.commit();
                 Intent intent = new Intent(context, Incident_Image_doc_Select_Activity.class);
                 context.startActivity(intent);
             }
@@ -152,7 +150,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
                     throw new RuntimeException(e);
                 }
 
-                Intent intent = new Intent(context, IncidentReportingActivity.class);
+                Intent intent = new Intent(context, IncidentReportingFragment.class);
                 context.startActivity(intent);
 
 

@@ -246,7 +246,6 @@ public class IncidentReportingFragment extends Fragment {
 
     }
 
-
     private void user_topcard(View view) {
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading !!");

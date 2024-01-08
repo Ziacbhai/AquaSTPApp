@@ -66,15 +66,6 @@ public class LoginFragment extends Fragment {
     String username, pwd;
     StpModelClass stpModelClass;
     Context context;
- /*   @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-    }
-//ramesh
-    @Override
-    public void onStart() {
-        super.onStart();
-    }*/
 
     private ProgressDialog progressDialog;
 
@@ -235,8 +226,7 @@ public class LoginFragment extends Fragment {
             }
         };
 
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                3000, // timeout in milliseconds
+        request.setRetryPolicy(new DefaultRetryPolicy(0,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));

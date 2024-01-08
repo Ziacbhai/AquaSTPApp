@@ -1,6 +1,7 @@
 package com.ziac.aquastpapp.Activities;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -102,6 +103,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
         if (imageBitmap == null) {
             return;
         }
+       // String image = imageToString(imageBitmap);
         String repair_remark = Repair_two_Remark.getText().toString();
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.Repair_UploadImage;
@@ -115,13 +117,11 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
             try {
                 if (resp.getBoolean("success")) {
                     Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
-                    // Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), response);
                     startActivity(new Intent(RepairTwo_Upload_Activity.this, RepairTwoImageListActivity.class));
                     finish();
                 } else {
                     if (resp.has("error")) {
-                        String errorMessage = resp.getString("error");
-                        //Toast.makeText(RepairTwo_Upload_Activity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(RepairTwo_Upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
                         Toast.makeText(RepairTwo_Upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.d("else", "else");
@@ -162,17 +162,19 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
                 params.put("fileName", image);
                 params.put("image_remarks", repair_remark);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
-                params.put("repair2_code", Global.sharedPreferences.getString("repair2_code", "0"));
+                params.put("repair2_code", Global.repairClass2.getD_Repairedtwo());
+                System.out.println(params);
                 return params;
             }
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
-                0,
+                (int) TimeUnit.SECONDS.toMillis(0),0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         queue.add(stringRequest);
     }
+
+
 
     private String imageToString(Bitmap imageBitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
