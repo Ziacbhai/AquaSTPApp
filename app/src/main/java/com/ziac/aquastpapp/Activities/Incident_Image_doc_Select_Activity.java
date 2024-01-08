@@ -55,7 +55,7 @@ public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
         In_image_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Incident_Image_doc_Select_Activity.this,Incident_image_upload_Activity.class));
+                startActivity(new Intent(Incident_Image_doc_Select_Activity.this, Incident_image_upload_Activity.class));
             }
         });
 

@@ -62,7 +62,6 @@ public class IncidentReportingFragment extends Fragment {
     IncidentAdapter incidentAdapter;
 
     private TextView tvSelectedDate;
-    TextView Date_A, STP_A;
     EditText Remark_A;
     AppCompatButton Update_A, Cancel_A;
     private SwipeRefreshLayout swipeRefreshLayout;

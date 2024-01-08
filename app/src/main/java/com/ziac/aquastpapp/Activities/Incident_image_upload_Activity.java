@@ -59,7 +59,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
     IncidentsClass incidentsClass;
     AppCompatButton In_image_uploadbtn;
     Context context;
-ImageView Repair_back_btn;
+    ImageView Repair_back_btn;
     private ProgressDialog progressDialog;
 
     @SuppressLint("MissingInflatedId")
@@ -91,7 +91,7 @@ ImageView Repair_back_btn;
         In_image_uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    openCamera();
+                openCamera();
             }
         });
 

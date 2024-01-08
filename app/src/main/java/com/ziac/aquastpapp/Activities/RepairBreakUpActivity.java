@@ -8,12 +8,15 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,7 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -54,6 +58,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import Adapters.Repair_BreakUp_Adapter;
+import Adapters.Repair_details_Adapter;
 import Models.EquipmentClassRepairBreakUp;
 import Models.ItemListClassRepair_BreakUp;
 import Models.RepairClass3;
@@ -68,9 +73,9 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     RecyclerView Repair_breakup_recyclerview;
     private Dialog zDialog;
     EquipmentClassRepairBreakUp equipment_spinner;
-
+    ImageView Repair_back_btn;
     ItemListClassRepair_BreakUp item_spinner;
-
+    SwipeRefreshLayout swipeRefreshLayout;
     Context context;
     private ProgressDialog progressDialog;
 
@@ -94,11 +99,42 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             }
         });
 
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshScreen();
+            }
+        });
+
+        Repair_back_btn = findViewById(R.id.repair_back_btn);
+        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         get_Breakup_Details_Repair();
         Repair_breakup_recyclerview = findViewById(R.id.repair_breakup_recyclerview);
         Repair_breakup_recyclerview.setLayoutManager(new LinearLayoutManager(this));
         Repair_breakup_recyclerview.setHasFixedSize(true);
         Repair_breakup_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    }
+
+    private void refreshScreen() {
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+                Global.repair2list.clear();
+                Repair_details_Adapter repair_details_adapter = new Repair_details_Adapter(Global.repair2list, context);
+                Repair_breakup_recyclerview.setAdapter(repair_details_adapter);
+                repair_details_adapter.notifyDataSetChanged();
+                get_Breakup_Details_Repair();
+            }
+        }, 2000);
+
     }
 
     private void user_topcard() {
