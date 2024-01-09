@@ -136,8 +136,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
         sContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeSupervisor.this, SelectSTPLocationActivity.class);
-                startActivity(in);
+                startActivity(new Intent(WelcomeSupervisor.this, SelectSTPLocationActivity.class));
             }
         });
 

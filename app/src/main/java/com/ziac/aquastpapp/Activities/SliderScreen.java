@@ -134,9 +134,9 @@ public class SliderScreen extends AppCompatActivity {
     }
 
     private void gotosignin() {
-
         startActivity(new Intent(SliderScreen.this, LoginSignupActivity.class));
         finish();
+
     }
 
 

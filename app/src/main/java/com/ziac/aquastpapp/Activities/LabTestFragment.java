@@ -65,7 +65,7 @@ public class LabTestFragment extends Fragment {
     private ProgressDialog progressDialog;
     Context context;
     AppCompatButton Update_A, Cancel_A;
-    TextView Ref_no, Ref_date, testdate,Rcp_date, Start_date, End_date, tvSelectedDate,Particulars,CustomerRef,RecivedOn;
+    TextView Ref_no, Ref_date,Rcp_date, Start_date, End_date, tvSelectedDate,Particulars,CustomerRef,RecivedOn;
     String currentDatevalue, currentDateValue2;
 
     @SuppressLint("MissingInflatedId")

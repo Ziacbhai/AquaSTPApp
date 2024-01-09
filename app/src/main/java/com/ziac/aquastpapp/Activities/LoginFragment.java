@@ -47,7 +47,7 @@ public class LoginFragment extends Fragment {
     EditText Login_User, Login_pwd;
     private CheckBox RememberMe;
     Button Login_btn;
-    TextView termsOfuse, privacy, forgotpwd;
+    TextView TermsOfuse, Privacy, Forgotpwd;
     boolean passwordVisible;
     String username, pwd;
     StpModelClass stpModelClass;
@@ -72,9 +72,9 @@ public class LoginFragment extends Fragment {
         Login_btn = view.findViewById(R.id.loginbtn);
         RememberMe = view.findViewById(R.id.RcheckBox);
 
-        termsOfuse = view.findViewById(R.id.terms);
-        privacy = view.findViewById(R.id.privacy);
-        forgotpwd = view.findViewById(R.id.btnftpass);
+        TermsOfuse = view.findViewById(R.id.terms);
+        Privacy = view.findViewById(R.id.privacy);
+        Forgotpwd = view.findViewById(R.id.btnftpass);
 
 
         TextView versionName = view.findViewById(R.id.version);
@@ -128,7 +128,7 @@ public class LoginFragment extends Fragment {
             RememberMe.setChecked(false);
         }
 
-        termsOfuse.setOnClickListener(new View.OnClickListener() {
+        TermsOfuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
@@ -136,7 +136,7 @@ public class LoginFragment extends Fragment {
 
             }
         });
-        privacy.setOnClickListener(new View.OnClickListener() {
+        Privacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://ziacsoft.com/privacy.html")));
@@ -164,7 +164,7 @@ public class LoginFragment extends Fragment {
             return false;
         });
 
-        forgotpwd.setOnClickListener(new View.OnClickListener() {
+        Forgotpwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), RecoveryPasswordWith.class));

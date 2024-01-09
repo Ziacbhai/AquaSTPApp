@@ -401,7 +401,6 @@ public class RepairFragment extends Fragment {
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
-
                 params.put("repair1_code", "0");
                 // params.put("repair1_code", Global.sharedPreferences.getString("repair1_code", "0"));
                 Log.d("rep_date", "rep_date: " + params.toString());

@@ -122,8 +122,7 @@ public class WelcomeUser extends AppCompatActivity {
         ucontinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeUser.this, SelectSTPLocationActivity.class);
-                startActivity(in);
+                startActivity(new Intent(WelcomeUser.this,SelectSTPLocationActivity.class));
             }
         });
 

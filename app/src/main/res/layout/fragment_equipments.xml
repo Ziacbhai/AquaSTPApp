@@ -8,8 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -24,97 +23,67 @@
                 android:background="@drawable/btn_gradient"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/sitename"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:gravity="center_horizontal"
+                    android:text="Site name"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                <TextView
+                    android:id="@+id/stpname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="STP name"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/sitename"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="Site name"
-                            android:textColor="@color/white"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/siteaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Site_address"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/personname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Personname"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="5dp">
+                <TextView
 
-                                <TextView
-                                    android:id="@+id/stpname"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1.1"
-                                    android:gravity="center"
-                                    android:text="STP name"
-                                    android:textColor="@color/white"
-                                    android:textSize="12dp"
-                                    android:textStyle="bold" />
+                    android:id="@+id/useremail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="email"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
 
-                            </LinearLayout>
+                <TextView
+                    android:id="@+id/usermobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="mobile"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
 
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/siteaddress"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="Site_address"
-                            android:textColor="@color/white"
-                            android:textSize="12dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/personname"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="Personname"
-                            android:textColor="@color/white"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-
-                            android:id="@+id/useremail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="email"
-                            android:textColor="@color/white"
-                            android:textSize="12dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/usermobile"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="mobile"
-                            android:textColor="@color/white"
-                            android:textSize="12dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -123,28 +92,16 @@
                     android:layout_marginRight="20dp"
                     android:background="@color/my_light_primary" />
 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="vertical"
-                    android:padding="5dp">
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Eqipments"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3.4"
-                            android:gravity="center"
-                            android:text="Equipment's"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </LinearLayout>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

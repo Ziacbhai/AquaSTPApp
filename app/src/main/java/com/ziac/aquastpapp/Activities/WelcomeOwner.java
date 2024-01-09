@@ -186,8 +186,8 @@ public class WelcomeOwner extends AppCompatActivity {
         oContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeOwner.this, SelectSTPLocationActivity.class);
-                startActivity(in);
+                startActivity(new Intent(WelcomeOwner.this,SelectSTPLocationActivity.class));
+
             }
         });
 

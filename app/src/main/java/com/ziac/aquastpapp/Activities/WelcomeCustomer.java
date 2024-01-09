@@ -124,8 +124,7 @@ public class WelcomeCustomer extends AppCompatActivity {
         cContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeCustomer.this, SelectSTPLocationActivity.class);
-                startActivity(in);
+                startActivity(new Intent(WelcomeCustomer.this,SelectSTPLocationActivity.class));
             }
         });
     }
@@ -227,8 +226,6 @@ public class WelcomeCustomer extends AppCompatActivity {
 
             try {
                 if (resp.getBoolean("success")) {
-
-
                     Global.customtoast(WelcomeCustomer.this, getLayoutInflater(), "Image uploaded successfully");
                     getuserdetails();
 

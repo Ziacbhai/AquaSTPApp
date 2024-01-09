@@ -39,24 +39,26 @@ public class RecoveryPasswordWith extends AppCompatActivity {
         Rcemail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent re = new Intent(RecoveryPasswordWith.this, ResetPasswordEmail.class);
-                startActivity(re);
+                startActivity(new Intent(RecoveryPasswordWith.this,ResetPasswordEmail.class));
+                finish();
             }
         });
 
         Rcusername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent run = new Intent(RecoveryPasswordWith.this, ResetPasswordUserName.class);
-                startActivity(run);
+                startActivity(new Intent(RecoveryPasswordWith.this,ResetPasswordUserName.class));
+                finish();
+
             }
         });
 
         Rcmobile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent rnum = new Intent(RecoveryPasswordWith.this, ResetPasswordNumber.class);
-                startActivity(rnum);
+                startActivity(new Intent(RecoveryPasswordWith.this,ResetPasswordNumber.class));
+                finish();
+
             }
         });
 

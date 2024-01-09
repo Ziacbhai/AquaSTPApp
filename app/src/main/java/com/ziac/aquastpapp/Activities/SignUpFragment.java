@@ -422,7 +422,7 @@ public class SignUpFragment extends Fragment {
             }
         };
         jsonArrayrequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
                 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 

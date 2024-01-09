@@ -172,8 +172,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void opencamera() {
-        com.github.dhaval2404.imagepicker.ImagePicker.with(ProfileActivity.this)
-                .crop()                    //Crop image(Optional), Check Customization for more option
+        com.github.dhaval2404.imagepicker.ImagePicker.with(ProfileActivity.this).crop()                    //Crop image(Optional), Check Customization for more option
                 .compress(1024)            //Final image size will be less than 1 MB(Optional)
                 .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
                 .start(10);
@@ -255,10 +254,8 @@ public class ProfileActivity extends AppCompatActivity {
                 return params;
             }
         };
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
-                0,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy((int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
     }
 
@@ -335,10 +332,8 @@ public class ProfileActivity extends AppCompatActivity {
                 //  String user_image = respObj.getString("user_image");
             }
         };
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(2500), //After the set time elapses the request will timeout
-                0,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy((int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         queue.add(stringRequest);
     }
@@ -386,10 +381,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 builder = new Picasso.Builder(getApplication());
                 picasso = builder.build();
-                picasso.load(Uri.parse(userimage))
-                        .memoryPolicy(MemoryPolicy.NO_CACHE)
-                        .networkPolicy(NetworkPolicy.NO_CACHE)
-                        .into(circleImageView);
+                picasso.load(Uri.parse(userimage)).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(circleImageView);
 
             } catch (JSONException e) {
                 e.printStackTrace();

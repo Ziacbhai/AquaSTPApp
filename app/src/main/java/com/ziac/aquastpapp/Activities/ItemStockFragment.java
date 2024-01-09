@@ -38,7 +38,6 @@ import Models.ItemStockClass;
 public class ItemStockFragment extends Fragment {
     RecyclerView consumableRecyclerView;
     ItemStockClass itemStockClass;
-    TextView Consumables_Code, Consumables_Name, Consumables_Stock, Consumables_Units;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -103,8 +102,6 @@ public class ItemStockFragment extends Fragment {
             }
         }) {
             public Map<String, String> getHeaders() {
-                // below line we are creating a map for
-                // storing our values in key and value pair.
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
