@@ -449,6 +449,7 @@
 
 
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -457,6 +458,8 @@
             android:gravity="center"
             android:text="Ver No:1.0.0"
             android:textSize="16sp" />
+
+
     </LinearLayout>
 
 

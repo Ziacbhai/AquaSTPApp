@@ -56,9 +56,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.Demopdf"
+            android:name=".Activities.GenerateSTPdetails"
             android:exported="false" />
-        <!-- android:theme="@style/AppTheme" -->
+        <activity
+            android:name=".Activities.Demopdf"
+            android:exported="false" /> <!-- android:theme="@style/AppTheme" -->
         <activity
             android:name=".Activities.RepairTwo_Upload_Activity"
             android:exported="false" />
@@ -106,7 +108,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.SelectLocationActivity"
+            android:name=".Activities.SelectSTPLocationActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

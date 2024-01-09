@@ -126,7 +126,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
         progressDialog.setCancelable(true);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String  stpname, sitename, processname,repair_date, repair_no, repair_amount;
-        ;
+
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         processname = sharedPreferences.getString("process_name", "");
@@ -145,6 +145,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
         textno = findViewById(R.id.repair_no);
         textdate = findViewById(R.id.repair_date);
         texamount = findViewById(R.id.repair_amount);
+
         textno.setText(repair_no);
         texamount.setText(repair_amount + "0");
 
@@ -170,7 +171,6 @@ public class Repair_Details_Activity extends AppCompatActivity {
         }
         String formattedConNo = removeTrailingZero(conNo);
         textno.setText(formattedConNo);
-
     }
 
     private void refreshScreen() {

@@ -55,9 +55,8 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
 
     ImageView RtwoImage;
     EditText Repair_two_Remark;
-    RecyclerView Repair_Images_Rv;
-
     Bitmap imageBitmap;
+    ImageView Repair_back_btn;
     AppCompatButton Repair_two_image_upload_btn, Repairtwo_image_cancel_btn;
     Context context;
     private static final int PICK_IMAGE_REQUEST_CODE = 10;
@@ -77,7 +76,13 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
         Repair_two_Remark = findViewById(R.id.repair_two_Remark);
         Repair_two_image_upload_btn = findViewById(R.id.repairtwo_image_upload_btn);
         Repairtwo_image_cancel_btn = findViewById(R.id.repairtwo_image_cancel_btn);
-
+        Repair_back_btn = findViewById(R.id.repair_back_btn);
+        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         RtwoImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -158,13 +157,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-                CircleImageView ProfileH;
-                TextView person_name, user_mail, user_site, user_stp;
-                ProfileH = drawerLayout.findViewById(R.id.profileH);
+                CircleImageView ProfileHeader;
+                TextView person_name ,user_mail, user_site, user_stp;
+                ProfileHeader = drawerLayout.findViewById(R.id.profileH);
                 layout = findViewById(R.id.headeProfile);
 
                 userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
-                Picasso.get().load(userimage).into(ProfileH);
+                Picasso.get().load(userimage).into(ProfileHeader);
 
                 person_name = drawerLayout.findViewById(R.id.profilename);
                 user_mail = drawerLayout.findViewById(R.id.headeremail);
@@ -312,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         if (itemId == R.id.nav_selectStp) {
-            startActivity(new Intent(MainActivity.this, SelectLocationActivity.class));
+            startActivity(new Intent(MainActivity.this, SelectSTPLocationActivity.class));
             return true;
         }
         // Close the drawer after an item is selected (optional)

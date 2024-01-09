@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ziac.aquastpapp.R;
@@ -15,6 +16,8 @@ import com.ziac.aquastpapp.R;
 public class RecoveryPasswordWith extends AppCompatActivity {
 
     CardView Rcemail, Rcusername, Rcmobile;
+
+    ImageView Repair_back_btn;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -24,6 +27,14 @@ public class RecoveryPasswordWith extends AppCompatActivity {
         Rcemail = findViewById(R.id.emailr);
         Rcusername = findViewById(R.id.usernamer);
         Rcmobile = findViewById(R.id.mobiler);
+
+        Repair_back_btn = findViewById(R.id.repair_back_btn);
+        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         Rcemail.setOnClickListener(new View.OnClickListener() {
             @Override

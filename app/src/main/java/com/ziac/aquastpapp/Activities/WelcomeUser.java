@@ -3,7 +3,6 @@ package com.ziac.aquastpapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
@@ -18,7 +17,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -45,9 +43,7 @@ import com.ziac.aquastpapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.sql.CallableStatement;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,7 +67,7 @@ public class WelcomeUser extends AppCompatActivity {
         /*fab = findViewById(R.id.floating);*/
         ImageView = findViewById(R.id.imageView);
         userpersonname = findViewById(R.id._person);
-        ClickHere = findViewById(R.id.Clickhere);
+      //  ClickHere = findViewById(R.id.Clickhere);
         ucontinue = findViewById(R.id.uContinue);
         usermail = findViewById(R.id.uMail);
         usermobile = findViewById(R.id.uPh);
@@ -115,18 +111,18 @@ public class WelcomeUser extends AppCompatActivity {
 
             }
         });
-        ClickHere.setOnClickListener(new View.OnClickListener() {
+       /* ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(WelcomeUser.this, ProfileActivity.class);
                 startActivity(in);
             }
-        });
+        });*/
 
         ucontinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeUser.this, SelectLocationActivity.class);
+                Intent in = new Intent(WelcomeUser.this, SelectSTPLocationActivity.class);
                 startActivity(in);
             }
         });

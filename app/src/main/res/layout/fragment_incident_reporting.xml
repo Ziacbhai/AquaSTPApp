@@ -93,7 +93,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
-                            android:text="_mobile"
+                            android:text="mobile"
                             android:textColor="@color/white"
                             android:textSize="12dp"
                             android:textStyle="bold" />
@@ -110,7 +110,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Repair"
+                            android:text="Incidents"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:textStyle="bold" />

@@ -3,7 +3,6 @@ package com.ziac.aquastpapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
@@ -68,7 +67,7 @@ public class WelcomeCustomer extends AppCompatActivity {
 
         ImageView = findViewById(R.id.imageView);
         Customer_name = findViewById(R.id.cname);
-        ClickHere = findViewById(R.id.Clickhere);
+       // ClickHere = findViewById(R.id.Clickhere);
         cContinue = findViewById(R.id.cContinue);
         /*fab = findViewById(R.id.floating);*/
         Customer_mail = findViewById(R.id.cmail);
@@ -113,19 +112,19 @@ public class WelcomeCustomer extends AppCompatActivity {
 
             }
         });
-        ClickHere.setOnClickListener(new View.OnClickListener() {
+        /*ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(WelcomeCustomer.this, ProfileActivity.class);
                 startActivity(in);
 
             }
-        });
+        });*/
 
         cContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeCustomer.this, SelectLocationActivity.class);
+                Intent in = new Intent(WelcomeCustomer.this, SelectSTPLocationActivity.class);
                 startActivity(in);
             }
         });

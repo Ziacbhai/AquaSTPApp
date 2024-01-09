@@ -53,6 +53,8 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     ImageView RepairImage;
     EditText Remark_repair;
+
+    ImageView Repair_back_btn;
     Context context;
 
     @SuppressLint("MissingInflatedId")
@@ -78,6 +80,14 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RepairTwoImageListActivity.this, RepairTwo_Upload_Activity.class));
+                finish();
+            }
+        });
+
+        Repair_back_btn = findViewById(R.id.back_btn);
+        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });

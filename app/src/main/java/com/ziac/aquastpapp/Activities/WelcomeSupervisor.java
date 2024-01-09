@@ -3,7 +3,6 @@ package com.ziac.aquastpapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
@@ -92,7 +91,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
 
         Smail = findViewById(R.id.sMail);
         Smobile = findViewById(R.id.sPh);
-        ClickHere = findViewById(R.id.Clickhere);
+        //ClickHere = findViewById(R.id.Clickhere);
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
         String usrname = Global.sharedPreferences.getString("person_nameu", "");
@@ -126,18 +125,18 @@ public class WelcomeSupervisor extends AppCompatActivity {
             }
         });
 
-        ClickHere.setOnClickListener(new View.OnClickListener() {
+       /* ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(WelcomeSupervisor.this, ProfileActivity.class);
                 startActivity(in);
             }
-        });
+        });*/
 
         sContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeSupervisor.this, SelectLocationActivity.class);
+                Intent in = new Intent(WelcomeSupervisor.this, SelectSTPLocationActivity.class);
                 startActivity(in);
             }
         });

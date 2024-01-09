@@ -52,8 +52,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -143,22 +148,60 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         progressDialog.setCancelable(true);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
+        String  stpname, sitename, processname,repair_date, repair_no, repair_amount;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
-        processname = sharedPreferences.getString("person_nameu", "");
+        processname = sharedPreferences.getString("process_name", "");
 
+        repair_date = Global.repairClass1.getRepair_Date();
+        repair_no = Global.repairClass1.getREPNo();
+        repair_amount = Global.repairClass1.getRepair_Amount();
 
-        TextView txtsitename, txtstpname, txtpersonname;
+        TextView txtsitename, txtstpname, textno, textdate, texamount;
 
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
-        txtpersonname = findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
         txtstpname.setText(stpname + " / " + processname);
 
+
+        textno = findViewById(R.id.repair_no);
+        textdate = findViewById(R.id.repair_date);
+        texamount = findViewById(R.id.repair_amount);
+
+        textno.setText(repair_no);
+        texamount.setText(repair_amount + "0");
+
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        try {
+            Date date = inputFormat.parse(repair_date);
+            String formattedDate = outputFormat.format(date);
+            String onlyDate = formattedDate.split(" ")[0];
+
+            textdate.setText(onlyDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        repair_no = Global.repairClass1.getREPNo();
+        double conNo;
+        try {
+            conNo = Double.parseDouble(repair_no);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return;
+        }
+        String formattedConNo = removeTrailingZero(conNo);
+        textno.setText(formattedConNo);
+
+    }
+
+    private String removeTrailingZero(double value) {
+        // Use DecimalFormat to remove trailing zeros
+        DecimalFormat decimalFormat = new DecimalFormat("#.###"); // Adjust the format as needed
+        return decimalFormat.format(value);
     }
 
     @SuppressLint("MissingInflatedId")

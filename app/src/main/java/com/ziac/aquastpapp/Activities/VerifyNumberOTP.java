@@ -17,6 +17,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,7 +51,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
 
     private TextInputEditText Newpwd;
     Context context;
-
+    ImageView Repair_back_btn;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +87,14 @@ public class VerifyNumberOTP extends AppCompatActivity {
                 }
             }
             return false;
+        });
+
+        Repair_back_btn = findViewById(R.id.repair_back_btn);
+        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
         });
         Verify.setOnClickListener(new View.OnClickListener() {
             @Override

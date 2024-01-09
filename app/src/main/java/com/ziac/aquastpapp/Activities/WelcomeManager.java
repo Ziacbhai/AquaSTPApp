@@ -3,7 +3,6 @@ package com.ziac.aquastpapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
@@ -75,7 +74,7 @@ public class WelcomeManager extends AppCompatActivity {
        /* fab = findViewById(R.id.floating);*/
 
 
-        ClickHere = findViewById(R.id.Clickhere);
+        //ClickHere = findViewById(R.id.Clickhere);
         mContinue = findViewById(R.id.mContinue);
 
         ManagerExit = findViewById(R.id.managerexit);
@@ -132,18 +131,18 @@ public class WelcomeManager extends AppCompatActivity {
 
             }
         });
-        ClickHere.setOnClickListener(new View.OnClickListener() {
+      /*  ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(WelcomeManager.this, ProfileActivity.class);
                 startActivity(in);
             }
-        });
+        });*/
 
         mContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeManager.this, SelectLocationActivity.class);
+                Intent in = new Intent(WelcomeManager.this, SelectSTPLocationActivity.class);
                 startActivity(in);
             }
         });

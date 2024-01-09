@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
-    EditText Newpwd, Rpwd;
+    EditText Newpwd, Repeatpwd;
     AppCompatButton Pwdconfirm;
 
     ProgressBar progressBar;
@@ -62,7 +62,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
 
         Newpwd = findViewById(R.id.newpwd);
-        Rpwd = findViewById(R.id.rpwd);
+        Repeatpwd = findViewById(R.id.rpwd);
         Pwdconfirm = findViewById(R.id.pwdconfirm);
         Backarrowbtn = findViewById(R.id.backarrowbtn);
         progressBar = findViewById(R.id.progressbr);
@@ -93,23 +93,23 @@ public class ChangePasswordActivity extends AppCompatActivity {
             return false;
         });
 
-        Rpwd.setOnTouchListener((v, event) -> {
+        Repeatpwd.setOnTouchListener((v, event) -> {
 
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
-                if (event.getRawX() >= Rpwd.getRight() - Rpwd.getCompoundDrawables()[Right].getBounds().width()) {
-                    int selection = Rpwd.getSelectionEnd();
+                if (event.getRawX() >= Repeatpwd.getRight() - Repeatpwd.getCompoundDrawables()[Right].getBounds().width()) {
+                    int selection = Repeatpwd.getSelectionEnd();
                     if (passwordvisible) {
-                        Rpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
-                        Rpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        Repeatpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
+                        Repeatpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                         passwordvisible = false;
 
                     } else {
-                        Rpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
-                        Rpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        Repeatpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
+                        Repeatpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                         passwordvisible = true;
                     }
-                    Rpwd.setSelection(selection);
+                    Repeatpwd.setSelection(selection);
                     return true;
                 }
             }
@@ -126,16 +126,16 @@ public class ChangePasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 newpassword = Newpwd.getText().toString();
-                repeatmpassword = Rpwd.getText().toString();
+                repeatmpassword = Repeatpwd.getText().toString();
                 username = Newpwd.getText().toString();
-                repeatmpassword = Rpwd.getText().toString();
+                repeatmpassword = Repeatpwd.getText().toString();
                 if (newpassword.isEmpty()) {
                     Newpwd.setError("Please enter the New Password");
                     Newpwd.requestFocus();
                     return;
                 } else if (repeatmpassword.isEmpty()) {
-                    Rpwd.setError("Please enter the New Password");
-                    Rpwd.requestFocus();
+                    Repeatpwd.setError("Please enter the New Password");
+                    Repeatpwd.requestFocus();
                     return;
                 } else if (newpassword.length() < 6) {
                     Toast.makeText(ChangePasswordActivity.this, "Password must be at least 6 characters long.", Toast.LENGTH_SHORT).show();
@@ -148,7 +148,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 }
 
                 if (newpassword.equals(repeatmpassword)) {
-                    username = Global.sharedPreferences.getString("username", null);
+                    username = Global.sharedPreferences.getString("user_name", null);
                     updatepassword();
                 } else {
                     Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Passwords do not match!!");

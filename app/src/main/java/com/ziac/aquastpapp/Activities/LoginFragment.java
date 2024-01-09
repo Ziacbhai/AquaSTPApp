@@ -4,22 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,16 +20,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -52,7 +39,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import Adapters.SiteLocationAdapter;
 import Models.StpModelClass;
 
 
@@ -277,37 +263,50 @@ public class LoginFragment extends Fragment {
                 Global.editor.commit();
 
                 JSONArray liststp = new JSONArray(respObj1.getString("data2"));
-                int i;
-                Global.StpList = new ArrayList<>();
-                for (i = 0; i < liststp.length(); i++) {
-                    final JSONObject e;
-                    try {
-                        e = liststp.getJSONObject(i);
-                    } catch (JSONException ex) {
-                        throw new RuntimeException(ex);
+
+                try {
+                    Global.StpList = new ArrayList<>();
+                    int i;
+                    for (i = 0; i < liststp.length(); i++) {
+                        final JSONObject e;
+                        try {
+
+                            e = liststp.getJSONObject(i);
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        //listofstp = new JSONObject(liststp[i]("site_code"));
+                        stpModelClass = new StpModelClass();
+
+                        stpModelClass.setSucode(e.getInt("su_code"));
+                        stpModelClass.setComcode(e.getString("com_code"));
+                        stpModelClass.setUsercode(e.getString("user_code"));
+                        stpModelClass.setPersonname(e.getString("person_name"));
+                        stpModelClass.setUsername(e.getString("username"));
+                        stpModelClass.setSstp1code(e.getString("sstp1_code"));
+                        stpModelClass.setStpname(e.getString("stp_name"));
+                        stpModelClass.setSitecode(e.getString("site_code"));
+                        stpModelClass.setSitename(e.getString("site_name"));
+                        stpModelClass.setStpactive(e.getString("stp_active"));
+                        stpModelClass.setSite_address(e.getString("site_address"));
+                        stpModelClass.setProcess__type(e.getString("process_name"));
+
+                        Global.StpList.add(stpModelClass);
                     }
-                    //listofstp = new JSONObject(liststp[i]("site_code"));
-                    stpModelClass = new StpModelClass();
 
-                    stpModelClass.setSucode(e.getInt("su_code"));
-                    stpModelClass.setComcode(e.getString("com_code"));
-                    stpModelClass.setUsercode(e.getString("user_code"));
-                    stpModelClass.setPersonname(e.getString("person_name"));
-                    stpModelClass.setUsername(e.getString("username"));
-                    stpModelClass.setSstp1code(e.getString("sstp1_code"));
-                    stpModelClass.setStpname(e.getString("stp_name"));
-                    stpModelClass.setSitecode(e.getString("site_code"));
-                    stpModelClass.setSitename(e.getString("site_name"));
-                    stpModelClass.setStpactive(e.getString("stp_active"));
-                    stpModelClass.setSite_address(e.getString("site_address"));
-                    stpModelClass.setProcess__type(e.getString("process_name"));
+                    if (Global.StpList.isEmpty()) {
+                        startActivity(new Intent(getActivity(), GenerateSTPdetails.class));
+                    } else {
+                        startActivity(new Intent(getActivity(), SelectSTPLocationActivity.class));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
 
-                    Global.StpList.add(stpModelClass);
                 }
 
                 progressDialog.dismiss();
 
-                switch (user_type) {
+                /*switch (user_type) {
                     case "O":
                         Intent o = new Intent(getActivity(), WelcomeOwner.class);
                         o.setType(Settings.ACTION_SYNC_SETTINGS);
@@ -333,7 +332,11 @@ public class LoginFragment extends Fragment {
                         u.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(u);
                         break;
-                }
+                }*/
+                // Go to the SelectLocationActivity
+                 /*   Intent intent = new Intent(getActivity(), SelectLocationActivity.class);
+                    startActivity(intent);*/
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }

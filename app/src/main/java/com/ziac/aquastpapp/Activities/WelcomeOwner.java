@@ -3,7 +3,6 @@ package com.ziac.aquastpapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
@@ -23,19 +22,14 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -78,7 +72,7 @@ public class WelcomeOwner extends AppCompatActivity {
 
         ImageView = findViewById(R.id.imageView);
         Oname = findViewById(R.id.wname);
-        ClickHere = findViewById(R.id.Clickhere);
+       // ClickHere = findViewById(R.id.Clickhere);
         oContinue = findViewById(R.id.oContinue);
        // fab = findViewById(R.id.floating);
 
@@ -124,7 +118,7 @@ public class WelcomeOwner extends AppCompatActivity {
 
             }
         });
-        ClickHere.setOnClickListener(new View.OnClickListener() {
+        /*ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(WelcomeOwner.this, ProfileActivity.class);
@@ -188,11 +182,11 @@ public class WelcomeOwner extends AppCompatActivity {
                 });
             }
         });
-
+*/
         oContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeOwner.this, SelectLocationActivity.class);
+                Intent in = new Intent(WelcomeOwner.this, SelectSTPLocationActivity.class);
                 startActivity(in);
             }
         });

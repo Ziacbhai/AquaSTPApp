@@ -1,37 +1,27 @@
 package com.ziac.aquastpapp.Activities;
 
 
-import static okhttp3.internal.Util.filterList;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
@@ -42,15 +32,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import Adapters.SiteLocationAdapter;
 import Models.StpModelClass;
 
-public class SelectLocationActivity extends AppCompatActivity {
+public class SelectSTPLocationActivity extends AppCompatActivity {
 
-    LinearLayout Scr;
+    LinearLayout Search;
     SiteLocationAdapter siteLocationAdapter;
     RecyclerView siteLocationRecyclerView;
     private SearchView searchView;
@@ -66,10 +55,10 @@ public class SelectLocationActivity extends AppCompatActivity {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         stpModelClassList = new StpModelClass();
         searchView = findViewById(R.id.searchView);
-        Scr = findViewById(R.id.search);
+        Search = findViewById(R.id.search);
         searchView.clearFocus();
 
-        Scr.setOnClickListener(new View.OnClickListener() {
+        Search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 searchView.setIconified(false);
@@ -96,7 +85,7 @@ public class SelectLocationActivity extends AppCompatActivity {
 
         siteLocationRecyclerView = findViewById(R.id.stp_recyclerview);
         siteLocationRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        siteLocationAdapter = new SiteLocationAdapter(Global.StpList, SelectLocationActivity.this);
+        siteLocationAdapter = new SiteLocationAdapter(Global.StpList, SelectSTPLocationActivity.this);
         siteLocationRecyclerView.setAdapter(siteLocationAdapter);
     }
 
@@ -181,7 +170,6 @@ public class SelectLocationActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-
                 params.put("name", query);
                 Log.d("params", params.toString());
 

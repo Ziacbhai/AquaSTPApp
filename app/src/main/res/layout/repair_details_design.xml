@@ -122,6 +122,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="3dp"
+                        android:padding="5dp"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -129,7 +130,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:drawablePadding="5dp"
-                            android:gravity="center"
                             android:text="Remarks"
                             android:textColor="#000"
                             android:textSize="12dp"
@@ -139,8 +139,7 @@
                             android:id="@+id/repair_remark"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:hint="equipment_name"
+                            android:hint="repair_remark"
                             android:textSize="10dp" />
                     </LinearLayout>
 
@@ -229,7 +228,6 @@
                                 android:layout_width="40dp"
                                 android:layout_height="28dp"
                                 android:layout_weight="1"
-                                android:drawablePadding="5dp"
                                 android:gravity="center"
                                 android:src="@drawable/rupee"
                                 android:text="Break Up" />
