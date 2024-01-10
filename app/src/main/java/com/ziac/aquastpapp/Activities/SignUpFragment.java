@@ -70,8 +70,8 @@ public class SignUpFragment extends Fragment {
 
     private Dialog zDialog;
     EditText Company, CPerson, Mobile, Email, Adminname, RPassword, Cpassword;
-    AppCompatButton Registerbtn;
-    TextView tvState, tvCity, Site_address, TermsOfUse, Privacy;
+
+    TextView tvState, tvCity, Site_address, TermsOfUse, Privacy,Registerbtn;
     ImageView DDstate, DDcity;
     private zList statename, cityname;
     private boolean passwordvisible = false;
@@ -103,8 +103,8 @@ public class SignUpFragment extends Fragment {
         CheckBox = view.findViewById(R.id.ccheckbox);
         Site_address = view.findViewById(R.id.site_address);
         Registerbtn = view.findViewById(R.id.registerbtn);
-        RPassword = view.findViewById(R.id.rpassword);
-        Cpassword = view.findViewById(R.id.rcpassword);
+        RPassword = view.findViewById(R.id.registerpassword);
+        Cpassword = view.findViewById(R.id.confirmpassword);
         TermsOfUse = view.findViewById(R.id.terms);
         Privacy = view.findViewById(R.id.privacy);
 

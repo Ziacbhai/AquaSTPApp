@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -33,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ResetPasswordNumber extends AppCompatActivity {
-    AppCompatButton GetOTPBtn;
+    TextView GetOTPBtn;
     EditText ForgotMobile;
     ImageView back_btn;
     String usermobile;
@@ -47,7 +48,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
         setContentView(R.layout.activity_reset_password_number);
 
         ForgotMobile = findViewById(R.id.fmobile);
-        GetOTPBtn = findViewById(R.id.n_OTPbtn);
+        GetOTPBtn = findViewById(R.id.numberOTPbtn);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //   String mobileno = Global.sharedPreferences.getString("mobile", "");

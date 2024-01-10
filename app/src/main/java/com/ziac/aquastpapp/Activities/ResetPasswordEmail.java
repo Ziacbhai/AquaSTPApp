@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -26,13 +27,14 @@ import com.ziac.aquastpapp.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ResetPasswordEmail extends AppCompatActivity {
 
-    AppCompatButton EnterOTPbtn;
+    TextView EnterOTPbtn;
     EditText Forgotemail;
     String useremail;
     ImageView back_btn;
@@ -49,7 +51,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
         context  = this;
 
 
-        EnterOTPbtn = findViewById(R.id.eotpbtn);
+        EnterOTPbtn = findViewById(R.id.emailgetotpbtn);
         Forgotemail = findViewById(R.id.Femail);
         progressBar = findViewById(R.id.progressbr);
 

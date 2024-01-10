@@ -35,7 +35,7 @@ import java.util.Map;
 public class ResetPasswordUserName extends AppCompatActivity {
 
     EditText entertusername;
-    AppCompatButton Getotp1;
+    TextView UserGetotp;
     ProgressBar progressBar;
     ImageView back_btn;
     String username;
@@ -46,12 +46,13 @@ public class ResetPasswordUserName extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_user_name);
-        Getotp1 = findViewById(R.id.submitotp);
+        UserGetotp = findViewById(R.id.userOTPbtn);
         entertusername = findViewById(R.id.fgusername);
         progressBar = findViewById(R.id.progressbr);
+        back_btn = findViewById(R.id.back_btn);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Getotp1.setOnClickListener(new View.OnClickListener() {
+        UserGetotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 username = entertusername.getText().toString();

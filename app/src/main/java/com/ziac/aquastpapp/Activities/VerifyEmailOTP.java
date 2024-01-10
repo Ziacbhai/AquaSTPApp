@@ -45,7 +45,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
     String otp, Newpassword;
     TextView Resendotp;
     PinView Enter_pinnumber;
-    AppCompatButton EVerify;
+    TextView EmailVerify;
     ProgressBar progressBar;
     ImageView back_btn;
     boolean passwordVisible;
@@ -61,7 +61,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
         Enter_pinnumber = findViewById(R.id.et_pinview);
         new OTP_Receiver().setPinView(Enter_pinnumber);
         requestSMSPermission();
-        EVerify = findViewById(R.id.everifyotp);
+        EmailVerify = findViewById(R.id.emailverifyotp);
         progressBar = findViewById(R.id.progressbr);
         EnterNewpwd = findViewById(R.id.enewpassword);
         Resendotp = findViewById(R.id.resendEotp);
@@ -94,7 +94,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
                 finish();
             }
         });
-        EVerify.setOnClickListener(new View.OnClickListener() {
+        EmailVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // getting the PinView data

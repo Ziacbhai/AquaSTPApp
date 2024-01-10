@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -45,7 +46,7 @@ import java.util.concurrent.TimeUnit;
 public class ChangePasswordActivity extends AppCompatActivity {
 
     EditText Newpwd, Repeatpwd;
-    AppCompatButton Pwdconfirm;
+    TextView Pwdconfirm;
 
     ProgressBar progressBar;
     ImageView Backarrowbtn;

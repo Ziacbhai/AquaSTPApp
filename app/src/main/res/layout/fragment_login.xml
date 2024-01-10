@@ -41,40 +41,35 @@
                     android:orientation="vertical"
                     android:padding="15dp">
 
-
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="8dp">
 
-
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:padding="8dp">
-
+                            android:padding="5dp">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Username" />
-
+                                android:layout_marginStart="5dp"
+                                android:hint="@string/username" />
 
                             <EditText
                                 android:id="@+id/loginuser"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:autofillHints=""
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
                                 android:background="@drawable/btnbgedited"
-                                android:inputType="textEmailAddress"
-                                android:longClickable="true"
-                                android:maxLength="25"
+                                android:inputType="textCapSentences|text"
+                                android:maxLength="50"
+                                android:textAllCaps="false"
                                 android:textColor="@color/black"
-                                android:textColorHint="@color/black"
-                                android:textStyle="bold" />
-
+                                android:textColorHint="@color/black" />
 
                         </LinearLayout>
 
@@ -98,7 +93,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
-                                android:text="Password" />
+                                android:text="@string/password" />
 
                             <EditText
                                 android:id="@+id/loginpassword"
@@ -129,19 +124,38 @@
                         android:text="Remember me"
                         android:textColor="@color/white" />
 
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/loginbtn"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="5dp"
+                        android:layout_height="50dp"
                         android:background="@drawable/btnbgedited"
-                        android:padding="5dp"
-                        android:text="Login"
-                        android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/loginbtn"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.7"
+                            android:padding="10dp"
+                            android:text="Login"
+                            android:textAllCaps="false"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:gravity="end"
+                            android:padding="10dp"
+                            android:src="@drawable/rightarrowblack"
+                            android:text="Get OTP"
+                            android:textColor="@color/white" />
+
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -188,7 +202,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="By continuing, you agree to"
-        android:textColor="@color/appcolor"
+        android:textColor="@color/black"
         android:textSize="16sp" />
 
     <TextView
@@ -208,7 +222,7 @@
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="&amp;"
-        android:textColor="@color/appcolor"
+        android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold" />
 
@@ -232,7 +246,8 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="1.0.0"
-        android:textColor="@color/appcolor" />
+        android:textColor="@color/black" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

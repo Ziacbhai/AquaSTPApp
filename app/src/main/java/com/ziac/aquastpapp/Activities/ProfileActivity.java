@@ -70,14 +70,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
 
     FloatingActionButton fab;
-    AppCompatButton Updatebutton;
     CircleImageView circleImageView;
     Bitmap imageBitmap;
     String userimage;
     Picasso.Builder builder;
     Picasso picasso;
     EditText Person_name, Person_number, Person_email;
-    TextView Person_ref_code;
+    TextView Person_ref_code,Updatebutton;
     ImageView Backarrowbtn;
 
     @SuppressLint("MissingInflatedId")

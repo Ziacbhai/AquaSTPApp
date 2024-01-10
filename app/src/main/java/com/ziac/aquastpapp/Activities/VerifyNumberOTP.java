@@ -44,9 +44,9 @@ import java.util.Map;
 public class VerifyNumberOTP extends AppCompatActivity {
     boolean passwordVisible;
     String otp, Newpassword;
-    TextView Resendotp;
+
     PinView pinView;
-    AppCompatButton Verify;
+    TextView NumberVerify,Resendotp;
     ProgressBar progressBar;
 
     private TextInputEditText Newpwd;
@@ -61,7 +61,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
         // displayMobno();
 
         pinView = findViewById(R.id.pinview);
-        Verify = findViewById(R.id.verifyotp);
+        NumberVerify = findViewById(R.id.numberverifyotp);
         progressBar = findViewById(R.id.progressbr);
         Newpwd = findViewById(R.id.newpassword);
 
@@ -96,7 +96,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
                 finish();
             }
         });
-        Verify.setOnClickListener(new View.OnClickListener() {
+        NumberVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // getting the PinView data

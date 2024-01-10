@@ -46,8 +46,7 @@ public class LoginFragment extends Fragment {
 
     EditText Login_User, Login_pwd;
     private CheckBox RememberMe;
-    Button Login_btn;
-    TextView TermsOfuse, Privacy, Forgotpwd;
+    TextView TermsOfuse, Privacy, Forgotpwd,Login_btn;
     boolean passwordVisible;
     String username, pwd;
     StpModelClass stpModelClass;

@@ -42,7 +42,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
     TextView Resendotp;
     PinView mPinView;
     boolean passwordVisible;
-    AppCompatButton UVerify;
+    TextView UserVerify;
     ProgressBar progressBar;
     Context context;
     ImageView Repair_back_btn;
@@ -55,7 +55,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
         setContentView(R.layout.activity_verify_user_name_otp);
 
         mPinView = findViewById(R.id.pinview);
-        UVerify = findViewById(R.id.uverifyotp);
+        UserVerify = findViewById(R.id.userverifyotp);
 
         progressBar = findViewById(R.id.progressbr);
         UNewpwd = findViewById(R.id.usernewpassword);
@@ -88,7 +88,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
                 finish();
             }
         });
-        UVerify.setOnClickListener(new View.OnClickListener() {
+        UserVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // getting the PinView data
