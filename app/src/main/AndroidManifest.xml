@@ -56,11 +56,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.GenerateSTPdetails"
+            android:name=".Activities.PDFEx"
             android:exported="false" />
         <activity
-            android:name=".Activities.Demopdf"
-            android:exported="false" /> <!-- android:theme="@style/AppTheme" -->
+            android:name=".Activities.GenerateSTPdetails"
+            android:exported="false" />
         <activity
             android:name=".Activities.RepairTwo_Upload_Activity"
             android:exported="false" />
@@ -80,13 +80,7 @@
             android:name=".Activities.Incident_Image_doc_Select_Activity"
             android:exported="false" />
         <activity
-            android:name=".Activities.IncidentReportingActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activities.Consumption_Details_Activity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.Incident_Details_Activity"
             android:exported="false" />
         <activity
             android:name=".Activities.LabTest_Details_Activity"

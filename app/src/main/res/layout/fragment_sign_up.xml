@@ -77,7 +77,6 @@
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
 
-                            <!--                                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ."-->
                         </LinearLayout>
 
 

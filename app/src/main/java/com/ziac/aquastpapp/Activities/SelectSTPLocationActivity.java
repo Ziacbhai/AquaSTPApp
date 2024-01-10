@@ -50,7 +50,7 @@ public class SelectSTPLocationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_company);
+        setContentView(R.layout.activity_select_stp_location);
         context = this;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         stpModelClassList = new StpModelClass();

@@ -14,6 +14,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -34,6 +35,7 @@ import java.util.Map;
 public class ResetPasswordNumber extends AppCompatActivity {
     AppCompatButton GetOTPBtn;
     EditText ForgotMobile;
+    ImageView back_btn;
     String usermobile;
     ProgressBar progressBar;
     Context context;
@@ -66,6 +68,14 @@ public class ResetPasswordNumber extends AppCompatActivity {
 //                    Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(), "Mobile number should not be less than 10 digits !!");
 //                    return;}
                 postDataUsingVolley();
+            }
+        });
+
+        back_btn = findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

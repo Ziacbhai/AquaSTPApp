@@ -48,7 +48,7 @@ public class Global {
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
 
-   public static String baseurl="http://192.168.1.4:9396/";
+   public static String baseurl="http://192.168.1.12:9396/";
 
     public static String userImageurl = baseurl+"WebsiteData/Users/";
     public static String incident_image = baseurl+"WebsiteData/IncidentReportDocs/";
@@ -109,7 +109,6 @@ public class Global {
     public static String Get_Lab_Details = baseurl + "api/Lab/Details?";
     public static String Get_Incidents_Details = baseurl + "api/Incidents/Details?";//
 
-   // public static String Get_Incidents_ImageUploud = baseurl + "api/Incidents/Details?";
     public static String Get_Incidents_delete = baseurl + "api/Incidents/DeleteImgOrDoc?";
     public static String api_List_Get_Equipments = baseurl + "api/List/GetEquipments?";
     public static String api_List_Get_Item = baseurl + "api/List/GetProducts?";

@@ -1,126 +1,77 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/repair_alert"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eaeff5"
     android:orientation="vertical"
     android:padding="5dp">
 
-    <LinearLayout
-        android:id="@+id/repair_alert"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_a"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        app:cardCornerRadius="12dp"
+        app:cardMaxElevation="10dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView_a"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardMaxElevation="10dp">
+            android:background="@drawable/btnbgoutline"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Equipment"
+                        android:textColor="#000"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/equipment_name_alert"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:textSize="12dp" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/baseline_arrow_drop_down_24" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btnbgoutline"
-                android:orientation="vertical"
-                android:padding="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="Equipment"
-                            android:textColor="#000"
-                            android:textSize="12dp"
-                            android:textStyle="bold" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/equipment_name_alert"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="5dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:textColor="@color/black"
-                                android:textSize="12dp" />
-
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/baseline_arrow_drop_down_24" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:background="#01A3A3" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="5dp">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="5dp"
-                                android:text="Remark"
-                                android:textColor="#000"
-                                android:textSize="12dp"
-                                android:textStyle="bold" />
-
-                            <EditText
-                                android:id="@+id/remark_alert_rd"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/btnbgedited"
-                                android:hint="remark"
-                                android:padding="5dp"
-                                android:textSize="12dp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                android:orientation="vertical">
 
                 <View
                     android:layout_width="match_parent"
@@ -132,53 +83,33 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
                     android:orientation="horizontal"
                     android:padding="5dp">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/update_alert_rd"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/btnbg"
-                            android:drawablePadding="5dp"
-                            android:gravity="center"
-                            android:text="Update"
-                            android:textColor="@color/white"
-                            android:textSize="12dp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
                         android:layout_weight="1"
-                        android:gravity="center_horizontal"
+                        android:gravity="center"
                         android:orientation="vertical">
 
-                        <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/cancel_alert_rd"
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/btnbg"
-                            android:gravity="center"
-                            android:text="Cancel"
-                            android:textColor="@color/white"
+                            android:padding="5dp"
+                            android:text="Remark"
+                            android:textColor="#000"
                             android:textSize="12dp"
                             android:textStyle="bold" />
 
+                        <EditText
+                            android:id="@+id/remark_alert_rd"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/btnbgedited"
+                            android:hint="remark"
+                            android:padding="5dp"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
@@ -186,11 +117,71 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="#01A3A3" />
 
-        </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
 
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/update_alert_rd"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btnbg"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="Update"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/cancel_alert_rd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/btnbg"
+                        android:gravity="center"
+                        android:text="Cancel"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
 

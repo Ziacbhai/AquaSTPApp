@@ -72,6 +72,7 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     implementation ("com.android.volley:volley:1.2.1")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
-
+    implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
+    implementation ("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 }

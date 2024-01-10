@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -34,7 +35,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
     AppCompatButton EnterOTPbtn;
     EditText Forgotemail;
     String useremail;
-
+    ImageView back_btn;
     ProgressBar progressBar;
     Context context;
 
@@ -43,6 +44,9 @@ public class ResetPasswordEmail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_email);
+
+
+        context  = this;
 
 
         EnterOTPbtn = findViewById(R.id.eotpbtn);
@@ -66,8 +70,15 @@ public class ResetPasswordEmail extends AppCompatActivity {
 
             }
         });
-    }
 
+        back_btn = findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
     private void postDataUsingVolley() {
 
         String urlemail = Global.forgotpasswordurl;

@@ -47,7 +47,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
     PinView Enter_pinnumber;
     AppCompatButton EVerify;
     ProgressBar progressBar;
-    ImageView Repair_back_btn;
+    ImageView back_btn;
     boolean passwordVisible;
     private TextInputEditText EnterNewpwd;
 
@@ -65,7 +65,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
         progressBar = findViewById(R.id.progressbr);
         EnterNewpwd = findViewById(R.id.enewpassword);
         Resendotp = findViewById(R.id.resendEotp);
-        Repair_back_btn = findViewById(R.id.repair_back_btn);
+
         Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyEmailOTP.this, ResetPasswordEmail.class)));
         EnterNewpwd.setOnTouchListener((v, event) -> {
             final int Right = 2;
@@ -87,8 +87,8 @@ public class VerifyEmailOTP extends AppCompatActivity {
             }
             return false;
         });
-
-        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+        back_btn = findViewById(R.id.back_btn);
+      back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

@@ -17,7 +17,7 @@
         android:weightSum="2">
 
         <ImageView
-            android:id="@+id/back_btn"
+            android:id="@+id/repair_back_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"

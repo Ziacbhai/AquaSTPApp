@@ -118,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="6dp"
-                    android:text="Connnet with us"
+                    android:text="Connect with us"
                     android:textColor="@color/appcolor"
                     android:textSize="22sp"
                     android:textStyle="bold" />
@@ -264,7 +264,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginTop="5dp"
-            android:text="Follow us on"
+            android:text="Fallow us on"
             android:textColor="@color/appcolor"
             android:textSize="22sp"
             android:textStyle="bold" />

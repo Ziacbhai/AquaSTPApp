@@ -37,6 +37,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
     EditText entertusername;
     AppCompatButton Getotp1;
     ProgressBar progressBar;
+    ImageView back_btn;
     String username;
     Context context;
 
@@ -50,11 +51,6 @@ public class ResetPasswordUserName extends AppCompatActivity {
         progressBar = findViewById(R.id.progressbr);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        //String usernames = Global.sharedPreferences.getString("username", "");
-
-        //etusername.setText(usernames);
-
         Getotp1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +61,14 @@ public class ResetPasswordUserName extends AppCompatActivity {
                     return;
                 }
                 postDataUsingVolley();
+            }
+        });
+
+        back_btn = findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

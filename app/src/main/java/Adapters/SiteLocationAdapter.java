@@ -1,11 +1,8 @@
 package Adapters;
 
-import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ziac.aquastpapp.Activities.EquipmentsFragment;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.MainActivity;
 import com.ziac.aquastpapp.R;
@@ -46,7 +40,7 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
     @NonNull
     @Override
     public SiteLocationAdapter.StpViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.companydetails, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.select_stp_details, parent, false);
         return new StpViewHolder(view);
     }
 
