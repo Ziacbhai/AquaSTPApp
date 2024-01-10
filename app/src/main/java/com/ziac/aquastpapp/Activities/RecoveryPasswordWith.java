@@ -24,7 +24,7 @@ public class RecoveryPasswordWith extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recovery_password_with);
-        Rcemail = findViewById(R.id.emailr);
+        Rcemail = findViewById(R.id.useremail);
         Rcusername = findViewById(R.id.usernamer);
         Rcmobile = findViewById(R.id.mobiler);
 

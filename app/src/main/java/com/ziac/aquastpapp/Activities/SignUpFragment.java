@@ -94,11 +94,10 @@ public class SignUpFragment extends Fragment {
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(true);
-
         Company = view.findViewById(R.id.company);
         CPerson = view.findViewById(R.id.cperson);
         Mobile = view.findViewById(R.id.mobile);
-        Email = view.findViewById(R.id.emailr);
+        Email = view.findViewById(R.id.emailuser);
         Adminname = view.findViewById(R.id.auname);
         CheckBox = view.findViewById(R.id.ccheckbox);
         Site_address = view.findViewById(R.id.site_address);
@@ -107,18 +106,14 @@ public class SignUpFragment extends Fragment {
         Cpassword = view.findViewById(R.id.confirmpassword);
         TermsOfUse = view.findViewById(R.id.terms);
         Privacy = view.findViewById(R.id.privacy);
-
         //////Call Api State And City/////
         tvState = view.findViewById(R.id.tvstate);
         DDstate = view.findViewById(R.id.dd_state);
-
         DDcity = view.findViewById(R.id.dd_city);
         tvCity = view.findViewById(R.id.tvcity);
-
         getstates();
         tvState.setOnClickListener(v -> statespopup());
         DDstate.setOnClickListener(v -> statespopup());
-
         DDcity.setOnClickListener(v -> citiespopup());
         tvCity.setOnClickListener(v -> citiespopup());
 
@@ -146,7 +141,6 @@ public class SignUpFragment extends Fragment {
             }
             return false;
         });
-
         Cpassword.setOnTouchListener((v, event) -> {
 
             final int Right = 2;
