@@ -58,6 +58,11 @@ public class SelectSTPLocationActivity extends AppCompatActivity {
         Search = findViewById(R.id.search);
         searchView.clearFocus();
 
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(SelectSTPLocationActivity.this, getLayoutInflater(), "Internet connection lost !!");
+        }
+
         Search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

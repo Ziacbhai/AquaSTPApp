@@ -69,6 +69,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressbr);
 
 
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Internet connection lost !!");
+        }
+
+
         Newpwd.setOnTouchListener((v, event) -> {
 
             final int Right = 2;
@@ -233,13 +239,5 @@ public class ChangePasswordActivity extends AppCompatActivity {
         queue.add(stringRequest);
     }
 
-    private boolean isNetworkAvailable() {
-        Context context = ChangePasswordActivity.this;
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager != null) {
-            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-        }
-        return false;
-    }
+
 }

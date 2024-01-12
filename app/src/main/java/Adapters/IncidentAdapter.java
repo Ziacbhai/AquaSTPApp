@@ -40,13 +40,13 @@ import java.util.Map;
 import Models.IncidentsClass;
 
 public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewholder> {
-    private List<IncidentsClass> incidentsClasses;
+    private List<IncidentsClass> incidentsClass;
     Context context;
 
 
-    public IncidentAdapter(Context context, ArrayList<IncidentsClass> incidentsClasses) {
+    public IncidentAdapter(Context context, ArrayList<IncidentsClass> incidentsClass) {
         this.context = context;
-        this.incidentsClasses = incidentsClasses;
+        this.incidentsClass = incidentsClass;
     }
 
     @NonNull
@@ -62,7 +62,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
     @Override
     public void onBindViewHolder(@NonNull IncidentAdapter.Viewholder holder, int position) {
 
-        holder.Incedent_Particlulars.setText(incidentsClasses.get(position).getIncidents_Particulars());
+        holder.Incedent_Particlulars.setText(incidentsClass.get(position).getIncidents_Particulars());
 
        /* holder.Inc_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +90,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             }
         });*/
 
-
-        String conNoString = incidentsClasses.get(position).getInc_No();
+        String conNoString = incidentsClass.get(position).getIncident_Code();
         double conNo;
         try {
             conNo = Double.parseDouble(conNoString);
@@ -102,7 +101,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         String formattedConNo = removeTrailingZero(conNo);
         holder.Incno.setText(formattedConNo);
 
-        String dateString = incidentsClasses.get(position).getInc_Date();
+        String dateString = incidentsClass.get(position).getIncident_Date();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date;
@@ -114,7 +113,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             e.printStackTrace();
             return;
         }
-        holder.Inc_created.setText("By" +incidentsClasses.get(position).getInc_Created_by());
+        holder.Inc_created.setText("By" +incidentsClass.get(position).getInc_Created_by());
 
         holder.Ininfo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +126,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         holder.Inupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Global.incidentsClass = incidentsClass.get(position);
                 Intent intent = new Intent(context, Incident_Image_doc_Select_Activity.class);
                 context.startActivity(intent);
             }
@@ -190,7 +190,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
 
     @Override
     public int getItemCount() {
-        return incidentsClasses.size();
+        return incidentsClass.size();
     }
 
 

@@ -60,6 +60,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
 
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(MainActivity.this, getLayoutInflater(), "Internet connection lost !!");
+        }
+
         Profile = findViewById(R.id.profileIcon);
         drawerLayout = findViewById(R.id.drawerlayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);

@@ -64,6 +64,12 @@ public class WelcomeUser extends AppCompatActivity {
         context = this;
 
 
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(WelcomeUser.this, getLayoutInflater(), "Internet connection lost !!");
+        }
+
+
         /*fab = findViewById(R.id.floating);*/
         ImageView = findViewById(R.id.imageView);
         userpersonname = findViewById(R.id._person);

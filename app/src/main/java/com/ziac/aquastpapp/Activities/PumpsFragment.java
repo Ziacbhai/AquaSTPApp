@@ -61,10 +61,11 @@ public class PumpsFragment extends Fragment {
         context = getContext();
         user_topcard(view);
 
-        if (!Global.isNetworkAvailable(getActivity())) {
-            Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
+        if (Global.isNetworkAvailable(getActivity())) {
+        } else {
+            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
         }
-        new InternetCheckTask().execute();
+
         PumpRecyclerview = view.findViewById(R.id.pump_recyclerview);
         PumpRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         PumpRecyclerview.setHasFixedSize(true);

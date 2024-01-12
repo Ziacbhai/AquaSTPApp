@@ -17,6 +17,12 @@ public class FiltersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_filters, container, false);
+
+
+        if (Global.isNetworkAvailable(getActivity())) {
+        } else {
+            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
+        }
         return view;
     }
 }

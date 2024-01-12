@@ -79,6 +79,12 @@ public class LoginFragment extends Fragment {
         TextView versionName = view.findViewById(R.id.version);
         versionName.setText("v1.0.0" + BuildConfig.VERSION_NAME);
 
+
+        if (Global.isNetworkAvailable(getActivity())) {
+        } else {
+            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
+        }
+
         Login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -51,6 +51,12 @@ public class ResetPasswordEmail extends AppCompatActivity {
         context  = this;
 
 
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(), "Internet connection lost !!");
+        }
+
+
         EnterOTPbtn = findViewById(R.id.emailgetotpbtn);
         Forgotemail = findViewById(R.id.Femail);
         progressBar = findViewById(R.id.progressbr);

@@ -94,6 +94,12 @@ public class SignUpFragment extends Fragment {
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(true);
+
+
+        if (Global.isNetworkAvailable(getActivity())) {
+        } else {
+            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
+        }
         Company = view.findViewById(R.id.company);
         CPerson = view.findViewById(R.id.cperson);
         Mobile = view.findViewById(R.id.mobile);
@@ -111,6 +117,7 @@ public class SignUpFragment extends Fragment {
         DDstate = view.findViewById(R.id.dd_state);
         DDcity = view.findViewById(R.id.dd_city);
         tvCity = view.findViewById(R.id.tvcity);
+
         getstates();
         tvState.setOnClickListener(v -> statespopup());
         DDstate.setOnClickListener(v -> statespopup());

@@ -55,7 +55,7 @@ import java.util.Map;
 
 public class WelcomeManager extends AppCompatActivity {
 
-    private TextView Managername, Managermail, Managermobile, ClickHere;
+    TextView Managername, Managermail, Managermobile, ClickHere;
     ImageView ImageView, ManagerExit;
     AppCompatButton mContinue;
     Context context;
@@ -69,6 +69,11 @@ public class WelcomeManager extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_manager);
 
         context = this;
+
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(WelcomeManager.this, getLayoutInflater(), "Internet connection lost !!");
+        }
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
        /* fab = findViewById(R.id.floating);*/
@@ -250,13 +255,7 @@ public class WelcomeManager extends AppCompatActivity {
 
                 } else {
                     if (resp.has("error")) {
-
-                        String errorMessage = resp.getString("error");
-                        Toast.makeText(WelcomeManager.this, errorMessage, Toast.LENGTH_SHORT).show();
                         Toast.makeText(WelcomeManager.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-
-
-                    } else {
                     }
                 }
             } catch (JSONException e) {

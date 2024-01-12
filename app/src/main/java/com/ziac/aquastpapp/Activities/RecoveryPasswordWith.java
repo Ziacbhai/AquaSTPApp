@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +18,9 @@ public class RecoveryPasswordWith extends AppCompatActivity {
 
     CardView Rcemail, Rcusername, Rcmobile;
 
-    ImageView Repair_back_btn;
+    ImageView back_btn;
+
+    Context context;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -28,8 +31,13 @@ public class RecoveryPasswordWith extends AppCompatActivity {
         Rcusername = findViewById(R.id.usernamer);
         Rcmobile = findViewById(R.id.mobiler);
 
-        Repair_back_btn = findViewById(R.id.repair_back_btn);
-        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(RecoveryPasswordWith.this, getLayoutInflater(), "Internet connection lost !!");
+        }
+
+        back_btn = findViewById(R.id.repair_back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

@@ -59,7 +59,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
     IncidentsClass incidentsClass;
     AppCompatButton In_image_uploadbtn;
     Context context;
-    ImageView Repair_back_btn;
+    ImageView back_btn;
     private ProgressDialog progressDialog;
 
     @SuppressLint("MissingInflatedId")
@@ -73,12 +73,14 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
         delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (!Global.isNetworkAvailable(this)) {
+
+        if (Global.isNetworkAvailable(this)) {
+        } else {
             Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
-        Repair_back_btn = findViewById(R.id.repair_back_btn);
-        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+        back_btn = findViewById(R.id.repair_back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -192,7 +194,8 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
                 params.put("fileName", image);
-                params.put("incident_code", Global.sharedPreferences.getString("incident_code", ""));
+                //params.put("incident_code", Global.incidentsClass.getIncident_No());
+                params.put("incident_code", Global.incidentsClass.getIncident_Code());
                 params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
                 return params;
             }
@@ -210,8 +213,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
 
     private void getIncidentImages() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = Global.Get_Incidents_Details + "incident_code=" + Global.sharedPreferences.getString("incident_code",
-                "0") + "&file_type=" + "I";
+        String url = Global.Get_Incidents_Details + "incident_code=" + Global.incidentsClass.getIncident_Code() + "&file_type=" + "I";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

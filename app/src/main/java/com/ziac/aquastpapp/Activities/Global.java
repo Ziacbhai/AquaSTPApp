@@ -45,42 +45,44 @@ public class Global {
 
     //Server url
     //public static String baseurl = "http://aquastp.ziaconline.com/";
+
+
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
 
-   public static String baseurl="http://192.168.1.12:9396/";
+    public static String baseurl = "http://192.168.1.17:9396/";
 
-    public static String userImageurl = baseurl+"WebsiteData/Users/";
-    public static String incident_image = baseurl+"WebsiteData/IncidentReportDocs/";
+    public static String userImageurl = baseurl + "WebsiteData/Users/";
+    public static String incident_image = baseurl + "WebsiteData/IncidentReportDocs/";
 
 
-   /* public static String repair_images = baseurl+"WebsiteData/RepairDocs/";*/
+    /* public static String repair_images = baseurl+"WebsiteData/RepairDocs/";*/
     public static String repair_images = baseurl;
 
-    public static String incident_UploadImage = baseurl+"api/Incidents/UploadImage";
-    public static String Repair_UploadImage = baseurl+"api/Repairs/UploadImage";
+    public static String incident_UploadImage = baseurl + "api/Incidents/UploadImage";
+    public static String Repair_UploadImage = baseurl + "api/Repairs/UploadImage";
 
-    public static String Repair_two_Imagelist = baseurl+"api/Repairs/RepairImageList?";
+    public static String Repair_two_Imagelist = baseurl + "api/Repairs/RepairImageList?";
 
-    public static String Incident_UploadDocuments = baseurl+"api/Incidents/UploadDoc";
+    public static String Incident_UploadDocuments = baseurl + "api/Incidents/UploadDoc";
 
-    public static String urlUpdateprofileImage = baseurl +"api/Users/UpdateProfilePhoto";
+    public static String urlUpdateprofileImage = baseurl + "api/Users/UpdateProfilePhoto";
 
-    public static String urlGetStates = baseurl+"api/List/GetStates";
+    public static String urlGetStates = baseurl + "api/List/GetStates";
 
-    public static String urlGetCities = baseurl+"api/List/GetCity?state_code=";
-    public static String registration = baseurl+"api/Account/Register";
+    public static String urlGetCities = baseurl + "api/List/GetCity?state_code=";
+    public static String registration = baseurl + "api/Account/Register";
 
-    public static String forgotpasswordurl = baseurl +"api/Account/ForgotPassword";
-    public static String validateotpurl = baseurl +"api/Account/ValidateOTP";
-    public static String changetpasswordurl = baseurl +"api/Account/ChangePassword";
+    public static String forgotpasswordurl = baseurl + "api/Account/ForgotPassword";
+    public static String validateotpurl = baseurl + "api/Account/ValidateOTP";
+    public static String changetpasswordurl = baseurl + "api/Account/ChangePassword";
 
     public static String getuserdetailsurl = baseurl + "api/account/getuserdetails";
 
     public static String getuserprofileurl = baseurl + "api/Users/GetUserProfile";
     public static String getSearchSiteOrSTPByName = baseurl + "api/Users/SearchSiteOrSTPByName?";
     public static String updateProfile = baseurl + "api/Users/UpdateProfile";
-    public static String updateConsumption= baseurl + "api/Consumables/AddEditConsumables";
+    public static String updateConsumption = baseurl + "api/Consumables/AddEditConsumables";
 
     public static String updateIncidents = baseurl + "api/Incidents/IncidentsAddUpdate";
     public static String updateDConsumption = baseurl + "api/Consumables/AddEditConsumablesDetails";
@@ -89,7 +91,7 @@ public class Global {
     public static String updateRepairDAddUpdate = baseurl + "api/Repairs/RepairDetailsAddUPdate";
     public static String RepairsRepairBreakUp = baseurl + "api/Repairs/RepairBreakUp?";
     public static String Repair_BreakUp_update = baseurl + "api/Repairs/RepairBreakUpAddUPdate";
-    public static String tokenurl = baseurl+"TOKEN";
+    public static String tokenurl = baseurl + "TOKEN";
 
     public static String Equipment_Details_com_pumps = baseurl + "api/Masters/GetPumps?";
 
@@ -102,7 +104,7 @@ public class Global {
 
     public static String Lab_Test_Update = baseurl + "api/Lab/AddUpdate";
     public static String Get_Incidents = baseurl + "api/Incidents/List?";
-    public static String Get_Consumables= baseurl + "api/Consumables/List?";
+    public static String Get_Consumables = baseurl + "api/Consumables/List?";
 
     public static String Get_Repairs_Details = baseurl + "api/Repairs/Details?";
     public static String Get_Consumables_Details = baseurl + "api/Consumables/Details?";
@@ -141,22 +143,21 @@ public class Global {
     public static ArrayList<LabTestClass> LabTest_Class;
     public static ArrayList<IncidentsClass> Incident_Class;
     public static ArrayList<CommonModelClass> metersdetails;
-    public static void  customtoast(Context context, LayoutInflater inflater, String msg){
-        //LayoutInflater inflater = getLayoutInflater();
-        View customToastView = inflater.inflate(R.layout.costom_toast, null);
 
-        // Find and modify any elements inside the custom layout
+    public static void customtoast(Context context, LayoutInflater inflater, String msg) {
+        View customToastView = inflater.inflate(R.layout.costom_toast, null);
         ImageView icon = customToastView.findViewById(R.id.toast_icon);
         TextView text = customToastView.findViewById(R.id.toast_text);
         text.setText(msg);
+
         // Create the Toast with the custom layout
         Toast customToast = new Toast(context);
         customToast.setDuration(Toast.LENGTH_LONG);
         customToast.setView(customToastView);
         customToast.show();
     }
-    public static boolean isNetworkAvailable(Context context) {
 
+    public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
             NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
@@ -164,13 +165,14 @@ public class Global {
         }
         return false;
     }
+
     public static Picasso getPicassoInstance(Context context) {
         if (picassoInstance == null) {
-
             picassoInstance = new Picasso.Builder(context.getApplicationContext()).build();
         }
         return picassoInstance;
     }
+
     public static void loadWithPicasso(Context context, ImageView imageView, String imageUrl) {
         Picasso picasso = getPicassoInstance(context);
         picasso.load(imageUrl)

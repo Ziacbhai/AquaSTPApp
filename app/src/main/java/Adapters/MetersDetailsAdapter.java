@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +26,7 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.ziac.aquastpapp.Activities.Global;
+import com.ziac.aquastpapp.Activities.RepairTwo_Upload_Activity;
 import com.ziac.aquastpapp.R;
 
 import java.util.List;
@@ -71,16 +74,18 @@ public class MetersDetailsAdapter extends RecyclerView.Adapter<MetersDetailsAdap
         holder.Specification.setText(commonModelClassList.get(position).getSpecification());
         holder.Rating_Capacity.setText(commonModelClassList.get(position).getRating_Capacity());
         holder.CleaningRunningFrequencyHRS.setText(commonModelClassList.get(position).getCleaning_RunningFrequency_HRS());
-       /* holder.ImageView.setOnClickListener(new View.OnClickListener() {
+        holder.ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int pos = holder.getAdapterPosition();
-                String userimage = Global.baseurl + commonModelClassList.get(pos).getImage().substring(2);
-                showImage(picasso, userimage);
-
+                if (TextUtils.isEmpty(commonModelClassList.get(pos).getImage())) {
+                    Toast.makeText(context, "Image not available", Toast.LENGTH_SHORT).show();
+                } else {
+                    String userImage = Global.baseurl + commonModelClassList.get(pos).getImage().substring(2);
+                    showImage(picasso, userImage);
+                }
             }
-        });*/
+        });
     }
 
     public void showImage(Picasso picasso, String userimage) {

@@ -100,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <LinearLayout
+       <!-- <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -145,7 +145,9 @@
             </androidx.cardview.widget.CardView>
 
 
-        </LinearLayout>
+        </LinearLayout>-->
+
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

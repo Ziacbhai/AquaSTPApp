@@ -124,8 +124,9 @@
                         android:id="@+id/searchView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:layoutDirection="rtl"
                         android:background="@drawable/btnbgoutline"
-                        android:iconifiedByDefault="false"
                         android:inputType="textFilter"
                         android:queryHint="Search" />
                 </LinearLayout>

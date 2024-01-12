@@ -57,6 +57,11 @@ public class VerifyUserNameOTP extends AppCompatActivity {
         mPinView = findViewById(R.id.pinview);
         UserVerify = findViewById(R.id.userverifyotp);
 
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(VerifyUserNameOTP.this, getLayoutInflater(), "Internet connection lost !!");
+        }
+
         progressBar = findViewById(R.id.progressbr);
         UNewpwd = findViewById(R.id.usernewpassword);
         Resendotp = findViewById(R.id.resendUotp);

@@ -88,10 +88,10 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
         //upload = findViewById(R.id.in_upload);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (!Global.isNetworkAvailable(this)) {
-            Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "Internet connection lost !!");
         }
-        new InternetCheckTask().execute();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");

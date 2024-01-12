@@ -34,16 +34,16 @@ public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
         context = this;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (!Global.isNetworkAvailable(this)) {
-            Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(Incident_Image_doc_Select_Activity.this, getLayoutInflater(), "Internet connection lost !!");
         }
-        new InternetCheckTask().execute();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
         In_image_ = findViewById(R.id.in_images_);
-        In_docs_ = findViewById(R.id.in_docs_);
+        //In_docs_ = findViewById(R.id.in_docs_);
 
         Repair_back_btn = findViewById(R.id.repair_back_btn);
         Repair_back_btn.setOnClickListener(new View.OnClickListener() {
@@ -59,12 +59,12 @@ public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
             }
         });
 
-        In_docs_.setOnClickListener(new View.OnClickListener() {
+       /* In_docs_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Incident_Image_doc_Select_Activity.this, Incident_documents_upload_Activity.class));
             }
-        });
+        });*/
 
 
     }

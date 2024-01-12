@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ziac.aquastpapp.R;
 
@@ -20,10 +21,14 @@ public class SplashScreen extends AppCompatActivity {
     TextView textView;
     ImageView imageView;
 
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+
         textView = findViewById(R.id.txt);
         imageView = findViewById(R.id.imageView);
         Animation myanimation = AnimationUtils.loadAnimation(SplashScreen.this, R.anim.animation);
@@ -31,6 +36,7 @@ public class SplashScreen extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(SplashScreen.this, R.anim.animationlogo);
         imageView.startAnimation(animation);
         handlermethod();
+
     }
     private void handlermethod() {
 
@@ -42,6 +48,6 @@ public class SplashScreen extends AppCompatActivity {
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 startActivity(intent);
             }
-        }, 3000);
+        }, 2000);
     }
 }

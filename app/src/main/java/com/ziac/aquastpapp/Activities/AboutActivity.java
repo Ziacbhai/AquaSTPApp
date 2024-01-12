@@ -73,7 +73,7 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://192.168.1.7/AquaSTP/")));
+                        Uri.parse("http://192.168.1.15/AquaSTP/")));
             }
         });
         CallUs.setOnClickListener(new View.OnClickListener() {

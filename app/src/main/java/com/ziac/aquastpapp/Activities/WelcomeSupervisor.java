@@ -71,6 +71,11 @@ public class WelcomeSupervisor extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_supervisor);
 
         context = this;
+
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(WelcomeSupervisor.this, getLayoutInflater(), "Internet connection lost !!");
+        }
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         ImageView = findViewById(R.id.imageView);

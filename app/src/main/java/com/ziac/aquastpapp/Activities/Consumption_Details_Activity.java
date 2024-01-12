@@ -92,8 +92,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         context = this;
         user_topcard();
 
-        if (!Global.isNetworkAvailable(this)) {
-            Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(Consumption_Details_Activity.this, getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
 

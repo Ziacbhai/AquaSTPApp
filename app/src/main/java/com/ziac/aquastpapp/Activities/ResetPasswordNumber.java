@@ -50,6 +50,12 @@ public class ResetPasswordNumber extends AppCompatActivity {
         ForgotMobile = findViewById(R.id.fmobile);
         GetOTPBtn = findViewById(R.id.numberOTPbtn);
 
+
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(), "Internet connection lost !!");
+        }
+
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //   String mobileno = Global.sharedPreferences.getString("mobile", "");
 

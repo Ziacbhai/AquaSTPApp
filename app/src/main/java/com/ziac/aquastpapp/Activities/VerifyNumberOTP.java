@@ -58,6 +58,11 @@ public class VerifyNumberOTP extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_number_otp);
 
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), "Internet connection lost !!");
+        }
+
         // displayMobno();
 
         pinView = findViewById(R.id.pinview);

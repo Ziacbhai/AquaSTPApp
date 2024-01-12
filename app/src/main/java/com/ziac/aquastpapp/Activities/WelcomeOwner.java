@@ -68,6 +68,11 @@ public class WelcomeOwner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_owner);
 
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(WelcomeOwner.this, getLayoutInflater(), "Internet connection lost !!");
+        }
+
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         ImageView = findViewById(R.id.imageView);

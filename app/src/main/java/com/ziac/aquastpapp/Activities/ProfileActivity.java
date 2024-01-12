@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -79,12 +80,19 @@ public class ProfileActivity extends AppCompatActivity {
     TextView Person_ref_code,Updatebutton;
     ImageView Backarrowbtn;
 
+    Context context;
+
     @SuppressLint("MissingInflatedId")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        if (Global.isNetworkAvailable(context)) {
+        } else {
+            Global.customtoast(ProfileActivity.this, getLayoutInflater(), "Internet connection lost !!");
+        }
 
 
         fab = findViewById(R.id.floating);

@@ -58,14 +58,11 @@ import Models.RepairClass1;
 public class RepairFragment extends Fragment {
 
     RepairClass1 repairClass1;
-
     RepairAdapter repairAdapter;
     RecyclerView RepairRecyclerview;
     TextView tvSelectedDate, Remark_A;
-    ;
     String currentDatevalue, currentDateValue2;
     ProgressDialog progressDialog;
-
     Context context;
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -78,10 +75,11 @@ public class RepairFragment extends Fragment {
 
         user_topcard(view);
 
-        if (!Global.isNetworkAvailable(getActivity())) {
-            Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
+        if (Global.isNetworkAvailable(getActivity())) {
+        } else {
+            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
         }
-        new InternetCheckTask().execute();
+
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading please wait...");
         progressDialog.setCancelable(true);

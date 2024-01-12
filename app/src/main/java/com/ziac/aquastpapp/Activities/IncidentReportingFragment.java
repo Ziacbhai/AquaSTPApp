@@ -60,12 +60,10 @@ public class IncidentReportingFragment extends Fragment {
     IncidentsClass incidents;
     ProgressDialog progressDialog;
     IncidentAdapter incidentAdapter;
-
     private TextView tvSelectedDate;
     EditText Remark_A;
     AppCompatButton Update_A, Cancel_A;
-    private SwipeRefreshLayout swipeRefreshLayout;
-
+    SwipeRefreshLayout swipeRefreshLayout;
     String currentDatevalue, currentDateValue2;
 
     @SuppressLint("MissingInflatedId")
@@ -94,8 +92,9 @@ public class IncidentReportingFragment extends Fragment {
             }
         });
 
-        if (!Global.isNetworkAvailable(getActivity())) {
-            Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
+        if (Global.isNetworkAvailable(getActivity())) {
+        } else {
+            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
         }
         new InternetCheckTask().execute();
 
@@ -310,12 +309,12 @@ public class IncidentReportingFragment extends Fragment {
                     }
                     incidents = new IncidentsClass();
                     try {
-                        incidents.setInc_No(e.getString("incident_code"));
-                        incidents.setInc_Date(e.getString("incident_date"));
+                        incidents.setIncident_Code(e.getString("incident_code"));
+                        incidents.setIncident_Date(e.getString("incident_date"));
                         incidents.setIncidents_Particulars(e.getString("incident_desc"));
                         incidents.setInc_Created_by(e.getString("createdby"));
 
-                        /*String incident_code = incidents.getInc_No();
+                       /* String incident_code = incidents.getIncident_Code();
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("incident_code", incident_code);
                         Global.editor.commit();*/
