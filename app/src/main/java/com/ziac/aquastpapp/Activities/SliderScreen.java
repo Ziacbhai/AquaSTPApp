@@ -37,10 +37,7 @@ public class SliderScreen extends AppCompatActivity {
         viewPager = findViewById(R.id.views);
 
 
-        if (Global.isNetworkAvailable(this)) {
-        } else {
-            Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
-        }
+
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 

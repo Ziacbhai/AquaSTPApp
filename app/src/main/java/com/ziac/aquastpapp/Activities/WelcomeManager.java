@@ -70,10 +70,7 @@ public class WelcomeManager extends AppCompatActivity {
 
         context = this;
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(WelcomeManager.this, getLayoutInflater(), "Internet connection lost !!");
-        }
+
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
        /* fab = findViewById(R.id.floating);*/

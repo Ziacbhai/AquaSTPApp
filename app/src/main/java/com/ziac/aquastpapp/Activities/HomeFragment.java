@@ -21,6 +21,7 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,8 @@ public class HomeFragment extends Fragment {
     ProgressDialog progressDialog;
     FloatingActionButton Fab;
 
+    RelativeLayout layoutpump,layoutblower,layoutmeter,layoutsensor,layoutfilter;
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,14 +46,60 @@ public class HomeFragment extends Fragment {
 
         user_topcard(view);
 
+        layoutpump = view.findViewById(R.id.pumpmotor);
+        layoutblower = view.findViewById(R.id.blower);
+        layoutmeter = view.findViewById(R.id.meter);
+        layoutsensor = view.findViewById(R.id.sensor);
+        layoutfilter = view.findViewById(R.id.filter);
+
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading please wait...");
         progressDialog.setCancelable(true);
 
-        if (Global.isNetworkAvailable(getActivity())) {
-        } else {
-            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
-        }
+
+
+        layoutpump.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pump = new Intent(getActivity(), PumpMoterDetails.class);
+                startActivity(pump);
+            }
+        });
+
+        layoutblower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent blower = new Intent(getActivity(), BlowersActivity.class);
+                startActivity(blower);
+            }
+        });
+
+
+        layoutmeter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent meter = new Intent(getActivity(), MeterActivity.class);
+                startActivity(meter);
+            }
+        });
+
+
+        layoutsensor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sensors = new Intent(getActivity(), SensorsActivity.class);
+                startActivity(sensors);
+            }
+        });
+
+
+        layoutfilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent filter = new Intent(getActivity(), FiltersActivity.class);
+                startActivity(filter);
+            }
+        });
 
 
         // PdfView = view.findViewById(R.id.pdfview);

@@ -34,10 +34,7 @@ public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
         context = this;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(Incident_Image_doc_Select_Activity.this, getLayoutInflater(), "Internet connection lost !!");
-        }
+
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");

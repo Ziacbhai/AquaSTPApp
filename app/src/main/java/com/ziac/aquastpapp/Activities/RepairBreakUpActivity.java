@@ -93,10 +93,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         context = this;
         user_topcard();
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(RepairBreakUpActivity.this, getLayoutInflater(), "Internet connection lost !!");
-        }
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

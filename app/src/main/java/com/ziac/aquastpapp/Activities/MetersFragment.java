@@ -57,10 +57,7 @@ public class MetersFragment extends Fragment {
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        if (Global.isNetworkAvailable(getActivity())) {
-        } else {
-            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
-        }
+
 
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading !!");

@@ -87,11 +87,6 @@ public class Repair_Details_Activity extends AppCompatActivity {
         user_topcard();
 
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(Repair_Details_Activity.this, getLayoutInflater(), "Internet connection lost !!");
-        }
-
         FloatingActionButton fab = findViewById(R.id.fab);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

@@ -47,12 +47,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     EditText Newpwd, Repeatpwd;
     TextView Pwdconfirm;
-
     ProgressBar progressBar;
     ImageView Backarrowbtn;
     private boolean passwordvisible = false;
     String username, newpassword, repeatmpassword;
-
     Context context;
 
     @SuppressLint("MissingInflatedId")
@@ -68,11 +66,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         Backarrowbtn = findViewById(R.id.backarrowbtn);
         progressBar = findViewById(R.id.progressbr);
 
-
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(ChangePasswordActivity.this, getLayoutInflater(), "Internet connection lost !!");
-        }
 
 
         Newpwd.setOnTouchListener((v, event) -> {
@@ -197,10 +190,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         finish();
 
                     } else {
-                        if (response.has("error")) {
-                            Toast.makeText(ChangePasswordActivity.this, response.getString("error"), Toast.LENGTH_SHORT).show();
-                        } else {
-                        }
+                        Toast.makeText(ChangePasswordActivity.this, response.getString("error"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     // Handle JSON parsing exception here

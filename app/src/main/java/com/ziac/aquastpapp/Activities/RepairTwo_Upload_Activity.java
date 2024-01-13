@@ -79,10 +79,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
         Repair_back_btn = findViewById(R.id.repair_back_btn);
 
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), "Internet connection lost !!");
-        }
+
         Repair_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

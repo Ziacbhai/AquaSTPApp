@@ -44,10 +44,7 @@ public class ItemStockFragment extends Fragment {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         View view = inflater.inflate(R.layout.fragment_itemstock, container, false);
 
-        if (Global.isNetworkAvailable(getActivity())) {
-        } else {
-            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
-        }
+
 
         consumableRecyclerView = view.findViewById(R.id.consumable_recyclerview);
         consumableRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

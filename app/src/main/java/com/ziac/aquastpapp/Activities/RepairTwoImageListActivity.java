@@ -71,10 +71,6 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         //Remark_repair = findViewById(R.id.repair_image_remark);
         Repair_image_uploadbtn = findViewById(R.id.repair_image_uploadbtn);
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(RepairTwoImageListActivity.this, getLayoutInflater(), "Internet connection lost !!");
-        }
 
         Repair_image_uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,10 +17,7 @@ public class OwnerDashBoard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_dash_board);
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(OwnerDashBoard.this, getLayoutInflater(), "Internet connection lost !!");
-        }
+
 
     }
 }

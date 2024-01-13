@@ -52,10 +52,7 @@ public class LabTest_Details_Activity extends AppCompatActivity {
         context = this;
         user_topcard();
 
-        if (!Global.isNetworkAvailable(this)) {
-            Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
-        }
-        new InternetCheckTask().execute();
+
 
         Labtest_details_Rv = findViewById(R.id.labTest_details_Recyclerview);
         Labtest_details_Rv.setLayoutManager(new LinearLayoutManager(this));

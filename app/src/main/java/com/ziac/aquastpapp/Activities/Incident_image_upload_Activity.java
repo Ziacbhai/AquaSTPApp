@@ -74,11 +74,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (Global.isNetworkAvailable(this)) {
-        } else {
-            Global.customtoast(this, getLayoutInflater(), "Internet connection lost !!");
-        }
-        new InternetCheckTask().execute();
+
         back_btn = findViewById(R.id.repair_back_btn);
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override

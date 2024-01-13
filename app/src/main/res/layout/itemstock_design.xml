@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="3dp"
+        android:layout_margin="2dp"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
@@ -29,7 +29,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.4"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
@@ -46,8 +46,6 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:background="#01A3A3" />
 
                     <TextView
@@ -64,8 +62,6 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:background="#01A3A3" />
 
                 <LinearLayout
@@ -78,7 +74,7 @@
                         android:id="@+id/stock_"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="0.8"
                         android:gravity="center"
                         android:text="Stock"
                         android:textColor="#000"
@@ -87,15 +83,13 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:background="#01A3A3" />
 
                     <TextView
                         android:id="@+id/units_"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="0.8"
                         android:gravity="center"
                         android:text="Units"
                         android:textColor="#000"

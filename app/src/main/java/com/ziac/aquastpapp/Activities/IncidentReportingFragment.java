@@ -92,11 +92,7 @@ public class IncidentReportingFragment extends Fragment {
             }
         });
 
-        if (Global.isNetworkAvailable(getActivity())) {
-        } else {
-            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
-        }
-        new InternetCheckTask().execute();
+
 
         Date currentDate = new Date();
         SimpleDateFormat dateFormat1 = null;

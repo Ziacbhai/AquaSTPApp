@@ -89,12 +89,6 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(ProfileActivity.this, getLayoutInflater(), "Internet connection lost !!");
-        }
-
-
         fab = findViewById(R.id.floating);
         Backarrowbtn = findViewById(R.id.backarrowbtn);
         Updatebutton = findViewById(R.id.updatebutton);

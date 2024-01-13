@@ -21,10 +21,6 @@ public class BlowersFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_blowers, container, false);
 
 
-        if (Global.isNetworkAvailable(getActivity())) {
-        } else {
-            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
-        }
         return view;
     }
 }

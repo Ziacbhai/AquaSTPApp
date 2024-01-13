@@ -58,11 +58,23 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.FiltersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.SensorsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.MeterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BlowersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.PumpMoterDetails"
+            android:exported="false" />
+        <activity
             android:name=".Activities.DemoAc"
-            android:exported="true" >
-
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".Activities.PDFEx"
             android:exported="false" />
@@ -193,13 +205,11 @@
             android:name=".Activities.SplashScreen"
             android:exported="true"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Activities.LoginSignupActivity"

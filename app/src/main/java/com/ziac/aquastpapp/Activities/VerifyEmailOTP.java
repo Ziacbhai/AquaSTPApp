@@ -62,10 +62,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
         new OTP_Receiver().setPinView(Enter_pinnumber);
         requestSMSPermission();
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(VerifyEmailOTP.this, getLayoutInflater(), "Internet connection lost !!");
-        }
+
         EmailVerify = findViewById(R.id.emailverifyotp);
         progressBar = findViewById(R.id.progressbr);
         EnterNewpwd = findViewById(R.id.enewpassword);

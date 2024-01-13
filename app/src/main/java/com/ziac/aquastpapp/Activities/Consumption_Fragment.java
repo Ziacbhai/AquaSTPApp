@@ -85,11 +85,6 @@ public class Consumption_Fragment extends Fragment {
         context = getContext();
         user_topcard(view);
 
-        if (Global.isNetworkAvailable(getActivity())) {
-        } else {
-            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
-        }
-        new InternetCheckTask().execute();
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading please wait...");
         progressDialog.setCancelable(true);

@@ -53,10 +53,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(ResetPasswordUserName.this, getLayoutInflater(), "Internet connection lost !!");
-        }
+
         UserGetotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

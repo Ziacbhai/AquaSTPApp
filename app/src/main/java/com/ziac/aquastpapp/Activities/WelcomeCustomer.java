@@ -63,10 +63,7 @@ public class WelcomeCustomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_customer);
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(WelcomeCustomer.this, getLayoutInflater(), "Internet connection lost !!");
-        }
+
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 

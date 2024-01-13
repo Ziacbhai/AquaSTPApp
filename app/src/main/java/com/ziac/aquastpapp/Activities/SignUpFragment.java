@@ -96,10 +96,8 @@ public class SignUpFragment extends Fragment {
         progressDialog.setCancelable(true);
 
 
-        if (Global.isNetworkAvailable(getActivity())) {
-        } else {
-            Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
-        }
+
+
         Company = view.findViewById(R.id.company);
         CPerson = view.findViewById(R.id.cperson);
         Mobile = view.findViewById(R.id.mobile);
@@ -553,7 +551,7 @@ public class SignUpFragment extends Fragment {
         cpperson = CPerson.getText().toString();
         mobile = Mobile.getText().toString();
         email = Email.getText().toString();
-        adminname = Adminname.getText().toString();
+        adminname = Adminname.getText().toString().trim();
         state = tvState.getText().toString().trim();
         city = tvCity.getText().toString().trim();
         password = RPassword.getText().toString();
@@ -562,8 +560,7 @@ public class SignUpFragment extends Fragment {
         //  progressDialog.show();
 
         if (company.isEmpty()) {
-            Company.setError("Company Name should not be empty");
-            Company.requestFocus();
+            Toast.makeText(getActivity(), "Company Name should not be empty !!", Toast.LENGTH_SHORT).show();
             return;
         } /*else if (company.contains(" ")) {
             // Check if the company name contains spaces
@@ -572,31 +569,36 @@ public class SignUpFragment extends Fragment {
         }*/
 
         if (cpperson.isEmpty()) {
-            CPerson.setError("Please enter Contact Name");
-            CPerson.requestFocus();
-
+            Toast.makeText(getActivity(), "Please enter Contact Name !!", Toast.LENGTH_SHORT).show();
+            return;
         }
         if (mobile.isEmpty()) {
-            Mobile.setError("Mobile number should not be empty!!");
-            Mobile.requestFocus();
+            Toast.makeText(getActivity(), "Mobile number should not be empty !!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (mobile.equals("0") || mobile.matches("0+")) {
+            Toast.makeText(getActivity(), "Invalid mobile number format !!", Toast.LENGTH_LONG).show();
+            return;
         }
 
         if (email.isEmpty()) {
-            //  Toast.makeText(getActivity(), "Email should not be empty!!", Toast.LENGTH_SHORT).show();
-            Email.setError("Email should not be empty!!");
-            Email.requestFocus();
+            Toast.makeText(getActivity(), "Email should not be empty !!", Toast.LENGTH_SHORT).show();
             return;
         }
         if (adminname.isEmpty()) {
-            Adminname.setError("Admin name field should not be empty!!");
-            Adminname.requestFocus();
-            //Toast.makeText(getActivity(), "Contact person field should not be empty!!", Toast.LENGTH_SHORT).show();
+          /*  Adminname.setError("Admin name field should not be empty!!");
+            Adminname.requestFocus();*/
+            Toast.makeText(getActivity(), "Display Name should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }
         if (state.isEmpty()) {
-            tvState.setError("State field should not be empty!!");
-            tvState.requestFocus();
-            // Toast.makeText(getActivity(), "Mobile number should not be empty!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "State field should not be empty!!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (city.isEmpty()) {
+            Toast.makeText(getActivity(), "City field should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }
         if (mobile.length() < 10) {
@@ -604,11 +606,7 @@ public class SignUpFragment extends Fragment {
             return;
         }
         if (password.isEmpty()) {
-            RPassword.setError("Password field should not be empty!!");
-            RPassword.requestFocus();
-           /* Toast toast = Toast.makeText(getActivity(), "Password  field should not be empty!!", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
-            toast.show();*/
+            Toast.makeText(getActivity(), "Password  field should not be empty!!", Toast.LENGTH_SHORT);
             return;
         }
         if (password.length() < 6) {
@@ -617,16 +615,20 @@ public class SignUpFragment extends Fragment {
         }
         if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
             Toast toast = Toast.makeText(getActivity().getApplicationContext(), "password must contain mix of upper and lower case letters as well as digits and one special charecter !!", Toast.LENGTH_SHORT);
-            // toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
             return;
         }
         if (cpassword.isEmpty()) {
-            Cpassword.setError("Confirm password field should not be empty!!");
-            Cpassword.requestFocus();
-            //Toast.makeText(getActivity(), "Confirm password field should not be empty!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Confirm password field should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        if (!password.equals(cpassword)) {
+            Toast.makeText(getActivity(), "The given password and confirm password does not match", Toast.LENGTH_LONG).show();
+            return;
+
+        }
+
         if (!CheckBox.isChecked()) {
             Toast.makeText(getActivity(), "You are not  agree with the terms and conditions of Aqua to move further  ", Toast.LENGTH_SHORT).show();
             return;
@@ -645,25 +647,27 @@ public class SignUpFragment extends Fragment {
                     throw new RuntimeException(e);
                 }
 
-                //Log.d("Register", sresponse);
+                Log.d("Register", sresponse);
 
                 try {
                     if (response.getBoolean("isSuccess")) {
-                        Toast.makeText(getActivity(), "Registration successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getActivity(), LoginSignupActivity.class));
                         //finish();
                     } else {
-                        //textViewError.setText(response.getString("error"));
-                        Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_SHORT).show();
+/*
+                        Toast.makeText(getActivity(), "Registration failed", Toast.LENGTH_SHORT).show();
+*/
+                        Global.customtoast(getActivity(),getLayoutInflater(), response.getString("error"));
+                       // Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
-                        //textViewError.setVisibility(View.VISIBLE);
+
                     }
 
                     progressDialog.dismiss();
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -694,7 +698,7 @@ public class SignUpFragment extends Fragment {
                 params.put("com_contact", CPerson.getText().toString());
                 params.put("com_contact_mobno", Mobile.getText().toString());
                 params.put("com_email", emailValue);
-                params.put("username", Adminname.getText().toString());
+                params.put("username",Adminname.getText().toString().trim());
                 params.put("password", RPassword.getText().toString());
                 params.put("confirm_password", Cpassword.getText().toString());
                 params.put("state_code", String.valueOf(statename.get_code()));

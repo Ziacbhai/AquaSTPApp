@@ -31,10 +31,6 @@ public class RecoveryPasswordWith extends AppCompatActivity {
         Rcusername = findViewById(R.id.usernamer);
         Rcmobile = findViewById(R.id.mobiler);
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(RecoveryPasswordWith.this, getLayoutInflater(), "Internet connection lost !!");
-        }
 
         back_btn = findViewById(R.id.repair_back_btn);
         back_btn.setOnClickListener(new View.OnClickListener() {

@@ -28,6 +28,8 @@ public class LoginSignupActivity extends AppCompatActivity {
     ViewPagerAdapter loginadapter;
     private boolean doubleBackToExitPressedOnce;
     Context context;
+    TabLayout.Tab loginTab;
+    TabLayout.Tab registerTab;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -37,24 +39,16 @@ public class LoginSignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginsignup);
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(LoginSignupActivity.this, getLayoutInflater(), "Internet connection lost !!");
-        }
-
 
 
         tabLayout = findViewById(R.id.tablayout);
         tabLayout.setSelectedTabIndicatorHeight(0);
 
-        TabLayout.Tab loginTab = tabLayout.newTab();
-
+        loginTab = tabLayout.newTab();
         loginTab.setText("LOGIN");
-
         tabLayout.addTab(loginTab);
 
-        TabLayout.Tab registerTab = tabLayout.newTab();
-
+        registerTab = tabLayout.newTab();
         registerTab.setText("REGISTER");
         tabLayout.addTab(registerTab);
 
@@ -65,6 +59,27 @@ public class LoginSignupActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.viewpagerlogin);
         loginadapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(loginadapter);
+
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                // Update the tab colors and text colors when a page is selected
+                for (int i = 0; i < tabLayout.getTabCount(); i++) {
+                    TabLayout.Tab tab = tabLayout.getTabAt(i);
+                    if (tab != null) {
+                        if (i == position) {
+                            tab.view.setBackgroundColor(Color.rgb(1, 163, 163));
+                            tabLayout.setTabTextColors(Color.rgb(1, 163, 163), Color.WHITE);
+                        } else {
+                            tab.view.setBackgroundColor(Color.TRANSPARENT);
+                            tabLayout.setTabTextColors(Color.rgb(1, 163, 163), Color.WHITE); // Update with your desired unselected text color
+                        }
+                    }
+                }
+            }
+        });
+
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -78,12 +93,13 @@ public class LoginSignupActivity extends AppCompatActivity {
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 // Reset the indicator color when a tab is unselected
+                viewPager2.setCurrentItem(tab.getPosition());
                 tab.view.setBackgroundColor(Color.TRANSPARENT);
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                // Handle tab reselection if needed
+
             }
         });
     }

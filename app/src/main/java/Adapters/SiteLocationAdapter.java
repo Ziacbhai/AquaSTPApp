@@ -3,6 +3,7 @@ package Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,6 +72,7 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
 
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
+
             }
         });
 

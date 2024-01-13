@@ -92,11 +92,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         context = this;
         user_topcard();
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(Consumption_Details_Activity.this, getLayoutInflater(), "Internet connection lost !!");
-        }
-        new InternetCheckTask().execute();
+
 
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading please wait...");
@@ -136,10 +132,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     }
 
     private void user_topcard() {
-//        progressDialog = new ProgressDialog(context);
-//        progressDialog.setMessage("Loading !!");
-//        progressDialog.setCancelable(true);
-
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String stpname, sitename, processname, consumption_date, consumption_no, consumption_amount;
         sitename = sharedPreferences.getString("site_name", "");
@@ -472,8 +464,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                                 ex.printStackTrace();
                             }
                         }
-
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -695,7 +685,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         zDialog.show();
 
         SearchView sveq = zDialog.findViewById(R.id.svequipment);
-
         sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -738,13 +727,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         public View getView(int i, View convertView, ViewGroup parent) {
 
             View v = getLayoutInflater().inflate(R.layout.popup_itemlist_consumption, null);
-
-
             TextView tvequipmentnameitem = v.findViewById(R.id.tvitemfirst);
             TextView tvenameitem = v.findViewById(R.id.tvitemtwoc);
-
             Item_spinner = mDataArrayList.get(i);
-
             tvequipmentnameitem.setText(Item_spinner.getItem_name());
             tvenameitem.setText(Item_spinner.getItem());
 
@@ -787,18 +772,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     notifyDataSetChanged();
                 }
             };
-        }
-    }
-
-    private void showProgressDialog() {
-        if (progressDialog != null && !progressDialog.isShowing()) {
-            progressDialog.show();
-        }
-    }
-
-    private void hideProgressDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
         }
     }
 }

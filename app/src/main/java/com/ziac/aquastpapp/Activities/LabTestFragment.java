@@ -77,10 +77,7 @@ public class LabTestFragment extends Fragment {
         context = getContext();
         user_topcard(view);
 
-        if (!Global.isNetworkAvailable(getActivity())) {
-            Global.customtoast(requireActivity(), getLayoutInflater(), "Internet connection lost !!");
-        }
-        new InternetCheckTask().execute();
+
         FloatingActionButton fab = view.findViewById(R.id.fab);
 
         Date currentDate = new Date();

@@ -60,10 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
 
-        if (Global.isNetworkAvailable(context)) {
-        } else {
-            Global.customtoast(MainActivity.this, getLayoutInflater(), "Internet connection lost !!");
-        }
+
 
         Profile = findViewById(R.id.profileIcon);
         drawerLayout = findViewById(R.id.drawerlayout);
@@ -338,7 +335,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void openFragment(Fragment fragment) {
-        FiltersFragment fragment1 = new FiltersFragment();
+        HomeFragment fragment1 = new HomeFragment();
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);

@@ -37,51 +37,35 @@ public class AboutActivity extends AppCompatActivity {
         MailUs = findViewById(R.id.mailUs);
         ChatUs = findViewById(R.id.chatUs);
         Locate = findViewById(R.id.locate);
-
         LinkedIn = findViewById(R.id.linkedIn);
         FaceBook = findViewById(R.id.Facebook);
         Instagram = findViewById(R.id.instagram);
         X = findViewById(R.id.X);
-
         Ziac = findViewById(R.id.animationView);
-        // Declaring the animation view
+
         LottieAnimationView animationView
                 = findViewById(R.id.animationView);
         animationView.addAnimatorUpdateListener(
                 (animation) -> {
-                    // Global.customtoast(this,getLayoutInflater(), "Working");
                 });
         animationView.playAnimation();
 
         if (animationView.isAnimating()) {
-            // Do something.
-        }
 
-        Locate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String address = "Ziac Software No. 5, 2nd Cross, CSI compound, Mission Rd, Bengaluru, Karnataka 560027";
-                Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + address);
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, gmmIntentUri);
-                intent.setPackage("com.google.android.apps.maps");
-                startActivity(intent);
-            }
-        });
+        }
 
 
         Website.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://192.168.1.15/AquaSTP/")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.1.15/AquaSTP/")));
             }
         });
         CallUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String phno = "+91 9845258746";
-                Intent i = new Intent(Intent.ACTION_DIAL, (Uri.parse("tel:" + phno)));
-                startActivity(i);
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + phno)));
             }
         });
         MailUs.setOnClickListener(new View.OnClickListener() {
