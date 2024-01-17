@@ -50,6 +50,11 @@ public class Global {
 
     public static String baseurl = "http://192.168.1.12:9396/";
 
+
+    //Logs
+    public static String DailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
+
+
     public static String userImageurl = baseurl + "WebsiteData/Users/";
     public static String incident_image = baseurl + "WebsiteData/IncidentReportDocs/";
 

@@ -156,7 +156,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Time"
+            android:text="00:00:00"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />

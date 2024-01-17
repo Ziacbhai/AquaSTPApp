@@ -4,6 +4,7 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,8 +45,9 @@ public class MetersFragment extends Fragment {
     RecyclerView MetersRecyclerview;
     CommonModelClass commonModelClassList;
     private ProgressDialog progressDialog;
-    TextView usersiteH, userstpH, usersiteaddressH, Mailid, Mobno, personnameH;
-    private String Personname, Stpname, Sitename, SiteAddress, Process;
+
+    Context context;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -53,41 +55,8 @@ public class MetersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_meters, container, false);
-
-
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-
-
-        progressDialog = new ProgressDialog(requireActivity());
-        progressDialog.setMessage("Loading !!");
-        progressDialog.setCancelable(true);
-
-
-        Sitename = sharedPreferences.getString("site_name", "");
-        Stpname = sharedPreferences.getString("stp_name", "");
-        SiteAddress = sharedPreferences.getString("site_address", "");
-        Process = sharedPreferences.getString("process_name", "");
-        String mail = Global.sharedPreferences.getString("user_email", "");
-        String mobile = Global.sharedPreferences.getString("user_mobile", "");
-        Personname = sharedPreferences.getString("person_nameu", "");
-
-        usersiteH = view.findViewById(R.id.site_name);
-        userstpH = view.findViewById(R.id.stp_name);
-        usersiteaddressH = view.findViewById(R.id.site_address);
-        //uProcess = view.findViewById(R.id.processname_);
-        Mailid = view.findViewById(R.id.email);
-        Mobno = view.findViewById(R.id._mobile);
-        personnameH = view.findViewById(R.id.person_name);
-
-        usersiteH.setText(Sitename);
-        userstpH.setText(Stpname + " / " + Process);
-        usersiteaddressH.setText(SiteAddress);
-        //uProcess.setText(Process);
-        Mailid.setText(mail);
-        Mobno.setText(mobile);
-        personnameH.setText(Personname);
-
+        context = getContext();
+        user_topcard(view);
 
         MetersRecyclerview = view.findViewById(R.id.meters_recyclerview);
         MetersRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -95,6 +64,39 @@ public class MetersFragment extends Fragment {
         MetersRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         getmeters();
         return view;
+    }
+
+    private void user_topcard(View view) {
+        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog.setMessage("Loading !!");
+        progressDialog.setCancelable(true);
+
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        sitename = sharedPreferences.getString("site_name", "");
+        stpname = sharedPreferences.getString("stp_name", "");
+        processname = sharedPreferences.getString("process_name", "");
+        siteaddress = sharedPreferences.getString("site_address", "");
+        useremail = sharedPreferences.getString("user_email", "");
+        usermobile = sharedPreferences.getString("user_mobile", "");
+        personname = sharedPreferences.getString("person_nameu", "");
+      stpcapacity = sharedPreferences.getString("stp_capacity", "");
+
+        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
+
+        txtsitename = view.findViewById(R.id.sitename);
+        txtstpname = view.findViewById(R.id.stpname);
+        txtsiteaddress = view.findViewById(R.id.siteaddress);
+        txtuseremail = view.findViewById(R.id.useremail);
+        txtusermobile = view.findViewById(R.id.usermobile);
+        txtpersonname = view.findViewById(R.id.personname);
+
+        txtsitename.setText(sitename);
+        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
+        txtsiteaddress.setText(siteaddress);
+        txtuseremail.setText(useremail);
+        txtusermobile.setText(usermobile);
+        txtpersonname.setText(personname);
     }
 
     private void getmeters() {

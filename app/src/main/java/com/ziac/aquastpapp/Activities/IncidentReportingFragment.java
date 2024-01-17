@@ -246,16 +246,15 @@ public class IncidentReportingFragment extends Fragment {
         progressDialog.setCancelable(true);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
         sitename = sharedPreferences.getString("site_name", "");
-
         stpname = sharedPreferences.getString("stp_name", "");
         processname = sharedPreferences.getString("process_name", "");
-
         siteaddress = sharedPreferences.getString("site_address", "");
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("person_nameu", "");
+        stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
@@ -267,7 +266,7 @@ public class IncidentReportingFragment extends Fragment {
         txtpersonname = view.findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname);
+        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
         txtsiteaddress.setText(siteaddress);
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);

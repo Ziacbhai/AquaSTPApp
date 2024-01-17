@@ -5,19 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#eaeff5"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btnbgoutline"
             app:cardCornerRadius="12dp"
             app:cardMaxElevation="10dp">
 
@@ -25,179 +24,192 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btnbgoutline"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="5dp">
 
+                <ImageView
+                    android:id="@+id/image_"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/aqua_logo" />
+
+                <TextView
+                    android:id="@+id/manufacturer_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/btnbgoutline"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Manufacturer"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/equipmentName_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/btnbgoutline"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Equipment name"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:id="@+id/equipmentName_"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text="Eqipment name"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/equip_slno"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:background="@drawable/btnbgoutline"
+                        android:gravity="center"
+                        android:padding="5dp"
                         android:text="Equip_slno"
-                        android:textSize="12dp" />
+                        android:textSize="14dp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp" />
+
 
                     <TextView
-                        android:id="@+id/manufacturer_"
-                        android:layout_width="match_parent"
+                        android:id="@+id/rating_capacity"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="3dp"
-                        android:gravity="center_horizontal"
-                        android:text="Manufacturer"
-                        android:textSize="10dp" />
+                        android:layout_weight="1"
+                        android:background="@drawable/btnbgoutline"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Capacity"
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#01A3A3" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/btnbgoutline"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
 
                     <LinearLayout
-                        android:layout_width="80dp"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
 
-                        <ImageView
-                            android:id="@+id/image_"
-                            android:layout_width="80dp"
-                            android:layout_height="match_parent"
-                            android:layout_margin="5dp"
-                            android:padding="10dp"
-                            android:src="@drawable/aqua_logo" />
+                        android:padding="3dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawablePadding="5dp"
+                            android:text="Form Factor"
+                            android:textColor="#000"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/formFactor_"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawablePadding="5dp"
+                            android:text="Form"
+                            android:textSize="12dp" />
+
                     </LinearLayout>
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal"
+                        android:padding="3dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="5dp">
+                            android:layout_weight="1"
+                            android:text="Frequency"
+                            android:textColor="#000"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
 
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_horizontal"
-                                android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/cleaning_Running_"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Frequency"
+                            android:textSize="12dp" />
 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Frequency"
-                                    android:textColor="#000"
-                                    android:textSize="12dp"
-                                    android:textStyle="bold" />
 
-                                <TextView
-                                    android:id="@+id/cleaning_Running_"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="Frequency"
-                                    android:textSize="12dp" />
+                    </LinearLayout>
 
-                            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
 
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_horizontal"
-                                android:orientation="vertical">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Phase"
+                            android:textColor="#000"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Capacity"
-                                    android:textColor="#000"
-                                    android:textSize="12dp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:id="@+id/rating_capacity_"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:drawablePadding="5dp"
-                                    android:gravity="center_horizontal"
-                                    android:text="Capacity"
-                                    android:textSize="12dp" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:background="#01A3A3" />
-
-                            <LinearLayout
-                                android:padding="5dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_horizontal"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="Specification"
-                                    android:textColor="#000"
-                                    android:textSize="12dp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:id="@+id/specification_"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="3dp"
-                                    android:text="Specification"
-                                    android:textSize="12dp" />
-
-                            </LinearLayout>
+                        <TextView
+                            android:id="@+id/phase_"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Phase"
+                            android:textSize="12dp" />
 
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/specification_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/btnbgoutline"
+                    android:hint="Specification"
+                    android:minHeight="80dp"
+                    android:padding="8dp"
+                    android:textSize="10dp" />
+
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
 </LinearLayout>
+
+
+
+
 
 
 

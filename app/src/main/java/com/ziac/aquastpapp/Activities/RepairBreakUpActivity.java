@@ -147,10 +147,11 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         progressDialog.setCancelable(true);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String  stpname, sitename, processname,repair_date, repair_no, repair_amount;
+        String  stpname, sitename, processname,repair_date, repair_no, repair_amount,stpcapacity;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         processname = sharedPreferences.getString("process_name", "");
+        stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
         repair_date = Global.repairClass1.getRepair_Date();
         repair_no = Global.repairClass1.getREPNo();
@@ -162,7 +163,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         txtstpname = findViewById(R.id.stpname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname);
+        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
 
 
         textno = findViewById(R.id.repair_no);

@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Context context;
 
     boolean click = true;
-    String userimage, usermail, stpname, sitename, siteaddress, userref, personname, processname;
+    String userimage, usermail, stpname, sitename, siteaddress, userref, personname, processname,stpcapacity;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         stpname = sharedPreferences.getString("stp_name", "");
         siteaddress = sharedPreferences.getString("site_address", "");
         processname = sharedPreferences.getString("process_name", "");
+        stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
         Picasso.Builder builder = new Picasso.Builder(getApplication());
         Picasso picasso = builder.build();

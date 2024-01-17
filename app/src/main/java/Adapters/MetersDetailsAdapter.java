@@ -161,7 +161,7 @@ public class MetersDetailsAdapter extends RecyclerView.Adapter<MetersDetailsAdap
             EquipmentName = itemView.findViewById(R.id.equipmentName_);
             Equipment_id = itemView.findViewById(R.id.equip_slno);
             Specification = itemView.findViewById(R.id.specification_);
-            Rating_Capacity = itemView.findViewById(R.id.rating_capacity_);
+            Rating_Capacity = itemView.findViewById(R.id.rating_capacity);
             CleaningRunningFrequencyHRS = itemView.findViewById(R.id.cleaning_Running_);
         }
     }

@@ -64,15 +64,13 @@
                     android:textStyle="bold" />
 
                 <TextView
-
                     android:id="@+id/useremail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="email"
                     android:textColor="@color/white"
-                    android:textSize="12dp"
-                    android:textStyle="bold" />
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/usermobile"
@@ -81,8 +79,7 @@
                     android:gravity="center_horizontal"
                     android:text="mobile"
                     android:textColor="@color/white"
-                    android:textSize="12dp"
-                    android:textStyle="bold" />
+                    android:textSize="12dp" />
 
 
                 <View
@@ -96,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Eqipments"
+                    android:text="Equipments"
                     android:padding="5dp"
                     android:textColor="@color/white"
                     android:textSize="18sp"

@@ -76,7 +76,7 @@ public class PumpsFragment extends Fragment {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
@@ -85,6 +85,7 @@ public class PumpsFragment extends Fragment {
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("person_nameu", "");
+        stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
@@ -96,7 +97,7 @@ public class PumpsFragment extends Fragment {
         txtpersonname = view.findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname);
+        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
         txtsiteaddress.setText(siteaddress);
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);
@@ -146,7 +147,6 @@ public class PumpsFragment extends Fragment {
                         commonModelClassList.setPhase(e.getString("phase"));
                         commonModelClassList.setSpecification(e.getString("equip_specs"));
                         commonModelClassList.setManufacturer(e.getString("mfg_name"));
-
                         commonModelClassList.setCleaning_RunningFrequency_HRS(e.getString("cleaning_freq_hrs"));
 
 

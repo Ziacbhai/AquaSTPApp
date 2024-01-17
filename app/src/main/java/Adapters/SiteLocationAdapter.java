@@ -68,6 +68,7 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
                 Global.editor.putString("stp_active", Global.StpList.get(position).getStpactive());
                 Global.editor.putString("site_address", Global.StpList.get(position).getSite_address());
                 Global.editor.putString("process_name", Global.StpList.get(position).getProcess__type());
+                Global.editor.putString("stp_capacity", Global.StpList.get(position).getStp_capacity());
                 Global.editor.commit();
 
                 Intent intent = new Intent(context, MainActivity.class);

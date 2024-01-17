@@ -133,10 +133,11 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
     private void user_topcard() {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String stpname, sitename, processname, consumption_date, consumption_no, consumption_amount;
+        String stpname, sitename, processname, consumption_date, consumption_no, consumption_amount,stpcapacity;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         processname = sharedPreferences.getString("process_name", "");
+        stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
         consumption_date = Global.ConsumptionClass.getDate();
         consumption_no = Global.ConsumptionClass.getCon1_code();
@@ -149,7 +150,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         textdate = findViewById(R.id.consumption_date);
         texamount = findViewById(R.id.consumption_amount);
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname);
+        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
 
         textno.setText(consumption_no);
         texamount.setText(consumption_amount + "0");

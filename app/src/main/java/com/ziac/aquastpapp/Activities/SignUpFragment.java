@@ -104,7 +104,7 @@ public class SignUpFragment extends Fragment {
         Email = view.findViewById(R.id.emailuser);
         Adminname = view.findViewById(R.id.auname);
         CheckBox = view.findViewById(R.id.ccheckbox);
-        Site_address = view.findViewById(R.id.site_address);
+       // Site_address = view.findViewById(R.id.site_address);
         Registerbtn = view.findViewById(R.id.registerbtn);
         RPassword = view.findViewById(R.id.registerpassword);
         Cpassword = view.findViewById(R.id.confirmpassword);

@@ -10,6 +10,7 @@ import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,7 +28,7 @@ public class PumpMoterDetails extends AppCompatActivity {
     String currentDatevalue, currentDateValue2;
     ImageView backbtn;
 
-    TextView Displaydate,Displaytime;
+    TextView Displaydate, Displaytime;
 
 
     @SuppressLint("MissingInflatedId")
@@ -46,12 +47,19 @@ public class PumpMoterDetails extends AppCompatActivity {
             }
         });
 
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateDateTime();
+                handler.postDelayed(this, 1000); // Update every 1000 milliseconds (1 second)
+            }
+        }, 0);
+
         Displaydate = findViewById(R.id.displaydate);
         Displaytime = findViewById(R.id.displaytime);
 
-        updateDateTime(); // Initial update
-
-}
+    }
 
     private void updateDateTime() {
         Date currentDate = new Date();
@@ -65,19 +73,18 @@ public class PumpMoterDetails extends AppCompatActivity {
             formattedDate = dateFormat.format(currentDate);
         }
         Displaydate.setText(formattedDate);
-        // Update time
-        SimpleDateFormat timeFormat = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            timeFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
-        }
-        String formattedTime = "";
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && timeFormat != null) {
-            formattedTime = timeFormat.format(currentDate);
-        }
-        // Convert AM/PM to uppercase
-        formattedTime = formattedTime.replace("am", "AM").replace("pm", "PM");
 
-        Displaytime.setText(formattedTime);
+        SimpleDateFormat timeFormat = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            timeFormat = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault());
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            String formattedTime = timeFormat.format(currentDate);
+            formattedTime = formattedTime.replace("am", "AM").replace("pm", "PM");
+
+            Displaytime.setText(formattedTime);
+        }
+
     }
 
     private void user_topcard() {

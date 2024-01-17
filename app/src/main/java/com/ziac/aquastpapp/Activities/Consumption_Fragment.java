@@ -158,7 +158,7 @@ public class Consumption_Fragment extends Fragment {
     private void user_topcard(View view) {
 
 
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
@@ -167,6 +167,7 @@ public class Consumption_Fragment extends Fragment {
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("person_nameu", "");
+        stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
@@ -178,7 +179,7 @@ public class Consumption_Fragment extends Fragment {
         txtpersonname = view.findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname);
+        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
         txtsiteaddress.setText(siteaddress);
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);
