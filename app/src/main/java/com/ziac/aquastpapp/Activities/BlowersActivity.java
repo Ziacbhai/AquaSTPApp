@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -14,10 +16,14 @@ import android.widget.TextView;
 
 import com.ziac.aquastpapp.R;
 
+import java.util.Date;
+import java.util.Locale;
+
 public class BlowersActivity extends AppCompatActivity {
     Context context;
-
+    TextView Displaydate,Displaytime;
     ImageView backbtn;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -29,13 +35,45 @@ public class BlowersActivity extends AppCompatActivity {
         user_topcard();
         backbtn = findViewById(R.id.back_btn);
 
+        Displaydate = findViewById(R.id.displaydate);
+        Displaytime = findViewById(R.id.displaytime);
+
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        updateDateTime(); // Initial update
 
+    }
+
+
+    private void updateDateTime() {
+        Date currentDate = new Date();
+        // Update date
+        SimpleDateFormat dateFormat = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        }
+        String formattedDate = "";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && dateFormat != null) {
+            formattedDate = dateFormat.format(currentDate);
+        }
+        Displaydate.setText(formattedDate);
+        // Update time
+        SimpleDateFormat timeFormat = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            timeFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+        }
+        String formattedTime = "";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && timeFormat != null) {
+            formattedTime = timeFormat.format(currentDate);
+        }
+        // Convert AM/PM to uppercase
+        formattedTime = formattedTime.replace("am", "AM").replace("pm", "PM");
+
+        Displaytime.setText(formattedTime);
     }
     private void user_topcard() {
 

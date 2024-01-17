@@ -1,11 +1,14 @@
 package com.ziac.aquastpapp.Activities;
 
+
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -16,14 +19,15 @@ import com.ziac.aquastpapp.R;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 public class PumpMoterDetails extends AppCompatActivity {
     Context context;
-
+    String currentDatevalue, currentDateValue2;
     ImageView backbtn;
+
+    TextView Displaydate,Displaytime;
 
 
     @SuppressLint("MissingInflatedId")
@@ -34,7 +38,6 @@ public class PumpMoterDetails extends AppCompatActivity {
 
         context = this;
         user_topcard();
-
         backbtn = findViewById(R.id.back_btn);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +46,38 @@ public class PumpMoterDetails extends AppCompatActivity {
             }
         });
 
+        Displaydate = findViewById(R.id.displaydate);
+        Displaytime = findViewById(R.id.displaytime);
+
+        updateDateTime(); // Initial update
+
+}
+
+    private void updateDateTime() {
+        Date currentDate = new Date();
+        // Update date
+        SimpleDateFormat dateFormat = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        }
+        String formattedDate = "";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && dateFormat != null) {
+            formattedDate = dateFormat.format(currentDate);
+        }
+        Displaydate.setText(formattedDate);
+        // Update time
+        SimpleDateFormat timeFormat = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            timeFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+        }
+        String formattedTime = "";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && timeFormat != null) {
+            formattedTime = timeFormat.format(currentDate);
+        }
+        // Convert AM/PM to uppercase
+        formattedTime = formattedTime.replace("am", "AM").replace("pm", "PM");
+
+        Displaytime.setText(formattedTime);
     }
 
     private void user_topcard() {

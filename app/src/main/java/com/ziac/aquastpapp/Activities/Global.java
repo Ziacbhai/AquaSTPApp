@@ -45,12 +45,10 @@ public class Global {
 
     //Server url
     //public static String baseurl = "http://aquastp.ziaconline.com/";
-
-
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
 
-    public static String baseurl = "http://192.168.1.7:9396/";
+    public static String baseurl = "http://192.168.1.12:9396/";
 
     public static String userImageurl = baseurl + "WebsiteData/Users/";
     public static String incident_image = baseurl + "WebsiteData/IncidentReportDocs/";
