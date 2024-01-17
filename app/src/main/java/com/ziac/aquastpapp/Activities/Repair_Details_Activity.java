@@ -73,10 +73,10 @@ public class Repair_Details_Activity extends AppCompatActivity {
     private static Dialog zDialog;
     static EquipmentRepairListClass equipment_spinner;
     Context context;
-     ProgressDialog progressDialog;
-     SwipeRefreshLayout swipeRefreshLayout;
+    ProgressDialog progressDialog;
+    SwipeRefreshLayout swipeRefreshLayout;
 
-     ImageView Repair_back_btn;
+    ImageView Repair_back_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +100,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
         Repair_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              finish();
+                finish();
             }
         });
         fab.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +122,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String  stpname, sitename, processname,repair_date, repair_no, repair_amount,stpcapacity;
+        String stpname, sitename, processname, repair_date, repair_no, repair_amount, stpcapacity;
 
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
@@ -138,7 +138,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
+        txtstpname.setText(stpname + " / " + processname + " / " + stpcapacity);
 
         textno = findViewById(R.id.repair_no);
         textdate = findViewById(R.id.repair_date);
@@ -195,9 +195,11 @@ public class Repair_Details_Activity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     private void showAddDetailsDialog(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LinearLayout Equipment_spinner;
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_repair_details_layout, null);
         Equipment_code = dialogView.findViewById(R.id.equipment_name_alert);
+        Equipment_spinner = dialogView.findViewById(R.id.repair_equipment_spinner);
         Remark_A = dialogView.findViewById(R.id.remark_alert_rd);
         Update_A = dialogView.findViewById(R.id.update_alert_rd);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_rd);
@@ -216,7 +218,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
         dialog.show();
 
-        Equipment_code.setOnClickListener(new View.OnClickListener() {
+        Equipment_spinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getRepairEquipmentsSpinnerPopup();

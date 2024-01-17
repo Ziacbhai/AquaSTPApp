@@ -186,22 +186,28 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     private void showAddDetailsDialog(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LinearLayout Equipment,Item;
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_consumption_details_layout, null);
         Equipment_code = dialogView.findViewById(R.id.equipment_name_alert_spinner);
         Item_code = dialogView.findViewById(R.id.item_name_alert_spinner);
-        Equipment_code.setOnClickListener(new View.OnClickListener() {
+        Equipment = dialogView.findViewById(R.id.eqipment_alert_spinner);
+        Item = dialogView.findViewById(R.id.Item_alert_spinner);
+
+        Equipment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getEquipmentsSpinnerPopup();
             }
         });
-        Item_code.setOnClickListener(new View.OnClickListener() {
+        Item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getItemSpinnerPopup();
             }
         });
+
         Qty_cb = dialogView.findViewById(R.id.qty_alert_cd);
         Update_A = dialogView.findViewById(R.id.update_alert_cd);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_cd);

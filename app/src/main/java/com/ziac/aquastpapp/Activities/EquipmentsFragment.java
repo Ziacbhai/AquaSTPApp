@@ -48,7 +48,7 @@ public class EquipmentsFragment extends Fragment {
                 FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, pumpFragment);
-                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.addToBackStack("pumpFragment");
                 fragmentTransaction.commit();
             }
         });
@@ -59,7 +59,7 @@ public class EquipmentsFragment extends Fragment {
                 FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frame_layout, metersFragment);
-                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.addToBackStack("metersFragment");
                 fragmentTransaction.commit();
             }
         });
