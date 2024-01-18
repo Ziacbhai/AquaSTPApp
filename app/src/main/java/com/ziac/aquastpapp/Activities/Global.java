@@ -21,6 +21,7 @@ import Models.CommonModelClass;
 import Models.ConsumptionClass;
 
 import Models.ConsumptionClass2;
+import Models.DailyLogClass;
 import Models.EquipmentClassRepairBreakUp;
 import Models.EquipmentListClassConsumption;
 import Models.EquipmentRepairListClass;
@@ -29,6 +30,7 @@ import Models.ItemListClassConsumption;
 import Models.ItemListClassRepair_BreakUp;
 import Models.ItemStockClass;
 import Models.LabTestClass;
+import Models.PumpMotorDailyLogClass;
 import Models.RepairClass2;
 import Models.RepairClass1;
 import Models.RepairClass3;
@@ -42,37 +44,25 @@ public class Global {
     public static SharedPreferences.Editor editor;
 
     private static Picasso picassoInstance;
-
     //Server url
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-
     public static String baseurl = "http://192.168.1.12:9396/";
-
-
     //Logs
-    public static String DailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
+    public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
 
-
+    public static String GetDailyLogPumpMotor = baseurl + "api/DailyLog/GetPumps?";
     public static String userImageurl = baseurl + "WebsiteData/Users/";
     public static String incident_image = baseurl + "WebsiteData/IncidentReportDocs/";
-
-
     /* public static String repair_images = baseurl+"WebsiteData/RepairDocs/";*/
     public static String repair_images = baseurl;
-
     public static String incident_UploadImage = baseurl + "api/Incidents/UploadImage";
     public static String Repair_UploadImage = baseurl + "api/Repairs/UploadImage";
-
     public static String Repair_two_Imagelist = baseurl + "api/Repairs/RepairImageList?";
-
     public static String Incident_UploadDocuments = baseurl + "api/Incidents/UploadDoc";
-
     public static String urlUpdateprofileImage = baseurl + "api/Users/UpdateProfilePhoto";
-
     public static String urlGetStates = baseurl + "api/List/GetStates";
-
     public static String urlGetCities = baseurl + "api/List/GetCity?state_code=";
     public static String registration = baseurl + "api/Account/Register";
 
@@ -120,6 +110,9 @@ public class Global {
     public static String api_Repair_List_Get_Equipments = baseurl + "api/List/GetRepairItems?";
     public static String api_Repair_List_Get_Units = baseurl + "api/List/GetUnits?";
     public static ArrayList<zList> statearraylist;
+    public static ArrayList<DailyLogClass> dailyLogClassArrayList;
+
+
     public static ArrayList<zList> cityarraylist;
     public static ArrayList<StpModelClass> StpList;
     public static ArrayList<CommonModelClass> pumpdetails;
@@ -133,6 +126,9 @@ public class Global {
     public static RepairClass1 repairClass1;
     public static RepairClass2 repairClass2;
     public static RepairClass3 repairClass3;
+    public static DailyLogClass dailyLogClass;
+
+    public static PumpMotorDailyLogClass pumpMotorDailyLogClass;
     public static RepairClass4 repairClass4;
     public static LabTestClass labTestClass1;
     public static IncidentsClass incidentsClass;
@@ -145,6 +141,7 @@ public class Global {
     public static ArrayList<EquipmentClassRepairBreakUp> Repair_Equipment_Breakup;
     public static ArrayList<LabTestClass> LabTest_Class;
     public static ArrayList<IncidentsClass> Incident_Class;
+    public static ArrayList<PumpMotorDailyLogClass> PumpMotor_LogClass;
     public static ArrayList<CommonModelClass> metersdetails;
 
     public static void customtoast(Context context, LayoutInflater inflater, String msg) {

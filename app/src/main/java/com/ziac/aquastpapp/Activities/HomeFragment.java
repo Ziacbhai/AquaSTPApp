@@ -4,7 +4,9 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -18,22 +20,51 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import Models.DailyLogClass;
+import Models.zList;
 
 
 public class HomeFragment extends Fragment {
     PDFView PdfView;
     ProgressDialog progressDialog;
     FloatingActionButton Fab;
+
+    private  DailyLogClass dailyLog;
+    Context context;
+
+    DailyLogClass dailyLogClass;
 
     RelativeLayout layoutpump,layoutblower,layoutmeter,layoutsensor,layoutfilter;
 
@@ -43,20 +74,15 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         user_topcard(view);
+
+        DailyLogIndex();
 
         layoutpump = view.findViewById(R.id.pumpmotor);
         layoutblower = view.findViewById(R.id.blower);
         layoutmeter = view.findViewById(R.id.meter);
         layoutsensor = view.findViewById(R.id.sensor);
         layoutfilter = view.findViewById(R.id.filter);
-
-        progressDialog = new ProgressDialog(requireActivity());
-        progressDialog.setMessage("Loading please wait...");
-        progressDialog.setCancelable(true);
-
-
 
         layoutpump.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +91,6 @@ public class HomeFragment extends Fragment {
                 startActivity(pump);
             }
         });
-
         layoutblower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,8 +98,6 @@ public class HomeFragment extends Fragment {
                 startActivity(blower);
             }
         });
-
-
         layoutmeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,8 +105,6 @@ public class HomeFragment extends Fragment {
                 startActivity(meter);
             }
         });
-
-
         layoutsensor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,8 +112,6 @@ public class HomeFragment extends Fragment {
                 startActivity(sensors);
             }
         });
-
-
         layoutfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,19 +119,8 @@ public class HomeFragment extends Fragment {
                 startActivity(filter);
             }
         });
-
-
-        // PdfView = view.findViewById(R.id.pdfview);
-        //Fab = view.findViewById(R.id.fab);
-       /* Fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launcher.launch("application/pdf");
-            }
-        });*/
         return view;
     }
-
     private void user_topcard(View view) {
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading !!");
@@ -146,12 +154,85 @@ public class HomeFragment extends Fragment {
         txtpersonname.setText(personname);
     }
 
- /*   private final ActivityResultLauncher<String> launcher = registerForActivityResult(
-            new ActivityResultContracts.GetContent(),
-            uri -> {
-                if (uri != null) {
-                    PdfView.fromUri(uri).load();
+    private void DailyLogIndex() {
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        String dailylog = Global.GetDailyLogIndex;
+
+        String com_code = Global.sharedPreferences.getString("com_code", "0");
+        String ayear = Global.sharedPreferences.getString("ayear", "0");
+        String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
+
+        dailylog = dailylog + "comcode=" + com_code + "&ayear=" + ayear + "&sstp1_code=" + sstp1_code;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, dailylog, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Global.dailyLogClassArrayList = new ArrayList<DailyLogClass>();
+
+                try {
+                    // Check if the response was successful
+                    boolean isSuccess = response.getBoolean("isSuccess");
+
+                    if (isSuccess) {
+                        // The "dlogdate" is present in the response
+                        String dlogdate = response.getString("dlogdate");
+                        Log.d("YourTag", "Daily Log Date: " + dlogdate);
+                       // Toast.makeText(context, response.getString("error"), Toast.LENGTH_SHORT).show();
+                        // Create a DailyLogClass object and add it to the list if needed
+                        DailyLogClass dailyLog = new DailyLogClass();
+                        dailyLog.setDailylog(dlogdate);
+                        Global.dailyLogClassArrayList.add(dailyLog);
+
+
+                        Global.editor = Global.sharedPreferences.edit();
+                        Global.editor.putString("dlogdate", dlogdate);
+                        Global.editor.commit();
+
+                    } else {
+                        // Handle the case when isSuccess is false
+                        String error = response.getString("error");
+                        Toast.makeText(requireActivity(), error, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
-    );*/
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Handle Volley errors
+                if (error instanceof TimeoutError) {
+                    Toast.makeText(requireActivity(), "Request Time-Out", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NoConnectionError) {
+                    Toast.makeText(requireActivity(), "No Connection Found", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(requireActivity(), "Server Error", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NetworkError) {
+                    Toast.makeText(requireActivity(), "Network Error", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(requireActivity(), "Parse Error", Toast.LENGTH_LONG).show();
+                }
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                // Set the Authorization header with the access token
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                // If you have any parameters to send in the request body, you can set them here
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        queue.add(jsonObjectRequest);
+    }
+
+
 }

@@ -41,8 +41,6 @@ public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.
     private List<CommonModelClass> commonModelClassList;
     Context context;
 
-    CardView dc;
-
     public PumpDetailsAdapter(List<CommonModelClass> commonModelClassList, Context context) {
         this.commonModelClassList = commonModelClassList;
         this.context = context;
@@ -66,7 +64,7 @@ public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.
         Picasso.Builder builder = new Picasso.Builder(context);
         Picasso picasso = builder.build();
         //picasso.load(Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2))).error(R.drawable.no_image_available_icon).into(holder.ImageView);
-holder.ImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        holder.ImageView.setScaleType(ImageView.ScaleType.FIT_XY);
         try {
             Uri uristring = Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2));
             picasso.load(uristring).error(R.drawable.no_image)
@@ -80,12 +78,6 @@ holder.ImageView.setScaleType(ImageView.ScaleType.FIT_XY);
                     .into(holder.ImageView);
         }
 
-        /*picasso.load(Uri.parse(Global.baseurl + commonModelClassList.get(position).getImage().substring(2))).error(R.drawable.no_image)
-                .memoryPolicy(MemoryPolicy.NO_CACHE)
-                .networkPolicy(NetworkPolicy.NO_CACHE)
-                .into(holder.ImageView);*/
-        //picasso.load(Global.baseurl + commonModelClassList.get(position).getImage().substring(2)).into(holder.ImageView);
-        //Log.d("imageurl",Global.baseurl + commonModelClassList.get(position).getImage().substring(2));
 
         holder.Manufacturer.setText(commonModelClassList.get(position).getManufacturer());
         holder.EquipmentName.setText(commonModelClassList.get(position).getEquipmentName());
@@ -109,7 +101,7 @@ holder.ImageView.setScaleType(ImageView.ScaleType.FIT_XY);
         });
 
     }
-    
+
     public void showImage(Picasso picasso, String userimage) {
         Dialog builder = new Dialog(context);
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);

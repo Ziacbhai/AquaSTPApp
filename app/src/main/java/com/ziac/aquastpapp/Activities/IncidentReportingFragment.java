@@ -277,7 +277,6 @@ public class IncidentReportingFragment extends Fragment {
     private void getIncidentReport() {
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
         String incident = Global.Get_Incidents;
-
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String ayear = Global.sharedPreferences.getString("ayear", "2023");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");

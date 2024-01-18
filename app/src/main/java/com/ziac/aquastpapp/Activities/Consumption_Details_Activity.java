@@ -105,14 +105,12 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             }
         });
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refreshScreen();
             }
         });
-
         FloatingActionButton fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +120,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             }
         });
         isSwipeRefreshTriggered = true;
+
         getConsumablesDetails();
 
         Consumables_D_Rv = findViewById(R.id.consumables_details_recyclerview);
@@ -492,8 +491,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     }
 
     private void getEquipmentsSpinnerPopup() {
-
-
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         zDialog.setContentView(R.layout.equipment_item);
         ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
@@ -529,7 +526,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     }
 
     private class EquipmentSelect_Adapter extends BaseAdapter implements Filterable {
-
         private ArrayList<EquipmentListClassConsumption> eQarrayList;
 
         public EquipmentSelect_Adapter(ArrayList<EquipmentListClassConsumption> eQarrayList) {
