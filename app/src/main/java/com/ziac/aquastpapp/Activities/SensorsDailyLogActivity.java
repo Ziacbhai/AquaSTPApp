@@ -20,18 +20,15 @@ import com.ziac.aquastpapp.R;
 import java.util.Date;
 import java.util.Locale;
 
-public class BlowersActivity extends AppCompatActivity {
-    Context context;
-    TextView Displaydate,Displaytime;
+public class SensorsDailyLogActivity extends AppCompatActivity {
     ImageView backbtn;
-
-
+    TextView Displaydate,Displaytime;
+    Context context;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blowers);
-
+        setContentView(R.layout.activity_sensors);
         context = this;
         user_topcard();
         backbtn = findViewById(R.id.back_btn);
@@ -54,7 +51,6 @@ public class BlowersActivity extends AppCompatActivity {
                 handler.postDelayed(this, 1000); // Update every 1000 milliseconds (1 second)
             }
         }, 0);
-
     }
 
 
@@ -83,9 +79,8 @@ public class BlowersActivity extends AppCompatActivity {
         }
 
     }
+
     private void user_topcard() {
-
-
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sitename = sharedPreferences.getString("site_name", "");
@@ -95,7 +90,6 @@ public class BlowersActivity extends AppCompatActivity {
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("person_nameu", "");
-
         stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
@@ -114,4 +108,6 @@ public class BlowersActivity extends AppCompatActivity {
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);
     }
+
+
 }

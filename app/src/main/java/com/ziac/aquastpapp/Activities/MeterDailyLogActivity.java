@@ -3,6 +3,8 @@ package com.ziac.aquastpapp.Activities;
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,10 +22,12 @@ import com.ziac.aquastpapp.R;
 import java.util.Date;
 import java.util.Locale;
 
-public class MeterActivity extends AppCompatActivity {
+public class MeterDailyLogActivity extends AppCompatActivity {
 
     ImageView backbtn;
     TextView Displaydate,Displaytime;
+
+    RecyclerView Meters_recyclerview;
 
     Context context;
 
@@ -56,6 +60,13 @@ public class MeterActivity extends AppCompatActivity {
                 handler.postDelayed(this, 1000); // Update every 1000 milliseconds (1 second)
             }
         }, 0);
+
+
+        DailyLogMeters();
+        Meters_recyclerview = findViewById(R.id.meter_started_recyclerview);
+        Meters_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        Meters_recyclerview.setHasFixedSize(true);
+        Meters_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
     private void updateDateTime() {
@@ -115,5 +126,7 @@ public class MeterActivity extends AppCompatActivity {
         txtpersonname.setText(personname);
     }
 
+    private void DailyLogMeters() {
+    }
 
 }

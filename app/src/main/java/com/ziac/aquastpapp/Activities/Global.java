@@ -25,12 +25,13 @@ import Models.DailyLogClass;
 import Models.EquipmentClassRepairBreakUp;
 import Models.EquipmentListClassConsumption;
 import Models.EquipmentRepairListClass;
+import Models.FiltersClass;
 import Models.IncidentsClass;
 import Models.ItemListClassConsumption;
 import Models.ItemListClassRepair_BreakUp;
 import Models.ItemStockClass;
 import Models.LabTestClass;
-import Models.PumpMotorDailyLogClass;
+import Models.PumpMotor_Blower_DailyLogClass;
 import Models.RepairClass2;
 import Models.RepairClass1;
 import Models.RepairClass3;
@@ -48,11 +49,14 @@ public class Global {
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl = "http://192.168.1.12:9396/";
+    public static String baseurl = "http://192.168.1.16:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
-
     public static String GetDailyLogPumpMotor = baseurl + "api/DailyLog/GetPumps?";
+
+    public static String GetDailyLogFilters = baseurl + "api/DailyLog/GetFilters?";
+
+    public static String GetDailyLogBlowers = baseurl + "api/DailyLog/GetBlowers?";
     public static String userImageurl = baseurl + "WebsiteData/Users/";
     public static String incident_image = baseurl + "WebsiteData/IncidentReportDocs/";
     /* public static String repair_images = baseurl+"WebsiteData/RepairDocs/";*/
@@ -127,8 +131,7 @@ public class Global {
     public static RepairClass2 repairClass2;
     public static RepairClass3 repairClass3;
     public static DailyLogClass dailyLogClass;
-
-    public static PumpMotorDailyLogClass pumpMotorDailyLogClass;
+    public static PumpMotor_Blower_DailyLogClass pumpMotorDailyLogClass;
     public static RepairClass4 repairClass4;
     public static LabTestClass labTestClass1;
     public static IncidentsClass incidentsClass;
@@ -141,7 +144,8 @@ public class Global {
     public static ArrayList<EquipmentClassRepairBreakUp> Repair_Equipment_Breakup;
     public static ArrayList<LabTestClass> LabTest_Class;
     public static ArrayList<IncidentsClass> Incident_Class;
-    public static ArrayList<PumpMotorDailyLogClass> PumpMotor_LogClass;
+    public static ArrayList<PumpMotor_Blower_DailyLogClass> PumpMotor_LogClass;
+    public static ArrayList<FiltersClass> Filter_LogClass;
     public static ArrayList<CommonModelClass> metersdetails;
 
     public static void customtoast(Context context, LayoutInflater inflater, String msg) {

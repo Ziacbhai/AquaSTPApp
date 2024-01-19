@@ -1,7 +1,6 @@
 package Adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.animation.content.Content;
-import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
 
 import java.util.List;
 
-import Models.PumpMotorDailyLogClass;
+import Models.PumpMotor_Blower_DailyLogClass;
 
 public class PumpMoterDailyLogStartAdapter extends RecyclerView.Adapter<PumpMoterDailyLogStartAdapter.Viewholder> {
 
 
-    private List<PumpMotorDailyLogClass> pumpMotorDailyLogClass;
+    private List<PumpMotor_Blower_DailyLogClass> pumpMotorDailyLogClass;
     Content content;
 
-    public PumpMoterDailyLogStartAdapter(Context context, List<PumpMotorDailyLogClass> pumpMotorDailyLogClass) {
+    public PumpMoterDailyLogStartAdapter(Context context, List<PumpMotor_Blower_DailyLogClass> pumpMotorDailyLogClass) {
         this.pumpMotorDailyLogClass = pumpMotorDailyLogClass;
         this.content = content;
     }

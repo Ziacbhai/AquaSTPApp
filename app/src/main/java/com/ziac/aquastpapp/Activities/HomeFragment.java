@@ -6,26 +6,15 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +42,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Models.DailyLogClass;
-import Models.zList;
 
 
 public class HomeFragment extends Fragment {
@@ -87,35 +75,35 @@ public class HomeFragment extends Fragment {
         layoutpump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pump = new Intent(getActivity(), PumpMoterDetails.class);
+                Intent pump = new Intent(getActivity(), PumpMoterDailyLogActivity.class);
                 startActivity(pump);
             }
         });
         layoutblower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent blower = new Intent(getActivity(), BlowersActivity.class);
+                Intent blower = new Intent(getActivity(), BlowersDailyLogActivity.class);
                 startActivity(blower);
             }
         });
         layoutmeter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent meter = new Intent(getActivity(), MeterActivity.class);
+                Intent meter = new Intent(getActivity(), MeterDailyLogActivity.class);
                 startActivity(meter);
             }
         });
         layoutsensor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent sensors = new Intent(getActivity(), SensorsActivity.class);
+                Intent sensors = new Intent(getActivity(), SensorsDailyLogActivity.class);
                 startActivity(sensors);
             }
         });
         layoutfilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent filter = new Intent(getActivity(), FiltersActivity.class);
+                Intent filter = new Intent(getActivity(), FiltersDailyLogActivity.class);
                 startActivity(filter);
             }
         });

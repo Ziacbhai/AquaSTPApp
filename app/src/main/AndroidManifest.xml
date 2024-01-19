@@ -58,19 +58,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.FiltersActivity"
+            android:name=".Activities.FiltersDailyLogActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.SensorsActivity"
+            android:name=".Activities.SensorsDailyLogActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.MeterActivity"
+            android:name=".Activities.MeterDailyLogActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.BlowersActivity"
+            android:name=".Activities.BlowersDailyLogActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.PumpMoterDetails"
+            android:name=".Activities.PumpMoterDailyLogActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.DemoAc"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#eaeff5"
     android:orientation="vertical"
-    tools:context=".Activities.MeterActivity">
+    tools:context=".Activities.MeterDailyLogActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -166,6 +166,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:weightSum="2.8"
         android:background="@drawable/btnbg"
         android:orientation="horizontal"
         android:padding="5dp">
@@ -173,7 +174,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.2"
+            android:layout_weight="1.3"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -181,7 +182,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="5dp"
-                android:text="Pump / Motor"
+                android:gravity="center"
+                android:text="Meter"
                 android:textColor="#fff"
                 android:textSize="12dp"
                 android:textStyle="bold" />
@@ -223,7 +225,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -232,7 +234,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Running (T)"
+                android:text="Save"
                 android:textColor="#fff"
                 android:textSize="12dp"
                 android:textStyle="bold" />
@@ -254,6 +256,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:weightSum="4"
         android:background="@drawable/btnbg"
         android:orientation="horizontal"
         android:padding="5dp">
@@ -261,17 +264,16 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.4"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Pump / Motor"
+                android:text="Meter"
                 android:textColor="#fff"
                 android:textSize="12dp"
                 android:textStyle="bold" />
@@ -287,7 +289,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.9"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -296,7 +298,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Stopped (T)"
+                android:text="Reading"
                 android:textColor="#fff"
                 android:textSize="12dp"
                 android:textStyle="bold" />
@@ -311,7 +313,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -320,7 +322,32 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Running (T)"
+                android:text="Reading (T)"
+                android:textColor="#fff"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#fff" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Total"
                 android:textColor="#fff"
                 android:textSize="12dp"
                 android:textStyle="bold" />

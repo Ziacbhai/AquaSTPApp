@@ -13,14 +13,14 @@ import com.ziac.aquastpapp.R;
 
 import java.util.List;
 
-import Models.PumpMotorDailyLogClass;
+import Models.PumpMotor_Blower_DailyLogClass;
 
 public class PumpMoterDailyLogStopAdapter extends RecyclerView.Adapter<PumpMoterDailyLogStopAdapter.Viewholder> {
 
-    private List<PumpMotorDailyLogClass> pumpMotorDailyLogClass;
+    private List<PumpMotor_Blower_DailyLogClass> pumpMotorDailyLogClass;
     Content content;
 
-    public PumpMoterDailyLogStopAdapter(List<PumpMotorDailyLogClass> pumpMotorDailyLogClass) {
+    public PumpMoterDailyLogStopAdapter(List<PumpMotor_Blower_DailyLogClass> pumpMotorDailyLogClass) {
         this.pumpMotorDailyLogClass = pumpMotorDailyLogClass;
         this.content = content;
     }
