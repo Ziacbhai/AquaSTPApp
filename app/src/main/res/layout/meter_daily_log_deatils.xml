@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pumpmotor_equip_name"
+                android:id="@+id/meter_equip_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="5dp"
@@ -48,7 +48,7 @@
 
 
             <TextView
-                android:id="@+id/pumpmotor_stop_time"
+                android:id="@+id/meter_reading_edit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -73,7 +73,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pumpmotor_running_time"
+                android:id="@+id/meter_reading_time"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -98,6 +98,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/meter_total"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"

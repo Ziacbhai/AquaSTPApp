@@ -20,11 +20,11 @@ public class PumpMoterDailyLogStartAdapter extends RecyclerView.Adapter<PumpMote
 
 
     private List<PumpMotor_Blower_DailyLogClass> pumpMotorDailyLogClass;
-    Content content;
+
 
     public PumpMoterDailyLogStartAdapter(Context context, List<PumpMotor_Blower_DailyLogClass> pumpMotorDailyLogClass) {
         this.pumpMotorDailyLogClass = pumpMotorDailyLogClass;
-        this.content = content;
+
     }
     @NonNull
     @Override

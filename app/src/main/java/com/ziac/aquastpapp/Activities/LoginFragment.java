@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
@@ -271,7 +272,71 @@ public class LoginFragment extends Fragment {
 
                 JSONArray liststp = new JSONArray(respObj1.getString("data2"));
 
+
                 try {
+                    Global.StpList = new ArrayList<>();
+
+                    for (int i = 0; i < liststp.length(); i++) {
+                        final JSONObject e;
+                        try {
+                            e = liststp.getJSONObject(i);
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                        stpModelClass = new StpModelClass();
+                        stpModelClass.setSucode(e.getInt("su_code"));
+                        stpModelClass.setComcode(e.getString("com_code"));
+                        stpModelClass.setUsercode(e.getString("user_code"));
+                        stpModelClass.setPersonname(e.getString("person_name"));
+                        stpModelClass.setUsername(e.getString("username"));
+                        stpModelClass.setSstp1code(e.getString("sstp1_code"));
+                        stpModelClass.setStpname(e.getString("stp_name"));
+                        stpModelClass.setSitecode(e.getString("site_code"));
+                        stpModelClass.setSitename(e.getString("site_name"));
+                        stpModelClass.setStpactive(e.getString("stp_active"));
+                        stpModelClass.setSite_address(e.getString("site_address"));
+                        stpModelClass.setProcess__type(e.getString("process_name"));
+                        stpModelClass.setStp_capacity(e.getString("stp_capacity"));
+
+                        Global.StpList.add(stpModelClass);
+                    }
+
+                    progressDialog.dismiss();
+
+                    if (Global.StpList.isEmpty()) {
+                        startActivity(new Intent(getActivity(), GenerateSTPdetails.class));
+                    } else {
+                        Intent welcomeIntent = null;
+
+                        if ("O".equals(user_type)) {
+                            welcomeIntent = new Intent(getActivity(), WelcomeOwner.class);
+                        } else if ("C".equals(user_type)) {
+                            welcomeIntent = new Intent(getActivity(), WelcomeCustomer.class);
+                        } else if ("S".equals(user_type)) {
+                            welcomeIntent = new Intent(getActivity(), WelcomeSupervisor.class);
+                        } else if ("M".equals(user_type)) {
+                            welcomeIntent = new Intent(getActivity(), WelcomeManager.class);
+                        } else if ("U".equals(user_type)) {
+                            welcomeIntent = new Intent(getActivity(), WelcomeUser.class);
+                        }
+
+                        if (welcomeIntent != null) {
+                            welcomeIntent.setType(Settings.ACTION_SYNC_SETTINGS);
+                            getActivity().startActivity(welcomeIntent);
+                        }else{
+                            startActivity(new Intent(getActivity(), SelectSTPLocationActivity.class));
+                        }
+                        // Assuming that the SelectSTPLocationActivity is common for all user types
+
+                }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+               /* try {
                     Global.StpList = new ArrayList<>();
                     int i;
                     for (i = 0; i < liststp.length(); i++) {
@@ -305,6 +370,7 @@ public class LoginFragment extends Fragment {
                     if (Global.StpList.isEmpty()) {
                         startActivity(new Intent(getActivity(), GenerateSTPdetails.class));
                     } else {
+
                         startActivity(new Intent(getActivity(), SelectSTPLocationActivity.class));
                     }
                 } catch (Exception e) {
@@ -314,7 +380,7 @@ public class LoginFragment extends Fragment {
 
                 progressDialog.dismiss();
 
-                /*switch (user_type) {
+                *//*switch (user_type) {
                     case "O":
                         Intent o = new Intent(getActivity(), WelcomeOwner.class);
                         o.setType(Settings.ACTION_SYNC_SETTINGS);
@@ -340,9 +406,9 @@ public class LoginFragment extends Fragment {
                         u.setType(Settings.ACTION_SYNC_SETTINGS);
                         getActivity().startActivity(u);
                         break;
-                }*/
+                }*//*
                 // Go to the SelectLocationActivity
-                 /*   Intent intent = new Intent(getActivity(), SelectLocationActivity.class);
+                 *//*   Intent intent = new Intent(getActivity(), SelectLocationActivity.class);
                     startActivity(intent);*/
 
             } catch (JSONException e) {

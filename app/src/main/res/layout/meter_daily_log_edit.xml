@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pumpmotor_equip_name"
+                android:id="@+id/meter_equip_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="5dp"
@@ -46,10 +46,11 @@
             android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/pumpmotor_stop_time"
+            <EditText
+                android:id="@+id/meter_reading_edit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/btnbgedited"
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="Reading"

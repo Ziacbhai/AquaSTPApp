@@ -99,7 +99,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/p_running_time"
+                android:id="@+id/blower_running_time"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -124,7 +124,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/pumpshare"
+                android:id="@+id/blower_pause"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"

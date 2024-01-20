@@ -50,9 +50,6 @@ public class ResetPasswordNumber extends AppCompatActivity {
         ForgotMobile = findViewById(R.id.fmobile);
         GetOTPBtn = findViewById(R.id.numberOTPbtn);
 
-
-
-
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //   String mobileno = Global.sharedPreferences.getString("mobile", "");
 

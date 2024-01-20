@@ -58,7 +58,9 @@ dependencies {
    /* implementation ("com.google.android.gms:play-services-auth:17.0.1")*/
 
     implementation ("androidx.viewpager2:viewpager2:1.0.0-alpha01")
+
     implementation ("io.github.chaosleung:pinview:1.4.4")
+
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("com.android.support:multidex:1.0.3")

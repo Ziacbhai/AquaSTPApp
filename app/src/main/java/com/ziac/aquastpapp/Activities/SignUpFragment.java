@@ -253,7 +253,7 @@ public class SignUpFragment extends Fragment {
         ListView lvStates = zDialog.findViewById(R.id.lvequipment);
 
         if (Global.statearraylist == null || Global.statearraylist.size() == 0) {
-            // Toast.makeText(getBaseContext(), "States list not found !! Please try again !!", Toast.LENGTH_LONG).show();
+             Toast.makeText(getActivity(), "States list not found !! Please try again !!", Toast.LENGTH_LONG).show();
             return;
         }
         final StateAdapter laStates = new StateAdapter(Global.statearraylist);

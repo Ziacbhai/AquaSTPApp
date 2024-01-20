@@ -245,7 +245,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/meter_started_recyclerview"
+        android:id="@+id/meter_edit_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -358,7 +358,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/motor_pump_stopped_recyclerview"
+        android:id="@+id/meter2_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"

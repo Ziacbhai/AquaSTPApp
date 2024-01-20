@@ -162,7 +162,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                 JSONArray jarray;
 
                 try {
-                    jarray = response.getJSONArray("pumps2");
+                    jarray = response.getJSONArray("blowers");
                     for (int i = 0; i < jarray.length(); i++) {
                         final JSONObject e;
                         try {
@@ -173,7 +173,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                         blowerClass = new PumpMotor_Blower_DailyLogClass();
                         try {
                             blowerClass.setEquip_name(e.getString("equip_name"));
-                            blowerClass.setStart_time(e.getString("endtime"));
+                            blowerClass.setStart_time(e.getString("starttime"));
                             blowerClass.setStop_time(e.getString("endtime"));
                             blowerClass.setRunning_time(e.getString("running_time"));
 

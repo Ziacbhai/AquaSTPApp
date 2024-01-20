@@ -3,6 +3,8 @@ package com.ziac.aquastpapp.Activities;
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,15 +16,45 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import Adapters.PumpMoterDailyLogStartAdapter;
+import Adapters.SensorDailyLogAdapter;
+import Adapters.SensorDailyLogEditAdapter;
+import Models.PumpMotor_Blower_DailyLogClass;
+import Models.SensorsModelClass;
 
 public class SensorsDailyLogActivity extends AppCompatActivity {
     ImageView backbtn;
     TextView Displaydate,Displaytime;
+    SensorsModelClass sensorsModelClass;
+
+    RecyclerView sensor_recyclerView;
+    RecyclerView sensor_recyclerView2;
     Context context;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -51,8 +83,21 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                 handler.postDelayed(this, 1000); // Update every 1000 milliseconds (1 second)
             }
         }, 0);
-    }
 
+        DailyLogSensorsEdit();
+        sensor_recyclerView = findViewById(R.id.sensor_edit_recyclerview);
+        sensor_recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        sensor_recyclerView.setHasFixedSize(true);
+        sensor_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        DailyLogSensors();
+
+        sensor_recyclerView2 = findViewById(R.id.sensors_recyclerview);
+        sensor_recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+        sensor_recyclerView2.setHasFixedSize(true);
+        sensor_recyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+    }
 
     private void updateDateTime() {
         Date currentDate = new Date();
@@ -109,5 +154,162 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
         txtpersonname.setText(personname);
     }
 
+
+    private void DailyLogSensorsEdit() {
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String dailylogsensors = Global.GetDailyLogSensors;
+
+        String com_code = Global.sharedPreferences.getString("com_code", "0");
+        String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
+        String dlog_date = Global.sharedPreferences.getString("dlogdate", "0");
+
+        dailylogsensors = dailylogsensors + "comcode=" + com_code + "&sstp1_code=" + sstp1_code + "&dlog_date=" + dlog_date;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, dailylogsensors, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                Global.Sensors_Class = new ArrayList<SensorsModelClass>();
+                sensorsModelClass = new SensorsModelClass();
+                JSONArray jarray;
+                try {
+                    jarray = response.getJSONArray("pumps1");
+                    for (int i = 0; i < jarray.length(); i++) {
+                        final JSONObject e;
+                        try {
+                            e = jarray.getJSONObject(i);
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        sensorsModelClass = new SensorsModelClass();
+                        try {
+                            sensorsModelClass.setEquip_name(e.getString("equip_name"));
+                            sensorsModelClass.setReading(e.getString("starttime"));
+
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        Global.Sensors_Class.add(sensorsModelClass);
+                        SensorDailyLogEditAdapter sensorDailyLogEditAdapter = new SensorDailyLogEditAdapter((List<SensorsModelClass>) Global.Sensors_Class);
+                        sensor_recyclerView.setAdapter(sensorDailyLogEditAdapter);
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof TimeoutError) {
+                    Toast.makeText(context, "Request Time-Out", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NoConnectionError) {
+                    Toast.makeText(context, "No Connection Found", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(context, "Server Error", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NetworkError) {
+                    Toast.makeText(context, "Network Error", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(context, "Parse Error", Toast.LENGTH_LONG).show();
+                }
+            }
+        }){
+
+            @Override
+            public Map<String, String> getHeaders() {
+                // Set the Authorization header with the access token
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                // If you have any parameters to send in the request body, you can set them here
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+
+        };
+
+        queue.add(jsonObjectRequest);
+    }
+
+    private void DailyLogSensors() {
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String dailylogsensors = Global.GetDailyLogSensors;
+
+        String com_code = Global.sharedPreferences.getString("com_code", "0");
+        String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
+        String dlog_date = Global.sharedPreferences.getString("dlogdate", "0");
+
+        dailylogsensors = dailylogsensors + "comcode=" + com_code + "&sstp1_code=" + sstp1_code + "&dlog_date=" + dlog_date;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, dailylogsensors, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Global.Sensors_Class = new ArrayList<SensorsModelClass>();
+                sensorsModelClass = new SensorsModelClass();
+                JSONArray jarray;
+                try {
+                    jarray = response.getJSONArray("pumps1");
+                    for (int i = 0; i < jarray.length(); i++) {
+                        final JSONObject e;
+                        try {
+                            e = jarray.getJSONObject(i);
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        sensorsModelClass = new SensorsModelClass();
+                        try {
+                            sensorsModelClass.setEquip_name(e.getString("equip_name"));
+                            sensorsModelClass.setReading(e.getString("starttime"));
+                            sensorsModelClass.setReading_time(e.getString("running_time"));
+                            sensorsModelClass.setSensor_total(e.getString("running_time"));
+                            sensorsModelClass.setSensor_image(e.getString("running_time"));
+
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        Global.Sensors_Class.add(sensorsModelClass);
+                        SensorDailyLogAdapter sensorDailyLogAdapter = new SensorDailyLogAdapter((List<SensorsModelClass>) Global.Sensors_Class);
+                        sensor_recyclerView.setAdapter(sensorDailyLogAdapter);
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+
+        }){
+
+            @Override
+            public Map<String, String> getHeaders() {
+                // Set the Authorization header with the access token
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                // If you have any parameters to send in the request body, you can set them here
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+
+
+        };
+
+        queue.add(jsonObjectRequest);
+    }
 
 }

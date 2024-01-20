@@ -16,11 +16,37 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import Adapters.MeterDailyLogAdapter;
+import Adapters.MeterDailyLogEditAdapter;
+import Adapters.PumpMoterDailyLogStopAdapter;
+import Models.MetersDailyLogClass;
+import Models.PumpMotor_Blower_DailyLogClass;
 
 public class MeterDailyLogActivity extends AppCompatActivity {
 
@@ -28,6 +54,10 @@ public class MeterDailyLogActivity extends AppCompatActivity {
     TextView Displaydate,Displaytime;
 
     RecyclerView Meters_recyclerview;
+
+    RecyclerView Meters_recyclerview2;
+
+    MetersDailyLogClass metersDailyLogClass;
 
     Context context;
 
@@ -62,11 +92,19 @@ public class MeterDailyLogActivity extends AppCompatActivity {
         }, 0);
 
 
-        DailyLogMeters();
-        Meters_recyclerview = findViewById(R.id.meter_started_recyclerview);
+        DailyLogMetersEdit();
+        Meters_recyclerview = findViewById(R.id.meter_edit_recyclerview);
         Meters_recyclerview.setLayoutManager(new LinearLayoutManager(this));
         Meters_recyclerview.setHasFixedSize(true);
         Meters_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+
+        DailyLogMeters();
+        Meters_recyclerview2 = findViewById(R.id.meter2_recyclerview);
+        Meters_recyclerview2.setLayoutManager(new LinearLayoutManager(this));
+        Meters_recyclerview2.setHasFixedSize(true);
+        Meters_recyclerview2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
     }
 
     private void updateDateTime() {
@@ -96,8 +134,6 @@ public class MeterDailyLogActivity extends AppCompatActivity {
     }
 
     private void user_topcard() {
-
-
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sitename = sharedPreferences.getString("site_name", "");
@@ -125,8 +161,173 @@ public class MeterDailyLogActivity extends AppCompatActivity {
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);
     }
+    private void DailyLogMetersEdit() {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String dailylogmeter = Global.GetDailyLogMeter;
+
+        String com_code = Global.sharedPreferences.getString("com_code", "0");
+        String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
+        String dlog_date = Global.sharedPreferences.getString("dlogdate", "0");
+
+        dailylogmeter = dailylogmeter + "comcode=" + com_code + "&sstp1_code=" + sstp1_code + "&dlog_date=" + dlog_date;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, dailylogmeter, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Global.Meters_Class = new ArrayList<MetersDailyLogClass>();
+                metersDailyLogClass = new MetersDailyLogClass();
+                JSONArray jarray;
+
+                try {
+                    jarray = response.getJSONArray("pumps2");
+                    for (int i = 0; i < jarray.length(); i++) {
+                        final JSONObject e;
+                        try {
+                            e = jarray.getJSONObject(i);
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        metersDailyLogClass = new MetersDailyLogClass();
+                        try {
+                            metersDailyLogClass.setMeters_equip_name(e.getString("equip_name"));
+                            metersDailyLogClass.setMeters_reading_edit(e.getString("endtime"));
+
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        Global.Meters_Class.add(metersDailyLogClass);
+                        MeterDailyLogEditAdapter meterDailyLogEditAdapter = new MeterDailyLogEditAdapter((List<MetersDailyLogClass>) Global.Meters_Class);
+                        Meters_recyclerview.setAdapter(meterDailyLogEditAdapter);
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof TimeoutError) {
+                    Toast.makeText(context, "Request Time-Out", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NoConnectionError) {
+                    Toast.makeText(context, "No Connection Found", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(context, "Server Error", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NetworkError) {
+                    Toast.makeText(context, "Network Error", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(context, "Parse Error", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }){
+
+            @Override
+            public Map<String, String> getHeaders() {
+                // Set the Authorization header with the access token
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                // If you have any parameters to send in the request body, you can set them here
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+
+        };
+
+        queue.add(jsonObjectRequest);
+    }
+
 
     private void DailyLogMeters() {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String dailylogmeter = Global.GetDailyLogMeter;
+
+        String com_code = Global.sharedPreferences.getString("com_code", "0");
+        String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
+        String dlog_date = Global.sharedPreferences.getString("dlogdate", "0");
+
+        dailylogmeter = dailylogmeter + "comcode=" + com_code + "&sstp1_code=" + sstp1_code + "&dlog_date=" + dlog_date;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, dailylogmeter, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Global.Meters_Class = new ArrayList<MetersDailyLogClass>();
+                metersDailyLogClass = new MetersDailyLogClass();
+                JSONArray jarray;
+
+                try {
+                    jarray = response.getJSONArray("pumps2");
+                    for (int i = 0; i < jarray.length(); i++) {
+                        final JSONObject e;
+                        try {
+                            e = jarray.getJSONObject(i);
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        metersDailyLogClass = new MetersDailyLogClass();
+                        try {
+                            metersDailyLogClass.setMeters_equip_name(e.getString("equip_name"));
+                            metersDailyLogClass.setMeters_reading_edit(e.getString("endtime"));
+                            metersDailyLogClass.setMeters_reading_time(e.getString("endtime"));
+                            metersDailyLogClass.setMeters_total(e.getString("endtime"));
+
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        Global.Meters_Class.add(metersDailyLogClass);
+                        MeterDailyLogAdapter meterDailyLogAdapter = new MeterDailyLogAdapter((List<MetersDailyLogClass>) Global.Meters_Class);
+                        Meters_recyclerview.setAdapter(meterDailyLogAdapter);
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof TimeoutError) {
+                    Toast.makeText(context, "Request Time-Out", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NoConnectionError) {
+                    Toast.makeText(context, "No Connection Found", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(context, "Server Error", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NetworkError) {
+                    Toast.makeText(context, "Network Error", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(context, "Parse Error", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        }){
+
+            @Override
+            public Map<String, String> getHeaders() {
+                // Set the Authorization header with the access token
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                // If you have any parameters to send in the request body, you can set them here
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+
+        };
+
+        queue.add(jsonObjectRequest);
     }
 
 }

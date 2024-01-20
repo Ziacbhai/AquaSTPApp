@@ -55,7 +55,7 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
     TextView Displaydate, Displaytime;
     RecyclerView pump_motor_started_recyclerview;
     RecyclerView pump_motor_stoped_recyclerview;
-    PumpMoterDailyLogStopAdapter pumpMoterDailyLogStopAdapter;
+
 
 
     @SuppressLint("MissingInflatedId")
