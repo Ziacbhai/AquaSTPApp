@@ -56,7 +56,7 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WelcomeSupervisor extends AppCompatActivity {
-    private TextView Sname, Smail, Smobile, ClickHere;
+    private TextView Sname, Smail, Smobile, ClickHere,Company;
     CircleImageView ImageView;
     ImageView SupervisorExit;
     AppCompatButton sContinue;
@@ -89,8 +89,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
+        Company = findViewById(R.id.company);
         Smail = findViewById(R.id.sMail);
         Smobile = findViewById(R.id.sPh);
         //ClickHere = findViewById(R.id.Clickhere);
@@ -98,11 +97,13 @@ public class WelcomeSupervisor extends AppCompatActivity {
 
         String usrname = Global.sharedPreferences.getString("person_nameu", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
+        String com_name = Global.sharedPreferences.getString("com_name", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
 
         Sname.setText(usrname);
         Smail.setText(mail);
         Smobile.setText(mobile);
+        Company.setText(com_name);
 
         Picasso.Builder builder = new Picasso.Builder(getApplication());
         Picasso picasso = builder.build();

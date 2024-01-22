@@ -30,7 +30,7 @@ public class MeterDailyLogAdapter extends RecyclerView.Adapter<MeterDailyLogAdap
     @NonNull
     @Override
     public MeterDailyLogAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View  view = LayoutInflater.from(parent.getContext()).inflate(R.layout.filter_daily_log_details,parent,false);
+        View  view = LayoutInflater.from(parent.getContext()).inflate(R.layout.meter_daily_log_deatils,parent,false);
         return new ViewHolder(view);
     }
 

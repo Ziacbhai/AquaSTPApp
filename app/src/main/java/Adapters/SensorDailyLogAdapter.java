@@ -41,13 +41,13 @@ public class SensorDailyLogAdapter extends RecyclerView.Adapter<SensorDailyLogAd
         holder.Sensor_reading_time.setText(sensorsModelClassList.get(position).getReading_time());
         holder.Sensor_total.setText(sensorsModelClassList.get(position).getSensor_total());
 
-        /*holder.Sensor_image.setText(sensorsModelClassList.get(position).getEquip_name());*/
-       holder.Sensor_image_upload.setOnClickListener(new View.OnClickListener() {
+
+      /* holder.Sensor_image_upload.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
 
            }
-       });
+       });*/
 
     }
 
@@ -69,8 +69,8 @@ public class SensorDailyLogAdapter extends RecyclerView.Adapter<SensorDailyLogAd
             Sensor_reading = itemView.findViewById(R.id.sensor_reading);
             Sensor_reading_time = itemView.findViewById(R.id.sensor_reading_time);
             Sensor_total = itemView.findViewById(R.id.sensor_total);
-            Sensor_image = itemView.findViewById(R.id.sensor_image);
-            Sensor_image_upload = itemView.findViewById(R.id.sensor_image_upload);
+           // Sensor_image = itemView.findViewById(R.id.sensor_image);
+           // Sensor_image_upload = itemView.findViewById(R.id.sensor_image_upload);
         }
     }
 }

@@ -42,10 +42,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import Adapters.PumpMoterDailyLogStartAdapter;
 import Adapters.SensorDailyLogAdapter;
 import Adapters.SensorDailyLogEditAdapter;
-import Models.PumpMotor_Blower_DailyLogClass;
 import Models.SensorsModelClass;
 
 public class SensorsDailyLogActivity extends AppCompatActivity {
@@ -174,7 +172,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                 sensorsModelClass = new SensorsModelClass();
                 JSONArray jarray;
                 try {
-                    jarray = response.getJSONArray("pumps1");
+                    jarray = response.getJSONArray("meters1");
                     for (int i = 0; i < jarray.length(); i++) {
                         final JSONObject e;
                         try {
@@ -185,7 +183,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                         sensorsModelClass = new SensorsModelClass();
                         try {
                             sensorsModelClass.setEquip_name(e.getString("equip_name"));
-                            sensorsModelClass.setReading(e.getString("starttime"));
+                            //sensorsModelClass.setReading(e.getString("starttime"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
@@ -255,7 +253,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                 sensorsModelClass = new SensorsModelClass();
                 JSONArray jarray;
                 try {
-                    jarray = response.getJSONArray("pumps1");
+                    jarray = response.getJSONArray("meters2");
                     for (int i = 0; i < jarray.length(); i++) {
                         final JSONObject e;
                         try {
@@ -266,17 +264,17 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                         sensorsModelClass = new SensorsModelClass();
                         try {
                             sensorsModelClass.setEquip_name(e.getString("equip_name"));
-                            sensorsModelClass.setReading(e.getString("starttime"));
-                            sensorsModelClass.setReading_time(e.getString("running_time"));
-                            sensorsModelClass.setSensor_total(e.getString("running_time"));
-                            sensorsModelClass.setSensor_image(e.getString("running_time"));
+                            sensorsModelClass.setReading(e.getString("reading_value"));
+                            sensorsModelClass.setReading_time(e.getString("readingtime"));
+                            sensorsModelClass.setSensor_total(e.getString("final_value"));
+                            //sensorsModelClass.setSensor_image(e.getString("running_time"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
                         Global.Sensors_Class.add(sensorsModelClass);
                         SensorDailyLogAdapter sensorDailyLogAdapter = new SensorDailyLogAdapter((List<SensorsModelClass>) Global.Sensors_Class);
-                        sensor_recyclerView.setAdapter(sensorDailyLogAdapter);
+                        sensor_recyclerView2.setAdapter(sensorDailyLogAdapter);
                     }
                 } catch (JSONException e) {
                     throw new RuntimeException(e);

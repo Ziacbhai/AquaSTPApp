@@ -162,7 +162,7 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
                 JSONArray jarray;
 
                 try {
-                    jarray = response.getJSONArray("pumps1");
+                    jarray = response.getJSONArray("filters");
                     for (int i = 0; i < jarray.length(); i++) {
                         final JSONObject e;
                         try {
@@ -173,8 +173,8 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
                         filtersClass = new FiltersClass();
                         try {
                             filtersClass.setEquip_name(e.getString("equip_name"));
-                            filtersClass.setFilter_image(e.getString("starttime"));
-                            filtersClass.setReading_time(e.getString("running_time"));
+                            //filtersClass.setFilter_image(e.getString("starttime"));
+                            filtersClass.setReading_time(e.getString("readingtime"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);

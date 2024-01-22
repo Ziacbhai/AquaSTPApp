@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pumpmotor_equip_name"
+                android:id="@+id/pump_equip_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="5dp"
@@ -72,7 +72,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/pumpmotor_running_time"
+                android:id="@+id/pump_running_time"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -97,9 +97,9 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/pumpshare"
+                android:id="@+id/pump_reload"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="16dp"
                 android:gravity="center"
                 android:src="@drawable/newshare"
                 android:textColor="#fff"/>
@@ -120,13 +120,12 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/pumpstop"
+                android:id="@+id/pump_stop"
                 android:layout_width="match_parent"
-                android:layout_height="14dp"
+                android:layout_height="16dp"
                 android:gravity="center"
                 android:src="@drawable/stop"
-                android:textColor="#fff"
-                android:textSize="12dp" />
+                android:textColor="#fff"/>
 
         </LinearLayout>
 

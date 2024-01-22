@@ -249,6 +249,7 @@ public class LoginFragment extends Fragment {
                 String user_mobile = respObj.getString("user_mobile");
                 String user_email = respObj.getString("user_email");
                 String ref_code = respObj.getString("ref_code");
+                String com_name = respObj.getString("com_name");
                // String stp_capacity = respObj.getString("stp_capacity");
 
 
@@ -266,6 +267,7 @@ public class LoginFragment extends Fragment {
                 Global.editor.putString("ayear", ayear);
                 Global.editor.putString("fin_stdate", finstdate);
                 Global.editor.putString("fin_eddate", fineddate);
+                Global.editor.putString("com_name", com_name);
                // Global.editor.putString("stp_capacity", stp_capacity);
                 // preferences.edit().remove("text").commit();
                 Global.editor.commit();
@@ -298,6 +300,7 @@ public class LoginFragment extends Fragment {
                         stpModelClass.setSite_address(e.getString("site_address"));
                         stpModelClass.setProcess__type(e.getString("process_name"));
                         stpModelClass.setStp_capacity(e.getString("stp_capacity"));
+
 
                         Global.StpList.add(stpModelClass);
                     }

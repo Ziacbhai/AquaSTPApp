@@ -44,9 +44,7 @@ import java.util.Map;
 
 import Adapters.MeterDailyLogAdapter;
 import Adapters.MeterDailyLogEditAdapter;
-import Adapters.PumpMoterDailyLogStopAdapter;
 import Models.MetersDailyLogClass;
-import Models.PumpMotor_Blower_DailyLogClass;
 
 public class MeterDailyLogActivity extends AppCompatActivity {
 
@@ -178,7 +176,7 @@ public class MeterDailyLogActivity extends AppCompatActivity {
                 JSONArray jarray;
 
                 try {
-                    jarray = response.getJSONArray("pumps2");
+                    jarray = response.getJSONArray("meters1");
                     for (int i = 0; i < jarray.length(); i++) {
                         final JSONObject e;
                         try {
@@ -189,7 +187,7 @@ public class MeterDailyLogActivity extends AppCompatActivity {
                         metersDailyLogClass = new MetersDailyLogClass();
                         try {
                             metersDailyLogClass.setMeters_equip_name(e.getString("equip_name"));
-                            metersDailyLogClass.setMeters_reading_edit(e.getString("endtime"));
+                            //metersDailyLogClass.setMeters_reading_edit(e.getString("endtime"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
@@ -262,7 +260,7 @@ public class MeterDailyLogActivity extends AppCompatActivity {
                 JSONArray jarray;
 
                 try {
-                    jarray = response.getJSONArray("pumps2");
+                    jarray = response.getJSONArray("meters2");
                     for (int i = 0; i < jarray.length(); i++) {
                         final JSONObject e;
                         try {
@@ -273,16 +271,16 @@ public class MeterDailyLogActivity extends AppCompatActivity {
                         metersDailyLogClass = new MetersDailyLogClass();
                         try {
                             metersDailyLogClass.setMeters_equip_name(e.getString("equip_name"));
-                            metersDailyLogClass.setMeters_reading_edit(e.getString("endtime"));
-                            metersDailyLogClass.setMeters_reading_time(e.getString("endtime"));
-                            metersDailyLogClass.setMeters_total(e.getString("endtime"));
+                            metersDailyLogClass.setMeters_reading_edit(e.getString("reading_value"));
+                            metersDailyLogClass.setMeters_reading_time(e.getString("readingtime"));
+                            metersDailyLogClass.setMeters_total(e.getString("final_value"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
                         Global.Meters_Class.add(metersDailyLogClass);
                         MeterDailyLogAdapter meterDailyLogAdapter = new MeterDailyLogAdapter((List<MetersDailyLogClass>) Global.Meters_Class);
-                        Meters_recyclerview.setAdapter(meterDailyLogAdapter);
+                        Meters_recyclerview2.setAdapter(meterDailyLogAdapter);
                     }
                 } catch (JSONException e) {
                     throw new RuntimeException(e);

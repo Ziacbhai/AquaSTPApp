@@ -174,7 +174,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                         try {
                             blowerClass.setEquip_name(e.getString("equip_name"));
                             blowerClass.setStart_time(e.getString("starttime"));
-                            blowerClass.setStop_time(e.getString("endtime"));
+                            blowerClass.setEnd_time(e.getString("endtime"));
                             blowerClass.setRunning_time(e.getString("running_time"));
 
                         } catch (JSONException ex) {

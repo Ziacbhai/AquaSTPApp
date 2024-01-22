@@ -37,7 +37,7 @@ public class BlowersDailyLogAdapter extends RecyclerView.Adapter<BlowersDailyLog
         holder.Blower_start_time.setText(browersDailyLogClass.get(position).getStart_time());
         holder.Blower_stop_time.setText(browersDailyLogClass.get(position).getRunning_time());
         holder.Blower_running_time.setText(browersDailyLogClass.get(position).getRunning_time());
-        holder.Blower_pause.setText(browersDailyLogClass.get(position).getRunning_time());
+       // holder.Blower_pause.setText(browersDailyLogClass.get(position).getRunning_time());
     }
 
     @Override
@@ -55,7 +55,7 @@ public class BlowersDailyLogAdapter extends RecyclerView.Adapter<BlowersDailyLog
             Blower_start_time = itemView.findViewById(R.id.blower_start_time);
             Blower_stop_time = itemView.findViewById(R.id.blower_stop_time);
             Blower_running_time = itemView.findViewById(R.id.blower_running_time);
-            Blower_pause = itemView.findViewById(R.id.blower_pause);
+           // Blower_pause = itemView.findViewById(R.id.blower_pause);
         }
     }
 }

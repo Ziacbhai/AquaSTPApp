@@ -55,7 +55,7 @@ import java.util.Map;
 
 public class WelcomeManager extends AppCompatActivity {
 
-    TextView Managername, Managermail, Managermobile, ClickHere;
+    TextView Managername, Managermail, Managermobile, ClickHere,Company;
     ImageView ImageView, ManagerExit;
     AppCompatButton mContinue;
     Context context;
@@ -70,17 +70,13 @@ public class WelcomeManager extends AppCompatActivity {
 
         context = this;
 
-
-
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
        /* fab = findViewById(R.id.floating);*/
 
-
+        Company = findViewById(R.id.company);
         //ClickHere = findViewById(R.id.Clickhere);
         mContinue = findViewById(R.id.mContinue);
-
         ManagerExit = findViewById(R.id.managerexit);
-
         ManagerExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +94,7 @@ public class WelcomeManager extends AppCompatActivity {
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
         String person = Global.sharedPreferences.getString("person_nameu", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
+        String com_name = Global.sharedPreferences.getString("com_name", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
 
         ///1
@@ -110,6 +107,7 @@ public class WelcomeManager extends AppCompatActivity {
         Managername.setText(person);
         Managermail.setText(mail);
         Managermobile.setText(mobile);
+        Company.setText(com_name);
 
 
         ///2

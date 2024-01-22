@@ -50,7 +50,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WelcomeCustomer extends AppCompatActivity {
-    private TextView Customer_name, Customer_mail, Customer_mobile, ClickHere;
+    private TextView Customer_name, Customer_mail, Customer_mobile,Company, ClickHere;
     ImageView ImageView, Customerexit;
     AppCompatButton cContinue;
     Bitmap imageBitmap;
@@ -69,6 +69,8 @@ public class WelcomeCustomer extends AppCompatActivity {
 
         ImageView = findViewById(R.id.imageView);
         Customer_name = findViewById(R.id.cname);
+
+        Company = findViewById(R.id.company);
        // ClickHere = findViewById(R.id.Clickhere);
         cContinue = findViewById(R.id.cContinue);
         /*fab = findViewById(R.id.floating);*/
@@ -83,16 +85,18 @@ public class WelcomeCustomer extends AppCompatActivity {
             }
         });
 
-        String username, usermail, usermobile, userimage;
+        String username, usermail, usermobile, userimage,com_name;
 
         username = Global.sharedPreferences.getString("person_nameu", "");
         usermail = Global.sharedPreferences.getString("user_email", "");
         usermobile = Global.sharedPreferences.getString("user_mobile", "");
+        com_name  = Global.sharedPreferences.getString("com_name", "");
         userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
         Customer_name.setText(username);
         Customer_mail.setText(usermail);
         Customer_mobile.setText(usermobile);
+        Company.setText(com_name);
 
         Picasso.Builder builder = new Picasso.Builder(getApplication());
         Picasso picasso = builder.build();

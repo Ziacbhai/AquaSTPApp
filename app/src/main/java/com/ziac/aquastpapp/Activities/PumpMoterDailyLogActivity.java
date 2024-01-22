@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import Adapters.CombinedPumpMoterDailyLogAdapter;
 import Adapters.PumpMoterDailyLogStartAdapter;
 import Adapters.PumpMoterDailyLogStopAdapter;
 import Models.PumpMotor_Blower_DailyLogClass;
@@ -84,12 +85,17 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
 
         Displaydate = findViewById(R.id.displaydate);
         Displaytime = findViewById(R.id.displaytime);
-        DailyLogPumpMotorStart();
 
+
+
+
+        DailyLogPumpMotorStart();
         pump_motor_started_recyclerview = findViewById(R.id.pump_motor_started_recyclerview);
         pump_motor_started_recyclerview.setLayoutManager(new LinearLayoutManager(this));
         pump_motor_started_recyclerview.setHasFixedSize(true);
         pump_motor_started_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+
 
         DailyLogPumpMotorStop();
         pump_motor_stoped_recyclerview = findViewById(R.id.motor_pump_stopped_recyclerview);
@@ -185,13 +191,14 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
                             pumpMotorClass.setEquip_name(e.getString("equip_name"));
                             pumpMotorClass.setStart_time(e.getString("starttime"));
                             pumpMotorClass.setRunning_time(e.getString("running_time"));
+                           //pumpMotorClass.setStart_tstp2_code(e.getString("tstp2_code"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
                         Global.PumpMotor_LogClass.add(pumpMotorClass);
-                        PumpMoterDailyLogStartAdapter pumpmoterStartAdapter = new PumpMoterDailyLogStartAdapter(context, (List<PumpMotor_Blower_DailyLogClass>) Global.PumpMotor_LogClass);
-                        pump_motor_started_recyclerview.setAdapter(pumpmoterStartAdapter);
+                        PumpMoterDailyLogStopAdapter dailyLogAdapter = new PumpMoterDailyLogStopAdapter((List<PumpMotor_Blower_DailyLogClass>) Global.PumpMotor_LogClass);
+                        pump_motor_started_recyclerview.setAdapter(dailyLogAdapter);
                     }
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
@@ -268,15 +275,16 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
                         pumpMotorClass = new PumpMotor_Blower_DailyLogClass();
                         try {
                             pumpMotorClass.setEquip_name(e.getString("equip_name"));
-                            pumpMotorClass.setStart_time(e.getString("endtime"));
+                            pumpMotorClass.setEnd_time(e.getString("endtime"));
                             pumpMotorClass.setRunning_time(e.getString("running_time"));
+                           // pumpMotorClass.setStop_tstp2_code(e.getString("tstp2_code"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
                         Global.PumpMotor_LogClass.add(pumpMotorClass);
-                        PumpMoterDailyLogStopAdapter pumpmoterStopAdapter = new PumpMoterDailyLogStopAdapter((List<PumpMotor_Blower_DailyLogClass>) Global.PumpMotor_LogClass);
-                        pump_motor_stoped_recyclerview.setAdapter(pumpmoterStopAdapter);
+                        PumpMoterDailyLogStartAdapter logAdapter = new PumpMoterDailyLogStartAdapter((List<PumpMotor_Blower_DailyLogClass>) Global.PumpMotor_LogClass);
+                        pump_motor_stoped_recyclerview.setAdapter(logAdapter);
                     }
                 } catch (JSONException e) {
                     throw new RuntimeException(e);

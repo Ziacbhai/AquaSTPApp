@@ -345,6 +345,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
+        //  Get the total number of fragments in the back stack
+        int count = getSupportFragmentManager().getBackStackEntryCount();
 
+        // Handle the back navigation based on the fragment count
+        switch (count) {
+            case 0:
+                // super.onBackPressed(); // If no fragments in the back stack, allow default back behavior
+                break;
+            case 1:
+                // Handle back press for the first fragment (Home or the initial fragment)
+                // You can use finish() here to close the activity if desired
+                super.onBackPressed();
+                break;
+            case 2:
+                // Handle back press for the second fragment (Statistics)
+                getSupportFragmentManager().popBackStack(); // Remove the top fragment from back stack
+                break;
+            case 3:
+                // Handle back press for the third fragment (Stock)
+                getSupportFragmentManager().popBackStack(); // Remove the top fragment from back stack
+                break;
+            case 4:
+                // Handle back press for the fourth fragment (Settings)
+                getSupportFragmentManager().popBackStack(); // Remove the top fragment from back stack
+                break;
+            case 5:
+                // Handle back press for the fourth fragment (Settings)
+                getSupportFragmentManager().popBackStack(); // Remove the top fragment from back stack
+                break;
+            case 6:
+                // Handle back press for the fourth fragment (Settings)
+                getSupportFragmentManager().popBackStack(); // Remove the top fragment from back stack
+                break;
+            case 7:
+                // Handle back press for the fourth fragment (Settings)
+                getSupportFragmentManager().popBackStack(); // Remove the top fragment from back stack
+                break;
+            default:
+                // If there are more than 4 fragments in the back stack, just pop the top fragment
+                getSupportFragmentManager().popBackStack();
+                break;
+        }
     }
 }

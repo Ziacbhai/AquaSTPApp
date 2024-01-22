@@ -53,7 +53,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WelcomeOwner extends AppCompatActivity {
 
-    TextView Oname, Ownermail, Owanarmobile, ClickHere;
+    TextView Oname, Ownermail, Owanarmobile,Company, ClickHere;
     CircleImageView ImageView;
     ImageView Ownerexit;
     AppCompatButton oContinue;
@@ -73,6 +73,7 @@ public class WelcomeOwner extends AppCompatActivity {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         ImageView = findViewById(R.id.imageView);
+
         Oname = findViewById(R.id.wname);
        // ClickHere = findViewById(R.id.Clickhere);
         oContinue = findViewById(R.id.oContinue);
@@ -85,18 +86,21 @@ public class WelcomeOwner extends AppCompatActivity {
                 finishAffinity();
             }
         });
-
+        Company = findViewById(R.id.company);
         Ownermail = findViewById(R.id.wemail);
         Owanarmobile = findViewById(R.id.wph);
 
         String username = Global.sharedPreferences.getString("person_nameu", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
+        String com_name = Global.sharedPreferences.getString("com_name", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+
 
         Oname.setText(username);
         Ownermail.setText(mail);
         Owanarmobile.setText(mobile);
+        Company.setText(com_name);
 
         Picasso.Builder builder = new Picasso.Builder(getApplication());
         Picasso picasso = builder.build();

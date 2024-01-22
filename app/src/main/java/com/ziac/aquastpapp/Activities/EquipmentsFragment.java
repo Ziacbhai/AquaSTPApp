@@ -98,4 +98,6 @@ public class EquipmentsFragment extends Fragment {
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);
     }
+
+
 }

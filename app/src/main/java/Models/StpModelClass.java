@@ -3,9 +3,17 @@ package Models;
 public class StpModelClass {
 
     int sucode;
-    String stpname,comcode,usercode,personname,username,sstp1code,sitecode,stpactive,sitename,site_address,process__type,stp_capacity;
+    String stpname,comcode,usercode,personname,username,sstp1code,sitecode,stpactive,sitename,site_address,process__type,stp_capacity,company_name;
     public StpModelClass() {
 
+    }
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
     }
 
     public String getStp_capacity() {
