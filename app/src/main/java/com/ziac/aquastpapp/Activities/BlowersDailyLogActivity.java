@@ -43,14 +43,14 @@ import java.util.Locale;
 import java.util.Map;
 
 import Adapters.BlowersDailyLogAdapter;
-import Models.PumpMotor_Blower_DailyLogClass;
+import Models.PumpMotorBlower_LogClass;
 
 public class BlowersDailyLogActivity extends AppCompatActivity {
     Context context;
     TextView Displaydate,Displaytime;
     ImageView backbtn;
     RecyclerView blowers_started_recyclerview;
-    PumpMotor_Blower_DailyLogClass blowerClass;
+    //PumpMotor_Blower_DailyLogClass blowerClass;
 
 
     @SuppressLint("MissingInflatedId")
@@ -157,8 +157,8 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                Global.PumpMotor_LogClass = new ArrayList<PumpMotor_Blower_DailyLogClass>();
-                blowerClass = new PumpMotor_Blower_DailyLogClass();
+                Global.Blower_LogClass = new ArrayList<PumpMotorBlower_LogClass>();
+                //blowerClass = new PumpMotorBlower_LogClass();
                 JSONArray jarray;
 
                 try {
@@ -170,7 +170,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
-                        blowerClass = new PumpMotor_Blower_DailyLogClass();
+                        PumpMotorBlower_LogClass blowerClass = new PumpMotorBlower_LogClass();
                         try {
                             blowerClass.setEquip_name(e.getString("equip_name"));
                             blowerClass.setStart_time(e.getString("starttime"));
@@ -180,10 +180,11 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
-                        Global.PumpMotor_LogClass.add(blowerClass);
-                        BlowersDailyLogAdapter blowerAdapter = new BlowersDailyLogAdapter((List<PumpMotor_Blower_DailyLogClass>) Global.PumpMotor_LogClass);
-                        blowers_started_recyclerview.setAdapter(blowerAdapter);
+                        Global.Blower_LogClass.add(blowerClass);
+
                     }
+                    BlowersDailyLogAdapter blowerAdapter = new BlowersDailyLogAdapter((List<PumpMotorBlower_LogClass>) Global.Blower_LogClass);
+                    blowers_started_recyclerview.setAdapter(blowerAdapter);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }

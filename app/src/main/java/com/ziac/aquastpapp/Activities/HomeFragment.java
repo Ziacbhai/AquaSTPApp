@@ -56,6 +56,13 @@ public class HomeFragment extends Fragment {
 
     RelativeLayout layoutpump,layoutblower,layoutmeter,layoutsensor,layoutfilter;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        DailyLogIndex();
+    }
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -221,6 +228,9 @@ public class HomeFragment extends Fragment {
 
         queue.add(jsonObjectRequest);
     }
+
+
+
 
 
 }

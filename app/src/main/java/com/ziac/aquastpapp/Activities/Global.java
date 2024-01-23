@@ -15,6 +15,10 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import Models.CommonModelClass;
@@ -32,7 +36,7 @@ import Models.ItemListClassRepair_BreakUp;
 import Models.ItemStockClass;
 import Models.LabTestClass;
 import Models.MetersDailyLogClass;
-import Models.PumpMotor_Blower_DailyLogClass;
+import Models.PumpMotorBlower_LogClass;
 import Models.RepairClass2;
 import Models.RepairClass1;
 import Models.RepairClass3;
@@ -51,10 +55,14 @@ public class Global {
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl = "http://192.168.1.16:9396/";
+    public static String baseurl = "http://192.168.1.7:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
     public static String GetDailyLogPumpMotor = baseurl + "api/DailyLog/GetPumps?";
+    public static String GetStartMotorPumps = baseurl + "api/DailyLog/StartMotorPumps?";
+    public static String GetStopMotorPumps = baseurl + "api/DailyLog/StopMotorPumps?";
+
+    public static String GetRolloverMotorPumps = baseurl + "api/DailyLog/RolloverMotorPumps?";
     public static String GetDailyLogMeter = baseurl + "api/DailyLog/GetMeters?";
     public static String GetDailyLogFilters = baseurl + "api/DailyLog/GetFilters?";
     public static String GetDailyLogSensors = baseurl + "api/DailyLog/GetSensors?";
@@ -133,7 +141,7 @@ public class Global {
     public static RepairClass2 repairClass2;
     public static RepairClass3 repairClass3;
     public static DailyLogClass dailyLogClass;
-    public static PumpMotor_Blower_DailyLogClass pumpMotorDailyLogClass;
+    //public static PumpMotor_Blower_DailyLogClass pumpMotorDailyLogClass;
     public static RepairClass4 repairClass4;
     public static LabTestClass labTestClass1;
     public static IncidentsClass incidentsClass;
@@ -146,7 +154,9 @@ public class Global {
     public static ArrayList<EquipmentClassRepairBreakUp> Repair_Equipment_Breakup;
     public static ArrayList<LabTestClass> LabTest_Class;
     public static ArrayList<IncidentsClass> Incident_Class;
-    public static ArrayList<PumpMotor_Blower_DailyLogClass> PumpMotor_LogClass;
+    public static ArrayList<PumpMotorBlower_LogClass> RunningPumpsMotors_LogClass;
+    public static ArrayList<PumpMotorBlower_LogClass> Blower_LogClass;
+    public static ArrayList<PumpMotorBlower_LogClass> StoppedPumpsMotors_LogClass;
     public static ArrayList<FiltersClass> Filter_LogClass;
     public static ArrayList<SensorsModelClass> Sensors_Class;
     public static ArrayList<MetersDailyLogClass> Meters_Class;
@@ -189,5 +199,55 @@ public class Global {
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(imageView);
+    }
+    public static void loadstoppedpumps(JSONObject response) throws JSONException {
+        /*stopped pumps*/
+        Global.StoppedPumpsMotors_LogClass = new ArrayList<PumpMotorBlower_LogClass>();
+        JSONArray jarray;
+        jarray = response.getJSONArray("pumps2");
+        for (int i = 0; i < jarray.length(); i++) {
+            final JSONObject e;
+            try {
+                e = jarray.getJSONObject(i);
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
+            }
+            PumpMotorBlower_LogClass pumpMotorClass = new PumpMotorBlower_LogClass();
+            try {
+                pumpMotorClass.setEquip_name(e.getString("equip_name"));
+                pumpMotorClass.setRunning_time(e.getString("running_time"));
+                pumpMotorClass.setEnd_time(e.getString("endtime"));
+                pumpMotorClass.set_tstp2_code(e.getString("tstp2_code"));
+                pumpMotorClass.setRunning_status(e.getString("running_status"));
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
+            }
+            Global.StoppedPumpsMotors_LogClass.add(pumpMotorClass);
+        }
+    }
+    public static void loadrunningpumps(JSONObject response) throws JSONException {
+        /*running pumps*/
+        Global.RunningPumpsMotors_LogClass = new ArrayList<PumpMotorBlower_LogClass>();
+        JSONArray jarray;
+        jarray = response.getJSONArray("pumps1");
+        for (int i = 0; i < jarray.length(); i++) {
+            final JSONObject e;
+            try {
+                e = jarray.getJSONObject(i);
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
+            }
+            PumpMotorBlower_LogClass pumpMotorClass = new PumpMotorBlower_LogClass();
+            try {
+                pumpMotorClass.setEquip_name(e.getString("equip_name"));
+                pumpMotorClass.setStart_time(e.getString("starttime"));
+                pumpMotorClass.setRunning_time(e.getString("running_time"));
+                pumpMotorClass.set_tstp2_code(e.getString("tstp2_code"));
+                pumpMotorClass.setRunning_status(e.getString("running_status"));
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
+            }
+            Global.RunningPumpsMotors_LogClass.add(pumpMotorClass);
+        }
     }
 }

@@ -13,13 +13,13 @@ import com.ziac.aquastpapp.R;
 
 import java.util.List;
 
-import Models.PumpMotor_Blower_DailyLogClass;
+import Models.PumpMotorBlower_LogClass;
 
 public class BlowersDailyLogAdapter extends RecyclerView.Adapter<BlowersDailyLogAdapter.Viewholder> {
-    private List<PumpMotor_Blower_DailyLogClass> browersDailyLogClass;
+    private List<PumpMotorBlower_LogClass> browersDailyLogClass;
     Context context;
 
-    public BlowersDailyLogAdapter(List<PumpMotor_Blower_DailyLogClass> browersDailyLogClass) {
+    public BlowersDailyLogAdapter(List<PumpMotorBlower_LogClass> browersDailyLogClass) {
         this.browersDailyLogClass = browersDailyLogClass;
         this.context = context;
     }

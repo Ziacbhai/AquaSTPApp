@@ -14,6 +14,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,21 +45,21 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import Adapters.CombinedPumpMoterDailyLogAdapter;
-import Adapters.PumpMoterDailyLogStartAdapter;
-import Adapters.PumpMoterDailyLogStopAdapter;
-import Models.PumpMotor_Blower_DailyLogClass;
+import Adapters.StoppedPumpMotorAdapter;
+import Adapters.RunningPumpMotorAdapter;
+import Models.PumpMotorBlower_LogClass;
 
 public class PumpMoterDailyLogActivity extends AppCompatActivity {
     Context context;
     String currentDatevalue, currentDateValue2;
     ImageView backbtn;
-    PumpMotor_Blower_DailyLogClass pumpMotorClass;
+    //PumpMotorBlower_LogClass pumpMotorClass;
     TextView Displaydate, Displaytime;
     RecyclerView pump_motor_started_recyclerview;
-    RecyclerView pump_motor_stoped_recyclerview;
+    RecyclerView pump_motor_stopped_recyclerview;
 
-
+    public RunningPumpMotorAdapter dailyLogAdapter;
+    public StoppedPumpMotorAdapter dailyLogAdapter1;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -87,21 +89,16 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
         Displaytime = findViewById(R.id.displaytime);
 
 
-
-
-        DailyLogPumpMotorStart();
+        PumpsMotors();
         pump_motor_started_recyclerview = findViewById(R.id.pump_motor_started_recyclerview);
         pump_motor_started_recyclerview.setLayoutManager(new LinearLayoutManager(this));
         pump_motor_started_recyclerview.setHasFixedSize(true);
         pump_motor_started_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-
-
-        DailyLogPumpMotorStop();
-        pump_motor_stoped_recyclerview = findViewById(R.id.motor_pump_stopped_recyclerview);
-        pump_motor_stoped_recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        pump_motor_stoped_recyclerview.setHasFixedSize(true);
-        pump_motor_stoped_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        pump_motor_stopped_recyclerview = findViewById(R.id.motor_pump_start_recyclerview);
+        pump_motor_stopped_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        pump_motor_stopped_recyclerview.setHasFixedSize(true);
+        pump_motor_stopped_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
     }
 
@@ -160,7 +157,7 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
         txtpersonname.setText(personname);
     }
 
-    private void DailyLogPumpMotorStart() {
+    private void PumpsMotors() {
         RequestQueue queue = Volley.newRequestQueue(context);
         String dailylogpump = Global.GetDailyLogPumpMotor;
 
@@ -173,33 +170,14 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, dailylogpump, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.PumpMotor_LogClass = new ArrayList<PumpMotor_Blower_DailyLogClass>();
-                pumpMotorClass = new PumpMotor_Blower_DailyLogClass();
-                JSONArray jarray;
-
                 try {
-                    jarray = response.getJSONArray("pumps1");
-                    for (int i = 0; i < jarray.length(); i++) {
-                        final JSONObject e;
-                        try {
-                            e = jarray.getJSONObject(i);
-                        } catch (JSONException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        pumpMotorClass = new PumpMotor_Blower_DailyLogClass();
-                        try {
-                            pumpMotorClass.setEquip_name(e.getString("equip_name"));
-                            pumpMotorClass.setStart_time(e.getString("starttime"));
-                            pumpMotorClass.setRunning_time(e.getString("running_time"));
-                           //pumpMotorClass.setStart_tstp2_code(e.getString("tstp2_code"));
+                    Global.loadrunningpumps(response);
+                    dailyLogAdapter = new RunningPumpMotorAdapter((List<PumpMotorBlower_LogClass>) Global.RunningPumpsMotors_LogClass, context);
+                    pump_motor_started_recyclerview.setAdapter(dailyLogAdapter);
 
-                        } catch (JSONException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        Global.PumpMotor_LogClass.add(pumpMotorClass);
-                        PumpMoterDailyLogStopAdapter dailyLogAdapter = new PumpMoterDailyLogStopAdapter((List<PumpMotor_Blower_DailyLogClass>) Global.PumpMotor_LogClass);
-                        pump_motor_started_recyclerview.setAdapter(dailyLogAdapter);
-                    }
+                    Global.loadstoppedpumps(response);
+                    dailyLogAdapter1 = new StoppedPumpMotorAdapter((List<PumpMotorBlower_LogClass>) Global.StoppedPumpsMotors_LogClass, context);
+                    pump_motor_stopped_recyclerview.setAdapter(dailyLogAdapter1);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -246,90 +224,6 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
-    private void DailyLogPumpMotorStop() {
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String dailylogpump = Global.GetDailyLogPumpMotor;
 
-        String com_code = Global.sharedPreferences.getString("com_code", "0");
-        String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
-        String dlog_date = Global.sharedPreferences.getString("dlogdate", "0");
-
-        dailylogpump = dailylogpump + "comcode=" + com_code + "&sstp1_code=" + sstp1_code + "&dlog_date=" + dlog_date;
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, dailylogpump, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Global.PumpMotor_LogClass = new ArrayList<PumpMotor_Blower_DailyLogClass>();
-                pumpMotorClass = new PumpMotor_Blower_DailyLogClass();
-                JSONArray jarray;
-
-                try {
-                    jarray = response.getJSONArray("pumps2");
-                    for (int i = 0; i < jarray.length(); i++) {
-                        final JSONObject e;
-                        try {
-                            e = jarray.getJSONObject(i);
-                        } catch (JSONException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        pumpMotorClass = new PumpMotor_Blower_DailyLogClass();
-                        try {
-                            pumpMotorClass.setEquip_name(e.getString("equip_name"));
-                            pumpMotorClass.setEnd_time(e.getString("endtime"));
-                            pumpMotorClass.setRunning_time(e.getString("running_time"));
-                           // pumpMotorClass.setStop_tstp2_code(e.getString("tstp2_code"));
-
-                        } catch (JSONException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        Global.PumpMotor_LogClass.add(pumpMotorClass);
-                        PumpMoterDailyLogStartAdapter logAdapter = new PumpMoterDailyLogStartAdapter((List<PumpMotor_Blower_DailyLogClass>) Global.PumpMotor_LogClass);
-                        pump_motor_stoped_recyclerview.setAdapter(logAdapter);
-                    }
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                if (error instanceof TimeoutError) {
-                    Toast.makeText(context, "Request Time-Out", Toast.LENGTH_LONG).show();
-                } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(context, "No Connection Found", Toast.LENGTH_LONG).show();
-                } else if (error instanceof ServerError) {
-                    Toast.makeText(context, "Server Error", Toast.LENGTH_LONG).show();
-                } else if (error instanceof NetworkError) {
-                    Toast.makeText(context, "Network Error", Toast.LENGTH_LONG).show();
-                } else if (error instanceof ParseError) {
-                    Toast.makeText(context, "Parse Error", Toast.LENGTH_LONG).show();
-                }
-
-            }
-        }) {
-
-            @Override
-            public Map<String, String> getHeaders() {
-                // Set the Authorization header with the access token
-                Map<String, String> headers = new HashMap<String, String>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", "");
-                headers.put("Authorization", "Bearer " + accesstoken);
-                return headers;
-            }
-
-            @Override
-            protected Map<String, String> getParams() {
-                // If you have any parameters to send in the request body, you can set them here
-                Map<String, String> params = new HashMap<>();
-
-                return params;
-            }
-
-        };
-
-        queue.add(jsonObjectRequest);
-    }
 
 }

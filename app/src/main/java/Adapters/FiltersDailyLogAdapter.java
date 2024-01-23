@@ -15,7 +15,7 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 import Models.FiltersClass;
-import Models.PumpMotor_Blower_DailyLogClass;
+//import Models.PumpMotorBlower_LogClass;
 
 public class FiltersDailyLogAdapter extends RecyclerView.Adapter<FiltersDailyLogAdapter.Viewholder> {
 

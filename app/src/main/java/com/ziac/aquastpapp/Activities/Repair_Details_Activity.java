@@ -268,10 +268,10 @@ public class Repair_Details_Activity extends AppCompatActivity {
                             repairClass2.setD_Remark(e.getString("repaired_remarks"));
                             repairClass2.setD_Repairedtwo(e.getString("repair2_code"));
 
-                           /* String repair2_code = repairClass2.getD_Repairedtwo();
+                            String repair2_code = repairClass2.getD_Repairedtwo();
                             Global.editor = Global.sharedPreferences.edit();
                             Global.editor.putString("repair2_code", repair2_code);
-                            Global.editor.commit();*/
+                            Global.editor.commit();
 
                             Global.repair2list.add(repairClass2);
                         }
