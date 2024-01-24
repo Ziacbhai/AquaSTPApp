@@ -51,6 +51,8 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
     Context context;
     String currentDatevalue, currentDateValue2;
     ImageView backbtn;
+
+    boolean isActive;
     //PumpMotorBlower_LogClass pumpMotorClass;
     TextView Displaydate, Displaytime;
     RecyclerView pump_motor_started_recyclerview;
@@ -68,6 +70,8 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
         context = this;
         user_topcard();
         backbtn = findViewById(R.id.back_btn);
+
+       // content();
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,7 +172,9 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, dailylogpump, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+
                 try {
+
                     Global.loadrunningpumps(response);
                     dailyLogAdapter = new RunningPumpMotorAdapter((List<PumpMotorBlower_LogClass>) Global.RunningPumpsMotors_LogClass, context);
                     pump_motor_started_recyclerview.setAdapter(dailyLogAdapter);
@@ -179,6 +185,7 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
+
 
             }
         }, new Response.ErrorListener() {
@@ -220,7 +227,9 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
         };
 
         queue.add(jsonObjectRequest);
+
     }
 
-    
+
+
 }

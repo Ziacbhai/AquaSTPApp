@@ -55,18 +55,32 @@ public class Global {
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl = "http://192.168.1.7:9396/";
+    public static String baseurl = "http://192.168.1.10:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
+
+    //Pump_Motor
     public static String GetDailyLogPumpMotor = baseurl + "api/DailyLog/GetPumps?";
     public static String GetStartMotorPumps = baseurl + "api/DailyLog/StartMotorPumps?";
     public static String GetStopMotorPumps = baseurl + "api/DailyLog/StopMotorPumps?";
-
     public static String GetRolloverMotorPumps = baseurl + "api/DailyLog/RolloverMotorPumps?";
-    public static String GetDailyLogMeter = baseurl + "api/DailyLog/GetMeters?";
-    public static String GetDailyLogFilters = baseurl + "api/DailyLog/GetFilters?";
-    public static String GetDailyLogSensors = baseurl + "api/DailyLog/GetSensors?";
+
+    //Blower
     public static String GetDailyLogBlowers = baseurl + "api/DailyLog/GetBlowers?";
+    public static String GetStartBlower = baseurl + "api/DailyLog/StartBlower?";
+    public static String GetStopBlower = baseurl + "";
+    public static String GetRolloverBlower = baseurl + "";
+
+
+    //Meter
+    public static String GetDailyLogMeter = baseurl + "api/DailyLog/GetMeters?";
+
+    //Filters
+    public static String GetDailyLogFilters = baseurl + "api/DailyLog/GetFilters?";
+
+    //Sensors
+    public static String GetDailyLogSensors = baseurl + "api/DailyLog/GetSensors?";
+
     public static String userImageurl = baseurl + "WebsiteData/Users/";
     public static String incident_image = baseurl + "WebsiteData/IncidentReportDocs/";
     /* public static String repair_images = baseurl+"WebsiteData/RepairDocs/";*/
@@ -157,6 +171,7 @@ public class Global {
     public static ArrayList<PumpMotorBlower_LogClass> RunningPumpsMotors_LogClass;
     public static ArrayList<PumpMotorBlower_LogClass> Blower_LogClass;
     public static ArrayList<PumpMotorBlower_LogClass> StoppedPumpsMotors_LogClass;
+    public static ArrayList<PumpMotorBlower_LogClass> StartBlower_LogClass;
     public static ArrayList<FiltersClass> Filter_LogClass;
     public static ArrayList<SensorsModelClass> Sensors_Class;
     public static ArrayList<MetersDailyLogClass> Meters_Class;
@@ -244,6 +259,7 @@ public class Global {
                 pumpMotorClass.setRunning_time(e.getString("running_time"));
                 pumpMotorClass.set_tstp2_code(e.getString("tstp2_code"));
                 pumpMotorClass.setRunning_status(e.getString("running_status"));
+
             } catch (JSONException ex) {
                 throw new RuntimeException(ex);
             }

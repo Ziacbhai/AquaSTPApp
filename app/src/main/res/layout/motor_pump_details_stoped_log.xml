@@ -100,7 +100,7 @@
             <ImageView
                 android:id="@+id/pump_start"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="18dp"
                 android:gravity="center"
                 android:padding="1dp"
                 android:src="@drawable/play"

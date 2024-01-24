@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_margin="2dp"
         android:weightSum="5"
         android:background="@drawable/btnbgedited"
@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1.2"
             android:gravity="center_horizontal"
             android:orientation="vertical">
@@ -116,6 +116,40 @@
             android:background="#000" />
 
         <LinearLayout
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/blower_stop"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:src="@drawable/stop"
+                    android:textColor="#fff"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="2dp"
+                android:background="#000" />
+                <ImageView
+                    android:id="@+id/blower_rollover"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:src="@drawable/newshare"
+                    android:textColor="#fff"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.4"

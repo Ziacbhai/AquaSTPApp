@@ -1,7 +1,9 @@
 package Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,20 +41,19 @@ import Models.PumpMotorBlower_LogClass;
 public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMotorAdapter.Viewholder> {
 
     private List<PumpMotorBlower_LogClass> pumpMotorDailyLogClass;
-
     private Context context;
 
     public RunningPumpMotorAdapter(List<PumpMotorBlower_LogClass> pumpMotorDailyLogClass, Context context) {
         this.pumpMotorDailyLogClass = pumpMotorDailyLogClass;
         this.context = context;
     }
-
     @NonNull
     @Override
     public RunningPumpMotorAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pumpmotordetails_start_log,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pumpmotordetails_start_log, parent, false);
         return new Viewholder(view);
     }
+
     @Override
     public void onBindViewHolder(@NonNull RunningPumpMotorAdapter.Viewholder holder, int position) {
 
@@ -63,6 +64,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
         holder.Pump_Stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((Activity) context).finish();
                 RunningPump_stop(position);
                 Intent pump = new Intent(context, PumpMoterDailyLogActivity.class);
                 context.startActivity(pump);
@@ -73,12 +75,11 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
             @Override
             public void onClick(View v) {
                 RolloverMotorPumps(position);
+                ((Activity) context).finish();
                 Intent pump = new Intent(context, PumpMoterDailyLogActivity.class);
                 context.startActivity(pump);
-
             }
         });
-
 
     }
 
@@ -98,7 +99,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, rolloverMotorPumps, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(context, "Rollover Motor Pumps", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Rollover Motor Pumps", Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -115,7 +116,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
                     Toast.makeText(context, "Parse Error", Toast.LENGTH_LONG).show();
                 }
             }
-        }){
+        }) {
 
             @Override
             public Map<String, String> getHeaders() {
@@ -146,11 +147,12 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
 
     @Override
     public int getItemCount() {
-        return  pumpMotorDailyLogClass.size();
+        return pumpMotorDailyLogClass.size();
     }
+
     public class Viewholder extends RecyclerView.ViewHolder {
-        TextView Pumpeqipname,Pumpstatedtime,Pumprunningtime;
-        ImageView Pump_Reload,Pump_Stop;
+        TextView Pumpeqipname, Pumpstatedtime, Pumprunningtime;
+        ImageView Pump_Reload, Pump_Stop;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -197,7 +199,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
                     Toast.makeText(context, "Parse Error", Toast.LENGTH_LONG).show();
                 }
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 // Set the Authorization header with the access token
@@ -221,4 +223,6 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
         };
         queue.add(jsonObjectRequest);
     }
+
+
 }

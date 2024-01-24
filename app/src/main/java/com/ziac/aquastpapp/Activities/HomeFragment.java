@@ -174,11 +174,10 @@ public class HomeFragment extends Fragment {
                         Log.d("YourTag", "Daily Log Date: " + dlogdate);
                        // Toast.makeText(context, response.getString("error"), Toast.LENGTH_SHORT).show();
                         // Create a DailyLogClass object and add it to the list if needed
+
                         DailyLogClass dailyLog = new DailyLogClass();
                         dailyLog.setDailylog(dlogdate);
                         Global.dailyLogClassArrayList.add(dailyLog);
-
-
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("dlogdate", dlogdate);
                         Global.editor.commit();
@@ -228,9 +227,5 @@ public class HomeFragment extends Fragment {
 
         queue.add(jsonObjectRequest);
     }
-
-
-
-
 
 }

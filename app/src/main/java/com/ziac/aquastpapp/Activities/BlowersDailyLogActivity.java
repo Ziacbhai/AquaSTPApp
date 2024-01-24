@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import Adapters.BlowersDailyLogAdapter;
+import Adapters.BlowersDailyLogStartAdapter;
 import Models.PumpMotorBlower_LogClass;
 
 public class BlowersDailyLogActivity extends AppCompatActivity {
@@ -176,6 +176,8 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                             blowerClass.setStart_time(e.getString("starttime"));
                             blowerClass.setEnd_time(e.getString("endtime"));
                             blowerClass.setRunning_time(e.getString("running_time"));
+                            blowerClass.setRunning_status(e.getString("running_status"));
+                            blowerClass.setTstp5_code(e.getString("tstp5_code"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
@@ -183,7 +185,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                         Global.Blower_LogClass.add(blowerClass);
 
                     }
-                    BlowersDailyLogAdapter blowerAdapter = new BlowersDailyLogAdapter((List<PumpMotorBlower_LogClass>) Global.Blower_LogClass);
+                    BlowersDailyLogStartAdapter blowerAdapter = new BlowersDailyLogStartAdapter((List<PumpMotorBlower_LogClass>) Global.Blower_LogClass);
                     blowers_started_recyclerview.setAdapter(blowerAdapter);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
