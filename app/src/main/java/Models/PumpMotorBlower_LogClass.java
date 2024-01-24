@@ -2,7 +2,8 @@ package Models;
 
 public class PumpMotorBlower_LogClass {
 
-    String equip_name,running_time,start_time,end_time,tstp2_code,running_status,blower_pause,tstp5_code;
+    String equip_name,running_time,start_time,end_time,tstp2_code,running_status,tstp5_code;
+
 
     public String getTstp5_code() {
         return tstp5_code;
@@ -10,22 +11,6 @@ public class PumpMotorBlower_LogClass {
 
     public void setTstp5_code(String tstp5_code) {
         this.tstp5_code = tstp5_code;
-    }
-
-    public String getBlower_pause() {
-        return blower_pause;
-    }
-
-    public void setBlower_pause(String blower_pause) {
-        this.blower_pause = blower_pause;
-    }
-
-    public String getTstp2_code() {
-        return tstp2_code;
-    }
-
-    public void setTstp2_code(String tstp2_code) {
-        this.tstp2_code = tstp2_code;
     }
 
     public String getRunning_status() {

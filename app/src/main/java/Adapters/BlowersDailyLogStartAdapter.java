@@ -37,12 +37,12 @@ import java.util.Map;
 import Models.PumpMotorBlower_LogClass;
 
 public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDailyLogStartAdapter.Viewholder> {
-    private List<PumpMotorBlower_LogClass> browersDailyLogClass;
     Context context;
+    private List<PumpMotorBlower_LogClass> browersDailyLogClass;
 
-    public BlowersDailyLogStartAdapter(List<PumpMotorBlower_LogClass> browersDailyLogClass) {
-        this.browersDailyLogClass = browersDailyLogClass;
+    public BlowersDailyLogStartAdapter(Context context, List<PumpMotorBlower_LogClass> browersDailyLogClass) {
         this.context = context;
+        this.browersDailyLogClass = browersDailyLogClass;
     }
 
     @NonNull
@@ -60,25 +60,26 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
         holder.Blower_running_time.setText(browersDailyLogClass.get(position).getRunning_time());
 
 
-        holder.Blower_pause.setOnClickListener(new View.OnClickListener() {
+        holder.Blower_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Toast.makeText(context, "Blower Response", Toast.LENGTH_SHORT).show();
                 start_blower(position, holder);
                 browersDailyLogClass.clear();
             }
         });
 
         if (browersDailyLogClass.size() > position && browersDailyLogClass.get(position).getRunning_status().equals("S")) {
-            holder.Blower_pause.setVisibility(View.GONE);
+            holder.Blower_start.setVisibility(View.GONE);
         } else {
-            holder.Blower_pause.setVisibility(View.VISIBLE);
+            holder.Blower_start.setVisibility(View.VISIBLE);
         }
 
     }
 
     private void start_blower(int position, Viewholder holder) {
 
-        RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
+        RequestQueue queue = Volley.newRequestQueue(context);
         // url
         String startBlower = Global.GetStartBlower;
 
@@ -86,7 +87,7 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
         String dlog_date = Global.sharedPreferences.getString("dlogdate", "0");
         String ayear = Global.sharedPreferences.getString("ayear", "0");
-        String tstp5_code = Global.StartBlower_LogClass.get(position).getTstp5_code();
+        String tstp5_code = Global.Start_Blower_LogClass.get(position).getTstp5_code();
 
         startBlower = startBlower + "comcode=" + com_code + "&sstp1_code=" + sstp1_code + "&dlog_date=" + dlog_date + "&tstp5_code=" + tstp5_code + "&ayear=" + ayear;
 
@@ -96,6 +97,7 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
                 Intent blower = new Intent(context, BlowersDailyLogActivity.class);
                 context.startActivity(blower);
                 ((Activity) context).finish();
+                Toast.makeText(context, "Blower Response", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -134,7 +136,7 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", null));
                 params.put("dlogdate", Global.sharedPreferences.getString("dlogdate", null));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", null));
-                params.put("tstp5_code", Global.StartBlower_LogClass.get(position).getTstp5_code());
+                params.put("tstp5_code", Global.Start_Blower_LogClass.get(position).getTstp5_code());
                 //params.put("running_status", Global.StoppedPumpsMotors_LogClass.get(position).getRunning_status());
                 return params;
             }
@@ -153,7 +155,7 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
 
         TextView Blower_equip_name,Blower_start_time,Blower_stop_time,Blower_running_time;
 
-        ImageView Blower_pause,Blower_rollover,Blower_stop;
+        ImageView Blower_start,Blower_rollover,Blower_stop;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
@@ -161,9 +163,8 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
             Blower_start_time = itemView.findViewById(R.id.blower_start_time);
             Blower_stop_time = itemView.findViewById(R.id.blower_stop_time);
             Blower_running_time = itemView.findViewById(R.id.blower_running_time);
-            Blower_pause = itemView.findViewById(R.id.blower_pause);
-            Blower_rollover = itemView.findViewById(R.id.blower_rollover);
-            Blower_stop = itemView.findViewById(R.id.blower_stop);
+            Blower_start = itemView.findViewById(R.id.blower_start);
+
         }
     }
 }

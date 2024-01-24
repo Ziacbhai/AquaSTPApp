@@ -29,7 +29,6 @@ import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.PumpMoterDailyLogActivity;
 import com.ziac.aquastpapp.R;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -54,7 +53,7 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
     @Override
     public StoppedPumpMotorAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.motor_pump_details_stoped_log, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pumpmotordetails_stopped_log, parent, false);
         return new Viewholder(view);
     }
 

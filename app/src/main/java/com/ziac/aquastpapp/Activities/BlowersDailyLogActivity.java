@@ -51,6 +51,8 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
     ImageView backbtn;
     RecyclerView blowers_started_recyclerview;
     //PumpMotor_Blower_DailyLogClass blowerClass;
+    boolean conditionToShowBlowerAdapter = shouldShowBlowerAdapter();
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -157,7 +159,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                Global.Blower_LogClass = new ArrayList<PumpMotorBlower_LogClass>();
+                Global.Start_Blower_LogClass = new ArrayList<PumpMotorBlower_LogClass>();
                 //blowerClass = new PumpMotorBlower_LogClass();
                 JSONArray jarray;
 
@@ -182,11 +184,31 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
-                        Global.Blower_LogClass.add(blowerClass);
+                        Global.Start_Blower_LogClass.add(blowerClass);
 
                     }
-                    BlowersDailyLogStartAdapter blowerAdapter = new BlowersDailyLogStartAdapter((List<PumpMotorBlower_LogClass>) Global.Blower_LogClass);
-                    blowers_started_recyclerview.setAdapter(blowerAdapter);
+
+                    RecyclerView blowersStartedRecyclerView = findViewById(R.id.blowers_started_recyclerview);
+                    BlowersDailyLogStartAdapter blowerAdapter = new BlowersDailyLogStartAdapter(context, (List<PumpMotorBlower_LogClass>) Global.Start_Blower_LogClass);
+                    blowersStartedRecyclerView.setAdapter(blowerAdapter);
+
+/*
+                    RecyclerView blowersStoppedRecyclerView = findViewById(R.id.blowers_started_recyclerview);
+
+                    BlowersDailyLogStopAdapter blowerStopAdapter = new BlowersDailyLogStopAdapter(context, (List<PumpMotorBlower_LogClass>) Global.Stop_Blower_LogClass);
+                    blowersStoppedRecyclerView.setAdapter(blowerStopAdapter);
+
+                    blowersStoppedRecyclerView.setVisibility(View.GONE);
+
+// Later in your code, when you want to hide/show the adapters based on conditions
+                    if (conditionToShowBlowerAdapter) {
+                        blowersStartedRecyclerView.setVisibility(View.VISIBLE);
+                        blowersStoppedRecyclerView.setVisibility(View.GONE);
+                    } else {
+                        blowersStartedRecyclerView.setVisibility(View.GONE);
+                        blowersStoppedRecyclerView.setVisibility(View.VISIBLE);
+                    }*/
+
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -230,6 +252,16 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         };
 
         queue.add(jsonObjectRequest);
+    }
+
+    private boolean shouldShowBlowerAdapter() {
+        // Your logic to determine whether to show the starting blower adapter
+        return true; // Replace with your actual condition
+    }
+
+    private boolean newConditionToShowBlowerAdapter() {
+        // Your logic to determine whether to show the stopping blower adapter
+        return false; // Replace with your actual condition
     }
 
 

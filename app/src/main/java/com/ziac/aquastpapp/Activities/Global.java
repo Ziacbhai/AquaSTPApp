@@ -68,7 +68,7 @@ public class Global {
     //Blower
     public static String GetDailyLogBlowers = baseurl + "api/DailyLog/GetBlowers?";
     public static String GetStartBlower = baseurl + "api/DailyLog/StartBlower?";
-    public static String GetStopBlower = baseurl + "";
+    public static String GetStopBlower = baseurl + "api/DailyLog/StopBlower?";
     public static String GetRolloverBlower = baseurl + "";
 
 
@@ -169,9 +169,11 @@ public class Global {
     public static ArrayList<LabTestClass> LabTest_Class;
     public static ArrayList<IncidentsClass> Incident_Class;
     public static ArrayList<PumpMotorBlower_LogClass> RunningPumpsMotors_LogClass;
-    public static ArrayList<PumpMotorBlower_LogClass> Blower_LogClass;
+    public static ArrayList<PumpMotorBlower_LogClass> Start_Blower_LogClass;
+    public static ArrayList<PumpMotorBlower_LogClass> Stop_Blower_LogClass;
     public static ArrayList<PumpMotorBlower_LogClass> StoppedPumpsMotors_LogClass;
-    public static ArrayList<PumpMotorBlower_LogClass> StartBlower_LogClass;
+
+
     public static ArrayList<FiltersClass> Filter_LogClass;
     public static ArrayList<SensorsModelClass> Sensors_Class;
     public static ArrayList<MetersDailyLogClass> Meters_Class;
