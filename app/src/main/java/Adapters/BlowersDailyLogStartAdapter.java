@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,7 +49,7 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
     @NonNull
     @Override
     public BlowersDailyLogStartAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.blowers_details_daily_log,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.blowerdetails_log,parent,false);
         return new Viewholder(view);
     }
 
@@ -64,40 +65,95 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
             @Override
             public void onClick(View v) {
                 //Toast.makeText(context, "Blower Response", Toast.LENGTH_SHORT).show();
-                start_blower(position, holder);
-                browersDailyLogClass.clear();
+                start_stop_rollover_blower(position,1);
+                //browersDailyLogClass.clear();
+            }
+        });
+        holder.Blower_stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(context, "Blower Response", Toast.LENGTH_SHORT).show();
+                start_stop_rollover_blower(position,2);
+                //browersDailyLogClass.clear();
+            }
+        });
+        holder.Blower_rollover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(context, "Blower Response", Toast.LENGTH_SHORT).show();
+                start_stop_rollover_blower(position,3);
+                //browersDailyLogClass.clear();
             }
         });
 
-        if (browersDailyLogClass.size() > position && browersDailyLogClass.get(position).getRunning_status().equals("S")) {
-            holder.Blower_start.setVisibility(View.GONE);
-        } else {
-            holder.Blower_start.setVisibility(View.VISIBLE);
+
+
+        if (browersDailyLogClass.size() > position)
+        {
+            if(browersDailyLogClass.get(position).getRunning_status().equals("R"))
+            {
+                holder.Blower_start.setImageBitmap(null);
+                holder.Blower_start.setEnabled(false);
+                holder.Blower_stop.setEnabled(true); // .setVisibility(View.GONE);
+                holder.Blower_rollover.setEnabled(true);
+            } else if(browersDailyLogClass.get(position).getRunning_status().equals("C")) {
+                holder.Blower_start.setEnabled(true);
+                holder.Blower_stop.setEnabled(false);
+                holder.Blower_stop.setImageBitmap(null);
+                holder.Blower_rollover.setEnabled(false);
+                holder.Blower_rollover.setImageBitmap(null);
+            } else{
+                holder.Blower_start.setEnabled(false);
+                holder.Blower_start.setImageBitmap(null);
+                holder.Blower_stop.setEnabled(false);
+                holder.Blower_stop.setImageBitmap(null);
+                holder.Blower_rollover.setEnabled(false);
+                holder.Blower_rollover.setImageBitmap(null);
+            }
         }
 
     }
 
-    private void start_blower(int position, Viewholder holder) {
+    private void start_stop_rollover_blower(int position,int type) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         // url
-        String startBlower = Global.GetStartBlower;
+
+        String blowerurl ="";
+
+        switch (type){
+            case 1:
+                blowerurl = Global.StartBlowerUrl;
+                break;
+            case 2:
+                blowerurl = Global.StopBlowerUrl;
+                break;
+            case 3:
+                blowerurl = Global.RolloverBlowerUrl;
+                break;
+            default:
+                blowerurl = "";
+                break;
+
+
+        }
+
 
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
         String dlog_date = Global.sharedPreferences.getString("dlogdate", "0");
         String ayear = Global.sharedPreferences.getString("ayear", "0");
-        String tstp5_code = Global.Start_Blower_LogClass.get(position).getTstp5_code();
+        String tstp5_code = Global.Blower_LogClass.get(position).getTstp5_code();
 
-        startBlower = startBlower + "comcode=" + com_code + "&sstp1_code=" + sstp1_code + "&dlog_date=" + dlog_date + "&tstp5_code=" + tstp5_code + "&ayear=" + ayear;
+        blowerurl = blowerurl + "comcode=" + com_code + "&sstp1_code=" + sstp1_code + "&dlog_date=" + dlog_date + "&tstp5_code=" + tstp5_code + "&ayear=" + ayear;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, startBlower, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, blowerurl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Intent blower = new Intent(context, BlowersDailyLogActivity.class);
                 context.startActivity(blower);
                 ((Activity) context).finish();
-                Toast.makeText(context, "Blower Response", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Blower Response", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -136,7 +192,7 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", null));
                 params.put("dlogdate", Global.sharedPreferences.getString("dlogdate", null));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", null));
-                params.put("tstp5_code", Global.Start_Blower_LogClass.get(position).getTstp5_code());
+                params.put("tstp5_code", Global.Blower_LogClass.get(position).getTstp5_code());
                 //params.put("running_status", Global.StoppedPumpsMotors_LogClass.get(position).getRunning_status());
                 return params;
             }
@@ -164,6 +220,8 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
             Blower_stopped_time = itemView.findViewById(R.id.blower_stopped_time);
             Blower_running_time = itemView.findViewById(R.id.blower_running_time);
             Blower_start = itemView.findViewById(R.id.blower_start);
+            Blower_stop = itemView.findViewById(R.id.blower_stop);
+            Blower_rollover = itemView.findViewById(R.id.blower_rollover);
 
         }
     }

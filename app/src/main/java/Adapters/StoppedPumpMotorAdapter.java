@@ -66,7 +66,7 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
         holder.Pump_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                start_motor_pump(position, holder);
+                start_motor_pump(position);
                 pumpMotorDailyLogClass.clear();
             }
         });
@@ -89,10 +89,10 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
     }
 
 
-    private void start_motor_pump(int position, Viewholder holder) {
+    private void start_motor_pump(int position) {
         RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
         // url
-        String startMotorPump = Global.GetStartMotorPumps;
+        String startMotorPump = Global.StartMotorPumpsUrl;
 
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");

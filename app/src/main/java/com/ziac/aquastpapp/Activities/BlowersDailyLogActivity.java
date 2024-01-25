@@ -159,7 +159,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                Global.Start_Blower_LogClass = new ArrayList<PumpMotorBlower_LogClass>();
+                Global.Blower_LogClass = new ArrayList<PumpMotorBlower_LogClass>();
                 //blowerClass = new PumpMotorBlower_LogClass();
                 JSONArray jarray;
 
@@ -184,12 +184,12 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
-                        Global.Start_Blower_LogClass.add(blowerClass);
+                        Global.Blower_LogClass.add(blowerClass);
 
                     }
 
                     RecyclerView blowersStartedRecyclerView = findViewById(R.id.blowers_started_recyclerview);
-                    BlowersDailyLogStartAdapter blowerAdapter = new BlowersDailyLogStartAdapter(context, (List<PumpMotorBlower_LogClass>) Global.Start_Blower_LogClass);
+                    BlowersDailyLogStartAdapter blowerAdapter = new BlowersDailyLogStartAdapter(context, (List<PumpMotorBlower_LogClass>) Global.Blower_LogClass);
                     blowersStartedRecyclerView.setAdapter(blowerAdapter);
 
 /*

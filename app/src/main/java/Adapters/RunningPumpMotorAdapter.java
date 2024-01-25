@@ -65,7 +65,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
             @Override
             public void onClick(View v) {
                 ((Activity) context).finish();
-                RunningPump_stop(position);
+                StopRolloverMotorPumps(position,1);
                 Intent pump = new Intent(context, PumpMoterDailyLogActivity.class);
                 context.startActivity(pump);
             }
@@ -74,7 +74,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
         holder.Pump_Reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RolloverMotorPumps(position);
+                StopRolloverMotorPumps(position,2);
                 ((Activity) context).finish();
                 Intent pump = new Intent(context, PumpMoterDailyLogActivity.class);
                 context.startActivity(pump);
@@ -83,10 +83,23 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
 
     }
 
-    private void RolloverMotorPumps(int position) {
+    private void StopRolloverMotorPumps(int position,int type) {
         RequestQueue queue = Volley.newRequestQueue(context);
         // url
-        String rolloverMotorPumps = Global.GetRolloverMotorPumps;
+        String MotorPumpsUrl = "";
+
+        switch (type){
+            case 2:
+                MotorPumpsUrl = Global.RolloverMotorPumpsUrl;
+                break;
+            case 1:
+                MotorPumpsUrl = Global.StopMotorPumpsUrl;
+                break;
+            default:
+                MotorPumpsUrl="";
+                break;
+        }
+
 
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
@@ -94,9 +107,9 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
         String ayear = Global.sharedPreferences.getString("ayear", "0");
         String tstp2_code = Global.RunningPumpsMotors_LogClass.get(position).get_tstp2_code();
 
-        rolloverMotorPumps = rolloverMotorPumps + "comcode=" + com_code + "&sstp1_code=" + sstp1_code + "&dlog_date=" + dlog_date + "&tstp2_code=" + tstp2_code + "&ayear=" + ayear;
+        MotorPumpsUrl = MotorPumpsUrl + "comcode=" + com_code + "&sstp1_code=" + sstp1_code + "&dlog_date=" + dlog_date + "&tstp2_code=" + tstp2_code + "&ayear=" + ayear;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, rolloverMotorPumps, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, MotorPumpsUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 //Toast.makeText(context, "Rollover Motor Pumps", Toast.LENGTH_LONG).show();
@@ -164,7 +177,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
         }
     }
 
-
+/*
     private void RunningPump_stop(int position) {
         RequestQueue queue = Volley.newRequestQueue(context);
         // url
@@ -222,7 +235,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
             }
         };
         queue.add(jsonObjectRequest);
-    }
+    }*/
 
 
 }
