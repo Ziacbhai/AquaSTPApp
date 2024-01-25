@@ -55,7 +55,7 @@ public class Global {
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl = "http://192.168.1.10:9396/";
+    public static String baseurl = "http://192.168.1.3:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
 
@@ -77,6 +77,9 @@ public class Global {
 
     //Filters
     public static String GetDailyLogFilters = baseurl + "api/DailyLog/GetFilters?";
+   /* public static String FilterDaily_log_image = baseurl + "WebsiteData/DailyLog/Filters/";*/
+
+    public static String GetDailyLogFilterImageUpload = baseurl + "api/DailyLog/FilterImageUpload";
 
     //Sensors
     public static String GetDailyLogSensors = baseurl + "api/DailyLog/GetSensors?";
@@ -159,6 +162,8 @@ public class Global {
     public static RepairClass4 repairClass4;
     public static LabTestClass labTestClass1;
     public static IncidentsClass incidentsClass;
+
+    public static FiltersClass filtersClass;
     public static ArrayList<ConsumptionClass> Consumption1list;
     public static ArrayList<ConsumptionClass2> Consumption2list;
     public static ArrayList<EquipmentListClassConsumption> Consumption_equipment;
@@ -172,8 +177,6 @@ public class Global {
     public static ArrayList<PumpMotorBlower_LogClass> Start_Blower_LogClass;
     public static ArrayList<PumpMotorBlower_LogClass> Stop_Blower_LogClass;
     public static ArrayList<PumpMotorBlower_LogClass> StoppedPumpsMotors_LogClass;
-
-
     public static ArrayList<FiltersClass> Filter_LogClass;
     public static ArrayList<SensorsModelClass> Sensors_Class;
     public static ArrayList<MetersDailyLogClass> Meters_Class;

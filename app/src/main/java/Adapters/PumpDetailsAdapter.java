@@ -176,7 +176,7 @@ public class PumpDetailsAdapter extends RecyclerView.Adapter<PumpDetailsAdapter.
             Equipment_id = itemView.findViewById(R.id.equip_slno);
             Specification = itemView.findViewById(R.id.specification_);
             Rating_Capacity = itemView.findViewById(R.id.rating_capacity);
-            FormFactor = itemView.findViewById(R.id.formFactor_);
+            FormFactor = itemView.findViewById(R.id.formFactor);
             Phase = itemView.findViewById(R.id.phase_);
             CleaningRunningFrequencyHRS = itemView.findViewById(R.id.cleaning_Running_);
         }

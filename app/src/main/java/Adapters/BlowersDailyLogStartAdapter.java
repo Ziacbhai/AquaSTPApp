@@ -56,7 +56,7 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
     public void onBindViewHolder(@NonNull BlowersDailyLogStartAdapter.Viewholder holder, int position) {
         holder.Blower_equip_name.setText(browersDailyLogClass.get(position).getEquip_name());
         holder.Blower_start_time.setText(browersDailyLogClass.get(position).getStart_time());
-        holder.Blower_stop_time.setText(browersDailyLogClass.get(position).getEnd_time());
+        holder.Blower_stopped_time.setText(browersDailyLogClass.get(position).getEnd_time());
         holder.Blower_running_time.setText(browersDailyLogClass.get(position).getRunning_time());
 
 
@@ -153,7 +153,7 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView Blower_equip_name,Blower_start_time,Blower_stop_time,Blower_running_time;
+        TextView Blower_equip_name,Blower_start_time,Blower_stopped_time,Blower_running_time;
 
         ImageView Blower_start,Blower_rollover,Blower_stop;
         public Viewholder(@NonNull View itemView) {
@@ -161,7 +161,7 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
 
             Blower_equip_name = itemView.findViewById(R.id.blower_equip_name);
             Blower_start_time = itemView.findViewById(R.id.blower_start_time);
-            Blower_stop_time = itemView.findViewById(R.id.blower_stop_time);
+            Blower_stopped_time = itemView.findViewById(R.id.blower_stopped_time);
             Blower_running_time = itemView.findViewById(R.id.blower_running_time);
             Blower_start = itemView.findViewById(R.id.blower_start);
 

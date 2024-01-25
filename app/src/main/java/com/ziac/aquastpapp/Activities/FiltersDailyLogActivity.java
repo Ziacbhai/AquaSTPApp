@@ -81,7 +81,7 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
             }
         }, 0);
 
-        FiltersLogBlowers();
+        FiltersDailyLog();
         Filters_recyclerview = findViewById(R.id.filter_recyclerview);
         Filters_recyclerview.setLayoutManager(new LinearLayoutManager(this));
         Filters_recyclerview.setHasFixedSize(true);
@@ -143,8 +143,7 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
         txtpersonname.setText(personname);
     }
 
-    private void FiltersLogBlowers() {
-
+    private void FiltersDailyLog() {
         RequestQueue queue = Volley.newRequestQueue(context);
         String dailylogfilter = Global.GetDailyLogFilters;
 
@@ -173,8 +172,11 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
                         filtersClass = new FiltersClass();
                         try {
                             filtersClass.setEquip_name(e.getString("equip_name"));
-                            //filtersClass.setFilter_image(e.getString("starttime"));
                             filtersClass.setReading_time(e.getString("readingtime"));
+                            filtersClass.setFilter_image(e.getString("image_path"));
+                            filtersClass.setFilter_status(e.getString("status"));
+                            filtersClass.setTstp4_code(e.getString("tstp4_code"));
+
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
@@ -224,5 +226,6 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
 
     }
+
 
 }

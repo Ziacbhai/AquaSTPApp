@@ -65,10 +65,10 @@ public class SensorDailyLogAdapter extends RecyclerView.Adapter<SensorDailyLogAd
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
-            Sensor_equip_name = itemView.findViewById(R.id.sensor_equip_name);
+           /* Sensor_equip_name = itemView.findViewById(R.id.sensor_equip_name);
             Sensor_reading = itemView.findViewById(R.id.sensor_reading);
             Sensor_reading_time = itemView.findViewById(R.id.sensor_reading_time);
-            Sensor_total = itemView.findViewById(R.id.sensor_total);
+            Sensor_total = itemView.findViewById(R.id.sensor_total);*/
            // Sensor_image = itemView.findViewById(R.id.sensor_image);
            // Sensor_image_upload = itemView.findViewById(R.id.sensor_image_upload);
         }

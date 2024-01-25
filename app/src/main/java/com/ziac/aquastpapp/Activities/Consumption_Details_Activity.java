@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -75,8 +76,10 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     Context context;
     private EquipmentListClassConsumption equipment_spinner;
     private ItemListClassConsumption Item_spinner;
+
     private Dialog zDialog;
-    TextView Equipment_code, Item_code, Qty_cb;
+    TextView Equipment_code, Item_codeTV;
+    EditText Qty_cb;
     AppCompatButton Update_A, Cancel_A;
     private ProgressDialog progressDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -190,7 +193,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_consumption_details_layout, null);
         Equipment_code = dialogView.findViewById(R.id.equipment_name_alert_spinner);
-        Item_code = dialogView.findViewById(R.id.item_name_alert_spinner);
+        Item_codeTV = dialogView.findViewById(R.id.item_name_alert_spinner);
         Equipment = dialogView.findViewById(R.id.eqipment_alert_spinner);
         Item = dialogView.findViewById(R.id.Item_alert_spinner);
 
@@ -251,9 +254,24 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     }
 
     private void updateConsumables_details() {
+
+
         String qty = Qty_cb.getText().toString();
-        String equipment_code = equipment_spinner.getEquipment_code();
-        String item_code = Item_spinner.getItem_code();
+
+
+        String equipment_code = Equipment_code.getText().toString();
+        String item_code = Item_codeTV.getText().toString();
+
+        if (qty.isEmpty()) {
+            Toast.makeText(this, "Qty  should not be empty !!", Toast.LENGTH_SHORT).show();
+            return;
+        }if (equipment_code.isEmpty()){
+            Toast.makeText(this, "Equipment_code  should not be empty !!", Toast.LENGTH_SHORT).show();
+            return;
+        }if (item_code.isEmpty()){
+            Toast.makeText(this, "Item_code  should not be empty !!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.updateDConsumption;
@@ -311,7 +329,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 String con1_code = Global.ConsumptionClass.getCon1_code();
                 params.put("item_code", item_code);
-                params.put("equip_code", equipment_code);
+                params.put("item_code",  String.valueOf(equipment_spinner.getEquipment_id()));
+                /*params.put("equip_code", equipment_code);*/
+                params.put("equip_code", String.valueOf(equipment_spinner.getEquipment_id()));
                 params.put("qty", qty);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
@@ -738,7 +758,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
             tvequipmentnameitem.setOnClickListener(view1 -> {
                 Item_spinner = mDataArrayList.get(i);
-                Item_code.setText(Item_spinner.getItem_name());
+                Item_codeTV.setText(Item_spinner.getItem_name());
                 zDialog.dismiss();
             });
 

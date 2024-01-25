@@ -123,7 +123,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/formFactor_"
+                            android:id="@+id/formFactor"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

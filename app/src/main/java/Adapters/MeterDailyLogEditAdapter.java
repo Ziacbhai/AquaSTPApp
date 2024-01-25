@@ -37,7 +37,7 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
     public void onBindViewHolder(@NonNull MeterDailyLogEditAdapter.ViewHolder holder, int position) {
 
         holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_equip_name());
-        holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_reading_edit());
+       //holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_reading_edit());
 
     }
 
@@ -54,7 +54,7 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
             super(itemView);
 
             Meter_equip_name = itemView.findViewById(R.id.meter_equip_name);
-            Meter_reading_edit = itemView.findViewById(R.id.meter_reading_edit);
+            //Meter_reading_edit = itemView.findViewById(R.id.meter_reading_edit);
         }
     }
 }

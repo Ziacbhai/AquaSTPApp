@@ -71,6 +71,8 @@ public class MetersDetailsAdapter extends RecyclerView.Adapter<MetersDetailsAdap
         holder.Manufacturer.setText(commonModelClassList.get(position).getManufacturer());
         holder.EquipmentName.setText(commonModelClassList.get(position).getEquipmentName());
         holder.Equipment_id.setText(commonModelClassList.get(position).getEquipmentNumber_Id());
+        holder.FormFactor.setText(commonModelClassList.get(position).getForm_Factor());
+        holder.Phase.setText(commonModelClassList.get(position).getPhase());
         holder.Specification.setText(commonModelClassList.get(position).getSpecification());
         holder.Rating_Capacity.setText(commonModelClassList.get(position).getRating_Capacity());
         holder.CleaningRunningFrequencyHRS.setText(commonModelClassList.get(position).getCleaning_RunningFrequency_HRS());
@@ -151,7 +153,7 @@ public class MetersDetailsAdapter extends RecyclerView.Adapter<MetersDetailsAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         private android.widget.ImageView ImageView;
         private TextView Manufacturer, EquipmentName, Specification, Rating_Capacity, Equipment_id,
-                CleaningRunningFrequencyHRS;
+                CleaningRunningFrequencyHRS,FormFactor,Phase;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -161,8 +163,10 @@ public class MetersDetailsAdapter extends RecyclerView.Adapter<MetersDetailsAdap
             EquipmentName = itemView.findViewById(R.id.equipmentName_);
             Equipment_id = itemView.findViewById(R.id.equip_slno);
             Specification = itemView.findViewById(R.id.specification_);
+            FormFactor = itemView.findViewById(R.id.formFactor);
             Rating_Capacity = itemView.findViewById(R.id.rating_capacity);
             CleaningRunningFrequencyHRS = itemView.findViewById(R.id.cleaning_Running_);
+            Phase = itemView.findViewById(R.id.phase_);
         }
     }
 }

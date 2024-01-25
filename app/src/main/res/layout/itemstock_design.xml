@@ -26,76 +26,65 @@
                 android:orientation="horizontal"
                 android:padding="5dp">
 
-                <LinearLayout
+
+                <TextView
+                    android:id="@+id/part_number"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.4"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:id="@+id/part_number"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Number"
-                        android:textColor="#000"
-                        android:textSize="11dp" />
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#01A3A3" />
-
-                    <TextView
-                        android:id="@+id/namelist_"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="NameList"
-                        android:textColor="#000"
-                        android:textSize="11dp" />
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Number"
+                    android:textColor="#000"
+                    android:textSize="11dp" />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="#01A3A3" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/namelist_"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:gravity="center"
+                    android:text="NameList"
+                    android:textColor="#000"
+                    android:textSize="11dp" />
 
-                    <TextView
-                        android:id="@+id/stock_"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.8"
-                        android:gravity="center"
-                        android:text="Stock"
-                        android:textColor="#000"
-                        android:textSize="11dp" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#01A3A3" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#01A3A3" />
 
-                    <TextView
-                        android:id="@+id/units_"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.8"
-                        android:gravity="center"
-                        android:text="Units"
-                        android:textColor="#000"
-                        android:textSize="11dp" />
 
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/stock_"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8"
+                    android:gravity="center"
+                    android:text="Stock"
+                    android:textColor="#000"
+                    android:textSize="11dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#01A3A3" />
+
+                <TextView
+                    android:id="@+id/units_"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8"
+                    android:gravity="center"
+                    android:text="Units"
+                    android:textColor="#000"
+                    android:textSize="11dp" />
+
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>

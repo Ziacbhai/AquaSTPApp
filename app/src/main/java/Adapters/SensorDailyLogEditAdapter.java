@@ -38,7 +38,7 @@ public class SensorDailyLogEditAdapter extends RecyclerView.Adapter<SensorDailyL
     public void onBindViewHolder(@NonNull SensorDailyLogEditAdapter.Viewholder holder, int position) {
 
         holder.Sensor_equip_name.setText(sensorsModelClasses.get(position).getEquip_name());
-        holder.Sensor_reading_edit.setText(sensorsModelClasses.get(position).getEquip_name());
+        //holder.Sensor_reading_edit.setText(sensorsModelClasses.get(position).getReading_time());
 
     }
 
@@ -55,7 +55,7 @@ public class SensorDailyLogEditAdapter extends RecyclerView.Adapter<SensorDailyL
             super(itemView);
 
             Sensor_equip_name = itemView.findViewById(R.id.sensor_equip_name);
-            Sensor_reading_edit = itemView.findViewById(R.id.sensor_reading_edit);
+           // Sensor_reading_edit = itemView.findViewById(R.id.sensor_reading_edit);
         }
     }
 }

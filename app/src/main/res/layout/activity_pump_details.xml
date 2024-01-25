@@ -171,8 +171,6 @@
         android:orientation="horizontal"
         android:padding="5dp">
 
-
-
             <TextView
                 android:id="@+id/pump_equip_name"
                 android:layout_width="0dp"
@@ -189,9 +187,6 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="#fff" />
-
-
-
 
 
             <TextView
@@ -235,28 +230,10 @@
             <ImageView
                 android:id="@+id/pump_reload"
                 android:layout_width="0dp"
-                android:layout_weight="0.5"
+                android:layout_weight="1"
                 android:layout_height="16dp"
                 android:gravity="center"
                 android:textColor="#fff"/>
-
-
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            />
-
-
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:layout_height="16dp"
-                android:gravity="center"
-
-                android:textColor="#fff"/>
-
 
     </LinearLayout>
 
@@ -265,7 +242,7 @@
         android:id="@+id/pump_motor_started_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/btnbgoutline" />
 
@@ -330,11 +307,9 @@
             android:layout_height="match_parent"
             android:background="#fff" />
 
-
-
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textColor="#fff"
@@ -348,7 +323,7 @@
         android:id="@+id/motor_pump_start_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/btnbgoutline" />
 

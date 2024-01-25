@@ -1,39 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="#eaeff5"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
-        android:weightSum="4"
         android:background="@drawable/btnbgedited"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:weightSum="4">
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/meter_equip_name"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Meter"
+            android:textColor="#000"
+            android:textSize="12dp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/meter_equip_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp"
-                android:gravity="center"
-                android:text="Meter"
-                android:textColor="#000"
-                android:textSize="12dp"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
 
         <View
             android:layout_width="1dp"
@@ -41,51 +34,36 @@
             android:background="#000" />
 
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/meter_reading_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Reading"
+            android:textColor="#000"
+            android:textSize="12dp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/meter_reading_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="Reading"
-                android:textColor="#000"
-                android:textSize="12dp"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
 
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="#000" />
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/meter_reading_time"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/meter_reading_time"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="Reading (T)"
-                android:textColor="#000"
-                android:textSize="12dp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Reading (T)"
+            android:textColor="#000"
+            android:textSize="12dp"
+            android:textStyle="bold" />
 
 
         <View
@@ -93,25 +71,18 @@
             android:layout_height="match_parent"
             android:background="#000" />
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/meter_total"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/meter_total"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="Total"
-                android:textColor="#000"
-                android:textSize="12dp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Total"
+            android:textColor="#000"
+            android:textSize="12dp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
