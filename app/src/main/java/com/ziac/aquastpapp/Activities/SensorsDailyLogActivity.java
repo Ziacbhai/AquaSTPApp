@@ -52,7 +52,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
     SensorsModelClass sensorsModelClass;
 
     RecyclerView sensor_recyclerView;
-   // RecyclerView sensor_recyclerView2;
+    RecyclerView sensor_recyclerView2;
     Context context;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -88,13 +88,13 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
         sensor_recyclerView.setHasFixedSize(true);
         sensor_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-       // DailyLogSensors();
+        DailyLogSensors();
 
-       /* sensor_recyclerView2 = findViewById(R.id.sensors_recyclerview);
+        sensor_recyclerView2 = findViewById(R.id.sensors_recyclerview);
         sensor_recyclerView2.setLayoutManager(new LinearLayoutManager(this));
         sensor_recyclerView2.setHasFixedSize(true);
         sensor_recyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-*/
+
     }
 
     private void updateDateTime() {
