@@ -411,4 +411,8 @@ public class WelcomeOwner extends AppCompatActivity {
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }

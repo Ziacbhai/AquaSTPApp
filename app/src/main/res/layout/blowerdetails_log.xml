@@ -23,7 +23,7 @@
             <TextView
                 android:id="@+id/blower_equip_name"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center"
                 android:text="Blower"
@@ -34,7 +34,6 @@
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="#000" />
-
 
             <TextView
                 android:id="@+id/blower_start_time"
@@ -84,6 +83,8 @@
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="#000" />
+
+
             <ImageView
                 android:id="@+id/blower_start"
                 android:layout_width="0dp"
@@ -92,6 +93,8 @@
                 android:gravity="center"
                 android:src="@drawable/play"
                 android:textColor="#fff" />
+
+
             <ImageView
                     android:id="@+id/blower_stop"
                     android:layout_width="0dp"
@@ -100,6 +103,9 @@
                     android:gravity="center"
                     android:src="@drawable/stop"
                     android:textColor="#fff" />
+
+
+
             <ImageView
                     android:id="@+id/blower_rollover"
                     android:layout_width="0dp"

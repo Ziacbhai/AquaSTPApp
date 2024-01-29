@@ -22,7 +22,7 @@ public class MeterDailyLogAdapter extends RecyclerView.Adapter<MeterDailyLogAdap
     private List<MetersDailyLogClass> metersDailyLogClass;
     Context context;
 
-    public MeterDailyLogAdapter(List<MetersDailyLogClass> metersDailyLogClass) {
+    public MeterDailyLogAdapter(List<MetersDailyLogClass> metersDailyLogClass, Context context) {
         this.metersDailyLogClass = metersDailyLogClass;
         this.context = context;
     }
@@ -54,8 +54,8 @@ public class MeterDailyLogAdapter extends RecyclerView.Adapter<MeterDailyLogAdap
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            Meter_equip_name = itemView.findViewById(R.id.meter_equip_name);
-            Meter_reading_edit = itemView.findViewById(R.id.meter_reading_edit);
+            Meter_equip_name = itemView.findViewById(R.id.meter_name);
+            Meter_reading_edit = itemView.findViewById(R.id.meter_reading);
             Meter_reading_time = itemView.findViewById(R.id.meter_reading_time);
             Meter_total = itemView.findViewById(R.id.meter_total);
         }

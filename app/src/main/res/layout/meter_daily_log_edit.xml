@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:weightSum="3"
         android:background="@drawable/btnbgedited"
         android:orientation="horizontal"
         android:padding="5dp">
@@ -18,7 +19,7 @@
             android:id="@+id/meter_equip_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:gravity="center"
             android:padding="5dp"
             android:text="Meter"
@@ -40,6 +41,7 @@
             android:layout_weight="1"
             android:background="@drawable/btnbgedited"
             android:gravity="center"
+            android:inputType="number"
             android:hint="Reading"
             android:padding="5dp"
             android:textColor="#000"
@@ -57,10 +59,21 @@
             android:id="@+id/meter_save"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:gravity="center"
             android:padding="5dp"
             android:text="Save"
+            android:textColor="#000"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:padding="5dp"
             android:textColor="#000"
             android:textSize="12dp"
             android:textStyle="bold" />

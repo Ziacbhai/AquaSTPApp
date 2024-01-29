@@ -118,7 +118,6 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
 
         RequestQueue queue = Volley.newRequestQueue(context);
         // url
-
         String blowerurl ="";
 
         switch (type){
@@ -134,11 +133,7 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
             default:
                 blowerurl = "";
                 break;
-
-
         }
-
-
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
         String dlog_date = Global.sharedPreferences.getString("dlogdate", "0");
@@ -208,13 +203,10 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-
         TextView Blower_equip_name,Blower_start_time,Blower_stopped_time,Blower_running_time;
-
         ImageView Blower_start,Blower_rollover,Blower_stop;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-
             Blower_equip_name = itemView.findViewById(R.id.blower_equip_name);
             Blower_start_time = itemView.findViewById(R.id.blower_start_time);
             Blower_stopped_time = itemView.findViewById(R.id.blower_stopped_time);
@@ -222,7 +214,6 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
             Blower_start = itemView.findViewById(R.id.blower_start);
             Blower_stop = itemView.findViewById(R.id.blower_stop);
             Blower_rollover = itemView.findViewById(R.id.blower_rollover);
-
         }
     }
 }

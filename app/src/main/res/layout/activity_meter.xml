@@ -167,6 +167,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:weightSum="3"
         android:background="@drawable/btnbg"
         android:orientation="horizontal"
         android:padding="5dp">
@@ -175,7 +176,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="1.5"
             android:gravity="center"
             android:padding="5dp"
             android:text="Meter"
@@ -211,7 +212,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:gravity="center"
             android:padding="5dp"
             android:text="Save"
@@ -219,22 +220,6 @@
             android:textSize="12dp"
             android:textStyle="bold" />
 
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#fff" />
-
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="5dp"
-            android:textColor="#fff"
-            android:textSize="12dp"
-            android:textStyle="bold" />
 
 
     </LinearLayout>
@@ -257,7 +242,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="1.5"
             android:gravity="center"
             android:padding="5dp"
             android:text="Meter"
@@ -271,10 +256,9 @@
             android:background="#fff" />
 
         <TextView
-            android:id="@+id/meter_reading_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:gravity="center"
             android:padding="5dp"
             android:text="Reading"
@@ -293,7 +277,7 @@
             android:id="@+id/meter_reading_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:gravity="center"
             android:padding="5dp"
             android:text="Reading"
@@ -312,7 +296,7 @@
             android:id="@+id/meter_total"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.9"
             android:gravity="center"
             android:padding="5dp"
             android:text="Total"

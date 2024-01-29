@@ -218,20 +218,21 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
         dialog.show();
 
-        Equipment_spinner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getRepairEquipmentsSpinnerPopup();
-            }
-        });
-
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String equipment_code = Equipment_code.getText().toString();
+
+                if (equipment_code.isEmpty()) {
+                    Toast.makeText(Repair_Details_Activity.this, "Equipment_code should not be empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 updateRepairdetails();
                 dialog.dismiss();
             }
         });
+
         Cancel_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -239,8 +240,76 @@ public class Repair_Details_Activity extends AppCompatActivity {
             }
         });
         getEquipmentsListRepairdetails();
-    }
 
+        Equipment_spinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getRepairEquipmentsSpinnerPopup();
+            }
+        });
+    }
+    private void updateRepairdetails() {
+
+        String remarks = Remark_A.getText().toString();
+        String equipment_code = equipment_spinner.getEquipment_code();
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = Global.updateRepairDAddUpdate;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String sresponse) {
+                JSONObject response;
+                try {
+                    response = new JSONObject(sresponse);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
+                try {
+                    if (response.getBoolean("isSuccess")) {
+                        Toast.makeText(Repair_Details_Activity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
+                        get_Details_Repair();
+                    } else {
+                        Toast.makeText(Repair_Details_Activity.this, response.getString("error"), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", "");
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("equip_code", equipment_code);
+                params.put("repaired_remarks", remarks);
+                params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
+                params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
+                params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
+                params.put("repair1_code", Global.repairClass1.getRepair_code());
+                //params.put("repair1_code", "22");
+                System.out.println(params);
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        queue.add(stringRequest);
+    }
     private void get_Details_Repair() {
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -306,69 +375,6 @@ public class Repair_Details_Activity extends AppCompatActivity {
             }
         };
         queue.add(jsonObjectRequest);
-    }
-
-
-    private void updateRepairdetails() {
-        String remarks = Remark_A.getText().toString();
-        String equipment_code = equipment_spinner.getEquipment_code();
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String url = Global.updateRepairDAddUpdate;
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String sresponse) {
-                JSONObject response;
-                try {
-                    response = new JSONObject(sresponse);
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-
-                try {
-                    if (response.getBoolean("isSuccess")) {
-                        Toast.makeText(Repair_Details_Activity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
-                        get_Details_Repair();
-                    } else {
-                        Toast.makeText(Repair_Details_Activity.this, response.getString("error"), Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<String, String>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", "");
-                headers.put("Authorization", "Bearer " + accesstoken);
-                return headers;
-            }
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("equip_code", equipment_code);
-                params.put("repaired_remarks", remarks);
-                params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
-                params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
-                params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
-                params.put("repair1_code", Global.repairClass1.getRepair_code());
-                //params.put("repair1_code", "22");
-                System.out.println(params);
-                return params;
-            }
-        };
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
-                0,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        queue.add(stringRequest);
     }
 
     private void getEquipmentsListRepairdetails() {

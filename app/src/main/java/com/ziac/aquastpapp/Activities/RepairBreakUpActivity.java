@@ -246,6 +246,53 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String qty, remarks, price, repair_item_code, unit_code,equipment_code,item_code;
+
+                equipment_code = Equipment_Item.getText().toString();
+                item_code = Breakup_Unit.getText().toString();
+                qty = Breakup_qty.getText().toString();
+                remarks = Breakup_remark.getText().toString();
+                price = Breakup_price.getText().toString();
+                unit_code = item_spinner.getBreakup_unit_code();
+                repair_item_code = equipment_spinner.getEquipmentBreakup_code();
+
+
+
+                if (equipment_code.isEmpty()) {
+                    Toast.makeText(RepairBreakUpActivity.this, "Equipment_code should not be empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (item_code.isEmpty()) {
+                    Toast.makeText(RepairBreakUpActivity.this, "Item_code should not be empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (qty.isEmpty()) {
+                    Toast.makeText(RepairBreakUpActivity.this, "Qty should not be empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (remarks.isEmpty()) {
+                    Toast.makeText(RepairBreakUpActivity.this, "Remarks should not be empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (price.isEmpty()) {
+                    Toast.makeText(RepairBreakUpActivity.this, "Price should not be empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (unit_code.isEmpty()) {
+                    Toast.makeText(RepairBreakUpActivity.this, "Unit code should not be empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (repair_item_code.isEmpty()) {
+                    Toast.makeText(RepairBreakUpActivity.this, "Repair item code should not be empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 updateRepairBreakupdetails();
                 dialog.dismiss();
             }

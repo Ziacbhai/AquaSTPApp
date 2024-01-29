@@ -2,7 +2,15 @@ package Models;
 
 public class MetersDailyLogClass {
 
-    String meters_equip_name,meters_reading_edit,meters_reading_time,meters_total;
+    String meters_equip_name,meters_reading_edit,meters_reading_time,meters_total,tstp3_code;
+
+    public String getTstp3_code() {
+        return tstp3_code;
+    }
+
+    public void setTstp3_code(String tstp3_code) {
+        this.tstp3_code = tstp3_code;
+    }
 
     public String getMeters_equip_name() {
         return meters_equip_name;

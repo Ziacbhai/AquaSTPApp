@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -95,21 +96,21 @@ public class VerifyUserNameOTP extends AppCompatActivity {
             public void onClick(View view) {
                 // getting the PinView data
                 Newpassword = UNewpwd.getText().toString();
-                // username = UNewpwd.getText().toString();
                 otp = mPinView.getText().toString();
 
-              /*  if (Newpassword.length() < 6 ){
-                    Global.customtoast(VerifiyEmailOTP.this, getLayoutInflater(), "Password should not be less than 6 digits !!");
-                    return;
-                }else {
-                    // Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), "Passwords doesn't match !!");
-
-                }*/
-                //Toast.makeText(OTPActivity.this, otp, Toast.LENGTH_SHORT).show();
-                UserDataUsingVolley(otp);
-
+                if (!TextUtils.isEmpty(otp)) {
+                    // Check if other required fields are not empty
+                    if (!TextUtils.isEmpty(Newpassword)) {
+                        UserDataUsingVolley(otp);
+                    } else {
+                        Toast.makeText(VerifyUserNameOTP.this, "Please enter a new password", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(VerifyUserNameOTP.this, "Please enter the OTP", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
 
 
     }
@@ -124,32 +125,32 @@ public class VerifyUserNameOTP extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, Uurl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                // Toast.makeText(VerifyUserNameOTP.this, "Data added to API", Toast.LENGTH_SHORT).show();
                 try {
-
                     JSONObject respObj = new JSONObject(response);
                     String issuccess = respObj.getString("isSuccess");
                     String error = respObj.getString("error");
-//                    Global.editor = sharedPreferences.edit();
-//                    Global.editor.putString("username", username);
-//                    Global.editor.putString("mobile", mobileno);
-//                    Global.editor.commit();
-                    Global.customtoast(VerifyUserNameOTP.this, getLayoutInflater(), error);
                     progressBar.setVisibility(View.GONE);
-                    if (issuccess.equals("true")) {
-                        startActivity(new Intent(VerifyUserNameOTP.this, LoginSignupActivity.class));
 
-                    } else {
-                        showAlertDialog("Wrong OTP", "The entered OTP is incorrect. Please try again.");
-
+                    switch (issuccess) {
+                        case "true":
+                            startActivity(new Intent(VerifyUserNameOTP.this, LoginSignupActivity.class));
+                            break;
+                        default:
+                            if (error.equals("PasswordError")) {
+                                showAlertDialog("Wrong Password", "The entered password is incorrect. Please try again.");
+                            } else {
+                                //showAlertDialog("General Error", "An error occurred. Please try again.");
+                                Global.customtoast(VerifyUserNameOTP.this, getLayoutInflater(), error);
+                            }
+                            break;
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     progressBar.setVisibility(View.GONE);
                     Global.customtoast(VerifyUserNameOTP.this, getLayoutInflater(), e.getMessage());
                 }
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {

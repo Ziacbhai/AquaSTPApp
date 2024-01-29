@@ -58,6 +58,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.SensorsDailyLog_Image_Upload_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.FiltersDailyLog_Image_Upload_Activity"
             android:exported="false" />
         <activity

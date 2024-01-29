@@ -16,10 +16,10 @@
 
 
         <TextView
-            android:id="@+id/meter_equip_name"
+            android:id="@+id/meter_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:gravity="center"
             android:padding="5dp"
             android:text="Meter"
@@ -35,17 +35,16 @@
 
 
         <TextView
-            android:id="@+id/meter_reading_edit"
+            android:id="@+id/meter_reading"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:gravity="center"
             android:padding="5dp"
             android:text="Reading"
             android:textColor="#000"
             android:textSize="12dp"
             android:textStyle="bold" />
-
 
         <View
             android:layout_width="1dp"
@@ -57,7 +56,7 @@
             android:id="@+id/meter_reading_time"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:gravity="center"
             android:padding="5dp"
             android:text="Reading (T)"
@@ -76,7 +75,7 @@
             android:id="@+id/meter_total"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.9"
             android:gravity="center"
             android:padding="5dp"
             android:text="Total"

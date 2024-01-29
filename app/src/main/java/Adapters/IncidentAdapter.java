@@ -1,7 +1,9 @@
 package Adapters;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +66,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
 
         holder.Incedent_Particlulars.setText(incidentsClass.get(position).getIncidents_Particulars());
 
-       /* holder.Inc_delete.setOnClickListener(new View.OnClickListener() {
+        /*holder.Inc_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(v.getContext());
@@ -90,7 +92,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             }
         });*/
 
-        String conNoString = incidentsClass.get(position).getIncident_Code();
+        String conNoString = incidentsClass.get(position).getIncident_no();
         double conNo;
         try {
             conNo = Double.parseDouble(conNoString);

@@ -252,11 +252,12 @@ public class Consumption_Fragment extends Fragment {
                                 JSONObject dataObject = dataArray.getJSONObject(i);
                                 ConsumptionClass consumablesClass = new ConsumptionClass();
 
-                                consumablesClass.setCon1_code(dataObject.getString("con1_code"));
+                                consumablesClass.setCon1_code(dataObject.getString("con_no"));
                                 consumablesClass.setDate(dataObject.getString("con_date"));
                                 consumablesClass.setAmount(dataObject.getString("con_amt"));
                                 consumablesClass.setRemark(dataObject.getString("remarks"));
                                 consumablesClass.setCreated_by(dataObject.getString("createdby"));
+                                consumablesClass.setCon_no(dataObject.getString("con_no"));
 
                                 Global.Consumption1list.add(consumablesClass);
                             }

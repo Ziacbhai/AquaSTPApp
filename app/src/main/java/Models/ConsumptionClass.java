@@ -1,7 +1,15 @@
 package Models;
 
 public class ConsumptionClass {
-    String Remark,Date,Amount,Sstp1_code,Con1_code,Created_by;
+    String Remark,Date,Amount,Sstp1_code,Con1_code,Created_by,Con_no;
+
+    public String getCon_no() {
+        return Con_no;
+    }
+
+    public void setCon_no(String con_no) {
+        Con_no = con_no;
+    }
 
     public String getCreated_by() {
         return Created_by;

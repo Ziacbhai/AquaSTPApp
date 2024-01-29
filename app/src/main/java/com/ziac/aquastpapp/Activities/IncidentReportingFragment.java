@@ -307,6 +307,7 @@ public class IncidentReportingFragment extends Fragment {
                         incidents.setIncident_Date(e.getString("incident_date"));
                         incidents.setIncidents_Particulars(e.getString("incident_desc"));
                         incidents.setInc_Created_by(e.getString("createdby"));
+                        incidents.setIncident_no(e.getString("incident_no"));
 
                        /* String incident_code = incidents.getIncident_Code();
                         Global.editor = Global.sharedPreferences.edit();

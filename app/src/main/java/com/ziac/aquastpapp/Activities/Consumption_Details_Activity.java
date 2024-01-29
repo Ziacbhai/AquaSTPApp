@@ -86,6 +86,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     private boolean isSwipeRefreshTriggered = false;
 
     ImageView Repair_back_btn;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +95,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
         context = this;
         user_topcard();
-
 
 
         progressDialog = new ProgressDialog(context);
@@ -135,7 +135,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
     private void user_topcard() {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String stpname, sitename, processname, consumption_date, consumption_no, consumption_amount,stpcapacity;
+        String stpname, sitename, processname, consumption_date, consumption_no, consumption_amount, stpcapacity;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         processname = sharedPreferences.getString("process_name", "");
@@ -152,7 +152,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         textdate = findViewById(R.id.consumption_date);
         texamount = findViewById(R.id.consumption_amount);
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
+        txtstpname.setText(stpname + " / " + processname + " / " + stpcapacity);
 
         textno.setText(consumption_no);
         texamount.setText(consumption_amount + "0");
@@ -189,11 +189,13 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     private void showAddDetailsDialog(Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        LinearLayout Equipment,Item;
+        LinearLayout Equipment, Item;
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_consumption_details_layout, null);
+
         Equipment_code = dialogView.findViewById(R.id.equipment_name_alert_spinner);
         Item_codeTV = dialogView.findViewById(R.id.item_name_alert_spinner);
+
         Equipment = dialogView.findViewById(R.id.eqipment_alert_spinner);
         Item = dialogView.findViewById(R.id.Item_alert_spinner);
 
@@ -210,6 +212,8 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             }
         });
 
+
+
         Qty_cb = dialogView.findViewById(R.id.qty_alert_cd);
         Update_A = dialogView.findViewById(R.id.update_alert_cd);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_cd);
@@ -225,7 +229,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             dialog.getWindow().setAttributes(layoutParams);
         }
         dialog.show();
-        Update_A.setOnClickListener(new View.OnClickListener() {
+       /* Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String enteredQty = Qty_cb.getText().toString().trim();
@@ -241,6 +245,35 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     }
                 }
             }
+        });*/
+
+        Update_A.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String equipment_code = Equipment_code.getText().toString();
+                String item_code = Item_codeTV.getText().toString();
+                String qty = Qty_cb.getText().toString();
+
+
+
+                if (equipment_code.isEmpty()) {
+                    Toast.makeText(Consumption_Details_Activity.this, "Equipment_code  should not be empty !!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (item_code.isEmpty()) {
+                    Toast.makeText(Consumption_Details_Activity.this, "Item_code  should not be empty !!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (qty.isEmpty()) {
+                    Toast.makeText(Consumption_Details_Activity.this, "Qty  should not be empty !!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                updateConsumables_details();
+                dialog.dismiss();
+            }
         });
         Cancel_A.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,23 +288,10 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
     private void updateConsumables_details() {
 
-
         String qty = Qty_cb.getText().toString();
+        String equipment_code = equipment_spinner.getEquipment_code();
+        String item_code = Item_spinner.getItem_code();
 
-
-        String equipment_code = Equipment_code.getText().toString();
-        String item_code = Item_codeTV.getText().toString();
-
-        if (qty.isEmpty()) {
-            Toast.makeText(this, "Qty  should not be empty !!", Toast.LENGTH_SHORT).show();
-            return;
-        }if (equipment_code.isEmpty()){
-            Toast.makeText(this, "Equipment_code  should not be empty !!", Toast.LENGTH_SHORT).show();
-            return;
-        }if (item_code.isEmpty()){
-            Toast.makeText(this, "Item_code  should not be empty !!", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.updateDConsumption;
@@ -329,9 +349,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 String con1_code = Global.ConsumptionClass.getCon1_code();
                 params.put("item_code", item_code);
-                params.put("item_code",  String.valueOf(equipment_spinner.getEquipment_id()));
-                /*params.put("equip_code", equipment_code);*/
-                params.put("equip_code", String.valueOf(equipment_spinner.getEquipment_id()));
+               // params.put("item_code", String.valueOf(equipment_spinner.getEquipment_code()));
+                params.put("equip_code", equipment_code);
+               // params.put("equip_code", String.valueOf(equipment_spinner.getEquipment_id()));
                 params.put("qty", qty);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
@@ -516,7 +536,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
         /*TextView Equipment_name =zDialog.findViewById(R.id.euipment_name);
         TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);*/
-         getEquipmentsList();
+        getEquipmentsList();
         if (Global.Consumption_equipment == null || Global.Consumption_equipment.size() == 0) {
             Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
             return;
@@ -750,16 +770,20 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         public View getView(int i, View convertView, ViewGroup parent) {
 
             View v = getLayoutInflater().inflate(R.layout.popup_itemlist_consumption, null);
+            LinearLayout select_item = findViewById(R.id.select_item);
             TextView tvequipmentnameitem = v.findViewById(R.id.tvitemfirst);
             TextView tvenameitem = v.findViewById(R.id.tvitemtwoc);
             Item_spinner = mDataArrayList.get(i);
             tvequipmentnameitem.setText(Item_spinner.getItem_name());
-            tvenameitem.setText(Item_spinner.getItem());
+            tvenameitem.setText(Item_spinner.getItem_code());
 
-            tvequipmentnameitem.setOnClickListener(view1 -> {
-                Item_spinner = mDataArrayList.get(i);
-                Item_codeTV.setText(Item_spinner.getItem_name());
-                zDialog.dismiss();
+            tvenameitem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Item_spinner = mDataArrayList.get(i);
+                    Item_codeTV.setText(Item_spinner.getItem_name());
+                    zDialog.dismiss();
+                }
             });
 
             return v;

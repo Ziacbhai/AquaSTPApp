@@ -267,13 +267,13 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                             sensorsModelClass.setReading(e.getString("reading_value"));
                             sensorsModelClass.setReading_time(e.getString("readingtime"));
                             sensorsModelClass.setSensor_total(e.getString("final_value"));
-                            //sensorsModelClass.setSensor_image(e.getString("running_time"));
+                            sensorsModelClass.setSensor_image(e.getString("image_path"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
                         Global.Sensors_Class.add(sensorsModelClass);
-                        SensorDailyLogAdapter sensorDailyLogAdapter = new SensorDailyLogAdapter((List<SensorsModelClass>) Global.Sensors_Class);
+                        SensorDailyLogAdapter sensorDailyLogAdapter = new SensorDailyLogAdapter((List<SensorsModelClass>) Global.Sensors_Class,context);
                         sensor_recyclerView2.setAdapter(sensorDailyLogAdapter);
                     }
                 } catch (JSONException e) {

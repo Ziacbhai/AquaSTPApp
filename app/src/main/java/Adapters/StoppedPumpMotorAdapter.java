@@ -41,9 +41,6 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
 
     private List<PumpMotorBlower_LogClass> pumpMotorDailyLogClass;
     Context context;
-    //PumpMotorBlower_LogClass pumpMotorClass;
-    //RecyclerView pump_motor_stoped_recyclerview;
-
     public StoppedPumpMotorAdapter(List<PumpMotorBlower_LogClass> pumpMotorDailyLogClass, Context context) {
         this.pumpMotorDailyLogClass = pumpMotorDailyLogClass;
         this.context = context;
@@ -77,10 +74,6 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
         } else {
             holder.Pump_start.setVisibility(View.VISIBLE);
         }
-    }
-
-    private void clearData() {
-        pumpMotorDailyLogClass.clear();
     }
 
     @Override

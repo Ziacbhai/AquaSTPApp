@@ -55,7 +55,7 @@ public class Global {
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl = "http://192.168.1.3:9396/";
+    public static String baseurl = "http://192.168.1.6:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
 
@@ -74,6 +74,8 @@ public class Global {
 
     //Meter
     public static String GetDailyLogMeter = baseurl + "api/DailyLog/GetMeters?";
+
+    public static String DailyLogUpdateMeterReadings = baseurl + "api/DailyLog/UpdateMeterReadings";
 
     //Filters
     public static String GetDailyLogFilters = baseurl + "api/DailyLog/GetFilters?";
@@ -162,8 +164,11 @@ public class Global {
     public static RepairClass4 repairClass4;
     public static LabTestClass labTestClass1;
     public static IncidentsClass incidentsClass;
-
     public static FiltersClass filtersClass;
+
+    public static MetersDailyLogClass metersDailyLogClass;
+
+    public static SensorsModelClass sensorclass;
     public static ArrayList<ConsumptionClass> Consumption1list;
     public static ArrayList<ConsumptionClass2> Consumption2list;
     public static ArrayList<EquipmentListClassConsumption> Consumption_equipment;
