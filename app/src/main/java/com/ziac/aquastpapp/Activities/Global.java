@@ -9,21 +9,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-
 import Models.CommonModelClass;
 import Models.ConsumptionClass;
-
 import Models.ConsumptionClass2;
 import Models.DailyLogClass;
 import Models.EquipmentClassRepairBreakUp;
@@ -55,7 +50,7 @@ public class Global {
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl = "http://192.168.1.6:9396/";
+    public static String baseurl = "http://192.168.1.9:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
 

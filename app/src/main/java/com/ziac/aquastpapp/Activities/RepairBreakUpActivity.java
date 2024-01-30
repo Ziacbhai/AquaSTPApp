@@ -212,6 +212,12 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         Equipment_Item = dialogView.findViewById(R.id.repair_breakup_item_alert_spinner);
         Breakup_Unit = dialogView.findViewById(R.id.repair_breakup_unit_alert_spinner);
 
+        Breakup_qty = dialogView.findViewById(R.id.repair_breakup_qty_alert_spinner);
+        Breakup_price = dialogView.findViewById(R.id.repair_breakup_price_alert_spinner);
+        Breakup_remark = dialogView.findViewById(R.id.remark_breakup);
+        Update_A = dialogView.findViewById(R.id.update_alert_breakup);
+        Cancel_A = dialogView.findViewById(R.id.cancel_alert_breakup);
+
         Equipment_Item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -224,11 +230,6 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 getItemBreakUpSpinnerPopup();
             }
         });
-        Breakup_qty = dialogView.findViewById(R.id.repair_breakup_qty_alert_spinner);
-        Breakup_price = dialogView.findViewById(R.id.repair_breakup_price_alert_spinner);
-        Breakup_remark = dialogView.findViewById(R.id.remark_breakup);
-        Update_A = dialogView.findViewById(R.id.update_alert_breakup);
-        Cancel_A = dialogView.findViewById(R.id.cancel_alert_breakup);
 
         builder.setView(dialogView);
 
@@ -248,15 +249,10 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String qty, remarks, price, repair_item_code, unit_code,equipment_code,item_code;
-
                 equipment_code = Equipment_Item.getText().toString();
                 item_code = Breakup_Unit.getText().toString();
                 qty = Breakup_qty.getText().toString();
-                remarks = Breakup_remark.getText().toString();
                 price = Breakup_price.getText().toString();
-                unit_code = item_spinner.getBreakup_unit_code();
-                repair_item_code = equipment_spinner.getEquipmentBreakup_code();
-
 
 
                 if (equipment_code.isEmpty()) {
@@ -273,24 +269,8 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                     Toast.makeText(RepairBreakUpActivity.this, "Qty should not be empty!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                if (remarks.isEmpty()) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Remarks should not be empty!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 if (price.isEmpty()) {
                     Toast.makeText(RepairBreakUpActivity.this, "Price should not be empty!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (unit_code.isEmpty()) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Unit code should not be empty!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (repair_item_code.isEmpty()) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Repair item code should not be empty!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 updateRepairBreakupdetails();
@@ -412,6 +392,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                     }
                     Global.repair3list.add(repairClass3);
                     Repair_BreakUp_Adapter repairBreakUpAdapter = new Repair_BreakUp_Adapter(Global.repair3list, context);
+                    repairBreakUpAdapter.notifyDataSetChanged();
                     Repair_breakup_recyclerview.setAdapter(repairBreakUpAdapter);
                 }
                 getEquipmentsRepairlist();

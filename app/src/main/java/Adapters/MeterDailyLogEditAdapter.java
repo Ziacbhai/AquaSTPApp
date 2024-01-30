@@ -37,7 +37,7 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
 
     private List<MetersDailyLogClass> metersDailyLogClass;
     Context context;
-
+    String enteredValue;
     public MeterDailyLogEditAdapter(List<MetersDailyLogClass> metersDailyLogClass) {
         this.metersDailyLogClass = metersDailyLogClass;
         this.context = context;
@@ -57,16 +57,28 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
         holder.Meter_reading_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Meter_reading = metersDailyLogClass.get(position).getMeters_reading_edit();
-               ;
+                /*String enteredValue = holder.Meter_reading_edit.getText().toString();
+                metersDailyLogClass.get(position).setMeters_reading_edit(enteredValue);
+                notifyDataSetChanged();*/
+                enteredValue = holder.Meter_reading_edit.getText().toString();
             }
         });
 
         holder.Meter_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Global.Meters_Class.get(position).getMeters_reading_edit();
+
+               /* String meterReading = metersDailyLogClass.get(position).getMeters_reading_edit();
+                Global.Meters_Class.get(position).setMeters_reading_edit(meterReading);
                 DailyLogMeters(position);
+                Global.Meters_Class.get(position).getMeters_reading_edit();*/
+                Toast.makeText(context, "data saved", Toast.LENGTH_SHORT).show();
+                if (enteredValue != null) {
+                    Global.Meters_Class.get(position).setMeters_reading_edit(enteredValue);
+                } else {
+                    Toast.makeText(context, "its not working", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -79,7 +91,7 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, MeterUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(context, "Meters_Update", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Meters_Updated", Toast.LENGTH_LONG).show();
             }
         }, new Response.ErrorListener() {
             @Override
