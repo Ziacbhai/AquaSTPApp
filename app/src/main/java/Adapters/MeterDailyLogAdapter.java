@@ -36,10 +36,10 @@ public class MeterDailyLogAdapter extends RecyclerView.Adapter<MeterDailyLogAdap
 
     @Override
     public void onBindViewHolder(@NonNull MeterDailyLogAdapter.ViewHolder holder, int position) {
-       holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_equip_name());
+       /*holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_equip_name());
        holder.Meter_reading_edit.setText(metersDailyLogClass.get(position).getMeters_reading_edit());
        holder.Meter_reading_time.setText(metersDailyLogClass.get(position).getMeters_reading_time());
-       holder.Meter_total.setText(metersDailyLogClass.get(position).getMeters_total());
+       holder.Meter_total.setText(metersDailyLogClass.get(position).getMeters_total());*/
 
     }
 
