@@ -1,5 +1,6 @@
 package Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -38,7 +40,8 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
     private List<MetersDailyLogClass> metersDailyLogClass;
     Context context;
     String enteredValue;
-    public MeterDailyLogEditAdapter(List<MetersDailyLogClass> metersDailyLogClass) {
+
+    public MeterDailyLogEditAdapter(List<MetersDailyLogClass> metersDailyLogClass, Context context) {
         this.metersDailyLogClass = metersDailyLogClass;
         this.context = context;
     }
@@ -51,47 +54,39 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MeterDailyLogEditAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MeterDailyLogEditAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_equip_name());
-        holder.Meter_reading_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*String enteredValue = holder.Meter_reading_edit.getText().toString();
-                metersDailyLogClass.get(position).setMeters_reading_edit(enteredValue);
-                notifyDataSetChanged();*/
-                enteredValue = holder.Meter_reading_edit.getText().toString();
-            }
-        });
 
         holder.Meter_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-               /* String meterReading = metersDailyLogClass.get(position).getMeters_reading_edit();
-                Global.Meters_Class.get(position).setMeters_reading_edit(meterReading);
-                DailyLogMeters(position);
-                Global.Meters_Class.get(position).getMeters_reading_edit();*/
-                Toast.makeText(context, "data saved", Toast.LENGTH_SHORT).show();
-                if (enteredValue != null) {
-                    Global.Meters_Class.get(position).setMeters_reading_edit(enteredValue);
-                } else {
-                    Toast.makeText(context, "its not working", Toast.LENGTH_SHORT).show();
-                }
-
+                holder.Meter_reading_edit.getText().toString();
+                DailyLogMeters(enteredValue);
             }
         });
 
     }
 
 
-    private void DailyLogMeters(int position) {
+    private void DailyLogMeters(String enteredValue) {
         RequestQueue queue = Volley.newRequestQueue(context);
-        String MeterUrl = Global.DailyLogUpdateMeterReadings;
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, MeterUrl, null, new Response.Listener<JSONObject>() {
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Global.DailyLogUpdateMeterReadings, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(context, "Meters_Updated", Toast.LENGTH_LONG).show();
+                try {
+                    String status = response.getString("status");
+
+                    if ("success".equals(status)) {
+                        Toast.makeText(context, "Update successful", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Update failed", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "Error parsing response", Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -123,8 +118,8 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
                 Map<String, String> params = new HashMap<>();
                 params.put("com_code", Global.sharedPreferences.getString("com_code", null));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", null));
-                params.put("tstp3_code", Global.Meters_Class.get(position).getTstp3_code());
-                params.put("reading_value", Global.Meters_Class.get(position).getMeters_reading_edit());
+                params.put("tstp3_code", Global.metersDailyLogClass.getTstp3_code());
+                params.put("reading_value", enteredValue);
                 return params;
             }
         };

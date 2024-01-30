@@ -52,7 +52,7 @@ public class LoginSignupActivity extends AppCompatActivity {
         registerTab.setText("REGISTER");
         tabLayout.addTab(registerTab);
 
-        loginTab.view.setBackgroundColor(Color.rgb(1, 163, 163));
+       // loginTab.view.setBackgroundColor(Color.rgb(1, 163, 163));
         tabLayout.setTabTextColors(Color.rgb(1, 163, 163), Color.WHITE);
 
 
@@ -106,7 +106,6 @@ public class LoginSignupActivity extends AppCompatActivity {
 
 
     public void onBackPressed() {
-
 
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();

@@ -59,9 +59,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
-
-
-
         Profile = findViewById(R.id.profileIcon);
         drawerLayout = findViewById(R.id.drawerlayout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);

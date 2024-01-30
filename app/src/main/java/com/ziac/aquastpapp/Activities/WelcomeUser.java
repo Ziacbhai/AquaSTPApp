@@ -48,7 +48,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WelcomeUser extends AppCompatActivity {
-    private TextView userpersonname, usermail, usermobile, ClickHere,Company;
+    private TextView userpersonname, usermail, usermobile, ClickHere, Company;
     ImageView ImageView, Userexit;
     AppCompatButton ucontinue;
     Context context;
@@ -64,13 +64,11 @@ public class WelcomeUser extends AppCompatActivity {
         context = this;
 
 
-
-
         Company = findViewById(R.id.company);
         /*fab = findViewById(R.id.floating);*/
         ImageView = findViewById(R.id.imageView);
         userpersonname = findViewById(R.id._person);
-      //  ClickHere = findViewById(R.id.Clickhere);
+        //  ClickHere = findViewById(R.id.Clickhere);
         ucontinue = findViewById(R.id.uContinue);
         usermail = findViewById(R.id.uMail);
         usermobile = findViewById(R.id.uPh);
@@ -127,7 +125,12 @@ public class WelcomeUser extends AppCompatActivity {
         ucontinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(WelcomeUser.this,SelectSTPLocationActivity.class));
+                if (Global.StpList.isEmpty()) {
+                    startActivity(new Intent(WelcomeUser.this, GenerateSTPdetails.class));
+                } else {
+                    startActivity(new Intent(WelcomeUser.this, SelectSTPLocationActivity.class));
+
+                }
             }
         });
 

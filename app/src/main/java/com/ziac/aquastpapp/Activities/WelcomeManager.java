@@ -55,7 +55,7 @@ import java.util.Map;
 
 public class WelcomeManager extends AppCompatActivity {
 
-    TextView Managername, Managermail, Managermobile, ClickHere,Company;
+    TextView Managername, Managermail, Managermobile, ClickHere, Company;
     ImageView ImageView, ManagerExit;
     AppCompatButton mContinue;
     Context context;
@@ -71,7 +71,7 @@ public class WelcomeManager extends AppCompatActivity {
         context = this;
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-       /* fab = findViewById(R.id.floating);*/
+        /* fab = findViewById(R.id.floating);*/
 
         Company = findViewById(R.id.company);
         //ClickHere = findViewById(R.id.Clickhere);
@@ -142,7 +142,12 @@ public class WelcomeManager extends AppCompatActivity {
         mContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(WelcomeManager.this,SelectSTPLocationActivity.class));
+                if (Global.StpList.isEmpty()) {
+                    startActivity(new Intent(WelcomeManager.this, GenerateSTPdetails.class));
+                } else {
+                    startActivity(new Intent(WelcomeManager.this, SelectSTPLocationActivity.class));
+                }
+
             }
         });
 

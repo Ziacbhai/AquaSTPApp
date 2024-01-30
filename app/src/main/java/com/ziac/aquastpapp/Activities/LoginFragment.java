@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -47,7 +48,7 @@ public class LoginFragment extends Fragment {
 
     EditText Login_User, Login_pwd;
     private CheckBox RememberMe;
-    TextView TermsOfuse, Privacy, Forgotpwd,Login_btn;
+    TextView TermsOfuse, Privacy, Forgotpwd, Login_btn;
     boolean passwordVisible;
     String username, pwd;
     StpModelClass stpModelClass;
@@ -237,79 +238,83 @@ public class LoginFragment extends Fragment {
 
             try {
                 JSONObject respObj1 = new JSONObject(response);
-                JSONObject respObj = new JSONObject(respObj1.getString("data"));
-                String ayear = respObj1.getString("ayear");
-                String finstdate = respObj1.getString("fin_stdate");
-                String fineddate = respObj1.getString("fin_eddate");
-                String user_code = respObj.getString("user_code");
-                String person_name = respObj.getString("person_name");
-                String com_code = respObj.getString("com_code");
-                String user_image = respObj.getString("user_image");
-                String user_type = respObj.getString("user_type");
-                String user_mobile = respObj.getString("user_mobile");
-                String user_email = respObj.getString("user_email");
-                String ref_code = respObj.getString("ref_code");
-                String com_name = respObj.getString("com_name");
-               // String stp_capacity = respObj.getString("stp_capacity");
+                boolean isSuccess = respObj1.getBoolean("isSuccess");
+                if (isSuccess) {
 
 
-                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-                Global.editor = Global.sharedPreferences.edit();
-                Global.editor.putString("user_code", user_code);
-                Global.editor.putString("person_nameu", person_name);
-                Global.editor.putString("com_code", com_code);
-                Global.editor.putString("user_image", user_image);
-                Global.editor.putString("user_type", user_type);
-                Global.editor.putString("user_mobile", user_mobile);
-                Global.editor.putString("user_email", user_email);
-                Global.editor.putString("ref_code", ref_code);
-                Global.editor.putString("user_image", user_image);
-                Global.editor.putString("ayear", ayear);
-                Global.editor.putString("fin_stdate", finstdate);
-                Global.editor.putString("fin_eddate", fineddate);
-                Global.editor.putString("com_name", com_name);
-               // Global.editor.putString("stp_capacity", stp_capacity);
-                // preferences.edit().remove("text").commit();
-                Global.editor.commit();
-
-                JSONArray liststp = new JSONArray(respObj1.getString("data2"));
+                    JSONObject respObj = new JSONObject(respObj1.getString("data"));
+                    String ayear = respObj1.getString("ayear");
+                    String finstdate = respObj1.getString("fin_stdate");
+                    String fineddate = respObj1.getString("fin_eddate");
+                    String user_code = respObj.getString("user_code");
+                    String person_name = respObj.getString("person_name");
+                    String com_code = respObj.getString("com_code");
+                    String user_image = respObj.getString("user_image");
+                    String user_type = respObj.getString("user_type");
+                    String user_mobile = respObj.getString("user_mobile");
+                    String user_email = respObj.getString("user_email");
+                    String ref_code = respObj.getString("ref_code");
+                    String com_name = respObj.getString("com_name");
+                    // String stp_capacity = respObj.getString("stp_capacity");
 
 
-                try {
-                    Global.StpList = new ArrayList<>();
+                    Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+                    Global.editor = Global.sharedPreferences.edit();
+                    Global.editor.putString("user_code", user_code);
+                    Global.editor.putString("person_nameu", person_name);
+                    Global.editor.putString("com_code", com_code);
+                    Global.editor.putString("user_image", user_image);
+                    Global.editor.putString("user_type", user_type);
+                    Global.editor.putString("user_mobile", user_mobile);
+                    Global.editor.putString("user_email", user_email);
+                    Global.editor.putString("ref_code", ref_code);
+                    Global.editor.putString("user_image", user_image);
+                    Global.editor.putString("ayear", ayear);
+                    Global.editor.putString("fin_stdate", finstdate);
+                    Global.editor.putString("fin_eddate", fineddate);
+                    Global.editor.putString("com_name", com_name);
+                    // Global.editor.putString("stp_capacity", stp_capacity);
+                    // preferences.edit().remove("text").commit();
+                    Global.editor.commit();
 
-                    for (int i = 0; i < liststp.length(); i++) {
-                        final JSONObject e;
-                        try {
-                            e = liststp.getJSONObject(i);
-                        } catch (JSONException ex) {
-                            throw new RuntimeException(ex);
+                    JSONArray liststp = new JSONArray(respObj1.getString("data2"));
+
+
+                    try {
+                        Global.StpList = new ArrayList<>();
+
+                        for (int i = 0; i < liststp.length(); i++) {
+                            final JSONObject e;
+                            try {
+                                e = liststp.getJSONObject(i);
+                            } catch (JSONException ex) {
+                                throw new RuntimeException(ex);
+                            }
+
+                            stpModelClass = new StpModelClass();
+                            stpModelClass.setSucode(e.getInt("su_code"));
+                            stpModelClass.setComcode(e.getString("com_code"));
+                            stpModelClass.setUsercode(e.getString("user_code"));
+                            stpModelClass.setPersonname(e.getString("person_name"));
+                            stpModelClass.setUsername(e.getString("username"));
+                            stpModelClass.setSstp1code(e.getString("sstp1_code"));
+                            stpModelClass.setStpname(e.getString("stp_name"));
+                            stpModelClass.setSitecode(e.getString("site_code"));
+                            stpModelClass.setSitename(e.getString("site_name"));
+                            stpModelClass.setStpactive(e.getString("stp_active"));
+                            stpModelClass.setSite_address(e.getString("site_address"));
+                            stpModelClass.setProcess__type(e.getString("process_name"));
+                            stpModelClass.setStp_capacity(e.getString("stp_capacity"));
+
+
+                            Global.StpList.add(stpModelClass);
                         }
 
-                        stpModelClass = new StpModelClass();
-                        stpModelClass.setSucode(e.getInt("su_code"));
-                        stpModelClass.setComcode(e.getString("com_code"));
-                        stpModelClass.setUsercode(e.getString("user_code"));
-                        stpModelClass.setPersonname(e.getString("person_name"));
-                        stpModelClass.setUsername(e.getString("username"));
-                        stpModelClass.setSstp1code(e.getString("sstp1_code"));
-                        stpModelClass.setStpname(e.getString("stp_name"));
-                        stpModelClass.setSitecode(e.getString("site_code"));
-                        stpModelClass.setSitename(e.getString("site_name"));
-                        stpModelClass.setStpactive(e.getString("stp_active"));
-                        stpModelClass.setSite_address(e.getString("site_address"));
-                        stpModelClass.setProcess__type(e.getString("process_name"));
-                        stpModelClass.setStp_capacity(e.getString("stp_capacity"));
+                        progressDialog.dismiss();
 
-
-                        Global.StpList.add(stpModelClass);
-                    }
-
-                    progressDialog.dismiss();
-
-                    if (Global.StpList.isEmpty()) {
-                        startActivity(new Intent(getActivity(), GenerateSTPdetails.class));
-                    } else {
+                        /*if (Global.StpList.isEmpty()) {
+                            startActivity(new Intent(getActivity(), GenerateSTPdetails.class));
+                        } else {*/
                         Intent welcomeIntent = null;
 
                         if ("O".equals(user_type)) {
@@ -327,92 +332,23 @@ public class LoginFragment extends Fragment {
                         if (welcomeIntent != null) {
                             welcomeIntent.setType(Settings.ACTION_SYNC_SETTINGS);
                             getActivity().startActivity(welcomeIntent);
-                        }else{
-                            startActivity(new Intent(getActivity(), SelectSTPLocationActivity.class));
+
+                        } else {
+                            //startActivity(new Intent(getActivity(), SelectSTPLocationActivity.class));
+                            Toast.makeText(context, "Unable to get User Details !!", Toast.LENGTH_LONG).show();
                         }
                         // Assuming that the SelectSTPLocationActivity is common for all user types
 
-                }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                        //}
 
 
-               /* try {
-                    Global.StpList = new ArrayList<>();
-                    int i;
-                    for (i = 0; i < liststp.length(); i++) {
-                        final JSONObject e;
-                        try {
-
-                            e = liststp.getJSONObject(i);
-                        } catch (JSONException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        //listofstp = new JSONObject(liststp[i]("site_code"));
-                        stpModelClass = new StpModelClass();
-
-                        stpModelClass.setSucode(e.getInt("su_code"));
-                        stpModelClass.setComcode(e.getString("com_code"));
-                        stpModelClass.setUsercode(e.getString("user_code"));
-                        stpModelClass.setPersonname(e.getString("person_name"));
-                        stpModelClass.setUsername(e.getString("username"));
-                        stpModelClass.setSstp1code(e.getString("sstp1_code"));
-                        stpModelClass.setStpname(e.getString("stp_name"));
-                        stpModelClass.setSitecode(e.getString("site_code"));
-                        stpModelClass.setSitename(e.getString("site_name"));
-                        stpModelClass.setStpactive(e.getString("stp_active"));
-                        stpModelClass.setSite_address(e.getString("site_address"));
-                        stpModelClass.setProcess__type(e.getString("process_name"));
-                        stpModelClass.setStp_capacity(e.getString("stp_capacity"));
-
-                        Global.StpList.add(stpModelClass);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-
-                    if (Global.StpList.isEmpty()) {
-                        startActivity(new Intent(getActivity(), GenerateSTPdetails.class));
-                    } else {
-
-                        startActivity(new Intent(getActivity(), SelectSTPLocationActivity.class));
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-
+                } else {
+                    progressDialog.dismiss();
+                    Toast.makeText(context, respObj1.getString("error"), Toast.LENGTH_LONG).show();
                 }
-
-                progressDialog.dismiss();
-
-                *//*switch (user_type) {
-                    case "O":
-                        Intent o = new Intent(getActivity(), WelcomeOwner.class);
-                        o.setType(Settings.ACTION_SYNC_SETTINGS);
-                        getActivity().startActivity(o);
-                        break;
-                    case "C":
-                        Intent c = (new Intent(getActivity(), WelcomeCustomer.class));
-                        c.setType(Settings.ACTION_SYNC_SETTINGS);
-                        getActivity().startActivity(c);
-                        break;
-                    case "S":
-                        Intent s = (new Intent(getActivity(), WelcomeSupervisor.class));
-                        s.setType(Settings.ACTION_SYNC_SETTINGS);
-                        getActivity().startActivity(s);
-                        break;
-                    case "M":
-                        Intent m = (new Intent(getActivity(), WelcomeManager.class));
-                        m.setType(Settings.ACTION_SYNC_SETTINGS);
-                        getActivity().startActivity(m);
-                        break;
-                    case "U":
-                        Intent u = (new Intent(getActivity(), WelcomeUser.class));
-                        u.setType(Settings.ACTION_SYNC_SETTINGS);
-                        getActivity().startActivity(u);
-                        break;
-                }*//*
-                // Go to the SelectLocationActivity
-                 *//*   Intent intent = new Intent(getActivity(), SelectLocationActivity.class);
-                    startActivity(intent);*/
 
             } catch (JSONException e) {
                 e.printStackTrace();

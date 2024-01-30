@@ -75,6 +75,7 @@ public class FiltersDailyLogAdapter extends RecyclerView.Adapter<FiltersDailyLog
         } else {
             holder.Filter_image_upload.setVisibility(View.VISIBLE);
         }
+
         holder.Filter_image_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

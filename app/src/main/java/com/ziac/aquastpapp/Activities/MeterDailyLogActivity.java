@@ -196,7 +196,7 @@ public class MeterDailyLogActivity extends AppCompatActivity {
                         }
                         DailyLogMeters();
                         Global.Meters_Class.add(metersDailyLogClass);
-                        MeterDailyLogEditAdapter meterDailyLogEditAdapter = new MeterDailyLogEditAdapter((List<MetersDailyLogClass>) Global.Meters_Class);
+                        MeterDailyLogEditAdapter meterDailyLogEditAdapter = new MeterDailyLogEditAdapter((List<MetersDailyLogClass>) Global.Meters_Class,context);
                         Meters_recyclerview.setAdapter(meterDailyLogEditAdapter);
                     }
                 } catch (JSONException e) {

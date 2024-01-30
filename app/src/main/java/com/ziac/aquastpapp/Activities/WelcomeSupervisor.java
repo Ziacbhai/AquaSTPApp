@@ -56,7 +56,7 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WelcomeSupervisor extends AppCompatActivity {
-    private TextView Sname, Smail, Smobile, ClickHere,Company;
+    private TextView Sname, Smail, Smobile, ClickHere, Company;
     CircleImageView ImageView;
     ImageView SupervisorExit;
     AppCompatButton sContinue;
@@ -79,7 +79,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
         Sname = findViewById(R.id.sName);
         // ClickHere = findViewById(R.id.Clickhere);
         sContinue = findViewById(R.id.sContinue);
-       /* fab = findViewById(R.id.floating);*/
+        /* fab = findViewById(R.id.floating);*/
         SupervisorExit = findViewById(R.id.supervisorexit);
 
         SupervisorExit.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +139,11 @@ public class WelcomeSupervisor extends AppCompatActivity {
         sContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(WelcomeSupervisor.this, SelectSTPLocationActivity.class));
+                if (Global.StpList.isEmpty()) {
+                    startActivity(new Intent(WelcomeSupervisor.this, GenerateSTPdetails.class));
+                } else {
+                    startActivity(new Intent(WelcomeSupervisor.this, SelectSTPLocationActivity.class));
+                }
             }
         });
 

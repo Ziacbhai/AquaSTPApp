@@ -16,9 +16,6 @@ import java.util.List;
 import Models.MetersDailyLogClass;
 
 public class MeterDailyLogAdapter extends RecyclerView.Adapter<MeterDailyLogAdapter.ViewHolder> {
-
-
-
     private List<MetersDailyLogClass> metersDailyLogClass;
     Context context;
 
@@ -36,11 +33,23 @@ public class MeterDailyLogAdapter extends RecyclerView.Adapter<MeterDailyLogAdap
 
     @Override
     public void onBindViewHolder(@NonNull MeterDailyLogAdapter.ViewHolder holder, int position) {
-       /*holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_equip_name());
-       holder.Meter_reading_edit.setText(metersDailyLogClass.get(position).getMeters_reading_edit());
+       holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_equip_name());
        holder.Meter_reading_time.setText(metersDailyLogClass.get(position).getMeters_reading_time());
-       holder.Meter_total.setText(metersDailyLogClass.get(position).getMeters_total());*/
+       holder.Meter_total.setText(metersDailyLogClass.get(position).getMeters_total());
 
+        double rawValue = Double.parseDouble(metersDailyLogClass.get(position).getMeters_reading_edit());
+        String formattedValue = removeTrailingZeros(rawValue);
+        holder.Meter_reading_edit.setText(formattedValue);
+
+    }
+
+    private String removeTrailingZeros(double value) {
+        String stringValue = String.valueOf(value);
+
+        // Remove trailing zeros and decimal point if it's all zeros after the decimal point
+        stringValue = stringValue.replaceAll("0*$", "").replaceAll("\\.$", "");
+
+        return stringValue;
     }
 
     @Override

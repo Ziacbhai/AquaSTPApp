@@ -683,7 +683,7 @@ public class SignUpFragment extends Fragment {
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-                Log.d("getHeaders", params.toString());
+               // Log.d("getHeaders", params.toString());
                 return params;
             }
 

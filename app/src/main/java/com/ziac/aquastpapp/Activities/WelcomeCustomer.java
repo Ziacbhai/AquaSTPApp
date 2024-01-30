@@ -130,7 +130,12 @@ public class WelcomeCustomer extends AppCompatActivity {
         cContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(WelcomeCustomer.this,SelectSTPLocationActivity.class));
+
+                if (Global.StpList.isEmpty()) {
+                    startActivity(new Intent(WelcomeCustomer.this, GenerateSTPdetails.class));
+                } else {
+                startActivity(new Intent(WelcomeCustomer.this, SelectSTPLocationActivity.class));
+                }
             }
         });
     }
