@@ -174,7 +174,6 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
 
                 try {
-
                     Global.loadrunningpumps(response);
                     dailyLogAdapter = new RunningPumpMotorAdapter((List<PumpMotorBlower_LogClass>) Global.RunningPumpsMotors_LogClass, context);
                     pump_motor_started_recyclerview.setAdapter(dailyLogAdapter);
@@ -229,7 +228,5 @@ public class PumpMoterDailyLogActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
 
     }
-
-
 
 }

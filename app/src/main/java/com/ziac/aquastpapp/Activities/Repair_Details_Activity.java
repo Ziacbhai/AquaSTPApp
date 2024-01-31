@@ -1,5 +1,6 @@
 package com.ziac.aquastpapp.Activities;
 
+import static com.android.volley.VolleyLog.TAG;
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import androidx.appcompat.app.AlertDialog;
@@ -20,6 +21,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -239,7 +241,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        getEquipmentsListRepairdetails();
+
 
         Equipment_spinner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,6 +249,8 @@ public class Repair_Details_Activity extends AppCompatActivity {
                 getRepairEquipmentsSpinnerPopup();
             }
         });
+
+        getEquipmentsListRepairdetails();
     }
     private void updateRepairdetails() {
 
@@ -379,9 +383,11 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
     private void getEquipmentsListRepairdetails() {
 
-        String Url = Global.api_List_Get_Equipments + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
-        Url = Url + "&sstp1_code=" + Global.sharedPreferences.getString("sstp1_code", "0");
-
+        String Url = Global.api_List_Get_Equipments +
+                "comcode=" + Global.sharedPreferences.getString("com_code", "0") +
+                "&sstp1_code=" + Global.sharedPreferences.getString("sstp1_code", "0")
+        + "&typ=R";
+        Log.d(TAG, "url:" + Url);
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Url, null,
                 new Response.Listener<JSONArray>() {
@@ -469,7 +475,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
             });
             layout.setOnClickListener(view1 -> {
                 equipment_spinner = eQarrayList.get(i);
-                Equipment_code.setText(equipment_spinner.getEquipment_Name());
+                Equipment_code.setText(equipment_spinner.getEquipment_code());
                 zDialog.dismiss();
             });
             return v;
@@ -513,14 +519,14 @@ public class Repair_Details_Activity extends AppCompatActivity {
         zDialog.setContentView(R.layout.equipment_item);
 
         ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
-       /* TextView Equipment_Name = zDialog.findViewById(R.id.euipment_name);
-        TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);*/
-
+        /*TextView Equipment_Name = zDialog.findViewById(R.id.euipment_name);
+        TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);
+*/
         if (Global.Repair_equipment == null || Global.Repair_equipment.size() == 0) {
             Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
             return;
         }
-        final Repair_Details_Activity.EquipmentSelectRepair_Adapter EqA = new Repair_Details_Activity.EquipmentSelectRepair_Adapter(Global.Repair_equipment);
+        final EquipmentSelectRepair_Adapter EqA = new EquipmentSelectRepair_Adapter(Global.Repair_equipment);
         lvEqName.setAdapter(EqA);
 
        /* Equipment_Name.setText("Equipment Name");

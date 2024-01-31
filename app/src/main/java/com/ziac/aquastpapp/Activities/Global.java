@@ -17,6 +17,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.List;
+
+import Adapters.MeterDailyLogEditAdapter;
 import Models.CommonModelClass;
 import Models.ConsumptionClass;
 import Models.ConsumptionClass2;
@@ -161,7 +164,7 @@ public class Global {
     public static IncidentsClass incidentsClass;
     public static FiltersClass filtersClass;
 
-    public static MetersDailyLogClass metersDailyLogClass;
+    public static MetersDailyLogClass MetersDailyLogClass;
 
     public static SensorsModelClass sensorclass;
     public static ArrayList<ConsumptionClass> Consumption1list;
@@ -269,6 +272,62 @@ public class Global {
                 throw new RuntimeException(ex);
             }
             Global.RunningPumpsMotors_LogClass.add(pumpMotorClass);
+        }
+    }
+
+    public static void loadmeter1(JSONObject response) throws JSONException {
+        Global.Meters_Class = new ArrayList<MetersDailyLogClass>();
+        JSONArray jarray;
+        jarray = response.getJSONArray("meters1");
+
+        for (int i = 0; i < jarray.length(); i++) {
+            final JSONObject e;
+            try {
+                e = jarray.getJSONObject(i);
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
+            }
+           MetersDailyLogClass = new MetersDailyLogClass();
+            try {
+                MetersDailyLogClass.setMeters_equip_name(e.getString("equip_name"));
+                MetersDailyLogClass.setTstp3_code(e.getString("tstp3_code"));
+                MetersDailyLogClass.setMeters_reading_edit(e.getString("reading_value"));
+                MetersDailyLogClass.setMeter_status(e.getString("status"));
+
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
+            }
+            Global.Meters_Class.add(MetersDailyLogClass);
+
+        }
+    }
+
+    public static void loadmeter2(JSONObject response) throws JSONException {
+        Global.Meters_Class = new ArrayList<MetersDailyLogClass>();
+        JSONArray jarray;
+        jarray = response.getJSONArray("meters2");
+
+        for (int i = 0; i < jarray.length(); i++) {
+            final JSONObject e;
+            try {
+                e = jarray.getJSONObject(i);
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
+            }
+            MetersDailyLogClass = new MetersDailyLogClass();
+            try {
+                MetersDailyLogClass.setMeters_equip_name(e.getString("equip_name"));
+                MetersDailyLogClass.setMeters_reading_edit(e.getString("reading_value"));
+                MetersDailyLogClass.setMeters_reading_time(e.getString("readingtime"));
+                MetersDailyLogClass.setMeters_total(e.getString("final_value"));
+                MetersDailyLogClass.setTstp3_code(e.getString("tstp3_code"));
+                MetersDailyLogClass.setMeter_status(e.getString("status"));
+
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
+            }
+            Global.Meters_Class.add(MetersDailyLogClass);
+
         }
     }
 }

@@ -255,22 +255,17 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 String item_code = Item_codeTV.getText().toString();
                 String qty = Qty_cb.getText().toString();
 
-
-
                 if (equipment_code.isEmpty()) {
                     Toast.makeText(Consumption_Details_Activity.this, "Equipment_code  should not be empty !!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (item_code.isEmpty()) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Item_code  should not be empty !!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Consumption_Details_Activity.this, "Item_code should not be empty !!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (qty.isEmpty()) {
+                    Toast.makeText(Consumption_Details_Activity.this, "Qty should not be empty !!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                if (qty.isEmpty()) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Qty  should not be empty !!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 updateConsumables_details();
                 dialog.dismiss();
             }
@@ -291,6 +286,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         String qty = Qty_cb.getText().toString();
         String equipment_code = equipment_spinner.getEquipment_code();
         String item_code = Item_spinner.getItem_code();
+
 
 
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -484,8 +480,10 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
     private void getEquipmentsList() {
 
-        String Url = Global.api_List_Get_Equipments + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
-        Url = Url + "&sstp1_code=" + Global.sharedPreferences.getString("sstp1_code", "0");
+        String Url = Global.api_List_Get_Equipments +
+                "comcode=" + Global.sharedPreferences.getString("com_code", "0") +
+                "&sstp1_code=" + Global.sharedPreferences.getString("sstp1_code", "0") +
+                "&typ=C";
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Url, null,
                 new Response.Listener<JSONArray>() {

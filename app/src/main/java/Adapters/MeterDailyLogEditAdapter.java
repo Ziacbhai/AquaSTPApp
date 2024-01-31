@@ -1,7 +1,10 @@
 package Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +25,11 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.Activities.Global;
+import com.ziac.aquastpapp.Activities.MeterDailyLogActivity;
+import com.ziac.aquastpapp.Activities.RepairBreakUpActivity;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONException;
@@ -58,36 +64,56 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
 
         holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_equip_name());
 
+
         holder.Meter_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.Meter_reading_edit.getText().toString();
-                DailyLogMeters(enteredValue);
+                // Get the meter status for the clicked position
+                String meterStatus = metersDailyLogClass.get(position).getMeter_status();
+                if ("C".equals(meterStatus)) {
+                    enteredValue = holder.Meter_reading_edit.getText().toString();
+                    DailyLogMeters(enteredValue);
+                } else {
+                    // If status is not "C," you can perform some other action or show a message
+                    Toast.makeText(context, "Meter status is not 'C'", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
+
+
     }
-
-
     private void DailyLogMeters(String enteredValue) {
         RequestQueue queue = Volley.newRequestQueue(context);
+        String url = Global.DailyLogUpdateMeterReadings;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Global.DailyLogUpdateMeterReadings, null, new Response.Listener<JSONObject>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(String response) {
                 try {
-                    String status = response.getString("status");
+                    JSONObject jsonObject = new JSONObject(response);
 
-                    if ("success".equals(status)) {
-                        Toast.makeText(context, "Update successful", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(context, "Update failed", Toast.LENGTH_SHORT).show();
+                    boolean success = jsonObject.getBoolean("success");
+                    String messages = jsonObject.getString("success");
+                    String error = jsonObject.getString("error");
+
+                    if (context != null) {
+                        if (success) {
+                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(context, MeterDailyLogActivity.class);
+                            context.startActivity(intent);
+
+                        } else {
+                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                        }
                     }
+
                 } catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(context, "Error parsing response", Toast.LENGTH_SHORT).show();
+                    throw new RuntimeException(e);
                 }
+
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -107,7 +133,7 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
 
             @Override
             public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<String, String>();
+                Map<String, String> headers = new HashMap<>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
@@ -118,15 +144,15 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
                 Map<String, String> params = new HashMap<>();
                 params.put("com_code", Global.sharedPreferences.getString("com_code", null));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", null));
-                params.put("tstp3_code", Global.metersDailyLogClass.getTstp3_code());
-                params.put("reading_value", enteredValue);
+                params.put("tstp3_code", Global.MetersDailyLogClass.getTstp3_code());
+                //params.put("tstp3_code","80462");
+                params.put("reading_value",enteredValue);
+                System.out.println(params);
                 return params;
             }
         };
-        queue.add(jsonObjectRequest);
-
+        queue.add(stringRequest);
     }
-
     @Override
     public int getItemCount() {
         return metersDailyLogClass.size();
@@ -144,5 +170,8 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
             Meter_reading_edit = itemView.findViewById(R.id.meter_reading_edit);
             Meter_save = itemView.findViewById(R.id.meter_save);
         }
+    }
+    private void showToast(String message) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 }

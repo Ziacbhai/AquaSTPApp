@@ -81,7 +81,8 @@ public class WelcomeCustomer extends AppCompatActivity {
         Customerexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishAffinity();
+                Intent intent = new Intent(WelcomeCustomer.this,LoginSignupActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -279,10 +280,7 @@ public class WelcomeCustomer extends AppCompatActivity {
                 String image = imageToString(imageBitmap);
                 params.put("username", Global.sharedPreferences.getString("username", null));
                 // params.put("fileName",image);
-
                 // Log.d("YourTag", "Key: fileName, Value: " + image);
-
-
                 return params;
             }
         };

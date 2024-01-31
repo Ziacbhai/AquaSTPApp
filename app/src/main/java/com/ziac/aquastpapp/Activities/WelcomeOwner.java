@@ -83,7 +83,8 @@ public class WelcomeOwner extends AppCompatActivity {
         Ownerexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishAffinity();
+                Intent intent = new Intent(WelcomeOwner.this,LoginSignupActivity.class);
+                startActivity(intent);
             }
         });
         Company = findViewById(R.id.company);

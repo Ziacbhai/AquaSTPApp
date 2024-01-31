@@ -49,7 +49,7 @@ import Models.MetersDailyLogClass;
 public class MeterDailyLogActivity extends AppCompatActivity {
 
     ImageView backbtn;
-    TextView Displaydate,Displaytime;
+    TextView Displaydate, Displaytime;
 
     RecyclerView Meters_recyclerview;
 
@@ -97,7 +97,6 @@ public class MeterDailyLogActivity extends AppCompatActivity {
         Meters_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
 
-
         Meters_recyclerview2 = findViewById(R.id.meter2_recyclerview);
         Meters_recyclerview2.setLayoutManager(new LinearLayoutManager(this));
         Meters_recyclerview2.setHasFixedSize(true);
@@ -132,7 +131,7 @@ public class MeterDailyLogActivity extends AppCompatActivity {
     }
 
     private void user_topcard() {
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, stpcapacity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
@@ -153,12 +152,13 @@ public class MeterDailyLogActivity extends AppCompatActivity {
         txtpersonname = findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
+        txtstpname.setText(stpname + " / " + processname + " / " + stpcapacity);
         txtsiteaddress.setText(siteaddress);
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);
     }
+
     private void DailyLogMetersEdit() {
         RequestQueue queue = Volley.newRequestQueue(context);
         String dailylogmeter = Global.GetDailyLogMeter;
@@ -171,34 +171,18 @@ public class MeterDailyLogActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, dailylogmeter, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Meters_Class = new ArrayList<MetersDailyLogClass>();
-                metersDailyLogClass = new MetersDailyLogClass();
-                JSONArray jarray;
-
                 try {
-                    jarray = response.getJSONArray("meters1");
-                    for (int i = 0; i < jarray.length(); i++) {
-                        final JSONObject e;
-                        try {
-                            e = jarray.getJSONObject(i);
-                        } catch (JSONException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        metersDailyLogClass = new MetersDailyLogClass();
-                        try {
-                            metersDailyLogClass.setMeters_equip_name(e.getString("equip_name"));
-                            metersDailyLogClass.setTstp3_code(e.getString("tstp3_code"));
-                            metersDailyLogClass.setMeters_reading_edit(e.getString("reading_value"));
-                            //metersDailyLogClass.setMeters_reading_edit(e.getString("endtime"));
+                    Global.loadmeter1(response);
+                    MeterDailyLogEditAdapter meterDailyLogEditAdapter = new MeterDailyLogEditAdapter((List<MetersDailyLogClass>) Global.Meters_Class, context);
+                    Meters_recyclerview.setAdapter(meterDailyLogEditAdapter);
+                    meterDailyLogEditAdapter.notifyDataSetChanged();
 
-                        } catch (JSONException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        DailyLogMeters();
-                        Global.Meters_Class.add(metersDailyLogClass);
-                        MeterDailyLogEditAdapter meterDailyLogEditAdapter = new MeterDailyLogEditAdapter((List<MetersDailyLogClass>) Global.Meters_Class,context);
-                        Meters_recyclerview.setAdapter(meterDailyLogEditAdapter);
-                    }
+                    Global.loadmeter2(response);
+                    MeterDailyLogAdapter meterDailyLogAdapter = new MeterDailyLogAdapter((List<MetersDailyLogClass>) Global.Meters_Class, context);
+                    Meters_recyclerview2.setAdapter(meterDailyLogAdapter);
+                    meterDailyLogAdapter.notifyDataSetChanged();
+
+
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -221,11 +205,10 @@ public class MeterDailyLogActivity extends AppCompatActivity {
                 }
 
             }
-        }){
+        }) {
 
             @Override
             public Map<String, String> getHeaders() {
-                // Set the Authorization header with the access token
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
@@ -234,7 +217,6 @@ public class MeterDailyLogActivity extends AppCompatActivity {
 
             @Override
             protected Map<String, String> getParams() {
-                // If you have any parameters to send in the request body, you can set them here
                 Map<String, String> params = new HashMap<>();
 
                 return params;
@@ -246,7 +228,7 @@ public class MeterDailyLogActivity extends AppCompatActivity {
     }
 
 
-    private void DailyLogMeters() {
+   /* private void DailyLogMeters() {
         RequestQueue queue = Volley.newRequestQueue(context);
         String dailylogmeter = Global.GetDailyLogMeter;
 
@@ -277,12 +259,15 @@ public class MeterDailyLogActivity extends AppCompatActivity {
                             metersDailyLogClass.setMeters_reading_edit(e.getString("reading_value"));
                             metersDailyLogClass.setMeters_reading_time(e.getString("readingtime"));
                             metersDailyLogClass.setMeters_total(e.getString("final_value"));
+                            metersDailyLogClass.setTstp3_code(e.getString("tstp3_code"));
+                            metersDailyLogClass.setMeter_status(e.getString("status"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
                         Global.Meters_Class.add(metersDailyLogClass);
-                        MeterDailyLogAdapter meterDailyLogAdapter = new MeterDailyLogAdapter((List<MetersDailyLogClass>) Global.Meters_Class,context);
+                        MeterDailyLogAdapter meterDailyLogAdapter = new MeterDailyLogAdapter((List<MetersDailyLogClass>) Global.Meters_Class, context);
+                        meterDailyLogAdapter.notifyDataSetChanged();
                         Meters_recyclerview2.setAdapter(meterDailyLogAdapter);
                     }
                 } catch (JSONException e) {
@@ -307,7 +292,7 @@ public class MeterDailyLogActivity extends AppCompatActivity {
                 }
 
             }
-        }){
+        }) {
 
             @Override
             public Map<String, String> getHeaders() {
@@ -327,6 +312,7 @@ public class MeterDailyLogActivity extends AppCompatActivity {
         };
 
         queue.add(jsonObjectRequest);
-    }
+    }*/
+
 
 }

@@ -23,35 +23,32 @@ public class MeterDailyLogAdapter extends RecyclerView.Adapter<MeterDailyLogAdap
         this.metersDailyLogClass = metersDailyLogClass;
         this.context = context;
     }
-
     @NonNull
     @Override
     public MeterDailyLogAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View  view = LayoutInflater.from(parent.getContext()).inflate(R.layout.meter_daily_log_deatils,parent,false);
         return new ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull MeterDailyLogAdapter.ViewHolder holder, int position) {
-       holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_equip_name());
-       holder.Meter_reading_time.setText(metersDailyLogClass.get(position).getMeters_reading_time());
-       holder.Meter_total.setText(metersDailyLogClass.get(position).getMeters_total());
 
-        double rawValue = Double.parseDouble(metersDailyLogClass.get(position).getMeters_reading_edit());
-        String formattedValue = removeTrailingZeros(rawValue);
-        holder.Meter_reading_edit.setText(formattedValue);
+
+            holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_equip_name());
+            holder.Meter_reading_time.setText(metersDailyLogClass.get(position).getMeters_reading_time());
+            holder.Meter_total.setText(metersDailyLogClass.get(position).getMeters_total());
+
+            double rawValue = Double.parseDouble(metersDailyLogClass.get(position).getMeters_reading_edit());
+            String formattedValue = removeTrailingZeros(rawValue);
+            holder.Meter_reading_edit.setText(formattedValue);
+
 
     }
-
     private String removeTrailingZeros(double value) {
         String stringValue = String.valueOf(value);
-
-        // Remove trailing zeros and decimal point if it's all zeros after the decimal point
         stringValue = stringValue.replaceAll("0*$", "").replaceAll("\\.$", "");
 
         return stringValue;
     }
-
     @Override
     public int getItemCount() {
         return metersDailyLogClass.size();
@@ -62,7 +59,6 @@ public class MeterDailyLogAdapter extends RecyclerView.Adapter<MeterDailyLogAdap
         TextView Meter_equip_name,Meter_reading_edit,Meter_reading_time,Meter_total;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             Meter_equip_name = itemView.findViewById(R.id.meter_name);
             Meter_reading_edit = itemView.findViewById(R.id.meter_reading);
             Meter_reading_time = itemView.findViewById(R.id.meter_reading_time);

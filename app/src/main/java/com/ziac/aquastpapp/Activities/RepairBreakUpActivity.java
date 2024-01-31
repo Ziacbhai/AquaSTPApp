@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -73,7 +74,8 @@ public class RepairBreakUpActivity extends AppCompatActivity {
 
     RepairClass3 repairClass3;
 
-    TextView Equipment_Item, Breakup_Unit, Breakup_qty, Breakup_price, Breakup_remark;
+    TextView Equipment_Item, Breakup_Unit, Breakup_qty, Breakup_price;
+    TextView Breakup_remark;
     AppCompatButton Update_A, Cancel_A;
     RecyclerView Repair_breakup_recyclerview;
     private Dialog zDialog;
@@ -287,9 +289,9 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     }
 
     private void updateRepairBreakupdetails() {
-        String qty, remarks, price, repair_item_code, unit_code;
+        String qty, price, repair_item_code, unit_code;
         qty = Breakup_qty.getText().toString();
-        remarks = Breakup_remark.getText().toString();
+       String remarks = Breakup_remark.getText().toString();
         price = Breakup_price.getText().toString();
         unit_code = item_spinner.getBreakup_unit_code();
         repair_item_code = equipment_spinner.getEquipmentBreakup_code();
