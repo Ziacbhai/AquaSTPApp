@@ -337,7 +337,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 String repair2_code = Global.repairClass2.getD_Repairedtwo();
                 params.put("repair_item_code", repair_item_code);
                 params.put("qty", qty);
-                params.put("repaired_remarks", remarks);
+                params.put("remarks", remarks);
                 params.put("price", price);
                 params.put("unit_code", unit_code);
                 params.put("repair2_code", repair2_code);

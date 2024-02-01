@@ -71,7 +71,7 @@ public class SignUpFragment extends Fragment {
     private Dialog zDialog;
     EditText Company, CPerson, Mobile, Email, Adminname, RPassword, Cpassword;
 
-    TextView tvState, tvCity, Site_address, TermsOfUse, Privacy,Registerbtn;
+    TextView tvState, tvCity, Site_address, TermsOfUse, Privacy, Registerbtn;
     ImageView DDstate, DDcity;
     private zList statename, cityname;
     private boolean passwordvisible = false;
@@ -96,15 +96,13 @@ public class SignUpFragment extends Fragment {
         progressDialog.setCancelable(true);
 
 
-
-
         Company = view.findViewById(R.id.company);
         CPerson = view.findViewById(R.id.cperson);
         Mobile = view.findViewById(R.id.mobile);
         Email = view.findViewById(R.id.emailuser);
         Adminname = view.findViewById(R.id.auname);
         CheckBox = view.findViewById(R.id.ccheckbox);
-       // Site_address = view.findViewById(R.id.site_address);
+        // Site_address = view.findViewById(R.id.site_address);
         Registerbtn = view.findViewById(R.id.registerbtn);
         RPassword = view.findViewById(R.id.registerpassword);
         Cpassword = view.findViewById(R.id.confirmpassword);
@@ -253,7 +251,7 @@ public class SignUpFragment extends Fragment {
         ListView lvStates = zDialog.findViewById(R.id.lvequipment);
 
         if (Global.statearraylist == null || Global.statearraylist.size() == 0) {
-             Toast.makeText(getActivity(), "States list not found !! Please try again !!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "States list not found !! Please try again !!", Toast.LENGTH_LONG).show();
             return;
         }
         final StateAdapter laStates = new StateAdapter(Global.statearraylist);
@@ -545,14 +543,14 @@ public class SignUpFragment extends Fragment {
     private void CreateNewUser() {
 
 
-        String company, cpperson, mobile, email, password, cpassword, adminname, state, city;
+        String company, cpperson, mobile, email, password, cpassword, adminname, city;
 
         company = Company.getText().toString();
         cpperson = CPerson.getText().toString();
         mobile = Mobile.getText().toString();
         email = Email.getText().toString();
         adminname = Adminname.getText().toString().trim();
-        state = tvState.getText().toString().trim();
+        String state = tvState.getText().toString();
         city = tvCity.getText().toString().trim();
         password = RPassword.getText().toString();
         cpassword = Cpassword.getText().toString();
@@ -560,6 +558,7 @@ public class SignUpFragment extends Fragment {
         //  progressDialog.show();
 
         if (company.isEmpty()) {
+            Company.requestFocus();
             Toast.makeText(getActivity(), "Company Name should not be empty !!", Toast.LENGTH_SHORT).show();
             return;
         } /*else if (company.contains(" ")) {
@@ -569,11 +568,16 @@ public class SignUpFragment extends Fragment {
         }*/
 
         if (cpperson.isEmpty()) {
+            CPerson.requestFocus();
             Toast.makeText(getActivity(), "Please enter Contact Name !!", Toast.LENGTH_SHORT).show();
             return;
         }
         if (mobile.isEmpty()) {
+            Mobile.requestFocus();
             Toast.makeText(getActivity(), "Mobile number should not be empty !!", Toast.LENGTH_SHORT).show();
+            return;
+        }if (mobile.length() < 10) {
+            Toast.makeText(getActivity(), "Mobile number should not be less than 10 digits !!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -583,50 +587,50 @@ public class SignUpFragment extends Fragment {
         }
 
         if (email.isEmpty()) {
+            Email.requestFocus();
             Toast.makeText(getActivity(), "Email should not be empty !!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (adminname.isEmpty()) {
-          /*  Adminname.setError("Admin name field should not be empty!!");
-            Adminname.requestFocus();*/
-            Toast.makeText(getActivity(), "Display Name should not be empty!!", Toast.LENGTH_SHORT).show();
-            return;
-        }
         if (state.isEmpty()) {
+            tvState.requestFocus();
             Toast.makeText(getActivity(), "State field should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }
-
         if (city.isEmpty()) {
             Toast.makeText(getActivity(), "City field should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (mobile.length() < 10) {
-            Toast.makeText(getActivity(), "Mobile number should not be less than 10 digits !!", Toast.LENGTH_SHORT).show();
+        if (adminname.isEmpty()) {
+           // Adminname.setError("Admin name field should not be empty!!");
+            Adminname.requestFocus();
+            Toast.makeText(getActivity(), "Display Name should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }
         if (password.isEmpty()) {
-            Toast.makeText(getActivity(), "Password  field should not be empty!!", Toast.LENGTH_SHORT);
+            RPassword.requestFocus();
+            Toast.makeText(getActivity(), "Password field should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (password.length() < 6) {
-            Toast.makeText(getActivity(), "Password must be at least 6 characters long.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
-            Toast toast = Toast.makeText(getActivity().getApplicationContext(), "password must contain mix of upper and lower case letters as well as digits and one special charecter !!", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
+
         if (cpassword.isEmpty()) {
+            Cpassword.requestFocus();
             Toast.makeText(getActivity(), "Confirm password field should not be empty!!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (!password.equals(cpassword)) {
-            Toast.makeText(getActivity(), "The given password and confirm password does not match", Toast.LENGTH_LONG).show();
+        if (password.length() < 6) {
+            Toast.makeText(getActivity(), "Password must be at least 6 characters long.", Toast.LENGTH_SHORT).show();
             return;
+        }
 
+        if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
+            Toast.makeText(getActivity(), "Password must contain a mix of upper and lower case letters, digits, and one special character.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (!password.equals(cpassword)) {
+            Toast.makeText(getActivity(), "Password and confirm password do not match", Toast.LENGTH_LONG).show();
+            return;
         }
 
         if (!CheckBox.isChecked()) {
@@ -658,8 +662,8 @@ public class SignUpFragment extends Fragment {
 /*
                         Toast.makeText(getActivity(), "Registration failed", Toast.LENGTH_SHORT).show();
 */
-                        Global.customtoast(getActivity(),getLayoutInflater(), response.getString("error"));
-                       // Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_LONG).show();
+                        Global.customtoast(getActivity(), getLayoutInflater(), response.getString("error"));
+                        // Toast.makeText(getActivity(), response.getString("error"), Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
 
                     }
@@ -683,7 +687,7 @@ public class SignUpFragment extends Fragment {
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-               // Log.d("getHeaders", params.toString());
+                // Log.d("getHeaders", params.toString());
                 return params;
             }
 
@@ -698,7 +702,7 @@ public class SignUpFragment extends Fragment {
                 params.put("com_contact", CPerson.getText().toString());
                 params.put("com_contact_mobno", Mobile.getText().toString());
                 params.put("com_email", emailValue);
-                params.put("username",Adminname.getText().toString().trim());
+                params.put("username", Adminname.getText().toString().trim());
                 params.put("password", RPassword.getText().toString());
                 params.put("confirm_password", Cpassword.getText().toString());
                 params.put("state_code", String.valueOf(statename.get_code()));

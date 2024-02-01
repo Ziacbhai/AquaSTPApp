@@ -142,7 +142,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
         consumption_date = Global.ConsumptionClass.getDate();
-        consumption_no = Global.ConsumptionClass.getCon1_code();
+        consumption_no = Global.ConsumptionClass.getCon_no();
         consumption_amount = Global.ConsumptionClass.getAmount();
 
         TextView txtsitename, txtstpname, textno, textdate, texamount;
@@ -167,7 +167,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        consumption_no = Global.ConsumptionClass.getCon1_code();
+        consumption_no = Global.ConsumptionClass.getCon_no();
         double conNo;
         try {
             conNo = Double.parseDouble(consumption_no);
@@ -229,24 +229,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             dialog.getWindow().setAttributes(layoutParams);
         }
         dialog.show();
-       /* Update_A.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String enteredQty = Qty_cb.getText().toString().trim();
-                if (enteredQty.isEmpty()) {
-                    Qty_cb.setError("Quantity cannot be empty");
-                } else {
-                    try {
-                        int quantity = Integer.parseInt(enteredQty);
-                        updateConsumables_details();
-                        dialog.dismiss(); // Close the dialog if needed
-                    } catch (NumberFormatException e) {
-                        Qty_cb.setError("Invalid quantity");
-                    }
-                }
-            }
-        });*/
-
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

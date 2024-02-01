@@ -72,7 +72,7 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
                 String meterStatus = metersDailyLogClass.get(position).getMeter_status();
                 if ("C".equals(meterStatus)) {
                     enteredValue = holder.Meter_reading_edit.getText().toString();
-                    DailyLogMeters(enteredValue);
+                    DailyLogMeters(enteredValue,position);
                 } else {
                     // If status is not "C," you can perform some other action or show a message
                     Toast.makeText(context, "Meter status is not 'C'", Toast.LENGTH_SHORT).show();
@@ -83,34 +83,39 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
 
 
     }
-    private void DailyLogMeters(String enteredValue) {
+    private void DailyLogMeters(String enteredValue,int position) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.DailyLogUpdateMeterReadings;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try {
+
+                Intent intent = new Intent(context, MeterDailyLogActivity.class);
+                context.startActivity(intent);
+                ((Activity) context).finish();
+
+
+               /* try {
+
                     JSONObject jsonObject = new JSONObject(response);
 
                     boolean success = jsonObject.getBoolean("success");
-                    String messages = jsonObject.getString("success");
+                    //String messages = jsonObject.getString("success");
                     String error = jsonObject.getString("error");
 
-                    if (context != null) {
                         if (success) {
-                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(context, MeterDailyLogActivity.class);
                             context.startActivity(intent);
-
+                            ((Activity) context).finish();
                         } else {
                             Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
                         }
-                    }
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
-                }
+                }*/
 
             }
 
@@ -144,7 +149,7 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
                 Map<String, String> params = new HashMap<>();
                 params.put("com_code", Global.sharedPreferences.getString("com_code", null));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", null));
-                params.put("tstp3_code", Global.MetersDailyLogClass.getTstp3_code());
+                params.put("tstp3_code", metersDailyLogClass.get(position).getTstp3_code());
                 //params.put("tstp3_code","80462");
                 params.put("reading_value",enteredValue);
                 System.out.println(params);

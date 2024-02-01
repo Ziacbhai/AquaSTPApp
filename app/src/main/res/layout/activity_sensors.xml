@@ -166,7 +166,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="3dp"
         android:background="@drawable/btnbg"
         android:orientation="horizontal"
         android:padding="5dp">
@@ -175,7 +175,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:gravity="center"
             android:padding="5dp"
             android:text="Sensors"
@@ -196,7 +196,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="5dp"
-            android:text="Reading (T)"
+            android:text="Reading"
             android:textColor="#fff"
             android:textSize="12dp"
             android:textStyle="bold" />
@@ -211,7 +211,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:gravity="center"
             android:padding="5dp"
             android:text="Save"
@@ -226,14 +226,13 @@
         android:id="@+id/sensor_edit_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/btnbgoutline" />
+        android:layout_margin="2dp"
+        android:layout_marginTop="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="3dp"
         android:background="@drawable/btnbg"
         android:orientation="horizontal"
         android:padding="5dp">
@@ -242,7 +241,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:gravity="center"
             android:padding="5dp"
             android:text="Sensors"
@@ -260,7 +259,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:gravity="center"
             android:text="Reading"
             android:textColor="#fff"
@@ -277,10 +276,27 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Running (T)"
+            android:textColor="#fff"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#fff" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:padding="5dp"
-            android:text="Running"
+            android:text="Total"
             android:textColor="#fff"
             android:textSize="12dp"
             android:textStyle="bold" />
@@ -292,8 +308,7 @@
         android:id="@+id/sensors_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/btnbgoutline" />
+        android:layout_margin="2dp"
+        android:layout_marginTop="10dp"/>
 
 </LinearLayout>

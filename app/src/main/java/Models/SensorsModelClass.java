@@ -2,7 +2,23 @@ package Models;
 
 public class SensorsModelClass {
 
-    String equip_name,reading,reading_time,sensor_total,sensor_image;
+    String equip_name,reading,reading_time,sensor_total,sensor_image,sensor_tstp6_code,sensor_status;
+
+    public String getSensor_status() {
+        return sensor_status;
+    }
+
+    public void setSensor_status(String sensor_status) {
+        this.sensor_status = sensor_status;
+    }
+
+    public String getSensor_tstp6_code() {
+        return sensor_tstp6_code;
+    }
+
+    public void setSensor_tstp6_code(String sensor_tstp6_code) {
+        this.sensor_tstp6_code = sensor_tstp6_code;
+    }
 
     public String getEquip_name() {
         return equip_name;

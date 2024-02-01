@@ -64,7 +64,7 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
             @Override
             public void onClick(View v) {
                 start_motor_pump(position);
-                pumpMotorDailyLogClass.clear();
+                //pumpMotorDailyLogClass.clear();
             }
         });
 

@@ -45,7 +45,7 @@ import Models.DailyLogClass;
 
 
 public class HomeFragment extends Fragment {
-    PDFView PdfView;
+
     ProgressDialog progressDialog;
     FloatingActionButton Fab;
 

@@ -82,9 +82,6 @@
             android:name=".Activities.DemoAc"
             android:exported="true" />
         <activity
-            android:name=".Activities.PDFEx"
-            android:exported="false" />
-        <activity
             android:name=".Activities.GenerateSTPdetails"
             android:exported="false" />
         <activity

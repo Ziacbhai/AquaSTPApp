@@ -172,7 +172,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                 sensorsModelClass = new SensorsModelClass();
                 JSONArray jarray;
                 try {
-                    jarray = response.getJSONArray("meters1");
+                    jarray = response.getJSONArray("sensors1");
                     for (int i = 0; i < jarray.length(); i++) {
                         final JSONObject e;
                         try {
@@ -183,13 +183,15 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                         sensorsModelClass = new SensorsModelClass();
                         try {
                             sensorsModelClass.setEquip_name(e.getString("equip_name"));
+                            sensorsModelClass.setSensor_tstp6_code(e.getString("tstp6_code"));
+                            sensorsModelClass.setSensor_status(e.getString("status"));
                             //sensorsModelClass.setReading(e.getString("starttime"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
                         Global.Sensors_Class.add(sensorsModelClass);
-                        SensorDailyLogEditAdapter sensorDailyLogEditAdapter = new SensorDailyLogEditAdapter((List<SensorsModelClass>) Global.Sensors_Class);
+                        SensorDailyLogEditAdapter sensorDailyLogEditAdapter = new SensorDailyLogEditAdapter((List<SensorsModelClass>) Global.Sensors_Class,context);
                         sensor_recyclerView.setAdapter(sensorDailyLogEditAdapter);
                     }
                 } catch (JSONException e) {
@@ -253,7 +255,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                 sensorsModelClass = new SensorsModelClass();
                 JSONArray jarray;
                 try {
-                    jarray = response.getJSONArray("meters2");
+                    jarray = response.getJSONArray("sensors2");
                     for (int i = 0; i < jarray.length(); i++) {
                         final JSONObject e;
                         try {

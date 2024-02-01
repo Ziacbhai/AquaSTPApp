@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -81,8 +81,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="mobile"
                     android:padding="5dp"
+                    android:text="mobile"
                     android:textColor="@color/white"
                     android:textSize="12dp"
                     android:textStyle="bold" />
@@ -92,276 +92,320 @@
         </androidx.cardview.widget.CardView>
 
 
-    <RelativeLayout
-        android:id="@+id/pumpmotor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
+            android:id="@+id/pumpmotor"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="5dp"
-            android:minHeight="65dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="2dp">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:weightSum="2"
-                android:layout_marginLeft="50dp"
-                android:orientation="horizontal">
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="5dp"
+                android:minHeight="65dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pumps / "
-                    android:textColor="#FF5722"
-                    android:textSize="32dp"
-                    android:textStyle="bold" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pumps / "
+                        android:textColor="#FF5722"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
 
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Motors"
+                        android:textColor="#43A047"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:elevation="13dp"
+                android:src="@drawable/motortwo" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/blower"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="5dp"
+                android:minHeight="65dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Motors"
-                    android:textColor="#43A047"
-                    android:textSize="32dp"
-                    android:textStyle="bold" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Blowers"
+                        android:textColor="#2196F3"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:elevation="13dp"
+                android:src="@drawable/fan" />
+
+        </RelativeLayout>
 
 
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_centerVertical="true"
-            android:elevation="13dp"
-            android:src="@drawable/motortwo" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/blower"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.cardview.widget.CardView
+        <!--<RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="5dp"
-            android:minHeight="65dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="2dp">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="50dp"
-                android:orientation="vertical">
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="5dp"
+                android:minHeight="65dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Blowers"
-                    android:textColor="#2196F3"
-                    android:textSize="32dp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_centerVertical="true"
-            android:elevation="13dp"
-            android:src="@drawable/fan" />
-
-    </RelativeLayout>
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="50dp"
+                    android:orientation="vertical">
 
 
-    <!--<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:elevation="13dp"
+                android:src="@drawable/pump" />
+
+        </RelativeLayout>-->
+
+        <RelativeLayout
+            android:id="@+id/meter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="5dp"
-            android:minHeight="65dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="2dp">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="50dp"
-                android:orientation="vertical">
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="5dp"
+                android:minHeight="65dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
 
-
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_centerVertical="true"
-            android:elevation="13dp"
-            android:src="@drawable/pump" />
-
-    </RelativeLayout>-->
-
-    <RelativeLayout
-        android:id="@+id/meter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="5dp"
-            android:minHeight="65dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="50dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Meters"
-                    android:textColor="#ED1B62"
-                    android:textSize="32dp"
-                    android:textStyle="bold" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Meters"
+                        android:textColor="#ED1B62"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
 
-        </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_centerVertical="true"
-            android:elevation="13dp"
-            android:src="@drawable/speedometer" />
+            </androidx.cardview.widget.CardView>
 
-    </RelativeLayout>
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:elevation="13dp"
+                android:src="@drawable/speedometer" />
 
-    <RelativeLayout
-        android:id="@+id/sensor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        </RelativeLayout>
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
+            android:id="@+id/sensor"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="5dp"
-            android:minHeight="65dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="2dp">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="50dp"
-                android:orientation="vertical">
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="5dp"
+                android:minHeight="65dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Sensors"
-                    android:textColor="#19E81C"
-                    android:textSize="32dp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_centerVertical="true"
-            android:elevation="13dp"
-            android:src="@drawable/sensor" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/filter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="5dp"
-            android:minHeight="65dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="50dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Filters"
-                    android:textColor="#3F51B5"
-                    android:textSize="32dp"
-                    android:textStyle="bold" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Sensors"
+                        android:textColor="#19E81C"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
 
-        </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
-        <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_centerVertical="true"
-            android:elevation="13dp"
-            android:src="@drawable/filter" />
+            </androidx.cardview.widget.CardView>
 
-    </RelativeLayout>
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:elevation="13dp"
+                android:src="@drawable/sensor" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="5dp"
+                android:minHeight="65dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Filters"
+                        android:textColor="#3F51B5"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:elevation="13dp"
+                android:src="@drawable/filter" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/handover_remarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="5dp"
+                android:minHeight="65dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Handover Remarks"
+                        android:textColor="#42B38B"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:elevation="13dp"
+                android:src="@drawable/handover" />
+
+        </RelativeLayout>
+
     </LinearLayout>
-
 
 
 </RelativeLayout>

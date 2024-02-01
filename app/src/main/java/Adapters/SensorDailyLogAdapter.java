@@ -1,5 +1,6 @@
 package Adapters;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -63,6 +64,14 @@ public class SensorDailyLogAdapter extends RecyclerView.Adapter<SensorDailyLogAd
                 .error(R.drawable.no_image_available_icon)
                 .into(holder.Sensor_image);
 
+        double rawValue = Double.parseDouble(sensorsModelClassList.get(position).getReading());
+        String formattedValue = removeTrailingZeros(rawValue);
+        holder.Sensor_reading.setText(formattedValue);
+
+        double rawValue1 = Double.parseDouble(sensorsModelClassList.get(position).getSensor_total());
+        String formattedValue1 = removeTrailingZeros(rawValue1);
+        holder.Sensor_total.setText(formattedValue1);
+
         holder.Sensor_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,9 +85,17 @@ public class SensorDailyLogAdapter extends RecyclerView.Adapter<SensorDailyLogAd
                Global.sensorclass = sensorsModelClassList.get(position);
                Intent intent = new Intent(context, SensorsDailyLog_Image_Upload_Activity.class);
                context.startActivity(intent);
+               ((Activity) context).finish();
            }
        });
 
+    }
+
+    private String removeTrailingZeros(double value) {
+        String stringValue = String.valueOf(value);
+        stringValue = stringValue.replaceAll("0*$", "").replaceAll("\\.$", "");
+
+        return stringValue;
     }
 
     private void showImage(String sensorImage) {

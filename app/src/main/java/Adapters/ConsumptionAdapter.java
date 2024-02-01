@@ -51,7 +51,7 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
         holder.Amount.setText(consumptionClasses.get(position).getAmount() + "0");
         holder.Remark.setText(consumptionClasses.get(position).getRemark());
         holder.Created_by.setText(consumptionClasses.get(position).getCreated_by());
-        String conNoString = consumptionClasses.get(position).getCon1_code();
+        String conNoString = consumptionClasses.get(position).getCon_no();
         double conNo;
         try {
             conNo = Double.parseDouble(conNoString);

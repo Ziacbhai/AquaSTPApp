@@ -67,7 +67,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressbr);
 
 
-
         Newpwd.setOnTouchListener((v, event) -> {
 
             final int Right = 2;
@@ -92,7 +91,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
             return false;
         });
-
         Repeatpwd.setOnTouchListener((v, event) -> {
 
             final int Right = 2;
@@ -133,17 +131,18 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     Newpwd.setError("Please enter the New Password");
                     Newpwd.requestFocus();
                     return;
-                } else if (repeatmpassword.isEmpty()) {
+                }
+                if (repeatmpassword.isEmpty()) {
                     Repeatpwd.setError("Please enter the New Password");
                     Repeatpwd.requestFocus();
                     return;
-                } else if (newpassword.length() < 6) {
+                }
+                if (newpassword.length() < 6) {
                     Toast.makeText(ChangePasswordActivity.this, "Password must be at least 6 characters long.", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (!newpassword.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
-                    Toast toast = Toast.makeText(ChangePasswordActivity.this, "password must contain mix of upper and lower case letters as well as digits and one special charecter !!", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
-                    toast.show();
+                }
+                if (!newpassword.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$%^&*+=?-]).{8,15}$")) {
+                    Toast.makeText(ChangePasswordActivity.this, "password must contain mix of upper and lower case letters as well as digits and one special charecter !!", Toast.LENGTH_LONG).show();
                     return;
                 }
 

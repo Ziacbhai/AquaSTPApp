@@ -53,7 +53,7 @@ public class Global {
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
     // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
-    public static String baseurl = "http://192.168.1.9:9396/";
+    public static String baseurl = "http://192.168.1.11:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
 
@@ -83,6 +83,7 @@ public class Global {
 
     //Sensors
     public static String GetDailyLogSensors = baseurl + "api/DailyLog/GetSensors?";
+    public static String DailyLogUpdateSensorsReadings = baseurl + "api/DailyLog/UpdateSensorsReadings";
 
     public static String userImageurl = baseurl + "WebsiteData/Users/";
     public static String incident_image = baseurl + "WebsiteData/IncidentReportDocs/";
@@ -183,7 +184,7 @@ public class Global {
     public static ArrayList<FiltersClass> Filter_LogClass;
     public static ArrayList<SensorsModelClass> Sensors_Class;
     public static ArrayList<MetersDailyLogClass> Meters_Class;
-    public static SensorsModelClass sensorsModelClass;
+    public static SensorsModelClass sensorsClass;
     public static ArrayList<CommonModelClass> metersdetails;
 
     public static void customtoast(Context context, LayoutInflater inflater, String msg) {
