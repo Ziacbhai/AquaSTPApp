@@ -473,11 +473,11 @@ public class Repair_Details_Activity extends AppCompatActivity {
                     zDialog.dismiss();
                 }
             });
-            layout.setOnClickListener(view1 -> {
+           /* layout.setOnClickListener(view1 -> {
                 equipment_spinner = eQarrayList.get(i);
                 Equipment_code.setText(equipment_spinner.getEquipment_code());
                 zDialog.dismiss();
-            });
+            });*/
             return v;
         }
 

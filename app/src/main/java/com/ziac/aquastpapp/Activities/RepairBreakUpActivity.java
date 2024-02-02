@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -301,9 +303,15 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {
-                JSONObject response;
+               /* JSONObject response;
+
+
                 try {
                     response = new JSONObject(sresponse);
+                 *//*   boolean success = response.getBoolean("success");
+                    String error = response.getString("error");
+                    *//*
+                    System.out.println(response);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -317,6 +325,21 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
+            }*/  try {
+                    JSONObject  jsonObject = new JSONObject(sresponse);
+                    boolean success = jsonObject.getBoolean("isSuccess");
+                    String error = jsonObject.getString("error");
+
+                    if (success) {
+                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                        get_Breakup_Details_Repair();
+                    } else {
+                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -345,6 +368,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 //params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
                 params.put("repair3_code", "0");
+                System.out.println(params);
                 return params;
 
             }
@@ -423,6 +447,12 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+
         };
         queue.add(jsonObjectRequest);
     }
@@ -625,6 +655,11 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("Authorization", "Bearer " + Global.sharedPreferences.getString("access_token", ""));
                 return headers;
+            }
+
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                return params;
             }
         };
         queue.add(jsonArrayRequest);

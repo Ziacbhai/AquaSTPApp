@@ -270,6 +270,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                             sensorsModelClass.setReading_time(e.getString("readingtime"));
                             sensorsModelClass.setSensor_total(e.getString("final_value"));
                             sensorsModelClass.setSensor_image(e.getString("image_path"));
+                            sensorsModelClass.setSensor_tstp6_code(e.getString("tstp6_code"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);

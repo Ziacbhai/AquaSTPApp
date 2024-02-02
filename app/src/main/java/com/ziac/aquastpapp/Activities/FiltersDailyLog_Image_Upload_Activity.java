@@ -111,9 +111,30 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
         }
         String url = Global.GetDailyLogFilterImageUpload;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
-            JSONObject resp;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String sresponse) {
+           // JSONObject resp;
+
+                Log.d("LOG THE RESPONSE","RESPONSE"+sresponse);
+                System.out.println(sresponse);
             try {
+                JSONObject  jsonObject = new JSONObject(sresponse);
+                boolean success = jsonObject.getBoolean("success");
+                String error = jsonObject.getString("error");
+
+                if (success) {
+                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                }
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+           /* try {
                 resp = new JSONObject(response);
             } catch (JSONException e) {
                 throw new RuntimeException(e);
@@ -121,17 +142,18 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
             try {
                 if (resp.getBoolean("success")) {
                     Global.customtoast(FiltersDailyLog_Image_Upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
-                    Intent intent = new Intent(FiltersDailyLog_Image_Upload_Activity.this,FiltersDailyLogActivity.class);
+                   *//* Intent intent = new Intent(FiltersDailyLog_Image_Upload_Activity.this,FiltersDailyLogActivity.class);
                     startActivity(intent);
-                    finish();
+                    finish();*//*
 
+                    startActivity(new Intent(FiltersDailyLog_Image_Upload_Activity.this,AboutActivity.class));
                     //getFiltersImages();
 
                 } else {
                     if (resp.has("error")) {
                         String errorMessage = resp.getString("error");
                         Toast.makeText(FiltersDailyLog_Image_Upload_Activity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                        Toast.makeText(FiltersDailyLog_Image_Upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(FiltersDailyLog_Image_Upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
 
                     } else {
                         Log.d("else", "else");
@@ -140,7 +162,7 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
             } catch (JSONException e) {
 
                 e.printStackTrace();
-            }
+            }*/
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -176,8 +198,5 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 
-    @Override
-    public void onBackPressed() {
 
-    }
 }

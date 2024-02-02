@@ -227,5 +227,9 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onPause() {
+        FiltersDailyLog();
+        super.onPause();
+    }
 }
