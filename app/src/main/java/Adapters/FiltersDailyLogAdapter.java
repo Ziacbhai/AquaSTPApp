@@ -83,7 +83,7 @@ public class FiltersDailyLogAdapter extends RecyclerView.Adapter<FiltersDailyLog
                 Global.filtersClass = filtersClassList.get(position);
                 Intent intent = new Intent(context, FiltersDailyLog_Image_Upload_Activity.class);
                 context.startActivity(intent);
-               // ((Activity) context).finish();
+               ((Activity) context).finish();
             }
         });
     }

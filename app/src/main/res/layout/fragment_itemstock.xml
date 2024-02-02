@@ -27,49 +27,36 @@
                 android:orientation="horizontal"
                 android:padding="5dp">
 
-                <LinearLayout
+
+                <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:text="Product"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="1dp"
-                        android:gravity="center_horizontal"
-                        android:text="Product"
-                        android:textColor="@color/white"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
 
                 <View
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="1dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:background="@color/my_light_primary" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Stock"
-                        android:textColor="@color/white"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Stock"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -84,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="5dp">
+                android:padding="2dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/consumable_recyclerview"

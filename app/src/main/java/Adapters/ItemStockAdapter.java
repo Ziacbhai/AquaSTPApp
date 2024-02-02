@@ -35,9 +35,8 @@ public class ItemStockAdapter extends RecyclerView.Adapter<ItemStockAdapter.View
     public void onBindViewHolder(@NonNull ItemStockAdapter.Viewholder holder, int position) {
 
         holder.Consumables_Code.setText(itemStockClasses.get(position).get_Number());
-        holder.Consumables_Name.setText(itemStockClasses.get(position).get_Name());
         holder.Consumables_Stock.setText(itemStockClasses.get(position).get_Stock());
-        holder.Consumables_Units.setText(itemStockClasses.get(position).get_Units());
+
     }
 
     @Override
@@ -51,9 +50,8 @@ public class ItemStockAdapter extends RecyclerView.Adapter<ItemStockAdapter.View
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             Consumables_Code = itemView.findViewById(R.id.part_number);
-            Consumables_Name = itemView.findViewById(R.id.namelist_);
             Consumables_Stock = itemView.findViewById(R.id.stock_);
-            Consumables_Units = itemView.findViewById(R.id.units_);
+
         }
     }
 }

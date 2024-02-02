@@ -303,29 +303,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {
-               /* JSONObject response;
-
-
-                try {
-                    response = new JSONObject(sresponse);
-                 *//*   boolean success = response.getBoolean("success");
-                    String error = response.getString("error");
-                    *//*
-                    System.out.println(response);
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-                try {
-                    if (response.getBoolean("isSuccess")) {
-                        Toast.makeText(RepairBreakUpActivity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
-                        get_Breakup_Details_Repair();
-                    } else {
-                        Toast.makeText(RepairBreakUpActivity.this, response.getString("Update Failed"), Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-            }*/  try {
+               try {
                     JSONObject  jsonObject = new JSONObject(sresponse);
                     boolean success = jsonObject.getBoolean("isSuccess");
                     String error = jsonObject.getString("error");
@@ -728,7 +706,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             LinearLayout layout = v.findViewById(R.id.select);
 
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
-            TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
+           TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
             item_spinner = eQarrayList.get(i);
 
             equipmentnameitem.setText(item_spinner.getBreakup_unit_name());

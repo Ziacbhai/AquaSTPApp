@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,6 +34,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import Models.SensorsModelClass;
 
@@ -90,7 +92,6 @@ public class SensorsDailyLog_Image_Upload_Activity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             Sensor_image_postselelectedimage();
-            finish();
         }
     }
 
@@ -103,33 +104,21 @@ public class SensorsDailyLog_Image_Upload_Activity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
-            public void onResponse(String response) {
-                JSONObject resp;
+            public void onResponse(String sresponse) {
                 try {
-                    resp = new JSONObject(response);
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }
-                try {
-                    if (resp.getBoolean("success")) {
-                        Global.customtoast(SensorsDailyLog_Image_Upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
-                        Intent intent = new Intent(SensorsDailyLog_Image_Upload_Activity.this, SensorsDailyLogActivity.class);
-                        startActivity(intent);
+                    JSONObject  jsonObject = new JSONObject(sresponse);
+                    boolean success = jsonObject.getBoolean("success");
+                    String error = jsonObject.getString("error");
+
+                    if (success) {
+                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SensorsDailyLog_Image_Upload_Activity.this, SensorsDailyLogActivity.class));
                         finish();
-
                     } else {
-                        if (resp.has("error")) {
-                            String errorMessage = resp.getString("error");
-                            Toast.makeText(SensorsDailyLog_Image_Upload_Activity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(SensorsDailyLog_Image_Upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            Log.d("else", "else");
-                        }
+                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
-
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
 
             }
@@ -160,6 +149,9 @@ public class SensorsDailyLog_Image_Upload_Activity extends AppCompatActivity {
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0),0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
     }
     private String imageToString(Bitmap imageBitmap) {

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -39,6 +40,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import Adapters.Incident_image_upload_Adapter;
 import Models.FiltersClass;
@@ -101,7 +103,6 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
             Filter_image_postselelectedimage();
-            finish();
         }
     }
 
@@ -114,17 +115,16 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {
-           // JSONObject resp;
 
-                Log.d("LOG THE RESPONSE","RESPONSE"+sresponse);
-                System.out.println(sresponse);
             try {
                 JSONObject  jsonObject = new JSONObject(sresponse);
                 boolean success = jsonObject.getBoolean("success");
                 String error = jsonObject.getString("error");
 
                 if (success) {
+                    startActivity(new Intent(FiltersDailyLog_Image_Upload_Activity.this,FiltersDailyLogActivity.class));
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                    finish();
 
                 } else {
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
@@ -134,35 +134,6 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
             }
 
         }
-           /* try {
-                resp = new JSONObject(response);
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                if (resp.getBoolean("success")) {
-                    Global.customtoast(FiltersDailyLog_Image_Upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
-                   *//* Intent intent = new Intent(FiltersDailyLog_Image_Upload_Activity.this,FiltersDailyLogActivity.class);
-                    startActivity(intent);
-                    finish();*//*
-
-                    startActivity(new Intent(FiltersDailyLog_Image_Upload_Activity.this,AboutActivity.class));
-                    //getFiltersImages();
-
-                } else {
-                    if (resp.has("error")) {
-                        String errorMessage = resp.getString("error");
-                        Toast.makeText(FiltersDailyLog_Image_Upload_Activity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(FiltersDailyLog_Image_Upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        Log.d("else", "else");
-                    }
-                }
-            } catch (JSONException e) {
-
-                e.printStackTrace();
-            }*/
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -187,6 +158,9 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0),0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         requestQueue.add(stringRequest);
     }

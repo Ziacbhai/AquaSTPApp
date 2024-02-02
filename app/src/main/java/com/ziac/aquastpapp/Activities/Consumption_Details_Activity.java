@@ -213,7 +213,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         });
 
 
-
         Qty_cb = dialogView.findViewById(R.id.qty_alert_cd);
         Update_A = dialogView.findViewById(R.id.update_alert_cd);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_cd);
@@ -237,17 +236,31 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 String item_code = Item_codeTV.getText().toString();
                 String qty = Qty_cb.getText().toString();
 
-                if (equipment_code.isEmpty()) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Equipment_code  should not be empty !!", Toast.LENGTH_SHORT).show();
+              /*  if (equipment_code.isEmpty()) {
+                    Toast.makeText(Consumption_Details_Activity.this, "Equipment  should not be empty !!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (item_code.isEmpty()) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Item_code should not be empty !!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Consumption_Details_Activity.this, "Item should not be empty !!", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (qty.isEmpty()) {
                     Toast.makeText(Consumption_Details_Activity.this, "Qty should not be empty !!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+*/
+                if (equipment_code.isEmpty()) {
+                    Toast.makeText(Consumption_Details_Activity.this, "Equipment  should not be empty !!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (item_code.isEmpty()) {
+                    Toast.makeText(Consumption_Details_Activity.this, "Item should not be empty !!", Toast.LENGTH_SHORT).show();
+                    return;
+                }  if (qty.isEmpty()) {
+                    Toast.makeText(Consumption_Details_Activity.this, "Qty should not be empty !!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 updateConsumables_details();
                 dialog.dismiss();
             }
@@ -268,7 +281,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         String qty = Qty_cb.getText().toString();
         String equipment_code = equipment_spinner.getEquipment_code();
         String item_code = Item_spinner.getItem_code();
-
 
 
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -327,9 +339,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 String con1_code = Global.ConsumptionClass.getCon1_code();
                 params.put("item_code", item_code);
-               // params.put("item_code", String.valueOf(equipment_spinner.getEquipment_code()));
+                // params.put("item_code", String.valueOf(equipment_spinner.getEquipment_code()));
                 params.put("equip_code", equipment_code);
-               // params.put("equip_code", String.valueOf(equipment_spinner.getEquipment_id()));
+                // params.put("equip_code", String.valueOf(equipment_spinner.getEquipment_id()));
                 params.put("qty", qty);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));

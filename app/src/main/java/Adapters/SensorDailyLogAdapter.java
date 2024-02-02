@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+import com.ziac.aquastpapp.Activities.FiltersDailyLogActivity;
 import com.ziac.aquastpapp.Activities.FiltersDailyLog_Image_Upload_Activity;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.SensorsDailyLog_Image_Upload_Activity;
