@@ -58,6 +58,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.Handover_Remarks_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.SensorsDailyLog_Image_Upload_Activity"
             android:exported="false" />
         <activity
@@ -76,7 +79,7 @@
             android:name=".Activities.BlowersDailyLogActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.PumpMoterDailyLogActivity"
+            android:name=".Activities.PumpMotorDailyLogActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.DemoAc"

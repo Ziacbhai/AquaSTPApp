@@ -52,7 +52,6 @@ public class Global {
     //Server url
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
-    // public static String baseurl="http://192.168.1.10/AquaSTP/Help";
     public static String baseurl = "http://192.168.1.10:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
@@ -84,8 +83,10 @@ public class Global {
     //Sensors
     public static String GetDailyLogSensors = baseurl + "api/DailyLog/GetSensors?";
     public static String DailyLogUpdateSensorsReadings = baseurl + "api/DailyLog/UpdateSensorsReadings";
-
     public static String DailyLogSensorsImageUpload = baseurl + "api/DailyLog/SensorsImageUpload";
+
+    //Handover Remarks;
+    public static String DailyLogUpdateHandOverRemark= baseurl + "api/DailyLog/UpdateHandOverRemarks?";
 
 
     public static String userImageurl = baseurl + "WebsiteData/Users/";
@@ -162,7 +163,7 @@ public class Global {
     public static RepairClass2 repairClass2;
     public static RepairClass3 repairClass3;
     public static DailyLogClass dailyLogClass;
-    //public static PumpMotor_Blower_DailyLogClass pumpMotorDailyLogClass;
+
     public static RepairClass4 repairClass4;
     public static LabTestClass labTestClass1;
     public static IncidentsClass incidentsClass;

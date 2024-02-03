@@ -3,7 +3,6 @@ package Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.airbnb.lottie.animation.content.Content;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
@@ -27,7 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.Activities.Global;
-import com.ziac.aquastpapp.Activities.PumpMoterDailyLogActivity;
+import com.ziac.aquastpapp.Activities.PumpMotorDailyLogActivity;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONObject;
@@ -73,7 +71,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
             public void onClick(View v) {
                 StopRolloverMotorPumps(position,2);
                 ((Activity) context).finish();
-                Intent pump = new Intent(context, PumpMoterDailyLogActivity.class);
+                Intent pump = new Intent(context, PumpMotorDailyLogActivity.class);
                 context.startActivity(pump);
             }
         });
@@ -110,7 +108,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
             @Override
             public void onResponse(JSONObject response) {
                 //Toast.makeText(context, "Rollover Motor Pumps", Toast.LENGTH_LONG).show();
-                Intent pump = new Intent(context, PumpMoterDailyLogActivity.class);
+                Intent pump = new Intent(context, PumpMotorDailyLogActivity.class);
                 context.startActivity(pump);
                 ((Activity) context).finish();
             }

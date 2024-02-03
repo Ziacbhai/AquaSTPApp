@@ -30,18 +30,21 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.github.barteksc.pdfviewer.PDFView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import Adapters.FiltersDailyLogAdapter;
 import Models.DailyLogClass;
+import Models.FiltersClass;
 
 
 public class HomeFragment extends Fragment {
@@ -49,17 +52,16 @@ public class HomeFragment extends Fragment {
     ProgressDialog progressDialog;
     FloatingActionButton Fab;
 
-    private  DailyLogClass dailyLog;
+    DailyLogClass dailyLog;
     Context context;
 
-    DailyLogClass dailyLogClass;
 
-    RelativeLayout layoutpump,layoutblower,layoutmeter,layoutsensor,layoutfilter;
+
+    RelativeLayout layoutpump, layoutblower, layoutmeter, layoutsensor, layoutfilter, layouthandover_remark;
 
     @Override
     public void onResume() {
         super.onResume();
-
         DailyLogIndex();
     }
 
@@ -78,11 +80,12 @@ public class HomeFragment extends Fragment {
         layoutmeter = view.findViewById(R.id.meter);
         layoutsensor = view.findViewById(R.id.sensor);
         layoutfilter = view.findViewById(R.id.filter);
+        layouthandover_remark = view.findViewById(R.id.handover_remarks);
 
         layoutpump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent pump = new Intent(getActivity(), PumpMoterDailyLogActivity.class);
+                Intent pump = new Intent(getActivity(), PumpMotorDailyLogActivity.class);
                 startActivity(pump);
             }
         });
@@ -114,14 +117,25 @@ public class HomeFragment extends Fragment {
                 startActivity(filter);
             }
         });
+
+        layouthandover_remark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent filter = new Intent(getActivity(), Handover_Remarks_Activity.class);
+                startActivity(filter);
+            }
+        });
+
+
         return view;
     }
+
     private void user_topcard(View view) {
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, stpcapacity;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
@@ -142,7 +156,7 @@ public class HomeFragment extends Fragment {
         txtpersonname = view.findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
+        txtstpname.setText(stpname + " / " + processname + " / " + stpcapacity);
         txtsiteaddress.setText(siteaddress);
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);
@@ -163,6 +177,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 Global.dailyLogClassArrayList = new ArrayList<DailyLogClass>();
+                JSONArray jarray;
 
                 try {
                     // Check if the response was successful
@@ -172,8 +187,7 @@ public class HomeFragment extends Fragment {
                         // The "dlogdate" is present in the response
                         String dlogdate = response.getString("dlogdate");
                         Log.d("YourTag", "Daily Log Date: " + dlogdate);
-                       // Toast.makeText(context, response.getString("error"), Toast.LENGTH_SHORT).show();
-                        // Create a DailyLogClass object and add it to the list if needed
+
 
                         DailyLogClass dailyLog = new DailyLogClass();
                         dailyLog.setDailylog(dlogdate);
@@ -183,12 +197,31 @@ public class HomeFragment extends Fragment {
                         Global.editor.commit();
 
                     } else {
-                        // Handle the case when isSuccess is false
                         String error = response.getString("error");
                         Toast.makeText(requireActivity(), error, Toast.LENGTH_LONG).show();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+
+                    jarray = response.getJSONArray("data");
+                    for (int i = 0; i < jarray.length(); i++) {
+                        final JSONObject e;
+                        try {
+                            e = jarray.getJSONObject(i);
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                        try {
+                            DailyLogClass dailyLogClass = new DailyLogClass();
+                            dailyLogClass.setTstp1_code(e.getString("tstp1_code"));
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                    }
+
+
+                } catch (Exception e) {
+
                 }
             }
         }, new Response.ErrorListener() {

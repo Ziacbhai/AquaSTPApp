@@ -26,7 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.Activities.Global;
-import com.ziac.aquastpapp.Activities.PumpMoterDailyLogActivity;
+import com.ziac.aquastpapp.Activities.PumpMotorDailyLogActivity;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONObject;
@@ -100,7 +100,7 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
             @Override
             public void onResponse(JSONObject response) {
                 //Toast.makeText(context, "Started", Toast.LENGTH_LONG).show();
-                Intent pump = new Intent(context, PumpMoterDailyLogActivity.class);
+                Intent pump = new Intent(context, PumpMotorDailyLogActivity.class);
                 context.startActivity(pump);
                 ((Activity) context).finish();
 

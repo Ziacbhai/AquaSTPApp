@@ -90,16 +90,6 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
             }
         });
 
-        holder.Repair_repaired_check.setEnabled(false);
-        holder.Repair_repaired_check.setOnCheckedChangeListener(null); // Prevent triggering onCheckedChanged during initialization
-        holder.Repair_repaired_check.setChecked(repairClass2.get(position).getD_Repaired().equals("true"));
-        holder.Repair_repaired_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                repairClass2.get(position).setD_Repaired(isChecked ? "true" : "false");
-                repair2list.set(position, (RepairClass2) repairClass2);
-            }
-        });
     }
 
 
@@ -119,7 +109,7 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
             super(itemView);
             Eq_Name = itemView.findViewById(R.id.repair_equipment_name);
             Eq_number = itemView.findViewById(R.id.repair_equipment_id);
-            Repair_repaired_check = itemView.findViewById(R.id.repair_repaired_check);
+
             Remark = itemView.findViewById(R.id.repair_remark);
             Amount = itemView.findViewById(R.id.repair_amount);
             RImage = itemView.findViewById(R.id.repair2_image);

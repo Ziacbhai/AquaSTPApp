@@ -4,8 +4,6 @@ package com.ziac.aquastpapp.Activities;
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,7 +45,7 @@ import Adapters.StoppedPumpMotorAdapter;
 import Adapters.RunningPumpMotorAdapter;
 import Models.PumpMotorBlower_LogClass;
 
-public class PumpMoterDailyLogActivity extends AppCompatActivity {
+public class PumpMotorDailyLogActivity extends AppCompatActivity {
     Context context;
     String currentDatevalue, currentDateValue2;
     ImageView backbtn;
