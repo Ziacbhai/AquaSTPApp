@@ -68,17 +68,11 @@ public class WelcomeOwner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_owner);
 
-
-
+        context = this;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         ImageView = findViewById(R.id.imageView);
-
         Oname = findViewById(R.id.wname);
-       // ClickHere = findViewById(R.id.Clickhere);
         oContinue = findViewById(R.id.oContinue);
-       // fab = findViewById(R.id.floating);
-
         Ownerexit = findViewById(R.id.ownerexit);
         Ownerexit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,12 +105,7 @@ public class WelcomeOwner extends AppCompatActivity {
                 .into(ImageView);
 
 
-       /* fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                opencamera();
-            }
-        });*/
+
         ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

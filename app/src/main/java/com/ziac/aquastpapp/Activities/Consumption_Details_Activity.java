@@ -236,19 +236,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 String item_code = Item_codeTV.getText().toString();
                 String qty = Qty_cb.getText().toString();
 
-              /*  if (equipment_code.isEmpty()) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Equipment  should not be empty !!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (item_code.isEmpty()) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Item should not be empty !!", Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (qty.isEmpty()) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Qty should not be empty !!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
-*/
                 if (equipment_code.isEmpty()) {
                     Toast.makeText(Consumption_Details_Activity.this, "Equipment  should not be empty !!", Toast.LENGTH_SHORT).show();
                     return;
@@ -260,7 +248,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     Toast.makeText(Consumption_Details_Activity.this, "Qty should not be empty !!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 updateConsumables_details();
                 dialog.dismiss();
             }

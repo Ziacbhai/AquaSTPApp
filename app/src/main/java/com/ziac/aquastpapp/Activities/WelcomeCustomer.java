@@ -49,54 +49,49 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class WelcomeCustomer extends AppCompatActivity {
-    private TextView Customer_name, Customer_mail, Customer_mobile,Company, ClickHere;
-    ImageView ImageView, Customerexit;
-    AppCompatButton cContinue;
-    Bitmap imageBitmap;
-    FloatingActionButton fab;
+    TextView Oname, Ownermail, Owanarmobile,Company, ClickHere;
+    CircleImageView ImageView;
+    ImageView Ownerexit;
+    AppCompatButton oContinue;
+
     Context context;
+    FloatingActionButton fab;
+    Bitmap imageBitmap;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_customer);
-
-
-
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
+        context = this;
         ImageView = findViewById(R.id.imageView);
-        Customer_name = findViewById(R.id.cname);
-
-        Company = findViewById(R.id.company);
-       // ClickHere = findViewById(R.id.Clickhere);
-        cContinue = findViewById(R.id.cContinue);
-        /*fab = findViewById(R.id.floating);*/
-        Customer_mail = findViewById(R.id.cmail);
-        Customer_mobile = findViewById(R.id.cph);
-
-        Customerexit = findViewById(R.id.customerexit);
-        Customerexit.setOnClickListener(new View.OnClickListener() {
+        Oname = findViewById(R.id.wname);
+        oContinue = findViewById(R.id.oContinue);
+        Ownerexit = findViewById(R.id.ownerexit);
+        Ownerexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeCustomer.this,LoginSignupActivity.class);
                 startActivity(intent);
             }
         });
+        Company = findViewById(R.id.company);
+        Ownermail = findViewById(R.id.wemail);
+        Owanarmobile = findViewById(R.id.wph);
 
-        String username, usermail, usermobile, userimage,com_name;
+        String username = Global.sharedPreferences.getString("person_nameu", "");
+        String mail = Global.sharedPreferences.getString("user_email", "");
+        String mobile = Global.sharedPreferences.getString("user_mobile", "");
+        String com_name = Global.sharedPreferences.getString("com_name", "");
+        String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
-        username = Global.sharedPreferences.getString("person_nameu", "");
-        usermail = Global.sharedPreferences.getString("user_email", "");
-        usermobile = Global.sharedPreferences.getString("user_mobile", "");
-        com_name  = Global.sharedPreferences.getString("com_name", "");
-        userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
-        Customer_name.setText(username);
-        Customer_mail.setText(usermail);
-        Customer_mobile.setText(usermobile);
+        Oname.setText(username);
+        Ownermail.setText(mail);
+        Owanarmobile.setText(mobile);
         Company.setText(com_name);
 
         Picasso.Builder builder = new Picasso.Builder(getApplication());
@@ -105,38 +100,17 @@ public class WelcomeCustomer extends AppCompatActivity {
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(ImageView);
-       /* fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                opencamera();
-            }
-        });*/
-        ImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-                showImage(picasso, userimage);
 
-            }
-        });
-        /*ClickHere.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(WelcomeCustomer.this, ProfileActivity.class);
-                startActivity(in);
-
-            }
-        });*/
-
-        cContinue.setOnClickListener(new View.OnClickListener() {
+        oContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (Global.StpList.isEmpty()) {
                     startActivity(new Intent(WelcomeCustomer.this, GenerateSTPdetails.class));
                 } else {
-                startActivity(new Intent(WelcomeCustomer.this, SelectSTPLocationActivity.class));
+                    startActivity(new Intent(WelcomeCustomer.this, SelectSTPLocationActivity.class));
                 }
+
             }
         });
     }
@@ -342,5 +316,10 @@ public class WelcomeCustomer extends AppCompatActivity {
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

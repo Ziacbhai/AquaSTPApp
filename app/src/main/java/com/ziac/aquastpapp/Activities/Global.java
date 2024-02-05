@@ -68,7 +68,6 @@ public class Global {
     public static String StopBlowerUrl = baseurl + "api/DailyLog/StopBlower?";
     public static String RolloverBlowerUrl = baseurl + "api/DailyLog/RolloverBlower?";
 
-
     //Meter
     public static String GetDailyLogMeter = baseurl + "api/DailyLog/GetMeters?";
 

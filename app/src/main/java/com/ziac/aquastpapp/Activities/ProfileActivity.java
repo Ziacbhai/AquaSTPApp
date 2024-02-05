@@ -27,6 +27,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -108,7 +109,11 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
                 showImage(picasso, userimage);
-
+                if (!TextUtils.isEmpty(userimage)) {
+                    showImage(picasso, userimage);
+                } else {
+                    circleImageView.setImageResource(R.drawable.no_image_available_icon); // Replace R.drawable.blank_image with the resource ID of your blank image
+                }
             }
         });
         Backarrowbtn.setOnClickListener(new View.OnClickListener() {

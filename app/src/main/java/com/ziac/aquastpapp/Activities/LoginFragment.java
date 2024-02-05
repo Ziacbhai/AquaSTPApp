@@ -305,8 +305,6 @@ public class LoginFragment extends Fragment {
                             stpModelClass.setSite_address(e.getString("site_address"));
                             stpModelClass.setProcess__type(e.getString("process_name"));
                             stpModelClass.setStp_capacity(e.getString("stp_capacity"));
-
-
                             Global.StpList.add(stpModelClass);
                         }
 

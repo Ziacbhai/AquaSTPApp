@@ -1,5 +1,6 @@
 package Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -53,7 +54,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RunningPumpMotorAdapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull RunningPumpMotorAdapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.Pumpeqipname.setText(pumpMotorDailyLogClass.get(position).getEquip_name());
         holder.Pumpstatedtime.setText(pumpMotorDailyLogClass.get(position).getStart_time());
@@ -172,6 +173,19 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
             Pumprunningtime = itemView.findViewById(R.id.pump_running_time);
             Pump_Reload = itemView.findViewById(R.id.pump_reload);
             Pump_Stop = itemView.findViewById(R.id.pump_stop);
+
+
+
+            String usertype=Global.sharedPreferences.getString("user_type","");
+            if (usertype.equals("C")){
+                Pump_Stop.setVisibility(View.GONE);
+                Pump_Reload.setVisibility(View.GONE);
+
+            }else {
+                Pump_Stop.setVisibility(View.VISIBLE);
+                Pump_Reload.setVisibility(View.VISIBLE);
+            }
+
         }
     }
 

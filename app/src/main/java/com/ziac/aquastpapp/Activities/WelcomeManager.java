@@ -53,76 +53,62 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class WelcomeManager extends AppCompatActivity {
 
-    TextView Managername, Managermail, Managermobile, ClickHere, Company;
-    ImageView ImageView, ManagerExit;
-    AppCompatButton mContinue;
+    TextView Oname, Ownermail, Owanarmobile, Company, ClickHere;
+    CircleImageView ImageView;
+    ImageView Ownerexit;
+    AppCompatButton oContinue;
+
     Context context;
-    Bitmap imageBitmap;
     FloatingActionButton fab;
+    Bitmap imageBitmap;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_manager);
-
         context = this;
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        /* fab = findViewById(R.id.floating);*/
-
-        Company = findViewById(R.id.company);
-        //ClickHere = findViewById(R.id.Clickhere);
-        mContinue = findViewById(R.id.mContinue);
-        ManagerExit = findViewById(R.id.managerexit);
-        ManagerExit.setOnClickListener(new View.OnClickListener() {
+        ImageView = findViewById(R.id.imageView);
+        Oname = findViewById(R.id.wname);
+        oContinue = findViewById(R.id.oContinue);
+        Ownerexit = findViewById(R.id.ownerexit);
+        Ownerexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*finishAffinity();*/
-
-                Intent i = new Intent(WelcomeManager.this, LoginSignupActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(WelcomeManager.this, LoginSignupActivity.class);
+                startActivity(intent);
             }
         });
-        Managername = findViewById(R.id.Mname);
-        Managermail = findViewById(R.id.Mmail);
-        Managermobile = findViewById(R.id.Mph);
-        ImageView = findViewById(R.id.imageView);
+        Company = findViewById(R.id.company);
+        Ownermail = findViewById(R.id.wemail);
+        Owanarmobile = findViewById(R.id.wph);
 
-        String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-        String person = Global.sharedPreferences.getString("person_nameu", "");
+        String username = Global.sharedPreferences.getString("person_nameu", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
-        String com_name = Global.sharedPreferences.getString("com_name", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
+        String com_name = Global.sharedPreferences.getString("com_name", "");
+        String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
-        ///1
+
+        Oname.setText(username);
+        Ownermail.setText(mail);
+        Owanarmobile.setText(mobile);
+        Company.setText(com_name);
+
         Picasso.Builder builder = new Picasso.Builder(getApplication());
         Picasso picasso = builder.build();
         picasso.load(Uri.parse(userimage))
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(ImageView);
-        Managername.setText(person);
-        Managermail.setText(mail);
-        Managermobile.setText(mobile);
-        Company.setText(com_name);
 
 
-        ///2
-       /* Glide.with(WelcomeManager.this).
-                load(userimage)
-                .into(ImageView);*/
-
-        // Log.d("MyTag", "SVG image: " + userimage);
-
-       /* fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                opencamera();
-            }
-        });*/
         ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,17 +117,75 @@ public class WelcomeManager extends AppCompatActivity {
 
             }
         });
-      /*  ClickHere.setOnClickListener(new View.OnClickListener() {
+        /*ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeManager.this, ProfileActivity.class);
+                Intent in = new Intent(WelcomeOwner.this, ProfileActivity.class);
                 startActivity(in);
-            }
-        });*/
 
-        mContinue.setOnClickListener(new View.OnClickListener() {
+            }
+
+            public void showImage(Picasso picasso, String userimage) {
+                Dialog builder = new Dialog(context);
+                builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                builder.getWindow().setBackgroundDrawable(
+                        new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        // Nothing
+                    }
+                });
+
+                // Calculate display dimensions
+                DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+                int screenWidth = displayMetrics.widthPixels;
+                int screenHeight = displayMetrics.heightPixels;
+
+                // Load the image using Picasso
+                picasso.load(Uri.parse(userimage)).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        ImageView imageView = new ImageView(getApplicationContext());
+
+                        // Calculate dimensions to fit the image within the screen
+                        int imageWidth = bitmap.getWidth();
+                        int imageHeight = bitmap.getHeight();
+                        float aspectRatio = (float) imageWidth / imageHeight;
+
+                        int newWidth = screenWidth;
+                        int newHeight = (int) (screenWidth / aspectRatio);
+                        if (newHeight > screenHeight) {
+                            newHeight = screenHeight;
+                            newWidth = (int) (screenHeight * aspectRatio);
+                        }
+
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(newWidth, newHeight);
+                        imageView.setLayoutParams(layoutParams);
+
+                        imageView.setImageBitmap(bitmap);
+
+                        builder.addContentView(imageView, layoutParams);
+                        builder.show();
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                        // Handle bitmap loading failure
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        // Prepare bitmap loading
+                    }
+                });
+            }
+        });
+*/
+        oContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (Global.StpList.isEmpty()) {
                     startActivity(new Intent(WelcomeManager.this, GenerateSTPdetails.class));
                 } else {
@@ -150,6 +194,7 @@ public class WelcomeManager extends AppCompatActivity {
 
             }
         });
+
 
     }
 
@@ -350,9 +395,11 @@ public class WelcomeManager extends AppCompatActivity {
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 
+
+
+    @Override
     public void onBackPressed() {
-        Intent i = new Intent(WelcomeManager.this, LoginSignupActivity.class);
-        startActivity(i);
+
     }
 
 }

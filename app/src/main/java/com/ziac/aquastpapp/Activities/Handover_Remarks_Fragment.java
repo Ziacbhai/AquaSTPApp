@@ -1,19 +1,17 @@
 package com.ziac.aquastpapp.Activities;
 
-import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,78 +34,39 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import Models.DailyLogClass;
 
-public class Handover_Remarks_Activity extends AppCompatActivity {
-    ImageView backbtn;
+public class Handover_Remarks_Fragment extends Fragment {
     TextView Remark_submit;
     EditText Remark_edit;
 
     Context context;
-
-    @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_handover_remarks);
-        backbtn = findViewById(R.id.back_btn);
-        Remark_edit = findViewById(R.id.remark_edit);
-        Remark_submit = findViewById(R.id.remark_submit);
-        context = this;
-        user_topcard();
-        backbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.fragment_handover__remarks, container, false);
+        getContext();
+        Remark_edit = view.findViewById(R.id.remark_edit);
+        Remark_submit = view.findViewById(R.id.remark_submit);
         Remark_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 SaveRemark();
             }
         });
-    }
-
-    private void user_topcard() {
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        sitename = sharedPreferences.getString("site_name", "");
-        stpname = sharedPreferences.getString("stp_name", "");
-        siteaddress = sharedPreferences.getString("site_address", "");
-        processname = sharedPreferences.getString("process_name", "");
-        useremail = sharedPreferences.getString("user_email", "");
-        usermobile = sharedPreferences.getString("user_mobile", "");
-        personname = sharedPreferences.getString("person_nameu", "");
-        stpcapacity = sharedPreferences.getString("stp_capacity", "");
-
-        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
-
-        txtsitename = findViewById(R.id.sitename);
-        txtstpname = findViewById(R.id.stpname);
-        txtsiteaddress = findViewById(R.id.siteaddress);
-        txtuseremail = findViewById(R.id.useremail);
-        txtusermobile = findViewById(R.id.usermobile);
-        txtpersonname = findViewById(R.id.personname);
-
-        txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
-        txtsiteaddress.setText(siteaddress);
-        txtuseremail.setText(useremail);
-        txtusermobile.setText(usermobile);
-        txtpersonname.setText(personname);
+        return view;
     }
 
     private void SaveRemark() {
         String remark;
         remark = Remark_edit.getText().toString();
         if (remark.isEmpty()) {
-            Toast.makeText(context, "Remark should not be empty !!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Remark should not be empty !!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
         String url = Global.DailyLogUpdateHandOverRemark;
 
         String handover_remarks =remark;
@@ -117,7 +76,6 @@ public class Handover_Remarks_Activity extends AppCompatActivity {
 
         url = url + "comcode="+com_code+"&ayear="+ayear +"&tstp1_code="+tstp1_code+"&handover_remarks="+handover_remarks;
 
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -126,9 +84,12 @@ public class Handover_Remarks_Activity extends AppCompatActivity {
                     boolean success = jsonObject.getBoolean("success");
                     String error = jsonObject.getString("error");
                     if (success) {
-                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Handover_Remarks_Activity.this, MainActivity.class));
-                        finish();
+                        Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                        HomeFragment homeFragment = new HomeFragment();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_layout, homeFragment); // R.id.fragment_container is the ID of the container in your activity layout
+                        transaction.addToBackStack("homeFragment");
+                        transaction.commit();
                     } else {
                         Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
                     }
@@ -140,15 +101,15 @@ public class Handover_Remarks_Activity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof TimeoutError) {
-                    Toast.makeText(context, "Request Time-Out", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Request Time-Out", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(context, "No Connection Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "No Connection Found", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ServerError) {
-                    Toast.makeText(context, "Server Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Server Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NetworkError) {
-                    Toast.makeText(context, "Network Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Network Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ParseError) {
-                    Toast.makeText(context, "Parse Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Parse Error", Toast.LENGTH_LONG).show();
                 }
             }
         }) {
@@ -163,11 +124,12 @@ public class Handover_Remarks_Activity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-              /*  params.put("handover_remarks", remark);
+               /* params.put("handover_remarks",         String handover_remarks =
+);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", null));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", null));
-                params.put("tstp1_code", Global.sharedPreferences.getString("tstp1_code",null))*/;
-
+                params.put("tstp1_code", Global.sharedPreferences.getString("tstp1_code",null));
+*/
                 return params;
             }
 

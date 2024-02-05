@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
         android:background="@drawable/btnbgedited"
         android:orientation="horizontal"
         android:padding="5dp">
@@ -16,7 +15,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_weight="3.5"
             android:padding="5dp"
             android:layout_height="wrap_content">
 
@@ -24,7 +22,7 @@
                 android:id="@+id/blower_equip_name"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.9"
                 android:gravity="center"
                 android:text="Blower"
                 android:textColor="#000"
@@ -56,11 +54,11 @@
                 android:id="@+id/blower_stopped_time"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.1"
                 android:gravity="center"
                 android:text="Stopped"
                 android:textColor="#000"
-                android:textSize="12dp" />
+                android:textSize="11dp" />
 
 
             <View

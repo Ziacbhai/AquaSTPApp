@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -48,40 +49,30 @@ import Models.FiltersClass;
 
 
 public class HomeFragment extends Fragment {
-
     ProgressDialog progressDialog;
     FloatingActionButton Fab;
-
     DailyLogClass dailyLog;
     Context context;
-
-
-
     RelativeLayout layoutpump, layoutblower, layoutmeter, layoutsensor, layoutfilter, layouthandover_remark;
-
     @Override
     public void onResume() {
         super.onResume();
         DailyLogIndex();
     }
-
     @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         user_topcard(view);
-
+        context = getActivity();
         DailyLogIndex();
-
         layoutpump = view.findViewById(R.id.pumpmotor);
         layoutblower = view.findViewById(R.id.blower);
         layoutmeter = view.findViewById(R.id.meter);
         layoutsensor = view.findViewById(R.id.sensor);
         layoutfilter = view.findViewById(R.id.filter);
         layouthandover_remark = view.findViewById(R.id.handover_remarks);
-
         layoutpump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,19 +108,15 @@ public class HomeFragment extends Fragment {
                 startActivity(filter);
             }
         });
-
         layouthandover_remark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent filter = new Intent(getActivity(), Handover_Remarks_Activity.class);
-                startActivity(filter);
+                Intent remark = new Intent(getActivity(), Handover_Remarks_Activity.class);
+                startActivity(remark);
             }
         });
-
-
         return view;
     }
-
     private void user_topcard(View view) {
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading !!");
@@ -188,7 +175,6 @@ public class HomeFragment extends Fragment {
                         String dlogdate = response.getString("dlogdate");
                         Log.d("YourTag", "Daily Log Date: " + dlogdate);
 
-
                         DailyLogClass dailyLog = new DailyLogClass();
                         dailyLog.setDailylog(dlogdate);
                         Global.dailyLogClassArrayList.add(dailyLog);
@@ -196,35 +182,26 @@ public class HomeFragment extends Fragment {
                         Global.editor.putString("dlogdate", dlogdate);
                         Global.editor.commit();
 
+                        // Extracting and displaying "tstp1_code"
+                        JSONObject dataObject = response.getJSONObject("data");
+                        String tstp1_code = dataObject.getString("tstp1_code");
+                        Global.editor.putString("tstp1_code", tstp1_code);
+                        Global.editor.commit();
+
+                        //Toast.makeText(requireActivity(), "tstp1_code: " + tstp1_code, Toast.LENGTH_SHORT).show();
                     } else {
                         String error = response.getString("error");
                         Toast.makeText(requireActivity(), error, Toast.LENGTH_LONG).show();
                     }
 
-                    jarray = response.getJSONArray("data");
-                    for (int i = 0; i < jarray.length(); i++) {
-                        final JSONObject e;
-                        try {
-                            e = jarray.getJSONObject(i);
-                        } catch (JSONException ex) {
-                            throw new RuntimeException(ex);
-                        }
-
-                        try {
-                            DailyLogClass dailyLogClass = new DailyLogClass();
-                            dailyLogClass.setTstp1_code(e.getString("tstp1_code"));
-                        } catch (JSONException ex) {
-                            throw new RuntimeException(ex);
-                        }
-
-                    }
-
+                    // Rest of your code...
 
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
-        }, new Response.ErrorListener() {
+
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // Handle Volley errors
@@ -260,5 +237,4 @@ public class HomeFragment extends Fragment {
 
         queue.add(jsonObjectRequest);
     }
-
 }

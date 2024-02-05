@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#eaeff5"
     android:orientation="vertical"
-    tools:context=".Activities.WelcomeCustomer">
+    tools:context=".Activities.WelcomeOwner">
 
     <View
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         android:layout_height="35dp">
 
         <ImageView
-            android:id="@+id/customerexit"
+            android:id="@+id/ownerexit"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_alignParentEnd="true"
@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
-
+        <!-- First CircleImageView -->
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView"
             android:layout_width="210dp"
@@ -42,28 +42,13 @@
             app:civ_border_color="#3FD5C7"
             app:civ_border_width="4dp" />
 
-        <!-- First FloatingActionButton -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/imageView"
-            android:layout_alignBottom="@+id/imageView"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:backgroundTint="#EE0F0F"
-            android:clickable="true"
-            android:src="@drawable/camera_icon"
-            app:fabCustomSize="40dp"
-            app:fabSize="mini"
-            app:maxImageSize="20dp"
-            app:tint="@color/white" />
+
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
 
     <TextView
         android:id="@+id/company"
@@ -75,11 +60,6 @@
         android:textSize="15sp"
         android:textStyle="bold" />
 
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -89,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Welcome Back,Valued Customer"
+            android:text="Greetings,esteemed Customer!"
             android:textColor="#01a4a3"
             android:textSize="22sp"
             android:textStyle="italic" />
@@ -105,31 +85,33 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
+
         <TextView
-            android:id="@+id/cname"
+            android:id="@+id/wname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amaranth_bold"
             android:gravity="center_horizontal"
-            android:text="xxxxxxxxxxx"
-            android:textSize="16sp"
+            android:text="Helloziac"
+            android:textColor="@color/black"
+            android:textSize="15sp"
             android:textStyle="italic" />
 
         <TextView
-            android:id="@+id/cmail"
+            android:id="@+id/wemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="xxxxxxxxxxx"
-            android:textSize="16sp" />
+            android:text="ziac@gmail.com"
+            android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/cph"
+            android:id="@+id/wph"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="xxxxxxxxxxx"
-            android:textSize="16sp" />
+            android:text="1234567890"
+            android:textSize="15sp" />
 
         <View
             android:layout_width="match_parent"
@@ -144,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Your water's purity is our commitment."
+                android:text="The helm of AquaSTP awaits."
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
@@ -155,7 +137,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:padding="2dp"
-            android:text="View your stats and insights here."
+            android:text="dive into comprehensive insights."
             android:textSize="15dp" />
     </LinearLayout>
 
@@ -164,7 +146,7 @@
         android:layout_height="40dp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/cContinue"
+        android:id="@+id/oContinue"
         android:layout_width="180dp"
         android:layout_height="55dp"
         android:layout_gravity="center_horizontal"
@@ -177,26 +159,26 @@
         android:layout_width="match_parent"
         android:layout_height="5dp" />
 
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <!-- <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="Update Profile ?" />
+         <TextView
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="25dp"
+             android:layout_weight="1"
+             android:gravity="end"
+             android:text="Details wrong ?" />
 
-        <TextView
-            android:id="@+id/Clickhere"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=" Click here"
-            android:textColor="#F44336" />
-    </LinearLayout>-->
+         <TextView
+             android:id="@+id/Clickhere"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:text=" Click here"
+             android:textColor="#F44336" />
+     </LinearLayout>-->
 
 </LinearLayout>

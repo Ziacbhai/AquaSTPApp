@@ -36,9 +36,6 @@ public class EquipmentsFragment extends Fragment {
 
         context = getContext();
         user_topcard(view);
-
-
-
         Pump = view.findViewById(R.id.pump_p);
         Meters = view.findViewById(R.id.moter_s);
         Pump.setOnClickListener(new View.OnClickListener() {

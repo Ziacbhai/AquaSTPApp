@@ -56,13 +56,14 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WelcomeSupervisor extends AppCompatActivity {
-    private TextView Sname, Smail, Smobile, ClickHere, Company;
+    TextView Oname, Ownermail, Owanarmobile,Company, ClickHere;
     CircleImageView ImageView;
-    ImageView SupervisorExit;
-    AppCompatButton sContinue;
+    ImageView Ownerexit;
+    AppCompatButton oContinue;
+
     Context context;
-    Bitmap imageBitmap;
     FloatingActionButton fab;
+    Bitmap imageBitmap;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -71,38 +72,32 @@ public class WelcomeSupervisor extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_supervisor);
 
         context = this;
-
-
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         ImageView = findViewById(R.id.imageView);
-        Sname = findViewById(R.id.sName);
-        // ClickHere = findViewById(R.id.Clickhere);
-        sContinue = findViewById(R.id.sContinue);
-        /* fab = findViewById(R.id.floating);*/
-        SupervisorExit = findViewById(R.id.supervisorexit);
-
-        SupervisorExit.setOnClickListener(new View.OnClickListener() {
+        Oname = findViewById(R.id.wname);
+        oContinue = findViewById(R.id.oContinue);
+        Ownerexit = findViewById(R.id.ownerexit);
+        Ownerexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(WelcomeSupervisor.this, LoginSignupActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(WelcomeSupervisor.this,LoginSignupActivity.class);
+                startActivity(intent);
             }
         });
         Company = findViewById(R.id.company);
-        Smail = findViewById(R.id.sMail);
-        Smobile = findViewById(R.id.sPh);
-        //ClickHere = findViewById(R.id.Clickhere);
+        Ownermail = findViewById(R.id.wemail);
+        Owanarmobile = findViewById(R.id.wph);
+
+        String username = Global.sharedPreferences.getString("person_nameu", "");
+        String mail = Global.sharedPreferences.getString("user_email", "");
+        String mobile = Global.sharedPreferences.getString("user_mobile", "");
+        String com_name = Global.sharedPreferences.getString("com_name", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
 
-        String usrname = Global.sharedPreferences.getString("person_nameu", "");
-        String mail = Global.sharedPreferences.getString("user_email", "");
-        String com_name = Global.sharedPreferences.getString("com_name", "");
-        String mobile = Global.sharedPreferences.getString("user_mobile", "");
 
-        Sname.setText(usrname);
-        Smail.setText(mail);
-        Smobile.setText(mobile);
+        Oname.setText(username);
+        Ownermail.setText(mail);
+        Owanarmobile.setText(mobile);
         Company.setText(com_name);
 
         Picasso.Builder builder = new Picasso.Builder(getApplication());
@@ -112,12 +107,7 @@ public class WelcomeSupervisor extends AppCompatActivity {
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(ImageView);
 
-       /* fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                opencamera();
-            }
-        });*/
+
 
         ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,23 +117,81 @@ public class WelcomeSupervisor extends AppCompatActivity {
 
             }
         });
-
-       /* ClickHere.setOnClickListener(new View.OnClickListener() {
+        /*ClickHere.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(WelcomeSupervisor.this, ProfileActivity.class);
+                Intent in = new Intent(WelcomeOwner.this, ProfileActivity.class);
                 startActivity(in);
-            }
-        });*/
 
-        sContinue.setOnClickListener(new View.OnClickListener() {
+            }
+
+            public void showImage(Picasso picasso, String userimage) {
+                Dialog builder = new Dialog(context);
+                builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                builder.getWindow().setBackgroundDrawable(
+                        new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        // Nothing
+                    }
+                });
+
+                // Calculate display dimensions
+                DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+                int screenWidth = displayMetrics.widthPixels;
+                int screenHeight = displayMetrics.heightPixels;
+
+                // Load the image using Picasso
+                picasso.load(Uri.parse(userimage)).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                        ImageView imageView = new ImageView(getApplicationContext());
+
+                        // Calculate dimensions to fit the image within the screen
+                        int imageWidth = bitmap.getWidth();
+                        int imageHeight = bitmap.getHeight();
+                        float aspectRatio = (float) imageWidth / imageHeight;
+
+                        int newWidth = screenWidth;
+                        int newHeight = (int) (screenWidth / aspectRatio);
+                        if (newHeight > screenHeight) {
+                            newHeight = screenHeight;
+                            newWidth = (int) (screenHeight * aspectRatio);
+                        }
+
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(newWidth, newHeight);
+                        imageView.setLayoutParams(layoutParams);
+
+                        imageView.setImageBitmap(bitmap);
+
+                        builder.addContentView(imageView, layoutParams);
+                        builder.show();
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                        // Handle bitmap loading failure
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        // Prepare bitmap loading
+                    }
+                });
+            }
+        });
+*/
+        oContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (Global.StpList.isEmpty()) {
                     startActivity(new Intent(WelcomeSupervisor.this, GenerateSTPdetails.class));
                 } else {
                     startActivity(new Intent(WelcomeSupervisor.this, SelectSTPLocationActivity.class));
                 }
+
             }
         });
 
@@ -364,6 +412,11 @@ public class WelcomeSupervisor extends AppCompatActivity {
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 
 }
