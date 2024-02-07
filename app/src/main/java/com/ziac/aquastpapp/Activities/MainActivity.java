@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         picasso.load(Uri.parse(userimage))
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
+                .error(R.drawable.no_image_available_icon)
                 .into(Profile);
         Profile.setOnClickListener(new View.OnClickListener() {
             @Override

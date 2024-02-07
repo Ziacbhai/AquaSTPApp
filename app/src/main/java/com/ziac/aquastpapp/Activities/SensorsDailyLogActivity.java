@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,12 +49,13 @@ import Models.SensorsModelClass;
 
 public class SensorsDailyLogActivity extends AppCompatActivity {
     ImageView backbtn;
-    TextView Displaydate,Displaytime;
+    TextView Displaydate, Displaytime,Total_sensor_header;
     SensorsModelClass sensorsModelClass;
-
+    LinearLayout Sensor_header;
     RecyclerView sensor_recyclerView;
     RecyclerView sensor_recyclerView2;
     Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,17 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
 
         Displaydate = findViewById(R.id.displaydate);
         Displaytime = findViewById(R.id.displaytime);
+        Sensor_header = findViewById(R.id.sensor_header);
+        sensor_recyclerView = findViewById(R.id.sensor_edit_recyclerview);
+        sensor_recyclerView2 = findViewById(R.id.sensors_recyclerview);
+        Total_sensor_header = findViewById(R.id.total_sensor_header);
+        String usertype=Global.sharedPreferences.getString("user_type","");
+
+        if (usertype.equals("C")) {
+            hideViews();
+        } else {
+            showViews();
+        }
 
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,18 +96,41 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
         }, 0);
 
         DailyLogSensorsEdit();
-        sensor_recyclerView = findViewById(R.id.sensor_edit_recyclerview);
-        sensor_recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        sensor_recyclerView.setHasFixedSize(true);
-        sensor_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
+        if (sensor_recyclerView != null) {
+            sensor_recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            sensor_recyclerView.setHasFixedSize(true);
+            sensor_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        }
         DailyLogSensors();
+        if (sensor_recyclerView2!= null){
+            sensor_recyclerView2.setLayoutManager(new LinearLayoutManager(this));
+            sensor_recyclerView2.setHasFixedSize(true);
+            sensor_recyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        }
+    }
 
-        sensor_recyclerView2 = findViewById(R.id.sensors_recyclerview);
-        sensor_recyclerView2.setLayoutManager(new LinearLayoutManager(this));
-        sensor_recyclerView2.setHasFixedSize(true);
-        sensor_recyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    private void showViews() {
+        if (Sensor_header != null) {
+            Sensor_header.setVisibility(View.VISIBLE);
+            Total_sensor_header.setVisibility(View.VISIBLE);
+        }
+        if (sensor_recyclerView != null) {
+            sensor_recyclerView.setVisibility(View.VISIBLE);
+            Total_sensor_header.setVisibility(View.VISIBLE);
+        }
+    }
 
+    private void hideViews() {
+        if (Sensor_header != null) {
+            Sensor_header.setVisibility(View.GONE);
+            Total_sensor_header.setVisibility(View.GONE);
+        }
+        if (sensor_recyclerView != null) {
+            sensor_recyclerView.setVisibility(View.GONE);
+            Total_sensor_header.setVisibility(View.GONE);
+
+        }
     }
 
     private void updateDateTime() {
@@ -124,7 +160,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
     }
 
     private void user_topcard() {
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, stpcapacity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
@@ -145,7 +181,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
         txtpersonname = findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
+        txtstpname.setText(stpname + " / " + processname + " / " + stpcapacity);
         txtsiteaddress.setText(siteaddress);
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);
@@ -191,7 +227,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                             throw new RuntimeException(ex);
                         }
                         Global.Sensors_Class.add(sensorsModelClass);
-                        SensorDailyLogEditAdapter sensorDailyLogEditAdapter = new SensorDailyLogEditAdapter((List<SensorsModelClass>) Global.Sensors_Class,context);
+                        SensorDailyLogEditAdapter sensorDailyLogEditAdapter = new SensorDailyLogEditAdapter((List<SensorsModelClass>) Global.Sensors_Class, context);
                         sensor_recyclerView.setAdapter(sensorDailyLogEditAdapter);
                     }
                 } catch (JSONException e) {
@@ -214,7 +250,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                     Toast.makeText(context, "Parse Error", Toast.LENGTH_LONG).show();
                 }
             }
-        }){
+        }) {
 
             @Override
             public Map<String, String> getHeaders() {
@@ -276,7 +312,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                             throw new RuntimeException(ex);
                         }
                         Global.Sensors_Class.add(sensorsModelClass);
-                        SensorDailyLogAdapter sensorDailyLogAdapter = new SensorDailyLogAdapter((List<SensorsModelClass>) Global.Sensors_Class,context);
+                        SensorDailyLogAdapter sensorDailyLogAdapter = new SensorDailyLogAdapter((List<SensorsModelClass>) Global.Sensors_Class, context);
                         sensor_recyclerView2.setAdapter(sensorDailyLogAdapter);
                     }
                 } catch (JSONException e) {
@@ -289,7 +325,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
 
             }
 
-        }){
+        }) {
 
             @Override
             public Map<String, String> getHeaders() {

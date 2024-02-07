@@ -242,7 +242,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pump_motor_started_recyclerview"
+        android:id="@+id/pump_motor_start_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
@@ -250,6 +250,7 @@
         android:background="@drawable/btnbgoutline" />
 
     <LinearLayout
+        android:id="@+id/pump_start_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
@@ -323,7 +324,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/motor_pump_start_recyclerview"
+        android:id="@+id/pump_motor_stop_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"

@@ -69,6 +69,7 @@
                 android:background="#000" />
 
             <LinearLayout
+                android:id="@+id/senser_image_hide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5">

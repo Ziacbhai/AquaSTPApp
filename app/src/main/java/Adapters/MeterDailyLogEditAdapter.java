@@ -30,6 +30,7 @@ import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.MeterDailyLogActivity;
 import com.ziac.aquastpapp.Activities.RepairBreakUpActivity;
+import com.ziac.aquastpapp.Activities.SensorsDailyLogActivity;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONException;
@@ -63,20 +64,14 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
     public void onBindViewHolder(@NonNull MeterDailyLogEditAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_equip_name());
-
-
         holder.Meter_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get the meter status for the clicked position
-                String meterStatus = metersDailyLogClass.get(position).getMeter_status();
-                if ("C".equals(meterStatus)) {
+
+
                     enteredValue = holder.Meter_reading_edit.getText().toString();
                     DailyLogMeters(enteredValue,position);
-                } else {
-                    // If status is not "C," you can perform some other action or show a message
-                    Toast.makeText(context, "Meter status is not 'C'", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
 
@@ -86,37 +81,24 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
     private void DailyLogMeters(String enteredValue,int position) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.DailyLogUpdateMeterReadings;
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
-                Intent intent = new Intent(context, MeterDailyLogActivity.class);
-                context.startActivity(intent);
-                ((Activity) context).finish();
-
-
-               /* try {
-
-                    JSONObject jsonObject = new JSONObject(response);
-
+                try {
+                    JSONObject  jsonObject = new JSONObject(response);
                     boolean success = jsonObject.getBoolean("success");
-                    //String messages = jsonObject.getString("success");
                     String error = jsonObject.getString("error");
-
-                        if (success) {
-                            //Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(context, MeterDailyLogActivity.class);
-                            context.startActivity(intent);
-                            ((Activity) context).finish();
-                        } else {
-                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
-                        }
-
+                    if (success) {
+                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, MeterDailyLogActivity.class);
+                        context.startActivity(intent);
+                        ((Activity) context).finish();
+                    } else {
+                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                    }
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
-                }*/
-
+                }
             }
 
         }, new Response.ErrorListener() {
@@ -176,7 +158,5 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
             Meter_save = itemView.findViewById(R.id.meter_save);
         }
     }
-    private void showToast(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
-    }
+
 }

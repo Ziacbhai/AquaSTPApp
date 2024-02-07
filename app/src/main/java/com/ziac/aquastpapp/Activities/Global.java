@@ -52,7 +52,7 @@ public class Global {
     //Server url
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
-    public static String baseurl = "http://192.168.1.10:9396/";
+    public static String baseurl = "http://192.168.1.5:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
 

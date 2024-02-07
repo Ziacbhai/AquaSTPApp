@@ -167,6 +167,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/meter_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -174,7 +175,6 @@
         android:background="@drawable/btnbg"
         android:orientation="horizontal"
         android:padding="5dp">
-
 
         <TextView
             android:layout_width="0dp"

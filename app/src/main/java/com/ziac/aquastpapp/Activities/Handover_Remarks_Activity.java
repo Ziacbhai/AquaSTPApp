@@ -61,14 +61,20 @@ public class Handover_Remarks_Activity extends AppCompatActivity {
                 finish();
             }
         });
-
+        String usertype=Global.sharedPreferences.getString("user_type","");
         Remark_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SaveRemark();
             }
         });
+
+
     }
+
+
+
+
 
     private void user_topcard() {
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;

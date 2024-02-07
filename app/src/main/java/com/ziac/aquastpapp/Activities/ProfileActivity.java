@@ -300,6 +300,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Global.editor.putString("user_email", Person_email.getText().toString());
                 Global.editor.putString("ref_code", Person_ref_code.getText().toString());
                 Global.editor.commit();
+
                 try {
                     if (response.getBoolean("isSuccess")) {
                         Toast.makeText(ProfileActivity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
@@ -387,7 +388,11 @@ public class ProfileActivity extends AppCompatActivity {
 
                 builder = new Picasso.Builder(getApplication());
                 picasso = builder.build();
-                picasso.load(Uri.parse(userimage)).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(circleImageView);
+                picasso.load(Uri.parse(userimage)).
+                        memoryPolicy(MemoryPolicy.NO_CACHE)
+                        .networkPolicy(NetworkPolicy.NO_CACHE)
+                        .error(R.drawable.no_image_available_icon)
+                        .into(circleImageView);
 
             } catch (JSONException e) {
                 e.printStackTrace();

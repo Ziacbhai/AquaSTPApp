@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,8 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
     RecyclerView pump_motor_started_recyclerview;
     RecyclerView pump_motor_stopped_recyclerview;
 
+    LinearLayout Pump_start_header;
+
     public RunningPumpMotorAdapter dailyLogAdapter;
     public StoppedPumpMotorAdapter dailyLogAdapter1;
 
@@ -64,11 +67,13 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pump_details);
-
+        String usertype=Global.sharedPreferences.getString("user_type","");
         context = this;
         user_topcard();
         backbtn = findViewById(R.id.back_btn);
-
+        Pump_start_header = findViewById(R.id.pump_start_header);
+        pump_motor_started_recyclerview = findViewById(R.id.pump_motor_start_recyclerview);
+        pump_motor_stopped_recyclerview = findViewById(R.id.pump_motor_stop_recyclerview);
        // content();
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,19 +93,41 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
         Displaydate = findViewById(R.id.displaydate);
         Displaytime = findViewById(R.id.displaytime);
 
-
+        if (usertype.equals("C")) {
+            hideViews();
+        } else {
+            showViews();
+        }
         PumpsMotors();
-        pump_motor_started_recyclerview = findViewById(R.id.pump_motor_started_recyclerview);
         pump_motor_started_recyclerview.setLayoutManager(new LinearLayoutManager(this));
         pump_motor_started_recyclerview.setHasFixedSize(true);
         pump_motor_started_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        pump_motor_stopped_recyclerview = findViewById(R.id.motor_pump_start_recyclerview);
         pump_motor_stopped_recyclerview.setLayoutManager(new LinearLayoutManager(this));
         pump_motor_stopped_recyclerview.setHasFixedSize(true);
         pump_motor_stopped_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
     }
+
+    private void showViews() {
+        if (Pump_start_header != null) {
+            Pump_start_header.setVisibility(View.VISIBLE);
+        }
+        if (pump_motor_stopped_recyclerview != null) {
+            pump_motor_stopped_recyclerview.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void hideViews() {
+
+        if (Pump_start_header != null) {
+            Pump_start_header.setVisibility(View.GONE);
+        }
+        if (pump_motor_stopped_recyclerview != null) {
+            pump_motor_stopped_recyclerview.setVisibility(View.GONE);
+        }
+    }
+
 
     private void updateDateTime() {
         Date currentDate = new Date();
@@ -179,6 +206,7 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
                     Global.loadstoppedpumps(response);
                     dailyLogAdapter1 = new StoppedPumpMotorAdapter((List<PumpMotorBlower_LogClass>) Global.StoppedPumpsMotors_LogClass, context);
                     pump_motor_stopped_recyclerview.setAdapter(dailyLogAdapter1);
+
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }

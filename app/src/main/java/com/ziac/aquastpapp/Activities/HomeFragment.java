@@ -73,6 +73,15 @@ public class HomeFragment extends Fragment {
         layoutsensor = view.findViewById(R.id.sensor);
         layoutfilter = view.findViewById(R.id.filter);
         layouthandover_remark = view.findViewById(R.id.handover_remarks);
+
+        String usertype=Global.sharedPreferences.getString("user_type","");
+
+        if (usertype.equals("C")) {
+            hideViews();
+        } else {
+            showViews();
+        }
+
         layoutpump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +126,19 @@ public class HomeFragment extends Fragment {
         });
         return view;
     }
+
+    private void showViews() {
+        if (layouthandover_remark != null) {
+            layouthandover_remark.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void hideViews() {
+        if (layouthandover_remark != null) {
+            layouthandover_remark.setVisibility(View.GONE);
+        }
+    }
+
     private void user_topcard(View view) {
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading !!");

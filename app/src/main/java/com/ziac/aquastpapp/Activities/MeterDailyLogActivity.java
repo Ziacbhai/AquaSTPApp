@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,13 +51,10 @@ public class MeterDailyLogActivity extends AppCompatActivity {
 
     ImageView backbtn;
     TextView Displaydate, Displaytime;
-
     RecyclerView Meters_recyclerview;
-
     RecyclerView Meters_recyclerview2;
 
-    MetersDailyLogClass metersDailyLogClass;
-
+    LinearLayout Meter_header;
     Context context;
 
     @SuppressLint("MissingInflatedId")
@@ -72,7 +70,7 @@ public class MeterDailyLogActivity extends AppCompatActivity {
 
         Displaydate = findViewById(R.id.displaydate);
         Displaytime = findViewById(R.id.displaytime);
-
+        String usertype = Global.sharedPreferences.getString("user_type", "");
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,18 +87,40 @@ public class MeterDailyLogActivity extends AppCompatActivity {
             }
         }, 0);
 
-
-        DailyLogMetersEdit();
+        // First, initialize your views
+        Meter_header = findViewById(R.id.meter_header); // Replace "your_meter_header_id" with the actual ID of your Meter_header view
         Meters_recyclerview = findViewById(R.id.meter_edit_recyclerview);
-        Meters_recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        Meters_recyclerview.setHasFixedSize(true);
-        Meters_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-
         Meters_recyclerview2 = findViewById(R.id.meter2_recyclerview);
-        Meters_recyclerview2.setLayoutManager(new LinearLayoutManager(this));
-        Meters_recyclerview2.setHasFixedSize(true);
-        Meters_recyclerview2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+// Then, perform visibility manipulation based on the user type
+        if (usertype.equals("C")) {
+            if (Meter_header != null) {
+                Meter_header.setVisibility(View.GONE);
+            }
+            if (Meters_recyclerview != null) {
+                Meters_recyclerview.setVisibility(View.GONE);
+            }
+        } else {
+            if (Meter_header != null) {
+                Meter_header.setVisibility(View.VISIBLE);
+            }
+            if (Meters_recyclerview != null) {
+                Meters_recyclerview.setVisibility(View.VISIBLE);
+            }
+        }
+
+// Continue with the rest of your code...
+        DailyLogMetersEdit();
+        if (Meters_recyclerview != null) {
+            Meters_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+            Meters_recyclerview.setHasFixedSize(true);
+            Meters_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        }
+        if (Meters_recyclerview2 != null) {
+            Meters_recyclerview2.setLayoutManager(new LinearLayoutManager(this));
+            Meters_recyclerview2.setHasFixedSize(true);
+            Meters_recyclerview2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        }
 
     }
 
@@ -162,7 +182,6 @@ public class MeterDailyLogActivity extends AppCompatActivity {
     private void DailyLogMetersEdit() {
         RequestQueue queue = Volley.newRequestQueue(context);
         String dailylogmeter = Global.GetDailyLogMeter;
-
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
         String dlog_date = Global.sharedPreferences.getString("dlogdate", "0");
@@ -172,17 +191,19 @@ public class MeterDailyLogActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+
+
                     Global.loadmeter1(response);
                     MeterDailyLogEditAdapter meterDailyLogEditAdapter = new MeterDailyLogEditAdapter((List<MetersDailyLogClass>) Global.Meters_Class, context);
                     Meters_recyclerview.setAdapter(meterDailyLogEditAdapter);
                     meterDailyLogEditAdapter.notifyDataSetChanged();
 
+
+                    // Common code block
                     Global.loadmeter2(response);
                     MeterDailyLogAdapter meterDailyLogAdapter = new MeterDailyLogAdapter((List<MetersDailyLogClass>) Global.Meters_Class, context);
                     Meters_recyclerview2.setAdapter(meterDailyLogAdapter);
                     meterDailyLogAdapter.notifyDataSetChanged();
-
-
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }

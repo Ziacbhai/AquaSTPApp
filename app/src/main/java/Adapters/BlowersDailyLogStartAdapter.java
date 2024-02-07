@@ -214,6 +214,17 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
             Blower_start = itemView.findViewById(R.id.blower_start);
             Blower_stop = itemView.findViewById(R.id.blower_stop);
             Blower_rollover = itemView.findViewById(R.id.blower_rollover);
+
+            String usertype = Global.sharedPreferences.getString("user_type", "");
+            if (usertype.equals("C")) {
+                Blower_start.setVisibility(View.GONE);
+                Blower_rollover.setVisibility(View.GONE);
+                Blower_stop.setVisibility(View.GONE);
+            } else {
+                Blower_start.setVisibility(View.VISIBLE);
+                Blower_rollover.setVisibility(View.VISIBLE);
+                Blower_stop.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

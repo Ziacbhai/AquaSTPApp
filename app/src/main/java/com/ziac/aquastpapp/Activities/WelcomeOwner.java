@@ -102,6 +102,7 @@ public class WelcomeOwner extends AppCompatActivity {
         picasso.load(Uri.parse(userimage))
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
+                .error(R.drawable.no_image_available_icon)
                 .into(ImageView);
 
 
