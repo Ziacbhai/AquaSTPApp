@@ -36,7 +36,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:text="Pumps - Motors"
+            android:text="Pumps / Motors"
             android:padding="3dp"/>
 
 
@@ -168,7 +168,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_margin="2dp"
         android:background="@drawable/btnbg"
         android:orientation="horizontal"
@@ -224,6 +224,7 @@
 
 
         <View
+            android:id="@+id/viewpump"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="#fff" />

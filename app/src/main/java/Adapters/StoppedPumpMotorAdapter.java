@@ -45,7 +45,6 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
         this.pumpMotorDailyLogClass = pumpMotorDailyLogClass;
         this.context = context;
     }
-
     @NonNull
     @Override
     public StoppedPumpMotorAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,7 +52,6 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pumpmotordetails_stopped_log, parent, false);
         return new Viewholder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull StoppedPumpMotorAdapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
         holder.Pumpeqipname.setText(pumpMotorDailyLogClass.get(position).getEquip_name());
@@ -80,36 +78,22 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
     public int getItemCount() {
         return pumpMotorDailyLogClass.size();
     }
-
-
     private void start_motor_pump(int position) {
         RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
         // url
         String startMotorPump = Global.StartMotorPumpsUrl;
-
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
         String dlog_date = Global.sharedPreferences.getString("dlogdate", "0");
         String ayear = Global.sharedPreferences.getString("ayear", "0");
         String tstp2_code = Global.StoppedPumpsMotors_LogClass.get(position).get_tstp2_code();
-
         startMotorPump = startMotorPump + "comcode=" + com_code + "&sstp1_code=" + sstp1_code + "&dlog_date=" + dlog_date + "&tstp2_code=" + tstp2_code + "&ayear=" + ayear;
-
-
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, startMotorPump, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                //Toast.makeText(context, "Started", Toast.LENGTH_LONG).show();
                 Intent pump = new Intent(context, PumpMotorDailyLogActivity.class);
                 context.startActivity(pump);
                 ((Activity) context).finish();
-
-                /*try {
-                    Global.loadrunningpumps(response);
-                    Global.loadstoppedpumps(response);
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
-                }*/
             }
         }, new Response.ErrorListener() {
             @Override
@@ -129,7 +113,6 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
         }) {
             @Override
             public Map<String, String> getHeaders() {
-                // Set the Authorization header with the access token
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
@@ -157,14 +140,25 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
     public class Viewholder extends RecyclerView.ViewHolder {
         TextView Pumpeqipname, Pumprunningtime, Pumpstoptime;
         ImageView Pump_start;
+        View viewpump;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-
             Pumpeqipname = itemView.findViewById(R.id.pumpmotor_equip_name);
             Pumpstoptime = itemView.findViewById(R.id.pumpmotor_end_time);
             Pumprunningtime = itemView.findViewById(R.id.pumpmotor_running_time);
             Pump_start = itemView.findViewById(R.id.pump_start);
+            viewpump = itemView.findViewById(R.id.vipump);
+
+
+            String usertype=Global.sharedPreferences.getString("user_type","");
+            if (usertype.equals("C")){
+                viewpump.setVisibility(View.GONE);
+
+            }else {
+                viewpump.setVisibility(View.VISIBLE);
+                ;
+            }
 
         }
     }

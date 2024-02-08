@@ -157,6 +157,8 @@ public class SensorDailyLogAdapter extends RecyclerView.Adapter<SensorDailyLogAd
 
         TextView Sensor_equip_name, Sensor_reading, Sensor_reading_time, Sensor_total;
 
+        View viewhide2,viewhide;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
@@ -166,18 +168,23 @@ public class SensorDailyLogAdapter extends RecyclerView.Adapter<SensorDailyLogAd
             Sensor_total = itemView.findViewById(R.id.sensor_total);
             Sensor_image = itemView.findViewById(R.id.sensor_image);
             Sensor_image_upload = itemView.findViewById(R.id.sensor_image_upload_btn);
+            viewhide = itemView.findViewById(R.id.viewhide);
+            viewhide2 = itemView.findViewById(R.id.viewhide2);
 
             String usertype=Global.sharedPreferences.getString("user_type","");
             if (usertype.equals("C")){
                 Sensor_image_upload.setVisibility(View.GONE);
                 Sensor_total.setVisibility(View.GONE);
+                viewhide.setVisibility(View.GONE);
+                viewhide2.setVisibility(View.GONE);
             }else {
                 Sensor_image_upload.setVisibility(View.VISIBLE);
                 Sensor_total.setVisibility(View.VISIBLE);
                 Sensor_equip_name.setVisibility(View.VISIBLE);
                 Sensor_reading_time.setVisibility(View.VISIBLE);
                 Sensor_reading.setVisibility(View.VISIBLE);
-
+                viewhide.setVisibility(View.VISIBLE);
+                viewhide2.setVisibility(View.VISIBLE);
             }
         }
     }

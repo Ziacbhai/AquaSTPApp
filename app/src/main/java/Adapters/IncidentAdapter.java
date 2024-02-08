@@ -117,13 +117,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         }
         holder.Inc_created.setText("By" +incidentsClass.get(position).getInc_Created_by());
 
-        holder.Ininfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    /*Intent intent = new Intent(context, Incident_Details_Activity.class);
-                    context.startActivity(intent);*/
-            }
-        });
+
 
         holder.Inupload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,7 +200,6 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             Incno = itemView.findViewById(R.id.incident_incno);
             Incedent_Particlulars = itemView.findViewById(R.id.incident_perticulars);
             Inc_date = itemView.findViewById(R.id.incident_date);
-            Ininfo = itemView.findViewById(R.id.incident_info);
             Inupload = itemView.findViewById(R.id.incident_photo_upload);
             Inc_created = itemView.findViewById(R.id.incident_createdby);
            // Inc_delete = itemView.findViewById(R.id.incident_delete);

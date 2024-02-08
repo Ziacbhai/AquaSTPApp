@@ -573,11 +573,11 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             LinearLayout layout = v.findViewById(R.id.select);
 
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
-            TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
+            //TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
             equipment_spinner = eQarrayList.get(i);
 
             equipmentnameitem.setText(equipment_spinner.getEquipment_Name());
-            eqnameitem.setText(equipment_spinner.getEquipment_id());
+            //eqnameitem.setText(equipment_spinner.getEquipment_id());
 
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -689,7 +689,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     private void getItemSpinnerPopup() {
 
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
-        zDialog.setContentView(R.layout.equipment_item);
+        zDialog.setContentView(R.layout.item);
         ListView lvItem = zDialog.findViewById(R.id.lvequipment);
        /* TextView Equipment_name =zDialog.findViewById(R.id.euipment_name);
         TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);*/
@@ -751,12 +751,12 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             View v = getLayoutInflater().inflate(R.layout.popup_itemlist_consumption, null);
             LinearLayout select_item = findViewById(R.id.select_item);
             TextView tvequipmentnameitem = v.findViewById(R.id.tvitemfirst);
-            TextView tvenameitem = v.findViewById(R.id.tvitemtwoc);
+            //TextView tvenameitem = v.findViewById(R.id.tvitemtwoc);
             Item_spinner = mDataArrayList.get(i);
             tvequipmentnameitem.setText(Item_spinner.getItem_name());
-            tvenameitem.setText(Item_spinner.getItem_code());
+            //tvenameitem.setText(Item_spinner.getItem_code());
 
-            tvenameitem.setOnClickListener(new View.OnClickListener() {
+            tvequipmentnameitem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Item_spinner = mDataArrayList.get(i);

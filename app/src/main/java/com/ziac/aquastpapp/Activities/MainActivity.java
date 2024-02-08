@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -41,13 +42,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     LinearLayout layout;
     NavigationView navigationView;
-    CircleImageView Profile;
+    ImageView Profile;
     ActionBarDrawerToggle toggle;
 
     Context context;
 
     boolean click = true;
-    String userimage, usermail, stpname, sitename, siteaddress, userref, personname, processname,stpcapacity;
+    String userimage, usermail, stpname, sitename, siteaddress, userref, personname, processname, stpcapacity;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -99,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(MainActivity.this, v);
                 popup.getMenuInflater().inflate(R.menu.profile_pop_up, popup.getMenu());
-
                 // Retrieve data from SharedPreferences
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
                 String profileName = Global.sharedPreferences.getString("ref_code", "");
@@ -107,7 +107,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 profileMenuItem.setTitle("Code: " + profileName);
 
                 userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
-                Picasso.get().load(userimage).into(Profile);
+                Picasso.get().load(userimage)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE)
+                        .networkPolicy(NetworkPolicy.NO_CACHE)
+                        .error(R.drawable.no_image_available_icon)
+                        .into(Profile);
 
                 popup.setOnMenuItemClickListener(item -> {
                     int itemId = item.getItemId();
@@ -143,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     } else {
 
                     }
-                    return false;
+                    return true;
                 });
                 popup.show();
             }
@@ -156,13 +160,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-                CircleImageView ProfileHeader;
-                TextView person_name ,user_mail, user_site, user_stp;
-                ProfileHeader = drawerLayout.findViewById(R.id.profileH);
+                ImageView ProfileHeader;
+                TextView person_name, user_mail, user_site, user_stp;
+                ProfileHeader = drawerLayout.findViewById(R.id.header_profile);
                 layout = findViewById(R.id.headeProfile);
 
                 userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
-                Picasso.get().load(userimage).into(ProfileHeader);
+                Picasso.get().load(userimage)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE)
+                        .networkPolicy(NetworkPolicy.NO_CACHE)
+                        .error(R.drawable.no_image_available_icon)
+                        .into(ProfileHeader);
 
                 person_name = drawerLayout.findViewById(R.id.profilename);
                 user_mail = drawerLayout.findViewById(R.id.headeremail);

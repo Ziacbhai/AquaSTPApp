@@ -52,7 +52,7 @@ public class Global {
     //Server url
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
-    public static String baseurl = "http://192.168.1.5:9396/";
+    public static String baseurl = "http://192.168.1.13:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
 
@@ -222,9 +222,9 @@ public class Global {
     public static void loadWithPicasso(Context context, ImageView imageView, String imageUrl) {
         Picasso picasso = getPicassoInstance(context);
         picasso.load(imageUrl)
-                .error(R.drawable.no_image_available_icon)
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
+                .error(R.drawable.no_image_available_icon)
                 .into(imageView);
     }
     public static void loadstoppedpumps(JSONObject response) throws JSONException {

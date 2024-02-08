@@ -242,6 +242,7 @@
 
 
         <View
+            android:id="@+id/blowerview"
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="#fff" />
@@ -257,8 +258,6 @@
             android:textColor="#fff"
             android:textSize="12dp"
             android:textStyle="bold" />
-
-
 
 
     </LinearLayout>

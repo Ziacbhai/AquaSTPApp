@@ -20,7 +20,7 @@
                 android:text="Display"
                 android:textSize="12dp"
                 android:typeface="sans" />
-            <TextView
+            <!--<TextView
                 android:layout_weight="1"
                 android:id="@+id/tvitemtwoc"
                 android:layout_width="0dp"
@@ -29,7 +29,7 @@
                 android:text="Display"
                 android:textColor="#000000"
                 android:textSize="12dp"
-                android:typeface="sans" />
+                android:typeface="sans" />-->
         </LinearLayout>
 
 </LinearLayout>

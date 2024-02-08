@@ -49,7 +49,7 @@ import Models.PumpMotorBlower_LogClass;
 public class PumpMotorDailyLogActivity extends AppCompatActivity {
     Context context;
     String currentDatevalue, currentDateValue2;
-    ImageView backbtn;
+    ImageView backbtn,Pump_reload;
 
     boolean isActive;
     //PumpMotorBlower_LogClass pumpMotorClass;
@@ -61,6 +61,7 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
 
     public RunningPumpMotorAdapter dailyLogAdapter;
     public StoppedPumpMotorAdapter dailyLogAdapter1;
+    View viewpump;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -74,6 +75,8 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
         Pump_start_header = findViewById(R.id.pump_start_header);
         pump_motor_started_recyclerview = findViewById(R.id.pump_motor_start_recyclerview);
         pump_motor_stopped_recyclerview = findViewById(R.id.pump_motor_stop_recyclerview);
+        Pump_reload = findViewById(R.id.pump_reload);
+        viewpump = findViewById(R.id.viewpump);
        // content();
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,9 +115,13 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
     private void showViews() {
         if (Pump_start_header != null) {
             Pump_start_header.setVisibility(View.VISIBLE);
+            Pump_reload.setVisibility(View.VISIBLE);
+            viewpump.setVisibility(View.VISIBLE);
         }
         if (pump_motor_stopped_recyclerview != null) {
             pump_motor_stopped_recyclerview.setVisibility(View.VISIBLE);
+            Pump_reload.setVisibility(View.VISIBLE);
+            viewpump.setVisibility(View.VISIBLE);
         }
     }
 
@@ -122,9 +129,13 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
 
         if (Pump_start_header != null) {
             Pump_start_header.setVisibility(View.GONE);
+            Pump_reload.setVisibility(View.GONE);
+            viewpump.setVisibility(View.GONE);
         }
         if (pump_motor_stopped_recyclerview != null) {
             pump_motor_stopped_recyclerview.setVisibility(View.GONE);
+            Pump_reload.setVisibility(View.GONE);
+            viewpump.setVisibility(View.GONE);
         }
     }
 

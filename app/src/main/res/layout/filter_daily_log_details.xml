@@ -64,6 +64,7 @@
                 android:textSize="12dp" />
 
             <View
+                android:id="@+id/filterview"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:background="#000" />

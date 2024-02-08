@@ -1,7 +1,6 @@
 package com.ziac.aquastpapp.Activities;
 
 //import static com.google.android.gms.cast.framework.media.ImagePicker.*;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -68,9 +67,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ProfileActivity extends AppCompatActivity {
-
     FloatingActionButton fab;
     CircleImageView circleImageView;
     Bitmap imageBitmap;
@@ -80,15 +77,14 @@ public class ProfileActivity extends AppCompatActivity {
     EditText Person_name, Person_number, Person_email;
     TextView Person_ref_code,Updatebutton;
     ImageView Backarrowbtn;
-
     Context context;
-
     @SuppressLint("MissingInflatedId")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        context = this;
 
         fab = findViewById(R.id.floating);
         Backarrowbtn = findViewById(R.id.backarrowbtn);
@@ -267,7 +263,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void updateprofile() {
         String personname, email, mobile;
-
         personname = Person_name.getText().toString();
         mobile = Person_number.getText().toString();
         email = Person_email.getText().toString();
@@ -361,13 +356,7 @@ public class ProfileActivity extends AppCompatActivity {
                 String mail = respObj.getString("user_email");
                 String refcode = respObj.getString("ref_code");
 
-                /*String user_image = respObj.getString("user_image");
-                String person_name = Global.sharedPreferences.getString("person_name", "");
-                String refcode = Global.sharedPreferences.getString("ref_code", "");
-                String mail = Global.sharedPreferences.getString("user_email", "");
-                String mobile = Global.sharedPreferences.getString("user_mobile", "");
                 //  Log.d("MyTag", "Profile image: " + user_image);*/
-
 
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 Global.editor = Global.sharedPreferences.edit();
@@ -388,10 +377,10 @@ public class ProfileActivity extends AppCompatActivity {
 
                 builder = new Picasso.Builder(getApplication());
                 picasso = builder.build();
-                picasso.load(Uri.parse(userimage)).
-                        memoryPolicy(MemoryPolicy.NO_CACHE)
-                        .networkPolicy(NetworkPolicy.NO_CACHE)
+                picasso.load(Uri.parse(userimage))
                         .error(R.drawable.no_image_available_icon)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE)
+                        .networkPolicy(NetworkPolicy.NO_CACHE)
                         .into(circleImageView);
 
             } catch (JSONException e) {

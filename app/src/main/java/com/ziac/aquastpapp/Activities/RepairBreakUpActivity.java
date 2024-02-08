@@ -480,7 +480,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     private void getEquipmentBreakupSpinnerPopup() {
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
 
-        zDialog.setContentView(R.layout.equipment_item);
+        zDialog.setContentView(R.layout.item);
 
         ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
 
@@ -540,11 +540,11 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             LinearLayout layout = v.findViewById(R.id.select);
 
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
-            TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
+            //TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
             equipment_spinner = eQarrayList.get(i);
 
             equipmentnameitem.setText(equipment_spinner.getEquipmentBreakup_Name());
-            eqnameitem.setText(equipment_spinner.getEquipmentBreakup_id());
+           // eqnameitem.setText(equipment_spinner.getEquipmentBreakup_id());
 
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -610,7 +610,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                         ItemListClassRepair_BreakUp equipment = new ItemListClassRepair_BreakUp();
 
                         equipment.setBreakup_unit(equipmentJson.getString("com_code"));
-                        equipment.setBreakup_unit_code(equipmentJson.getString("unit_code"));
+                       /* equipment.setBreakup_unit_code(equipmentJson.getString("unit_code"));*/
                         equipment.setBreakup_unit_name(equipmentJson.getString("unit_name"));
 
 
@@ -646,7 +646,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     private void getItemBreakUpSpinnerPopup() {
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
 
-        zDialog.setContentView(R.layout.equipment_item);
+        zDialog.setContentView(R.layout.unit);
 
         ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
 
@@ -706,11 +706,11 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             LinearLayout layout = v.findViewById(R.id.select);
 
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
-           TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
+          // TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
             item_spinner = eQarrayList.get(i);
 
             equipmentnameitem.setText(item_spinner.getBreakup_unit_name());
-            eqnameitem.setText(item_spinner.getBreakup_unit());
+           // eqnameitem.setText(item_spinner.getBreakup_unit());
 
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override

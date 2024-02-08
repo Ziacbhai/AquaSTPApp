@@ -147,6 +147,7 @@ public class FiltersDailyLogAdapter extends RecyclerView.Adapter<FiltersDailyLog
         TextView Filter_equip_name, Filter_reading;
         ImageView Filter_image, Filter_image_upload;
         LinearLayout layout;
+        View filterview;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -155,14 +156,17 @@ public class FiltersDailyLogAdapter extends RecyclerView.Adapter<FiltersDailyLog
             Filter_reading = itemView.findViewById(R.id.filter_reading);
             Filter_image_upload = itemView.findViewById(R.id.filter_image_upload);
             layout = itemView.findViewById(R.id.senser_image_hide);
+            filterview = itemView.findViewById(R.id.filterview);
 
 
             String usertype=Global.sharedPreferences.getString("user_type","");
 
             if (usertype.equals("C")){
                 layout.setVisibility(View.GONE);
+                filterview.setVisibility(View.GONE);
             }else {
                 layout.setVisibility(View.VISIBLE);
+                filterview.setVisibility(View.VISIBLE);
             }
 
         }

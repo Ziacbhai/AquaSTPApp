@@ -387,7 +387,6 @@ public class Repair_Details_Activity extends AppCompatActivity {
                 "comcode=" + Global.sharedPreferences.getString("com_code", "0") +
                 "&sstp1_code=" + Global.sharedPreferences.getString("sstp1_code", "0")
         + "&typ=R";
-        Log.d(TAG, "url:" + Url);
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Url, null,
                 new Response.Listener<JSONArray>() {
@@ -460,11 +459,11 @@ public class Repair_Details_Activity extends AppCompatActivity {
             View v = getLayoutInflater().inflate(R.layout.popup_equipmentlist, null);
             LinearLayout layout = v.findViewById(R.id.select);
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
-            TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
+            //TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
             equipment_spinner = eQarrayList.get(i);
 
             equipmentnameitem.setText(equipment_spinner.getEquipment_Name());
-            eqnameitem.setText(equipment_spinner.getEquipment_id());
+           // eqnameitem.setText(equipment_spinner.getEquipment_id());
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -205,6 +205,7 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
     public class Viewholder extends RecyclerView.ViewHolder {
         TextView Blower_equip_name,Blower_start_time,Blower_stopped_time,Blower_running_time;
         ImageView Blower_start,Blower_rollover,Blower_stop;
+        View blowerview;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             Blower_equip_name = itemView.findViewById(R.id.blower_equip_name);
@@ -214,16 +215,19 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
             Blower_start = itemView.findViewById(R.id.blower_start);
             Blower_stop = itemView.findViewById(R.id.blower_stop);
             Blower_rollover = itemView.findViewById(R.id.blower_rollover);
+            blowerview = itemView.findViewById(R.id.blowerview);
 
             String usertype = Global.sharedPreferences.getString("user_type", "");
             if (usertype.equals("C")) {
                 Blower_start.setVisibility(View.GONE);
                 Blower_rollover.setVisibility(View.GONE);
                 Blower_stop.setVisibility(View.GONE);
+                blowerview.setVisibility(View.GONE);
             } else {
                 Blower_start.setVisibility(View.VISIBLE);
                 Blower_rollover.setVisibility(View.VISIBLE);
                 Blower_stop.setVisibility(View.VISIBLE);
+                blowerview.setVisibility(View.VISIBLE);
             }
         }
     }

@@ -165,6 +165,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
     public class Viewholder extends RecyclerView.ViewHolder {
         TextView Pumpeqipname, Pumpstatedtime, Pumprunningtime;
         ImageView Pump_Reload, Pump_Stop;
+        View Vipump,Vipump2;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -173,17 +174,21 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
             Pumprunningtime = itemView.findViewById(R.id.pump_running_time);
             Pump_Reload = itemView.findViewById(R.id.pump_reload);
             Pump_Stop = itemView.findViewById(R.id.pump_stop);
-
-
+            Vipump = itemView.findViewById(R.id.vipump);
+            Vipump2 = itemView.findViewById(R.id.vipump2);
 
             String usertype=Global.sharedPreferences.getString("user_type","");
             if (usertype.equals("C")){
                 Pump_Stop.setVisibility(View.GONE);
                 Pump_Reload.setVisibility(View.GONE);
+                Vipump.setVisibility(View.GONE);
+                Vipump.setVisibility(View.GONE);
 
             }else {
                 Pump_Stop.setVisibility(View.VISIBLE);
                 Pump_Reload.setVisibility(View.VISIBLE);
+                Vipump.setVisibility(View.VISIBLE);
+                Vipump2.setVisibility(View.VISIBLE);
             }
 
         }

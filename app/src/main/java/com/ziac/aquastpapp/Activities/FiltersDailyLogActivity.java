@@ -49,9 +49,10 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
 
     ImageView backbtn;
 
-    TextView Displaydate,Displaytime;
+    TextView Displaydate,Displaytime,hidefilter1;
     RecyclerView Filters_recyclerview;
     FiltersClass filtersClass;
+    View hidefilter;
 
     Context context;
 
@@ -65,6 +66,8 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
         backbtn = findViewById(R.id.back_btn);
         Displaydate = findViewById(R.id.displaydate);
         Displaytime = findViewById(R.id.displaytime);
+        hidefilter = findViewById(R.id.hidefilterview);
+        hidefilter1 = findViewById(R.id.hidefilter1);
 
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +75,14 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        String usertype=Global.sharedPreferences.getString("user_type","");
+        if (usertype.equals("C")) {
+            hideViews();
+        } else {
+            showViews();
+        }
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -88,6 +99,22 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
         Filters_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
+
+    private void showViews() {
+        if (hidefilter != null) {
+            hidefilter.setVisibility(View.VISIBLE);
+            hidefilter1.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    private void hideViews() {
+        if (hidefilter != null) {
+            hidefilter1.setVisibility(View.GONE);
+            hidefilter.setVisibility(View.GONE);
+        }
+
+    }
 
     private void updateDateTime() {
         Date currentDate = new Date();

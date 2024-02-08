@@ -55,6 +55,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
     RecyclerView sensor_recyclerView;
     RecyclerView sensor_recyclerView2;
     Context context;
+    View viewhide;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -64,6 +65,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
         context = this;
         user_topcard();
         backbtn = findViewById(R.id.back_btn);
+        viewhide = findViewById(R.id.viewhide3);
 
         Displaydate = findViewById(R.id.displaydate);
         Displaytime = findViewById(R.id.displaytime);
@@ -71,8 +73,8 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
         sensor_recyclerView = findViewById(R.id.sensor_edit_recyclerview);
         sensor_recyclerView2 = findViewById(R.id.sensors_recyclerview);
         Total_sensor_header = findViewById(R.id.total_sensor_header);
-        String usertype=Global.sharedPreferences.getString("user_type","");
 
+        String usertype=Global.sharedPreferences.getString("user_type","");
         if (usertype.equals("C")) {
             hideViews();
         } else {
@@ -114,10 +116,12 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
         if (Sensor_header != null) {
             Sensor_header.setVisibility(View.VISIBLE);
             Total_sensor_header.setVisibility(View.VISIBLE);
+            viewhide.setVisibility(View.VISIBLE);
         }
         if (sensor_recyclerView != null) {
             sensor_recyclerView.setVisibility(View.VISIBLE);
             Total_sensor_header.setVisibility(View.VISIBLE);
+            viewhide.setVisibility(View.VISIBLE);
         }
     }
 
@@ -125,10 +129,12 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
         if (Sensor_header != null) {
             Sensor_header.setVisibility(View.GONE);
             Total_sensor_header.setVisibility(View.GONE);
+            viewhide.setVisibility(View.GONE);
         }
         if (sensor_recyclerView != null) {
             sensor_recyclerView.setVisibility(View.GONE);
             Total_sensor_header.setVisibility(View.GONE);
+            viewhide.setVisibility(View.GONE);
 
         }
     }

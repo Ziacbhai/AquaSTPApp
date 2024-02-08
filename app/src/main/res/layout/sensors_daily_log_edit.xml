@@ -36,6 +36,7 @@
             android:layout_weight="1"
             android:background="@drawable/btnbgedited"
             android:gravity="center"
+            android:inputType="number"
             android:padding="5dp"
             android:hint="Reading"
             android:textColor="#000"
