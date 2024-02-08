@@ -50,12 +50,9 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
     TextView Displaydate, Displaytime;
     ImageView backbtn;
     RecyclerView blowers_started_recyclerview;
-    //PumpMotor_Blower_DailyLogClass blowerClass;
     TextView Startheading;
     View blowerview;
     boolean conditionToShowBlowerAdapter = shouldShowBlowerAdapter();
-
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +63,9 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         user_topcard();
         backbtn = findViewById(R.id.back_btn);
         blowerview = findViewById(R.id.blowerview);
-
         Displaydate = findViewById(R.id.displaydate);
         Displaytime = findViewById(R.id.displaytime);
         Startheading = findViewById(R.id.startheading);
-
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,13 +81,11 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                 handler.postDelayed(this, 1000); // Update every 1000 milliseconds (1 second)
             }
         }, 0);
-
         if (usertype.equals("C")) {
             hideViews();
         } else {
             showViews();
         }
-
         DailyLogBlowers();
         blowers_started_recyclerview = findViewById(R.id.blowers_started_recyclerview);
         blowers_started_recyclerview.setLayoutManager(new LinearLayoutManager(this));
@@ -100,21 +93,18 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         blowers_started_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
     }
-
     private void showViews() {
         if (Startheading != null) {
             Startheading.setVisibility(View.VISIBLE);
             blowerview.setVisibility(View.VISIBLE);
         }
     }
-
     private void hideViews() {
         if (Startheading != null) {
             Startheading.setVisibility(View.GONE);
             blowerview.setVisibility(View.GONE);
         }
     }
-
     private void updateDateTime() {
         Date currentDate = new Date();
         // Update date
@@ -140,7 +130,6 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         }
 
     }
-
     private void user_topcard() {
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, stpcapacity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -170,7 +159,6 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);
     }
-
     private void DailyLogBlowers() {
         RequestQueue queue = Volley.newRequestQueue(context);
         String dailylogblowers = Global.GetDailyLogBlowers;
@@ -279,16 +267,10 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
 
         queue.add(jsonObjectRequest);
     }
-
     private boolean shouldShowBlowerAdapter() {
-        // Your logic to determine whether to show the starting blower adapter
         return true; // Replace with your actual condition
     }
-
     private boolean newConditionToShowBlowerAdapter() {
-        // Your logic to determine whether to show the stopping blower adapter
         return false; // Replace with your actual condition
     }
-
-
 }

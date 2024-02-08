@@ -56,7 +56,7 @@ public class LoginFragment extends Fragment {
 
     private ProgressDialog progressDialog;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
@@ -335,10 +335,6 @@ public class LoginFragment extends Fragment {
                             //startActivity(new Intent(getActivity(), SelectSTPLocationActivity.class));
                             Toast.makeText(context, "Unable to get User Details !!", Toast.LENGTH_LONG).show();
                         }
-                        // Assuming that the SelectSTPLocationActivity is common for all user types
-
-                        //}
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -71,12 +71,7 @@ public class RepairFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_repair, container, false);
         context = getContext();
-
-
         user_topcard(view);
-
-
-
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading please wait...");
         progressDialog.setCancelable(true);
@@ -103,7 +98,6 @@ public class RepairFragment extends Fragment {
         RepairRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         RepairRecyclerview.setHasFixedSize(true);
         RepairRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-
 
         Date currentDate = new Date();
         SimpleDateFormat dateFormat1 = null;

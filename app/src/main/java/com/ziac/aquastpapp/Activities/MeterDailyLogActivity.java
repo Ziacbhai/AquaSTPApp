@@ -48,12 +48,10 @@ import Adapters.MeterDailyLogEditAdapter;
 import Models.MetersDailyLogClass;
 
 public class MeterDailyLogActivity extends AppCompatActivity {
-
     ImageView backbtn;
     TextView Displaydate, Displaytime;
     RecyclerView Meters_recyclerview;
     RecyclerView Meters_recyclerview2;
-
     LinearLayout Meter_header;
     Context context;
 

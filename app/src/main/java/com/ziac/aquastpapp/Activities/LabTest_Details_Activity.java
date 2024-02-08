@@ -52,8 +52,6 @@ public class LabTest_Details_Activity extends AppCompatActivity {
         context = this;
         user_topcard();
 
-
-
         Labtest_details_Rv = findViewById(R.id.labTest_details_Recyclerview);
         Labtest_details_Rv.setLayoutManager(new LinearLayoutManager(this));
         Labtest_details_Rv.setHasFixedSize(true);

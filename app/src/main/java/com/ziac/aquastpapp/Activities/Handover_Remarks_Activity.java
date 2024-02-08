@@ -72,10 +72,6 @@ public class Handover_Remarks_Activity extends AppCompatActivity {
 
     }
 
-
-
-
-
     private void user_topcard() {
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -176,9 +172,7 @@ public class Handover_Remarks_Activity extends AppCompatActivity {
 
                 return params;
             }
-
         };
         queue.add(stringRequest);
-
     }
 }

@@ -60,8 +60,6 @@ public class SensorsDailyLog_Image_Upload_Activity extends AppCompatActivity {
             }
         });
     }
-
-
     private void openCamera() {
         try {
             if (context instanceof Activity) {

@@ -17,9 +17,7 @@ import com.ziac.aquastpapp.R;
 public class RecoveryPasswordWith extends AppCompatActivity {
 
     CardView Rcemail, Rcusername, Rcmobile;
-
     ImageView back_btn;
-
     Context context;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
@@ -30,8 +28,6 @@ public class RecoveryPasswordWith extends AppCompatActivity {
         Rcemail = findViewById(R.id.useremail);
         Rcusername = findViewById(R.id.usernamer);
         Rcmobile = findViewById(R.id.mobiler);
-
-
         back_btn = findViewById(R.id.repair_back_btn);
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -111,8 +111,6 @@ public class VerifyUserNameOTP extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     private void UserDataUsingVolley(String otp) {
@@ -169,8 +167,6 @@ public class VerifyUserNameOTP extends AppCompatActivity {
 
                 // params.put("NewPassword", "Siva126@Ziac");
                 // params.put("UserName", username);
-
-
                 return params;
             }
         };

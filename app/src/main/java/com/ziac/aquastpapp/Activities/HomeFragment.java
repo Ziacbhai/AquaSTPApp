@@ -54,14 +54,16 @@ public class HomeFragment extends Fragment {
     DailyLogClass dailyLog;
     Context context;
     RelativeLayout layoutpump, layoutblower, layoutmeter, layoutsensor, layoutfilter, layouthandover_remark;
+
     @Override
     public void onResume() {
         super.onResume();
         DailyLogIndex();
     }
+
     @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         user_topcard(view);
@@ -74,7 +76,7 @@ public class HomeFragment extends Fragment {
         layoutfilter = view.findViewById(R.id.filter);
         layouthandover_remark = view.findViewById(R.id.handover_remarks);
 
-        String usertype=Global.sharedPreferences.getString("user_type","");
+        String usertype = Global.sharedPreferences.getString("user_type", "");
 
         if (usertype.equals("C")) {
             hideViews();
@@ -223,7 +225,7 @@ public class HomeFragment extends Fragment {
                 }
             }
 
-                }, new Response.ErrorListener() {
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // Handle Volley errors

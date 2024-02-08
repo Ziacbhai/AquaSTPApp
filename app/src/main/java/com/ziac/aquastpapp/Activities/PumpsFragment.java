@@ -178,15 +178,7 @@ public class PumpsFragment extends Fragment {
 
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-
-                /*params.put("equip_name", EquipmentName.getText().toString());
-                params.put("rating", Rating_Capacity.getText().toString());
-                params.put("form_factor",FormFactor.getText().toString());
-                params.put("phase", Phase.getText().toString());
-                params.put("equip_specs", Specification.getText().toString());
-                params.put("mfg_name", Manufacturer.getText().toString());
-                params.put("equip_slno", EquipmentNumber_Id.getText().toString());
-                params.put("cleaning_freq_hrs", CleaningRunningFrequencyHRS.getText().toString());*/
+                /*params.put("form_factor",FormFactor.getText().toString());*/
                 return params;
             }
         };

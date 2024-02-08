@@ -49,7 +49,7 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
 
     ImageView backbtn;
 
-    TextView Displaydate,Displaytime,hidefilter1;
+    TextView Displaydate, Displaytime, hidefilter1;
     RecyclerView Filters_recyclerview;
     FiltersClass filtersClass;
     View hidefilter;
@@ -76,7 +76,7 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
             }
         });
 
-        String usertype=Global.sharedPreferences.getString("user_type","");
+        String usertype = Global.sharedPreferences.getString("user_type", "");
         if (usertype.equals("C")) {
             hideViews();
         } else {
@@ -141,8 +141,9 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
         }
 
     }
+
     private void user_topcard() {
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, stpcapacity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
@@ -163,7 +164,7 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
         txtpersonname = findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
+        txtstpname.setText(stpname + " / " + processname + " / " + stpcapacity);
         txtsiteaddress.setText(siteaddress);
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);
@@ -232,7 +233,7 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
                 }
 
             }
-        }){
+        }) {
             public Map<String, String> getHeaders() {
                 // Set the Authorization header with the access token
                 Map<String, String> headers = new HashMap<String, String>();

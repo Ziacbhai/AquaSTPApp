@@ -77,7 +77,6 @@ public class LabTestFragment extends Fragment {
         context = getContext();
         user_topcard(view);
 
-
         FloatingActionButton fab = view.findViewById(R.id.fab);
 
         Date currentDate = new Date();
@@ -88,7 +87,6 @@ public class LabTestFragment extends Fragment {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             currentDatevalue = dateFormat1.format(currentDate);
         }
-
 
         SimpleDateFormat dateFormat2 = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {

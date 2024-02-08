@@ -239,6 +239,4 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
             }
         }
     }
-
-
 }

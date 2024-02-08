@@ -82,7 +82,7 @@ public class SignUpFragment extends Fragment {
     Context context;
 
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -190,10 +190,7 @@ public class SignUpFragment extends Fragment {
 
                 CreateNewUser();
                 //progressBar.setVisibility(View.VISIBLE);
-
             }
-
-
         });
 
         return view;

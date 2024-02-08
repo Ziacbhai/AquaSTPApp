@@ -56,7 +56,6 @@ public class WelcomeCustomer extends AppCompatActivity {
     CircleImageView ImageView;
     ImageView Ownerexit;
     AppCompatButton oContinue;
-
     Context context;
     FloatingActionButton fab;
     Bitmap imageBitmap;

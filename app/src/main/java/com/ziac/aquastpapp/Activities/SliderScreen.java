@@ -109,7 +109,6 @@ public class SliderScreen extends AppCompatActivity {
             }
         };
 
-
         Skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

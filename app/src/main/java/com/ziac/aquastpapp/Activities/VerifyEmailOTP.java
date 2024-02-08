@@ -54,7 +54,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
 
     Context context;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +62,6 @@ public class VerifyEmailOTP extends AppCompatActivity {
         Enter_pinnumber = findViewById(R.id.et_pinview);
         new OTP_Receiver().setPinView(Enter_pinnumber);
         requestSMSPermission();
-
-
         EmailVerify = findViewById(R.id.emailverifyotp);
         progressBar = findViewById(R.id.progressbr);
         EnterNewpwd = findViewById(R.id.enewpassword);

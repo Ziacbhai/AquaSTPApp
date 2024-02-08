@@ -9,13 +9,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +78,7 @@ public class Global {
 
     //Filters
     public static String GetDailyLogFilters = baseurl + "api/DailyLog/GetFilters?";
-   /* public static String FilterDaily_log_image = baseurl + "WebsiteData/DailyLog/Filters/";*/
+    /* public static String FilterDaily_log_image = baseurl + "WebsiteData/DailyLog/Filters/";*/
 
     public static String GetDailyLogFilterImageUpload = baseurl + "api/DailyLog/FilterImageUpload";
 
@@ -85,7 +88,7 @@ public class Global {
     public static String DailyLogSensorsImageUpload = baseurl + "api/DailyLog/SensorsImageUpload";
 
     //Handover Remarks;
-    public static String DailyLogUpdateHandOverRemark= baseurl + "api/DailyLog/UpdateHandOverRemarks?";
+    public static String DailyLogUpdateHandOverRemark = baseurl + "api/DailyLog/UpdateHandOverRemarks?";
 
 
     public static String userImageurl = baseurl + "WebsiteData/Users/";
@@ -227,6 +230,7 @@ public class Global {
                 .error(R.drawable.no_image_available_icon)
                 .into(imageView);
     }
+
     public static void loadstoppedpumps(JSONObject response) throws JSONException {
         /*stopped pumps*/
         Global.StoppedPumpsMotors_LogClass = new ArrayList<PumpMotorBlower_LogClass>();
@@ -252,6 +256,7 @@ public class Global {
             Global.StoppedPumpsMotors_LogClass.add(pumpMotorClass);
         }
     }
+
     public static void loadrunningpumps(JSONObject response) throws JSONException {
         /*running pumps*/
         Global.RunningPumpsMotors_LogClass = new ArrayList<PumpMotorBlower_LogClass>();
@@ -291,7 +296,7 @@ public class Global {
             } catch (JSONException ex) {
                 throw new RuntimeException(ex);
             }
-           MetersDailyLogClass = new MetersDailyLogClass();
+            MetersDailyLogClass = new MetersDailyLogClass();
             try {
                 MetersDailyLogClass.setMeters_equip_name(e.getString("equip_name"));
                 MetersDailyLogClass.setTstp3_code(e.getString("tstp3_code"));

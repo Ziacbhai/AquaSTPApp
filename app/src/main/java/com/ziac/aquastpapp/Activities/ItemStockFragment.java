@@ -44,8 +44,6 @@ public class ItemStockFragment extends Fragment {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         View view = inflater.inflate(R.layout.fragment_itemstock, container, false);
 
-
-
         consumableRecyclerView = view.findViewById(R.id.consumable_recyclerview);
         consumableRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         consumableRecyclerView.setHasFixedSize(true);

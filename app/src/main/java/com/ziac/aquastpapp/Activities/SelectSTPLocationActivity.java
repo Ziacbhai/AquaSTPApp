@@ -45,7 +45,6 @@ public class SelectSTPLocationActivity extends AppCompatActivity {
     private SearchView searchView;
     StpModelClass stpModelClassList;
     Context context;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +56,6 @@ public class SelectSTPLocationActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
         Search = findViewById(R.id.search);
         searchView.clearFocus();
-
-
-
         Search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

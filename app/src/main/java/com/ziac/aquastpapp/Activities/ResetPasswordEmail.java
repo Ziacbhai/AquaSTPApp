@@ -46,14 +46,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_email);
-
-
         context  = this;
-
-
-
-
-
         EnterOTPbtn = findViewById(R.id.emailgetotpbtn);
         Forgotemail = findViewById(R.id.Femail);
         progressBar = findViewById(R.id.progressbr);
