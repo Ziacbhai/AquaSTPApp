@@ -15,7 +15,7 @@
             android:background="@drawable/btn_gradient"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Equipment Select"
+            android:text="Item"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />

@@ -33,11 +33,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1.6"
             android:gravity="center"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
+            android:padding="3dp"
             android:text="Blowers"
-            android:padding="3dp"/>
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
         <ImageView

@@ -82,9 +82,6 @@
             android:name=".Activities.PumpMotorDailyLogActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.DemoAc"
-            android:exported="true" />
-        <activity
             android:name=".Activities.GenerateSTPdetails"
             android:exported="false" />
         <activity
@@ -135,10 +132,7 @@
             android:name=".Activities.PumpsFragment"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".Activities.OwnerDashBoard"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".Activities.WelcomeSupervisor"
             android:exported="false"
