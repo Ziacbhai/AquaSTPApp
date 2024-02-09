@@ -55,11 +55,11 @@ public class HomeFragment extends Fragment {
     Context context;
     RelativeLayout layoutpump, layoutblower, layoutmeter, layoutsensor, layoutfilter, layouthandover_remark;
 
-    @Override
+   /* @Override
     public void onResume() {
         super.onResume();
         DailyLogIndex();
-    }
+    }*/
 
     @SuppressLint("MissingInflatedId")
     @Override

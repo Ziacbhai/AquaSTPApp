@@ -16,36 +16,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:weightSum="2"
             android:background="@drawable/btn_gradient"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <ImageView
                 android:id="@+id/repair_back_btn"
-                android:layout_weight="0.2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:padding="8dp"
+                android:layout_weight="0.2"
                 android:gravity="center"
+                android:padding="8dp"
                 android:src="@drawable/back"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:layout_weight="1.6"
                 android:id="@+id/backarrowbtn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1.6"
                 android:padding="3dp"
                 android:src="@drawable/aquatoolbar" />
 
 
             <ImageView
-                android:layout_weight="0.2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0.2"
                 android:visibility="invisible" />
         </LinearLayout>
 
@@ -58,194 +58,189 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_margin="2dp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="10dp">
 
-                    <androidx.cardview.widget.CardView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="10dp">
+                        android:background="@drawable/btn_gradient"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+
+                        <TextView
+                            android:id="@+id/sitename"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="Site name"
+                            android:textColor="@color/white"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/stpname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="STP name"
+                            android:textColor="@color/white"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/my_light_primary" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3.4"
+                                    android:gravity="center"
+                                    android:text="Repair Details"
+                                    android:textColor="@color/white"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@color/my_light_primary" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:background="@drawable/btn_gradient"
-                            android:orientation="vertical">
-
-
-                            <TextView
-                                android:id="@+id/sitename"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_horizontal"
-                                android:text="Site name"
-                                android:textColor="@color/white"
-                                android:textSize="16dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/stpname"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="STP name"
-                                android:textColor="@color/white"
-                                android:textSize="12dp"
-                                android:textStyle="bold" />
-
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="20dp"
-                                android:background="@color/my_light_primary" />
+                            android:orientation="horizontal"
+                            android:padding="5dp">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="40dp"
-                                android:orientation="vertical"
-                                android:padding="5dp">
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
 
-                                <LinearLayout
+                                <TextView
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="horizontal">
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:drawablePadding="5dp"
+                                    android:gravity="center"
+                                    android:text="No."
+                                    android:textColor="#fff"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold" />
 
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="3.4"
-                                        android:gravity="center"
-                                        android:text="Repair Details"
-                                        android:textColor="@color/white"
-                                        android:textSize="18sp"
-                                        android:textStyle="bold" />
+                                <TextView
+                                    android:id="@+id/repair_no"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Rep no"
+                                    android:textColor="#fff"
+                                    android:textSize="12dp" />
 
-                                </LinearLayout>
                             </LinearLayout>
 
                             <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="20dp"
-                                android:background="@color/my_light_primary" />
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:background="#fff" />
+
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:padding="5dp">
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
 
-                                <LinearLayout
-                                    android:layout_width="0dp"
+                                <TextView
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
+                                    android:gravity="center"
+                                    android:text="Date"
+                                    android:textColor="#fff"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold" />
 
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:drawablePadding="5dp"
-                                        android:gravity="center"
-                                        android:text="No."
-                                        android:textColor="#fff"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/repair_no"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="Rep no"
-                                        android:textColor="#fff"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="match_parent"
-                                    android:background="#fff" />
-
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
+                                <TextView
+                                    android:id="@+id/repair_date"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
+                                    android:gravity="center"
+                                    android:text="incident_date"
+                                    android:textColor="#fff"
+                                    android:textSize="12dp" />
 
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="Date"
-                                        android:textColor="#fff"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
+                            </LinearLayout>
 
-                                    <TextView
-                                        android:id="@+id/repair_date"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="incident_date"
-                                        android:textColor="#fff"
-                                        android:textSize="12dp" />
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:background="#fff" />
 
-                                </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
 
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="match_parent"
-                                    android:background="#fff" />
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
+                                <TextView
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="vertical">
+                                    android:gravity="center"
+                                    android:text="Amount"
+                                    android:textColor="#fff"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold" />
 
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="Amount"
-                                        android:textColor="#fff"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/repair_amount"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:text="amount"
-                                        android:textColor="#fff"
-                                        android:textSize="12dp" />
-
-                                </LinearLayout>
+                                <TextView
+                                    android:id="@+id/repair_amount"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="amount"
+                                    android:textColor="#fff"
+                                    android:textSize="12dp" />
 
                             </LinearLayout>
 
                         </LinearLayout>
 
-                    </androidx.cardview.widget.CardView>
+                    </LinearLayout>
 
-                </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
 
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/swipe_refresh"

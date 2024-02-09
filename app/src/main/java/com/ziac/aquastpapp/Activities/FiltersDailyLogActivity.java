@@ -46,16 +46,12 @@ import Adapters.FiltersDailyLogAdapter;
 import Models.FiltersClass;
 
 public class FiltersDailyLogActivity extends AppCompatActivity {
-
     ImageView backbtn;
-
     TextView Displaydate, Displaytime, hidefilter1;
     RecyclerView Filters_recyclerview;
     FiltersClass filtersClass;
     View hidefilter;
-
     Context context;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +71,6 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
                 finish();
             }
         });
-
         String usertype = Global.sharedPreferences.getString("user_type", "");
         if (usertype.equals("C")) {
             hideViews();
@@ -98,24 +93,18 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
         Filters_recyclerview.setHasFixedSize(true);
         Filters_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
-
-
     private void showViews() {
         if (hidefilter != null) {
             hidefilter.setVisibility(View.VISIBLE);
             hidefilter1.setVisibility(View.VISIBLE);
         }
-
     }
-
     private void hideViews() {
         if (hidefilter != null) {
             hidefilter1.setVisibility(View.GONE);
             hidefilter.setVisibility(View.GONE);
         }
-
     }
-
     private void updateDateTime() {
         Date currentDate = new Date();
         // Update date
@@ -141,7 +130,6 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
         }
 
     }
-
     private void user_topcard() {
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, stpcapacity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -170,7 +158,6 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);
     }
-
     private void FiltersDailyLog() {
         RequestQueue queue = Volley.newRequestQueue(context);
         String dailylogfilter = Global.GetDailyLogFilters;
@@ -254,7 +241,6 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
 
     }
-
     @Override
     protected void onPause() {
         FiltersDailyLog();

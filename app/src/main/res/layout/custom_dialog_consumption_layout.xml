@@ -12,13 +12,13 @@
         android:id="@+id/cardView_a"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="12dp"
+        app:cardCornerRadius="10dp"
         app:cardMaxElevation="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/btnbgoutline"
+            android:background="@drawable/custom_update_outerline_gray"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -26,16 +26,17 @@
                 android:id="@+id/tvSelectedDate"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:background="@drawable/custom_consumption_btn"
                 android:gravity="center"
                 android:text="Selected Date"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="14dp"
                 android:textStyle="bold" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#01A3A3" />
+                android:background="@color/my_light_primary"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -49,8 +50,8 @@
                 android:id="@+id/remark_alert"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@drawable/btnbgoutline"
                 android:gravity="left|center_horizontal"
+                android:background="@drawable/custom_update_outerline_gray"
                 android:hint="Enter your remarks for this consumption"
                 android:padding="5dp"
                 android:textSize="12dp" />
@@ -67,7 +68,7 @@
                     android:layout_height="30dp"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/btnbg"
+                    android:background="@drawable/custom_consumption_btn"
                     android:gravity="center"
                     android:text="Update"
                     android:textColor="@color/white"
@@ -79,7 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_weight="1"
-                    android:background="@drawable/btnbg"
+                    android:background="@drawable/custom_consumption_btn"
                     android:gravity="center"
                     android:text="Cancel"
                     android:textColor="@color/white"

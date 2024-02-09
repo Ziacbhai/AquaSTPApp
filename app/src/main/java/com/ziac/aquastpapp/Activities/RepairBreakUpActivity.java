@@ -75,7 +75,6 @@ import Models.RepairClass3;
 public class RepairBreakUpActivity extends AppCompatActivity {
 
     RepairClass3 repairClass3;
-
     TextView Equipment_Item, Breakup_Unit, Breakup_qty, Breakup_price;
     TextView Breakup_remark;
     AppCompatButton Update_A, Cancel_A;
@@ -96,7 +95,6 @@ public class RepairBreakUpActivity extends AppCompatActivity {
 
         context = this;
         user_topcard();
-
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -151,7 +149,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         progressDialog.setCancelable(true);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String  stpname, sitename, processname,repair_date, repair_no, repair_amount,stpcapacity;
+        String stpname, sitename, processname, repair_date, repair_no, repair_amount, stpcapacity;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         processname = sharedPreferences.getString("process_name", "");
@@ -167,7 +165,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         txtstpname = findViewById(R.id.stpname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
+        txtstpname.setText(stpname + " / " + processname + " / " + stpcapacity);
 
 
         textno = findViewById(R.id.repair_no);
@@ -252,29 +250,38 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String qty, remarks, price, repair_item_code, unit_code,equipment_code,item_code;
-                equipment_code = Equipment_Item.getText().toString();
-                item_code = Breakup_Unit.getText().toString();
+                String qty, remarks, price, repair_item_code, unit_code, Item_name, item_code;
+                Item_name = Equipment_Item.getText().toString();
+                unit_code = Breakup_Unit.getText().toString();
                 qty = Breakup_qty.getText().toString();
                 price = Breakup_price.getText().toString();
 
 
-                if (equipment_code.isEmpty()) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Equipment_code should not be empty!", Toast.LENGTH_SHORT).show();
+                if (Item_name.isEmpty()) {
+                    Toast.makeText(RepairBreakUpActivity.this, "Repair Item should not be empty!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if (item_code.isEmpty()) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Item_code should not be empty!", Toast.LENGTH_SHORT).show();
+                if (unit_code.isEmpty()) {
+                    Toast.makeText(RepairBreakUpActivity.this, "Unit should not be empty!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (qty.isEmpty()) {
                     Toast.makeText(RepairBreakUpActivity.this, "Qty should not be empty!", Toast.LENGTH_SHORT).show();
                     return;
+
+                }
+                if (qty.equals("0") || qty.matches("0+")) {
+                    Toast.makeText(RepairBreakUpActivity.this, "Invalid Qty number format !!", Toast.LENGTH_LONG).show();
+                    return;
                 }
                 if (price.isEmpty()) {
                     Toast.makeText(RepairBreakUpActivity.this, "Price should not be empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (price.equals("0") || price.matches("0+")) {
+                    Toast.makeText(RepairBreakUpActivity.this, "Invalid price number format !!", Toast.LENGTH_LONG).show();
                     return;
                 }
                 updateRepairBreakupdetails();
@@ -293,7 +300,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     private void updateRepairBreakupdetails() {
         String qty, price, repair_item_code, unit_code;
         qty = Breakup_qty.getText().toString();
-       String remarks = Breakup_remark.getText().toString();
+        String remarks = Breakup_remark.getText().toString();
         price = Breakup_price.getText().toString();
         unit_code = item_spinner.getBreakup_unit_code();
         repair_item_code = equipment_spinner.getEquipmentBreakup_code();
@@ -303,8 +310,8 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {
-               try {
-                    JSONObject  jsonObject = new JSONObject(sresponse);
+                try {
+                    JSONObject jsonObject = new JSONObject(sresponse);
                     boolean success = jsonObject.getBoolean("isSuccess");
                     String error = jsonObject.getString("error");
 
@@ -485,7 +492,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
 
         if (Global.Repair_Equipment_Breakup == null || Global.Repair_Equipment_Breakup.size() == 0) {
-            Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Item list not found !! Please try again !!", Toast.LENGTH_LONG).show();
             return;
         }
         final EquipmentSelect_Adapter EqA = new EquipmentSelect_Adapter(Global.Repair_Equipment_Breakup);
@@ -540,11 +547,11 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             LinearLayout layout = v.findViewById(R.id.select);
 
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
-            //TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
+            TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
             equipment_spinner = eQarrayList.get(i);
 
             equipmentnameitem.setText(equipment_spinner.getEquipmentBreakup_Name());
-           // eqnameitem.setText(equipment_spinner.getEquipmentBreakup_id());
+            eqnameitem.setText(equipment_spinner.getEquipmentBreakup_id());
 
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -610,7 +617,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                         ItemListClassRepair_BreakUp equipment = new ItemListClassRepair_BreakUp();
 
                         equipment.setBreakup_unit(equipmentJson.getString("com_code"));
-                       /* equipment.setBreakup_unit_code(equipmentJson.getString("unit_code"));*/
+                        equipment.setBreakup_unit_code(equipmentJson.getString("unit_code"));
                         equipment.setBreakup_unit_name(equipmentJson.getString("unit_name"));
 
 
@@ -651,7 +658,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
 
         if (Global.Repair_Item_Breakup == null || Global.Repair_Item_Breakup.size() == 0) {
-            Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Unit list not found !! Please try again !!", Toast.LENGTH_LONG).show();
             return;
         }
         ItemSelect_Adapter ItA = new ItemSelect_Adapter(Global.Repair_Item_Breakup);
@@ -706,11 +713,11 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             LinearLayout layout = v.findViewById(R.id.select);
 
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
-          // TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
+            @SuppressLint("MissingInflatedId") TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
             item_spinner = eQarrayList.get(i);
 
             equipmentnameitem.setText(item_spinner.getBreakup_unit_name());
-           // eqnameitem.setText(item_spinner.getBreakup_unit());
+            eqnameitem.setText(item_spinner.getBreakup_unit());
 
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override

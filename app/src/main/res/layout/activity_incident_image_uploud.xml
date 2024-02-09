@@ -12,36 +12,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:weightSum="2"
         android:background="@drawable/btn_gradient"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="2"
+        tools:ignore="MissingConstraints">
 
         <ImageView
             android:id="@+id/repair_back_btn"
-            android:layout_weight="0.2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:padding="8dp"
+            android:layout_weight="0.2"
             android:gravity="center"
+            android:padding="8dp"
             android:src="@drawable/back"
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <ImageView
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1.6"
-            android:id="@+id/backarrowbtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:gravity="center"
             android:padding="3dp"
-            android:src="@drawable/aquatoolbar" />
-
+            android:text="Upload Image"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <ImageView
-            android:layout_weight="0.2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="0.2"
             android:visibility="invisible" />
     </LinearLayout>
 
@@ -50,21 +53,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/in_image_uploadbtn"
+        <ImageView
+            android:id="@+id/incident_image_upload"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/inputbg"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_update_outerline_gray"
+            android:src="@drawable/imageupload"
             android:gravity="center"
-            android:text="Upload Image"
-            android:textAllCaps="false"
-            android:textColor="#009688"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:text="Upload Image" />
 
     </LinearLayout>
-
-
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

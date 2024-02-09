@@ -25,6 +25,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +58,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
     Bitmap imageBitmap;
     RecyclerView Incident_Images_Rv;
     IncidentsClass incidentsClass;
-    AppCompatButton In_image_uploadbtn;
+    ImageView In_image_uploadbtn;
     Context context;
     ImageView back_btn;
     private ProgressDialog progressDialog;
@@ -69,11 +70,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
         context = this;
         setContentView(R.layout.activity_incident_image_uploud);
 
-        AppCompatDelegate delegate = ((AppCompatActivity) context).getDelegate();
-        delegate.setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
 
         back_btn = findViewById(R.id.repair_back_btn);
         back_btn.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +82,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
-        In_image_uploadbtn = findViewById(R.id.in_image_uploadbtn);
+        In_image_uploadbtn = findViewById(R.id.incident_image_upload);
         In_image_uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

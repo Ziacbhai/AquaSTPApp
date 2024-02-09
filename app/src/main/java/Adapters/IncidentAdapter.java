@@ -115,7 +115,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             e.printStackTrace();
             return;
         }
-        holder.Inc_created.setText("By" +incidentsClass.get(position).getInc_Created_by());
+        holder.Inc_created.setText(incidentsClass.get(position).getInc_Created_by());
 
 
 

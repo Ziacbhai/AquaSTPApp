@@ -39,19 +39,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:background="@drawable/btnbgoutline"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Manufacturer"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:background="@color/my_light_primary"
+                    android:layout_marginRight="1dp" />
+
                 <TextView
                     android:id="@+id/equipmentName_"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:background="@drawable/btnbgoutline"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Equipment name"
@@ -69,7 +74,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/btnbgoutline"
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="Equip_slno"
@@ -78,6 +82,7 @@
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="1dp"
+                        android:background="@color/my_light_primary"
                         android:layout_marginRight="1dp" />
 
                     <TextView
@@ -85,7 +90,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@drawable/btnbgoutline"
                         android:gravity="center"
                         android:padding="5dp"
                         android:text="Capacity"
@@ -93,12 +97,18 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:background="@color/my_light_primary"
+                    android:layout_marginRight="1dp" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:background="@drawable/btnbgoutline"
                     android:orientation="vertical"
                     android:padding="5dp">
 
@@ -131,6 +141,13 @@
 
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/my_light_primary"
+                        android:layout_marginRight="1dp" />
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -158,6 +175,13 @@
 
 
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="1dp"
+                        android:background="@color/my_light_primary"
+                        android:layout_marginRight="1dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -192,7 +216,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:background="@drawable/btnbgoutline"
+                    android:background="@drawable/custom_update_outerline_gray"
                     android:hint="Specification"
                     android:minHeight="80dp"
                     android:padding="8dp"

@@ -50,21 +50,23 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
 
     LinearLayout FilterImageUpload;
     Bitmap imageBitmap;
-
+    ImageView filter_image_back;
     FiltersClass filtersClass;
     Context context;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filters_daily_log_image_upload);
-
         context = this;
-
         FilterImageUpload = findViewById(R.id.filters_image_upload);
-
-
+        filter_image_back = findViewById(R.id.filter_image_back);
+        filter_image_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FiltersDailyLog_Image_Upload_Activity.this,FiltersDailyLogActivity.class));
+            }
+        });
         FilterImageUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +107,6 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
             Filter_image_postselelectedimage();
         }
     }
-
     private void Filter_image_postselelectedimage() {
         if (imageBitmap == null) {
             return;
@@ -115,7 +116,6 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {
-
             try {
                 JSONObject  jsonObject = new JSONObject(sresponse);
                 boolean success = jsonObject.getBoolean("success");
@@ -132,7 +132,6 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
-
         }
         }, new Response.ErrorListener() {
             @Override
@@ -146,7 +145,6 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
-
             @NonNull
             @Override
             protected Map<String, String> getParams() {
@@ -161,7 +159,6 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
                 (int) TimeUnit.SECONDS.toMillis(0),0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
         requestQueue.add(stringRequest);
     }
 
@@ -171,6 +168,4 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
-
-
 }

@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/custom_update_outerline_gray"
         android:orientation="horizontal"
         android:padding="2dp">
 
@@ -28,7 +28,7 @@
         <View
             android:layout_width="1dp"
             android:layout_height="30dp"
-            android:background="#01A3A3" />
+            android:background="@color/my_light_primary" />
 
         <TextView
             android:id="@+id/stock_"
@@ -40,10 +40,7 @@
             android:textColor="#000"
             android:textSize="11dp" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#01A3A3" />
+
 
     </LinearLayout>
 

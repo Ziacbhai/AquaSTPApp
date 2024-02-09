@@ -64,6 +64,7 @@ public class WelcomeUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_user);
+        context = this;
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         ImageView = findViewById(R.id.imageView);
@@ -80,8 +81,6 @@ public class WelcomeUser extends AppCompatActivity {
         Company = findViewById(R.id.company);
         Ownermail = findViewById(R.id.wemail);
         Owanarmobile = findViewById(R.id.wph);
-
-
         Company = findViewById(R.id.company);
         Ownermail = findViewById(R.id.wemail);
         Owanarmobile = findViewById(R.id.wph);
@@ -91,7 +90,6 @@ public class WelcomeUser extends AppCompatActivity {
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
         String com_name = Global.sharedPreferences.getString("com_name", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-
 
         Oname.setText(username);
         Ownermail.setText(mail);
@@ -113,8 +111,6 @@ public class WelcomeUser extends AppCompatActivity {
                 showImage(picasso, userimage);
             }
         });
-
-
         oContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -225,8 +221,6 @@ public class WelcomeUser extends AppCompatActivity {
 
             try {
                 if (resp.getBoolean("success")) {
-
-
                     Global.customtoast(WelcomeUser.this, getLayoutInflater(), "Image uploaded successfully");
                     getuserdetails();
 
@@ -236,8 +230,6 @@ public class WelcomeUser extends AppCompatActivity {
                         String errorMessage = resp.getString("error");
                         Toast.makeText(WelcomeUser.this, errorMessage, Toast.LENGTH_SHORT).show();
                         Toast.makeText(WelcomeUser.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-
-
                     }
                 }
             } catch (JSONException e) {
@@ -245,11 +237,9 @@ public class WelcomeUser extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
 
             }
         }) {
