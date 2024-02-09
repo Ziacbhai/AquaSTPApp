@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_gradient"
                 android:padding="5dp"
-                app:cardCornerRadius="15dp"
+                app:cardCornerRadius="10dp"
                 app:cardElevation="10dp"
                 app:cardMaxElevation="12dp">
 

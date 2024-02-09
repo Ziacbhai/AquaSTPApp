@@ -60,7 +60,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/profilebtnupdate"
+            android:background="@drawable/custom_consumption_btn"
             android:gravity="center"
             android:text="Verification"
             android:textColor="@color/white"
@@ -78,7 +78,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btnbgoutline"
+            android:background="@drawable/custom_update_outerline"
             android:gravity="center"
             android:padding="5dp"
             android:text="You will get a OTP via EMAIL &amp; MOBILE"
@@ -104,8 +104,6 @@
             app:itemWidth="40dp">
 
         </com.chaos.view.PinView>
-
-
 
 
         <LinearLayout
@@ -138,7 +136,7 @@
             android:layout_height="55dp"
             android:layout_margin="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/btnbgoutline"
+            android:background="@drawable/custom_update_outerline"
             android:drawableRight="@drawable/ic_baseline_remove_red_eye_on"
             android:hint="New password"
             android:longClickable="true"
@@ -181,8 +179,6 @@
 
         </LinearLayout>
 
-
-
         <ProgressBar
             android:id="@+id/progressbr"
             android:layout_width="wrap_content"
@@ -195,6 +191,8 @@
             android:progress="0"
             android:progressDrawable="@drawable/custom_progress_dialog"
             android:visibility="invisible" />
+
+
     </LinearLayout>
     <View
         android:layout_width="match_parent"

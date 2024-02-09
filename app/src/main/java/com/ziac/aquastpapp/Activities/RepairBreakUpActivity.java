@@ -713,7 +713,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             LinearLayout layout = v.findViewById(R.id.select);
 
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
-            @SuppressLint("MissingInflatedId") TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
+            TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
             item_spinner = eQarrayList.get(i);
 
             equipmentnameitem.setText(item_spinner.getBreakup_unit_name());

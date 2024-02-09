@@ -20,13 +20,14 @@ import com.ziac.aquastpapp.R;
 public class SplashScreen extends AppCompatActivity {
     TextView textView;
     ImageView imageView;
-
     Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        context = this;
 
         textView = findViewById(R.id.txt);
         imageView = findViewById(R.id.imageView);

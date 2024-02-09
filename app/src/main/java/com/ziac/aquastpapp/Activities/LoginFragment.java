@@ -61,32 +61,24 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         context = getContext();
-
-
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Logging in...");
         progressDialog.setCancelable(true);
-
         Login_User = view.findViewById(R.id.loginuser);
         Login_pwd = view.findViewById(R.id.loginpassword);
         Login_btn = view.findViewById(R.id.loginbtn);
         RememberMe = view.findViewById(R.id.RcheckBox);
-
         TermsOfuse = view.findViewById(R.id.terms);
         Privacy = view.findViewById(R.id.privacy);
         Forgotpwd = view.findViewById(R.id.btnftpass);
-
-
         TextView versionName = view.findViewById(R.id.version);
         versionName.setText("v1.0.0" + BuildConfig.VERSION_NAME);
-
 
         if (Global.isNetworkAvailable(getActivity())) {
         } else {
             Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
         }
-
         Login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -36,9 +36,6 @@ public class SliderScreen extends AppCompatActivity {
 
         viewPager = findViewById(R.id.views);
 
-
-
-
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
