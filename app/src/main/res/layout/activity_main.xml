@@ -5,6 +5,7 @@
     android:id="@+id/drawerlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:openDrawer="start"
     tools:context=".Activities.MainActivity">
 
     <LinearLayout
@@ -26,7 +27,7 @@
                 android:padding="5dp"
                 android:src="@drawable/aquatoolbar" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profileIcon"
                 android:layout_width="35dp"
                 android:layout_height="40dp"

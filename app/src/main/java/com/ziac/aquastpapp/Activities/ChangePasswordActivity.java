@@ -53,7 +53,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     String username, newpassword, repeatmpassword;
     Context context;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

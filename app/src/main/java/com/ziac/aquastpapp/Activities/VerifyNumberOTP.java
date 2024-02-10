@@ -53,7 +53,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
     private TextInputEditText Newpwd;
     Context context;
     ImageView Repair_back_btn;
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

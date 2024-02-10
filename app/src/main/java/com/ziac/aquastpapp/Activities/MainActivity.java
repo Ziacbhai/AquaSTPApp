@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     LinearLayout layout;
     NavigationView navigationView;
-    ImageView Profile;
+    CircleImageView Profile;
     ActionBarDrawerToggle toggle;
 
     Context context;
@@ -56,8 +56,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
+        user_topcard();
         toolbar = findViewById(R.id.toolbar);
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         Profile = findViewById(R.id.profileIcon);
@@ -79,14 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         openFragment(new HomeFragment());
 
         userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
-        userref = sharedPreferences.getString("ref_code", "");
-        personname = sharedPreferences.getString("person_nameu", "");
-        usermail = sharedPreferences.getString("user_email", "");
-        sitename = sharedPreferences.getString("site_name", "");
-        stpname = sharedPreferences.getString("stp_name", "");
-        siteaddress = sharedPreferences.getString("site_address", "");
-        processname = sharedPreferences.getString("process_name", "");
-        stpcapacity = sharedPreferences.getString("stp_capacity", "");
+
 
         Picasso.Builder builder = new Picasso.Builder(getApplication());
         Picasso picasso = builder.build();
@@ -178,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 user_stp = drawerLayout.findViewById(R.id.stp_name);
 
 
+
                 person_name.setText(personname);
                 user_mail.setText(usermail);
                 user_site.setText(sitename);
@@ -215,6 +210,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // bottomNavigationView=findViewById(R.id.bottomNavigationView);
         // bottomNavigationView.setBackground(null);
+    }
+
+    private void user_topcard() {
+        usermail = sharedPreferences.getString("user_email", "");
+        userref = sharedPreferences.getString("ref_code", "");
+        sitename = sharedPreferences.getString("site_name", "");
+        stpname = sharedPreferences.getString("stp_name", "");
+        siteaddress = sharedPreferences.getString("site_address", "");
+        processname = sharedPreferences.getString("process_name", "");
+        personname = sharedPreferences.getString("user_name", "");
+        stpcapacity = sharedPreferences.getString("stp_capacity", "");
+
     }
 
     @Override

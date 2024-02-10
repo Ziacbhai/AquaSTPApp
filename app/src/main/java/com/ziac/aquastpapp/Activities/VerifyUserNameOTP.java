@@ -49,7 +49,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
     ImageView Repair_back_btn;
     private TextInputEditText UNewpwd;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

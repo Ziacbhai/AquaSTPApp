@@ -290,7 +290,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 Global.editor = Global.sharedPreferences.edit();
-                Global.editor.putString("person_nameu", Person_name.getText().toString());
+                Global.editor.putString("user_name", Person_name.getText().toString());
                 Global.editor.putString("user_mobile", Person_number.getText().toString());
                 Global.editor.putString("user_email", Person_email.getText().toString());
                 Global.editor.putString("ref_code", Person_ref_code.getText().toString());

@@ -54,7 +54,6 @@ public class WelcomeUser extends AppCompatActivity {
     CircleImageView ImageView;
     ImageView Ownerexit;
     AppCompatButton oContinue;
-
     Context context;
     FloatingActionButton fab;
     Bitmap imageBitmap;
@@ -123,7 +122,6 @@ public class WelcomeUser extends AppCompatActivity {
         });
 
     }
-
     public void showImage(@NonNull Picasso picasso, String userimage) {
         Dialog builder = new Dialog(this);
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);

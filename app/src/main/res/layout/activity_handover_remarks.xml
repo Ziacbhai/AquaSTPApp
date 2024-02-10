@@ -161,6 +161,7 @@
                             android:layout_margin="2dp"
                             android:background="@drawable/btnbgedited"
                             android:gravity="left"
+                            android:capitalize="sentences"
                             android:hint="HandOver Remarks"
                             android:padding="5dp"
                             android:textSize="16sp" />

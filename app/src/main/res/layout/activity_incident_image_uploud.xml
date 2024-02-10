@@ -57,7 +57,7 @@
             android:id="@+id/incident_image_upload"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/custom_update_outerline_gray"
+            android:background="@drawable/inputbg"
             android:src="@drawable/imageupload"
             android:gravity="center"
             android:text="Upload Image" />

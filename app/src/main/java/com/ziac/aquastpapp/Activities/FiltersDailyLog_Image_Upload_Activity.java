@@ -65,6 +65,7 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FiltersDailyLog_Image_Upload_Activity.this,FiltersDailyLogActivity.class));
+                finish();
             }
         });
         FilterImageUpload.setOnClickListener(new View.OnClickListener() {

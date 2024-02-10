@@ -152,7 +152,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         String stpname, sitename, processname, repair_date, repair_no, repair_amount, stpcapacity;
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
-        processname = sharedPreferences.getString("process_name", "");
+        processname = sharedPreferences.getString("user_name", "");
         stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
         repair_date = Global.repairClass1.getRepair_Date();

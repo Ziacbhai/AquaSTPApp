@@ -12,7 +12,7 @@
         android:layout_height="160dp"
         android:background="@drawable/header_background">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/header_profile"
             android:layout_width="70dp"
             android:layout_height="80dp"

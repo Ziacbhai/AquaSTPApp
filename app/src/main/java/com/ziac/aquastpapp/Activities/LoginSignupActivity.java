@@ -57,6 +57,8 @@ public class LoginSignupActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.viewpagerlogin);
         loginadapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(loginadapter);
+        viewPager2.setUserInputEnabled(false);
+        //viewPager2.setUserInputEnabled(true);
 
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -77,32 +79,25 @@ public class LoginSignupActivity extends AppCompatActivity {
                 }
             }
         });
-
-
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager2.setCurrentItem(tab.getPosition());
-
                 tab.view.setBackgroundColor(Color.rgb(1, 163, 163));
 
             }
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 // Reset the indicator color when a tab is unselected
                 viewPager2.setCurrentItem(tab.getPosition());
                 tab.view.setBackgroundColor(Color.TRANSPARENT);
             }
-
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
     }
-
-
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();

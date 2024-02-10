@@ -35,7 +35,7 @@ import java.util.Map;
 
 public class ResetPasswordNumber extends AppCompatActivity {
     TextView GetOTPBtn;
-    EditText ForgotMobile;
+    EditText ForgotNumber;
     ImageView back_btn;
     String usermobile;
     ProgressBar progressBar;
@@ -46,8 +46,8 @@ public class ResetPasswordNumber extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password_number);
-
-        ForgotMobile = findViewById(R.id.fmobile);
+        context = this;
+        ForgotNumber = findViewById(R.id.forgotNumber);
         GetOTPBtn = findViewById(R.id.numberOTPbtn);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -59,7 +59,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
         GetOTPBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                usermobile = ForgotMobile.getText().toString();
+                usermobile = ForgotNumber.getText().toString();
                 // progressBar.setVisibility(View.VISIBLE);
 //                 if (mobile.isEmpty()) {
 //                     ForgotPass.setError("Please Enter Password");

@@ -50,8 +50,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
     ProgressBar progressBar;
     ImageView back_btn;
     boolean passwordVisible;
-    private TextInputEditText EnterNewpwd;
-
+    TextInputEditText EnterNewpwd;
     Context context;
 
     @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
@@ -59,12 +58,14 @@ public class VerifyEmailOTP extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verifiy_email_otp);
+
+        context = this;
         Enter_pinnumber = findViewById(R.id.et_pinview);
         new OTP_Receiver().setPinView(Enter_pinnumber);
         requestSMSPermission();
         EmailVerify = findViewById(R.id.emailverifyotp);
         progressBar = findViewById(R.id.progressbr);
-        EnterNewpwd = findViewById(R.id.enewpassword);
+        EnterNewpwd = findViewById(R.id.enternewpassword);
         Resendotp = findViewById(R.id.resendEotp);
 
         Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyEmailOTP.this, ResetPasswordEmail.class)));
@@ -170,11 +171,8 @@ public class VerifyEmailOTP extends AppCompatActivity {
                 params.put("NewPassword", Newpassword);
                 params.put("user_email", Global.sharedPreferences.getString("user_email", ""));
                 Log.d("params", params.toString());
-
                 // params.put("NewPassword", "Siva126@Ziac");
                 // params.put("UserName", username);
-
-
                 return params;
             }
         };

@@ -81,7 +81,7 @@ public class Handover_Remarks_Activity extends AppCompatActivity {
         processname = sharedPreferences.getString("process_name", "");
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
-        personname = sharedPreferences.getString("person_nameu", "");
+        personname = sharedPreferences.getString("user_name", "");
         stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;

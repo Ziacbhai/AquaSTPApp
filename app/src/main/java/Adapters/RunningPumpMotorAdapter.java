@@ -71,9 +71,9 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
             @Override
             public void onClick(View v) {
                 StopRolloverMotorPumps(position,2);
-                ((Activity) context).finish();
                 Intent pump = new Intent(context, PumpMotorDailyLogActivity.class);
                 context.startActivity(pump);
+                ((Activity) context).finish();
             }
         });
 
@@ -253,6 +253,8 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
         };
         queue.add(jsonObjectRequest);
     }*/
+
+
 
 
 }

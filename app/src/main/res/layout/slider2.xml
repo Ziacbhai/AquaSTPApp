@@ -4,15 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- Top Spacer -->
     <View
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
+    <!-- Image -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/slide2" />
+        android:src="@drawable/slide2"
+        android:scaleType="centerCrop" />
+
+    <!-- Text: Stay informed and in control, anytime, anywhere -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,18 +25,22 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginTop="16dp" />
 
+    <!-- Text: Fast, accurate, and user-friendly analytics on the go -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Fast, accurate, and user-friendly analytics on the go"
         android:textAlignment="center"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:layout_marginTop="8dp" />
 
+    <!-- Bottom Spacer -->
     <View
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

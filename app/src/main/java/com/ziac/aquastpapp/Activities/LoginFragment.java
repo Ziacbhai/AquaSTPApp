@@ -61,10 +61,12 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         context = getContext();
+
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Logging in...");
         progressDialog.setCancelable(true);
+
         Login_User = view.findViewById(R.id.loginuser);
         Login_pwd = view.findViewById(R.id.loginpassword);
         Login_btn = view.findViewById(R.id.loginbtn);

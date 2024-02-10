@@ -64,13 +64,9 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import Models.zList;
-
-
 public class SignUpFragment extends Fragment {
-
     private Dialog zDialog;
     EditText Company, CPerson, Mobile, Email, Adminname, RPassword, Cpassword;
-
     TextView tvState, tvCity, Site_address, TermsOfUse, Privacy, Registerbtn;
     ImageView DDstate, DDcity;
     private zList statename, cityname;
@@ -78,10 +74,7 @@ public class SignUpFragment extends Fragment {
     String citycode;
     ProgressDialog progressDialog;
     private CheckBox CheckBox;
-
     Context context;
-
-
     @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,19 +88,20 @@ public class SignUpFragment extends Fragment {
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(true);
 
-
         Company = view.findViewById(R.id.company);
         CPerson = view.findViewById(R.id.cperson);
         Mobile = view.findViewById(R.id.mobile);
         Email = view.findViewById(R.id.emailuser);
         Adminname = view.findViewById(R.id.auname);
         CheckBox = view.findViewById(R.id.ccheckbox);
+
         // Site_address = view.findViewById(R.id.site_address);
         Registerbtn = view.findViewById(R.id.registerbtn);
         RPassword = view.findViewById(R.id.registerpassword);
         Cpassword = view.findViewById(R.id.confirmpassword);
         TermsOfUse = view.findViewById(R.id.terms);
         Privacy = view.findViewById(R.id.privacy);
+
         //////Call Api State And City/////
         tvState = view.findViewById(R.id.tvstate);
         DDstate = view.findViewById(R.id.dd_state);
@@ -130,13 +124,10 @@ public class SignUpFragment extends Fragment {
                         RPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
                         RPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                         passwordvisible = false;
-
                     } else {
                         RPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
                         RPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                         passwordvisible = true;
-
-
                     }
                     RPassword.setSelection(selection);
                     return true;

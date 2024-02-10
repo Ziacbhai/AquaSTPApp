@@ -48,7 +48,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
         setContentView(R.layout.activity_reset_password_email);
         context  = this;
         EnterOTPbtn = findViewById(R.id.emailgetotpbtn);
-        Forgotemail = findViewById(R.id.Femail);
+        Forgotemail = findViewById(R.id.resetemail);
         progressBar = findViewById(R.id.progressbr);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
