@@ -199,8 +199,6 @@ public class IncidentReportingFragment extends Fragment {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-
-
             }
         }, new Response.ErrorListener() {
             @Override

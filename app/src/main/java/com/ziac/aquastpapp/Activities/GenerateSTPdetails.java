@@ -48,7 +48,6 @@ public class GenerateSTPdetails extends AppCompatActivity {
         });
 
     }
-
     @Override
     public void onBackPressed() {
 

@@ -189,13 +189,10 @@ public class MeterDailyLogActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-
-
                     Global.loadmeter1(response);
                     MeterDailyLogEditAdapter meterDailyLogEditAdapter = new MeterDailyLogEditAdapter((List<MetersDailyLogClass>) Global.Meters_Class, context);
                     Meters_recyclerview.setAdapter(meterDailyLogEditAdapter);
                     meterDailyLogEditAdapter.notifyDataSetChanged();
-
 
                     // Common code block
                     Global.loadmeter2(response);

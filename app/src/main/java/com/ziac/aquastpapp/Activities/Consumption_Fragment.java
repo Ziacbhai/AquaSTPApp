@@ -61,14 +61,12 @@ import Models.ConsumptionClass;
 
 public class Consumption_Fragment extends Fragment {
 
-    ConsumptionClass consumables_Class;
+
     RecyclerView Consumables_rv;
     private TextView tvSelectedDate;
     TextView Date_A, STP_A, Remark_A;
     AppCompatButton Update_A, Cancel_A;
-
     ProgressDialog progressDialog;
-
     String currentDatevalue, currentDateValue2;
     Context context;
     ConsumptionAdapter consumptionAdapter;
@@ -77,8 +75,6 @@ public class Consumption_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_consumption, container, false);
 
@@ -128,18 +124,13 @@ public class Consumption_Fragment extends Fragment {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             currentDateValue2 = dateFormat2.format(currentDate);
         }
-
 //        Global.sharedPreferences.edit();
 //        Global.editor.putString("current_date",currentDatevalue);
 //        Global.editor.commit();
-
         getConsumables();
         return view;
 
     }
-
-
-
      private void refreshScreen() {
          new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
              @Override
@@ -289,7 +280,6 @@ public class Consumption_Fragment extends Fragment {
                 headers.put("Authorization", "Bearer " + accessToken);
                 return headers;
             }
-
             @Override
             protected Map<String, String> getParams() {
                 return new HashMap<>();
@@ -298,8 +288,6 @@ public class Consumption_Fragment extends Fragment {
 
         queue.add(jsonObjectRequest);
     }
-
-
     private void updateConsumables() {
 
         String remarks = Remark_A.getText().toString();
@@ -319,16 +307,6 @@ public class Consumption_Fragment extends Fragment {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-
-                /*Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-                Global.editor = Global.sharedPreferences.edit();
-                Global.editor.putString("con1_code","0");
-                Global.editor.putString("ayear",Global.sharedPreferences.getString("ayear", "0"));
-                Global.editor.putString("sstp1_code",Global.sharedPreferences.getString("sstp1_code", "0"));
-                Global.editor.putString("com_code",Global.sharedPreferences.getString("com_code", "0"));
-                Global.editor.putString("con_date", tvSelectedDate.getText().toString());
-                Global.editor.putString("remarks", Remark_A.getText().toString());
-                Global.editor.commit();*/
                 try {
                     if (response.getBoolean("isSuccess")) {
                         Toast.makeText(getActivity(), "Updated successfully !!", Toast.LENGTH_SHORT).show();

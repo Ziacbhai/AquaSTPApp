@@ -5,9 +5,6 @@ import android.os.AsyncTask;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-
-
 public class InternetCheckTask extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected Boolean doInBackground(Void... voids) {

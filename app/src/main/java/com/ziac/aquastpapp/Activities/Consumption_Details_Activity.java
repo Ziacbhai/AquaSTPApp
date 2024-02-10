@@ -95,8 +95,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
         context = this;
         user_topcard();
-
-
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading please wait...");
         progressDialog.setCancelable(true);
@@ -123,9 +121,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             }
         });
         isSwipeRefreshTriggered = true;
-
         getConsumablesDetails();
-
         Consumables_D_Rv = findViewById(R.id.consumables_details_recyclerview);
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(context));
         Consumables_D_Rv.setHasFixedSize(true);
@@ -598,10 +594,8 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 Equipment_code.setText(equipment_spinner.getEquipment_Name());
                 zDialog.dismiss();
             });
-
             return v;
         }
-
         @Override
         public Filter getFilter() {
             return new Filter() {
@@ -619,7 +613,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                             }
                         }
                     }
-
                     FilterResults filterResults = new FilterResults();
                     filterResults.values = mFilteredList;
                     filterResults.count = mFilteredList.size();
@@ -654,8 +647,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                         item.setItem_code(equipmentJson.getString("item_code"));
                         item.setItem_name(equipmentJson.getString("prd_name"));
 
-                        //Log.d("YourTag", "Name: " + equipmentJson.getString("equip_name"));
-                        // Log.d("YourTag", "Code: " + equipmentJson.getString("sstp1_code"));
                         Global.Consumption_item.add(item);
 
                     } catch (JSONException ex) {
@@ -733,17 +724,14 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         public ItemSelect_Adapter(ArrayList<ItemListClassConsumption> mDataArrayList) {
             this.mDataArrayList = mDataArrayList;
         }
-
         @Override
         public int getCount() {
             return mDataArrayList.size();
         }
-
         @Override
         public Object getItem(int i) {
             return mDataArrayList.get(i);
         }
-
         @Override
         public long getItemId(int i) {
             return i;
@@ -796,7 +784,6 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     filterResults.count = mFilteredList.size();
                     return filterResults;
                 }
-
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                     mDataArrayList = (ArrayList<ItemListClassConsumption>) filterResults.values;

@@ -27,7 +27,6 @@ public class EquipmentsFragment extends Fragment {
     private CardView Pump, Meters;
     ProgressDialog progressDialog;
     Context context;
-
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -95,6 +94,4 @@ public class EquipmentsFragment extends Fragment {
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);
     }
-
-
 }

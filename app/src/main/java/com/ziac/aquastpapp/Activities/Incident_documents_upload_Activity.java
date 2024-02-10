@@ -102,16 +102,6 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
             }
         });
 
-      /*  upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent galleryIntent = new Intent();
-                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-                galleryIntent.setType("application/pdf");
-                startActivityForResult(galleryIntent, 1);
-            }
-        });*/
-
         Incident_Documents_Rv = findViewById(R.id.incident_Documents_Rv);
         Incident_Documents_Rv.setLayoutManager(new LinearLayoutManager(this));
         Incident_Documents_Rv.setHasFixedSize(true);
@@ -166,94 +156,6 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
 
         Volley.newRequestQueue(this).add(stringRequest);
     }
-
-
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 10 && resultCode == RESULT_OK) {
-//            Uri uri = data.getData();
-//            // imageList.add(uri);
-//            try {
-//                documentBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            Incident_postselectedDocument();
-//        }
-//    }
-   /* private void Incident_postselectedDocument() {
-        if (documentUri == null) {
-            return;
-        }
-        String url = Global.Incident_UploadDocuments;
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
-            JSONObject resp;
-            try {
-                resp = new JSONObject(response);
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                if (resp.getBoolean("success")) {
-                    Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "Document uploaded successfully");
-                    getIncidentDocuments();
-                } else {
-                    if (resp.has("error")) {
-                        Toast.makeText(Incident_documents_upload_Activity.this, "Document upload failed", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Log.d("else", "else");
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if (error instanceof TimeoutError) {
-                    Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "Request Time-Out");
-                } else if (error instanceof ServerError) {
-                    Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "Invalid Username or Password");
-                } else if (error instanceof ParseError) {
-                    Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "Parse Error ");
-                } else if (error instanceof AuthFailureError) {
-                    Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "AuthFailureError");
-                }
-
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<String, String>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", null);
-                headers.put("Authorization", "Bearer " + accesstoken);
-                return headers;
-            }
-            @NonNull
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                try {
-                    String document = documentToString(documentUri);
-                    params.put("fileName", document);
-                    params.put("incident_code", Global.sharedPreferences.getString("incident_code", ""));
-                    params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                return params;
-            }
-        };
-        requestQueue.add(stringRequest);
-    }*/
-
-    /* private String documentToString(Uri documentUri) throws IOException {
-         InputStream inputStream = getContentResolver().openInputStream(documentUri);
-         byte[] bytes = new byte[inputStream.available()];
-         inputStream.read(bytes);
-         return Base64.encodeToString(bytes, Base64.DEFAULT);
-     }*/
     private void getIncidentDocuments() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.Get_Incidents_Details + "incident_code=" + Global.sharedPreferences.getString("incident_code",

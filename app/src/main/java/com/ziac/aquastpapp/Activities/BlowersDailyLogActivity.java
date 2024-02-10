@@ -52,7 +52,6 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
     RecyclerView blowers_started_recyclerview;
     TextView Startheading;
     View blowerview;
-    boolean conditionToShowBlowerAdapter = shouldShowBlowerAdapter();
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -266,11 +265,5 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         };
 
         queue.add(jsonObjectRequest);
-    }
-    private boolean shouldShowBlowerAdapter() {
-        return true; // Replace with your actual condition
-    }
-    private boolean newConditionToShowBlowerAdapter() {
-        return false; // Replace with your actual condition
     }
 }

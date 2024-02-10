@@ -22,15 +22,13 @@ import com.google.android.material.tabs.TabLayout;
 import com.ziac.aquastpapp.R;
 
 public class LoginSignupActivity extends AppCompatActivity {
-
     TabLayout tabLayout;
     ViewPager2 viewPager2;
     ViewPagerAdapter loginadapter;
-    private boolean doubleBackToExitPressedOnce;
+    boolean doubleBackToExitPressedOnce;
     Context context;
     TabLayout.Tab loginTab;
     TabLayout.Tab registerTab;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +50,6 @@ public class LoginSignupActivity extends AppCompatActivity {
 
        // loginTab.view.setBackgroundColor(Color.rgb(1, 163, 163));
         tabLayout.setTabTextColors(Color.rgb(1, 163, 163), Color.WHITE);
-
-
         viewPager2 = findViewById(R.id.viewpagerlogin);
         loginadapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(loginadapter);
@@ -106,6 +102,5 @@ public class LoginSignupActivity extends AppCompatActivity {
         }
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
-
     }
 }

@@ -228,18 +228,7 @@ public class HomeFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // Handle Volley errors
-                if (error instanceof TimeoutError) {
-                    Toast.makeText(requireActivity(), "Request Time-Out", Toast.LENGTH_LONG).show();
-                } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(requireActivity(), "No Connection Found", Toast.LENGTH_LONG).show();
-                } else if (error instanceof ServerError) {
-                    Toast.makeText(requireActivity(), "Server Error", Toast.LENGTH_LONG).show();
-                } else if (error instanceof NetworkError) {
-                    Toast.makeText(requireActivity(), "Network Error", Toast.LENGTH_LONG).show();
-                } else if (error instanceof ParseError) {
-                    Toast.makeText(requireActivity(), "Parse Error", Toast.LENGTH_LONG).show();
-                }
+
             }
         }) {
             @Override

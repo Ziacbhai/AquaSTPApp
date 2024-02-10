@@ -237,9 +237,7 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
                 return params;
             }
         };
-
         queue.add(jsonObjectRequest);
-
     }
     @Override
     protected void onPause() {

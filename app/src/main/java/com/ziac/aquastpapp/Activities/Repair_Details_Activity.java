@@ -409,8 +409,6 @@ public class Repair_Details_Activity extends AppCompatActivity {
                                 ex.printStackTrace();
                             }
                         }
-
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -540,7 +538,6 @@ public class Repair_Details_Activity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 EqA.getFilter().filter(newText);

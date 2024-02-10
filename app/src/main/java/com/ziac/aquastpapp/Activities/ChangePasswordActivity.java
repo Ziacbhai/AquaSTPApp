@@ -58,14 +58,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-
-
+        context = this;
         Newpwd = findViewById(R.id.newpwd);
         Repeatpwd = findViewById(R.id.rpwd);
         Pwdconfirm = findViewById(R.id.pwdconfirm);
         Backarrowbtn = findViewById(R.id.backarrowbtn);
         progressBar = findViewById(R.id.progressbr);
-
 
         Newpwd.setOnTouchListener((v, event) -> {
 
@@ -82,8 +80,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         Newpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
                         Newpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                         passwordvisible = true;
-
-
                     }
                     Newpwd.setSelection(selection);
                     return true;
@@ -161,13 +157,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         String url = Global.changetpasswordurl;
         progressBar.setVisibility(View.VISIBLE);
-
         // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(ChangePasswordActivity.this);
-
-
         progressBar.setVisibility(View.GONE);
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String sresponse) {

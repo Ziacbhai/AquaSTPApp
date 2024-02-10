@@ -40,7 +40,6 @@ public class LabTest_Details_Activity extends AppCompatActivity {
     RecyclerView Labtest_details_Rv;
     LabTestClass labTest_Dclass;
     Context context;
-
     private ProgressDialog progressDialog;
 
     @SuppressLint("MissingInflatedId")

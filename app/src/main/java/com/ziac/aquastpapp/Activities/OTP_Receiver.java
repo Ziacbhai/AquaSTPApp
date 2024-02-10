@@ -32,9 +32,6 @@ public class OTP_Receiver extends BroadcastReceiver {
     }
 
     private String extractOtp(String message) {
-        // Implement your logic to extract the OTP from the message
-        // This might involve regular expressions or other parsing methods
-        // For simplicity, let's assume the OTP is a 6-digit number
         return message.replaceAll("[^0-9]", "");
     }
 
