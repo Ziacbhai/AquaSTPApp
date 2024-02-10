@@ -174,17 +174,14 @@ public class SensorDailyLogAdapter extends RecyclerView.Adapter<SensorDailyLogAd
             String usertype=Global.sharedPreferences.getString("user_type","");
             if (usertype.equals("C")){
                 Sensor_image_upload.setVisibility(View.GONE);
-                Sensor_total.setVisibility(View.GONE);
                 viewhide.setVisibility(View.GONE);
-                viewhide2.setVisibility(View.GONE);
             }else {
                 Sensor_image_upload.setVisibility(View.VISIBLE);
-                Sensor_total.setVisibility(View.VISIBLE);
                 Sensor_equip_name.setVisibility(View.VISIBLE);
                 Sensor_reading_time.setVisibility(View.VISIBLE);
                 Sensor_reading.setVisibility(View.VISIBLE);
                 viewhide.setVisibility(View.VISIBLE);
-                viewhide2.setVisibility(View.VISIBLE);
+
             }
         }
     }

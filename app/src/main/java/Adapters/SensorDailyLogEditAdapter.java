@@ -63,9 +63,13 @@ public class SensorDailyLogEditAdapter extends RecyclerView.Adapter<SensorDailyL
         holder.Sensor_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 enteredValue = holder.Sensor_reading_edit.getText().toString();
-                DailyLogSensors(enteredValue,position);
+                if (!enteredValue.isEmpty()) {
+                    DailyLogSensors(enteredValue, position);
+                } else {
+                    // Handle the case when enteredValue is empty
+                    // For example, show a message to the user indicating that the value cannot be empty
+                }
             }
         });
 

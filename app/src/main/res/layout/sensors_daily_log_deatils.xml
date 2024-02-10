@@ -42,8 +42,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/btnbgedited"
                 android:gravity="center"
-                android:padding="5dp"
                 android:hint="Reading"
+                android:padding="5dp"
                 android:textColor="#000"
                 android:textSize="12dp" />
 
@@ -73,7 +73,7 @@
                 android:id="@+id/sensor_total"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.8"
                 android:padding="5dp"
                 android:text="Total"
                 android:gravity="center"
@@ -101,7 +101,6 @@
                 android:layout_weight="2.7"
                 android:padding="5dp"
                 android:src="@drawable/aqua_logo"
-                android:scaleType="centerCrop"
                 android:textColor="#000"
                 android:textSize="12dp" />
 

@@ -67,16 +67,15 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
         holder.Meter_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                     enteredValue = holder.Meter_reading_edit.getText().toString();
-                    DailyLogMeters(enteredValue,position);
+                if (!enteredValue.isEmpty()) {
+                    Toast.makeText(context, "enter value", Toast.LENGTH_SHORT).show();
+                } else {
+                    DailyLogMeters(enteredValue, position);
+                }
 
             }
         });
-
-
-
     }
     private void DailyLogMeters(String enteredValue,int position) {
         RequestQueue queue = Volley.newRequestQueue(context);

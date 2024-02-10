@@ -51,14 +51,11 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
     String currentDatevalue, currentDateValue2;
     ImageView backbtn,Pump_reload;
 
-    boolean isActive;
     //PumpMotorBlower_LogClass pumpMotorClass;
     TextView Displaydate, Displaytime;
     RecyclerView pump_motor_started_recyclerview;
     RecyclerView pump_motor_stopped_recyclerview;
-
     LinearLayout Pump_start_header;
-
     public RunningPumpMotorAdapter dailyLogAdapter;
     public StoppedPumpMotorAdapter dailyLogAdapter1;
     View viewpump;
@@ -92,7 +89,6 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
                 handler.postDelayed(this, 1000); // Update every 1000 milliseconds (1 second)
             }
         }, 0);
-
         Displaydate = findViewById(R.id.displaydate);
         Displaytime = findViewById(R.id.displaytime);
 
@@ -111,7 +107,6 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
         pump_motor_stopped_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
     }
-
     private void showViews() {
         if (Pump_start_header != null) {
             Pump_start_header.setVisibility(View.VISIBLE);
@@ -124,7 +119,6 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
             viewpump.setVisibility(View.VISIBLE);
         }
     }
-
     private void hideViews() {
 
         if (Pump_start_header != null) {
@@ -138,8 +132,6 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
             viewpump.setVisibility(View.GONE);
         }
     }
-
-
     private void updateDateTime() {
         Date currentDate = new Date();
         // Update date
@@ -163,9 +155,7 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
 
             Displaytime.setText(formattedTime);
         }
-
     }
-
     private void user_topcard() {
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, stpcapacity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -221,8 +211,6 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -242,7 +230,6 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
 
             }
         }) {
-
             @Override
             public Map<String, String> getHeaders() {
                 // Set the Authorization header with the access token
@@ -261,9 +248,7 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
             }
 
         };
-
         queue.add(jsonObjectRequest);
-
     }
 
 }

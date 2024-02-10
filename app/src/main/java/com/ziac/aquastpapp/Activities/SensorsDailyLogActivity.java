@@ -115,26 +115,23 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
     private void showViews() {
         if (Sensor_header != null) {
             Sensor_header.setVisibility(View.VISIBLE);
-            Total_sensor_header.setVisibility(View.VISIBLE);
-            viewhide.setVisibility(View.VISIBLE);
+
         }
         if (sensor_recyclerView != null) {
             sensor_recyclerView.setVisibility(View.VISIBLE);
-            Total_sensor_header.setVisibility(View.VISIBLE);
-            viewhide.setVisibility(View.VISIBLE);
+
         }
     }
 
     private void hideViews() {
         if (Sensor_header != null) {
             Sensor_header.setVisibility(View.GONE);
-            Total_sensor_header.setVisibility(View.GONE);
-            viewhide.setVisibility(View.GONE);
+
+
         }
         if (sensor_recyclerView != null) {
             sensor_recyclerView.setVisibility(View.GONE);
-            Total_sensor_header.setVisibility(View.GONE);
-            viewhide.setVisibility(View.GONE);
+
 
         }
     }
