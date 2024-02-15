@@ -49,7 +49,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
     TextView EmailVerify;
     ProgressBar progressBar;
     ImageView back_btn;
-    boolean passwordVisible;
+    private boolean passwordvisible = false;
     TextInputEditText EnterNewpwd;
     Context context;
 
@@ -74,14 +74,14 @@ public class VerifyEmailOTP extends AppCompatActivity {
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getRawX() >= EnterNewpwd.getRight() - EnterNewpwd.getCompoundDrawables()[Right].getBounds().width()) {
                     int selection = EnterNewpwd.getSelectionEnd();
-                    if (passwordVisible) {
+                    if (passwordvisible) {
                         EnterNewpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
                         EnterNewpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        passwordVisible = false;
+                        passwordvisible = false;
                     } else {
                         EnterNewpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
                         EnterNewpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        passwordVisible = true;
+                        passwordvisible = true;
                     }
                     EnterNewpwd.setSelection(selection);
                     return true;

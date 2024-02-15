@@ -31,6 +31,7 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        context = this;
 
         Website = findViewById(R.id.websiteaqua);
         CallUs = findViewById(R.id.callUs);

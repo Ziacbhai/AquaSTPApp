@@ -31,12 +31,14 @@ public class SliderScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slider_screen);
 
+        context = this;
+
         Next = findViewById(R.id.next);
         Skip = findViewById(R.id.skip);
 
         viewPager = findViewById(R.id.views);
 
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager, true);

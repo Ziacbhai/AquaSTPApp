@@ -43,7 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VerifyNumberOTP extends AppCompatActivity {
-    boolean passwordVisible;
+    private boolean passwordvisible = false;
     String otp, Newpassword;
 
     PinView pinView;
@@ -71,14 +71,14 @@ public class VerifyNumberOTP extends AppCompatActivity {
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getRawX() >= Newpwd.getRight() - Newpwd.getCompoundDrawables()[Right].getBounds().width()) {
                     int selection = Newpwd.getSelectionEnd();
-                    if (passwordVisible) {
+                    if (passwordvisible) {
                         Newpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
                         Newpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        passwordVisible = false;
+                        passwordvisible = false;
                     } else {
                         Newpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
                         Newpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        passwordVisible = true;
+                        passwordvisible = true;
                     }
                     Newpwd.setSelection(selection);
                     return true;

@@ -141,6 +141,7 @@
                     android:background="@drawable/custom_update_outerline"
                     android:drawableRight="@drawable/ic_baseline_remove_red_eye_on"
                     android:hint="New password"
+                    android:inputType="textPassword"
                     android:longClickable="true"
                     android:padding="10dp"
                     android:textColor="@color/black"

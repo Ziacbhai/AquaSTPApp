@@ -42,7 +42,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
     String otp, Newpassword;
     TextView Resendotp;
     PinView mPinView;
-    boolean passwordVisible;
+    private boolean passwordvisible ;
     TextView UserVerify;
     ProgressBar progressBar;
     Context context;
@@ -69,14 +69,14 @@ public class VerifyUserNameOTP extends AppCompatActivity {
             if (event.getAction() == MotionEvent.ACTION_UP) {
                 if (event.getRawX() >= UNewpwd.getRight() - UNewpwd.getCompoundDrawables()[Right].getBounds().width()) {
                     int selection = UNewpwd.getSelectionEnd();
-                    if (passwordVisible) {
+                    if (passwordvisible) {
                         UNewpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_remove_red_eye_on, 0);
                         UNewpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        passwordVisible = false;
+                        passwordvisible = false;
                     } else {
                         UNewpwd.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_visibility_off, 0);
                         UNewpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        passwordVisible = true;
+                        passwordvisible = true;
                     }
                     UNewpwd.setSelection(selection);
                     return true;
