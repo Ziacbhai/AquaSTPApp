@@ -69,7 +69,7 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
             public void onClick(View v) {
                     enteredValue = holder.Meter_reading_edit.getText().toString();
                 if (enteredValue.isEmpty()) {
-                    Toast.makeText(context, "Enter value", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Enter value", Toast.LENGTH_LONG).show();
                 } else {
                     DailyLogMeters(enteredValue, position);
                 }
