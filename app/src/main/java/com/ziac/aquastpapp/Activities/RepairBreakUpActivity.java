@@ -273,7 +273,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
 
                 }
                 if (qty.equals("0") || qty.matches("0+")) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Invalid Qty number format !!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RepairBreakUpActivity.this, "Qty should not be zero", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (price.isEmpty()) {
@@ -281,7 +281,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                     return;
                 }
                 if (price.equals("0") || price.matches("0+")) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Invalid price number format !!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RepairBreakUpActivity.this, "Price should not be zero", Toast.LENGTH_LONG).show();
                     return;
                 }
                 updateRepairBreakupdetails();

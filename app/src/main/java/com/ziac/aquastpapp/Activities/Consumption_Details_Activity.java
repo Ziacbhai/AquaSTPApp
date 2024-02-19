@@ -246,7 +246,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     return;
                 }
                 if (qty.equals("0") || qty.matches("0+")) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Invalid Qty number format !!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Consumption_Details_Activity.this, "Qty should not be zero !!", Toast.LENGTH_LONG).show();
                     return;
                 }
                 updateConsumables_details();

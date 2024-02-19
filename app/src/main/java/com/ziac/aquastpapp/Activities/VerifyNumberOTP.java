@@ -58,6 +58,9 @@ public class VerifyNumberOTP extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_number_otp);
+
+        context = this;
+
         pinView = findViewById(R.id.pinview);
         NumberVerify = findViewById(R.id.numberverifyotp);
         progressBar = findViewById(R.id.progressbr);
