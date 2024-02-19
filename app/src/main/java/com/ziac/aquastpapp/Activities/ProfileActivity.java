@@ -194,6 +194,27 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+   /* protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 10 && resultCode == RESULT_OK && data != null) {
+            Uri uri = data.getData();
+            if (uri != null) {
+                // Set the URI directly to an ImageView to check if it loads properly
+                circleImageView.setImageURI(uri);
+                // Alternatively, load the bitmap and handle it
+                try {
+                    imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                 postselelectedimage();
+            } else {
+                Log.e("onActivityResult", "Image URI is null");
+            }
+        }
+    }*/
+
+
     private void postselelectedimage() {
 
         if (imageBitmap == null) {
