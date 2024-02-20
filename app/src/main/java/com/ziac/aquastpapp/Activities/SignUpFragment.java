@@ -188,7 +188,7 @@ public class SignUpFragment extends Fragment {
 
     }
 
-    private void getstates() {
+ /*   private void getstates() {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         //String baseurl="http://192.168.1.4/AquaSTP/api/List/GetStates";
@@ -210,8 +210,8 @@ public class SignUpFragment extends Fragment {
                         // getting the state name from the object
                         statename.set_name(e.getString("state_name"));
                         statename.set_code(e.getString("state_code"));
-                       /* Log.d("YourTag", "State Name: " + statename.get_name());
-                        Log.d("YourTag", "State Code: " + statename.get_code());*/
+                       *//* Log.d("YourTag", "State Name: " + statename.get_name());
+                        Log.d("YourTag", "State Code: " + statename.get_code());*//*
 
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
@@ -228,7 +228,51 @@ public class SignUpFragment extends Fragment {
         });
         queue.add(jsonArrayrequest);
 
+    }*/
+
+    private void getstates() {
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        //String baseurl="http://192.168.1.4/AquaSTP/api/List/GetStates";
+        JsonArrayRequest jsonArrayrequest = new JsonArrayRequest(Request.Method.GET, urlGetStates, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Global.statearraylist = new ArrayList<zList>();
+                statename = new zList();
+
+                if (response.length() > 0) {
+                    JSONObject e = null;
+                    try {
+                        // Accessing the first element assuming there's only one element
+                        e = response.getJSONObject(0);
+                    } catch (JSONException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    if (e != null) {
+                        statename = new zList();
+                        try {
+                            // getting the state name from the object
+                            statename.set_name(e.getString("state_name"));
+                            statename.set_code(e.getString("state_code"));
+                       /* Log.d("YourTag", "State Name: " + statename.get_name());
+                        Log.d("YourTag", "State Code: " + statename.get_code());*/
+
+                        } catch (JSONException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        Global.statearraylist.add(statename);
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(jsonArrayrequest);
     }
+
 
     private void statespopup() {
 

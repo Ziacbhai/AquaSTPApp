@@ -49,12 +49,11 @@ public class Global {
 
     public static SharedPreferences sharedPreferences;
     public static SharedPreferences.Editor editor;
-
     private static Picasso picassoInstance;
     //Server url
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
-    public static String baseurl = "http://192.168.1.17:9396/";
+    public static String baseurl = "http://192.168.1.16:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
     //Pump_Motor
@@ -146,7 +145,6 @@ public class Global {
     public static String api_Repair_List_Get_Units = baseurl + "api/List/GetUnits?";
     public static ArrayList<zList> statearraylist;
     public static ArrayList<DailyLogClass> dailyLogClassArrayList;
-
 
     public static ArrayList<zList> cityarraylist;
     public static ArrayList<StpModelClass> StpList;
