@@ -16,7 +16,7 @@ import com.ziac.aquastpapp.R;
 
 public class RecoveryPasswordWith extends AppCompatActivity {
 
-    CardView Rcemail, Rcusername, Rcmobile;
+    CardView Resetemail, Resetusername, Resetmobile;
     ImageView back_btn;
     Context context;
 
@@ -27,9 +27,9 @@ public class RecoveryPasswordWith extends AppCompatActivity {
         setContentView(R.layout.activity_recovery_password_with);
 
         context = this;
-        Rcemail = findViewById(R.id.useremail);
-        Rcusername = findViewById(R.id.usernamer);
-        Rcmobile = findViewById(R.id.mobiler);
+        Resetemail = findViewById(R.id.useremail);
+        Resetusername = findViewById(R.id.usernamer);
+        Resetmobile = findViewById(R.id.mobiler);
         back_btn = findViewById(R.id.repair_back_btn);
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +38,7 @@ public class RecoveryPasswordWith extends AppCompatActivity {
             }
         });
 
-        Rcemail.setOnClickListener(new View.OnClickListener() {
+        Resetemail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RecoveryPasswordWith.this,ResetPasswordEmail.class));
@@ -46,7 +46,7 @@ public class RecoveryPasswordWith extends AppCompatActivity {
             }
         });
 
-        Rcusername.setOnClickListener(new View.OnClickListener() {
+        Resetusername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RecoveryPasswordWith.this,ResetPasswordUserName.class));
@@ -55,7 +55,7 @@ public class RecoveryPasswordWith extends AppCompatActivity {
             }
         });
 
-        Rcmobile.setOnClickListener(new View.OnClickListener() {
+        Resetmobile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RecoveryPasswordWith.this,ResetPasswordNumber.class));

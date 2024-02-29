@@ -101,7 +101,6 @@
                                 android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ."
                                 android:inputType="textCapSentences|text"
                                 android:maxLength="50"
-
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black" />
@@ -358,8 +357,6 @@
 
 
                         </LinearLayout>
-
-
                     </androidx.cardview.widget.CardView>
 
 

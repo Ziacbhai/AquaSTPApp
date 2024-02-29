@@ -53,8 +53,6 @@ public class ResetPasswordUserName extends AppCompatActivity {
         back_btn = findViewById(R.id.back_btn);
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-
         UserGetotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +76,6 @@ public class ResetPasswordUserName extends AppCompatActivity {
     }
 
     private void postDataUsingVolley() {
-
         String urlUsername = Global.forgotpasswordurl;
         progressBar.setVisibility(View.VISIBLE);
 

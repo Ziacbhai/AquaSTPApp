@@ -95,9 +95,9 @@ public class ResetPasswordNumber extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     String error = respObj.getString("error");
 
-                    Global.editor = Global.sharedPreferences.edit();
+                    /*Global.editor = Global.sharedPreferences.edit();
                     Global.editor.putString("mobile", usermobile);
-                    Global.editor.commit();
+                    Global.editor.commit();*/
 
                     if (issuccess.equals("true")) {
                         Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(), respObj.getString("error"));

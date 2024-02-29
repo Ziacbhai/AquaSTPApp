@@ -42,7 +42,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
     String otp, Newpassword;
     TextView Resendotp;
     PinView mPinView;
-    private boolean passwordvisible ;
+    private boolean passwordvisible;
     TextView UserVerify;
     ProgressBar progressBar;
     Context context;
@@ -54,10 +54,9 @@ public class VerifyUserNameOTP extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_user_name_otp);
-
+        context = this;
         mPinView = findViewById(R.id.pinview);
         UserVerify = findViewById(R.id.userverifyotp);
-
 
 
         progressBar = findViewById(R.id.progressbr);
@@ -97,7 +96,6 @@ public class VerifyUserNameOTP extends AppCompatActivity {
                 // getting the PinView data
                 Newpassword = UNewpwd.getText().toString();
                 otp = mPinView.getText().toString();
-
                 if (!TextUtils.isEmpty(otp)) {
                     // Check if other required fields are not empty
                     if (!TextUtils.isEmpty(Newpassword)) {
@@ -158,7 +156,6 @@ public class VerifyUserNameOTP extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-
                 params.put("otp", otp);
                 params.put("FPType", "U");
                 params.put("NewPassword", Newpassword);

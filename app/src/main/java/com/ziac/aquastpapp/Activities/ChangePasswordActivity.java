@@ -154,7 +154,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     private void updatepassword() {
-
         String url = Global.changetpasswordurl;
         progressBar.setVisibility(View.VISIBLE);
         // creating a new variable for our request queue

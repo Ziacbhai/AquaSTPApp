@@ -53,7 +53,7 @@ public class Global {
     //Server url
     //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
-    public static String baseurl = "http://192.168.1.16:9396/";
+    public static String baseurl = "http://192.168.1.20:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
     //Pump_Motor
@@ -61,7 +61,6 @@ public class Global {
     public static String StartMotorPumpsUrl = baseurl + "api/DailyLog/StartMotorPumps?";
     public static String StopMotorPumpsUrl = baseurl + "api/DailyLog/StopMotorPumps?";
     public static String RolloverMotorPumpsUrl = baseurl + "api/DailyLog/RolloverMotorPumps?";
-
     //Blower
     public static String GetDailyLogBlowers = baseurl + "api/DailyLog/GetBlowers?";
     public static String StartBlowerUrl = baseurl + "api/DailyLog/StartBlower?";

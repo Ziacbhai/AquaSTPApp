@@ -194,27 +194,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-   /* protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10 && resultCode == RESULT_OK && data != null) {
-            Uri uri = data.getData();
-            if (uri != null) {
-                // Set the URI directly to an ImageView to check if it loads properly
-                circleImageView.setImageURI(uri);
-                // Alternatively, load the bitmap and handle it
-                try {
-                    imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                 postselelectedimage();
-            } else {
-                Log.e("onActivityResult", "Image URI is null");
-            }
-        }
-    }*/
-
-
     private void postselelectedimage() {
 
         if (imageBitmap == null) {
@@ -271,7 +250,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-
                 params.put("fileName", image);
                 Log.d("YourTag", "Key: fileName, Value: " + image);
                 return params;
@@ -289,7 +267,6 @@ public class ProfileActivity extends AppCompatActivity {
         email = Person_email.getText().toString();
 
         if (personname.isEmpty() || mobile.isEmpty() || email.isEmpty()) {
-
             Toast.makeText(ProfileActivity.this, "Complete the information and try again !!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -362,7 +339,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void getuserdetails() {
-
         String url = Global.getuserprofileurl;
         RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
 
