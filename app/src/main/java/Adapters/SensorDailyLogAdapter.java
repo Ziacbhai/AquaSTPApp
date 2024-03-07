@@ -69,9 +69,7 @@ public class SensorDailyLogAdapter extends RecyclerView.Adapter<SensorDailyLogAd
         String formattedValue = removeTrailingZeros(rawValue);
         holder.Sensor_reading.setText(formattedValue);
 
-        double rawValue1 = Double.parseDouble(sensorsModelClassList.get(position).getSensor_total());
-        String formattedValue1 = removeTrailingZeros(rawValue1);
-        holder.Sensor_total.setText(formattedValue1);
+
 
         holder.Sensor_image.setOnClickListener(new View.OnClickListener() {
             @Override
