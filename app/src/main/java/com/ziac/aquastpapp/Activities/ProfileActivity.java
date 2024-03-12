@@ -217,7 +217,6 @@ public class ProfileActivity extends AppCompatActivity {
 
                 } else {
                     if (resp.has("error")) {
-
                         String errorMessage = resp.getString("error");
                         Toast.makeText(ProfileActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                         Toast.makeText(ProfileActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
@@ -230,11 +229,9 @@ public class ProfileActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
 
             }
         }) {
@@ -251,7 +248,7 @@ public class ProfileActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("fileName", image);
-                Log.d("YourTag", "Key: fileName, Value: " + image);
+                //Log.d("YourTag", "Key: fileName, Value: " + image);
                 return params;
             }
         };

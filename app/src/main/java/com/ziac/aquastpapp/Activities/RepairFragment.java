@@ -207,7 +207,6 @@ public class RepairFragment extends Fragment {
                 dialog.dismiss();
             }
         });
-
         Cancel_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

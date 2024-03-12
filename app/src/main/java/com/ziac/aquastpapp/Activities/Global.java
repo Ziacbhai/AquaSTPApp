@@ -66,26 +66,19 @@ public class Global {
     public static String StartBlowerUrl = baseurl + "api/DailyLog/StartBlower?";
     public static String StopBlowerUrl = baseurl + "api/DailyLog/StopBlower?";
     public static String RolloverBlowerUrl = baseurl + "api/DailyLog/RolloverBlower?";
-
     //Meter
     public static String GetDailyLogMeter = baseurl + "api/DailyLog/GetMeters?";
-
     public static String DailyLogUpdateMeterReadings = baseurl + "api/DailyLog/UpdateMeterReadings";
-
     //Filters
     public static String GetDailyLogFilters = baseurl + "api/DailyLog/GetFilters?";
     /* public static String FilterDaily_log_image = baseurl + "WebsiteData/DailyLog/Filters/";*/
-
     public static String GetDailyLogFilterImageUpload = baseurl + "api/DailyLog/FilterImageUpload";
-
     //Sensors
     public static String GetDailyLogSensors = baseurl + "api/DailyLog/GetSensors?";
     public static String DailyLogUpdateSensorsReadings = baseurl + "api/DailyLog/UpdateSensorsReadings";
     public static String DailyLogSensorsImageUpload = baseurl + "api/DailyLog/SensorsImageUpload";
-
     //Handover Remarks;
     public static String DailyLogUpdateHandOverRemark = baseurl + "api/DailyLog/UpdateHandOverRemarks?";
-
     public static String userImageurl = baseurl + "WebsiteData/Users/";
     public static String incident_image = baseurl + "WebsiteData/IncidentReportDocs/";
     /* public static String repair_images = baseurl+"WebsiteData/RepairDocs/";*/
