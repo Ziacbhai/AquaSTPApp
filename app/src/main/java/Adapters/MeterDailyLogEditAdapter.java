@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.NetworkError;
@@ -146,7 +147,8 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView Meter_equip_name, Meter_save;
+        TextView Meter_equip_name;
+        AppCompatButton Meter_save;
         EditText Meter_reading_edit;
 
         public ViewHolder(@NonNull View itemView) {

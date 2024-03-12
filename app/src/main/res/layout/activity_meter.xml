@@ -283,11 +283,10 @@
             android:layout_weight="0.8"
             android:gravity="center"
             android:padding="5dp"
-            android:text="Reading"
+            android:text="Time"
             android:textColor="#fff"
             android:textSize="12dp"
             android:textStyle="bold" />
-
 
         <View
             android:layout_width="1dp"

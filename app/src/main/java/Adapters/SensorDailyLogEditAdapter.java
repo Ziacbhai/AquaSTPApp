@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.NetworkError;
@@ -73,14 +74,15 @@ public class SensorDailyLogEditAdapter extends RecyclerView.Adapter<SensorDailyL
         });
 
     }
-    private void DailyLogSensors(String enteredValue,int position) {
+
+    private void DailyLogSensors(String enteredValue, int position) {
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.DailyLogUpdateSensorsReadings;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                   JSONObject  jsonObject = new JSONObject(response);
+                    JSONObject jsonObject = new JSONObject(response);
                     boolean success = jsonObject.getBoolean("success");
                     String error = jsonObject.getString("error");
 
@@ -112,7 +114,7 @@ public class SensorDailyLogEditAdapter extends RecyclerView.Adapter<SensorDailyL
                     Toast.makeText(context, "Parse Error", Toast.LENGTH_LONG).show();
                 }
             }
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
@@ -120,13 +122,14 @@ public class SensorDailyLogEditAdapter extends RecyclerView.Adapter<SensorDailyL
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("com_code", Global.sharedPreferences.getString("com_code", null));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", null));
                 params.put("tstp6_code", sensorsModelClasses.get(position).getSensor_tstp6_code());
-                params.put("reading_value",enteredValue);
+                params.put("reading_value", enteredValue);
                 System.out.println(params);
                 return params;
             }
@@ -143,7 +146,8 @@ public class SensorDailyLogEditAdapter extends RecyclerView.Adapter<SensorDailyL
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView Sensor_equip_name,Sensor_save;
+        TextView Sensor_equip_name;
+        AppCompatButton Sensor_save;
         EditText Sensor_reading_edit;
 
         public Viewholder(@NonNull View itemView) {

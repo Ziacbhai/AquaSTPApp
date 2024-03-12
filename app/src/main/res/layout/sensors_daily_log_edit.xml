@@ -47,7 +47,7 @@
             android:layout_height="35dp"
             android:background="#000" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/sensor_save"
             android:layout_width="0dp"
             android:layout_height="match_parent"

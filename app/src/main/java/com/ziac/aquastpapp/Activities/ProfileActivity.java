@@ -349,9 +349,7 @@ public class ProfileActivity extends AppCompatActivity {
                 String mobile = respObj.getString("user_mobile");
                 String mail = respObj.getString("user_email");
                 String refcode = respObj.getString("ref_code");
-
                 //  Log.d("MyTag", "Profile image: " + user_image);*/
-
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                 Global.editor = Global.sharedPreferences.edit();
                 Global.editor.putString("user_image", user_image);
