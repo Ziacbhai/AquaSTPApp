@@ -30,6 +30,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -169,6 +170,16 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
                 // Prepare bitmap loading
+            }
+        });
+        builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    dialog.dismiss();
+                    return true;
+                }
+                return false;
             }
         });
     }
