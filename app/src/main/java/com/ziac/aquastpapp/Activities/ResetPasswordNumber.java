@@ -60,14 +60,11 @@ public class ResetPasswordNumber extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 usermobile = ForgotNumber.getText().toString();
-                // progressBar.setVisibility(View.VISIBLE);
-//                 if (mobile.isEmpty()) {
-//                     ForgotPass.setError("Please Enter Password");
-//                     ForgotPass.requestFocus();
-//                    return;
-//                } else if(mobile.length() < 10 ){
-//                    Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(), "Mobile number should not be less than 10 digits !!");
-//                    return;}
+                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                Global.editor = Global.sharedPreferences.edit();
+                Global.editor.putString("fpmobilenumber", usermobile);
+                Global.editor.commit();
+
                 postDataUsingVolley();
             }
         });
@@ -95,9 +92,6 @@ public class ResetPasswordNumber extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     String error = respObj.getString("error");
 
-                    /*Global.editor = Global.sharedPreferences.edit();
-                    Global.editor.putString("mobile", usermobile);
-                    Global.editor.commit();*/
 
                     if (issuccess.equals("true")) {
                         Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(), respObj.getString("error"));

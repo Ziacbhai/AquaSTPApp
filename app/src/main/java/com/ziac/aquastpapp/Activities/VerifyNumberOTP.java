@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -44,10 +45,10 @@ import java.util.Map;
 
 public class VerifyNumberOTP extends AppCompatActivity {
     private boolean passwordvisible = false;
-    String otp, Newpassword;
+    String otp, Newpassword,show_number;
 
     PinView pinView;
-    TextView NumberVerify,Resendotp;
+    TextView NumberVerify,Resendotp,Show_number;
     ProgressBar progressBar;
 
     private TextInputEditText Newpwd;
@@ -65,6 +66,11 @@ public class VerifyNumberOTP extends AppCompatActivity {
         NumberVerify = findViewById(R.id.numberverifyotp);
         progressBar = findViewById(R.id.progressbr);
         Newpwd = findViewById(R.id.newpassword);
+        Show_number = findViewById(R.id.shownumber);
+
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        show_number = Global.sharedPreferences.getString("fpmobilenumber", "");
+        Show_number.setText(show_number);
 
         Resendotp = findViewById(R.id.resendNotp);
         Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyNumberOTP.this, ResetPasswordNumber.class)));
@@ -97,6 +103,8 @@ public class VerifyNumberOTP extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
 
         NumberVerify.setOnClickListener(new View.OnClickListener() {
@@ -171,10 +179,9 @@ public class VerifyNumberOTP extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("otp", otp);
-                params.put("Mobile", Global.sharedPreferences.getString("mobile", ""));
+                params.put("Mobile", Global.sharedPreferences.getString("fpmobilenumber", ""));
                 params.put("FPType", "M");
                 params.put("NewPassword", Newpassword);
-
                 Log.d("params", params.toString());
 
                 return params;

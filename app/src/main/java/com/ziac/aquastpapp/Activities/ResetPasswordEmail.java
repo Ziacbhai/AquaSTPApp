@@ -61,9 +61,12 @@ public class ResetPasswordEmail extends AppCompatActivity {
                     Forgotemail.setError("Please Enter Email");
                     Forgotemail.requestFocus();
                     return;
-                } else {
-
                 }
+
+                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                Global.editor = Global.sharedPreferences.edit();
+                Global.editor.putString("fpemail", useremail);
+                Global.editor.commit();
                 postDataUsingVolley();
 
             }
@@ -95,11 +98,6 @@ public class ResetPasswordEmail extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     String error = respObj.getString("error");
 
-                    Global.editor = Global.sharedPreferences.edit();
-                    Global.editor.putString("user_email", useremail);
-                    //Global.editor.remove("Email").commit();
-
-                    Global.editor.commit();
 
                     if (issuccess.equals("true")) {
                         Global.customtoast(ResetPasswordEmail.this, getLayoutInflater(), respObj.getString("error"));
@@ -130,7 +128,6 @@ public class ResetPasswordEmail extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("UserName", "");
-                // params.put("Email", email);
                 params.put("Mobile", "");
                 params.put("FPType", "E");
                 params.put("user_email", useremail);

@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -43,10 +44,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VerifyEmailOTP extends AppCompatActivity {
-    String otp, Newpassword;
+    String otp, Newpassword, email_show;
     TextView Resendotp;
     PinView Enter_pinnumber;
-    TextView EmailVerify;
+    TextView EmailVerify, Email_show;
     ProgressBar progressBar;
     ImageView back_btn;
     private boolean passwordvisible = false;
@@ -64,9 +65,15 @@ public class VerifyEmailOTP extends AppCompatActivity {
         new OTP_Receiver().setPinView(Enter_pinnumber);
         requestSMSPermission();
         EmailVerify = findViewById(R.id.emailverifyotp);
+        Email_show = findViewById(R.id.resetemail);
         progressBar = findViewById(R.id.progressbr);
         EnterNewpwd = findViewById(R.id.enternewpassword);
         Resendotp = findViewById(R.id.resendEotp);
+
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        email_show = Global.sharedPreferences.getString("pfemail", "");
+        Email_show.setText(email_show);
+
 
         Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyEmailOTP.this, ResetPasswordEmail.class)));
         EnterNewpwd.setOnTouchListener((v, event) -> {
@@ -169,10 +176,8 @@ public class VerifyEmailOTP extends AppCompatActivity {
                 params.put("FPType", "E");
                 params.put("UserName", "");
                 params.put("NewPassword", Newpassword);
-                params.put("user_email", Global.sharedPreferences.getString("user_email", ""));
+                params.put("user_email", Global.sharedPreferences.getString("pfemail", ""));
                 Log.d("params", params.toString());
-                // params.put("NewPassword", "Siva126@Ziac");
-                // params.put("UserName", username);
                 return params;
             }
         };

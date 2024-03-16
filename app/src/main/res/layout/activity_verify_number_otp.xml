@@ -81,7 +81,16 @@
             android:background="@drawable/custom_update_outerline"
             android:gravity="center"
             android:padding="5dp"
-            android:text="You will get a OTP via EMAIL &amp; MOBILE"
+            android:text="You will get a OTP via MOBILE"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/shownumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="email"
             android:textSize="16sp"
             android:textStyle="bold" />
 

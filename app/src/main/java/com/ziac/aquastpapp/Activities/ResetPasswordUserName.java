@@ -62,6 +62,10 @@ public class ResetPasswordUserName extends AppCompatActivity {
                     Forgotusername.requestFocus();
                     return;
                 }
+                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                Global.editor = Global.sharedPreferences.edit();
+                Global.editor.putString("fpusername", username);
+                Global.editor.commit();
                 postDataUsingVolley();
             }
         });
@@ -90,9 +94,6 @@ public class ResetPasswordUserName extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     String error = respObj.getString("error");
 
-                    Global.editor = Global.sharedPreferences.edit();
-                    Global.editor.putString("username", username);
-                    Global.editor.commit();
 
                     if (issuccess.equals("true")) {
                         Global.customtoast(ResetPasswordUserName.this, getLayoutInflater(), respObj.getString("error"));

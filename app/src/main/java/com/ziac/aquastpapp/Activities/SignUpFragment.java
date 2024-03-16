@@ -198,26 +198,26 @@ public class SignUpFragment extends Fragment {
 
                 if (response.length() > 0) {
                     JSONObject e = null;
-                    try {
-                        // Accessing the first element assuming there's only one element
-                        e = response.getJSONObject(0);
-                    } catch (JSONException ex) {
-                        throw new RuntimeException(ex);
-                    }
-
-                    if (e != null) {
-                        statename = new zList();
+                    for(int i = 0; i < response.length(); i++){
                         try {
-                            // getting the state name from the object
-                            statename.set_name(e.getString("state_name"));
-                            statename.set_code(e.getString("state_code"));
-                       /* Log.d("YourTag", "State Name: " + statename.get_name());
-                        Log.d("YourTag", "State Code: " + statename.get_code());*/
-
+                            e = response.getJSONObject(i);
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
-                        Global.statearraylist.add(statename);
+                        if (e != null) {
+                            statename = new zList();
+                            try {
+                                // getting the state name from the object
+                                statename.set_name(e.getString("state_name"));
+                                statename.set_code(e.getString("state_code"));
+                           /* Log.d("YourTag", "State Name: " + statename.get_name());
+                            Log.d("YourTag", "State Code: " + statename.get_code());*/
+
+                            } catch (JSONException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            Global.statearraylist.add(statename);
+                        }
                     }
                 }
             }
@@ -227,6 +227,11 @@ public class SignUpFragment extends Fragment {
 
             }
         });
+        jsonArrayrequest.setRetryPolicy(new DefaultRetryPolicy(
+                0, // timeout in milliseconds
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
         queue.add(jsonArrayrequest);
     }
 
