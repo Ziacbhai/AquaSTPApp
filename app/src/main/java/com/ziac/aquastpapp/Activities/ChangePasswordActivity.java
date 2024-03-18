@@ -122,7 +122,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 newpassword = Newpwd.getText().toString();
                 repeatmpassword = Repeatpwd.getText().toString();
                 username = Newpwd.getText().toString();
-                repeatmpassword = Repeatpwd.getText().toString();
                 if (newpassword.isEmpty()) {
                     Newpwd.setError("Please enter the New Password");
                     Newpwd.requestFocus();
@@ -156,7 +155,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private void updatepassword() {
         String url = Global.changetpasswordurl;
         progressBar.setVisibility(View.VISIBLE);
-        // creating a new variable for our request queue
         RequestQueue queue = Volley.newRequestQueue(ChangePasswordActivity.this);
         progressBar.setVisibility(View.GONE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

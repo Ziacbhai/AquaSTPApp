@@ -94,7 +94,6 @@ public class ResetPasswordUserName extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     String error = respObj.getString("error");
 
-
                     if (issuccess.equals("true")) {
                         Global.customtoast(ResetPasswordUserName.this, getLayoutInflater(), respObj.getString("error"));
                         startActivity(new Intent(ResetPasswordUserName.this, VerifyUserNameOTP.class));
@@ -102,7 +101,6 @@ public class ResetPasswordUserName extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         Global.customtoast(ResetPasswordUserName.this, getLayoutInflater(), respObj.getString("error"));
                         // Show a toast message for wrong username or password
-
                     }
 
                 } catch (JSONException e) {

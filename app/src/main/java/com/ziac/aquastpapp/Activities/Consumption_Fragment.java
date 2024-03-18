@@ -149,7 +149,6 @@ public class Consumption_Fragment extends Fragment {
     private void user_topcard(View view) {
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         siteaddress = sharedPreferences.getString("site_address", "");
