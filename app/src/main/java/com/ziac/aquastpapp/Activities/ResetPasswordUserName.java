@@ -64,7 +64,7 @@ public class ResetPasswordUserName extends AppCompatActivity {
                 }
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                 Global.editor = Global.sharedPreferences.edit();
-                Global.editor.putString("fpusername", username);
+                Global.editor.putString("user_name", username);
                 Global.editor.commit();
                 postDataUsingVolley();
             }

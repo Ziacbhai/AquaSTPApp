@@ -65,7 +65,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
         new OTP_Receiver().setPinView(Enter_pinnumber);
         requestSMSPermission();
         EmailVerify = findViewById(R.id.emailverifyotp);
-        Email_show = findViewById(R.id.resetemail);
+        Email_show = findViewById(R.id.showemail);
         progressBar = findViewById(R.id.progressbr);
         EnterNewpwd = findViewById(R.id.enternewpassword);
         Resendotp = findViewById(R.id.resendEotp);
@@ -176,8 +176,8 @@ public class VerifyEmailOTP extends AppCompatActivity {
                 params.put("FPType", "E");
                 params.put("UserName", "");
                 params.put("NewPassword", Newpassword);
-                params.put("user_email", Global.sharedPreferences.getString("pfemail", ""));
-                Log.d("params", params.toString());
+                params.put("user_email", Global.sharedPreferences.getString("user_email", ""));
+               // Log.d("params", params.toString());
                 return params;
             }
         };

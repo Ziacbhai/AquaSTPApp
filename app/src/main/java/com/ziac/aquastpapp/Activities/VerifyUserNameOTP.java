@@ -159,7 +159,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
                 params.put("otp", otp);
                 params.put("FPType", "U");
                 params.put("NewPassword", Newpassword);
-                params.put("UserName", Global.sharedPreferences.getString("fpusername", ""));
+                params.put("UserName", Global.sharedPreferences.getString("user_name", ""));
                 Log.d("params", params.toString());
                 return params;
             }

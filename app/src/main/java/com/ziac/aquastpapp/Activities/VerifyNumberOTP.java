@@ -179,7 +179,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("otp", otp);
-                params.put("Mobile", Global.sharedPreferences.getString("fpmobilenumber", ""));
+                params.put("Mobile", Global.sharedPreferences.getString("user_mobile", ""));
                 params.put("FPType", "M");
                 params.put("NewPassword", Newpassword);
                 Log.d("params", params.toString());

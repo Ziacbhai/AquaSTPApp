@@ -65,7 +65,7 @@ public class ResetPasswordEmail extends AppCompatActivity {
 
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                 Global.editor = Global.sharedPreferences.edit();
-                Global.editor.putString("fpemail", useremail);
+                Global.editor.putString("user_email", useremail);
                 Global.editor.commit();
                 postDataUsingVolley();
 

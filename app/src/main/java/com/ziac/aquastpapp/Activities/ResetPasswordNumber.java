@@ -52,7 +52,6 @@ public class ResetPasswordNumber extends AppCompatActivity {
 
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //   String mobileno = Global.sharedPreferences.getString("mobile", "");
-
         // FMobile.setText(mobileno);
         progressBar = findViewById(R.id.progressbr);
 
@@ -62,7 +61,7 @@ public class ResetPasswordNumber extends AppCompatActivity {
                 usermobile = ForgotNumber.getText().toString();
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                 Global.editor = Global.sharedPreferences.edit();
-                Global.editor.putString("fpmobilenumber", usermobile);
+                Global.editor.putString("user_mobile", usermobile);
                 Global.editor.commit();
 
                 postDataUsingVolley();
