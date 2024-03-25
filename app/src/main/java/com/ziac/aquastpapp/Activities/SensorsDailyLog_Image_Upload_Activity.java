@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class SensorsDailyLog_Image_Upload_Activity extends AppCompatActivity {
     LinearLayout Sensor_image_Upload;
     Context context;
     SensorsModelClass sensorsModelClass;
+    ImageView bck_btn;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -51,12 +53,20 @@ public class SensorsDailyLog_Image_Upload_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_sensors_daily_log_image_upload);
 
         Sensor_image_Upload = findViewById(R.id.sensor_image_upload);
+        bck_btn = findViewById(R.id.bck_btn);
         context = this;
 
         Sensor_image_Upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openCamera();
+            }
+        });
+
+        bck_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
