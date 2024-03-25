@@ -2,8 +2,11 @@ package com.ziac.aquastpapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,17 +22,21 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.webkit.PermissionRequest;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -42,6 +49,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.single.PermissionListener;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONArray;
@@ -49,6 +61,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -59,12 +73,24 @@ import java.util.Map;
 import Adapters.Incident_documents_upload_Adapter;
 import Models.Document;
 import Models.IncidentsClass;
+import Models.VolleyMultipartRequest;
 
 public class Incident_documents_upload_Activity extends AppCompatActivity {
+
+    private static final int REQUEST_CODE = 1;
+    private static final int PERMISSION_REQUEST_CODE = 2;
+
+    private static final int REQUEST_CODE_FILE = 1;
+    private static final int REQUEST_CODE_CAMERA = 2;
+
+    List<IncidentsClass> FileList;
+    InputStream inputStream;
+    Context context;
+    List<File> pdffiles;
     Bitmap documentBitmap;
-    private List<IncidentsClass> fileList;
+
     ImageView upload;
-    Uri pdfUri ;
+    Uri pdfUri;
     ProgressDialog dialog;
     private Incident_documents_upload_Adapter documentAdapter;
     IncidentsClass incidentsClass;
@@ -74,7 +100,7 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     private static final int REQUEST_PICK_DOCUMENT = 1;
-    Context context;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -83,80 +109,208 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_incident_documents_uploud);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
                 PackageManager.PERMISSION_GRANTED);
-        context = this;
-        In_doc_uploadbtn = findViewById(R.id.in_doc_uploadbtn);
-        //upload = findViewById(R.id.in_upload);
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+        In_doc_uploadbtn = findViewById(R.id.in_doc_uploadbtn);
+        upload = findViewById(R.id.in_upload);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
-
         In_doc_uploadbtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.R)
             @Override
             public void onClick(View v) {
-                showDocumentPicker();
+                if (ContextCompat.checkSelfPermission(Incident_documents_upload_Activity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(Incident_documents_upload_Activity.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            PERMISSION_REQUEST_CODE);
+                }
+                openFileChooser();
+
+
             }
         });
+
 
         Incident_Documents_Rv = findViewById(R.id.incident_Documents_Rv);
         Incident_Documents_Rv.setLayoutManager(new LinearLayoutManager(this));
         Incident_Documents_Rv.setHasFixedSize(true);
         Incident_Documents_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        getIncidentDocuments();
+
+
+        runtimepermission();
+        //getdocumentslist();
 
     }
+    private void runtimepermission() {
+        Dexter.withContext(context).withPermission(Manifest.permission.READ_EXTERNAL_STORAGE).withListener(new PermissionListener() {
+            @Override
+            public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+
+            }
+
+            @Override
+            public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+
+                Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(com.karumi.dexter.listener.PermissionRequest permissionRequest, PermissionToken permissionToken) {
+
+            }
+
+        }).check();
+    }
+
+    private void openFileChooser() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,application/*");
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            dialog = new ProgressDialog(this);
-            dialog.setMessage("Uploading");
-            dialog.show();
-            pdfUri = data.getData();
-            uploadToDatabase(Uri.parse(String.valueOf(pdfUri)));
+
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            try {
+                Uri selectedFileUri = data.getData();
+                uploadDocs(selectedFileUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    private void showDocumentPicker() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        String[] mimeTypes = {"application/pdf", "text/plain", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"};
-        intent.setType("*/*");
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-        startActivityForResult(intent, REQUEST_PICK_DOCUMENT);
+    private void uploadDocs(Uri fileUri) throws IOException {
+        String apiUrl = Global.Incident_UploadDocuments;
+        // Ensure fileUri is not null
+        if (fileUri == null) {
+            Toast.makeText(this, "Invalid fileUri", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Get the file path from the URI
+        String filePath = getPathFromUri(fileUri);
+        // Check if the file path is valid
+        if (filePath == null) {
+            Toast.makeText(this, "Invalid file path", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        File file = new File(filePath);
+        if (file.exists()) {
+            inputStream = getContentResolver().openInputStream(fileUri);
+        } else {
+            Toast.makeText(this, "File does not exist", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+        if (inputStream != null) {
+            Map<String, String> params = new HashMap<>();
+            params.put("incident_code", Global.incidentsClass.getIncident_Code());
+            params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
+
+
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+            VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(apiUrl, file, inputStream,params,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            // Handle the server response
+                            Log.d("Response", response);
+                            JSONObject resp;
+                            try {
+                                resp = new JSONObject(response);
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            try {
+                                if (resp.getBoolean("success")) {
+                                    String Message = resp.getString("success");
+                                    Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "File uploaded successfully");
+                                    //getdocumentslist();
+                                    // Global.customtoast(ProfileActivity.this, getLayoutInflater(),Message);
+
+
+                                } else {
+                                    if (resp.has("error")) {
+
+                                        String errorMessage = resp.getString("error");
+                                        // Toast.makeText(UploadFileActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Incident_documents_upload_Activity.this, "File upload failed", Toast.LENGTH_SHORT).show();
+
+
+                                    } else {
+                                    }
+                                }
+                            } catch (JSONException e) {
+
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // Handle errors
+                            Log.e("Error", error.toString());
+                        }
+                    });
+
+            multipartRequest.setTag("uploadRequest");
+
+            multipartRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    0, // timeout in milliseconds
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            ));
+
+            requestQueue.add(multipartRequest);
+
+
+
+        } else {
+            // Handle the case where the InputStream is null
+            Log.e("UploadDocs", "Failed to open InputStream from fileUri");
+        }
+    }
+
+    private String getPathFromUri(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+
+        if (cursor != null) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            String filePath = cursor.getString(column_index);
+            cursor.close();
+            return filePath;
+        } else {
+            // Handle the case where the cursor is null
+            return null;
+        }
     }
 
 
-    private void uploadToDatabase(Uri pdfUri) {
-        String url = Global.Incident_UploadDocuments; // Replace with your server URL
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                response -> {
-                    // Handle the response from the server
-                    dialog.dismiss();
-                    Toast.makeText(Incident_documents_upload_Activity.this, "PDF uploaded to database", Toast.LENGTH_SHORT).show();
-                },
-                error -> {
-                    dialog.dismiss();
-                    Toast.makeText(Incident_documents_upload_Activity.this, "Error uploading to database", Toast.LENGTH_SHORT).show();
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("fileName", pdfUri.toString());
-                params.put("incident_code", Global.sharedPreferences.getString("incident_code", ""));
-                params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
-                return params;
-            }
-        };
 
-        Volley.newRequestQueue(this).add(stringRequest);
-    }
-    private void getIncidentDocuments() {
+
+
+
+
+
+  /*  private void getdocumentslist () {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.Get_Incidents_Details + "incident_code=" + Global.sharedPreferences.getString("incident_code",
                 "0") + "&file_type=" + "D";
@@ -218,13 +372,50 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
 
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                /*params.put("incident_code", Global.sharedPreferences.getString("incident_code", "0"));
-                params.put("file_type", "I");*/
+                *//*params.put("incident_code", Global.sharedPreferences.getString("incident_code", "0"));
+                params.put("file_type", "I");*//*
                 return params;
             }
 
         };
         queue.add(jsonObjectRequest);
+    }*/
+
+  /*  @SuppressLint("Range")
+    private File createTempFileFromInputStream(InputStream inputStream) throws IOException {
+        // Create a temporary file
+        File tempFile = File.createTempFile("temp_file", null);
+
+        // Write the InputStream content to the temporary file
+        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                fos.write(buffer, 0, bytesRead);
+            }
+        }
+
+        return tempFile;
     }
 
+    @SuppressLint("Range")
+    private String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            try (Cursor cursor = getContentResolver().query(uri, null, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            }
+        } else if (uri.getScheme().equals("file")) {
+            result = uri.getLastPathSegment();
+        }
+        return result;
+    }*/
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

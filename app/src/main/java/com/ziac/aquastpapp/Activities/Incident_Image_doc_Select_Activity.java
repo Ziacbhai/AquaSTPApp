@@ -23,7 +23,7 @@ public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
 
     Context context;
     CardView In_image_, In_docs_;
-    private ProgressDialog progressDialog;
+    ProgressDialog progressDialog;
     ImageView Repair_back_btn;
 
     @SuppressLint("MissingInflatedId")
@@ -37,7 +37,7 @@ public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
         In_image_ = findViewById(R.id.in_images_);
-        //In_docs_ = findViewById(R.id.in_docs_);
+        In_docs_ = findViewById(R.id.in_docs);
 
         Repair_back_btn = findViewById(R.id.repair_back_btn);
         Repair_back_btn.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +50,13 @@ public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Incident_Image_doc_Select_Activity.this, Incident_image_upload_Activity.class));
+            }
+        });
+
+        In_docs_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Incident_Image_doc_Select_Activity.this, Incident_documents_upload_Activity.class));
             }
         });
     }
