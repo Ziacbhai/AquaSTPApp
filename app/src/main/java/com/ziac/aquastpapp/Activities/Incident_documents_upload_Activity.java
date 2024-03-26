@@ -1,18 +1,14 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.pm.PackageManager;
 
 import android.annotation.SuppressLint;
@@ -30,23 +26,18 @@ import android.provider.OpenableColumns;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.webkit.PermissionRequest;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.karumi.dexter.Dexter;
@@ -62,6 +53,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,7 +63,6 @@ import java.util.List;
 import java.util.Map;
 
 import Adapters.Incident_documents_upload_Adapter;
-import Models.Document;
 import Models.IncidentsClass;
 import Models.VolleyMultipartRequest;
 
@@ -86,6 +77,7 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
     List<IncidentsClass> FileList;
     InputStream inputStream;
     Context context;
+    Bitmap imageBitmap;
     List<File> pdffiles;
     Bitmap documentBitmap;
 
@@ -143,7 +135,7 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
 
 
         runtimepermission();
-        //getdocumentslist();
+        getdocumentslist();
 
     }
     private void runtimepermission() {
@@ -188,13 +180,51 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
         }
     }
 
+    public String getStringPdf (Uri filepath){
+        InputStream inputStream = null;
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try {
+            inputStream =  getContentResolver().openInputStream(filepath);
+
+            byte[] buffer = new byte[1024];
+            byteArrayOutputStream = new ByteArrayOutputStream();
+
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                byteArrayOutputStream.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        byte[] pdfByteArray = byteArrayOutputStream.toByteArray();
+
+        return Base64.encodeToString(pdfByteArray, Base64.DEFAULT);
+    }
+
     private void uploadDocs(Uri fileUri) throws IOException {
         String apiUrl = Global.Incident_UploadDocuments;
+
+
+        //String documentToString = documentToString(documentBitmap);
+
+
         // Ensure fileUri is not null
         if (fileUri == null) {
             Toast.makeText(this, "Invalid fileUri", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        String documentToString = getStringPdf(fileUri);
+
 
         // Get the file path from the URI
         String filePath = getPathFromUri(fileUri);
@@ -213,10 +243,13 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
         }
 
 
-        if (inputStream != null) {
+        //if (inputStream != null) {
             Map<String, String> params = new HashMap<>();
+
+            params.put("fileName", documentToString);
             params.put("incident_code", Global.incidentsClass.getIncident_Code());
             params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
+
 
 
             RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -238,7 +271,7 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
                                 if (resp.getBoolean("success")) {
                                     String Message = resp.getString("success");
                                     Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "File uploaded successfully");
-                                    //getdocumentslist();
+                                    getdocumentslist();
                                     // Global.customtoast(ProfileActivity.this, getLayoutInflater(),Message);
 
 
@@ -279,12 +312,10 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
 
             requestQueue.add(multipartRequest);
 
-
-
-        } else {
+        /*} else {
             // Handle the case where the InputStream is null
             Log.e("UploadDocs", "Failed to open InputStream from fileUri");
-        }
+        }*/
     }
 
     private String getPathFromUri(Uri uri) {
@@ -302,15 +333,28 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
             return null;
         }
     }
+    private String documentToString(Bitmap documentFile) {
+        try {
+            FileInputStream fileInputStream = new FileInputStream(documentFile.toString());
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fileInputStream.read(buffer)) != -1) {
+                byteArrayOutputStream.write(buffer, 0, length);
+            }
+
+            byte[] documentBytes = byteArrayOutputStream.toByteArray();
+            return Base64.encodeToString(documentBytes, Base64.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
 
-
-
-
-
-
-  /*  private void getdocumentslist () {
+    private void getdocumentslist () {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.Get_Incidents_Details + "incident_code=" + Global.sharedPreferences.getString("incident_code",
                 "0") + "&file_type=" + "D";
@@ -337,9 +381,8 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
                     }
                     incidentsClass = new IncidentsClass();
                     try {
-                        incidentsClass.setImageList(e.getString("file_name"));
-                        incidentsClass.setIn_image_name(e.getString("original_file_name"));
-
+                        incidentsClass.setIn_doc_list(e.getString("file_name"));
+                        incidentsClass.setInc_doc_name(e.getString("original_file_name"));
                         // Toast.makeText(context, ""+ incidentsClass.getImageList(), Toast.LENGTH_SHORT).show();
 
 
@@ -370,18 +413,26 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
                 return headers;
             }
 
+            @NonNull
+            @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                *//*params.put("incident_code", Global.sharedPreferences.getString("incident_code", "0"));
-                params.put("file_type", "I");*//*
+                // params.put("incident_code", Global.incidentsClass.getIncident_No());
+                String documentToString = documentToString(documentBitmap);
+                params.put("fileName", documentToString);
+                params.put("incident_code", Global.incidentsClass.getIncident_Code());
+                params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
+
+
                 return params;
             }
 
+
         };
         queue.add(jsonObjectRequest);
-    }*/
+    }
 
-  /*  @SuppressLint("Range")
+    @SuppressLint("Range")
     private File createTempFileFromInputStream(InputStream inputStream) throws IOException {
         // Create a temporary file
         File tempFile = File.createTempFile("temp_file", null);
@@ -411,7 +462,7 @@ public class Incident_documents_upload_Activity extends AppCompatActivity {
             result = uri.getLastPathSegment();
         }
         return result;
-    }*/
+    }
 
     @SuppressLint("MissingSuperCall")
     @Override

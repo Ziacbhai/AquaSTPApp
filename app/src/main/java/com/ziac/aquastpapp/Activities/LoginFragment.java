@@ -24,9 +24,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -199,7 +204,24 @@ public class LoginFragment extends Fragment {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Global.customtoast(getActivity(), getLayoutInflater(), "Invalid username / password error");
+                //Global.customtoast(LoginActivity.this, getLayoutInflater(), "Invalid username / password");
+                if (error instanceof TimeoutError) {
+                    Toast.makeText(getActivity(), "Request Time-Out", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), "No Connection Found", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ServerError) {
+                    String errorResponse = new String(error.networkResponse.data);
+                    try {
+                        JSONObject errorJson = new JSONObject(errorResponse);
+                        String errorDescription = errorJson.optString("error_description", "");
+                        Global.customtoast(getActivity(), getLayoutInflater(), errorDescription);
+                    } catch (JSONException e) {
+                        Global.customtoast(getActivity(), getLayoutInflater(), "An error occurred. Please try again later.");
+                    }
+                } else if (error instanceof NetworkError) {
+                    Toast.makeText(getActivity(), "Network Error", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(getActivity(), "Parse Error", Toast.LENGTH_LONG).show();}
                 progressDialog.dismiss();
             }
         }) {

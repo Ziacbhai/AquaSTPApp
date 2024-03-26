@@ -45,15 +45,11 @@ public class VolleyMultipartRequest extends Request<String> {
         headers.put("Authorization", "Bearer " + accesstoken);
         //headers.put("test", "Bearer " + accesstoken);
 
-
         for (Map.Entry<String, String> entry : mParams.entrySet()) {
             //appendParameter(bos, entry.getKey(), entry.getValue());
             headers.put(entry.getKey(), entry.getValue());
         }
-
         headers.put("file_name", mFile.getName());
-
-
         return headers;
     }
 
