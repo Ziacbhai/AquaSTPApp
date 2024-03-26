@@ -75,5 +75,6 @@ dependencies {
     implementation ("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation ("com.karumi:dexter:6.2.2")
+    implementation ("com.android.volley:volley:1.2.1")
 
 }

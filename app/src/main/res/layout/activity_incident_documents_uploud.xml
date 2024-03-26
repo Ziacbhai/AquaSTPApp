@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <TextView
             android:id="@+id/in_doc_uploadbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,7 +86,6 @@
                     android:id="@+id/incident_Documents_Rv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
                     android:layout_marginTop="10dp" />
             </LinearLayout>
 
