@@ -74,4 +74,5 @@
     </style>
 
     <string name="title_activity_about">AboutActivity</string>
+    <string name="msg_loading" />
 </resources>

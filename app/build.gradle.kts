@@ -69,6 +69,7 @@ dependencies {
     implementation ("com.wdullaer:materialdatetimepicker:3.6.0")
     /*implementation ("com.androidx.autofill:autofill:1.1.0")*/
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+
     implementation ("com.android.volley:volley:1.2.1")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation ("com.github.barteksc:android-pdf-viewer:2.8.2")
@@ -76,5 +77,13 @@ dependencies {
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation ("com.karumi:dexter:6.2.2")
     implementation ("com.android.volley:volley:1.2.1")
+
+    implementation ("com.afollestad.material-dialogs:core:3.3.0")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("androidx.test.espresso:espresso-core:3.5.0")
+
 
 }
