@@ -166,6 +166,4 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         };
         queue.add(jsonObjectRequest);
     }
-
-
 }

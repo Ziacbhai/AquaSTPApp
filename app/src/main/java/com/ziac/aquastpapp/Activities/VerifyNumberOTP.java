@@ -46,11 +46,9 @@ import java.util.Map;
 public class VerifyNumberOTP extends AppCompatActivity {
     private boolean passwordvisible = false;
     String otp, Newpassword,show_number;
-
     PinView pinView;
     TextView NumberVerify,Resendotp,Show_number;
     ProgressBar progressBar;
-
     private TextInputEditText Newpwd;
     Context context;
     ImageView Repair_back_btn;

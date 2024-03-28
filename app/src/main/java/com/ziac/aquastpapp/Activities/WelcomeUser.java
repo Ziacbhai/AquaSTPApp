@@ -55,7 +55,6 @@ public class WelcomeUser extends AppCompatActivity {
     ImageView Ownerexit;
     AppCompatButton oContinue;
     Context context;
-    FloatingActionButton fab;
     Bitmap imageBitmap;
 
     @SuppressLint("MissingInflatedId")
