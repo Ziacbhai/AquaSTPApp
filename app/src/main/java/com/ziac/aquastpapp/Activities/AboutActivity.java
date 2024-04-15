@@ -23,7 +23,6 @@ public class AboutActivity extends AppCompatActivity {
 
     LinearLayout Locate;
     LottieAnimationView Ziac;
-
     Context context;
 
     @SuppressLint("MissingInflatedId")

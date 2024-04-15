@@ -147,16 +147,8 @@ public class Consumption_Fragment extends Fragment {
      }
 
     private void user_topcard(View view) {
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        sitename = sharedPreferences.getString("site_name", "");
-        stpname = sharedPreferences.getString("stp_name", "");
-        siteaddress = sharedPreferences.getString("site_address", "");
-        processname = sharedPreferences.getString("process_name", "");
-        useremail = sharedPreferences.getString("user_email", "");
-        usermobile = sharedPreferences.getString("user_mobile", "");
-        personname = sharedPreferences.getString("user_name", "");
-        stpcapacity = sharedPreferences.getString("stp_capacity", "");
+
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
@@ -167,12 +159,12 @@ public class Consumption_Fragment extends Fragment {
         txtusermobile = view.findViewById(R.id.usermobile);
         txtpersonname = view.findViewById(R.id.personname);
 
-        txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
-        txtsiteaddress.setText(siteaddress);
-        txtuseremail.setText(useremail);
-        txtusermobile.setText(usermobile);
-        txtpersonname.setText(personname);
+        txtsitename.setText(sharedPreferences.getString("site_name", ""));
+        txtstpname.setText(sharedPreferences.getString("stp_name", "") + " / " + sharedPreferences.getString("process_name", "") +  " / " + sharedPreferences.getString("stp_capacity", ""));
+        txtsiteaddress.setText(sharedPreferences.getString("site_address", ""));
+        txtuseremail.setText(sharedPreferences.getString("user_email", ""));
+        txtusermobile.setText(sharedPreferences.getString("user_mobile", ""));
+        txtpersonname.setText(sharedPreferences.getString("user_name", ""));
     }
 
     @SuppressLint("MissingInflatedId")

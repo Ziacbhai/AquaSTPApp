@@ -130,17 +130,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
 
     }
     private void user_topcard() {
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, stpcapacity;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        sitename = sharedPreferences.getString("site_name", "");
-        stpname = sharedPreferences.getString("stp_name", "");
-        siteaddress = sharedPreferences.getString("site_address", "");
-        processname = sharedPreferences.getString("process_name", "");
-        useremail = sharedPreferences.getString("user_email", "");
-        usermobile = sharedPreferences.getString("user_mobile", "");
-        personname = sharedPreferences.getString("user_name", "");
-
-        stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 
@@ -151,12 +141,12 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         txtusermobile = findViewById(R.id.usermobile);
         txtpersonname = findViewById(R.id.personname);
 
-        txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname + " / " + stpcapacity);
-        txtsiteaddress.setText(siteaddress);
-        txtuseremail.setText(useremail);
-        txtusermobile.setText(usermobile);
-        txtpersonname.setText(personname);
+        txtsitename.setText(sharedPreferences.getString("site_name", ""));
+        txtstpname.setText(sharedPreferences.getString("stp_name", "") + " / " + sharedPreferences.getString("process_name", "") +  " / " + sharedPreferences.getString("stp_capacity", ""));
+        txtsiteaddress.setText(sharedPreferences.getString("site_address", ""));
+        txtuseremail.setText(sharedPreferences.getString("user_email", ""));
+        txtusermobile.setText(sharedPreferences.getString("user_mobile", ""));
+        txtpersonname.setText(sharedPreferences.getString("user_name", ""));
     }
     private void DailyLogBlowers() {
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -205,22 +195,6 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                     BlowersDailyLogStartAdapter blowerAdapter = new BlowersDailyLogStartAdapter(context, (List<PumpMotorBlower_LogClass>) Global.Blower_LogClass);
                     blowersStartedRecyclerView.setAdapter(blowerAdapter);
 
-/*
-                    RecyclerView blowersStoppedRecyclerView = findViewById(R.id.blowers_started_recyclerview);
-
-                    BlowersDailyLogStopAdapter blowerStopAdapter = new BlowersDailyLogStopAdapter(context, (List<PumpMotorBlower_LogClass>) Global.Stop_Blower_LogClass);
-                    blowersStoppedRecyclerView.setAdapter(blowerStopAdapter);
-
-                    blowersStoppedRecyclerView.setVisibility(View.GONE);
-
-// Later in your code, when you want to hide/show the adapters based on conditions
-                    if (conditionToShowBlowerAdapter) {
-                        blowersStartedRecyclerView.setVisibility(View.VISIBLE);
-                        blowersStoppedRecyclerView.setVisibility(View.GONE);
-                    } else {
-                        blowersStartedRecyclerView.setVisibility(View.GONE);
-                        blowersStoppedRecyclerView.setVisibility(View.VISIBLE);
-                    }*/
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
@@ -258,7 +232,6 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // If you have any parameters to send in the request body, you can set them here
                 Map<String, String> params = new HashMap<>();
-
                 return params;
             }
 

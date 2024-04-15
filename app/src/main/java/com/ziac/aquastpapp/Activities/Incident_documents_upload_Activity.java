@@ -1,68 +1,60 @@
 package com.ziac.aquastpapp.Activities;
 
 
-import androidx.annotation.Nullable;
+import static com.yalantis.ucrop.util.FileUtils.getPath;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.OpenableColumns;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
-import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
-import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
-import com.shockwave.pdfium.PdfDocument;
 import com.ziac.aquastpapp.R;
 
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import Adapters.Incident_documents_upload_Adapter;
 import Models.IncidentsClass;
-import Models.VolleyMultipartRequest;
-import okhttp3.Call;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
-public class Incident_documents_upload_Activity extends AppCompatActivity  {
+public class Incident_documents_upload_Activity<Payment_upload> extends AppCompatActivity  {
 
     Intent myFileIntent;
     ImageView upload;
@@ -74,8 +66,12 @@ public class Incident_documents_upload_Activity extends AppCompatActivity  {
     private ProgressDialog progressDialog;
 
     public ProgressDialog pDialog;
+    private static final int REQUEST_CODE = 1;
     private File selectedFile;
-    private static final int REQUEST_DOC_PDF = 1;
+
+    Context context;
+    private static final int PERMISSION_REQUEST_CODE = 1;
+    private static final int REQUEST_CODE_DOC = 1;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -85,19 +81,30 @@ public class Incident_documents_upload_Activity extends AppCompatActivity  {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
                 PackageManager.PERMISSION_GRANTED);
 
+        context = this;
+
         In_doc_uploadbtn = findViewById(R.id.in_doc_uploadbtn);
         upload = findViewById(R.id.in_upload);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         In_doc_uploadbtn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.R)
             @Override
             public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions((Activity) context,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            PERMISSION_REQUEST_CODE);
+                }
                 openFileChooser();
             }
         });
 
 
-        progressDialog = new ProgressDialog(this);
+
+
+    progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
@@ -111,101 +118,136 @@ public class Incident_documents_upload_Activity extends AppCompatActivity  {
 
     private void openFileChooser() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
-        startActivityForResult(intent, REQUEST_DOC_PDF);
+        intent.setType("application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf");
+        startActivityForResult(intent, REQUEST_CODE);
     }
+
+    public void upload() {
+        Intent intent = new Intent();
+        intent.setType("application/pdf,application/msword");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+
+    }
+
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_DOC_PDF && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
-            Uri fileUri = data.getData();
-            selectedFile = new File(fileUri.getPath());
-            uploadFileToServer(selectedFile);
-        }
-    }
 
-    private void uploadFileToServer(final File file) {
-        String url = Global.Incident_UploadDocuments;
-        StringRequest request = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Handle successful response from the server
-                        JSONObject resp;
-                        try {
-                            resp = new JSONObject(response);
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-                        try {
-                            if (resp.getBoolean("success")) {
-                                Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
-                                // getIncidentImages();
+        if (requestCode == REQUEST_CODE_DOC && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri uri = data.getData();
 
-                            } else {
-                                if (resp.has("error")) {
-                                    String errorMessage = resp.getString("error");
-                                    Toast.makeText(Incident_documents_upload_Activity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(Incident_documents_upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-
-                                } else {
-                                    Log.d("else", "else");
-                                }
-                            }
-                        } catch (JSONException e) {
-
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // Handle error response from the server
-                Toast.makeText(Incident_documents_upload_Activity.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                String fileString = fileToString(file);
-                params.put("fileName", fileString);
-                params.put("incident_code", Global.incidentsClass.getIncident_Code());
-                params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                String accesstoken = Global.sharedPreferences.getString("access_token", null);
-                headers.put("Authorization", "Bearer " + accesstoken);
-                return headers;
-            }
-        };
-        // Add the request to the RequestQueue
-        Volley.newRequestQueue(this).add(request);
-    }
-
-    private String fileToString(File file) {
-        FileInputStream inputStream = null;
-        try {
-            inputStream = new FileInputStream(file);
-            byte[] buffer = new byte[(int) file.length()];
-            inputStream.read(buffer);
-            return Base64.encodeToString(buffer, Base64.DEFAULT);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                String path = getPath(Incident_documents_upload_Activity.this, uri);
+                if (path != null) {
+                    File file = new File(path);
+                    uploadFile(file);
                 }
             }
         }
-        return null;
+    }
+
+    private void uploadFile(File file) {
+        String url = Global.Incident_UploadDocuments;
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, url, new Response.Listener<NetworkResponse>() {
+            @Override
+            public void onResponse(NetworkResponse response) {
+                String resultResponse = new String(response.data);
+                // Handle response here
+                try {
+                    JSONObject resp = new JSONObject(resultResponse);
+
+                    if (resp.getBoolean("success")) {
+                        Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
+                        // getIncidentImages();
+
+                    } else {
+                        if (resp.has("error")) {
+                            String errorMessage = resp.getString("error");
+                            Toast.makeText(Incident_documents_upload_Activity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Incident_documents_upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Log.d("else", "else");
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    // Handle JSON parsing error here
+                    // Throw RuntimeException to propagate the exception if needed
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String errorMessage = "Unknown error";
+                if (error instanceof TimeoutError) {
+                    errorMessage = "Request timeout";
+                } else if (error instanceof NoConnectionError) {
+                    errorMessage = "Failed to connect server";
+                } else if (error instanceof AuthFailureError) {
+                    errorMessage = "Auth Failure Error";
+                }
+                Log.e("Error", errorMessage);
+                error.printStackTrace();
+            }
+        }) {
+
+            protected Map<String, String> getParams() {
+                Map<String, String> parameters = new HashMap<>();
+                String fileString = fileToString(file);
+                parameters.put("fileName", fileString);
+                parameters.put("incident_code", Global.incidentsClass.getIncident_Code());
+                parameters.put("com_code", Global.sharedPreferences.getString("com_code", ""));
+                return parameters;
+            }
+
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                // Add your file here
+                params.put("file", new DataPart(file.getName(), getFileDataFromUri(file), "application/pdf"));
+                return params;
+            }
+        };
+
+        requestQueue.add(multipartRequest);
+    }
+    private String fileToString(File file) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line);
+                stringBuilder.append("\n");
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
+    }
+
+    private byte[] getFileDataFromUri(File file) {
+        byte[] byteArray = null;
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = fileInputStream.read(buffer)) != -1) {
+                byteArrayOutputStream.write(buffer, 0, bytesRead);
+            }
+            byteArray = byteArrayOutputStream.toByteArray();
+            fileInputStream.close();
+            byteArrayOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return byteArray;
     }
 }
 

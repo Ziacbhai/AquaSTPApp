@@ -52,7 +52,7 @@
         <TextView
             android:id="@+id/in_doc_uploadbtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:background="@drawable/inputbg"
             android:gravity="center"
             android:text="Upload Documents"
