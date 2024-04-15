@@ -1,9 +1,5 @@
 package Adapters;
-
-
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,10 +20,8 @@ import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.IncidentReportingFragment;
 import com.ziac.aquastpapp.Activities.Incident_Image_doc_Select_Activity;
 import com.ziac.aquastpapp.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,7 +36,6 @@ import Models.IncidentsClass;
 public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewholder> {
     private List<IncidentsClass> incidentsClass;
     Context context;
-
 
     public IncidentAdapter(Context context, ArrayList<IncidentsClass> incidentsClass) {
         this.context = context;
@@ -116,8 +107,6 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             return;
         }
         holder.Inc_created.setText(incidentsClass.get(position).getInc_Created_by());
-
-
 
         holder.Inupload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,8 +180,8 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
 
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        private TextView Incno, Incedent_Particlulars, Inc_date,Inc_created,Inc_Amount;
-        private ImageView Inupload, Ininfo, Inc_delete;
+        private TextView Incno, Incedent_Particlulars, Inc_date,Inc_created;
+        private ImageView Inupload, Inc_delete;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);

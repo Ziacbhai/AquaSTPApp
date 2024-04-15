@@ -56,11 +56,8 @@ import java.util.Map;
 import Models.IncidentsClass;
 
 public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident_image_upload_Adapter.Viewholder> {
-
-
     private ArrayList<IncidentsClass> incidentsClasses;
     private Context context;
-
     public Incident_image_upload_Adapter(ArrayList<IncidentsClass> incidentsClasses, Context context) {
         this.incidentsClasses = incidentsClasses;
         this.context = context;

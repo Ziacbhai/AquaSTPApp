@@ -150,7 +150,6 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
             Pump_start = itemView.findViewById(R.id.pump_start);
             viewpump = itemView.findViewById(R.id.vipump);
 
-
             String usertype=Global.sharedPreferences.getString("user_type","");
             if (usertype.equals("C")){
                 viewpump.setVisibility(View.GONE);
