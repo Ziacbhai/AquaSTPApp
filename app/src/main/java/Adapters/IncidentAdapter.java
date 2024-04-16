@@ -36,12 +36,10 @@ import Models.IncidentsClass;
 public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewholder> {
     private List<IncidentsClass> incidentsClass;
     Context context;
-
     public IncidentAdapter(Context context, ArrayList<IncidentsClass> incidentsClass) {
         this.context = context;
         this.incidentsClass = incidentsClass;
     }
-
     @NonNull
     @Override
     public IncidentAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,7 +54,6 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
     public void onBindViewHolder(@NonNull IncidentAdapter.Viewholder holder, int position) {
 
         holder.Incedent_Particlulars.setText(incidentsClass.get(position).getIncidents_Particulars());
-
         /*holder.Inc_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +79,6 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
                 alertDialog.show();
             }
         });*/
-
         String conNoString = incidentsClass.get(position).getIncident_no();
         double conNo;
         try {
@@ -118,7 +114,6 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         });
 
     }
-
     public void deleteItem(String incident_code2) {
         RequestQueue queue = Volley.newRequestQueue(context.getApplicationContext());
         String url = Global.Get_Incidents_delete;
@@ -137,8 +132,6 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
 
                 Intent intent = new Intent(context, IncidentReportingFragment.class);
                 context.startActivity(intent);
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -153,14 +146,10 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
-
-
         };
         queue.add(jsonObjectRequest);
 
     }
-
-
     private String removeTrailingZero(double value) {
         // Convert the double to a string
         String formattedValue = String.valueOf(value);
@@ -172,17 +161,13 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
 
         return formattedValue;
     }
-
     @Override
     public int getItemCount() {
         return incidentsClass.size();
     }
-
-
     public class Viewholder extends RecyclerView.ViewHolder {
         private TextView Incno, Incedent_Particlulars, Inc_date,Inc_created;
         private ImageView Inupload, Inc_delete;
-
         public Viewholder(@NonNull View itemView) {
             super(itemView);
 
@@ -192,7 +177,6 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             Inupload = itemView.findViewById(R.id.incident_photo_upload);
             Inc_created = itemView.findViewById(R.id.incident_createdby);
            // Inc_delete = itemView.findViewById(R.id.incident_delete);
-
 
         }
     }
