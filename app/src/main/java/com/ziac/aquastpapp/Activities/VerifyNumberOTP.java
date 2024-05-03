@@ -150,6 +150,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
                     switch (issuccess) {
                         case "true":
                             startActivity(new Intent(VerifyNumberOTP.this, LoginSignupActivity.class));
+                            finish();
                             break;
                         default:
                             if (error.equals("PasswordError")) {

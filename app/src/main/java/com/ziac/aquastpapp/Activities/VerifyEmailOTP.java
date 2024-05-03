@@ -145,6 +145,7 @@ public class VerifyEmailOTP extends AppCompatActivity {
                     switch (issuccess) {
                         case "true":
                             startActivity(new Intent(VerifyEmailOTP.this, LoginSignupActivity.class));
+                            finish();
                             break;
                         default:
                             if (error.equals("PasswordError")) {

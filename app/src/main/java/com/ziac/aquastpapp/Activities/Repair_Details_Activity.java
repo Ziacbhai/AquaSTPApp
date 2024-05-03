@@ -383,8 +383,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
     private void getEquipmentsListRepairdetails() {
 
-        String Url = Global.api_List_Get_Equipments +
-                "comcode=" + Global.sharedPreferences.getString("com_code", "0") +
+        String Url = Global.api_List_Get_Equipments + "comcode=" + Global.sharedPreferences.getString("com_code", "0") +
                 "&sstp1_code=" + Global.sharedPreferences.getString("sstp1_code", "0")
         + "&typ=R";
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -512,7 +511,6 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
     private void getRepairEquipmentsSpinnerPopup() {
         zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
-
         zDialog.setContentView(R.layout.equipment_item);
 
         ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
@@ -532,7 +530,6 @@ public class Repair_Details_Activity extends AppCompatActivity {
         zDialog.show();
 
         SearchView sveq = zDialog.findViewById(R.id.svequipment);
-
         sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

@@ -85,13 +85,13 @@
             android:id="@+id/wname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/amaranth_bold"
+
+            android:layout_marginTop="8dp"
             android:gravity="center_horizontal"
             android:text="Helloziac"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:textStyle="italic"
-            android:layout_marginTop="8dp"/>
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/wemail"

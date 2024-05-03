@@ -130,6 +130,7 @@ public class VerifyUserNameOTP extends AppCompatActivity {
                     switch (issuccess) {
                         case "true":
                             startActivity(new Intent(VerifyUserNameOTP.this, LoginSignupActivity.class));
+                            finish();
                             break;
                         default:
                             if (error.equals("PasswordError")) {
