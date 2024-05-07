@@ -158,7 +158,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
                     if (resp.has("error")) {
                         String errorMessage = resp.getString("error");
                         Toast.makeText(Incident_image_upload_Activity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                        Toast.makeText(Incident_image_upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Incident_image_upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
 
                     } else {
                         Log.d("else", "else");

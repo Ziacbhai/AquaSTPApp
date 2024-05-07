@@ -1,28 +1,25 @@
 package com.ziac.aquastpapp.Activities;
 
 
-import static com.yalantis.ucrop.util.FileUtils.getPath;
-
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +32,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
 
@@ -43,44 +41,28 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import Adapters.Incident_documents_upload_Adapter;
-import Models.IncidentsClass;
-
-public class Incident_documents_upload_Activity<Payment_upload> extends AppCompatActivity  {
-
-    Intent myFileIntent;
+public class Incident_documents_upload_Activity<Payment_upload> extends AppCompatActivity {
     ImageView upload;
-    ProgressDialog dialog;
-    Incident_documents_upload_Adapter documentAdapter;
-    IncidentsClass incidentsClass;
     TextView In_doc_uploadbtn;
     private RecyclerView Incident_Documents_Rv;
     private ProgressDialog progressDialog;
-
     public ProgressDialog pDialog;
-    private static final int REQUEST_CODE = 1;
-    private File selectedFile;
-
+    private static final int REQUEST_FILE = 1;
+    private static final int PICK_FILE_REQUEST_CODE = 1;
     Context context;
-    private static final int PERMISSION_REQUEST_CODE = 1;
-    private static final int REQUEST_CODE_DOC = 1;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incident_documents_uploud);
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
-                PackageManager.PERMISSION_GRANTED);
-
         context = this;
 
         In_doc_uploadbtn = findViewById(R.id.in_doc_uploadbtn);
@@ -91,20 +73,12 @@ public class Incident_documents_upload_Activity<Payment_upload> extends AppCompa
             @RequiresApi(api = Build.VERSION_CODES.R)
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions((Activity) context,
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                            PERMISSION_REQUEST_CODE);
-                }
-                openFileChooser();
+                openFileManager();
             }
         });
 
 
-
-
-    progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
@@ -116,139 +90,102 @@ public class Incident_documents_upload_Activity<Payment_upload> extends AppCompa
 
     }
 
-    private void openFileChooser() {
+    private void openFileManager() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf");
-        startActivityForResult(intent, REQUEST_CODE);
-    }
-
-    public void upload() {
-        Intent intent = new Intent();
-        intent.setType("application/pdf,application/msword");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_BROWSABLE);
-
+        intent.setType("*/*");
+        startActivityForResult(intent, REQUEST_FILE);
     }
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CODE_DOC && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri uri = data.getData();
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                String path = getPath(Incident_documents_upload_Activity.this, uri);
-                if (path != null) {
-                    File file = new File(path);
-                    uploadFile(file);
+        if (requestCode == PICK_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
+            if (data != null) {
+                Uri fileUri = data.getData();
+                if (fileUri != null) {
+                    String fileType = getFileType(fileUri);
+                    if (fileType != null) {
+                        uploadFile(fileType, fileUri);
+                    } else {
+                        Toast.makeText(this, "Unsupported file type", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "File URI is null", Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                Toast.makeText(this, "Intent data is null", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void uploadFile(File file) {
+    private void uploadFile(String fileType, Uri fileUri) {
         String url = Global.Incident_UploadDocuments;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, url, new Response.Listener<NetworkResponse>() {
-            @Override
-            public void onResponse(NetworkResponse response) {
-                String resultResponse = new String(response.data);
-                // Handle response here
-                try {
-                    JSONObject resp = new JSONObject(resultResponse);
 
-                    if (resp.getBoolean("success")) {
-                        Global.customtoast(Incident_documents_upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
-                        // getIncidentImages();
-
-                    } else {
-                        if (resp.has("error")) {
-                            String errorMessage = resp.getString("error");
-                            Toast.makeText(Incident_documents_upload_Activity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(Incident_documents_upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    try {
+                        JSONObject resp = new JSONObject(response);
+                        if (resp.getBoolean("success")) {
+                            Global.customtoast(context, getLayoutInflater(), "File uploaded successfully");
+                           // getIncidentFiles();
                         } else {
-                            Log.d("else", "else");
+                            if (resp.has("error")) {
+                                String errorMessage = resp.getString("error");
+                                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.d("else", "else");
+                            }
                         }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    // Handle JSON parsing error here
-                    // Throw RuntimeException to propagate the exception if needed
-                    throw new RuntimeException(e);
-                }
-            }
-        }, new Response.ErrorListener() {
+                },
+                error -> {
+                    // Handle error response
+                    Toast.makeText(context, "Error uploading file", Toast.LENGTH_SHORT).show();
+                }) {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                String errorMessage = "Unknown error";
-                if (error instanceof TimeoutError) {
-                    errorMessage = "Request timeout";
-                } else if (error instanceof NoConnectionError) {
-                    errorMessage = "Failed to connect server";
-                } else if (error instanceof AuthFailureError) {
-                    errorMessage = "Auth Failure Error";
-                }
-                Log.e("Error", errorMessage);
-                error.printStackTrace();
-            }
-        }) {
-
-            protected Map<String, String> getParams() {
-                Map<String, String> parameters = new HashMap<>();
-                String fileString = fileToString(file);
-                parameters.put("fileName", fileString);
-                parameters.put("incident_code", Global.incidentsClass.getIncident_Code());
-                parameters.put("com_code", Global.sharedPreferences.getString("com_code", ""));
-                return parameters;
-            }
-
-            protected Map<String, DataPart> getByteData() {
-                Map<String, DataPart> params = new HashMap<>();
-                // Add your file here
-                params.put("file", new DataPart(file.getName(), getFileDataFromUri(file), "application/pdf"));
-                return params;
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", null);
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
             }
         };
 
-        requestQueue.add(multipartRequest);
-    }
-    private String fileToString(File file) {
-        StringBuilder stringBuilder = new StringBuilder();
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line);
-                stringBuilder.append("\n");
-            }
-            bufferedReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return stringBuilder.toString();
+        requestQueue.add(stringRequest);
     }
 
-    private byte[] getFileDataFromUri(File file) {
-        byte[] byteArray = null;
-        try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = fileInputStream.read(buffer)) != -1) {
-                byteArrayOutputStream.write(buffer, 0, bytesRead);
+    private String getFileType(Uri fileUri) {
+        String mimeType = getContentResolver().getType(fileUri);
+        if (mimeType != null) {
+            if (mimeType.contains("pdf")) {
+                return "pdf";
+            } else if (mimeType.contains("doc") || mimeType.contains("docx")) {
+                return "doc";
+            } else {
+                return null; // Unsupported file type
             }
-            byteArray = byteArrayOutputStream.toByteArray();
-            fileInputStream.close();
-            byteArrayOutputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            // If MIME type is null, try to determine file type based on file extension
+            String extension = MimeTypeMap.getFileExtensionFromUrl(fileUri.toString());
+            if (extension != null) {
+                if (extension.equals("pdf")) {
+                    return "pdf";
+                } else if (extension.equals("doc") || extension.equals("docx")) {
+                    return "doc";
+                } else {
+                    return null; // Unsupported file type
+                }
+            } else {
+                return null; // Unable to determine file type
+            }
         }
-        return byteArray;
     }
+
+
 }
 
 
