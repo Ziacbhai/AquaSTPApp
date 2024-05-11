@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,6 +35,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import Adapters.MetersDetailsAdapter;
 import Adapters.PumpDetailsAdapter;
@@ -163,13 +165,12 @@ public class MetersFragment extends Fragment {
 
                 return headers;
             }
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                /*params.put("form_factor",FormFactor.getText().toString());*/
-                return params;
-            }
         };
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest);
 
 

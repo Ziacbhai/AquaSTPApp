@@ -269,12 +269,13 @@ public class Consumption_Fragment extends Fragment {
                 headers.put("Authorization", "Bearer " + accessToken);
                 return headers;
             }
-            @Override
-            protected Map<String, String> getParams() {
-                return new HashMap<>();
-            }
         };
 
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest);
     }
     private void updateConsumables() {

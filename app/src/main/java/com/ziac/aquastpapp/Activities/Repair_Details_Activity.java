@@ -373,11 +373,12 @@ public class Repair_Details_Activity extends AppCompatActivity {
                 return headers;
             }
 
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
         };
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest);
     }
 

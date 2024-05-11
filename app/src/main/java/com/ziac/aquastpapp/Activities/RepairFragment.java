@@ -318,15 +318,12 @@ public class RepairFragment extends Fragment {
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
-
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-            /*params.put("rep_no", Repno.getText().toString());
-            params.put("repaired_amt",Amount.getText().toString());
-            params.put("rep_date", RepairDate.getText().toString());*/
-                return params;
-            }
         };
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest);
     }
 

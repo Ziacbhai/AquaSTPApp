@@ -456,6 +456,11 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 return params;
             }
         };
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest);
 
     }
@@ -506,6 +511,11 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 return headers;
             }
         };
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         queue.add(jsonArrayRequest);
     }
@@ -678,6 +688,11 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 return headers;
             }
         };
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonArrayRequest);
 
     }

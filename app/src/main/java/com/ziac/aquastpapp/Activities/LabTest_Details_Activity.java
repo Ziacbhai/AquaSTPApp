@@ -15,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,6 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import Adapters.Lab_Test_Details_Adapter;
 import Models.LabTestClass;
@@ -143,19 +145,20 @@ public class LabTest_Details_Activity extends AppCompatActivity {
             }
         }) {
             public Map<String, String> getHeaders() {
-
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
 
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                return params;
-            }
 
         };
+
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest);
     }
 

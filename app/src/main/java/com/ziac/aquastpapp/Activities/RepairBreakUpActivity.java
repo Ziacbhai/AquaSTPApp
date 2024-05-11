@@ -439,6 +439,11 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             }
 
         };
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest);
     }
 
@@ -481,6 +486,12 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 return headers;
             }
         };
+
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonArrayRequest);
     }
 
@@ -647,6 +658,11 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 return params;
             }
         };
+
+        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
+                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                0,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonArrayRequest);
     }
 
