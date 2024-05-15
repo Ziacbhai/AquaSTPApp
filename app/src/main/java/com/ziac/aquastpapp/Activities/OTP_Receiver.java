@@ -9,9 +9,7 @@ import android.telephony.SmsMessage;
 import com.chaos.view.PinView;
 
 public class OTP_Receiver extends BroadcastReceiver {
-
     private static PinView pinView;
-
     public void setPinView(PinView pinView) {
         OTP_Receiver.pinView = pinView;
     }
@@ -22,10 +20,8 @@ public class OTP_Receiver extends BroadcastReceiver {
 
         for (SmsMessage smsMessage : smsMessages) {
             String message = smsMessage.getMessageBody();
-
             // Extract OTP from the message (assuming it's a 6-digit OTP)
             String otp = extractOtp(message);
-
             // Set the OTP in the PinView
             setOtpInPinView(otp);
         }

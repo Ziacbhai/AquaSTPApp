@@ -2,7 +2,6 @@ package com.ziac.aquastpapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
