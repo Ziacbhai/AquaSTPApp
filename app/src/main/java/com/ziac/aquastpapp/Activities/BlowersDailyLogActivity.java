@@ -74,6 +74,8 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
             }
         });
         String usertype = Global.sharedPreferences.getString("user_type", "");
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

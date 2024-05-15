@@ -208,7 +208,7 @@ public class LoginFragment extends Fragment {
                 if (error instanceof TimeoutError) {
                     Toast.makeText(getActivity(), "Request Time-Out", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(getActivity(), "No Connection Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Unable to connect to server", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ServerError) {
                     String errorResponse = new String(error.networkResponse.data);
                     try {

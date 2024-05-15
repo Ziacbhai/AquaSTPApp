@@ -204,6 +204,7 @@ public class HomeFragment extends Fragment {
                         DailyLogClass dailyLog = new DailyLogClass();
                         dailyLog.setDailylog(dlogdate);
                         Global.dailyLogClassArrayList.add(dailyLog);
+
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("dlogdate", dlogdate);
                         Global.editor.commit();
