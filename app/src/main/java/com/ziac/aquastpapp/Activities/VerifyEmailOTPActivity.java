@@ -60,7 +60,7 @@ public class VerifyEmailOTPActivity extends AppCompatActivity {
 
         context = this;
         Enter_pinnumber = findViewById(R.id.et_pinview);
-        new OTP_Receiver().setPinView(Enter_pinnumber);
+        new OTPReceiver().setPinView(Enter_pinnumber);
         requestSMSPermission();
         EmailVerify = findViewById(R.id.emailverifyotp);
         Email_show = findViewById(R.id.showemail);

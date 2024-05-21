@@ -1,12 +1,12 @@
 package Models;
 
-public class RepairClass4 {
+public class RepairModel4 {
 
     String I_Remark,I_Repair_image,IImageList;
 
 
 
-    public RepairClass4() {
+    public RepairModel4() {
 
     }
 

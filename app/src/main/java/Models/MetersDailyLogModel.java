@@ -1,6 +1,6 @@
 package Models;
 
-public class MetersDailyLogClass {
+public class MetersDailyLogModel {
 
     String meters_equip_name,meters_reading_edit,meters_reading_time,meters_total,tstp3_code_m2,meter_status,tstp3_code;
 

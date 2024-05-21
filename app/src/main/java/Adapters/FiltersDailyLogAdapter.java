@@ -25,24 +25,21 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.ziac.aquastpapp.Activities.FiltersDailyLog_Image_Upload_Activity;
 import com.ziac.aquastpapp.Activities.Global;
-import com.ziac.aquastpapp.Activities.Incident_Image_doc_Select_Activity;
 import com.ziac.aquastpapp.R;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
-import Models.FiltersClass;
+import Models.FiltersModel;
 //import Models.PumpMotorBlower_LogClass;
 
 public class FiltersDailyLogAdapter extends RecyclerView.Adapter<FiltersDailyLogAdapter.Viewholder> {
 
     Context context;
-    private List<FiltersClass> filtersClassList;
+    private List<FiltersModel> filtersModelList;
 
-    public FiltersDailyLogAdapter(Context context, List<FiltersClass> filtersClassList) {
+    public FiltersDailyLogAdapter(Context context, List<FiltersModel> filtersModelList) {
         this.context = context;
-        this.filtersClassList = filtersClassList;
+        this.filtersModelList = filtersModelList;
     }
     @NonNull
     @Override
@@ -52,12 +49,12 @@ public class FiltersDailyLogAdapter extends RecyclerView.Adapter<FiltersDailyLog
     }
     @Override
     public void onBindViewHolder(@NonNull FiltersDailyLogAdapter.Viewholder holder, int position) {
-        holder.Filter_equip_name.setText(filtersClassList.get(position).getEquip_name());
-        holder.Filter_reading.setText(filtersClassList.get(position).getReading_time());
+        holder.Filter_equip_name.setText(filtersModelList.get(position).getEquip_name());
+        holder.Filter_reading.setText(filtersModelList.get(position).getReading_time());
 
         Picasso.Builder builder = new Picasso.Builder(context);
         Picasso picasso = builder.build();
-        String originalImageUrl = filtersClassList.get(position).getFilter_image();
+        String originalImageUrl = filtersModelList.get(position).getFilter_image();
         String trimmedImageUrl = originalImageUrl.replace('~', ' ').trim();
         picasso.load(Uri.parse(Global.baseurl + trimmedImageUrl))
                 .error(R.drawable.no_image_available_icon)
@@ -66,13 +63,13 @@ public class FiltersDailyLogAdapter extends RecyclerView.Adapter<FiltersDailyLog
             @Override
             public void onClick(View v) {
 
-                showImage(filtersClassList.get(position).getFilter_image());
+                showImage(filtersModelList.get(position).getFilter_image());
             }
         });
 
 
 
-        if (filtersClassList.size() > position && filtersClassList.get(position).getFilter_status().equals("S")) {
+        if (filtersModelList.size() > position && filtersModelList.get(position).getFilter_status().equals("S")) {
             holder.Filter_image_upload.setVisibility(View.GONE);
         } else {
             holder.Filter_image_upload.setVisibility(View.VISIBLE);
@@ -81,7 +78,7 @@ public class FiltersDailyLogAdapter extends RecyclerView.Adapter<FiltersDailyLog
         holder.Filter_image_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Global.filtersClass = filtersClassList.get(position);
+                Global.filtersModel = filtersModelList.get(position);
                 Intent intent = new Intent(context, FiltersDailyLog_Image_Upload_Activity.class);
                 context.startActivity(intent);
                ((Activity) context).finish();
@@ -139,7 +136,7 @@ public class FiltersDailyLogAdapter extends RecyclerView.Adapter<FiltersDailyLog
 
     @Override
     public int getItemCount() {
-        return filtersClassList.size();
+        return filtersModelList.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {

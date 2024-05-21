@@ -1,6 +1,5 @@
 package Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -24,14 +23,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import Models.RepairClass1;
+import Models.RepairModel1;
 
 public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder> {
-    private List<RepairClass1> repairClass1;
+    private List<RepairModel1> repairModel1;
     Context context;
 
-    public RepairAdapter(List<RepairClass1> repairClass1, Context context) {
-        this.repairClass1 = repairClass1;
+    public RepairAdapter(List<RepairModel1> repairModel1, Context context) {
+        this.repairModel1 = repairModel1;
         this.context = context;
     }
 
@@ -48,14 +47,14 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
     @Override
     public void onBindViewHolder(@NonNull RepairAdapter.Viewholder holder, int position) {
         //holder.Repno.setText(repairS.get(position).getREPNo());
-        holder.Amount.setText(repairClass1.get(position).getRepair_Amount() + "0");
+        holder.Amount.setText(repairModel1.get(position).getRepair_Amount() + "0");
 
-        holder.Repair_remark.setText(repairClass1.get(position).getRemark());
-        holder.Created_by.setText(repairClass1.get(position).getR_createdby());
+        holder.Repair_remark.setText(repairModel1.get(position).getRemark());
+        holder.Created_by.setText(repairModel1.get(position).getR_createdby());
 
-        String dateString = repairClass1.get(position).getRepair_Date();
+        String dateString = repairModel1.get(position).getRepair_Date();
 
-        String conNoString = repairClass1.get(position).getREPNo();
+        String conNoString = repairModel1.get(position).getREPNo();
         double conrepNo;
         try {
             conrepNo = Double.parseDouble(conNoString);
@@ -80,7 +79,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
         holder.Repair_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Global.repairClass1 = repairClass1.get(position);
+                Global.repairModel1 = repairModel1.get(position);
                 Intent i = new Intent(context, Repair_Details_Activity.class);
                 context.startActivity(i);
 //                ((Activity) context).finish();
@@ -101,7 +100,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
 
     @Override
     public int getItemCount() {
-        return repairClass1.size();
+        return repairModel1.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {

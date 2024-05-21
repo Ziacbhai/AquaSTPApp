@@ -1,18 +1,13 @@
 package Adapters;
 
-import static com.ziac.aquastpapp.Activities.Global.repairClass4;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +17,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,16 +29,15 @@ import com.ziac.aquastpapp.R;
 import java.util.ArrayList;
 
 
-import Models.RepairClass2;
-import Models.RepairClass4;
+import Models.RepairModel4;
 
 public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo_image_list_Adapter.Viewholder> {
-    ArrayList<RepairClass4> repairClasses4;
+    ArrayList<RepairModel4> repairClasses4;
     Context context;
     Picasso.Builder builder;
     Picasso picasso;
 
-    public Repairtwo_image_list_Adapter(ArrayList<RepairClass4> repairClasses4, Context context) {
+    public Repairtwo_image_list_Adapter(ArrayList<RepairModel4> repairClasses4, Context context) {
         this.repairClasses4 = repairClasses4;
         this.context = context;
     }

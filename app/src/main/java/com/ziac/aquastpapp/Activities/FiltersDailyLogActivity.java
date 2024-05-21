@@ -39,13 +39,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.FiltersDailyLogAdapter;
-import Models.FiltersClass;
+import Models.FiltersModel;
 
 public class FiltersDailyLogActivity extends AppCompatActivity {
     ImageView backbtn;
     TextView Displaydate, Displaytime, hidefilter1;
     RecyclerView Filters_recyclerview;
-    FiltersClass filtersClass;
+    FiltersModel filtersModel;
     View hidefilter;
     Context context;
     @SuppressLint("MissingInflatedId")
@@ -167,8 +167,8 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, dailylogfilter, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Filter_LogClass = new ArrayList<FiltersClass>();
-                filtersClass = new FiltersClass();
+                Global.Filter_LogClass = new ArrayList<FiltersModel>();
+                filtersModel = new FiltersModel();
                 JSONArray jarray;
 
                 try {
@@ -180,20 +180,20 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
-                        filtersClass = new FiltersClass();
+                        filtersModel = new FiltersModel();
                         try {
-                            filtersClass.setEquip_name(e.getString("equip_name"));
-                            filtersClass.setReading_time(e.getString("readingtime"));
-                            filtersClass.setFilter_image(e.getString("image_path"));
-                            filtersClass.setFilter_status(e.getString("status"));
-                            filtersClass.setTstp4_code(e.getString("tstp4_code"));
+                            filtersModel.setEquip_name(e.getString("equip_name"));
+                            filtersModel.setReading_time(e.getString("readingtime"));
+                            filtersModel.setFilter_image(e.getString("image_path"));
+                            filtersModel.setFilter_status(e.getString("status"));
+                            filtersModel.setTstp4_code(e.getString("tstp4_code"));
 
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
-                        Global.Filter_LogClass.add(filtersClass);
-                        FiltersDailyLogAdapter filtersDailyLogAdapter = new FiltersDailyLogAdapter(context, (List<FiltersClass>) Global.Filter_LogClass);
+                        Global.Filter_LogClass.add(filtersModel);
+                        FiltersDailyLogAdapter filtersDailyLogAdapter = new FiltersDailyLogAdapter(context, (List<FiltersModel>) Global.Filter_LogClass);
                         Filters_recyclerview.setAdapter(filtersDailyLogAdapter);
                     }
                 } catch (JSONException e) {

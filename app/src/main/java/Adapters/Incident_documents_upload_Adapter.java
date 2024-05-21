@@ -1,9 +1,6 @@
 package Adapters;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,36 +11,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.Activities.Global;
-import com.ziac.aquastpapp.Activities.Incident_image_upload_Activity;
 import com.ziac.aquastpapp.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Document;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import Models.IncidentsClass;
+import Models.IncidentsModelClass;
 
 public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Incident_documents_upload_Adapter.Viewholder> {
 
     private Context context;
-    private ArrayList<IncidentsClass> incidentsClasses;
+    private ArrayList<IncidentsModelClass> incidentsModelClasses;
 
-    public Incident_documents_upload_Adapter(Context context, ArrayList<IncidentsClass> incidentsClasses) {
+    public Incident_documents_upload_Adapter(Context context, ArrayList<IncidentsModelClass> incidentsModelClasses) {
         this.context = context;
-        this.incidentsClasses = incidentsClasses;
+        this.incidentsModelClasses = incidentsModelClasses;
     }
 
     @NonNull
@@ -56,18 +39,18 @@ public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Inci
     @Override
     public void onBindViewHolder(@NonNull Incident_documents_upload_Adapter.Viewholder holder, int position) {
 
-        IncidentsClass incidentsClass = incidentsClasses.get(position);
-        holder.In_doc_name.setText(incidentsClass.getInc_doc_name());
+        IncidentsModelClass incidentsModelClass = incidentsModelClasses.get(position);
+        holder.In_doc_name.setText(incidentsModelClass.getInc_doc_name());
 
         Picasso.Builder builder = new Picasso.Builder(context);
         Picasso picasso = builder.build();
-        picasso.load(Uri.parse(Global.incident_image + incidentsClasses.get(position).getImageList())).error(R.drawable.no_image_available_icon).into(holder.In_doc_show);
+        picasso.load(Uri.parse(Global.incident_image + incidentsModelClasses.get(position).getImageList())).error(R.drawable.no_image_available_icon).into(holder.In_doc_show);
     }
 
 
     @Override
     public int getItemCount() {
-        return incidentsClasses.size();
+        return incidentsModelClasses.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {

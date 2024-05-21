@@ -13,15 +13,15 @@ import com.ziac.aquastpapp.R;
 
 import java.util.List;
 
-import Models.ItemStockClass;
+import Models.ItemStockModel;
 
 public class ItemStockAdapter extends RecyclerView.Adapter<ItemStockAdapter.Viewholder> {
     Context context;
-    private List<ItemStockClass> itemStockClasses;
+    private List<ItemStockModel> itemStockModels;
 
-    public ItemStockAdapter(Context context, List<ItemStockClass> itemStockClasses) {
+    public ItemStockAdapter(Context context, List<ItemStockModel> itemStockModels) {
         this.context = context;
-        this.itemStockClasses = itemStockClasses;
+        this.itemStockModels = itemStockModels;
     }
 
     @NonNull
@@ -34,14 +34,14 @@ public class ItemStockAdapter extends RecyclerView.Adapter<ItemStockAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ItemStockAdapter.Viewholder holder, int position) {
 
-        holder.Consumables_Code.setText(itemStockClasses.get(position).get_Number());
-        holder.Consumables_Stock.setText(itemStockClasses.get(position).get_Stock());
+        holder.Consumables_Code.setText(itemStockModels.get(position).get_Number());
+        holder.Consumables_Stock.setText(itemStockModels.get(position).get_Stock());
 
     }
 
     @Override
     public int getItemCount() {
-        return itemStockClasses.size();
+        return itemStockModels.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {

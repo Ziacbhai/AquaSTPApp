@@ -34,14 +34,14 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import Models.IncidentsClass;
+import Models.IncidentsModelClass;
 
 public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewholder> {
-    private List<IncidentsClass> incidentsClass;
+    private List<IncidentsModelClass> incidentsModelClasses;
     Context context;
-    public IncidentAdapter(Context context, ArrayList<IncidentsClass> incidentsClass) {
+    public IncidentAdapter(Context context, ArrayList<IncidentsModelClass> incidentsModelClasses) {
         this.context = context;
-        this.incidentsClass = incidentsClass;
+        this.incidentsModelClasses = incidentsModelClasses;
     }
     @NonNull
     @Override
@@ -56,7 +56,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
     @Override
     public void onBindViewHolder(@NonNull IncidentAdapter.Viewholder holder, int position) {
 
-        holder.Incedent_Particlulars.setText(incidentsClass.get(position).getIncidents_Particulars());
+        holder.Incedent_Particlulars.setText(incidentsModelClasses.get(position).getIncidents_Particulars());
         /*holder.Inc_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +82,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
                 alertDialog.show();
             }
         });*/
-        String conNoString = incidentsClass.get(position).getIncident_no();
+        String conNoString = incidentsModelClasses.get(position).getIncident_no();
         double conNo;
         try {
             conNo = Double.parseDouble(conNoString);
@@ -93,7 +93,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
         String formattedConNo = removeTrailingZero(conNo);
         holder.Incno.setText(formattedConNo);
 
-        String dateString = incidentsClass.get(position).getIncident_Date();
+        String dateString = incidentsModelClasses.get(position).getIncident_Date();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date;
@@ -105,12 +105,12 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             e.printStackTrace();
             return;
         }
-        holder.Inc_created.setText(incidentsClass.get(position).getInc_Created_by());
+        holder.Inc_created.setText(incidentsModelClasses.get(position).getInc_Created_by());
 
         holder.Inupload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Global.incidentsClass = incidentsClass.get(position);
+                Global.incidentsModelClass = incidentsModelClasses.get(position);
                 Intent intent = new Intent(context, Incident_Image_doc_Select_Activity.class);
                 context.startActivity(intent);
             }
@@ -171,7 +171,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
     }
     @Override
     public int getItemCount() {
-        return incidentsClass.size();
+        return incidentsModelClasses.size();
     }
     public class Viewholder extends RecyclerView.ViewHolder {
         private TextView Incno, Incedent_Particlulars, Inc_date,Inc_created;

@@ -159,7 +159,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
                 params.put("fileName", image);
                 params.put("image_remarks", repair_remark);
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
-                params.put("repair2_code", Global.repairClass2.getD_Repairedtwo());
+                params.put("repair2_code", Global.repairModel2.getD_Repairedtwo());
                 System.out.println(params);
                 return params;
             }

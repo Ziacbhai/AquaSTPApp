@@ -40,7 +40,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.StoppedPumpMotorAdapter;
 import Adapters.RunningPumpMotorAdapter;
-import Models.PumpMotorBlower_LogClass;
+import Models.PumpMotorBlowerLogModel;
 
 public class PumpMotorDailyLogActivity extends AppCompatActivity {
     Context context;
@@ -197,11 +197,11 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
 
                 try {
                     Global.loadrunningpumps(response);
-                    dailyLogAdapter = new RunningPumpMotorAdapter((List<PumpMotorBlower_LogClass>) Global.RunningPumpsMotors_LogClass, context);
+                    dailyLogAdapter = new RunningPumpMotorAdapter((List<PumpMotorBlowerLogModel>) Global.RunningPumpsMotors_LogClass, context);
                     pump_motor_started_recyclerview.setAdapter(dailyLogAdapter);
 
                     Global.loadstoppedpumps(response);
-                    dailyLogAdapter1 = new StoppedPumpMotorAdapter((List<PumpMotorBlower_LogClass>) Global.StoppedPumpsMotors_LogClass, context);
+                    dailyLogAdapter1 = new StoppedPumpMotorAdapter((List<PumpMotorBlowerLogModel>) Global.StoppedPumpsMotors_LogClass, context);
                     pump_motor_stopped_recyclerview.setAdapter(dailyLogAdapter1);
 
                 } catch (JSONException e) {

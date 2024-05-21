@@ -1,21 +1,13 @@
 package Adapters;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,43 +15,25 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.ziac.aquastpapp.Activities.Global;
-import com.ziac.aquastpapp.Activities.Incident_image_upload_Activity;
 import com.ziac.aquastpapp.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import Models.IncidentsClass;
+import Models.IncidentsModelClass;
 
 public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident_image_upload_Adapter.Viewholder> {
-    private ArrayList<IncidentsClass> incidentsClasses;
+    private ArrayList<IncidentsModelClass> incidentsModelClasses;
     private Context context;
-    public Incident_image_upload_Adapter(ArrayList<IncidentsClass> incidentsClasses, Context context) {
-        this.incidentsClasses = incidentsClasses;
+    public Incident_image_upload_Adapter(ArrayList<IncidentsModelClass> incidentsModelClasses, Context context) {
+        this.incidentsModelClasses = incidentsModelClasses;
         this.context = context;
     }
 
@@ -76,16 +50,16 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
     @Override
     public void onBindViewHolder(@NonNull Incident_image_upload_Adapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
 
-        Global.loadWithPicasso(context, holder.In_image_show, Global.incident_image + incidentsClasses.get(position).getImageList());
+        Global.loadWithPicasso(context, holder.In_image_show, Global.incident_image + incidentsModelClasses.get(position).getImageList());
 //        picasso.load(Uri.parse(Global.incident_image + incidentsClasses.get(position).getImageList()))
 //                .error(R.drawable.no_image_available_icon).into(holder.In_image_show);
 
-        holder.In_image_name.setText(incidentsClasses.get(position).getIn_image_name());
+        holder.In_image_name.setText(incidentsModelClasses.get(position).getIn_image_name());
 
         holder.In_image_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showImage(incidentsClasses.get(position).getImageList());
+                showImage(incidentsModelClasses.get(position).getImageList());
             }
         });
 
@@ -207,7 +181,7 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
 
     @Override
     public int getItemCount() {
-        return incidentsClasses.size();
+        return incidentsModelClasses.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {

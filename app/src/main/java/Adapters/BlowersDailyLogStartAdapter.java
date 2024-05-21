@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,13 +36,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import Models.PumpMotorBlower_LogClass;
+import Models.PumpMotorBlowerLogModel;
 
 public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDailyLogStartAdapter.Viewholder> {
     Context context;
-    private List<PumpMotorBlower_LogClass> browersDailyLogClass;
+    private List<PumpMotorBlowerLogModel> browersDailyLogClass;
 
-    public BlowersDailyLogStartAdapter(Context context, List<PumpMotorBlower_LogClass> browersDailyLogClass) {
+    public BlowersDailyLogStartAdapter(Context context, List<PumpMotorBlowerLogModel> browersDailyLogClass) {
         this.context = context;
         this.browersDailyLogClass = browersDailyLogClass;
     }

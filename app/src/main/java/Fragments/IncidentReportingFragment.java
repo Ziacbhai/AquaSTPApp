@@ -44,13 +44,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.IncidentAdapter;
-import Models.IncidentsClass;
+import Models.IncidentsModelClass;
 
 
 public class IncidentReportingFragment extends Fragment {
     RecyclerView Incident_recyclerview;
     Context context;
-    IncidentsClass incidents;
+    IncidentsModelClass incidents;
     ProgressDialog progressDialog;
     IncidentAdapter incidentAdapter;
     private TextView tvSelectedDate;
@@ -265,8 +265,8 @@ public class IncidentReportingFragment extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, incident, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Incident_Class = new ArrayList<IncidentsClass>();
-                incidents = new IncidentsClass();
+                Global.Incident_Class = new ArrayList<IncidentsModelClass>();
+                incidents = new IncidentsModelClass();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -281,7 +281,7 @@ public class IncidentReportingFragment extends Fragment {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    incidents = new IncidentsClass();
+                    incidents = new IncidentsModelClass();
                     try {
                         incidents.setIncident_Code(e.getString("incident_code"));
                         incidents.setIncident_Date(e.getString("incident_date"));

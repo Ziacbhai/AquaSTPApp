@@ -60,11 +60,11 @@ import java.util.concurrent.TimeUnit;
 import Adapters.Repair_BreakUp_Adapter;
 import Adapters.Repair_details_Adapter;
 import Models.EquipmentClassRepairBreakUp;
-import Models.ItemListClassRepair_BreakUp;
-import Models.RepairClass3;
+import Models.ItemListRepair_BreakUpModel;
+import Models.RepairModel3;
 public class RepairBreakUpActivity extends AppCompatActivity {
 
-    RepairClass3 repairClass3;
+    RepairModel3 repairModel3;
     TextView Equipment_Item, Breakup_Unit, Breakup_qty, Breakup_price;
     TextView Breakup_remark;
     AppCompatButton Update_A, Cancel_A;
@@ -72,7 +72,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     private Dialog zDialog;
     EquipmentClassRepairBreakUp equipment_spinner;
     ImageView Repair_back_btn;
-    ItemListClassRepair_BreakUp item_spinner;
+    ItemListRepair_BreakUpModel item_spinner;
     SwipeRefreshLayout swipeRefreshLayout;
     Context context;
     private ProgressDialog progressDialog;
@@ -145,9 +145,9 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         processname = sharedPreferences.getString("user_name", "");
         stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
-        repair_date = Global.repairClass1.getRepair_Date();
-        repair_no = Global.repairClass1.getREPNo();
-        repair_amount = Global.repairClass1.getRepair_Amount();
+        repair_date = Global.repairModel1.getRepair_Date();
+        repair_no = Global.repairModel1.getREPNo();
+        repair_amount = Global.repairModel1.getRepair_Amount();
 
         TextView txtsitename, txtstpname, textno, textdate, texamount;
 
@@ -177,7 +177,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        repair_no = Global.repairClass1.getREPNo();
+        repair_no = Global.repairModel1.getREPNo();
         double conNo;
         try {
             conNo = Double.parseDouble(repair_no);
@@ -332,7 +332,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
 
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                String repair2_code = Global.repairClass2.getD_Repairedtwo();
+                String repair2_code = Global.repairModel2.getD_Repairedtwo();
                 params.put("repair_item_code", repair_item_code);
                 params.put("qty", qty);
                 params.put("remarks", remarks);
@@ -359,13 +359,13 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     private void get_Breakup_Details_Repair() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String Repair_Breakup_API = Global.RepairsRepairBreakUp;
-        String url = Repair_Breakup_API + "repair2_code=" + Global.repairClass2.getD_Repairedtwo();
+        String url = Repair_Breakup_API + "repair2_code=" + Global.repairModel2.getD_Repairedtwo();
         // String url = Repair_Breakup_API + "repair2_code=" +"2";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.repair3list = new ArrayList<RepairClass3>();
-                repairClass3 = new RepairClass3();
+                Global.repair3list = new ArrayList<RepairModel3>();
+                repairModel3 = new RepairModel3();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -379,19 +379,19 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    repairClass3 = new RepairClass3();
+                    repairModel3 = new RepairModel3();
                     try {
-                        repairClass3.setRepair_Breakup_Item_name(e.getString("repair_item_name"));
-                        repairClass3.setRepair_Breakup_Unit(e.getString("unit_name"));
-                        repairClass3.setRepair_Breakup_Qty(e.getString("qty"));
-                        repairClass3.setRepair_Breakup_Price(e.getString("price"));
-                        repairClass3.setRepair_Breakup_Remark(e.getString("remarks"));
-                        repairClass3.setRepair_Breakup_amount(e.getString("amt"));
+                        repairModel3.setRepair_Breakup_Item_name(e.getString("repair_item_name"));
+                        repairModel3.setRepair_Breakup_Unit(e.getString("unit_name"));
+                        repairModel3.setRepair_Breakup_Qty(e.getString("qty"));
+                        repairModel3.setRepair_Breakup_Price(e.getString("price"));
+                        repairModel3.setRepair_Breakup_Remark(e.getString("remarks"));
+                        repairModel3.setRepair_Breakup_amount(e.getString("amt"));
 
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.repair3list.add(repairClass3);
+                    Global.repair3list.add(repairModel3);
                     Repair_BreakUp_Adapter repairBreakUpAdapter = new Repair_BreakUp_Adapter(Global.repair3list, context);
                     repairBreakUpAdapter.notifyDataSetChanged();
                     Repair_breakup_recyclerview.setAdapter(repairBreakUpAdapter);
@@ -611,11 +611,11 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Global.Repair_Item_Breakup = new ArrayList<ItemListClassRepair_BreakUp>();
+                Global.Repair_Item_Breakup = new ArrayList<ItemListRepair_BreakUpModel>();
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject equipmentJson = response.getJSONObject(i);
-                        ItemListClassRepair_BreakUp equipment = new ItemListClassRepair_BreakUp();
+                        ItemListRepair_BreakUpModel equipment = new ItemListRepair_BreakUpModel();
 
                         equipment.setBreakup_unit(equipmentJson.getString("com_code"));
                         equipment.setBreakup_unit_code(equipmentJson.getString("unit_code"));
@@ -691,9 +691,9 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     }
 
     private class ItemSelect_Adapter extends BaseAdapter implements Filterable {
-        private ArrayList<ItemListClassRepair_BreakUp> eQarrayList;
+        private ArrayList<ItemListRepair_BreakUpModel> eQarrayList;
 
-        public ItemSelect_Adapter(ArrayList<ItemListClassRepair_BreakUp> eQarrayList) {
+        public ItemSelect_Adapter(ArrayList<ItemListRepair_BreakUpModel> eQarrayList) {
             this.eQarrayList = eQarrayList;
         }
 
@@ -748,12 +748,12 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             return new Filter() {
                 @Override
                 protected FilterResults performFiltering(CharSequence charSequence) {
-                    ArrayList<ItemListClassRepair_BreakUp> mFilteredList = new ArrayList<>();
+                    ArrayList<ItemListRepair_BreakUpModel> mFilteredList = new ArrayList<>();
                     String charString = charSequence.toString();
                     if (charString.isEmpty()) {
                         mFilteredList = Global.Repair_Item_Breakup;
                     } else {
-                        for (ItemListClassRepair_BreakUp dataList : Global.Repair_Item_Breakup) {
+                        for (ItemListRepair_BreakUpModel dataList : Global.Repair_Item_Breakup) {
                             if (dataList.getBreakup_unit_name().toLowerCase().contains(charString) ||
                                     dataList.getBreakup_unit().toLowerCase().contains(charString)) {
                                 mFilteredList.add(dataList);
@@ -769,7 +769,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
 
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                    eQarrayList = (ArrayList<ItemListClassRepair_BreakUp>) filterResults.values;
+                    eQarrayList = (ArrayList<ItemListRepair_BreakUpModel>) filterResults.values;
                     notifyDataSetChanged();
                 }
             };

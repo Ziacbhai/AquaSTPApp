@@ -24,14 +24,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import Models.ConsumptionClass;
+import Models.ConsumptionModel;
 
 public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.Viewholder> {
-    private final List<ConsumptionClass> consumptionClasses;
+    private final List<ConsumptionModel> consumptionModels;
     Context context;
 
-    public ConsumptionAdapter(List<ConsumptionClass> consumptionClasses, Context context) {
-        this.consumptionClasses = consumptionClasses;
+    public ConsumptionAdapter(List<ConsumptionModel> consumptionModels, Context context) {
+        this.consumptionModels = consumptionModels;
         this.context = context;
     }
 
@@ -48,10 +48,10 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
     @Override
     public void onBindViewHolder(@NonNull ConsumptionAdapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
 
-        holder.Amount.setText(consumptionClasses.get(position).getAmount() + "0");
-        holder.Remark.setText(consumptionClasses.get(position).getRemark());
-        holder.Created_by.setText(consumptionClasses.get(position).getCreated_by());
-        String conNoString = consumptionClasses.get(position).getCon_no();
+        holder.Amount.setText(consumptionModels.get(position).getAmount() + "0");
+        holder.Remark.setText(consumptionModels.get(position).getRemark());
+        holder.Created_by.setText(consumptionModels.get(position).getCreated_by());
+        String conNoString = consumptionModels.get(position).getCon_no();
         double conNo;
         try {
             conNo = Double.parseDouble(conNoString);
@@ -62,7 +62,7 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
         String formattedConNo = removeTrailingZero(conNo);
         holder.Con1_code.setText(formattedConNo);
         // holder.Date.setText(consumablesClasses.get(position).getDate());
-        String dateString = consumptionClasses.get(position).getDate();
+        String dateString = consumptionModels.get(position).getDate();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date;
@@ -78,7 +78,7 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
         holder.Consumable_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Global.ConsumptionClass = consumptionClasses.get(position);
+                Global.ConsumptionModel = consumptionModels.get(position);
                 Intent i = new Intent(context, Consumption_Details_Activity.class);
                 context.startActivity(i);
             }
@@ -97,7 +97,7 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
 
     @Override
     public int getItemCount() {
-        return consumptionClasses.size();
+        return consumptionModels.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {

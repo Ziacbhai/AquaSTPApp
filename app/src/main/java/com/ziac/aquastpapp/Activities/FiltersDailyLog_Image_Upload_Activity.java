@@ -31,13 +31,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import Models.FiltersClass;
+import Models.FiltersModel;
 public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
 
     LinearLayout FilterImageUpload;
     Bitmap imageBitmap;
     ImageView filter_image_back;
-    FiltersClass filtersClass;
+    FiltersModel filtersModel;
     Context context;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -138,7 +138,7 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
                 params.put("fileName", image);
-                params.put("tstp4_code", Global.filtersClass.getTstp4_code());
+                params.put("tstp4_code", Global.filtersModel.getTstp4_code());
                 params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
                 return params;
             }

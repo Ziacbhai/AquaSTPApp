@@ -8,10 +8,10 @@ import android.telephony.SmsMessage;
 
 import com.chaos.view.PinView;
 
-public class OTP_Receiver extends BroadcastReceiver {
+public class OTPReceiver extends BroadcastReceiver {
     private static PinView pinView;
     public void setPinView(PinView pinView) {
-        OTP_Receiver.pinView = pinView;
+        OTPReceiver.pinView = pinView;
     }
 
     @Override

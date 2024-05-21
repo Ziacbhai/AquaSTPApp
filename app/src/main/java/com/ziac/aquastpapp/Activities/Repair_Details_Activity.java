@@ -53,10 +53,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.Repair_details_Adapter;
 import Models.EquipmentRepairListClass;
-import Models.RepairClass2;
+import Models.RepairModel2;
 
 public class Repair_Details_Activity extends AppCompatActivity {
-    RepairClass2 repairClass2;
+    RepairModel2 repairModel2;
     TextView Remark_A;
     static TextView Equipment_code;
     AppCompatButton Update_A, Cancel_A;
@@ -120,9 +120,9 @@ public class Repair_Details_Activity extends AppCompatActivity {
         processname = sharedPreferences.getString("process_name", "");
         stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
-        repair_date = Global.repairClass1.getRepair_Date();
-        repair_no = Global.repairClass1.getREPNo();
-        repair_amount = Global.repairClass1.getRepair_Amount();
+        repair_date = Global.repairModel1.getRepair_Date();
+        repair_no = Global.repairModel1.getREPNo();
+        repair_amount = Global.repairModel1.getRepair_Amount();
 
         TextView txtsitename, txtstpname, textno, textdate, texamount;
 
@@ -150,7 +150,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        repair_no = Global.repairClass1.getREPNo();
+        repair_no = Global.repairModel1.getREPNo();
         double conNo;
         try {
             conNo = Double.parseDouble(repair_no);
@@ -290,7 +290,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", "0"));
                 params.put("sstp1_code", Global.sharedPreferences.getString("sstp1_code", "0"));
-                params.put("repair1_code", Global.repairClass1.getRepair_code());
+                params.put("repair1_code", Global.repairModel1.getRepair_code());
                 //params.put("repair1_code", "22");
                 System.out.println(params);
                 return params;
@@ -308,12 +308,12 @@ public class Repair_Details_Activity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.Get_Repairs_Details;
 
-        String Repair_Details_API = url + "repair1_code=" + Global.repairClass1.getRepair_code();
+        String Repair_Details_API = url + "repair1_code=" + Global.repairModel1.getRepair_code();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Repair_Details_API, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.repair2list = new ArrayList<RepairClass2>();
-                repairClass2 = new RepairClass2();
+                Global.repair2list = new ArrayList<RepairModel2>();
+                repairModel2 = new RepairModel2();
 
                 try {
                     JSONArray jarray = response.getJSONArray("data");
@@ -321,21 +321,21 @@ public class Repair_Details_Activity extends AppCompatActivity {
                     if (jarray.length() > 0) {
                         for (int i = 0; i < jarray.length(); i++) {
                             final JSONObject e = jarray.getJSONObject(i);
-                            repairClass2 = new RepairClass2();
+                            repairModel2 = new RepairModel2();
 
-                            repairClass2.setD_Equipment_Name(e.getString("equip_name"));
-                            repairClass2.setD_Equipment_Number(e.getString("equip_slno"));
-                            repairClass2.setD_Amount(e.getString("repaired_amt"));
-                            repairClass2.setD_Repaired(e.getString("repaired_flag"));
-                            repairClass2.setD_Remark(e.getString("repaired_remarks"));
-                            repairClass2.setD_Repairedtwo(e.getString("repair2_code"));
+                            repairModel2.setD_Equipment_Name(e.getString("equip_name"));
+                            repairModel2.setD_Equipment_Number(e.getString("equip_slno"));
+                            repairModel2.setD_Amount(e.getString("repaired_amt"));
+                            repairModel2.setD_Repaired(e.getString("repaired_flag"));
+                            repairModel2.setD_Remark(e.getString("repaired_remarks"));
+                            repairModel2.setD_Repairedtwo(e.getString("repair2_code"));
 
                            /* String repair2_code = repairClass2.getD_Repairedtwo();
                             Global.editor = Global.sharedPreferences.edit();
                             Global.editor.putString("repair2_code", repair2_code);
                             Global.editor.commit();*/
 
-                            Global.repair2list.add(repairClass2);
+                            Global.repair2list.add(repairModel2);
                         }
                         Repair_details_Adapter repair_details_adapter = new Repair_details_Adapter(Global.repair2list, context);
                         Repair_details_recyclerview.setAdapter(repair_details_adapter);

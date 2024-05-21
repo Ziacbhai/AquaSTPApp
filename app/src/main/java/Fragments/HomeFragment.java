@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,14 +38,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import Models.DailyLogClass;
+import Models.DailyLogModel;
 
 
 
 public class HomeFragment extends Fragment {
     ProgressDialog progressDialog;
     FloatingActionButton Fab;
-    DailyLogClass dailyLog;
+    DailyLogModel dailyLog;
     Context context;
     RelativeLayout layoutpump, layoutblower, layoutmeter, layoutsensor, layoutfilter, layouthandover_remark;
 
@@ -181,7 +181,7 @@ public class HomeFragment extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, dailylog, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.dailyLogClassArrayList = new ArrayList<DailyLogClass>();
+                Global.dailyLogModelArrayList = new ArrayList<DailyLogModel>();
                 JSONArray jarray;
 
                 try {
@@ -193,9 +193,9 @@ public class HomeFragment extends Fragment {
                         String dlogdate = response.getString("dlogdate");
                         Log.d("YourTag", "Daily Log Date: " + dlogdate);
 
-                        DailyLogClass dailyLog = new DailyLogClass();
+                        DailyLogModel dailyLog = new DailyLogModel();
                         dailyLog.setDailylog(dlogdate);
-                        Global.dailyLogClassArrayList.add(dailyLog);
+                        Global.dailyLogModelArrayList.add(dailyLog);
 
                         Global.editor = Global.sharedPreferences.edit();
                         Global.editor.putString("dlogdate", dlogdate);

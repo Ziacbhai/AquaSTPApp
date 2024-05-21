@@ -1,6 +1,6 @@
 package Models;
 
-public class PumpMotorBlower_LogClass {
+public class PumpMotorBlowerLogModel {
 
     String equip_name,running_time,start_time,end_time,tstp2_code,running_status,tstp5_code;
 

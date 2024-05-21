@@ -37,13 +37,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import Models.PumpMotorBlower_LogClass;
+import Models.PumpMotorBlowerLogModel;
 
 public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMotorAdapter.Viewholder> {
 
-    private List<PumpMotorBlower_LogClass> pumpMotorDailyLogClass;
+    private List<PumpMotorBlowerLogModel> pumpMotorDailyLogClass;
     Context context;
-    public StoppedPumpMotorAdapter(List<PumpMotorBlower_LogClass> pumpMotorDailyLogClass, Context context) {
+    public StoppedPumpMotorAdapter(List<PumpMotorBlowerLogModel> pumpMotorDailyLogClass, Context context) {
         this.pumpMotorDailyLogClass = pumpMotorDailyLogClass;
         this.context = context;
     }

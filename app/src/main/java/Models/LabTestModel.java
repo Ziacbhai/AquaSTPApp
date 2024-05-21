@@ -1,6 +1,6 @@
 package Models;
 
-public class LabTestClass {
+public class LabTestModel {
 
     String  l_Test_Method,l_Units,l_KSPCB_Standard,l_result,TRno, Refno,LabDate,LabRefDate,CustomerRef,Sample_Received_Date,
             Test_Start_Date,Test_Completion_Date,Sample_Received_By,Sample_Particular,Status;

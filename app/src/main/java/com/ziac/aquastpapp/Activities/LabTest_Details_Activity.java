@@ -29,11 +29,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.Lab_Test_Details_Adapter;
-import Models.LabTestClass;
+import Models.LabTestModel;
 
 public class LabTest_Details_Activity extends AppCompatActivity {
     RecyclerView Labtest_details_Rv;
-    LabTestClass labTest_Dclass;
+    LabTestModel labTest_Dclass;
     Context context;
     private ProgressDialog progressDialog;
 
@@ -92,8 +92,8 @@ public class LabTest_Details_Activity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Lab_Details_API, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.LabTest_Class = new ArrayList<LabTestClass>();
-                labTest_Dclass = new LabTestClass();
+                Global.LabTest_Class = new ArrayList<LabTestModel>();
+                labTest_Dclass = new LabTestModel();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -109,7 +109,7 @@ public class LabTest_Details_Activity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    labTest_Dclass = new LabTestClass();
+                    labTest_Dclass = new LabTestModel();
                     try {
                         labTest_Dclass.setL_Test_Method(e.getString("test_method"));
                         labTest_Dclass.setL_Units(e.getString("unit_name"));

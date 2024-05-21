@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 
 import Models.SensorsModelClass;
 
-public class SensorsDailyLog_Image_Upload_Activity extends AppCompatActivity {
+public class SensorsDailyLogImageUploadActivity extends AppCompatActivity {
     Bitmap imageBitmap;
     LinearLayout Sensor_image_Upload;
     Context context;
@@ -120,7 +119,7 @@ public class SensorsDailyLog_Image_Upload_Activity extends AppCompatActivity {
 
                     if (success) {
                         Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SensorsDailyLog_Image_Upload_Activity.this, SensorsDailyLogActivity.class));
+                        startActivity(new Intent(SensorsDailyLogImageUploadActivity.this, SensorsDailyLogActivity.class));
                         finish();
                     } else {
                         Toast.makeText(context, error, Toast.LENGTH_SHORT).show();

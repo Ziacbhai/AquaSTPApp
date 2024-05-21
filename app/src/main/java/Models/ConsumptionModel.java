@@ -1,6 +1,6 @@
 package Models;
 
-public class ConsumptionClass {
+public class ConsumptionModel {
     String Remark,Date,Amount,Sstp1_code,Con1_code,Created_by,Con_no;
 
     public String getCon_no() {

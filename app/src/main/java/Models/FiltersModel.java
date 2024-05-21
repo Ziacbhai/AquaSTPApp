@@ -1,6 +1,6 @@
 package Models;
 
-public class FiltersClass {
+public class FiltersModel {
 
     String  equip_name,reading_time,filter_image,filter_status,tstp4_code;
 

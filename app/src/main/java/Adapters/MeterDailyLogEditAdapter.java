@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +25,10 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.MeterDailyLogActivity;
-import com.ziac.aquastpapp.Activities.RepairBreakUpActivity;
-import com.ziac.aquastpapp.Activities.SensorsDailyLogActivity;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONException;
@@ -43,16 +39,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import Models.MetersDailyLogClass;
+import Models.MetersDailyLogModel;
 
 public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLogEditAdapter.ViewHolder> {
 
-    private List<MetersDailyLogClass> metersDailyLogClass;
+    private List<MetersDailyLogModel> metersDailyLogModels;
     Context context;
     String enteredValue;
 
-    public MeterDailyLogEditAdapter(List<MetersDailyLogClass> metersDailyLogClass, Context context) {
-        this.metersDailyLogClass = metersDailyLogClass;
+    public MeterDailyLogEditAdapter(List<MetersDailyLogModel> metersDailyLogModels, Context context) {
+        this.metersDailyLogModels = metersDailyLogModels;
         this.context = context;
     }
 
@@ -66,7 +62,7 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
     @Override
     public void onBindViewHolder(@NonNull MeterDailyLogEditAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_equip_name());
+        holder.Meter_equip_name.setText(metersDailyLogModels.get(position).getMeters_equip_name());
         holder.Meter_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +129,7 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
                 Map<String, String> params = new HashMap<>();
                 params.put("com_code", Global.sharedPreferences.getString("com_code", null));
                 params.put("ayear", Global.sharedPreferences.getString("ayear", null));
-                params.put("tstp3_code", metersDailyLogClass.get(position).getTstp3_code());
+                params.put("tstp3_code", metersDailyLogModels.get(position).getTstp3_code());
                 //params.put("tstp3_code","80462");
                 params.put("reading_value",enteredValue);
                 System.out.println(params);
@@ -150,7 +146,7 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
     }
     @Override
     public int getItemCount() {
-        return metersDailyLogClass.size();
+        return metersDailyLogModels.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

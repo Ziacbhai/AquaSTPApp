@@ -42,12 +42,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.LabTestAdapter;
-import Models.LabTestClass;
+import Models.LabTestModel;
 
 
 public class LabTestFragment extends Fragment {
     RecyclerView LabTestRecyclerview;
-    LabTestClass labTestClass;
+    LabTestModel labTestModel;
     LabTestAdapter labTestAdapter;
     private ProgressDialog progressDialog;
     Context context;
@@ -327,8 +327,8 @@ public class LabTestFragment extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, labTest, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.LabTest_Class = new ArrayList<LabTestClass>();
-                labTestClass = new LabTestClass();
+                Global.LabTest_Class = new ArrayList<LabTestModel>();
+                labTestModel = new LabTestModel();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -343,23 +343,23 @@ public class LabTestFragment extends Fragment {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    labTestClass = new LabTestClass();
+                    labTestModel = new LabTestModel();
                     try {
-                        labTestClass.setTRno(e.getString("test_code"));
-                        labTestClass.setLabDate(e.getString("test_date"));
-                        labTestClass.setRefno(e.getString("ref_no"));
-                        labTestClass.setCustomerRef(e.getString("cus_ref"));
-                        labTestClass.setLabRefDate(e.getString("ref_date"));
+                        labTestModel.setTRno(e.getString("test_code"));
+                        labTestModel.setLabDate(e.getString("test_date"));
+                        labTestModel.setRefno(e.getString("ref_no"));
+                        labTestModel.setCustomerRef(e.getString("cus_ref"));
+                        labTestModel.setLabRefDate(e.getString("ref_date"));
 
-                        labTestClass.setSample_Received_Date(e.getString("rcp_date"));
+                        labTestModel.setSample_Received_Date(e.getString("rcp_date"));
 
-                        labTestClass.setTest_Start_Date(e.getString("start_date"));
-                        labTestClass.setTest_Completion_Date(e.getString("end_date"));
+                        labTestModel.setTest_Start_Date(e.getString("start_date"));
+                        labTestModel.setTest_Completion_Date(e.getString("end_date"));
 
-                        labTestClass.setSample_Received_By(e.getString("sample_receivedby"));
-                        labTestClass.setSample_Particular(e.getString("sample_desc"));
+                        labTestModel.setSample_Received_By(e.getString("sample_receivedby"));
+                        labTestModel.setSample_Particular(e.getString("sample_desc"));
 
-                        labTestClass.setStatus(e.getString("test_status"));
+                        labTestModel.setStatus(e.getString("test_status"));
 
                       /*  String test_code = labTestClass.getTRno();
                         Global.editor = Global.sharedPreferences.edit();
@@ -369,7 +369,7 @@ public class LabTestFragment extends Fragment {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.LabTest_Class.add(labTestClass);
+                    Global.LabTest_Class.add(labTestModel);
                     labTestAdapter = new LabTestAdapter(Global.LabTest_Class, getContext());
                     LabTestRecyclerview.setAdapter(labTestAdapter);
                 }

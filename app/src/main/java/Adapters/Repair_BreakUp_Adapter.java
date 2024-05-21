@@ -11,19 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ziac.aquastpapp.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import Models.RepairClass3;
+import Models.RepairModel3;
 
 
 public class Repair_BreakUp_Adapter extends RecyclerView.Adapter<Repair_BreakUp_Adapter.Viewholder> {
 
-    List<RepairClass3> repairClass3;
+    List<RepairModel3> repairModel3;
     Context context;
 
-    public Repair_BreakUp_Adapter(List<RepairClass3> repairClass3, Context context) {
-        this.repairClass3 = repairClass3;
+    public Repair_BreakUp_Adapter(List<RepairModel3> repairModel3, Context context) {
+        this.repairModel3 = repairModel3;
         this.context = context;
     }
 
@@ -36,17 +35,17 @@ public class Repair_BreakUp_Adapter extends RecyclerView.Adapter<Repair_BreakUp_
 
     @Override
     public void onBindViewHolder(@NonNull Repair_BreakUp_Adapter.Viewholder holder, int position) {
-        holder.Breakup_Item_name.setText(repairClass3.get(position).getRepair_Breakup_Item_name());
-        holder.Breakup_qty.setText(repairClass3.get(position).getRepair_Breakup_Qty() + 0);
-        holder.Breakup_price.setText(repairClass3.get(position).getRepair_Breakup_Price() + 0);
-        holder.Breakup_total.setText(repairClass3.get(position).getRepair_Breakup_amount() + 0);
-        holder.Breakup_unit.setText(repairClass3.get(position).getRepair_Breakup_Unit());
-        holder.Breakup_remark.setText(repairClass3.get(position).getRepair_Breakup_Remark());
+        holder.Breakup_Item_name.setText(repairModel3.get(position).getRepair_Breakup_Item_name());
+        holder.Breakup_qty.setText(repairModel3.get(position).getRepair_Breakup_Qty() + 0);
+        holder.Breakup_price.setText(repairModel3.get(position).getRepair_Breakup_Price() + 0);
+        holder.Breakup_total.setText(repairModel3.get(position).getRepair_Breakup_amount() + 0);
+        holder.Breakup_unit.setText(repairModel3.get(position).getRepair_Breakup_Unit());
+        holder.Breakup_remark.setText(repairModel3.get(position).getRepair_Breakup_Remark());
     }
 
     @Override
     public int getItemCount() {
-        return repairClass3.size();
+        return repairModel3.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {

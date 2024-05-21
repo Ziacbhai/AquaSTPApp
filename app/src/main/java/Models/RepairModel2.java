@@ -1,6 +1,6 @@
 package Models;
 
-public class RepairClass2 {
+public class RepairModel2 {
 
     String D_Equipment_Name,D_Equipment_Number,D_Amount ,D_Repaired,D_Repairedtwo,D_Remark;
 

@@ -39,7 +39,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.BlowersDailyLogStartAdapter;
-import Models.PumpMotorBlower_LogClass;
+import Models.PumpMotorBlowerLogModel;
 
 public class BlowersDailyLogActivity extends AppCompatActivity {
     Context context;
@@ -160,7 +160,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                Global.Blower_LogClass = new ArrayList<PumpMotorBlower_LogClass>();
+                Global.Blower_LogClass = new ArrayList<PumpMotorBlowerLogModel>();
                 //blowerClass = new PumpMotorBlower_LogClass();
                 JSONArray jarray;
 
@@ -173,7 +173,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
                         }
-                        PumpMotorBlower_LogClass blowerClass = new PumpMotorBlower_LogClass();
+                        PumpMotorBlowerLogModel blowerClass = new PumpMotorBlowerLogModel();
                         try {
                             blowerClass.setEquip_name(e.getString("equip_name"));
                             blowerClass.setStart_time(e.getString("starttime"));
@@ -190,7 +190,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                     }
 
                     RecyclerView blowersStartedRecyclerView = findViewById(R.id.blowers_started_recyclerview);
-                    BlowersDailyLogStartAdapter blowerAdapter = new BlowersDailyLogStartAdapter(context, (List<PumpMotorBlower_LogClass>) Global.Blower_LogClass);
+                    BlowersDailyLogStartAdapter blowerAdapter = new BlowersDailyLogStartAdapter(context, (List<PumpMotorBlowerLogModel>) Global.Blower_LogClass);
                     blowersStartedRecyclerView.setAdapter(blowerAdapter);
 
 

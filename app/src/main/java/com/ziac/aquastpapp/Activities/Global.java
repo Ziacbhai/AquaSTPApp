@@ -20,28 +20,26 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import Adapters.MeterDailyLogEditAdapter;
 import Models.CommonModelClass;
-import Models.ConsumptionClass;
-import Models.ConsumptionClass2;
-import Models.DailyLogClass;
+import Models.ConsumptionModel;
+import Models.ConsumptionModel2;
+import Models.DailyLogModel;
 import Models.EquipmentClassRepairBreakUp;
 import Models.EquipmentListClassConsumption;
 import Models.EquipmentRepairListClass;
-import Models.FiltersClass;
-import Models.IncidentsClass;
-import Models.ItemListClassConsumption;
-import Models.ItemListClassRepair_BreakUp;
-import Models.ItemStockClass;
-import Models.LabTestClass;
-import Models.MetersDailyLogClass;
-import Models.PumpMotorBlower_LogClass;
-import Models.RepairClass2;
-import Models.RepairClass1;
-import Models.RepairClass3;
-import Models.RepairClass4;
+import Models.FiltersModel;
+import Models.IncidentsModelClass;
+import Models.ItemListConsumptionModel;
+import Models.ItemListRepair_BreakUpModel;
+import Models.ItemStockModel;
+import Models.LabTestModel;
+import Models.MetersDailyLogModel;
+import Models.PumpMotorBlowerLogModel;
+import Models.RepairModel2;
+import Models.RepairModel1;
+import Models.RepairModel3;
+import Models.RepairModel4;
 import Models.SensorsModelClass;
 import Models.StpModelClass;
 import Models.zList;
@@ -137,47 +135,47 @@ public class Global {
     public static String api_Repair_List_Get_Equipments = baseurl + "api/List/GetRepairItems?";
     public static String api_Repair_List_Get_Units = baseurl + "api/List/GetUnits?";
     public static ArrayList<zList> statearraylist;
-    public static ArrayList<DailyLogClass> dailyLogClassArrayList;
+    public static ArrayList<DailyLogModel> dailyLogModelArrayList;
 
     public static ArrayList<zList> cityarraylist;
     public static ArrayList<StpModelClass> StpList;
     public static ArrayList<CommonModelClass> pumpdetails;
-    public static ArrayList<ItemStockClass> Item_stock;
-    public static ArrayList<RepairClass1> repair1list;
-    public static ArrayList<RepairClass2> repair2list;
-    public static ArrayList<RepairClass3> repair3list;
-    public static ArrayList<RepairClass4> repair4list;
-    public static ConsumptionClass ConsumptionClass;
-    public static ConsumptionClass2 consumptionClass2;
-    public static RepairClass1 repairClass1;
-    public static RepairClass2 repairClass2;
-    public static RepairClass3 repairClass3;
-    public static DailyLogClass dailyLogClass;
+    public static ArrayList<ItemStockModel> Item_stock;
+    public static ArrayList<RepairModel1> repair1list;
+    public static ArrayList<RepairModel2> repair2list;
+    public static ArrayList<RepairModel3> repair3list;
+    public static ArrayList<RepairModel4> repair4list;
+    public static ConsumptionModel ConsumptionModel;
+    public static ConsumptionModel2 consumptionModel2;
+    public static RepairModel1 repairModel1;
+    public static RepairModel2 repairModel2;
+    public static RepairModel3 repairModel3;
+    public static DailyLogModel dailyLogModel;
 
-    public static RepairClass4 repairClass4;
-    public static LabTestClass labTestClass1;
-    public static IncidentsClass incidentsClass;
-    public static FiltersClass filtersClass;
+    public static RepairModel4 repairModel4;
+    public static LabTestModel labTestModel1;
+    public static IncidentsModelClass incidentsModelClass;
+    public static FiltersModel filtersModel;
 
-    public static MetersDailyLogClass MetersDailyLogClass;
+    public static MetersDailyLogModel MetersDailyLogModel;
 
     public static SensorsModelClass sensorclass;
-    public static ArrayList<ConsumptionClass> Consumption1list;
-    public static ArrayList<ConsumptionClass2> Consumption2list;
+    public static ArrayList<ConsumptionModel> Consumption1list;
+    public static ArrayList<ConsumptionModel2> Consumption2list;
     public static ArrayList<EquipmentListClassConsumption> Consumption_equipment;
-    public static ArrayList<ItemListClassConsumption> Consumption_item;
+    public static ArrayList<ItemListConsumptionModel> Consumption_item;
     public static ArrayList<EquipmentRepairListClass> Repair_equipment;
-    public static ArrayList<ItemListClassRepair_BreakUp> Repair_Item_Breakup;
+    public static ArrayList<ItemListRepair_BreakUpModel> Repair_Item_Breakup;
     public static ArrayList<EquipmentClassRepairBreakUp> Repair_Equipment_Breakup;
-    public static ArrayList<LabTestClass> LabTest_Class;
-    public static ArrayList<IncidentsClass> Incident_Class;
-    public static ArrayList<PumpMotorBlower_LogClass> RunningPumpsMotors_LogClass;
-    public static ArrayList<PumpMotorBlower_LogClass> Blower_LogClass;
+    public static ArrayList<LabTestModel> LabTest_Class;
+    public static ArrayList<IncidentsModelClass> Incident_Class;
+    public static ArrayList<PumpMotorBlowerLogModel> RunningPumpsMotors_LogClass;
+    public static ArrayList<PumpMotorBlowerLogModel> Blower_LogClass;
     //public static ArrayList<PumpMotorBlower_LogClass> Stop_Blower_LogClass;
-    public static ArrayList<PumpMotorBlower_LogClass> StoppedPumpsMotors_LogClass;
-    public static ArrayList<FiltersClass> Filter_LogClass;
+    public static ArrayList<PumpMotorBlowerLogModel> StoppedPumpsMotors_LogClass;
+    public static ArrayList<FiltersModel> Filter_LogClass;
     public static ArrayList<SensorsModelClass> Sensors_Class;
-    public static ArrayList<MetersDailyLogClass> Meters_Class;
+    public static ArrayList<MetersDailyLogModel> Meters_Class;
     public static SensorsModelClass sensorsClass;
     public static ArrayList<CommonModelClass> metersdetails;
 
@@ -221,7 +219,7 @@ public class Global {
 
     public static void loadstoppedpumps(JSONObject response) throws JSONException {
         /*stopped pumps*/
-        Global.StoppedPumpsMotors_LogClass = new ArrayList<PumpMotorBlower_LogClass>();
+        Global.StoppedPumpsMotors_LogClass = new ArrayList<PumpMotorBlowerLogModel>();
         JSONArray jarray;
         jarray = response.getJSONArray("pumps2");
         for (int i = 0; i < jarray.length(); i++) {
@@ -231,7 +229,7 @@ public class Global {
             } catch (JSONException ex) {
                 throw new RuntimeException(ex);
             }
-            PumpMotorBlower_LogClass pumpMotorClass = new PumpMotorBlower_LogClass();
+            PumpMotorBlowerLogModel pumpMotorClass = new PumpMotorBlowerLogModel();
             try {
                 pumpMotorClass.setEquip_name(e.getString("equip_name"));
                 pumpMotorClass.setRunning_time(e.getString("running_time"));
@@ -247,7 +245,7 @@ public class Global {
 
     public static void loadrunningpumps(JSONObject response) throws JSONException {
         /*running pumps*/
-        Global.RunningPumpsMotors_LogClass = new ArrayList<PumpMotorBlower_LogClass>();
+        Global.RunningPumpsMotors_LogClass = new ArrayList<PumpMotorBlowerLogModel>();
         JSONArray jarray;
         jarray = response.getJSONArray("pumps1");
         for (int i = 0; i < jarray.length(); i++) {
@@ -257,7 +255,7 @@ public class Global {
             } catch (JSONException ex) {
                 throw new RuntimeException(ex);
             }
-            PumpMotorBlower_LogClass pumpMotorClass = new PumpMotorBlower_LogClass();
+            PumpMotorBlowerLogModel pumpMotorClass = new PumpMotorBlowerLogModel();
             try {
                 pumpMotorClass.setEquip_name(e.getString("equip_name"));
                 pumpMotorClass.setStart_time(e.getString("starttime"));
@@ -273,7 +271,7 @@ public class Global {
     }
 
     public static void loadmeter1(JSONObject response) throws JSONException {
-        Global.Meters_Class = new ArrayList<MetersDailyLogClass>();
+        Global.Meters_Class = new ArrayList<MetersDailyLogModel>();
         JSONArray jarray;
         jarray = response.getJSONArray("meters1");
 
@@ -284,23 +282,23 @@ public class Global {
             } catch (JSONException ex) {
                 throw new RuntimeException(ex);
             }
-            MetersDailyLogClass = new MetersDailyLogClass();
+            MetersDailyLogModel = new MetersDailyLogModel();
             try {
-                MetersDailyLogClass.setMeters_equip_name(e.getString("equip_name"));
-                MetersDailyLogClass.setTstp3_code(e.getString("tstp3_code"));
-                MetersDailyLogClass.setMeters_reading_edit(e.getString("reading_value"));
-                MetersDailyLogClass.setMeter_status(e.getString("status"));
+                MetersDailyLogModel.setMeters_equip_name(e.getString("equip_name"));
+                MetersDailyLogModel.setTstp3_code(e.getString("tstp3_code"));
+                MetersDailyLogModel.setMeters_reading_edit(e.getString("reading_value"));
+                MetersDailyLogModel.setMeter_status(e.getString("status"));
 
             } catch (JSONException ex) {
                 throw new RuntimeException(ex);
             }
-            Global.Meters_Class.add(MetersDailyLogClass);
+            Global.Meters_Class.add(MetersDailyLogModel);
 
         }
     }
 
     public static void loadmeter2(JSONObject response) throws JSONException {
-        Global.Meters_Class = new ArrayList<MetersDailyLogClass>();
+        Global.Meters_Class = new ArrayList<MetersDailyLogModel>();
         JSONArray jarray;
         jarray = response.getJSONArray("meters2");
 
@@ -311,19 +309,19 @@ public class Global {
             } catch (JSONException ex) {
                 throw new RuntimeException(ex);
             }
-            MetersDailyLogClass = new MetersDailyLogClass();
+            MetersDailyLogModel = new MetersDailyLogModel();
             try {
-                MetersDailyLogClass.setMeters_equip_name(e.getString("equip_name"));
-                MetersDailyLogClass.setMeters_reading_edit(e.getString("reading_value"));
-                MetersDailyLogClass.setMeters_reading_time(e.getString("readingtime"));
-                MetersDailyLogClass.setMeters_total(e.getString("final_value"));
-                MetersDailyLogClass.setTstp3_code(e.getString("tstp3_code"));
-                MetersDailyLogClass.setMeter_status(e.getString("status"));
+                MetersDailyLogModel.setMeters_equip_name(e.getString("equip_name"));
+                MetersDailyLogModel.setMeters_reading_edit(e.getString("reading_value"));
+                MetersDailyLogModel.setMeters_reading_time(e.getString("readingtime"));
+                MetersDailyLogModel.setMeters_total(e.getString("final_value"));
+                MetersDailyLogModel.setTstp3_code(e.getString("tstp3_code"));
+                MetersDailyLogModel.setMeter_status(e.getString("status"));
 
             } catch (JSONException ex) {
                 throw new RuntimeException(ex);
             }
-            Global.Meters_Class.add(MetersDailyLogClass);
+            Global.Meters_Class.add(MetersDailyLogModel);
 
         }
     }

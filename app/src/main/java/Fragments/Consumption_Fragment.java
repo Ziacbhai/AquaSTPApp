@@ -2,11 +2,9 @@ package Fragments;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
@@ -21,7 +19,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.DefaultRetryPolicy;
@@ -45,7 +42,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.ConsumptionAdapter;
-import Models.ConsumptionClass;
+import Models.ConsumptionModel;
 
 public class Consumption_Fragment extends Fragment {
     RecyclerView Consumables_rv;
@@ -212,7 +209,7 @@ public class Consumption_Fragment extends Fragment {
                             Global.Consumption1list = new ArrayList<>();
                             for (int i = 0; i < dataArray.length(); i++) {
                                 JSONObject dataObject = dataArray.getJSONObject(i);
-                                ConsumptionClass consumablesClass = new ConsumptionClass();
+                                ConsumptionModel consumablesClass = new ConsumptionModel();
 
                                 consumablesClass.setCon1_code(dataObject.getString("con1_code"));
                                 consumablesClass.setDate(dataObject.getString("con_date"));

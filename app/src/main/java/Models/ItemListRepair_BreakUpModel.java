@@ -1,6 +1,6 @@
 package Models;
 
-public class ItemListClassRepair_BreakUp {
+public class ItemListRepair_BreakUpModel {
 
     String Breakup_unit ,Breakup_unit_name,Breakup_unit_code;
 

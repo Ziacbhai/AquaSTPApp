@@ -1,10 +1,6 @@
 package Models;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-public class IncidentsClass {
+public class IncidentsModelClass {
     String Incident_no,Incident_Code,Incident_Date,Incidents_Particulars,In_info,In_upload,In_Delete,ImageList,In_image_name,Inc_Created_by,
             Inc_doc_name,Inc_doc_delete,In_doc_list,Name,Delete_Incident_code2;
 

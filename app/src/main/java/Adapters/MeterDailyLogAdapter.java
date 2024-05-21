@@ -13,14 +13,14 @@ import com.ziac.aquastpapp.R;
 
 import java.util.List;
 
-import Models.MetersDailyLogClass;
+import Models.MetersDailyLogModel;
 
 public class MeterDailyLogAdapter extends RecyclerView.Adapter<MeterDailyLogAdapter.ViewHolder> {
-    private List<MetersDailyLogClass> metersDailyLogClass;
+    private List<MetersDailyLogModel> metersDailyLogModels;
     Context context;
 
-    public MeterDailyLogAdapter(List<MetersDailyLogClass> metersDailyLogClass, Context context) {
-        this.metersDailyLogClass = metersDailyLogClass;
+    public MeterDailyLogAdapter(List<MetersDailyLogModel> metersDailyLogModels, Context context) {
+        this.metersDailyLogModels = metersDailyLogModels;
         this.context = context;
     }
 
@@ -35,15 +35,15 @@ public class MeterDailyLogAdapter extends RecyclerView.Adapter<MeterDailyLogAdap
     public void onBindViewHolder(@NonNull MeterDailyLogAdapter.ViewHolder holder, int position) {
 
 
-        holder.Meter_equip_name.setText(metersDailyLogClass.get(position).getMeters_equip_name());
-        holder.Meter_reading_time.setText(metersDailyLogClass.get(position).getMeters_reading_time());
-        holder.Meter_total.setText(metersDailyLogClass.get(position).getMeters_total());
+        holder.Meter_equip_name.setText(metersDailyLogModels.get(position).getMeters_equip_name());
+        holder.Meter_reading_time.setText(metersDailyLogModels.get(position).getMeters_reading_time());
+        holder.Meter_total.setText(metersDailyLogModels.get(position).getMeters_total());
 
-        double rawValue = Double.parseDouble(metersDailyLogClass.get(position).getMeters_reading_edit());
+        double rawValue = Double.parseDouble(metersDailyLogModels.get(position).getMeters_reading_edit());
         String formattedValue = removeTrailingZeros(rawValue);
         holder.Meter_reading_edit.setText(formattedValue);
 
-        double rawValue1 = Double.parseDouble(metersDailyLogClass.get(position).getMeters_total());
+        double rawValue1 = Double.parseDouble(metersDailyLogModels.get(position).getMeters_total());
         String formattedValue1 = removeTrailingZeros(rawValue1);
         holder.Meter_total.setText(formattedValue1);
 
@@ -58,7 +58,7 @@ public class MeterDailyLogAdapter extends RecyclerView.Adapter<MeterDailyLogAdap
 
     @Override
     public int getItemCount() {
-        return metersDailyLogClass.size();
+        return metersDailyLogModels.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

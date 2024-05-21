@@ -28,10 +28,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.ItemStockAdapter;
-import Models.ItemStockClass;
+import Models.ItemStockModel;
 public class ItemStockFragment extends Fragment {
     RecyclerView consumableRecyclerView;
-    ItemStockClass itemStockClass;
+    ItemStockModel itemStockModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -58,8 +58,8 @@ public class ItemStockFragment extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, urlstock, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.Item_stock = new ArrayList<ItemStockClass>();
-                itemStockClass = new ItemStockClass();
+                Global.Item_stock = new ArrayList<ItemStockModel>();
+                itemStockModel = new ItemStockModel();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -74,14 +74,14 @@ public class ItemStockFragment extends Fragment {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    itemStockClass = new ItemStockClass();
+                    itemStockModel = new ItemStockModel();
                     try {
-                        itemStockClass.set_Number(e.getString("full_prd_name"));
-                        itemStockClass.set_Stock(e.getString("closing_stock"));
+                        itemStockModel.set_Number(e.getString("full_prd_name"));
+                        itemStockModel.set_Stock(e.getString("closing_stock"));
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Item_stock.add(itemStockClass);
+                    Global.Item_stock.add(itemStockModel);
                 }
                 ItemStockAdapter itemStockAdapter = new ItemStockAdapter(getContext(), Global.Item_stock);
                 consumableRecyclerView.setAdapter(itemStockAdapter);

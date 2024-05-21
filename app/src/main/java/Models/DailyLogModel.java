@@ -1,6 +1,6 @@
 package Models;
 
-public class DailyLogClass {
+public class DailyLogModel {
 
 
     String dailylog,tstp1_code;
@@ -13,7 +13,7 @@ public class DailyLogClass {
         this.tstp1_code = tstp1_code;
     }
 
-    public DailyLogClass() {
+    public DailyLogModel() {
         this.dailylog = dailylog;
     }
 

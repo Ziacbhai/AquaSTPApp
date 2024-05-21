@@ -45,12 +45,12 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.RepairAdapter;
-import Models.RepairClass1;
+import Models.RepairModel1;
 
 
 public class RepairFragment extends Fragment {
 
-    RepairClass1 repairClass1;
+    RepairModel1 repairModel1;
     RepairAdapter repairAdapter;
     RecyclerView RepairRecyclerview;
     TextView tvSelectedDate, Remark_A;
@@ -260,8 +260,8 @@ public class RepairFragment extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, repair, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.repair1list = new ArrayList<RepairClass1>();
-                repairClass1 = new RepairClass1();
+                Global.repair1list = new ArrayList<RepairModel1>();
+                repairModel1 = new RepairModel1();
 
                 try {
                     JSONArray jarray = response.getJSONArray("data");
@@ -269,14 +269,14 @@ public class RepairFragment extends Fragment {
                     if (jarray.length() > 0) {
                         for (int i = 0; i < jarray.length(); i++) {
                             final JSONObject e = jarray.getJSONObject(i);
-                            repairClass1 = new RepairClass1();
+                            repairModel1 = new RepairModel1();
 
-                            repairClass1.setREPNo(e.getString("rep_no"));
-                            repairClass1.setRepair_Amount(e.getString("repaired_amt"));
-                            repairClass1.setRepair_Date(e.getString("rep_date"));
-                            repairClass1.setRepair_code(e.getString("repair1_code"));
-                            repairClass1.setRemark(e.getString("remarks"));
-                            repairClass1.setR_createdby(e.getString("createdby"));
+                            repairModel1.setREPNo(e.getString("rep_no"));
+                            repairModel1.setRepair_Amount(e.getString("repaired_amt"));
+                            repairModel1.setRepair_Date(e.getString("rep_date"));
+                            repairModel1.setRepair_code(e.getString("repair1_code"));
+                            repairModel1.setRemark(e.getString("remarks"));
+                            repairModel1.setR_createdby(e.getString("createdby"));
 
 
                             /*String repair1_code = repairClass1.getRepair_code();
@@ -284,7 +284,7 @@ public class RepairFragment extends Fragment {
                             Global.editor.putString("repair1_code", repair1_code);
                             Global.editor.commit();*/
 
-                            Global.repair1list.add(repairClass1);
+                            Global.repair1list.add(repairModel1);
                         }
 
                         RepairAdapter repairAdapter = new RepairAdapter(Global.repair1list, getContext());

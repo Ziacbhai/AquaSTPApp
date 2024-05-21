@@ -21,15 +21,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import Models.LabTestClass;
+import Models.LabTestModel;
 
 
 public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewholder> {
-    private List<LabTestClass> labTestClasses;
+    private List<LabTestModel> labTestModels;
     Context context;
 
-    public LabTestAdapter(List<LabTestClass> labTestClasses, Context context) {
-        this.labTestClasses = labTestClasses;
+    public LabTestAdapter(List<LabTestModel> labTestModels, Context context) {
+        this.labTestModels = labTestModels;
         this.context = context;
     }
 
@@ -43,21 +43,21 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
     @Override
     public void onBindViewHolder(@NonNull LabTestAdapter.Viewholder holder, int position) {
 
-        holder.Refno.setText(labTestClasses.get(position).getRefno());
-        holder.CustomerRef.setText(labTestClasses.get(position).getCustomerRef());
-        holder.Sample_Received_By.setText(labTestClasses.get(position).getSample_Received_By());
-        holder.Sample_Particular.setText(labTestClasses.get(position).getSample_Particular());
+        holder.Refno.setText(labTestModels.get(position).getRefno());
+        holder.CustomerRef.setText(labTestModels.get(position).getCustomerRef());
+        holder.Sample_Received_By.setText(labTestModels.get(position).getSample_Received_By());
+        holder.Sample_Particular.setText(labTestModels.get(position).getSample_Particular());
 
         holder.Lab_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Global.labTestClass1 = labTestClasses.get(position);
+                Global.labTestModel1 = labTestModels.get(position);
                 Intent i = new Intent(context, LabTest_Details_Activity.class);
                 context.startActivity(i);
             }
         });
 
-        String conNoString = labTestClasses.get(position).getTRno();
+        String conNoString = labTestModels.get(position).getTRno();
         double conNo;
         try {
             conNo = Double.parseDouble(conNoString);
@@ -68,7 +68,7 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
         String formattedConNo = removeTrailingZero(conNo);
         holder.TRno.setText(formattedConNo);
 
-        String dateString = labTestClasses.get(position).getLabDate();
+        String dateString = labTestModels.get(position).getLabDate();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date;
@@ -81,7 +81,7 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
             return;
         }
 
-        String LabRefDate = labTestClasses.get(position).getLabRefDate();
+        String LabRefDate = labTestModels.get(position).getLabRefDate();
 
         SimpleDateFormat inputFormat1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat1 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -96,7 +96,7 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
         }
 
 
-        String Start_Date = labTestClasses.get(position).getTest_Start_Date();
+        String Start_Date = labTestModels.get(position).getTest_Start_Date();
 
         SimpleDateFormat inputFormat2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -110,7 +110,7 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
             return;
         }
 
-        String Completion_Date = labTestClasses.get(position).getTest_Completion_Date();
+        String Completion_Date = labTestModels.get(position).getTest_Completion_Date();
 
         SimpleDateFormat inputFormat_1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat_1 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -124,7 +124,7 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
             return;
         }
 
-        String Sample_Received_Date = labTestClasses.get(position).getSample_Received_Date();
+        String Sample_Received_Date = labTestModels.get(position).getSample_Received_Date();
 
         SimpleDateFormat inputFormat_2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
         SimpleDateFormat outputFormat_2 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -155,7 +155,7 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
 
     @Override
     public int getItemCount() {
-        return labTestClasses.size();
+        return labTestModels.size();
     }
 
     public static class Viewholder extends RecyclerView.ViewHolder {

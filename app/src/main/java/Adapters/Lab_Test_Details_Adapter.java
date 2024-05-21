@@ -11,18 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ziac.aquastpapp.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import Models.LabTestClass;
+import Models.LabTestModel;
 
 public class Lab_Test_Details_Adapter extends RecyclerView.Adapter<Lab_Test_Details_Adapter.Viewholder> {
     Context context;
-    private List<LabTestClass> labTestClasses;
+    private List<LabTestModel> labTestModels;
 
-    public Lab_Test_Details_Adapter(Context context, List<LabTestClass> labTestClasses) {
+    public Lab_Test_Details_Adapter(Context context, List<LabTestModel> labTestModels) {
         this.context = context;
-        this.labTestClasses = labTestClasses;
+        this.labTestModels = labTestModels;
     }
 
     @NonNull
@@ -34,15 +33,15 @@ public class Lab_Test_Details_Adapter extends RecyclerView.Adapter<Lab_Test_Deta
 
     @Override
     public void onBindViewHolder(@NonNull Lab_Test_Details_Adapter.Viewholder holder, int position) {
-        holder.TestMethod_d.setText(labTestClasses.get(position).getL_Test_Method());
-        holder.Units_d.setText(labTestClasses.get(position).getL_Units());
-        holder.Result_d.setText(labTestClasses.get(position).getL_result());
-        holder.Kspcb_Standard.setText(labTestClasses.get(position).getL_KSPCB_Standard());
+        holder.TestMethod_d.setText(labTestModels.get(position).getL_Test_Method());
+        holder.Units_d.setText(labTestModels.get(position).getL_Units());
+        holder.Result_d.setText(labTestModels.get(position).getL_result());
+        holder.Kspcb_Standard.setText(labTestModels.get(position).getL_KSPCB_Standard());
     }
 
     @Override
     public int getItemCount() {
-        return labTestClasses.size();
+        return labTestModels.size();
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {

@@ -1,6 +1,6 @@
 package Models;
 
-public class ItemListClassConsumption {
+public class ItemListConsumptionModel {
 
     String item ,item_name,Item_code;
 

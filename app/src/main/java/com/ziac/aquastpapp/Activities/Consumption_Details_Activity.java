@@ -60,16 +60,16 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.Consumption_Details_Adapter;
-import Models.ConsumptionClass2;
+import Models.ConsumptionModel2;
 import Models.EquipmentListClassConsumption;
-import Models.ItemListClassConsumption;
+import Models.ItemListConsumptionModel;
 
 public class Consumption_Details_Activity extends AppCompatActivity {
-    ConsumptionClass2 consumptionClass2;
+    ConsumptionModel2 consumptionModel2;
     RecyclerView Consumables_D_Rv;
     Context context;
     private EquipmentListClassConsumption equipment_spinner;
-    private ItemListClassConsumption Item_spinner;
+    private ItemListConsumptionModel Item_spinner;
 
     private Dialog zDialog;
     TextView Equipment_code, Item_codeTV;
@@ -131,9 +131,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         processname = sharedPreferences.getString("process_name", "");
         stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
-        consumption_date = Global.ConsumptionClass.getDate();
-        consumption_no = Global.ConsumptionClass.getCon_no();
-        consumption_amount = Global.ConsumptionClass.getAmount();
+        consumption_date = Global.ConsumptionModel.getDate();
+        consumption_no = Global.ConsumptionModel.getCon_no();
+        consumption_amount = Global.ConsumptionModel.getAmount();
 
         TextView txtsitename, txtstpname, textno, textdate, texamount;
         txtsitename = findViewById(R.id.sitename);
@@ -157,7 +157,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        consumption_no = Global.ConsumptionClass.getCon_no();
+        consumption_no = Global.ConsumptionModel.getCon_no();
         double conNo;
         try {
             conNo = Double.parseDouble(consumption_no);
@@ -319,7 +319,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                String con1_code = Global.ConsumptionClass.getCon1_code();
+                String con1_code = Global.ConsumptionModel.getCon1_code();
                 params.put("item_code", item_code);
                 // params.put("item_code", String.valueOf(equipment_spinner.getEquipment_code()));
                 params.put("equip_code", equipment_code);
@@ -363,7 +363,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
     private void getConsumablesDetails() {
         RequestQueue queue = Volley.newRequestQueue(this);
         String consumables_d = Global.Get_Consumables_Details;
-        String Consumable_Details_API = consumables_d + "con1_code=" + Global.ConsumptionClass.getCon1_code();
+        String Consumable_Details_API = consumables_d + "con1_code=" + Global.ConsumptionModel.getCon1_code();
         // Toast.makeText(context, ""+Global.ConsumablesClass.getCon_no(), Toast.LENGTH_SHORT).show();
 
         progressDialog.show();
@@ -371,8 +371,8 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 progressDialog.dismiss();
-                Global.Consumption2list = new ArrayList<ConsumptionClass2>();
-                consumptionClass2 = new ConsumptionClass2();
+                Global.Consumption2list = new ArrayList<ConsumptionModel2>();
+                consumptionModel2 = new ConsumptionModel2();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -387,18 +387,18 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    consumptionClass2 = new ConsumptionClass2();
+                    consumptionModel2 = new ConsumptionModel2();
                     try {
-                        consumptionClass2.setEquipment_Name(e.getString("equip_name"));
-                        consumptionClass2.setEquipment_id(e.getString("equip_slno"));
-                        consumptionClass2.setEquip_code(e.getString("equip_code"));
-                        consumptionClass2.setItem_code(e.getString("item_code"));
-                        consumptionClass2.setD_qty(e.getString("qty"));
-                        consumptionClass2.setD_Amount(e.getString("prd_amt"));
-                        consumptionClass2.setD_item(e.getString("part_no"));
-                        consumptionClass2.setD_item_name(e.getString("prd_name"));
-                        consumptionClass2.setD_unit(e.getString("unit_name"));
-                        consumptionClass2.setD_rate(e.getString("prch_price"));
+                        consumptionModel2.setEquipment_Name(e.getString("equip_name"));
+                        consumptionModel2.setEquipment_id(e.getString("equip_slno"));
+                        consumptionModel2.setEquip_code(e.getString("equip_code"));
+                        consumptionModel2.setItem_code(e.getString("item_code"));
+                        consumptionModel2.setD_qty(e.getString("qty"));
+                        consumptionModel2.setD_Amount(e.getString("prd_amt"));
+                        consumptionModel2.setD_item(e.getString("part_no"));
+                        consumptionModel2.setD_item_name(e.getString("prd_name"));
+                        consumptionModel2.setD_unit(e.getString("unit_name"));
+                        consumptionModel2.setD_rate(e.getString("prch_price"));
 
                         // Toast.makeText(context, ""+consumables_Class.getD_item_name(), Toast.LENGTH_SHORT).show();
                     /*    Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -413,7 +413,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                         Toast.makeText(context, "No Data Available", Toast.LENGTH_SHORT).show();
                         throw new RuntimeException(ex);
                     }
-                    Global.Consumption2list.add(consumptionClass2);
+                    Global.Consumption2list.add(consumptionModel2);
                     Consumption_Details_Adapter consumablesDetailsAdapter = new Consumption_Details_Adapter(context, Global.Consumption2list);
                     Consumables_D_Rv.setAdapter(consumablesDetailsAdapter);
                 }
@@ -645,7 +645,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                     try {
 
                         JSONObject equipmentJson = response.getJSONObject(i);
-                        ItemListClassConsumption item = new ItemListClassConsumption();
+                        ItemListConsumptionModel item = new ItemListConsumptionModel();
 
                         item.setItem(equipmentJson.getString("part_no"));
                         item.setItem_code(equipmentJson.getString("item_code"));
@@ -728,9 +728,9 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
     public class ItemSelect_Adapter extends BaseAdapter implements Filterable {
 
-        private ArrayList<ItemListClassConsumption> mDataArrayList;
+        private ArrayList<ItemListConsumptionModel> mDataArrayList;
 
-        public ItemSelect_Adapter(ArrayList<ItemListClassConsumption> mDataArrayList) {
+        public ItemSelect_Adapter(ArrayList<ItemListConsumptionModel> mDataArrayList) {
             this.mDataArrayList = mDataArrayList;
         }
         @Override
@@ -775,12 +775,12 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             return new Filter() {
                 @Override
                 protected FilterResults performFiltering(CharSequence charSequence) {
-                    List<ItemListClassConsumption> mFilteredList = new ArrayList<>();
+                    List<ItemListConsumptionModel> mFilteredList = new ArrayList<>();
                     String charString = charSequence.toString();
                     if (charString.isEmpty()) {
                         mFilteredList = Global.Consumption_item;
                     } else {
-                        for (ItemListClassConsumption dataList : Global.Consumption_item) {
+                        for (ItemListConsumptionModel dataList : Global.Consumption_item) {
                             if (dataList.getItem_name().toLowerCase().contains(charString) ||
                                     dataList.getItem().toLowerCase().contains(charString)) {
                                 mFilteredList.add(dataList);
@@ -795,7 +795,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                 }
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                    mDataArrayList = (ArrayList<ItemListClassConsumption>) filterResults.values;
+                    mDataArrayList = (ArrayList<ItemListConsumptionModel>) filterResults.values;
                     notifyDataSetChanged();
                 }
             };

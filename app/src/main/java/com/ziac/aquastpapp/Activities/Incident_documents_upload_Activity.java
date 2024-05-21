@@ -2,7 +2,6 @@ package com.ziac.aquastpapp.Activities;
 
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,13 +10,11 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -163,7 +160,7 @@ public class Incident_documents_upload_Activity<Payment_upload> extends AppCompa
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("fileName", base64String);
-                params.put("incident_code", Global.incidentsClass.getIncident_Code());
+                params.put("incident_code", Global.incidentsModelClass.getIncident_Code());
                 params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
                 return params;
             }

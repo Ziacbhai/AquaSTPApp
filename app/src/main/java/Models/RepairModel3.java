@@ -1,6 +1,6 @@
 package Models;
 
-public class RepairClass3 {
+public class RepairModel3 {
 
     String Repair_Breakup_Item_name,Repair_Breakup_Unit,Repair_Breakup_Qty,Repair_Breakup_Price,Repair_Breakup_Remark,Repair_Breakup_amount,Repair_Breakup_total;
 

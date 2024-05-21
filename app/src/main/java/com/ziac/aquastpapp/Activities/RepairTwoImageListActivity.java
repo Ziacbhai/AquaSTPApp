@@ -37,13 +37,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.Repairtwo_image_list_Adapter;
-import Models.RepairClass4;
+import Models.RepairModel4;
 
 
 public class RepairTwoImageListActivity extends AppCompatActivity {
     Bitmap imageBitmap;
     RecyclerView Repair_Images_Rv;
-    RepairClass4 repairClass4;
+    RepairModel4 repairModel4;
     AppCompatButton Repair_image_uploadbtn;
     ProgressDialog progressDialog;
     ImageView RepairImage;
@@ -105,13 +105,13 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
 
     private void getRepairImages() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = Global.Repair_two_Imagelist + "repair2_code=" + Global.repairClass2.getD_Repairedtwo();
+        String url = Global.Repair_two_Imagelist + "repair2_code=" + Global.repairModel2.getD_Repairedtwo();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
-                Global.repair4list = new ArrayList<RepairClass4>();
-                repairClass4 = new RepairClass4();
+                Global.repair4list = new ArrayList<RepairModel4>();
+                repairModel4 = new RepairModel4();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -127,15 +127,15 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    repairClass4 = new RepairClass4();
+                    repairModel4 = new RepairModel4();
                     try {
-                        repairClass4.setI_Repair_image(e.getString("image_name"));
-                        repairClass4.setI_Remark(e.getString("image_remarks"));
+                        repairModel4.setI_Repair_image(e.getString("image_name"));
+                        repairModel4.setI_Remark(e.getString("image_remarks"));
                         //Toast.makeText(context, (e.getString("image_remarks")), Toast.LENGTH_SHORT).show();
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.repair4list.add(repairClass4);
+                    Global.repair4list.add(repairModel4);
                     Repairtwo_image_list_Adapter repairtwoImageUploadAdapter = new Repairtwo_image_list_Adapter(Global.repair4list, context);
                     Repair_Images_Rv.setAdapter(repairtwoImageUploadAdapter);
                 }

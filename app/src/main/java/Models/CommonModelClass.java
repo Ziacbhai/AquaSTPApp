@@ -1,42 +1,8 @@
 package Models;
 
 public class CommonModelClass {
-    private String Process_name ,Sstp2_code,Image_id,Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
-            Form_Factor,Phase,Cleaning_RunningFrequency_HRS,Address_M,REPNo,Amount,TRNO,Refno,CustomerNo,INCno ,Incident_perticular;
-    private int Card_view ;
-
-    public String getTRNO() {
-        return TRNO;
-    }
-
-    public void setTRNO(String TRNO) {
-        this.TRNO = TRNO;
-    }
-
-    public String getRefno() {
-        return Refno;
-    }
-
-    public void setRefno(String refno) {
-        Refno = refno;
-    }
-
-    public String getCustomerNo() {
-        return CustomerNo;
-    }
-
-    public void setCustomerNo(String customerNo) {
-        CustomerNo = customerNo;
-    }
-
-    public String getREPNo() {
-        return REPNo;
-    }
-
-    public void setREPNo(String REPNo) {
-        this.REPNo = REPNo;
-    }
-
+     String Process_name ,Image_id,Manufacturer,EquipmentName,Specification,EquipmentNumber_Id,Rating_Capacity,
+            Form_Factor,Phase,Cleaning_RunningFrequency_HRS,Amount;
     public String getAmount() {
         return Amount;
     }
@@ -45,42 +11,12 @@ public class CommonModelClass {
         Amount = amount;
     }
 
-    public String getImage_id() {
-        return Image_id;
-    }
-
-
-    public void setImage_id(String image_id) {
-        Image_id = image_id;
-    }
-
-
-    public String getAddress_M() {
-        return Address_M;
-    }
-
-    public void setAddress_M(String address_M) {
-        Address_M = address_M;
-    }
-
-    public CommonModelClass() {
-
-    }
-
     public String getProcess_name() {
         return Process_name;
     }
 
     public void setProcess_name(String process_name) {
         Process_name = process_name;
-    }
-
-    public String getSstp2_code() {
-        return Sstp2_code;
-    }
-
-    public void setSstp2_code(String sstp2_code) {
-        Sstp2_code = sstp2_code;
     }
 
     public String getImage() {
@@ -155,11 +91,4 @@ public class CommonModelClass {
         Cleaning_RunningFrequency_HRS = cleaning_RunningFrequency_HRS;
     }
 
-    public int getCard_view() {
-        return Card_view;
-    }
-
-    public void setCard_view(int card_view) {
-        Card_view = card_view;
-    }
 }

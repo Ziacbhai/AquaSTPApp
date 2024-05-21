@@ -44,12 +44,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.Incident_image_upload_Adapter;
-import Models.IncidentsClass;
+import Models.IncidentsModelClass;
 
 public class Incident_image_upload_Activity extends AppCompatActivity {
     Bitmap imageBitmap;
     RecyclerView Incident_Images_Rv;
-    IncidentsClass incidentsClass;
+    IncidentsModelClass incidentsModelClass;
     ImageView In_image_uploadbtn;
     Context context;
     ImageView back_btn;
@@ -180,7 +180,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
                 String image = imageToString(imageBitmap);
                 params.put("fileName", image);
                 //params.put("incident_code", Global.incidentsClass.getIncident_No());
-                params.put("incident_code", Global.incidentsClass.getIncident_Code());
+                params.put("incident_code", Global.incidentsModelClass.getIncident_Code());
                 params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
                 return params;
             }
@@ -203,13 +203,13 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
 
     private void getIncidentImages() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = Global.Get_Incidents_Details + "incident_code=" + Global.incidentsClass.getIncident_Code() + "&file_type=" + "I";
+        String url = Global.Get_Incidents_Details + "incident_code=" + Global.incidentsModelClass.getIncident_Code() + "&file_type=" + "I";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
-                Global.Incident_Class = new ArrayList<IncidentsClass>();
-                incidentsClass = new IncidentsClass();
+                Global.Incident_Class = new ArrayList<IncidentsModelClass>();
+                incidentsModelClass = new IncidentsModelClass();
                 JSONArray jarray;
                 try {
                     jarray = response.getJSONArray("data");
@@ -225,11 +225,11 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    incidentsClass = new IncidentsClass();
+                    incidentsModelClass = new IncidentsModelClass();
                     try {
-                        incidentsClass.setImageList(e.getString("file_name"));
-                        incidentsClass.setIn_image_name(e.getString("original_file_name"));
-                        incidentsClass.setDelete_Incident_code2(e.getString("incident_code2"));
+                        incidentsModelClass.setImageList(e.getString("file_name"));
+                        incidentsModelClass.setIn_image_name(e.getString("original_file_name"));
+                        incidentsModelClass.setDelete_Incident_code2(e.getString("incident_code2"));
 
                         // Toast.makeText(context, ""+ incidentsClass.getImageList(), Toast.LENGTH_SHORT).show();
 
@@ -237,7 +237,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.Incident_Class.add(incidentsClass);
+                    Global.Incident_Class.add(incidentsModelClass);
                     Incident_image_upload_Adapter incidentImageUploadAdapter = new Incident_image_upload_Adapter(Global.Incident_Class, context);
                     Incident_Images_Rv.setAdapter(incidentImageUploadAdapter);
                 }

@@ -1,6 +1,6 @@
 package Models;
 
-public class ConsumptionClass2 {
+public class ConsumptionModel2 {
     String D_Amount,D_unit,D_item,D_rate,D_qty ,D_item_name,Equipment_Name,Equipment_id,Equip_code,Item_code;
 
     public String getD_Amount() {

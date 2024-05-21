@@ -40,7 +40,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.MeterDailyLogAdapter;
 import Adapters.MeterDailyLogEditAdapter;
-import Models.MetersDailyLogClass;
+import Models.MetersDailyLogModel;
 
 public class MeterDailyLogActivity extends AppCompatActivity {
     ImageView backbtn;
@@ -185,13 +185,13 @@ public class MeterDailyLogActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     Global.loadmeter1(response);
-                    MeterDailyLogEditAdapter meterDailyLogEditAdapter = new MeterDailyLogEditAdapter((List<MetersDailyLogClass>) Global.Meters_Class, context);
+                    MeterDailyLogEditAdapter meterDailyLogEditAdapter = new MeterDailyLogEditAdapter((List<MetersDailyLogModel>) Global.Meters_Class, context);
                     Meters_recyclerview.setAdapter(meterDailyLogEditAdapter);
                     meterDailyLogEditAdapter.notifyDataSetChanged();
 
                     // Common code block
                     Global.loadmeter2(response);
-                    MeterDailyLogAdapter meterDailyLogAdapter = new MeterDailyLogAdapter((List<MetersDailyLogClass>) Global.Meters_Class, context);
+                    MeterDailyLogAdapter meterDailyLogAdapter = new MeterDailyLogAdapter((List<MetersDailyLogModel>) Global.Meters_Class, context);
                     Meters_recyclerview2.setAdapter(meterDailyLogAdapter);
                     meterDailyLogAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {

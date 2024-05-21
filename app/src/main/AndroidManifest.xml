@@ -59,7 +59,7 @@
             android:name=".Activities.Handover_Remarks_Activity"
             android:exported="false" />
         <activity
-            android:name=".Activities.SensorsDailyLog_Image_Upload_Activity"
+            android:name=".Activities.SensorsDailyLogImageUploadActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.FiltersDailyLog_Image_Upload_Activity"
@@ -111,7 +111,7 @@
             android:exported="false" />
 
         <receiver
-            android:name=".Activities.OTP_Receiver"
+            android:name=".Activities.OTPReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />

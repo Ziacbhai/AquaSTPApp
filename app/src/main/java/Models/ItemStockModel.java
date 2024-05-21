@@ -1,7 +1,7 @@
 package Models;
 
-public class ItemStockClass {
-    public ItemStockClass() {
+public class ItemStockModel {
+    public ItemStockModel() {
 
     }
 
