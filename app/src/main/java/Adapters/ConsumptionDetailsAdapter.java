@@ -17,19 +17,19 @@ import java.util.List;
 
 import Models.ConsumptionModel2;
 
-public class Consumption_Details_Adapter extends RecyclerView.Adapter<Consumption_Details_Adapter.Viewholder> {
+public class ConsumptionDetailsAdapter extends RecyclerView.Adapter<ConsumptionDetailsAdapter.Viewholder> {
 
     Context context;
     private List<ConsumptionModel2> consumptionModel2;
 
-    public Consumption_Details_Adapter(Context context, List<ConsumptionModel2> consumptionModel2) {
+    public ConsumptionDetailsAdapter(Context context, List<ConsumptionModel2> consumptionModel2) {
         this.context = context;
         this.consumptionModel2 = consumptionModel2;
     }
 
     @NonNull
     @Override
-    public Consumption_Details_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ConsumptionDetailsAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.consumption_details_design, parent, false);
         Viewholder viewholder = new Viewholder(view);
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
@@ -38,7 +38,7 @@ public class Consumption_Details_Adapter extends RecyclerView.Adapter<Consumptio
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Consumption_Details_Adapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull ConsumptionDetailsAdapter.Viewholder holder, int position) {
         holder.Consumption_eq_name.setText(consumptionModel2.get(position).getEquipment_Name());
         holder.Consumption_eq_id.setText(consumptionModel2.get(position).getEquipment_id());
         holder.Consumption_item.setText(consumptionModel2.get(position).getD_item() + " / " + consumptionModel2.get(position).getD_item_name());

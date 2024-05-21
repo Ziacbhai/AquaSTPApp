@@ -24,19 +24,19 @@ import java.util.List;
 
 import Models.RepairModel2;
 
-public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_Adapter.Viewholder> {
+public class RepairDetailsAdapter extends RecyclerView.Adapter<RepairDetailsAdapter.Viewholder> {
 
     private List<RepairModel2> repairModel2;
     Context context;
 
-    public Repair_details_Adapter(List<RepairModel2> repairModel2, Context context) {
+    public RepairDetailsAdapter(List<RepairModel2> repairModel2, Context context) {
         this.repairModel2 = repairModel2;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public Repair_details_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RepairDetailsAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repair_details_design, parent, false);
         Viewholder viewholder = new Viewholder(view);
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
@@ -45,7 +45,7 @@ public class Repair_details_Adapter extends RecyclerView.Adapter<Repair_details_
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Repair_details_Adapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull RepairDetailsAdapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.Eq_Name.setText(repairModel2.get(position).getD_Equipment_Name());
         holder.Eq_number.setText(repairModel2.get(position).getD_Equipment_Number());

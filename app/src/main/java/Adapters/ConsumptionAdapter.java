@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ziac.aquastpapp.Activities.Consumption_Details_Activity;
+import com.ziac.aquastpapp.Activities.ConsumptionDetailsActivity;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
 
@@ -79,7 +79,7 @@ public class ConsumptionAdapter extends RecyclerView.Adapter<ConsumptionAdapter.
             @Override
             public void onClick(View v) {
                 Global.ConsumptionModel = consumptionModels.get(position);
-                Intent i = new Intent(context, Consumption_Details_Activity.class);
+                Intent i = new Intent(context, ConsumptionDetailsActivity.class);
                 context.startActivity(i);
             }
         });

@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import Adapters.Repairtwo_image_list_Adapter;
+import Adapters.RepairTwoImagelistAdapter;
 import Models.RepairModel4;
 
 
@@ -70,7 +70,7 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         Repair_image_uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RepairTwoImageListActivity.this, RepairTwo_Upload_Activity.class));
+                startActivity(new Intent(RepairTwoImageListActivity.this, RepairTwoUploadActivity.class));
                 finish();
             }
         });
@@ -136,7 +136,7 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
                         throw new RuntimeException(ex);
                     }
                     Global.repair4list.add(repairModel4);
-                    Repairtwo_image_list_Adapter repairtwoImageUploadAdapter = new Repairtwo_image_list_Adapter(Global.repair4list, context);
+                    RepairTwoImagelistAdapter repairtwoImageUploadAdapter = new RepairTwoImagelistAdapter(Global.repair4list, context);
                     Repair_Images_Rv.setAdapter(repairtwoImageUploadAdapter);
                 }
 

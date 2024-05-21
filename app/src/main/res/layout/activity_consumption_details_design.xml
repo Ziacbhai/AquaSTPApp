@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#eaeff5"
     android:orientation="vertical"
-    tools:context=".Activities.Consumption_Details_Activity">
+    tools:context=".Activities.ConsumptionDetailsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

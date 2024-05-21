@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import com.ziac.aquastpapp.R;
 
-public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
+public class IncidentImageDocSelectActivity extends AppCompatActivity {
 
     Context context;
     CardView In_image_, In_docs_;
@@ -42,14 +42,14 @@ public class Incident_Image_doc_Select_Activity extends AppCompatActivity {
         In_image_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Incident_Image_doc_Select_Activity.this, Incident_image_upload_Activity.class));
+                startActivity(new Intent(IncidentImageDocSelectActivity.this, IncidentImageUploadActivity.class));
             }
         });
 
         In_docs_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Incident_Image_doc_Select_Activity.this, Incident_documents_upload_Activity.class));
+                startActivity(new Intent(IncidentImageDocSelectActivity.this, IncidentDocumentsUploadActivity.class));
             }
         });
     }

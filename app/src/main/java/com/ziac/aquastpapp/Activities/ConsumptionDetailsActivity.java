@@ -59,12 +59,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import Adapters.Consumption_Details_Adapter;
+import Adapters.ConsumptionDetailsAdapter;
 import Models.ConsumptionModel2;
 import Models.EquipmentListClassConsumption;
 import Models.ItemListConsumptionModel;
 
-public class Consumption_Details_Activity extends AppCompatActivity {
+public class ConsumptionDetailsActivity extends AppCompatActivity {
     ConsumptionModel2 consumptionModel2;
     RecyclerView Consumables_D_Rv;
     Context context;
@@ -228,19 +228,19 @@ public class Consumption_Details_Activity extends AppCompatActivity {
 
 
                 if (equipment_code.isEmpty()) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Equipment  should not be empty !!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Equipment  should not be empty !!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (item_code.isEmpty()) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Item should not be empty !!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Item should not be empty !!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (qty.isEmpty()) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Qty should not be empty !!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Qty should not be empty !!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (qty.equals("0") || qty.matches("0+")) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Qty should not be zero !!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Qty should not be zero !!", Toast.LENGTH_LONG).show();
                     return;
                 }
                 updateConsumables_details();
@@ -297,15 +297,15 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 // Toast.makeText(context, "failed to upload", Toast.LENGTH_SHORT).show();
                 if (error instanceof TimeoutError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "No Connection Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "No Connection Found", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ServerError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Server Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Server Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NetworkError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Network Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Network Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ParseError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Parse Error", Toast.LENGTH_LONG).show();
                 }
             }
         }) {
@@ -352,7 +352,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             public void run() {
                 swipeRefreshLayout.setRefreshing(false);
                 Global.Consumption2list.clear();
-                Consumption_Details_Adapter consumablesDetailsAdapter = new Consumption_Details_Adapter(context, Global.Consumption2list);
+                ConsumptionDetailsAdapter consumablesDetailsAdapter = new ConsumptionDetailsAdapter(context, Global.Consumption2list);
                 Consumables_D_Rv.setAdapter(consumablesDetailsAdapter);
                 consumablesDetailsAdapter.notifyDataSetChanged();
                 getConsumablesDetails();
@@ -414,7 +414,7 @@ public class Consumption_Details_Activity extends AppCompatActivity {
                         throw new RuntimeException(ex);
                     }
                     Global.Consumption2list.add(consumptionModel2);
-                    Consumption_Details_Adapter consumablesDetailsAdapter = new Consumption_Details_Adapter(context, Global.Consumption2list);
+                    ConsumptionDetailsAdapter consumablesDetailsAdapter = new ConsumptionDetailsAdapter(context, Global.Consumption2list);
                     Consumables_D_Rv.setAdapter(consumablesDetailsAdapter);
                 }
                 getEquipmentsList();
@@ -426,15 +426,15 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
                 if (error instanceof TimeoutError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "No Connection Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "No Connection Found", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ServerError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Server Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Server Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NetworkError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Network Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Network Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ParseError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Parse Error", Toast.LENGTH_LONG).show();
                 }
             }
         }) {
@@ -662,15 +662,15 @@ public class Consumption_Details_Activity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof TimeoutError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "No Connection Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "No Connection Found", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ServerError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Server Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Server Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NetworkError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Network Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Network Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ParseError) {
-                    Toast.makeText(Consumption_Details_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ConsumptionDetailsActivity.this, "Parse Error", Toast.LENGTH_LONG).show();
                 }
 
             }

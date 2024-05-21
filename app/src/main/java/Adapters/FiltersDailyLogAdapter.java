@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-import com.ziac.aquastpapp.Activities.FiltersDailyLog_Image_Upload_Activity;
+import com.ziac.aquastpapp.Activities.FiltersDailyLogImageUploadActivity;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
 
@@ -79,7 +79,7 @@ public class FiltersDailyLogAdapter extends RecyclerView.Adapter<FiltersDailyLog
             @Override
             public void onClick(View v) {
                 Global.filtersModel = filtersModelList.get(position);
-                Intent intent = new Intent(context, FiltersDailyLog_Image_Upload_Activity.class);
+                Intent intent = new Intent(context, FiltersDailyLogImageUploadActivity.class);
                 context.startActivity(intent);
                ((Activity) context).finish();
             }

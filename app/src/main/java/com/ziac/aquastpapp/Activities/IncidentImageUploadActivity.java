@@ -43,10 +43,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import Adapters.Incident_image_upload_Adapter;
+import Adapters.IncidentImageUploadAdapter;
 import Models.IncidentsModelClass;
 
-public class Incident_image_upload_Activity extends AppCompatActivity {
+public class IncidentImageUploadActivity extends AppCompatActivity {
     Bitmap imageBitmap;
     RecyclerView Incident_Images_Rv;
     IncidentsModelClass incidentsModelClass;
@@ -143,13 +143,13 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
             }
             try {
                 if (resp.getBoolean("success")) {
-                    Global.customtoast(Incident_image_upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
+                    Global.customtoast(IncidentImageUploadActivity.this, getLayoutInflater(), "Image uploaded successfully");
                     getIncidentImages();
 
                 } else {
                     if (resp.has("error")) {
                         String errorMessage = resp.getString("error");
-                        Toast.makeText(Incident_image_upload_Activity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(IncidentImageUploadActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                         //Toast.makeText(Incident_image_upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
 
                     } else {
@@ -238,7 +238,7 @@ public class Incident_image_upload_Activity extends AppCompatActivity {
                         throw new RuntimeException(ex);
                     }
                     Global.Incident_Class.add(incidentsModelClass);
-                    Incident_image_upload_Adapter incidentImageUploadAdapter = new Incident_image_upload_Adapter(Global.Incident_Class, context);
+                    IncidentImageUploadAdapter incidentImageUploadAdapter = new IncidentImageUploadAdapter(Global.Incident_Class, context);
                     Incident_Images_Rv.setAdapter(incidentImageUploadAdapter);
                 }
 

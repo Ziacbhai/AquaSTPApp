@@ -29,17 +29,17 @@ import java.util.ArrayList;
 
 import Models.IncidentsModelClass;
 
-public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident_image_upload_Adapter.Viewholder> {
+public class IncidentImageUploadAdapter extends RecyclerView.Adapter<IncidentImageUploadAdapter.Viewholder> {
     private ArrayList<IncidentsModelClass> incidentsModelClasses;
     private Context context;
-    public Incident_image_upload_Adapter(ArrayList<IncidentsModelClass> incidentsModelClasses, Context context) {
+    public IncidentImageUploadAdapter(ArrayList<IncidentsModelClass> incidentsModelClasses, Context context) {
         this.incidentsModelClasses = incidentsModelClasses;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public Incident_image_upload_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public IncidentImageUploadAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.incident_image_list_upload, parent, false);
         Viewholder viewHolder = new Viewholder(view);
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
@@ -48,7 +48,7 @@ public class Incident_image_upload_Adapter extends RecyclerView.Adapter<Incident
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Incident_image_upload_Adapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull IncidentImageUploadAdapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
 
         Global.loadWithPicasso(context, holder.In_image_show, Global.incident_image + incidentsModelClasses.get(position).getImageList());
 //        picasso.load(Uri.parse(Global.incident_image + incidentsClasses.get(position).getImageList()))

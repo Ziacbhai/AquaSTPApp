@@ -51,11 +51,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import Adapters.Repair_details_Adapter;
+import Adapters.RepairDetailsAdapter;
 import Models.EquipmentRepairListClass;
 import Models.RepairModel2;
 
-public class Repair_Details_Activity extends AppCompatActivity {
+public class RepairDetailsActivity extends AppCompatActivity {
     RepairModel2 repairModel2;
     TextView Remark_A;
     static TextView Equipment_code;
@@ -168,7 +168,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
             public void run() {
                 swipeRefreshLayout.setRefreshing(false);
                 Global.repair2list.clear();
-                Repair_details_Adapter repair_details_adapter = new Repair_details_Adapter(Global.repair2list, context);
+                RepairDetailsAdapter repair_details_adapter = new RepairDetailsAdapter(Global.repair2list, context);
                 Repair_details_recyclerview.setAdapter(repair_details_adapter);
                 repair_details_adapter.notifyDataSetChanged();
                 get_Details_Repair();
@@ -215,7 +215,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
                 String equipment_code = Equipment_code.getText().toString();
 
                 if (equipment_code.isEmpty()) {
-                    Toast.makeText(Repair_Details_Activity.this, "Equipment_code should not be empty!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RepairDetailsActivity.this, "Equipment_code should not be empty!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -260,10 +260,10 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
                 try {
                     if (response.getBoolean("isSuccess")) {
-                        Toast.makeText(Repair_Details_Activity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RepairDetailsActivity.this, "Updated successfully !!", Toast.LENGTH_SHORT).show();
                         get_Details_Repair();
                     } else {
-                        Toast.makeText(Repair_Details_Activity.this, response.getString("error"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RepairDetailsActivity.this, response.getString("error"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
@@ -337,7 +337,7 @@ public class Repair_Details_Activity extends AppCompatActivity {
 
                             Global.repair2list.add(repairModel2);
                         }
-                        Repair_details_Adapter repair_details_adapter = new Repair_details_Adapter(Global.repair2list, context);
+                        RepairDetailsAdapter repair_details_adapter = new RepairDetailsAdapter(Global.repair2list, context);
                         Repair_details_recyclerview.setAdapter(repair_details_adapter);
                         repair_details_adapter.notifyDataSetChanged();
                         getEquipmentsListRepairdetails();

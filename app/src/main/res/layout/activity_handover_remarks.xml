@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#eaeff5"
     android:orientation="vertical"
-    tools:context=".Activities.Handover_Remarks_Activity">
+    tools:context=".Activities.HandoverRemarksActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class Handover_Remarks_Activity extends AppCompatActivity {
+public class HandoverRemarksActivity extends AppCompatActivity {
     ImageView backbtn;
     TextView Remark_submit;
     EditText Remark_edit;
@@ -123,7 +123,7 @@ public class Handover_Remarks_Activity extends AppCompatActivity {
                     String error = jsonObject.getString("error");
                     if (success) {
                         Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Handover_Remarks_Activity.this, MainActivity.class));
+                        startActivity(new Intent(HandoverRemarksActivity.this, MainActivity.class));
                         finish();
                     } else {
                         Toast.makeText(context, error, Toast.LENGTH_SHORT).show();

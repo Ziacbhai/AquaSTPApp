@@ -19,25 +19,25 @@ import java.util.ArrayList;
 
 import Models.IncidentsModelClass;
 
-public class Incident_documents_upload_Adapter extends RecyclerView.Adapter<Incident_documents_upload_Adapter.Viewholder> {
+public class IncidentDocumentsUploadAdapter extends RecyclerView.Adapter<IncidentDocumentsUploadAdapter.Viewholder> {
 
     private Context context;
     private ArrayList<IncidentsModelClass> incidentsModelClasses;
 
-    public Incident_documents_upload_Adapter(Context context, ArrayList<IncidentsModelClass> incidentsModelClasses) {
+    public IncidentDocumentsUploadAdapter(Context context, ArrayList<IncidentsModelClass> incidentsModelClasses) {
         this.context = context;
         this.incidentsModelClasses = incidentsModelClasses;
     }
 
     @NonNull
     @Override
-    public Incident_documents_upload_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public IncidentDocumentsUploadAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.incident_docs_list_upload, parent, false);
         return new Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Incident_documents_upload_Adapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull IncidentDocumentsUploadAdapter.Viewholder holder, int position) {
 
         IncidentsModelClass incidentsModelClass = incidentsModelClasses.get(position);
         holder.In_doc_name.setText(incidentsModelClass.getInc_doc_name());

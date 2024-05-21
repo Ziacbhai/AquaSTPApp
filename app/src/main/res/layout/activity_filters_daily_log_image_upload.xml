@@ -7,7 +7,7 @@
     android:background="#eaeff5"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Activities.FiltersDailyLog_Image_Upload_Activity">
+    tools:context=".Activities.FiltersDailyLogImageUploadActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

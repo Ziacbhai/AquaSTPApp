@@ -40,7 +40,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class RepairTwo_Upload_Activity extends AppCompatActivity {
+public class RepairTwoUploadActivity extends AppCompatActivity {
 
     ImageView RtwoImage;
     EditText Repair_two_Remark;
@@ -91,7 +91,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
         Repairtwo_image_cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RepairTwo_Upload_Activity.this, RepairTwoImageListActivity.class));
+                startActivity(new Intent(RepairTwoUploadActivity.this, RepairTwoImageListActivity.class));
             }
         });
     }
@@ -113,13 +113,13 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
             }
             try {
                 if (resp.getBoolean("success")) {
-                    Global.customtoast(RepairTwo_Upload_Activity.this, getLayoutInflater(), "Image uploaded successfully");
-                    startActivity(new Intent(RepairTwo_Upload_Activity.this, RepairTwoImageListActivity.class));
+                    Global.customtoast(RepairTwoUploadActivity.this, getLayoutInflater(), "Image uploaded successfully");
+                    startActivity(new Intent(RepairTwoUploadActivity.this, RepairTwoImageListActivity.class));
                     finish();
                 } else {
                     if (resp.has("error")) {
                         //Toast.makeText(RepairTwo_Upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(RepairTwo_Upload_Activity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RepairTwoUploadActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
                     } else {
                         Log.d("else", "else");
                     }
@@ -133,15 +133,15 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof TimeoutError) {
-                    Toast.makeText(RepairTwo_Upload_Activity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RepairTwoUploadActivity.this, "Request Time-Out", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(RepairTwo_Upload_Activity.this, "No Connection Found", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RepairTwoUploadActivity.this, "No Connection Found", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ServerError) {
-                    Toast.makeText(RepairTwo_Upload_Activity.this, "Server Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RepairTwoUploadActivity.this, "Server Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof NetworkError) {
-                    Toast.makeText(RepairTwo_Upload_Activity.this, "Network Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RepairTwoUploadActivity.this, "Network Error", Toast.LENGTH_LONG).show();
                 } else if (error instanceof ParseError) {
-                    Toast.makeText(RepairTwo_Upload_Activity.this, "Parse Error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RepairTwoUploadActivity.this, "Parse Error", Toast.LENGTH_LONG).show();
                 }
             }
         }) {
@@ -183,7 +183,7 @@ public class RepairTwo_Upload_Activity extends AppCompatActivity {
     private void openCamera() {
         try {
             // Use image picker library
-            com.github.dhaval2404.imagepicker.ImagePicker.with(RepairTwo_Upload_Activity.this)
+            com.github.dhaval2404.imagepicker.ImagePicker.with(RepairTwoUploadActivity.this)
                     .crop()
                     .compress(800)
                     .maxResultSize(1080, 1080)

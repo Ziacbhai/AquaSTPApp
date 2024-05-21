@@ -27,7 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.Activities.BlowersDailyLogActivity;
 import com.ziac.aquastpapp.Activities.FiltersDailyLogActivity;
 import com.ziac.aquastpapp.Activities.Global;
-import com.ziac.aquastpapp.Activities.Handover_Remarks_Activity;
+import com.ziac.aquastpapp.Activities.HandoverRemarksActivity;
 import com.ziac.aquastpapp.Activities.MeterDailyLogActivity;
 import com.ziac.aquastpapp.Activities.PumpMotorDailyLogActivity;
 import com.ziac.aquastpapp.Activities.SensorsDailyLogActivity;
@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment {
         layouthandover_remark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent remark = new Intent(getActivity(), Handover_Remarks_Activity.class);
+                Intent remark = new Intent(getActivity(), HandoverRemarksActivity.class);
                 startActivity(remark);
             }
         });

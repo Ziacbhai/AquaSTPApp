@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Models.FiltersModel;
-public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
+public class FiltersDailyLogImageUploadActivity extends AppCompatActivity {
 
     LinearLayout FilterImageUpload;
     Bitmap imageBitmap;
@@ -50,7 +50,7 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
         filter_image_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FiltersDailyLog_Image_Upload_Activity.this,FiltersDailyLogActivity.class));
+                startActivity(new Intent(FiltersDailyLogImageUploadActivity.this,FiltersDailyLogActivity.class));
                 finish();
             }
         });
@@ -109,7 +109,7 @@ public class FiltersDailyLog_Image_Upload_Activity extends AppCompatActivity {
                 String error = jsonObject.getString("error");
 
                 if (success) {
-                    startActivity(new Intent(FiltersDailyLog_Image_Upload_Activity.this,FiltersDailyLogActivity.class));
+                    startActivity(new Intent(FiltersDailyLogImageUploadActivity.this,FiltersDailyLogActivity.class));
                     Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
                     finish();
 

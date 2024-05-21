@@ -15,24 +15,24 @@ import java.util.List;
 
 import Models.LabTestModel;
 
-public class Lab_Test_Details_Adapter extends RecyclerView.Adapter<Lab_Test_Details_Adapter.Viewholder> {
+public class LabTestDetailsAdapter extends RecyclerView.Adapter<LabTestDetailsAdapter.Viewholder> {
     Context context;
     private List<LabTestModel> labTestModels;
 
-    public Lab_Test_Details_Adapter(Context context, List<LabTestModel> labTestModels) {
+    public LabTestDetailsAdapter(Context context, List<LabTestModel> labTestModels) {
         this.context = context;
         this.labTestModels = labTestModels;
     }
 
     @NonNull
     @Override
-    public Lab_Test_Details_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LabTestDetailsAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lab_test_details_design, parent, false);
         return new Viewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Lab_Test_Details_Adapter.Viewholder holder, int position) {
+    public void onBindViewHolder(@NonNull LabTestDetailsAdapter.Viewholder holder, int position) {
         holder.TestMethod_d.setText(labTestModels.get(position).getL_Test_Method());
         holder.Units_d.setText(labTestModels.get(position).getL_Units());
         holder.Result_d.setText(labTestModels.get(position).getL_result());

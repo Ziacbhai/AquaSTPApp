@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ziac.aquastpapp.Activities.Global;
-import com.ziac.aquastpapp.Activities.LabTest_Details_Activity;
+import com.ziac.aquastpapp.Activities.LabTestDetailsActivity;
 import com.ziac.aquastpapp.R;
 
 import java.text.ParseException;
@@ -52,7 +52,7 @@ public class LabTestAdapter extends RecyclerView.Adapter<LabTestAdapter.Viewhold
             @Override
             public void onClick(View v) {
                 Global.labTestModel1 = labTestModels.get(position);
-                Intent i = new Intent(context, LabTest_Details_Activity.class);
+                Intent i = new Intent(context, LabTestDetailsActivity.class);
                 context.startActivity(i);
             }
         });

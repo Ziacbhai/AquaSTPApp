@@ -28,10 +28,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import Adapters.Lab_Test_Details_Adapter;
+import Adapters.LabTestDetailsAdapter;
 import Models.LabTestModel;
 
-public class LabTest_Details_Activity extends AppCompatActivity {
+public class LabTestDetailsActivity extends AppCompatActivity {
     RecyclerView Labtest_details_Rv;
     LabTestModel labTest_Dclass;
     Context context;
@@ -120,7 +120,7 @@ public class LabTest_Details_Activity extends AppCompatActivity {
                         throw new RuntimeException(ex);
                     }
                     Global.LabTest_Class.add(labTest_Dclass);
-                    Lab_Test_Details_Adapter labTestDetailsAdapter = new Lab_Test_Details_Adapter(context, Global.LabTest_Class);
+                    LabTestDetailsAdapter labTestDetailsAdapter = new LabTestDetailsAdapter(context, Global.LabTest_Class);
                     Labtest_details_Rv.setAdapter(labTestDetailsAdapter);
                 }
 

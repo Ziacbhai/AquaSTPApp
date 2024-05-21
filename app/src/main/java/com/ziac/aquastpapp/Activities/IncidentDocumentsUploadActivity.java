@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class Incident_documents_upload_Activity<Payment_upload> extends AppCompatActivity {
+public class IncidentDocumentsUploadActivity<Payment_upload> extends AppCompatActivity {
     ImageView upload;
     TextView In_doc_uploadbtn;
     private RecyclerView Incident_Documents_Rv;

@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ziac.aquastpapp.Activities.Global;
-import com.ziac.aquastpapp.Activities.Repair_Details_Activity;
+import com.ziac.aquastpapp.Activities.RepairDetailsActivity;
 import com.ziac.aquastpapp.R;
 
 import java.text.ParseException;
@@ -80,7 +80,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.Viewholder
             @Override
             public void onClick(View v) {
                 Global.repairModel1 = repairModel1.get(position);
-                Intent i = new Intent(context, Repair_Details_Activity.class);
+                Intent i = new Intent(context, RepairDetailsActivity.class);
                 context.startActivity(i);
 //                ((Activity) context).finish();
 

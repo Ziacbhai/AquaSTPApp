@@ -20,7 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.Activities.Global;
 import Fragments.IncidentReportingFragment;
-import com.ziac.aquastpapp.Activities.Incident_Image_doc_Select_Activity;
+import com.ziac.aquastpapp.Activities.IncidentImageDocSelectActivity;
 import com.ziac.aquastpapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -111,7 +111,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             @Override
             public void onClick(View v) {
                 Global.incidentsModelClass = incidentsModelClasses.get(position);
-                Intent intent = new Intent(context, Incident_Image_doc_Select_Activity.class);
+                Intent intent = new Intent(context, IncidentImageDocSelectActivity.class);
                 context.startActivity(intent);
             }
         });

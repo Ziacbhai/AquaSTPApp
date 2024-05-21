@@ -26,7 +26,6 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.ziac.aquastpapp.Activities.Global;
-import com.ziac.aquastpapp.Activities.RepairTwo_Upload_Activity;
 import com.ziac.aquastpapp.R;
 
 import java.util.List;

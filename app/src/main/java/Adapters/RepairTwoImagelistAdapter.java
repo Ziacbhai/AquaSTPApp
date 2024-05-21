@@ -31,20 +31,20 @@ import java.util.ArrayList;
 
 import Models.RepairModel4;
 
-public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo_image_list_Adapter.Viewholder> {
+public class RepairTwoImagelistAdapter extends RecyclerView.Adapter<RepairTwoImagelistAdapter.Viewholder> {
     ArrayList<RepairModel4> repairClasses4;
     Context context;
     Picasso.Builder builder;
     Picasso picasso;
 
-    public Repairtwo_image_list_Adapter(ArrayList<RepairModel4> repairClasses4, Context context) {
+    public RepairTwoImagelistAdapter(ArrayList<RepairModel4> repairClasses4, Context context) {
         this.repairClasses4 = repairClasses4;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public Repairtwo_image_list_Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RepairTwoImagelistAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repairtwoimagelist, parent, false);
         Viewholder viewholder = new Viewholder(view);
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
@@ -53,7 +53,7 @@ public class Repairtwo_image_list_Adapter extends RecyclerView.Adapter<Repairtwo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Repairtwo_image_list_Adapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull RepairTwoImagelistAdapter.Viewholder holder, @SuppressLint("RecyclerView") int position) {
         Picasso.Builder builder = new Picasso.Builder(context);
         Picasso picasso = builder.build();
         String originalImageUrl = repairClasses4.get(position).getI_Repair_image();

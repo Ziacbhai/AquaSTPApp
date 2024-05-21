@@ -57,8 +57,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import Adapters.Repair_BreakUp_Adapter;
-import Adapters.Repair_details_Adapter;
+import Adapters.RepairBreakUpAdapter;
+import Adapters.RepairDetailsAdapter;
 import Models.EquipmentClassRepairBreakUp;
 import Models.ItemListRepair_BreakUpModel;
 import Models.RepairModel3;
@@ -124,7 +124,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             public void run() {
                 swipeRefreshLayout.setRefreshing(false);
                 Global.repair2list.clear();
-                Repair_details_Adapter repair_details_adapter = new Repair_details_Adapter(Global.repair2list, context);
+                RepairDetailsAdapter repair_details_adapter = new RepairDetailsAdapter(Global.repair2list, context);
                 Repair_breakup_recyclerview.setAdapter(repair_details_adapter);
                 repair_details_adapter.notifyDataSetChanged();
                 get_Breakup_Details_Repair();
@@ -392,7 +392,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                         throw new RuntimeException(ex);
                     }
                     Global.repair3list.add(repairModel3);
-                    Repair_BreakUp_Adapter repairBreakUpAdapter = new Repair_BreakUp_Adapter(Global.repair3list, context);
+                    RepairBreakUpAdapter repairBreakUpAdapter = new RepairBreakUpAdapter(Global.repair3list, context);
                     repairBreakUpAdapter.notifyDataSetChanged();
                     Repair_breakup_recyclerview.setAdapter(repairBreakUpAdapter);
                 }

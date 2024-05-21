@@ -56,13 +56,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.Handover_Remarks_Activity"
+            android:name=".Activities.HandoverRemarksActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.SensorsDailyLogImageUploadActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.FiltersDailyLog_Image_Upload_Activity"
+            android:name=".Activities.FiltersDailyLogImageUploadActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.FiltersDailyLogActivity"
@@ -83,7 +83,7 @@
             android:name=".Activities.GenerateSTPdetails"
             android:exported="false" />
         <activity
-            android:name=".Activities.RepairTwo_Upload_Activity"
+            android:name=".Activities.RepairTwoUploadActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.RepairBreakUpActivity"
@@ -92,22 +92,22 @@
             android:name=".Activities.RepairTwoImageListActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Incident_documents_upload_Activity"
+            android:name=".Activities.IncidentDocumentsUploadActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Incident_image_upload_Activity"
+            android:name=".Activities.IncidentImageUploadActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Incident_Image_doc_Select_Activity"
+            android:name=".Activities.IncidentImageDocSelectActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Consumption_Details_Activity"
+            android:name=".Activities.ConsumptionDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.LabTest_Details_Activity"
+            android:name=".Activities.LabTestDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.Repair_Details_Activity"
+            android:name=".Activities.RepairDetailsActivity"
             android:exported="false" />
 
         <receiver
@@ -215,7 +215,8 @@
         <activity
             android:name="Fragments.LoginFragment"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="Instantiatable" />
 
     </application>
 
