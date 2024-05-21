@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -28,6 +29,10 @@ import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -38,9 +43,9 @@ public class Incident_documents_upload_Activity<Payment_upload> extends AppCompa
     private RecyclerView Incident_Documents_Rv;
     private ProgressDialog progressDialog;
     public ProgressDialog pDialog;
-    private static final int REQUEST_FILE = 1;
-    private static final int PICK_FILE_REQUEST_CODE = 1;
+    private static final int YOUR_REQUEST_CODE = 1;
     Context context;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -53,13 +58,6 @@ public class Incident_documents_upload_Activity<Payment_upload> extends AppCompa
         upload = findViewById(R.id.in_upload);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        In_doc_uploadbtn.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.R)
-            @Override
-            public void onClick(View v) {
-                openFileManager();
-            }
-        });
 
 
         progressDialog = new ProgressDialog(this);
@@ -72,38 +70,61 @@ public class Incident_documents_upload_Activity<Payment_upload> extends AppCompa
         Incident_Documents_Rv.setHasFixedSize(true);
         Incident_Documents_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-    }
+        In_doc_uploadbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"application/pdf", "application/msword", "image/*"});
+                startActivityForResult(Intent.createChooser(intent, "Select a file"), YOUR_REQUEST_CODE);
+            }
+        });
 
-    private void openFileManager() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
-        startActivityForResult(intent, REQUEST_FILE);
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == YOUR_REQUEST_CODE && resultCode == RESULT_OK) {
             if (data != null) {
                 Uri fileUri = data.getData();
                 if (fileUri != null) {
-                    String fileType = getFileType(fileUri);
-                    if (fileType != null) {
-                        uploadFile(fileType, fileUri);
+                    String base64String = convertFileToBase64(fileUri);
+                    if (base64String != null) {
+                        uploadFile(base64String);
                     } else {
-                        Toast.makeText(this, "Unsupported file type", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Failed to convert file", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(this, "File URI is null", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(this, "Intent data is null", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    private void uploadFile(String fileType, Uri fileUri) {
+    private String convertFileToBase64(Uri uri) {
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            byte[] bytes = getBytes(inputStream);
+            return Base64.encodeToString(bytes, Base64.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+
+        int len;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
+    }
+
+    private void uploadFile(String base64String) {
         String url = Global.Incident_UploadDocuments;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -113,7 +134,7 @@ public class Incident_documents_upload_Activity<Payment_upload> extends AppCompa
                         JSONObject resp = new JSONObject(response);
                         if (resp.getBoolean("success")) {
                             Global.customtoast(context, getLayoutInflater(), "File uploaded successfully");
-                           // getIncidentFiles();
+                            // getIncidentFiles();
                         } else {
                             if (resp.has("error")) {
                                 String errorMessage = resp.getString("error");
@@ -137,44 +158,26 @@ public class Incident_documents_upload_Activity<Payment_upload> extends AppCompa
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("fileName", base64String);
+                params.put("incident_code", Global.incidentsClass.getIncident_Code());
+                params.put("com_code", Global.sharedPreferences.getString("com_code", ""));
+                return params;
+            }
         };
 
-
-
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
+                (int) TimeUnit.SECONDS.toMillis(0), // After the set time elapses the request will timeout
                 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         requestQueue.add(stringRequest);
     }
 
-    private String getFileType(Uri fileUri) {
-        String mimeType = getContentResolver().getType(fileUri);
-        if (mimeType != null) {
-            if (mimeType.contains("pdf")) {
-                return "pdf";
-            } else if (mimeType.contains("doc") || mimeType.contains("docx")) {
-                return "doc";
-            } else {
-                return null; // Unsupported file type
-            }
-        } else {
-            // If MIME type is null, try to determine file type based on file extension
-            String extension = MimeTypeMap.getFileExtensionFromUrl(fileUri.toString());
-            if (extension != null) {
-                if (extension.equals("pdf")) {
-                    return "pdf";
-                } else if (extension.equals("doc") || extension.equals("docx")) {
-                    return "doc";
-                } else {
-                    return null; // Unsupported file type
-                }
-            } else {
-                return null; // Unable to determine file type
-            }
-        }
-    }
+
 
 
 }

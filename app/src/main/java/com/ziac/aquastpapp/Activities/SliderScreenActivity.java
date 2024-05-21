@@ -2,7 +2,6 @@ package com.ziac.aquastpapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -19,7 +18,7 @@ import android.widget.TextView;
 import com.google.android.material.tabs.TabLayout;
 import com.ziac.aquastpapp.R;
 
-public class SliderScreen extends AppCompatActivity {
+public class SliderScreenActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private static final String TAG = "SliderActivity";
@@ -135,7 +134,7 @@ public class SliderScreen extends AppCompatActivity {
     }
 
     private void gotosignin() {
-        startActivity(new Intent(SliderScreen.this, LoginSignupActivity.class));
+        startActivity(new Intent(SliderScreenActivity.this, LoginSignupActivity.class));
         finish();
 
     }

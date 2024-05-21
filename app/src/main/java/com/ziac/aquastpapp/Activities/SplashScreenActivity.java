@@ -1,23 +1,19 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ziac.aquastpapp.R;
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
     TextView textView;
     ImageView imageView;
     Context context;
@@ -30,9 +26,9 @@ public class SplashScreen extends AppCompatActivity {
         context = this;
         textView = findViewById(R.id.txt);
         imageView = findViewById(R.id.imageView);
-        Animation myanimation = AnimationUtils.loadAnimation(SplashScreen.this, R.anim.animation);
+        Animation myanimation = AnimationUtils.loadAnimation(SplashScreenActivity.this, R.anim.animation);
         textView.startAnimation(myanimation);
-        Animation animation = AnimationUtils.loadAnimation(SplashScreen.this, R.anim.animationlogo);
+        Animation animation = AnimationUtils.loadAnimation(SplashScreenActivity.this, R.anim.animationlogo);
         imageView.startAnimation(animation);
         handlermethod();
 
@@ -43,7 +39,7 @@ public class SplashScreen extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, SliderScreen.class);
+                Intent intent = new Intent(SplashScreenActivity.this, SliderScreenActivity.class);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 startActivity(intent);
             }

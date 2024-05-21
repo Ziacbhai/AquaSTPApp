@@ -1,4 +1,4 @@
-package com.ziac.aquastpapp.Activities;
+package Fragments;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
 
 public class EquipmentsFragment extends Fragment {

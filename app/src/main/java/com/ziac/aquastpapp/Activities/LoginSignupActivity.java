@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 import com.ziac.aquastpapp.R;
 
+import Adapters.ViewPagerAdapter;
+
 public class LoginSignupActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager2;

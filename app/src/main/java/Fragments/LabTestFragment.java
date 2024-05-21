@@ -1,4 +1,4 @@
-package com.ziac.aquastpapp.Activities;
+package Fragments;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
@@ -30,6 +30,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
 import org.json.JSONException;

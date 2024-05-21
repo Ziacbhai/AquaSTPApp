@@ -1,11 +1,12 @@
-package com.ziac.aquastpapp.Activities;
+package Adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import Fragments.LoginFragment;
+import Fragments.SignUpFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 

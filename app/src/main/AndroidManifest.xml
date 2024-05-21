@@ -127,28 +127,28 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.PumpsFragment"
+            android:name="Fragments.PumpsFragment"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".Activities.WelcomeSupervisor"
+            android:name=".Activities.WelcomeSupervisorActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.WelcomeCustomer"
+            android:name=".Activities.WelcomeCustomerActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.WelcomeManager"
+            android:name=".Activities.WelcomeManagerActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.WelcomeUser"
+            android:name=".Activities.WelcomeUserActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.WelcomeOwner"
+            android:name=".Activities.WelcomeOwnerActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -166,41 +166,41 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.VerifyNumberOTP"
+            android:name=".Activities.VerifyNumberOTPActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.VerifyUserNameOTP"
+            android:name=".Activities.VerifyUserNameOTPActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.VerifyEmailOTP"
+            android:name=".Activities.VerifyEmailOTPActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.ResetPasswordNumber"
+            android:name=".Activities.ResetPasswordNumberActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.ResetPasswordUserName"
+            android:name=".Activities.ResetPasswordUserNameActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.ResetPasswordEmail"
+            android:name=".Activities.ResetPasswordEmailActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.RecoveryPasswordWith"
+            android:name=".Activities.RecoveryPasswordWithActivity"
             android:exported="false"
             android:label="@string/title_activity_recovery_password_with"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AquaSTPApp" />
         <activity
-            android:name=".Activities.SliderScreen"
+            android:name=".Activities.SliderScreenActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name=".Activities.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -213,7 +213,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.LoginFragment"
+            android:name="Fragments.LoginFragment"
             android:exported="false"
             android:screenOrientation="portrait" />
 

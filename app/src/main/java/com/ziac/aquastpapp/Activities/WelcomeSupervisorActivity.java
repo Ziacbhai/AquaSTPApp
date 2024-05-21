@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -26,10 +27,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -44,6 +49,7 @@ import com.ziac.aquastpapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,21 +57,23 @@ import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class WelcomeUser extends AppCompatActivity {
+public class WelcomeSupervisorActivity extends AppCompatActivity {
     TextView Oname, Ownermail, Owanarmobile,Company, ClickHere;
     CircleImageView ImageView;
     ImageView Ownerexit;
     AppCompatButton oContinue;
+
     Context context;
+    FloatingActionButton fab;
     Bitmap imageBitmap;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome_user);
-        context = this;
+        setContentView(R.layout.activity_welcome_supervisor);
 
+        context = this;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         ImageView = findViewById(R.id.imageView);
         Oname = findViewById(R.id.wname);
@@ -74,13 +82,10 @@ public class WelcomeUser extends AppCompatActivity {
         Ownerexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeUser.this,LoginSignupActivity.class);
+                Intent intent = new Intent(WelcomeSupervisorActivity.this,LoginSignupActivity.class);
                 startActivity(intent);
             }
         });
-        Company = findViewById(R.id.company);
-        Ownermail = findViewById(R.id.wemail);
-        Owanarmobile = findViewById(R.id.wph);
         Company = findViewById(R.id.company);
         Ownermail = findViewById(R.id.wemail);
         Owanarmobile = findViewById(R.id.wph);
@@ -90,6 +95,7 @@ public class WelcomeUser extends AppCompatActivity {
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
         String com_name = Global.sharedPreferences.getString("com_name", "");
         String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+
 
         Oname.setText(username);
         Ownermail.setText(mail);
@@ -104,25 +110,32 @@ public class WelcomeUser extends AppCompatActivity {
                 .error(R.drawable.no_image_available_icon)
                 .into(ImageView);
 
+
+
         ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
                 showImage(picasso, userimage);
+
             }
         });
+
         oContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (Global.StpList.isEmpty()) {
-                    startActivity(new Intent(WelcomeUser.this, GenerateSTPdetails.class));
+                    startActivity(new Intent(WelcomeSupervisorActivity.this, GenerateSTPdetails.class));
                 } else {
-                    startActivity(new Intent(WelcomeUser.this, SelectSTPLocationActivity.class));
+                    startActivity(new Intent(WelcomeSupervisorActivity.this, SelectSTPLocationActivity.class));
                 }
+
             }
         });
 
     }
+
     public void showImage(@NonNull Picasso picasso, String userimage) {
         Dialog builder = new Dialog(this);
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -181,7 +194,7 @@ public class WelcomeUser extends AppCompatActivity {
 
     private void opencamera() {
 
-        ImagePicker.with(WelcomeUser.this)
+        ImagePicker.with(WelcomeSupervisorActivity.this)
                 .crop()                    //Crop image(Optional), Check Customization for more option
                 .compress(1024)            //Final image size will be less than 1 MB(Optional)
                 .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
@@ -220,15 +233,20 @@ public class WelcomeUser extends AppCompatActivity {
 
             try {
                 if (resp.getBoolean("success")) {
-                    Global.customtoast(WelcomeUser.this, getLayoutInflater(), "Image uploaded successfully");
+
+
+                    Global.customtoast(WelcomeSupervisorActivity.this, getLayoutInflater(), "Image uploaded successfully");
                     getuserdetails();
 
                 } else {
                     if (resp.has("error")) {
 
                         String errorMessage = resp.getString("error");
-                        Toast.makeText(WelcomeUser.this, errorMessage, Toast.LENGTH_SHORT).show();
-                        Toast.makeText(WelcomeUser.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WelcomeSupervisorActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WelcomeSupervisorActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+
+
+                    } else {
                     }
                 }
             } catch (JSONException e) {
@@ -236,9 +254,11 @@ public class WelcomeUser extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
 
             }
         }) {
@@ -254,7 +274,12 @@ public class WelcomeUser extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("username", Global.sharedPreferences.getString("username", null));
+                String image = imageToString(imageBitmap);
+
+                params.put("fileName", image);
+
+                Log.d("YourTag", "Key: fileName, Value: " + image);
+
                 return params;
             }
         };
@@ -270,7 +295,7 @@ public class WelcomeUser extends AppCompatActivity {
     private void getuserdetails() {
 
         String url = Global.getuserprofileurl;
-        RequestQueue queue = Volley.newRequestQueue(WelcomeUser.this);
+        RequestQueue queue = Volley.newRequestQueue(WelcomeSupervisorActivity.this);
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
 
@@ -294,7 +319,15 @@ public class WelcomeUser extends AppCompatActivity {
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                if (error instanceof TimeoutError) {
+                    Global.customtoast(WelcomeSupervisorActivity.this, getLayoutInflater(), "Request Time-Out");
+                } else if (error instanceof ServerError) {
+                    Global.customtoast(WelcomeSupervisorActivity.this, getLayoutInflater(), "Invalid Username or Password");
+                } else if (error instanceof ParseError) {
+                    Global.customtoast(WelcomeSupervisorActivity.this, getLayoutInflater(), "Parse Error ");
+                } else if (error instanceof AuthFailureError) {
+                    Global.customtoast(WelcomeSupervisorActivity.this, getLayoutInflater(), "AuthFailureError");
+                }
             }
         }) {
             @Override
@@ -308,7 +341,10 @@ public class WelcomeUser extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
+
                 params.put("username", Global.sharedPreferences.getString("username", null));
+                params.put("person_name", Global.sharedPreferences.getString("person_name", null));
+
                 return params;
             }
         };
@@ -319,6 +355,14 @@ public class WelcomeUser extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(request);
     }
+
+    private String imageToString(Bitmap imageBitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
+        byte[] imgBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    }
+
     @Override
     public void onBackPressed() {
 

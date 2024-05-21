@@ -30,6 +30,12 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.R;
 
+import Fragments.Consumption_Fragment;
+import Fragments.EquipmentsFragment;
+import Fragments.HomeFragment;
+import Fragments.IncidentReportingFragment;
+import Fragments.ItemStockFragment;
+import Fragments.RepairFragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

@@ -1,23 +1,16 @@
 package com.ziac.aquastpapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.AppCompatButton;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,18 +19,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResetPasswordNumber extends AppCompatActivity {
-    TextView GetOTPBtn;
-    EditText ForgotNumber;
+public class ResetPasswordEmailActivity extends AppCompatActivity {
+
+    TextView EnterOTPbtn;
+    EditText Forgotemail;
+    String useremail;
     ImageView back_btn;
-    String usermobile;
     ProgressBar progressBar;
     Context context;
 
@@ -45,26 +37,30 @@ public class ResetPasswordNumber extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_password_number);
-        context = this;
-        ForgotNumber = findViewById(R.id.forgotNumber);
-        GetOTPBtn = findViewById(R.id.numberOTPbtn);
-
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //   String mobileno = Global.sharedPreferences.getString("mobile", "");
-        // FMobile.setText(mobileno);
+        setContentView(R.layout.activity_reset_password_email);
+        context  = this;
+        EnterOTPbtn = findViewById(R.id.emailgetotpbtn);
+        Forgotemail = findViewById(R.id.resetemail);
         progressBar = findViewById(R.id.progressbr);
 
-        GetOTPBtn.setOnClickListener(new View.OnClickListener() {
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        EnterOTPbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                usermobile = ForgotNumber.getText().toString();
+                useremail = Forgotemail.getText().toString();
+                // progressBar.setVisibility(View.VISIBLE);
+                if (useremail.isEmpty()) {
+                    Forgotemail.setError("Please Enter Email");
+                    Forgotemail.requestFocus();
+                    return;
+                }
+
                 Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                 Global.editor = Global.sharedPreferences.edit();
-                Global.editor.putString("user_mobile", usermobile);
+                Global.editor.putString("user_email", useremail);
                 Global.editor.commit();
-
                 postDataUsingVolley();
+
             }
         });
 
@@ -76,14 +72,17 @@ public class ResetPasswordNumber extends AppCompatActivity {
             }
         });
     }
-
     private void postDataUsingVolley() {
-        String urlnumber = Global.forgotpasswordurl;
+
+        String urlemail = Global.forgotpasswordurl;
         progressBar.setVisibility(View.VISIBLE);
+
         RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, urlnumber, new Response.Listener<String>() {
+
+        StringRequest request = new StringRequest(Request.Method.POST, urlemail, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 try {
                     JSONObject respObj = new JSONObject(response);
 
@@ -93,40 +92,40 @@ public class ResetPasswordNumber extends AppCompatActivity {
 
 
                     if (issuccess.equals("true")) {
-                        Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(), respObj.getString("error"));
-                        startActivity(new Intent(ResetPasswordNumber.this, VerifyNumberOTP.class));
+                        Global.customtoast(ResetPasswordEmailActivity.this, getLayoutInflater(), respObj.getString("error"));
+                        startActivity(new Intent(ResetPasswordEmailActivity.this, VerifyEmailOTPActivity.class));
                     } else {
                         progressBar.setVisibility(View.GONE);
                         // Show a toast message for wrong username or password
-                        Global.customtoast(ResetPasswordNumber.this, getLayoutInflater(), respObj.getString("error"));
+                        Global.customtoast(ResetPasswordEmailActivity.this, getLayoutInflater(), respObj.getString("error"));
+
                     }
 
                 } catch (JSONException e) {
-
                     e.printStackTrace();
                     progressBar.setVisibility(View.GONE);
                     // Toast.makeText(ForgotPasswordActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
 
                 }
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
                 progressBar.setVisibility(View.GONE);
+
             }
         }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("UserName", "");
-                params.put("Mobile", usermobile);
-                params.put("FPType", "M");
-                params.put("user_email", "");
+                params.put("Mobile", "");
+                params.put("FPType", "E");
+                params.put("user_email", useremail);
                 return params;
             }
         };
-
         request.setRetryPolicy(new DefaultRetryPolicy(
                 0, // timeout in milliseconds
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

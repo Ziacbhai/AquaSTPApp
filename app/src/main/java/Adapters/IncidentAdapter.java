@@ -19,7 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.Activities.Global;
-import com.ziac.aquastpapp.Activities.IncidentReportingFragment;
+import Fragments.IncidentReportingFragment;
 import com.ziac.aquastpapp.Activities.Incident_Image_doc_Select_Activity;
 import com.ziac.aquastpapp.R;
 import org.json.JSONException;

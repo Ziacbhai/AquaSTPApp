@@ -27,6 +27,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//import com.larvalabs.svgandroid.SVG;
+//import com.larvalabs.svgandroid.SVGParser;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -34,6 +36,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.MemoryPolicy;
@@ -53,11 +57,13 @@ import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class WelcomeCustomer extends AppCompatActivity {
-    TextView Oname, Ownermail, Owanarmobile,Company, ClickHere;
+public class WelcomeManagerActivity extends AppCompatActivity {
+
+    TextView Oname, Ownermail, Owanarmobile, Company, ClickHere;
     CircleImageView ImageView;
     ImageView Ownerexit;
     AppCompatButton oContinue;
+
     Context context;
     FloatingActionButton fab;
     Bitmap imageBitmap;
@@ -66,8 +72,10 @@ public class WelcomeCustomer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome_customer);
+        setContentView(R.layout.activity_welcome_manager);
         context = this;
+
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         ImageView = findViewById(R.id.imageView);
         Oname = findViewById(R.id.wname);
         oContinue = findViewById(R.id.oContinue);
@@ -75,7 +83,7 @@ public class WelcomeCustomer extends AppCompatActivity {
         Ownerexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeCustomer.this,LoginSignupActivity.class);
+                Intent intent = new Intent(WelcomeManagerActivity.this, LoginSignupActivity.class);
                 startActivity(intent);
             }
         });
@@ -103,18 +111,30 @@ public class WelcomeCustomer extends AppCompatActivity {
                 .error(R.drawable.no_image_available_icon)
                 .into(ImageView);
 
+
+        ImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+                showImage(picasso, userimage);
+
+            }
+        });
+
         oContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (Global.StpList.isEmpty()) {
-                    startActivity(new Intent(WelcomeCustomer.this, GenerateSTPdetails.class));
+                    startActivity(new Intent(WelcomeManagerActivity.this, GenerateSTPdetails.class));
                 } else {
-                    startActivity(new Intent(WelcomeCustomer.this, SelectSTPLocationActivity.class));
+                    startActivity(new Intent(WelcomeManagerActivity.this, SelectSTPLocationActivity.class));
                 }
 
             }
         });
+
+
     }
 
     public void showImage(@NonNull Picasso picasso, String userimage) {
@@ -175,7 +195,7 @@ public class WelcomeCustomer extends AppCompatActivity {
 
     private void opencamera() {
 
-        ImagePicker.with(WelcomeCustomer.this)
+        ImagePicker.with(WelcomeManagerActivity.this)
                 .crop()                    //Crop image(Optional), Check Customization for more option
                 .compress(1024)            //Final image size will be less than 1 MB(Optional)
                 .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
@@ -214,18 +234,12 @@ public class WelcomeCustomer extends AppCompatActivity {
 
             try {
                 if (resp.getBoolean("success")) {
-                    Global.customtoast(WelcomeCustomer.this, getLayoutInflater(), "Image uploaded successfully");
+                    Global.customtoast(WelcomeManagerActivity.this, getLayoutInflater(), "Image uploaded successfully");
                     getuserdetails();
 
                 } else {
                     if (resp.has("error")) {
-
-                        String errorMessage = resp.getString("error");
-                        Toast.makeText(WelcomeCustomer.this, errorMessage, Toast.LENGTH_SHORT).show();
-                        Toast.makeText(WelcomeCustomer.this, "Image upload failed", Toast.LENGTH_SHORT).show();
-
-
-                    } else {
+                        Toast.makeText(WelcomeManagerActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
                     }
                 }
             } catch (JSONException e) {
@@ -237,7 +251,6 @@ public class WelcomeCustomer extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
 
             }
         }) {
@@ -254,9 +267,9 @@ public class WelcomeCustomer extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 String image = imageToString(imageBitmap);
-                params.put("username", Global.sharedPreferences.getString("username", null));
-                // params.put("fileName",image);
-                // Log.d("YourTag", "Key: fileName, Value: " + image);
+                params.put("fileName", image);
+                Log.d("YourTag", "Key: fileName, Value: " + image);
+
                 return params;
             }
         };
@@ -272,7 +285,7 @@ public class WelcomeCustomer extends AppCompatActivity {
     private void getuserdetails() {
 
         String url = Global.getuserprofileurl;
-        RequestQueue queue = Volley.newRequestQueue(WelcomeCustomer.this);
+        RequestQueue queue = Volley.newRequestQueue(WelcomeManagerActivity.this);
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
 
@@ -310,7 +323,6 @@ public class WelcomeCustomer extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-
                 params.put("username", Global.sharedPreferences.getString("username", null));
                 return params;
             }
@@ -323,6 +335,7 @@ public class WelcomeCustomer extends AppCompatActivity {
         queue.add(request);
     }
 
+
     private String imageToString(Bitmap imageBitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
@@ -330,8 +343,11 @@ public class WelcomeCustomer extends AppCompatActivity {
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 
+
+
     @Override
     public void onBackPressed() {
 
     }
+
 }

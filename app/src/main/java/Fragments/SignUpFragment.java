@@ -1,4 +1,4 @@
-package com.ziac.aquastpapp.Activities;
+package Fragments;
 
 import static com.ziac.aquastpapp.Activities.Global.urlGetStates;
 
@@ -51,6 +51,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.ziac.aquastpapp.Activities.Global;
+import com.ziac.aquastpapp.Activities.LoginSignupActivity;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONArray;

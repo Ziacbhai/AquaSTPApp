@@ -1,4 +1,4 @@
-package com.ziac.aquastpapp.Activities;
+package Fragments;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
@@ -24,6 +24,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.ziac.aquastpapp.Activities.BlowersDailyLogActivity;
+import com.ziac.aquastpapp.Activities.FiltersDailyLogActivity;
+import com.ziac.aquastpapp.Activities.Global;
+import com.ziac.aquastpapp.Activities.Handover_Remarks_Activity;
+import com.ziac.aquastpapp.Activities.MeterDailyLogActivity;
+import com.ziac.aquastpapp.Activities.PumpMotorDailyLogActivity;
+import com.ziac.aquastpapp.Activities.SensorsDailyLogActivity;
 import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -199,14 +206,13 @@ public class HomeFragment extends Fragment {
                         String tstp1_code = dataObject.getString("tstp1_code");
                         Global.editor.putString("tstp1_code", tstp1_code);
                         Global.editor.commit();
-
-                        //Toast.makeText(requireActivity(), "tstp1_code: " + tstp1_code, Toast.LENGTH_SHORT).show();
                     } else {
-                        String error = response.getString("error");
-                        Toast.makeText(requireActivity(), error, Toast.LENGTH_LONG).show();
+                       /* String error = response.getString("error");
+                        Toast.makeText(requireActivity(), error, Toast.LENGTH_LONG).show();*/
+                        Global.customtoast(context, getLayoutInflater(), response.getString("error"));
+
                     }
 
-                    // Rest of your code...
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -221,18 +227,10 @@ public class HomeFragment extends Fragment {
         }) {
             @Override
             public Map<String, String> getHeaders() {
-                // Set the Authorization header with the access token
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
-            }
-
-            @Override
-            protected Map<String, String> getParams() {
-                // If you have any parameters to send in the request body, you can set them here
-                Map<String, String> params = new HashMap<>();
-                return params;
             }
         };
 

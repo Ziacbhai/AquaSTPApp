@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import com.ziac.aquastpapp.R;
 
-public class RecoveryPasswordWith extends AppCompatActivity {
+public class RecoveryPasswordWithActivity extends AppCompatActivity {
 
     CardView Resetemail, Resetusername, Resetmobile;
     ImageView back_btn;
@@ -37,7 +37,7 @@ public class RecoveryPasswordWith extends AppCompatActivity {
         Resetemail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RecoveryPasswordWith.this,ResetPasswordEmail.class));
+                startActivity(new Intent(RecoveryPasswordWithActivity.this, ResetPasswordEmailActivity.class));
                 finish();
             }
         });
@@ -45,7 +45,7 @@ public class RecoveryPasswordWith extends AppCompatActivity {
         Resetusername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RecoveryPasswordWith.this,ResetPasswordUserName.class));
+                startActivity(new Intent(RecoveryPasswordWithActivity.this, ResetPasswordUserNameActivity.class));
                 finish();
 
             }
@@ -54,7 +54,7 @@ public class RecoveryPasswordWith extends AppCompatActivity {
         Resetmobile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RecoveryPasswordWith.this,ResetPasswordNumber.class));
+                startActivity(new Intent(RecoveryPasswordWithActivity.this, ResetPasswordNumberActivity.class));
                 finish();
 
             }

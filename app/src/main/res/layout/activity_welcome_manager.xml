@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#eaeff5"
     android:orientation="vertical"
-    tools:context=".Activities.WelcomeOwner">
+    tools:context=".Activities.WelcomeOwnerActivity">
 
     <!-- Add vertical spacing at the top -->
     <View

@@ -1,4 +1,4 @@
-package com.ziac.aquastpapp.Activities;
+package Fragments;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,30 +30,32 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import Adapters.MetersDetailsAdapter;
+import Adapters.PumpDetailsAdapter;
 import Models.CommonModelClass;
 
 
-public class MetersFragment extends Fragment {
+public class PumpsFragment extends Fragment {
 
-    RecyclerView MetersRecyclerview;
+    RecyclerView PumpRecyclerview;
     CommonModelClass commonModelClassList;
-    private ProgressDialog progressDialog;
     Context context;
+    private ProgressDialog progressDialog;
+
     @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_meters, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_pump, container, false);
+
         context = getContext();
         user_topcard(view);
 
-        MetersRecyclerview = view.findViewById(R.id.meters_recyclerview);
-        MetersRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        MetersRecyclerview.setHasFixedSize(true);
-        MetersRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        getmeters();
+
+        PumpRecyclerview = view.findViewById(R.id.pump_recyclerview);
+        PumpRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        PumpRecyclerview.setHasFixedSize(true);
+        PumpRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
+        getpump();
         return view;
     }
 
@@ -61,12 +64,12 @@ public class MetersFragment extends Fragment {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
 
-        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, stpcapacity;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
-        processname = sharedPreferences.getString("process_name", "");
         siteaddress = sharedPreferences.getString("site_address", "");
+        processname = sharedPreferences.getString("process_name", "");
         useremail = sharedPreferences.getString("user_email", "");
         usermobile = sharedPreferences.getString("user_mobile", "");
         personname = sharedPreferences.getString("user_name", "");
@@ -82,17 +85,17 @@ public class MetersFragment extends Fragment {
         txtpersonname = view.findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname + " / " + stpcapacity);
+        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
         txtsiteaddress.setText(siteaddress);
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);
     }
 
-    private void getmeters() {
+    private void getpump() {
 
         RequestQueue queue = Volley.newRequestQueue(requireActivity());
-        String url = Global.Equipment_Details_com_meters;
+        String url = Global.Equipment_Details_com_pumps;
 
         String com_code = Global.sharedPreferences.getString("com_code", "0");
         String sstp1_code = Global.sharedPreferences.getString("sstp1_code", "0");
@@ -103,15 +106,17 @@ public class MetersFragment extends Fragment {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Global.metersdetails = new ArrayList<CommonModelClass>();
+                Global.pumpdetails = new ArrayList<CommonModelClass>();
                 commonModelClassList = new CommonModelClass();
                 JSONArray jarray;
+
                 try {
                     jarray = response.getJSONArray("data");
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
+
                 for (int i = 0; i < jarray.length(); i++) {
                     final JSONObject e;
                     try {
@@ -121,24 +126,26 @@ public class MetersFragment extends Fragment {
                     }
                     commonModelClassList = new CommonModelClass();
                     try {
+
                         commonModelClassList.setImage(e.getString("name_plate"));
                         commonModelClassList.setEquipmentName(e.getString("equip_name"));
+                        commonModelClassList.setEquipmentNumber_Id(e.getString("equip_slno"));
                         commonModelClassList.setRating_Capacity(e.getString("rating"));
                         commonModelClassList.setForm_Factor(e.getString("form_factor"));
                         commonModelClassList.setPhase(e.getString("phase"));
-                        commonModelClassList.setManufacturer(e.getString("mfg_name"));
                         commonModelClassList.setSpecification(e.getString("equip_specs"));
-                        commonModelClassList.setEquipmentNumber_Id(e.getString("equip_slno"));
+                        commonModelClassList.setManufacturer(e.getString("mfg_name"));
                         commonModelClassList.setCleaning_RunningFrequency_HRS(e.getString("cleaning_freq_hrs"));
 
 
                     } catch (JSONException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Global.metersdetails.add(commonModelClassList);
+                    Global.pumpdetails.add(commonModelClassList);
                 }
-                MetersDetailsAdapter metersDetailsAdapter = new MetersDetailsAdapter(Global.metersdetails, getContext());
-                MetersRecyclerview.setAdapter(metersDetailsAdapter);
+
+                PumpDetailsAdapter pumpDetailsAdapter = new PumpDetailsAdapter(Global.pumpdetails, getContext());
+                PumpRecyclerview.setAdapter(pumpDetailsAdapter);
                 progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
@@ -156,15 +163,15 @@ public class MetersFragment extends Fragment {
 
                 return headers;
             }
+
         };
+
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
                 (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
                 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest);
-
-
     }
 
 }

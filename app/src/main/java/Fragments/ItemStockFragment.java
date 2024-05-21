@@ -1,4 +1,4 @@
-package com.ziac.aquastpapp.Activities;
+package Fragments;
 
 
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,16 +1,12 @@
 package com.ziac.aquastpapp.Activities;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -24,13 +20,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -45,7 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class VerifyNumberOTP extends AppCompatActivity {
+public class VerifyNumberOTPActivity extends AppCompatActivity {
     private boolean passwordvisible = false;
     String otp, Newpassword,show_number;
     PinView pinView;
@@ -73,7 +65,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
         Show_number.setText(show_number);
 
         Resendotp = findViewById(R.id.resendNotp);
-        Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyNumberOTP.this, ResetPasswordNumber.class)));
+        Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyNumberOTPActivity.this, ResetPasswordNumberActivity.class)));
 
         Newpwd.setOnTouchListener((v, event) -> {
             final int Right = 2;
@@ -117,10 +109,10 @@ public class VerifyNumberOTP extends AppCompatActivity {
                     if (!TextUtils.isEmpty(Newpassword)) {
                         postDataUsingVolley(otp);
                     } else {
-                        Toast.makeText(VerifyNumberOTP.this, "Please enter a new password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VerifyNumberOTPActivity.this, "Please enter a new password", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(VerifyNumberOTP.this, "Please enter the OTP", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VerifyNumberOTPActivity.this, "Please enter the OTP", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -151,7 +143,7 @@ public class VerifyNumberOTP extends AppCompatActivity {
 
                     switch (issuccess) {
                         case "true":
-                            startActivity(new Intent(VerifyNumberOTP.this, LoginSignupActivity.class));
+                            startActivity(new Intent(VerifyNumberOTPActivity.this, LoginSignupActivity.class));
                             finish();
                             break;
                         default:
@@ -159,14 +151,14 @@ public class VerifyNumberOTP extends AppCompatActivity {
                                 showAlertDialog("Wrong Password", "The entered password is incorrect. Please try again.");
                             } else {
                                 //showAlertDialog("General Error", "An error occurred. Please try again.");
-                                Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), error);
+                                Global.customtoast(VerifyNumberOTPActivity.this, getLayoutInflater(), error);
                             }
                             break;
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     progressBar.setVisibility(View.GONE);
-                    Global.customtoast(VerifyNumberOTP.this, getLayoutInflater(), e.getMessage());
+                    Global.customtoast(VerifyNumberOTPActivity.this, getLayoutInflater(), e.getMessage());
                 }
             }
         }, new com.android.volley.Response.ErrorListener() {

@@ -1,4 +1,4 @@
-package com.ziac.aquastpapp.Activities;
+package Fragments;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -32,6 +32,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.chaos.view.BuildConfig;
+import com.ziac.aquastpapp.Activities.Global;
+import com.ziac.aquastpapp.Activities.RecoveryPasswordWithActivity;
+import com.ziac.aquastpapp.Activities.WelcomeCustomerActivity;
+import com.ziac.aquastpapp.Activities.WelcomeManagerActivity;
+import com.ziac.aquastpapp.Activities.WelcomeOwnerActivity;
+import com.ziac.aquastpapp.Activities.WelcomeSupervisorActivity;
+import com.ziac.aquastpapp.Activities.WelcomeUserActivity;
 import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -166,7 +173,7 @@ public class LoginFragment extends Fragment {
         Forgotpwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), RecoveryPasswordWith.class));
+                startActivity(new Intent(getActivity(), RecoveryPasswordWithActivity.class));
             }
         });
         return view;
@@ -325,15 +332,15 @@ public class LoginFragment extends Fragment {
                         Intent welcomeIntent = null;
 
                         if ("O".equals(user_type)) {
-                            welcomeIntent = new Intent(getActivity(), WelcomeOwner.class);
+                            welcomeIntent = new Intent(getActivity(), WelcomeOwnerActivity.class);
                         } else if ("C".equals(user_type)) {
-                            welcomeIntent = new Intent(getActivity(), WelcomeCustomer.class);
+                            welcomeIntent = new Intent(getActivity(), WelcomeCustomerActivity.class);
                         } else if ("S".equals(user_type)) {
-                            welcomeIntent = new Intent(getActivity(), WelcomeSupervisor.class);
+                            welcomeIntent = new Intent(getActivity(), WelcomeSupervisorActivity.class);
                         } else if ("M".equals(user_type)) {
-                            welcomeIntent = new Intent(getActivity(), WelcomeManager.class);
+                            welcomeIntent = new Intent(getActivity(), WelcomeManagerActivity.class);
                         } else if ("U".equals(user_type)) {
-                            welcomeIntent = new Intent(getActivity(), WelcomeUser.class);
+                            welcomeIntent = new Intent(getActivity(), WelcomeUserActivity.class);
                         }
 
                         if (welcomeIntent != null) {
