@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -29,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -43,11 +45,14 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -57,11 +62,13 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
 import Adapters.RepairBreakUpAdapter;
 import Adapters.RepairDetailsAdapter;
 import Models.EquipmentClassRepairBreakUp;
 import Models.ItemListRepair_BreakUpModel;
 import Models.RepairModel3;
+
 public class RepairBreakUpActivity extends AppCompatActivity {
 
     RepairModel3 repairModel3;
@@ -70,6 +77,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     AppCompatButton Update_A, Cancel_A;
     RecyclerView Repair_breakup_recyclerview;
     private Dialog zDialog;
+    BottomSheetDialog bottomSheetDialog;
     EquipmentClassRepairBreakUp equipment_spinner;
     ImageView Repair_back_btn;
     ItemListRepair_BreakUpModel item_spinner;
@@ -198,17 +206,19 @@ public class RepairBreakUpActivity extends AppCompatActivity {
 
     @SuppressLint("MissingInflatedId")
     private void showAddDetailsDialog(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.custom_dialog_repair_breakup_layout, null);
-        Equipment_Item = dialogView.findViewById(R.id.repair_breakup_item_alert_spinner);
-        Breakup_Unit = dialogView.findViewById(R.id.repair_breakup_unit_alert_spinner);
 
-        Breakup_qty = dialogView.findViewById(R.id.repair_breakup_qty_alert_spinner);
-        Breakup_price = dialogView.findViewById(R.id.repair_breakup_price_alert_spinner);
-        Breakup_remark = dialogView.findViewById(R.id.remark_breakup);
-        Update_A = dialogView.findViewById(R.id.update_alert_breakup);
-        Cancel_A = dialogView.findViewById(R.id.cancel_alert_breakup);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+        LayoutInflater inflater = getLayoutInflater();
+        bottomSheetDialog.setContentView(R.layout.custom_dialog_repair_breakup_layout);
+
+        Equipment_Item = bottomSheetDialog.findViewById(R.id.repair_breakup_item_alert_spinner);
+        Breakup_Unit = bottomSheetDialog.findViewById(R.id.repair_breakup_unit_alert_spinner);
+
+        Breakup_qty = bottomSheetDialog.findViewById(R.id.repair_breakup_qty_alert_spinner);
+        Breakup_price = bottomSheetDialog.findViewById(R.id.repair_breakup_price_alert_spinner);
+        Breakup_remark = bottomSheetDialog.findViewById(R.id.remark_breakup);
+        Update_A = bottomSheetDialog.findViewById(R.id.update_alert_breakup);
+        Cancel_A = bottomSheetDialog.findViewById(R.id.cancel_alert_breakup);
 
         Equipment_Item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,77 +233,62 @@ public class RepairBreakUpActivity extends AppCompatActivity {
             }
         });
 
-        builder.setView(dialogView);
+        bottomSheetDialog.show();
 
-        AlertDialog dialog = builder.create();
-        if (dialog.getWindow() != null) {
-
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-            layoutParams.copyFrom(dialog.getWindow().getAttributes());
-            layoutParams.width = getResources().getDimensionPixelSize(R.dimen.dialog_width);
-            layoutParams.height = getResources().getDimensionPixelSize(R.dimen.dialog_height);
-            dialog.getWindow().setAttributes(layoutParams);
-        }
-
-        dialog.show();
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String qty, remarks, price, repair_item_code, unit_code, Item_name, item_code;
-                Item_name = Equipment_Item.getText().toString();
-                unit_code = Breakup_Unit.getText().toString();
-                qty = Breakup_qty.getText().toString();
-                price = Breakup_price.getText().toString();
-
-
-                if (Item_name.isEmpty()) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Repair Item should not be empty!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (unit_code.isEmpty()) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Unit should not be empty!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (qty.isEmpty()) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Qty should not be empty!", Toast.LENGTH_SHORT).show();
-                    return;
-
-                }
-                if (qty.equals("0") || qty.matches("0+")) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Qty should not be zero", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                if (price.isEmpty()) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Price should not be empty!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (price.equals("0") || price.matches("0+")) {
-                    Toast.makeText(RepairBreakUpActivity.this, "Price should not be zero", Toast.LENGTH_LONG).show();
-                    return;
-                }
                 updateRepairBreakupdetails();
-                dialog.dismiss();
+                bottomSheetDialog.dismiss();
             }
         });
         Cancel_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+                bottomSheetDialog.dismiss();
             }
         });
+
 
     }
 
     private void updateRepairBreakupdetails() {
-        String qty, price, repair_item_code, unit_code;
-        qty = Breakup_qty.getText().toString();
-        String remarks = Breakup_remark.getText().toString();
-        price = Breakup_price.getText().toString();
-        unit_code = item_spinner.getBreakup_unit_code();
+        String qty, price, repair_item_code, unit_code, item_name, remarks;
         repair_item_code = equipment_spinner.getEquipmentBreakup_code();
+        unit_code = item_spinner.getBreakup_unit_code();
+        qty = Breakup_qty.getText().toString();
+        price = Breakup_price.getText().toString();
+        remarks = Breakup_remark.getText().toString();
+
+
+        if (repair_item_code.isEmpty()) {
+            Toast.makeText(RepairBreakUpActivity.this, "Repair Item should not be empty!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (unit_code.isEmpty()) {
+            Toast.makeText(RepairBreakUpActivity.this, "Unit should not be empty!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (qty.isEmpty()) {
+            Toast.makeText(RepairBreakUpActivity.this, "Qty should not be empty!", Toast.LENGTH_SHORT).show();
+            return;
+
+        }
+        if (qty.equals("0") || qty.matches("0+")) {
+            Toast.makeText(RepairBreakUpActivity.this, "Qty should not be zero", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (price.isEmpty()) {
+            Toast.makeText(RepairBreakUpActivity.this, "Price should not be empty!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (price.equals("0") || price.matches("0+")) {
+            Toast.makeText(RepairBreakUpActivity.this, "Price should not be zero", Toast.LENGTH_LONG).show();
+            return;
+        }
+
 
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.Repair_BreakUp_update;
@@ -486,11 +481,11 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     }
 
     private void getEquipmentBreakupSpinnerPopup() {
-        zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        bottomSheetDialog = new BottomSheetDialog(this);
+        View sheetView = getLayoutInflater().inflate(R.layout.item, null);
+        bottomSheetDialog.setContentView(sheetView);
 
-        zDialog.setContentView(R.layout.item);
-
-        ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
+        ListView lvEqName = bottomSheetDialog.findViewById(R.id.lvequipment);
 
         if (Global.Repair_Equipment_Breakup == null || Global.Repair_Equipment_Breakup.size() == 0) {
             Toast.makeText(getBaseContext(), "Item list not found !! Please try again !!", Toast.LENGTH_LONG).show();
@@ -500,10 +495,10 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         lvEqName.setAdapter(EqA);
 
 
-        zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        zDialog.show();
+        bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        bottomSheetDialog.show();
 
-        SearchView sveq = zDialog.findViewById(R.id.svequipment);
+        SearchView sveq = bottomSheetDialog.findViewById(R.id.svequipment);
 
         sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -559,14 +554,8 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     equipment_spinner = eQarrayList.get(i);
                     Equipment_Item.setText(equipment_spinner.getEquipmentBreakup_Name());
-                    zDialog.dismiss();
+                    bottomSheetDialog.dismiss();
                 }
-            });
-
-            layout.setOnClickListener(view1 -> {
-                equipment_spinner = eQarrayList.get(i);
-                Equipment_Item.setText(equipment_spinner.getEquipmentBreakup_Name());
-                zDialog.dismiss();
             });
 
             return v;
@@ -657,11 +646,12 @@ public class RepairBreakUpActivity extends AppCompatActivity {
     }
 
     private void getItemBreakUpSpinnerPopup() {
-        zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
 
-        zDialog.setContentView(R.layout.unit);
+        bottomSheetDialog = new BottomSheetDialog(this);
+        View sheetView = getLayoutInflater().inflate(R.layout.unit, null);
+        bottomSheetDialog.setContentView(sheetView);
 
-        ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
+        ListView lvEqName = bottomSheetDialog.findViewById(R.id.lvequipment);
 
         if (Global.Repair_Item_Breakup == null || Global.Repair_Item_Breakup.size() == 0) {
             Toast.makeText(getBaseContext(), "Unit list not found !! Please try again !!", Toast.LENGTH_LONG).show();
@@ -671,10 +661,7 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         lvEqName.setAdapter(ItA);
 
 
-        zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        zDialog.show();
-
-        SearchView sveq = zDialog.findViewById(R.id.svequipment);
+        SearchView sveq = bottomSheetDialog.findViewById(R.id.svequipment);
 
         sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -688,6 +675,9 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        bottomSheetDialog.show();
     }
 
     private class ItemSelect_Adapter extends BaseAdapter implements Filterable {
@@ -730,15 +720,10 @@ public class RepairBreakUpActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     item_spinner = eQarrayList.get(i);
                     Breakup_Unit.setText(item_spinner.getBreakup_unit_name());
-                    zDialog.dismiss();
+                    bottomSheetDialog.dismiss();
                 }
             });
 
-            layout.setOnClickListener(view1 -> {
-                item_spinner = eQarrayList.get(i);
-                Breakup_Unit.setText(item_spinner.getBreakup_unit_name());
-                zDialog.dismiss();
-            });
 
             return v;
         }

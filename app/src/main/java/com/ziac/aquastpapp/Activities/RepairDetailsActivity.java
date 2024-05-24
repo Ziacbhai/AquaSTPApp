@@ -37,6 +37,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
@@ -62,6 +63,8 @@ public class RepairDetailsActivity extends AppCompatActivity {
     AppCompatButton Update_A, Cancel_A;
     RecyclerView Repair_details_recyclerview;
     private static Dialog zDialog;
+
+    BottomSheetDialog bottomSheetDialog;
     static EquipmentRepairListClass equipment_spinner;
     Context context;
     ProgressDialog progressDialog;
@@ -185,7 +188,7 @@ public class RepairDetailsActivity extends AppCompatActivity {
 
     @SuppressLint("MissingInflatedId")
     private void showAddDetailsDialog(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         LinearLayout Equipment_spinner;
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_repair_details_layout, null);
@@ -194,20 +197,6 @@ public class RepairDetailsActivity extends AppCompatActivity {
         Remark_A = dialogView.findViewById(R.id.remark_alert_rd);
         Update_A = dialogView.findViewById(R.id.update_alert_rd);
         Cancel_A = dialogView.findViewById(R.id.cancel_alert_rd);
-
-        builder.setView(dialogView);
-
-        AlertDialog dialog = builder.create();
-        if (dialog.getWindow() != null) {
-
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-            layoutParams.copyFrom(dialog.getWindow().getAttributes());
-            layoutParams.width = getResources().getDimensionPixelSize(R.dimen.dialog_width);
-            layoutParams.height = getResources().getDimensionPixelSize(R.dimen.dialog_height);
-            dialog.getWindow().setAttributes(layoutParams);
-        }
-
-        dialog.show();
 
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,17 +209,16 @@ public class RepairDetailsActivity extends AppCompatActivity {
                 }
 
                 updateRepairdetails();
-                dialog.dismiss();
+                bottomSheetDialog.dismiss();
             }
         });
 
         Cancel_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+                bottomSheetDialog.dismiss();
             }
         });
-
 
         Equipment_spinner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,6 +226,10 @@ public class RepairDetailsActivity extends AppCompatActivity {
                 getRepairEquipmentsSpinnerPopup();
             }
         });
+
+        bottomSheetDialog.setContentView(dialogView);
+
+        bottomSheetDialog.show();
 
         getEquipmentsListRepairdetails();
     }
@@ -419,6 +411,44 @@ public class RepairDetailsActivity extends AppCompatActivity {
     }
 
 
+
+
+    private void getRepairEquipmentsSpinnerPopup() {
+        bottomSheetDialog = new BottomSheetDialog(this);
+        View sheetView = getLayoutInflater().inflate(R.layout.equipment_item, null);
+        bottomSheetDialog.setContentView(sheetView);
+
+        ListView lvEqName = bottomSheetDialog.findViewById(R.id.lvequipment);
+        /*TextView Equipment_Name = zDialog.findViewById(R.id.euipment_name);
+        TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);
+*/
+        if (Global.Repair_equipment == null || Global.Repair_equipment.size() == 0) {
+            Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        final EquipmentSelectRepair_Adapter EqA = new EquipmentSelectRepair_Adapter(Global.Repair_equipment);
+        lvEqName.setAdapter(EqA);
+
+       /* Equipment_Name.setText("Equipment Name");
+        Equipment_id.setText("Equipment ID");*/
+        bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        bottomSheetDialog.show();
+
+        SearchView sveq = bottomSheetDialog.findViewById(R.id.svequipment);
+        sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                EqA.getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
+
+
     public class EquipmentSelectRepair_Adapter extends BaseAdapter implements Filterable {
 
         private ArrayList<EquipmentRepairListClass> eQarrayList;
@@ -450,13 +480,13 @@ public class RepairDetailsActivity extends AppCompatActivity {
             equipment_spinner = eQarrayList.get(i);
 
             equipmentnameitem.setText(equipment_spinner.getEquipment_Name());
-           // eqnameitem.setText(equipment_spinner.getEquipment_id());
+            // eqnameitem.setText(equipment_spinner.getEquipment_id());
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     equipment_spinner = eQarrayList.get(i);
                     Equipment_code.setText(equipment_spinner.getEquipment_Name());
-                    zDialog.dismiss();
+                    bottomSheetDialog.dismiss();
                 }
             });
            /* layout.setOnClickListener(view1 -> {
@@ -497,40 +527,6 @@ public class RepairDetailsActivity extends AppCompatActivity {
                 }
             };
         }
-    }
-
-    private void getRepairEquipmentsSpinnerPopup() {
-        zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
-        zDialog.setContentView(R.layout.equipment_item);
-
-        ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
-        /*TextView Equipment_Name = zDialog.findViewById(R.id.euipment_name);
-        TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);
-*/
-        if (Global.Repair_equipment == null || Global.Repair_equipment.size() == 0) {
-            Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
-            return;
-        }
-        final EquipmentSelectRepair_Adapter EqA = new EquipmentSelectRepair_Adapter(Global.Repair_equipment);
-        lvEqName.setAdapter(EqA);
-
-       /* Equipment_Name.setText("Equipment Name");
-        Equipment_id.setText("Equipment ID");*/
-        zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        zDialog.show();
-
-        SearchView sveq = zDialog.findViewById(R.id.svequipment);
-        sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                EqA.getFilter().filter(newText);
-                return false;
-            }
-        });
     }
 
 

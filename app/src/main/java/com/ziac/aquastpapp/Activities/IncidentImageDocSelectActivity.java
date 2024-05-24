@@ -30,7 +30,7 @@ public class IncidentImageDocSelectActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
         In_image_ = findViewById(R.id.in_images_);
-        In_docs_ = findViewById(R.id.in_docs);
+        //In_docs_ = findViewById(R.id.in_docs);
 
         Repair_back_btn = findViewById(R.id.repair_back_btn);
         Repair_back_btn.setOnClickListener(new View.OnClickListener() {
@@ -46,11 +46,11 @@ public class IncidentImageDocSelectActivity extends AppCompatActivity {
             }
         });
 
-        In_docs_.setOnClickListener(new View.OnClickListener() {
+       /* In_docs_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(IncidentImageDocSelectActivity.this, IncidentDocumentsUploadActivity.class));
             }
-        });
+        });*/
     }
 }

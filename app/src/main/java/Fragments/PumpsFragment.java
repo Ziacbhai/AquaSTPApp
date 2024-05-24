@@ -1,7 +1,6 @@
 package Fragments;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,10 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -152,6 +158,25 @@ public class PumpsFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                if (error instanceof TimeoutError) {
+                    Toast.makeText(getActivity(), "Request Time-Out", Toast.LENGTH_LONG).show();
+                } else if (error instanceof NoConnectionError) {
+                    Toast.makeText(getActivity(), "No Connection Found", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ServerError) {
+                    String errorResponse = new String(error.networkResponse.data);
+                    try {
+                        JSONObject errorJson = new JSONObject(errorResponse);
+                        String errorDescription = errorJson.optString("error_description", "");
+                        Global.customtoast(getActivity(), getLayoutInflater(), errorDescription);
+                    } catch (JSONException e) {
+                        Global.customtoast(getActivity(), getLayoutInflater(), "An error occurred. Please try again later.");
+                    }
+                } else if (error instanceof NetworkError) {
+                    Toast.makeText(getActivity(), "Network Error", Toast.LENGTH_LONG).show();
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(getActivity(), "Parse Error", Toast.LENGTH_LONG).show();
+                }
+
             }
         }) {
             public Map<String, String> getHeaders() {
@@ -160,13 +185,9 @@ public class PumpsFragment extends Fragment {
                 Map<String, String> headers = new HashMap<String, String>();
                 String accesstoken = Global.sharedPreferences.getString("access_token", "");
                 headers.put("Authorization", "Bearer " + accesstoken);
-
                 return headers;
             }
-
         };
-
-
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
                 (int) TimeUnit.SECONDS.toMillis(0), //After the set time elapses the request will timeout
                 0,

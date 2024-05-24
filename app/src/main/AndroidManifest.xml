@@ -126,10 +126,11 @@
             android:name=".Activities.SelectSTPLocationActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="Fragments.PumpsFragment"
+
+       <!-- <activity
+            android:name=".Fragments.PumpsFragment"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />-->
 
         <activity
             android:name=".Activities.WelcomeSupervisorActivity"

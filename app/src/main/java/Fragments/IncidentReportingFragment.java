@@ -31,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
@@ -154,36 +155,34 @@ public class IncidentReportingFragment extends Fragment {
 
     @SuppressLint("MissingInflatedId")
     private void showAddDetailsDialog(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_incident_layout, null);
+
         tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
         Remark_A = dialogView.findViewById(R.id.incident_particulars);
         Update_A = dialogView.findViewById(R.id.incident_update_alert);
         Cancel_A = dialogView.findViewById(R.id.incident_cancel_alert);
 
-        // tvSelectedDate.setText(currentDatevalue);
         tvSelectedDate.setText(currentDateValue2);
 
-        builder.setView(dialogView);
-
-        AlertDialog dialog = builder.create();
-
-        dialog.show();
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateIncident();
-                dialog.dismiss();
+                bottomSheetDialog.dismiss();
             }
         });
 
         Cancel_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                bottomSheetDialog.dismiss();
             }
         });
+
+        bottomSheetDialog.setContentView(dialogView);
+        bottomSheetDialog.show();
     }
 
     private void updateIncident() {

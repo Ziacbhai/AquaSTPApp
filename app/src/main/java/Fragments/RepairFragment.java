@@ -32,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
@@ -160,7 +161,7 @@ public class RepairFragment extends Fragment {
 
     @SuppressLint("MissingInflatedId")
     private void showAddDetailsDialog(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_repair_layout, null);
         AppCompatButton Update_A, Cancel_A;
@@ -178,23 +179,22 @@ public class RepairFragment extends Fragment {
 //                showDatePicker();
             }
         });
-        builder.setView(dialogView);
 
-        AlertDialog dialog = builder.create();
+        bottomSheetDialog.setContentView(dialogView);
 
-        dialog.show();
+        bottomSheetDialog.show();
 
         Update_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateRepairs();
-                dialog.dismiss();
+                bottomSheetDialog.dismiss();
             }
         });
         Cancel_A.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+                bottomSheetDialog.dismiss();
             }
         });
     }

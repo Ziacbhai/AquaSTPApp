@@ -1,6 +1,7 @@
 package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -8,6 +9,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -30,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -44,11 +47,14 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,6 +65,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
 import Adapters.ConsumptionDetailsAdapter;
 import Models.ConsumptionModel2;
 import Models.EquipmentListClassConsumption;
@@ -71,7 +78,7 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
     private EquipmentListClassConsumption equipment_spinner;
     private ItemListConsumptionModel Item_spinner;
 
-    private Dialog zDialog;
+    BottomSheetDialog bottomSheetDialog;
     TextView Equipment_code, Item_codeTV;
     EditText Qty_cb;
     AppCompatButton Update_A, Cancel_A;
@@ -111,7 +118,7 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showAddDetailsDialog(context);
+                showAddDetailsBottomSheetDialog(context);
             }
         });
         isSwipeRefreshTriggered = true;
@@ -175,19 +182,16 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
         return decimalFormat.format(value);
     }
 
-    @SuppressLint("MissingInflatedId")
-    private void showAddDetailsDialog(Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    private void showAddDetailsBottomSheetDialog(Context context) {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.custom_dialog_consumption_details_layout);
 
         LinearLayout Equipment, Item;
-        LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.custom_dialog_consumption_details_layout, null);
+        Equipment_code = bottomSheetDialog.findViewById(R.id.equipment_name_alert_spinner);
+        Item_codeTV = bottomSheetDialog.findViewById(R.id.item_name_alert_spinner);
 
-        Equipment_code = dialogView.findViewById(R.id.equipment_name_alert_spinner);
-        Item_codeTV = dialogView.findViewById(R.id.item_name_alert_spinner);
-
-        Equipment = dialogView.findViewById(R.id.eqipment_alert_spinner);
-        Item = dialogView.findViewById(R.id.Item_alert_spinner);
+        Equipment = bottomSheetDialog.findViewById(R.id.eqipment_alert_spinner);
+        Item = bottomSheetDialog.findViewById(R.id.Item_alert_spinner);
 
         Equipment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,61 +206,56 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
             }
         });
 
+        Qty_cb = bottomSheetDialog.findViewById(R.id.qty_alert_cd);
+        Update_A = bottomSheetDialog.findViewById(R.id.update_alert_cd);
+        Cancel_A = bottomSheetDialog.findViewById(R.id.cancel_alert_cd);
 
-        Qty_cb = dialogView.findViewById(R.id.qty_alert_cd);
-        Update_A = dialogView.findViewById(R.id.update_alert_cd);
-        Cancel_A = dialogView.findViewById(R.id.cancel_alert_cd);
+        if (Update_A != null) {
+            Update_A.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-        builder.setView(dialogView);
-        AlertDialog dialog = builder.create();
-        if (dialog.getWindow() != null) {
+                    String equipment_code = Equipment_code.getText().toString();
+                    String item_code = Item_codeTV.getText().toString();
+                    String qty = Qty_cb.getText().toString();
 
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-            layoutParams.copyFrom(dialog.getWindow().getAttributes());
-            layoutParams.width = getResources().getDimensionPixelSize(R.dimen.dialog_width);
-            layoutParams.height = getResources().getDimensionPixelSize(R.dimen.dialog_height);
-            dialog.getWindow().setAttributes(layoutParams);
+
+                    if (equipment_code.isEmpty()) {
+                        Toast.makeText(ConsumptionDetailsActivity.this, "Equipment  should not be empty !!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (item_code.isEmpty()) {
+                        Toast.makeText(ConsumptionDetailsActivity.this, "Item should not be empty !!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (qty.isEmpty()) {
+                        Toast.makeText(ConsumptionDetailsActivity.this, "Qty should not be empty !!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (qty.equals("0") || qty.matches("0+")) {
+                        Toast.makeText(ConsumptionDetailsActivity.this, "Qty should not be zero !!", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    updateConsumables_details();
+                    bottomSheetDialog.dismiss();
+                }
+            });
         }
-        dialog.show();
-        Update_A.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                String equipment_code = Equipment_code.getText().toString();
-                String item_code = Item_codeTV.getText().toString();
-                String qty = Qty_cb.getText().toString();
+        if (Cancel_A != null) {
+            Cancel_A.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    bottomSheetDialog.dismiss();
+                }
+            });
+        }
 
-
-                if (equipment_code.isEmpty()) {
-                    Toast.makeText(ConsumptionDetailsActivity.this, "Equipment  should not be empty !!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (item_code.isEmpty()) {
-                    Toast.makeText(ConsumptionDetailsActivity.this, "Item should not be empty !!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (qty.isEmpty()) {
-                    Toast.makeText(ConsumptionDetailsActivity.this, "Qty should not be empty !!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (qty.equals("0") || qty.matches("0+")) {
-                    Toast.makeText(ConsumptionDetailsActivity.this, "Qty should not be zero !!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-                updateConsumables_details();
-                dialog.dismiss();
-            }
-        });
-        Cancel_A.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
+        bottomSheetDialog.show();
         getEquipmentsList();
         getItemSpinner();
     }
+
 
     private void updateConsumables_details() {
 
@@ -515,11 +514,13 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
     }
 
     private void getEquipmentsSpinnerPopup() {
-        zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
-        zDialog.setContentView(R.layout.equipment_item);
-        ListView lvEqName = zDialog.findViewById(R.id.lvequipment);
-        /*TextView Equipment_name =zDialog.findViewById(R.id.euipment_name);
-        TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);*/
+        bottomSheetDialog = new BottomSheetDialog(this);
+        View sheetView = getLayoutInflater().inflate(R.layout.equipment_item, null);
+        bottomSheetDialog.setContentView(sheetView);
+
+        ListView lvEqName = sheetView.findViewById(R.id.lvequipment);
+    /*TextView Equipment_name = sheetView.findViewById(R.id.euipment_name);
+    TextView Equipment_id = sheetView.findViewById(R.id.euipment_id);*/
         getEquipmentsList();
         if (Global.Consumption_equipment == null || Global.Consumption_equipment.size() == 0) {
             Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
@@ -528,12 +529,12 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
         EquipmentSelect_Adapter EqA = new EquipmentSelect_Adapter(Global.Consumption_equipment);
         lvEqName.setAdapter(EqA);
 
-       /* Equipment_name.setText("Equipment Name");
-        Equipment_id.setText("Equipment ID");*/
-        zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        zDialog.show();
+    /*Equipment_name.setText("Equipment Name");
+    Equipment_id.setText("Equipment ID");*/
+        bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        bottomSheetDialog.show();
 
-        SearchView sveq = zDialog.findViewById(R.id.svequipment);
+        SearchView sveq = sheetView.findViewById(R.id.svequipment);
 
         sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -589,17 +590,13 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     equipment_spinner = eQarrayList.get(i);
                     Equipment_code.setText(equipment_spinner.getEquipment_Name());
-                    zDialog.dismiss();
+                    bottomSheetDialog.dismiss();
                 }
             });
 
-            layout.setOnClickListener(view1 -> {
-                equipment_spinner = eQarrayList.get(i);
-                Equipment_code.setText(equipment_spinner.getEquipment_Name());
-                zDialog.dismiss();
-            });
             return v;
         }
+
         @Override
         public Filter getFilter() {
             return new Filter() {
@@ -631,6 +628,7 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
             };
         }
     }
+
 
     private void getItemSpinner() {
         String Url = Global.api_List_Get_Item + "comcode=" + Global.sharedPreferences.getString("com_code", "0");
@@ -691,13 +689,12 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
 
     }
 
-    private void getItemSpinnerPopup() {
 
-        zDialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
-        zDialog.setContentView(R.layout.item);
-        ListView lvItem = zDialog.findViewById(R.id.lvequipment);
-       /* TextView Equipment_name =zDialog.findViewById(R.id.euipment_name);
-        TextView Equipment_id = zDialog.findViewById(R.id.euipment_id);*/
+    private void getItemSpinnerPopup() {
+        bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.item);
+
+        ListView lvItem = bottomSheetDialog.findViewById(R.id.lvequipment);
 
         if (Global.Consumption_item == null || Global.Consumption_item.size() == 0) {
             Toast.makeText(getBaseContext(), "Item list not found !! Please try again !!", Toast.LENGTH_LONG).show();
@@ -706,12 +703,12 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
         ItemSelect_Adapter laItem = new ItemSelect_Adapter(Global.Consumption_item);
         lvItem.setAdapter(laItem);
 
-       /* Equipment_name.setText("Item Name");
-        Equipment_id.setText("Item ID");*/
-        zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        zDialog.show();
+        bottomSheetDialog.setOnShowListener(dialog -> {
+            bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        });
 
-        SearchView sveq = zDialog.findViewById(R.id.svequipment);
+
+        SearchView sveq = bottomSheetDialog.findViewById(R.id.svequipment);
         sveq.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -724,6 +721,8 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        bottomSheetDialog.show();
     }
 
     public class ItemSelect_Adapter extends BaseAdapter implements Filterable {
@@ -733,39 +732,39 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
         public ItemSelect_Adapter(ArrayList<ItemListConsumptionModel> mDataArrayList) {
             this.mDataArrayList = mDataArrayList;
         }
+
         @Override
         public int getCount() {
             return mDataArrayList.size();
         }
+
         @Override
         public Object getItem(int i) {
             return mDataArrayList.get(i);
         }
+
         @Override
         public long getItemId(int i) {
             return i;
         }
 
         @Override
-        @SuppressLint("MissingInflatedId")
         public View getView(int i, View convertView, ViewGroup parent) {
-
-            View v = getLayoutInflater().inflate(R.layout.popup_itemlist_consumption, null);
-            LinearLayout select_item = findViewById(R.id.select_item);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.popup_itemlist_consumption, parent, false);
             TextView tvequipmentnameitem = v.findViewById(R.id.tvitemfirst);
-            //TextView tvenameitem = v.findViewById(R.id.tvitemtwoc);
             Item_spinner = mDataArrayList.get(i);
             tvequipmentnameitem.setText(Item_spinner.getItem_name());
-            //tvenameitem.setText(Item_spinner.getItem_code());
+
 
             tvequipmentnameitem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Item_spinner = mDataArrayList.get(i);
                     Item_codeTV.setText(Item_spinner.getItem_name());
-                    zDialog.dismiss();
+                    bottomSheetDialog.dismiss(); // assuming bottomSheetDialog is accessible here
                 }
             });
+
 
             return v;
         }
@@ -793,6 +792,7 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
                     filterResults.count = mFilteredList.size();
                     return filterResults;
                 }
+
                 @Override
                 protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                     mDataArrayList = (ArrayList<ItemListConsumptionModel>) filterResults.values;
@@ -801,4 +801,5 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
             };
         }
     }
+
 }
