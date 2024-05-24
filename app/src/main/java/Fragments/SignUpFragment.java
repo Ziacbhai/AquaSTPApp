@@ -51,6 +51,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.LoginSignupActivity;
 import com.ziac.aquastpapp.R;
@@ -68,6 +69,8 @@ import java.util.concurrent.TimeUnit;
 import Models.zList;
 public class SignUpFragment extends Fragment {
     private Dialog zDialog;
+
+    BottomSheetDialog bottomSheetDialog;
     EditText Company, CPerson, Mobile, Email, Adminname, RPassword, Cpassword;
     TextView tvState, tvCity, Site_address, TermsOfUse, Privacy, Registerbtn;
     ImageView DDstate, DDcity;
@@ -237,11 +240,11 @@ public class SignUpFragment extends Fragment {
 
     private void statespopup() {
 
-        zDialog = new Dialog(getActivity(), android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        bottomSheetDialog = new BottomSheetDialog(context);
+        View sheetView = getLayoutInflater().inflate(R.layout.popup_list, null);
+        bottomSheetDialog.setContentView(sheetView);
 
-        zDialog.setContentView(R.layout.popup_list);
-
-        ListView lvStates = zDialog.findViewById(R.id.lvequipment);
+        ListView lvStates = bottomSheetDialog.findViewById(R.id.lvequipment);
 
         if (Global.statearraylist == null || Global.statearraylist.size() == 0) {
             Toast.makeText(getActivity(), "States list not found !! Please try again !!", Toast.LENGTH_LONG).show();
@@ -249,10 +252,10 @@ public class SignUpFragment extends Fragment {
         }
         final StateAdapter laStates = new StateAdapter(Global.statearraylist);
         lvStates.setAdapter(laStates);
-        zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        zDialog.show();
+        bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        bottomSheetDialog.show();
 
-        SearchView svstate = zDialog.findViewById(R.id.svequipment);
+        SearchView svstate = bottomSheetDialog.findViewById(R.id.svequipment);
 
         svstate.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -331,7 +334,7 @@ public class SignUpFragment extends Fragment {
             tvstatenameitem.setOnClickListener(view1 -> {
                 statename = mDataArrayList.get(i);
                 tvState.setText(statename.get_name());
-                zDialog.dismiss();
+                bottomSheetDialog.dismiss();
                 getcity();
             });
             return v;
@@ -422,11 +425,14 @@ public class SignUpFragment extends Fragment {
     }
 
     private void citiespopup() {
-        zDialog = new Dialog(getActivity(), android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
-        //zDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        zDialog.setContentView(R.layout.popup_list);
 
-        ListView lvStates = zDialog.findViewById(R.id.lvequipment);
+        bottomSheetDialog = new BottomSheetDialog(context);
+        View sheetView = getLayoutInflater().inflate(R.layout.popup_list, null);
+        bottomSheetDialog.setContentView(sheetView);
+
+
+
+        ListView lvStates = bottomSheetDialog.findViewById(R.id.lvequipment);
 
         if (Global.cityarraylist == null || Global.cityarraylist.size() == 0) {
 //            Toast.makeText(getBaseContext(), "City list not found !! Please try again !!", Toast.LENGTH_LONG).show();
@@ -437,10 +443,10 @@ public class SignUpFragment extends Fragment {
         final CityAdapter laStates = new CityAdapter(Global.cityarraylist);
         lvStates.setAdapter(laStates);
 
-        zDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        zDialog.show();
+        bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        bottomSheetDialog.show();
 
-        SearchView svstate = zDialog.findViewById(R.id.svequipment);
+        SearchView svstate = bottomSheetDialog.findViewById(R.id.svequipment);
 
         svstate.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -525,7 +531,7 @@ public class SignUpFragment extends Fragment {
                     cityname = mDataArrayList.get(i);
                     tvCity.setText(cityname.get_name());
                     citycode = cityname.get_code();
-                    zDialog.dismiss();
+                    bottomSheetDialog.dismiss();
                 }
             });
             return v;
