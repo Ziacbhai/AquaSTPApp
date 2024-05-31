@@ -3,12 +3,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -20,8 +26,10 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,24 +48,32 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+import com.yalantis.ucrop.UCrop;
 import com.ziac.aquastpapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
+    private static final int WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 0;
+    private static final int CAMERA_AND_STORAGE_PERMISSION_REQUEST_CODE = 0;
+    private static final int REQUEST_IMAGE_CAPTURE = 10;
+    private static final int REQUEST_IMAGE_SELECT = 10;
     FloatingActionButton fab;
     CircleImageView circleImageView;
     Bitmap imageBitmap;
+
     String userimage;
     Picasso.Builder builder;
     Picasso picasso;
     EditText Person_name, Person_number, Person_email;
     TextView Person_ref_code,Updatebutton;
+
     ImageView Backarrowbtn;
     Context context;
     @SuppressLint("MissingInflatedId")
@@ -80,7 +96,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         Updatebutton.setOnClickListener(v -> updateprofile());
         fab.setOnClickListener(v -> {
-            opencamera();
+            showDialog();
         });
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +117,130 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         getuserdetails();
+    }
+
+    private void showDialog() {
+
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottomsheetlayout);
+
+
+        ImageView Captureimage,SelectImages;
+        Captureimage = dialog.findViewById(R.id.captureimage);
+        SelectImages= dialog.findViewById(R.id.selectimagefromgallery);
+
+        Captureimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestCameraAndStoragePermissions();
+                dialog.dismiss();
+            }
+        });
+
+        SelectImages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+                dialog.dismiss();
+            }
+        });
+
+
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+
+    }
+    private void requestCameraAndStoragePermissions() {
+        if (  ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED  ||
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_AND_STORAGE_PERMISSION_REQUEST_CODE);
+        } else {
+            // Permissions already granted, proceed with taking a picture
+            dispatchTakePictureIntent();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, proceed with taking a picture
+                dispatchTakePictureIntent();
+            } else {
+                // Permission denied, show a message to the user or handle it accordingly
+                Toast.makeText(this, "Permission denied to write to external storage", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_IMAGE_SELECT);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            if (extras != null) {
+                // Get the captured image bitmap
+                imageBitmap = (Bitmap) extras.get("data");
+                if (imageBitmap != null) {
+                    startCrop(getImageUri(this, imageBitmap));
+                }
+            }
+        } else if (requestCode == REQUEST_IMAGE_SELECT && resultCode == RESULT_OK && data != null) {
+            Uri selectedImage = data.getData();
+            startCrop(selectedImage);
+        } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+            final Uri croppedUri = UCrop.getOutput(data);
+            try {
+                imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), croppedUri);
+                // Call postselelectedimage() only after cropping
+                postselelectedimage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            final Throwable cropError = UCrop.getError(data);
+            cropError.printStackTrace();
+        }
+    }
+
+
+    private Uri getImageUri(Context context, Bitmap bitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Title", null);
+        return Uri.parse(path);
+    }
+    private void startCrop(Uri sourceUri) {
+        String destinationFileName = "cropped_image";
+        UCrop uCrop = UCrop.of(sourceUri, Uri.fromFile(new File(getCacheDir(), destinationFileName)));
+        uCrop.withAspectRatio(1, 1); // Set cropping aspect ratio as square
+        uCrop.withMaxResultSize(1000, 1000); // Set max cropping size
+        uCrop.start(this);
+    }
+    private String imageToString(Bitmap imageBitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
+        byte[] imgBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 
     public void showImage(Picasso picasso, String userimage) {
@@ -165,7 +305,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void opencamera() {
+   /* private void opencamera() {
         com.github.dhaval2404.imagepicker.ImagePicker.with(ProfileActivity.this).crop()                    //Crop image(Optional), Check Customization for more option
                 .compress(1024)            //Final image size will be less than 1 MB(Optional)
                 .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
@@ -184,7 +324,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
             postselelectedimage();
         }
-    }
+    }*/
 
     private void postselelectedimage() {
 
@@ -394,11 +534,11 @@ public class ProfileActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    private String imageToString(Bitmap imageBitmap) {
+    /*private String imageToString(Bitmap imageBitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
-    }
+    }*/
 
 }

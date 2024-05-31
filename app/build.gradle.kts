@@ -86,6 +86,9 @@ dependencies {
     implementation ("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
     testImplementation ("junit:junit:4.13.2")
     testImplementation ("androidx.test.espresso:espresso-core:3.5.0")
+    testImplementation ("com.github.yalantis:ucrop:2.2.6")
+
+
 
 
 }

@@ -519,8 +519,7 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
         bottomSheetDialog.setContentView(sheetView);
 
         ListView lvEqName = sheetView.findViewById(R.id.lvequipment);
-    /*TextView Equipment_name = sheetView.findViewById(R.id.euipment_name);
-    TextView Equipment_id = sheetView.findViewById(R.id.euipment_id);*/
+
         getEquipmentsList();
         if (Global.Consumption_equipment == null || Global.Consumption_equipment.size() == 0) {
             Toast.makeText(getBaseContext(), "Equipment list not found !! Please try again !!", Toast.LENGTH_LONG).show();
@@ -529,8 +528,6 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
         EquipmentSelect_Adapter EqA = new EquipmentSelect_Adapter(Global.Consumption_equipment);
         lvEqName.setAdapter(EqA);
 
-    /*Equipment_name.setText("Equipment Name");
-    Equipment_id.setText("Equipment ID");*/
         bottomSheetDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         bottomSheetDialog.show();
 
@@ -579,11 +576,11 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
             LinearLayout layout = v.findViewById(R.id.select);
 
             TextView equipmentnameitem = v.findViewById(R.id.tvsingle);
-            //TextView eqnameitem = v.findViewById(R.id.tvtwoeq);
+
             equipment_spinner = eQarrayList.get(i);
 
             equipmentnameitem.setText(equipment_spinner.getEquipment_Name());
-            //eqnameitem.setText(equipment_spinner.getEquipment_id());
+
 
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override

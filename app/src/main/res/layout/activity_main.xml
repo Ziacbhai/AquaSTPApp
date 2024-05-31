@@ -44,10 +44,10 @@
     </LinearLayout>
 
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+ <!--   <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--<com.google.android.material.bottomappbar.BottomAppBar
+        &lt;!&ndash;<com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,8 +65,8 @@
                 app:labelVisibilityMode="labeled"
                 app:menu="@menu/bottom_menu" />
 
-        </com.google.android.material.bottomappbar.BottomAppBar>-->
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </com.google.android.material.bottomappbar.BottomAppBar>&ndash;&gt;
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
