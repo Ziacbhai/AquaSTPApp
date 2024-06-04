@@ -62,8 +62,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
     private static final int WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE = 0;
     private static final int CAMERA_AND_STORAGE_PERMISSION_REQUEST_CODE = 0;
-    private static final int REQUEST_IMAGE_CAPTURE = 10;
-    private static final int REQUEST_IMAGE_SELECT = 10;
+    private static final int REQUEST_IMAGE_CAPTURE = 2;
+    private static final int REQUEST_IMAGE_SELECT = 3;
     FloatingActionButton fab;
     CircleImageView circleImageView;
     Bitmap imageBitmap;
@@ -194,11 +194,9 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             if (extras != null) {
-                // Get the captured image bitmap
                 imageBitmap = (Bitmap) extras.get("data");
                 if (imageBitmap != null) {
                     startCrop(getImageUri(this, imageBitmap));
@@ -206,18 +204,24 @@ public class ProfileActivity extends AppCompatActivity {
             }
         } else if (requestCode == REQUEST_IMAGE_SELECT && resultCode == RESULT_OK && data != null) {
             Uri selectedImage = data.getData();
-            startCrop(selectedImage);
+            if (selectedImage != null) {
+                Log.d("SelectedImageUri", selectedImage.toString());
+                startCrop(selectedImage);
+            } else {
+                Log.e("SelectedImageUri", "Selected image URI is null");
+            }
         } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
-            final Uri croppedUri = UCrop.getOutput(data);
-            try {
-                imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), croppedUri);
-                // Call postselelectedimage() only after cropping
-                postselelectedimage();
-            } catch (IOException e) {
-                e.printStackTrace();
+            Uri croppedUri = UCrop.getOutput(data);
+            if (croppedUri != null) {
+                try {
+                    imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), croppedUri);
+                    postselelectedimage();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         } else if (resultCode == UCrop.RESULT_ERROR) {
-            final Throwable cropError = UCrop.getError(data);
+            Throwable cropError = UCrop.getError(data);
             cropError.printStackTrace();
         }
     }
@@ -534,11 +538,6 @@ public class ProfileActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    /*private String imageToString(Bitmap imageBitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
-        byte[] imgBytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
-    }*/
+
 
 }
