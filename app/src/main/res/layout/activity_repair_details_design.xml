@@ -269,5 +269,6 @@
         app:backgroundTint="@color/white"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:srcCompat="@android:drawable/ic_input_add" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

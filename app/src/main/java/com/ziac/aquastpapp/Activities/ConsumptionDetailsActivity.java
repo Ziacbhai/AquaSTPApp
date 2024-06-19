@@ -2,6 +2,7 @@ package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -87,6 +88,7 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
     private boolean isSwipeRefreshTriggered = false;
 
     ImageView Repair_back_btn;
+    FloatingActionButton fab;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -113,7 +115,7 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
                 refreshScreen();
             }
         });
-        FloatingActionButton fab = findViewById(R.id.fab);
+         fab = findViewById(R.id.consumption_D_fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +126,29 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
         isSwipeRefreshTriggered = true;
         getConsumablesDetails();
         Consumables_D_Rv = findViewById(R.id.consumables_details_recyclerview);
+
+        Consumables_D_Rv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Consumables_D_Rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        if (dy > 0 || dy < 0 && fab.isShown()) {
+                            fab.hide();
+                        }
+                    }
+
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            fab.show();
+                        }
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+                });
+            }
+        });
+
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(context));
         Consumables_D_Rv.setHasFixedSize(true);
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));

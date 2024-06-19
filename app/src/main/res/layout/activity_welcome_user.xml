@@ -68,12 +68,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/acme"
             android:gravity="center_horizontal"
             android:text="Greetings, esteemed User!"
             android:textColor="#01a4a3"
             android:textSize="22sp"
-            android:textStyle="italic"
-            android:layout_marginBottom="8dp"/>
+            android:textStyle="italic" />
 
         <View
             android:layout_width="100dp"
@@ -89,7 +90,6 @@
             android:text="Helloziac"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:textStyle="italic"
             android:layout_marginTop="8dp"/>
 
         <TextView

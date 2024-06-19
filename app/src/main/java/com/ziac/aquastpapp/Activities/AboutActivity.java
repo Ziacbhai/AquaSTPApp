@@ -108,8 +108,7 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://twitter.com/ziac3" +
-                                "soft")));
+                        Uri.parse("https://x.com/ziacsoft")));
             }
         });
 

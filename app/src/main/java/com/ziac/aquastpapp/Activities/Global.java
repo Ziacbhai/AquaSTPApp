@@ -113,7 +113,6 @@ public class Global {
 
     public static String GetItemStock = baseurl + "api/Masters/GetItemStock?";
 
-
     public static String GetLab_Test_Items = baseurl + "api/Lab/List?";
 
     public static String Lab_Test_Update = baseurl + "api/Lab/AddUpdate";
@@ -147,7 +146,6 @@ public class Global {
     public static RepairModel2 repairModel2;
     public static RepairModel3 repairModel3;
     public static DailyLogModel dailyLogModel;
-
     public static RepairModel4 repairModel4;
     public static LabTestModel labTestModel1;
     public static IncidentsModelClass incidentsModelClass;

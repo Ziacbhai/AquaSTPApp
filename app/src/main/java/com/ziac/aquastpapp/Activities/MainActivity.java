@@ -30,7 +30,7 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.R;
 
-import Fragments.Consumption_Fragment;
+import Fragments.ConsumptionFragment;
 import Fragments.EquipmentsFragment;
 import Fragments.HomeFragment;
 import Fragments.IncidentReportingFragment;
@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         if (itemId == R.id.nav_consumption) {
-            Consumption_Fragment consumables = new Consumption_Fragment();
+            ConsumptionFragment consumables = new ConsumptionFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, consumables);

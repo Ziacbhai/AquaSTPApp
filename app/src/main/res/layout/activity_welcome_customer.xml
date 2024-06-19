@@ -72,6 +72,7 @@
             android:text="Greetings, esteemed Customer!"
             android:textColor="#01a4a3"
             android:textSize="22sp"
+            android:fontFamily="@font/acme"
             android:textStyle="italic"
             android:layout_marginBottom="8dp"/>
 
@@ -89,7 +90,6 @@
             android:text="Helloziac"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:textStyle="italic"
             android:layout_marginTop="8dp"/>
 
         <TextView

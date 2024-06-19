@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#eaeff5"
     android:orientation="vertical"
-    tools:context="Fragments.Consumption_Fragment">
+    tools:context="Fragments.ConsumptionFragment">
 
 
     <androidx.core.widget.NestedScrollView
@@ -145,5 +145,6 @@
         app:backgroundTint="@color/white"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:srcCompat="@android:drawable/ic_input_add" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

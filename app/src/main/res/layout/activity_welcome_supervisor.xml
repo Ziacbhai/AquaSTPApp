@@ -18,12 +18,13 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:paddingEnd="16dp">
+
         <ImageView
             android:id="@+id/ownerexit"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/cross" />
     </RelativeLayout>
 
@@ -32,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView"
             android:layout_width="210dp"
@@ -52,28 +54,29 @@
         android:id="@+id/company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
         android:text="CompanyName"
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/acme"
             android:gravity="center_horizontal"
             android:text="Greetings, esteemed Supervisor!"
             android:textColor="#01a4a3"
             android:textSize="22sp"
-            android:textStyle="italic"
-            android:layout_marginBottom="8dp"/>
+            android:textStyle="italic" />
 
         <View
             android:layout_width="100dp"
@@ -85,12 +88,11 @@
             android:id="@+id/wname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:gravity="center_horizontal"
             android:text="Helloziac"
             android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="italic"
-            android:layout_marginTop="8dp"/>
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/wemail"
@@ -111,11 +113,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:gravity="center_horizontal"
             android:text="The helm of AquaSTP awaits."
             android:textSize="17sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
@@ -137,11 +139,11 @@
         android:layout_width="180dp"
         android:layout_height="55dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/profilebtnupdate"
         android:text="Continue"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
+        android:textStyle="bold" />
 
     <!-- Add vertical spacing -->
     <View

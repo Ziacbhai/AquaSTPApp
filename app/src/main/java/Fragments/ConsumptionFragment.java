@@ -6,7 +6,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
-import androidx.appcompat.app.AlertDialog;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,15 +46,16 @@ import java.util.concurrent.TimeUnit;
 import Adapters.ConsumptionAdapter;
 import Models.ConsumptionModel;
 
-public class Consumption_Fragment extends Fragment {
+public class ConsumptionFragment extends Fragment {
     RecyclerView Consumables_rv;
     private TextView tvSelectedDate;
-    TextView Date_A, STP_A, Remark_A;
+    TextView  Remark_A;
     AppCompatButton Update_A, Cancel_A;
     ProgressDialog progressDialog;
     String currentDatevalue, currentDateValue2;
     Context context;
     ConsumptionAdapter consumptionAdapter;
+    FloatingActionButton fab;
     private SwipeRefreshLayout swipeRefreshLayout;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -79,7 +81,7 @@ public class Consumption_Fragment extends Fragment {
         });
 
 
-        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab = view.findViewById(R.id.fab_consumption);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +90,30 @@ public class Consumption_Fragment extends Fragment {
         });
 
         Consumables_rv = view.findViewById(R.id.consumables_recyclerview);
+
+        Consumables_rv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Consumables_rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        if (dy > 0 || dy < 0 && fab.isShown()) {
+                            fab.hide();
+                        }
+                    }
+
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            fab.show();
+                        }
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+                });
+            }
+        });
+
+
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         Consumables_rv.setHasFixedSize(true);
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
