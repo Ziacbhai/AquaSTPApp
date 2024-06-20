@@ -1,6 +1,8 @@
 package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -71,7 +73,8 @@ public class RepairDetailsActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
 
     ImageView Repair_back_btn;
-
+    FloatingActionButton fab;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +84,7 @@ public class RepairDetailsActivity extends AppCompatActivity {
         user_topcard();
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+         fab = findViewById(R.id.repairdetailsfab);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -105,6 +108,28 @@ public class RepairDetailsActivity extends AppCompatActivity {
         });
 
         Repair_details_recyclerview = findViewById(R.id.repair_details_recyclerview);
+
+        Repair_details_recyclerview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Repair_details_recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        if (dy > 0 || dy < 0 && fab.isShown()) {
+                            fab.hide();
+                        }
+                    }
+
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            fab.show();
+                        }
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+                });
+            }
+        });
         Repair_details_recyclerview.setLayoutManager(new LinearLayoutManager(this));
         Repair_details_recyclerview.setHasFixedSize(true);
         Repair_details_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

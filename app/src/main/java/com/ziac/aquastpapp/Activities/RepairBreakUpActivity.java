@@ -2,6 +2,7 @@ package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -95,8 +96,8 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         user_topcard();
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton breakup = findViewById(R.id.repairbreakupfab);
+        breakup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAddDetailsDialog(context);
@@ -121,6 +122,29 @@ public class RepairBreakUpActivity extends AppCompatActivity {
 
         get_Breakup_Details_Repair();
         Repair_breakup_recyclerview = findViewById(R.id.repair_breakup_recyclerview);
+
+        Repair_breakup_recyclerview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Repair_breakup_recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        if (dy > 0 || dy < 0 && breakup.isShown()) {
+                            breakup.hide();
+                        }
+                    }
+
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            breakup.show();
+                        }
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+                });
+            }
+        });
+
         Repair_breakup_recyclerview.setLayoutManager(new LinearLayoutManager(this));
         Repair_breakup_recyclerview.setHasFixedSize(true);
         Repair_breakup_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

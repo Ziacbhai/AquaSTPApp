@@ -1,13 +1,13 @@
 package Fragments;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
-import androidx.appcompat.app.AlertDialog;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,8 +46,6 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.IncidentAdapter;
 import Models.IncidentsModelClass;
-
-
 public class IncidentReportingFragment extends Fragment {
     RecyclerView Incident_recyclerview;
     Context context;
@@ -58,6 +56,7 @@ public class IncidentReportingFragment extends Fragment {
     EditText Remark_A;
     AppCompatButton Update_A, Cancel_A;
     SwipeRefreshLayout swipeRefreshLayout;
+    FloatingActionButton AddIncedent;
     String currentDatevalue, currentDateValue2;
 
     @SuppressLint("MissingInflatedId")
@@ -69,7 +68,7 @@ public class IncidentReportingFragment extends Fragment {
         context = getContext();
         user_topcard(view);
 
-        FloatingActionButton fab = view.findViewById(R.id.fab);
+        AddIncedent = view.findViewById(R.id.incedentfab);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
 
@@ -79,7 +78,7 @@ public class IncidentReportingFragment extends Fragment {
                 refreshScreen();
             }
         });
-        fab.setOnClickListener(new View.OnClickListener() {
+        AddIncedent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAddDetailsDialog(context);
@@ -106,6 +105,31 @@ public class IncidentReportingFragment extends Fragment {
 
 
         Incident_recyclerview = view.findViewById(R.id.fragment_incident_recyclerview);
+
+        Incident_recyclerview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Incident_recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        if (dy > 0 || dy < 0 && AddIncedent.isShown()) {
+                            AddIncedent.hide();
+                        }
+                    }
+
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            AddIncedent.show();
+                        }
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+                });
+            }
+        });
+
+
+
         Incident_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         Incident_recyclerview.setHasFixedSize(true);
         Incident_recyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));

@@ -8,6 +8,8 @@ import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
@@ -70,7 +72,7 @@ public class RepairFragment extends Fragment {
         progressDialog.setMessage("Loading please wait...");
         progressDialog.setCancelable(true);
 
-        FloatingActionButton fab = view.findViewById(R.id.fab);
+        FloatingActionButton fab = view.findViewById(R.id.repairfab);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -89,6 +91,29 @@ public class RepairFragment extends Fragment {
         });
 
         RepairRecyclerview = view.findViewById(R.id.repair_recyclerview);
+
+
+        RepairRecyclerview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RepairRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                        if (dy > 0 || dy < 0 && fab.isShown()) {
+                            fab.hide();
+                        }
+                    }
+
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            fab.show();
+                        }
+                        super.onScrollStateChanged(recyclerView, newState);
+                    }
+                });
+            }
+        });
         RepairRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         RepairRecyclerview.setHasFixedSize(true);
         RepairRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));

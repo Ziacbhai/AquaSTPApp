@@ -88,7 +88,7 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
     private boolean isSwipeRefreshTriggered = false;
 
     ImageView Repair_back_btn;
-    FloatingActionButton fab;
+    FloatingActionButton ConsumptionFab;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -115,9 +115,9 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
                 refreshScreen();
             }
         });
-         fab = findViewById(R.id.consumption_D_fab);
+        ConsumptionFab = findViewById(R.id.consumption_D_fab);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        ConsumptionFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showAddDetailsBottomSheetDialog(context);
@@ -133,15 +133,15 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
                 Consumables_D_Rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
                     @Override
                     public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                        if (dy > 0 || dy < 0 && fab.isShown()) {
-                            fab.hide();
+                        if (dy > 0 || dy < 0 && ConsumptionFab.isShown()) {
+                            ConsumptionFab.hide();
                         }
                     }
 
                     @Override
                     public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                         if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                            fab.show();
+                            ConsumptionFab.show();
                         }
                         super.onScrollStateChanged(recyclerView, newState);
                     }
