@@ -86,7 +86,6 @@ public class FiltersDailyLogActivity extends AppCompatActivity {
         FiltersDailyLog();
         Filters_recyclerview = findViewById(R.id.filter_recyclerview);
         Filters_recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        Filters_recyclerview.setHasFixedSize(true);
         Filters_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
     private void showViews() {

@@ -137,6 +137,7 @@
                             android:layout_weight="1"
                             android:drawablePadding="5dp"
                             android:text="Form"
+                            android:inputType="textCapSentences"
                             android:textSize="12dp" />
 
                     </LinearLayout>

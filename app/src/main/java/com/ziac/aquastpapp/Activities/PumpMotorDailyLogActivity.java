@@ -95,11 +95,9 @@ public class PumpMotorDailyLogActivity extends AppCompatActivity {
         }
         PumpsMotors();
         pump_motor_started_recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        pump_motor_started_recyclerview.setHasFixedSize(true);
         pump_motor_started_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         pump_motor_stopped_recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        pump_motor_stopped_recyclerview.setHasFixedSize(true);
         pump_motor_stopped_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
     }

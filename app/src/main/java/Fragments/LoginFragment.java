@@ -91,8 +91,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 username = Login_User.getText().toString();
                 pwd = Login_pwd.getText().toString();
-                username = Login_User.getText().toString();
-                pwd = Login_pwd.getText().toString();
+
                 if (username.isEmpty()) {
                     Login_User.setError("Please enter the User name");
                     Login_User.requestFocus();
@@ -103,24 +102,22 @@ public class LoginFragment extends Fragment {
                     return;
                 }
 
-                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
                 Global.editor = Global.sharedPreferences.edit();
+                // Always save the username
+                Global.editor.putString("user_name", username);
                 if (RememberMe.isChecked()) {
-                    Global.editor.putString("user_name", username);
                     Global.editor.putString("password", pwd);
                 } else {
-                    Global.editor.putString("user_name", "");
                     Global.editor.putString("password", "");
                 }
+
                 Global.editor.commit();
                 dologinVolley();
             }
         });
 
-
         RememberMe.setChecked(false);
         try {
-            Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             username = Global.sharedPreferences.getString("user_name", "");
             pwd = Global.sharedPreferences.getString("password", "");
             Login_User.setText(username);

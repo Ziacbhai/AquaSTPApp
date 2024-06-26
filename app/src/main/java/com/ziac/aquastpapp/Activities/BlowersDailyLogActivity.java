@@ -86,7 +86,6 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         DailyLogBlowers();
         blowers_started_recyclerview = findViewById(R.id.blowers_started_recyclerview);
         blowers_started_recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        blowers_started_recyclerview.setHasFixedSize(true);
         blowers_started_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
     }

@@ -81,7 +81,7 @@ public class MeterDailyLogActivity extends AppCompatActivity {
         }, 0);
 
         // First, initialize your views
-        Meter_header = findViewById(R.id.meter_header); // Replace "your_meter_header_id" with the actual ID of your Meter_header view
+        Meter_header = findViewById(R.id.meter_header);
         Meters_recyclerview = findViewById(R.id.meter_edit_recyclerview);
         Meters_recyclerview2 = findViewById(R.id.meter2_recyclerview);
 
@@ -106,12 +106,10 @@ public class MeterDailyLogActivity extends AppCompatActivity {
         DailyLogMetersEdit();
         if (Meters_recyclerview != null) {
             Meters_recyclerview.setLayoutManager(new LinearLayoutManager(this));
-            Meters_recyclerview.setHasFixedSize(true);
             Meters_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         }
         if (Meters_recyclerview2 != null) {
             Meters_recyclerview2.setLayoutManager(new LinearLayoutManager(this));
-            Meters_recyclerview2.setHasFixedSize(true);
             Meters_recyclerview2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         }
 

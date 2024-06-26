@@ -103,13 +103,11 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
 
         if (sensor_recyclerView != null) {
             sensor_recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            sensor_recyclerView.setHasFixedSize(true);
             sensor_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         }
         DailyLogSensors();
         if (sensor_recyclerView2!= null){
             sensor_recyclerView2.setLayoutManager(new LinearLayoutManager(this));
-            sensor_recyclerView2.setHasFixedSize(true);
             sensor_recyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         }
     }
