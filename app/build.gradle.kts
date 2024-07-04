@@ -9,12 +9,11 @@ android {
 
     defaultConfig {
         applicationId = "com.ziac.aquastpapp"
-        minSdk = 19
+        minSdk = 21
         targetSdk = 34
-        versionCode = 100
-        versionName = "1.0.0"
+        versionCode = 103
+        versionName = "1.0.3"
         multiDexEnabled = true
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -55,7 +54,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("com.google.android.material:material:1.5.0")
     implementation("com.google.android.material:material:1.3.0-alpha03")
     implementation("com.github.Drjacky:ImagePicker:2.3.22")
     implementation("androidx.viewpager2:viewpager2:1.0.0-alpha01")
@@ -74,9 +72,6 @@ dependencies {
     implementation("com.afollestad.material-dialogs:core:3.3.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    testImplementation("androidx.test.espresso:espresso-core:3.5.0")
     testImplementation("com.github.yalantis:ucrop:2.2.6")
     testImplementation("junit:junit:4.13.2")
-
-
 }

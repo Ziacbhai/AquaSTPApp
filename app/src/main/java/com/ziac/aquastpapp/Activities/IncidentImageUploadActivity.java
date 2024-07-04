@@ -84,7 +84,6 @@ public class IncidentImageUploadActivity extends AppCompatActivity {
 
         Incident_Images_Rv = findViewById(R.id.incident_Images_Rv);
         Incident_Images_Rv.setLayoutManager(new LinearLayoutManager(this));
-        Incident_Images_Rv.setHasFixedSize(true);
 
         Animation fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         LayoutAnimationController layoutAnimationController = new LayoutAnimationController(fadeInAnimation);

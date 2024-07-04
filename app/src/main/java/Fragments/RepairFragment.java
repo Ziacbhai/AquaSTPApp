@@ -66,6 +66,7 @@ public class RepairFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_repair, container, false);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         context = getContext();
         user_topcard(view);
         progressDialog = new ProgressDialog(requireActivity());
@@ -115,7 +116,6 @@ public class RepairFragment extends Fragment {
             }
         });
         RepairRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        RepairRecyclerview.setHasFixedSize(true);
         RepairRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         Date currentDate = new Date();
@@ -163,8 +163,6 @@ public class RepairFragment extends Fragment {
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading !!");
         progressDialog.setCancelable(true);
-
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 

@@ -707,8 +707,6 @@ public class SignUpFragment extends Fragment {
                 params.put("state_code", String.valueOf(statename.get_code()));
                 params.put("city_code", String.valueOf(cityname.get_code()));
                 params.put("com_name", Company.getText().toString());
-
-                //Log.d("params", params.toString());
                 return params;
             }
         };

@@ -146,7 +146,6 @@ public class RepairBreakUpActivity extends AppCompatActivity {
         });
 
         Repair_breakup_recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        Repair_breakup_recyclerview.setHasFixedSize(true);
         Repair_breakup_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 

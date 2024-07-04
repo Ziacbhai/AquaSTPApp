@@ -131,7 +131,6 @@ public class RepairDetailsActivity extends AppCompatActivity {
             }
         });
         Repair_details_recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        Repair_details_recyclerview.setHasFixedSize(true);
         Repair_details_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         get_Details_Repair();
     }

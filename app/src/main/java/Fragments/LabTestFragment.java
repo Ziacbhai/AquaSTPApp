@@ -60,6 +60,7 @@ public class LabTestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lab_test, container, false);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         context = getContext();
         user_topcard(view);
@@ -92,7 +93,6 @@ public class LabTestFragment extends Fragment {
 
         LabTestRecyclerview = view.findViewById(R.id.labTest_Recyclerview);
         LabTestRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        LabTestRecyclerview.setHasFixedSize(true);
         LabTestRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         getLabTestReports();
@@ -105,7 +105,7 @@ public class LabTestFragment extends Fragment {
         progressDialog.setCancelable(true);
 
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile;
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         siteaddress = sharedPreferences.getString("site_address", "");

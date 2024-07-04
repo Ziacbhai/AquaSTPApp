@@ -63,7 +63,7 @@ public class ConsumptionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_consumption, container, false);
-
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         context = getContext();
         user_topcard(view);
 
@@ -115,7 +115,6 @@ public class ConsumptionFragment extends Fragment {
 
 
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Consumables_rv.setHasFixedSize(true);
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         Consumables_rv.setAdapter(consumptionAdapter);
 
@@ -157,8 +156,6 @@ public class ConsumptionFragment extends Fragment {
      }
 
     private void user_topcard(View view) {
-
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 

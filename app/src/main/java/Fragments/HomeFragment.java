@@ -60,6 +60,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
         user_topcard(view);
         context = getActivity();
         DailyLogIndex();
@@ -141,7 +143,7 @@ public class HomeFragment extends Fragment {
         progressDialog.setCancelable(true);
 
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, stpcapacity;
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         siteaddress = sharedPreferences.getString("site_address", "");

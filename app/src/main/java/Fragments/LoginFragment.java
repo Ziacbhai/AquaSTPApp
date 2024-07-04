@@ -80,7 +80,7 @@ public class LoginFragment extends Fragment {
         Privacy = view.findViewById(R.id.privacy);
         Forgotpwd = view.findViewById(R.id.btnftpass);
         TextView versionName = view.findViewById(R.id.version);
-        versionName.setText("v1.0.0" + BuildConfig.VERSION_NAME);
+        versionName.setText("Ver No: 1.0.3" + BuildConfig.VERSION_NAME);
 
         if (Global.isNetworkAvailable(getActivity())) {
         } else {

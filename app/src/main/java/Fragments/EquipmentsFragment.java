@@ -27,7 +27,7 @@ public class EquipmentsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_equipments, container, false);
-
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         context = getContext();
         user_topcard(view);
@@ -64,7 +64,7 @@ public class EquipmentsFragment extends Fragment {
         progressDialog.setCancelable(true);
 
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile,stpcapacity;
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         siteaddress = sharedPreferences.getString("site_address", "");

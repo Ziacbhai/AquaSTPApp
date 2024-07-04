@@ -64,7 +64,6 @@ public class IncidentDocumentsUploadActivity<Payment_upload> extends AppCompatAc
 
         Incident_Documents_Rv = findViewById(R.id.incident_Documents_Rv);
         Incident_Documents_Rv.setLayoutManager(new LinearLayoutManager(this));
-        Incident_Documents_Rv.setHasFixedSize(true);
         Incident_Documents_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         In_doc_uploadbtn.setOnClickListener(new View.OnClickListener() {

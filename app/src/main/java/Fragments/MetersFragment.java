@@ -46,6 +46,7 @@ public class MetersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_meters, container, false);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         context = getContext();
         user_topcard(view);
 
@@ -63,7 +64,7 @@ public class MetersFragment extends Fragment {
         progressDialog.setCancelable(true);
 
         String personname, useremail, stpname, sitename, siteaddress, processname, usermobile, stpcapacity;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
         sitename = sharedPreferences.getString("site_name", "");
         stpname = sharedPreferences.getString("stp_name", "");
         processname = sharedPreferences.getString("process_name", "");

@@ -55,6 +55,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_blowers);
 
         context = this;
+       Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         user_topcard();
         backbtn = findViewById(R.id.back_btn);
         blowerview = findViewById(R.id.blowerview);
@@ -67,7 +68,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                 finish();
             }
         });
-        String usertype = Global.sharedPreferences.getString("user_type", "");
+        String usertype = sharedPreferences.getString("user_type", "");
 
 
         Handler handler = new Handler();
@@ -127,7 +128,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
 
     }
     private void user_topcard() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
 
         TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
 

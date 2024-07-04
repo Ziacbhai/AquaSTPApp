@@ -150,7 +150,6 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
         });
 
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(context));
-        Consumables_D_Rv.setHasFixedSize(true);
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
 
     }

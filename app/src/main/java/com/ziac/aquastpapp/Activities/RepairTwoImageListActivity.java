@@ -84,7 +84,6 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
         });
         Repair_Images_Rv = findViewById(R.id.repair_two_imagelist_recyclerview);
         Repair_Images_Rv.setLayoutManager(new LinearLayoutManager(this));
-        Repair_Images_Rv.setHasFixedSize(true);
         Repair_Images_Rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         getRepairImages();
     }

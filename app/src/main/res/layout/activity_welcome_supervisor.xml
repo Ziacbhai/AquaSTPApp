@@ -16,7 +16,7 @@
     <!-- Move the exit icon to the top right corner -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:paddingEnd="16dp">
 
         <ImageView
@@ -32,14 +32,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="12dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView"
-            android:layout_width="210dp"
-            android:layout_height="210dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+
             app:civ_border_color="#3FD5C7"
             app:civ_border_width="4dp" />
     </RelativeLayout>
@@ -47,18 +47,18 @@
     <!-- Add vertical spacing -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:layout_height="20dp" />
 
     <!-- Adjust alignment and spacing of text views -->
     <TextView
         android:id="@+id/company"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center_horizontal"
         android:text="CompanyName"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -70,29 +70,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/acme"
             android:gravity="center_horizontal"
-            android:text="Greetings, esteemed Supervisor!"
+            android:text="Greetings, esteemed Supervisor !"
             android:textColor="#01a4a3"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:textStyle="italic" />
 
         <View
             android:layout_width="100dp"
             android:layout_height="2dp"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:background="#F44336" />
 
         <TextView
             android:id="@+id/wname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:gravity="center_horizontal"
             android:text="Helloziac"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/wemail"
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="ziac@gmail.com"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/wph"
@@ -108,15 +108,15 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="1234567890"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:gravity="center_horizontal"
             android:text="The helm of AquaSTP awaits."
-            android:textSize="17sp"
+            android:textSize="19sp"
             android:textStyle="bold" />
 
         <TextView
@@ -125,52 +125,30 @@
             android:gravity="center_horizontal"
             android:padding="2dp"
             android:text="Dive into comprehensive insights."
-            android:textSize="15sp" />
+            android:textSize="17sp" />
     </LinearLayout>
 
     <!-- Add vertical spacing -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="50dp" />
 
     <!-- Adjust button size and margin -->
+
+    <!-- Add vertical spacing -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/oContinue"
-        android:layout_width="180dp"
-        android:layout_height="55dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/profilebtnupdate"
         android:text="Continue"
         android:textColor="@color/white"
         android:textStyle="bold" />
 
-    <!-- Add vertical spacing -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="5dp" />
-
-    <!-- Uncomment and adjust if needed -->
-    <!--
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="Details wrong ?" />
-        <TextView
-            android:id="@+id/Clickhere"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=" Click here"
-            android:textColor="#F44336" />
-    </LinearLayout>
-    -->
+        android:layout_height="10dp" />
 
 </LinearLayout>
