@@ -1,7 +1,10 @@
 package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,12 +13,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,12 +28,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.window.OnBackInvokedDispatcher;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import Fragments.ConsumptionFragment;
 import Fragments.EquipmentsFragment;
@@ -49,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle toggle;
 
     Context context;
+
+
+
 
     boolean click = true;
     String userimage, usermail, stpname, sitename, siteaddress, userref, personname, processname, stpcapacity;
@@ -71,34 +94,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
         toggle.syncState();
 
+        getuserdetails();
+
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        /*Menu menu = navigationView.getMenu();
-        MenuItem RefItem = menu.findItem(R.id.refaral_code);
-        View RefView = RefItem.getActionView();
-        TextView refTitle = RefView.findViewById(R.id.design_menu_item_text);
-        refTitle.setBackgroundColor(getResources().getColor(R.color.your_color_for_profile_title));*/
 
         openFragment(new HomeFragment());
 
         userimage = Global.userImageurl + sharedPreferences.getString("user_image", "");
-
-
         Picasso.Builder builder = new Picasso.Builder(getApplication());
         Picasso picasso = builder.build();
+        Picasso.get().setIndicatorsEnabled(true);
+        Picasso.get().setLoggingEnabled(true);
         picasso.load(Uri.parse(userimage))
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .error(R.drawable.no_image_available_icon)
                 .into(Profile);
+
+
         Profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopupMenu popup = new PopupMenu(MainActivity.this, v);
                 popup.getMenuInflater().inflate(R.menu.profile_pop_up, popup.getMenu());
                 // Retrieve data from SharedPreferences
-                Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+
                 String profileName = Global.sharedPreferences.getString("ref_code", "");
                 MenuItem profileMenuItem = popup.getMenu().findItem(R.id.refaral_code);
                 profileMenuItem.setTitle("Code: " + profileName);
@@ -175,7 +196,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 user_stp = drawerLayout.findViewById(R.id.stp_name);
 
 
-
                 person_name.setText(personname);
                 user_mail.setText(usermail);
                 user_site.setText(sitename);
@@ -202,17 +222,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-       /* Profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-                showImage(picasso,userimage);
-
-            }
-        });*/
-
-        // bottomNavigationView=findViewById(R.id.bottomNavigationView);
-        // bottomNavigationView.setBackground(null);
     }
 
     private void user_topcard() {
@@ -361,47 +370,74 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        //  Get the total number of fragments in the back stack
         int count = getSupportFragmentManager().getBackStackEntryCount();
-
-        // Handle the back navigation based on the fragment count
         switch (count) {
             case 0:
-                // super.onBackPressed(); // If no fragments in the back stack, allow default back behavior
                 break;
             case 1:
-                // Handle back press for the first fragment (Home or the initial fragment)
-                // You can use finish() here to close the activity if desired
                 super.onBackPressed();
                 break;
             case 2:
-                // Handle back press for the second fragment (Statistics)
-                getSupportFragmentManager().popBackStack(); // Remove the top fragment from back stack
+                getSupportFragmentManager().popBackStack();
                 break;
             case 3:
-                // Handle back press for the third fragment (Stock)
-                getSupportFragmentManager().popBackStack(); // Remove the top fragment from back stack
+                getSupportFragmentManager().popBackStack();
                 break;
             case 4:
-                // Handle back press for the fourth fragment (Settings)
-                getSupportFragmentManager().popBackStack(); // Remove the top fragment from back stack
+                getSupportFragmentManager().popBackStack();
                 break;
             case 5:
-                // Handle back press for the fourth fragment (Settings)
-                getSupportFragmentManager().popBackStack(); // Remove the top fragment from back stack
+                getSupportFragmentManager().popBackStack();
                 break;
             case 6:
-                // Handle back press for the fourth fragment (Settings)
-                getSupportFragmentManager().popBackStack(); // Remove the top fragment from back stack
+                getSupportFragmentManager().popBackStack();
                 break;
             case 7:
-                // Handle back press for the fourth fragment (Settings)
-                getSupportFragmentManager().popBackStack(); // Remove the top fragment from back stack
+                getSupportFragmentManager().popBackStack();
                 break;
             default:
-                // If there are more than 4 fragments in the back stack, just pop the top fragment
                 getSupportFragmentManager().popBackStack();
                 break;
         }
     }
+
+    private void getuserdetails() {
+        String url = Global.getuserprofileurl;
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
+            try {
+                JSONObject respObj1 = new JSONObject(response);
+                JSONObject respObj = new JSONObject(respObj1.getString("data"));
+                userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<String, String>();
+                String accesstoken = Global.sharedPreferences.getString("access_token", null);
+                headers.put("Authorization", "Bearer " + accesstoken);
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_name", Global.sharedPreferences.getString("user_name", null));
+                return params;
+            }
+        };
+        queue.add(request);
+    }
+
+
+
 }

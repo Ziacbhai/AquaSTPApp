@@ -309,26 +309,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-   /* private void opencamera() {
-        com.github.dhaval2404.imagepicker.ImagePicker.with(ProfileActivity.this).crop()                    //Crop image(Optional), Check Customization for more option
-                .compress(1024)            //Final image size will be less than 1 MB(Optional)
-                .maxResultSize(1080, 1080)    //Final image resolution will be less than 1080 x 1080(Optional)
-                .start(10);
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10 && resultCode == RESULT_OK) {
-            Uri uri = data.getData();
-            //imageList.add(uri);
-            try {
-                imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            postselelectedimage();
-        }
-    }*/
 
     private void postselelectedimage() {
 
@@ -495,7 +475,6 @@ public class ProfileActivity extends AppCompatActivity {
                 Global.editor.putString("user_mobile", mobile);
                 Global.editor.commit();
                 userimage = Global.userImageurl + Global.sharedPreferences.getString("user_image", "");
-                //Picasso.get().load(userimage).into(circleImageView);
 
                 Person_name.setText(person_name);
                 Person_email.setText(mail);
@@ -538,6 +517,9 @@ public class ProfileActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+       startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+        super.onBackPressed();
+    }
 }
