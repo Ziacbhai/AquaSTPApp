@@ -67,13 +67,11 @@ public class ProfileActivity extends AppCompatActivity {
     FloatingActionButton fab;
     CircleImageView circleImageView;
     Bitmap imageBitmap;
-
-    String userimage;
+    String personname, email, mobile,userimage;
     Picasso.Builder builder;
     Picasso picasso;
     EditText Person_name, Person_number, Person_email;
     TextView Person_ref_code,Updatebutton;
-
     ImageView Backarrowbtn;
     Context context;
     @SuppressLint("MissingInflatedId")
@@ -374,7 +372,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void updateprofile() {
-        String personname, email, mobile;
+
         personname = Person_name.getText().toString();
         mobile = Person_number.getText().toString();
         email = Person_email.getText().toString();
@@ -385,6 +383,11 @@ public class ProfileActivity extends AppCompatActivity {
         }
         if (mobile.length() < 10) {
             Toast.makeText(ProfileActivity.this, "Mobile number should not be less than 10 digits !!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Person_email.requestFocus();
+            Toast.makeText(context, "Please Enter a Valid Email Address !!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -438,9 +441,9 @@ public class ProfileActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("com_code", Global.sharedPreferences.getString("com_code", "0"));
-                params.put("person_name", Person_name.getText().toString());
-                params.put("user_mobile", Person_number.getText().toString());
-                params.put("user_email", Person_email.getText().toString());
+                params.put("person_name",personname );
+                params.put("user_mobile",mobile );
+                params.put("user_email", email);
                 return params;
                 //  String user_image = respObj.getString("user_image");
             }

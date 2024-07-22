@@ -439,10 +439,11 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Ver No:1.0.0"
+            android:text="Ver No:1.0.3"
             android:textSize="16sp" />
 
 

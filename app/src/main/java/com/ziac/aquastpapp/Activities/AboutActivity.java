@@ -9,7 +9,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.airbnb.lottie.LottieAnimationView;
+import com.chaos.view.BuildConfig;
 import com.ziac.aquastpapp.R;
 
 public class AboutActivity extends AppCompatActivity {
@@ -38,6 +41,9 @@ public class AboutActivity extends AppCompatActivity {
         X = findViewById(R.id.X);
         Ziac = findViewById(R.id.animationView);
 
+        TextView versionName = findViewById(R.id.version);
+        versionName.setText("Ver No: 1.0.3" + BuildConfig.VERSION_NAME);
+
         LottieAnimationView animationView
                 = findViewById(R.id.animationView);
         animationView.addAnimatorUpdateListener(
@@ -53,13 +59,13 @@ public class AboutActivity extends AppCompatActivity {
         Website.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.1.15/AquaSTP/")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://aquastp.ziaconline.com/")));
             }
         });
         CallUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phno = "+91 9845258746";
+                String phno = "+91 9972595464";
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + phno)));
             }
         });
