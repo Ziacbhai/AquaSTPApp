@@ -1,16 +1,10 @@
 package com.ziac.aquastpapp.Activities;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -22,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -33,19 +26,17 @@ import com.android.volley.toolbox.Volley;
 import com.chaos.view.PinView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ziac.aquastpapp.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class VerifyEmailOTPActivity extends AppCompatActivity {
     String otp, Newpassword, email_show;
-    TextView Resendotp;
+
     PinView Enter_pinnumber;
-    TextView EmailVerify, Email_show;
+    TextView EmailVerify, Email_show,Resendotp;
     ProgressBar progressBar;
     ImageView back_btn;
     private boolean passwordvisible = false;
@@ -57,18 +48,16 @@ public class VerifyEmailOTPActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verifiy_email_otp);
-
         context = this;
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
         Enter_pinnumber = findViewById(R.id.et_pinview);
-        new OTPReceiver().setPinView(Enter_pinnumber);
-        requestSMSPermission();
         EmailVerify = findViewById(R.id.emailverifyotp);
         Email_show = findViewById(R.id.showemail);
         progressBar = findViewById(R.id.progressbr);
         EnterNewpwd = findViewById(R.id.enternewpassword);
         Resendotp = findViewById(R.id.resendEotp);
 
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         email_show = Global.sharedPreferences.getString("pfemail", "");
         Email_show.setText(email_show);
 
@@ -188,14 +177,6 @@ public class VerifyEmailOTPActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    private void requestSMSPermission() {
-        if (ContextCompat.checkSelfPermission(VerifyEmailOTPActivity.this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(VerifyEmailOTPActivity.this, new String[]{
-                    Manifest.permission.RECEIVE_SMS
-            }, 100);
-        }
-
-    }
 
     private void showAlertDialog(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

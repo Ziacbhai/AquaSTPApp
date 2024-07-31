@@ -53,6 +53,7 @@ public class VerifyNumberOTPActivity extends AppCompatActivity {
         setContentView(R.layout.activity_verify_number_otp);
 
         context = this;
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         pinView = findViewById(R.id.pinview);
         NumberVerify = findViewById(R.id.numberverifyotp);
@@ -60,7 +61,6 @@ public class VerifyNumberOTPActivity extends AppCompatActivity {
         Newpwd = findViewById(R.id.newpassword);
         Show_number = findViewById(R.id.shownumber);
 
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         show_number = Global.sharedPreferences.getString("fpmobilenumber", "");
         Show_number.setText(show_number);
 
