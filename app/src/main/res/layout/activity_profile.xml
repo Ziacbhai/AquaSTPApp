@@ -247,6 +247,7 @@
                                         android:background="@drawable/btnbgedited"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="5dp"
+                                        android:inputType="textEmailAddress"
                                         android:hint="Ziacdemo"
                                         android:maxLength="150" />
                                 </LinearLayout>

@@ -389,6 +389,10 @@ public class ProfileActivity extends AppCompatActivity {
             Person_email.requestFocus();
             Toast.makeText(context, "Please Enter a Valid Email Address !!", Toast.LENGTH_SHORT).show();
             return;
+        }if (!email.endsWith(".com")) {
+            Person_email.requestFocus();
+            Toast.makeText(context, "Email must end with '.com'.", Toast.LENGTH_SHORT).show();
+            return ;
         }
 
         RequestQueue queue = Volley.newRequestQueue(ProfileActivity.this);
