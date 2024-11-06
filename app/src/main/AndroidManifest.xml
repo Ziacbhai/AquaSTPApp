@@ -83,13 +83,6 @@
             android:name=".Activities.RepairDetailsActivity"
             android:exported="false" />
 
-        <receiver
-            android:name=".Activities.OTPReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-            </intent-filter>
-        </receiver>
 
         <activity
             android:name=".Activities.ChangePasswordActivity"
@@ -100,10 +93,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
 
-       <!-- <activity
-            android:name=".Fragments.PumpsFragment"
-            android:exported="false"
-            android:screenOrientation="portrait" />-->
+
 
         <activity
             android:name=".Activities.WelcomeSupervisorActivity"

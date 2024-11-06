@@ -1,5 +1,7 @@
 package Adapters;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +59,8 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
     public void onBindViewHolder(@NonNull IncidentAdapter.Viewholder holder, int position) {
 
         holder.Incedent_Particlulars.setText(incidentsModelClasses.get(position).getIncidents_Particulars());
-        /*holder.Inc_delete.setOnClickListener(new View.OnClickListener() {
+/*
+        holder.Inc_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(v.getContext());
@@ -67,7 +70,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
                 alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String incidentcode = Global.Incident_s.get(position).getInc_No();
+                        String incidentcode = Global.Incident_Class.get(position).getIncident_no();
                         deleteItem(incidentcode);
                     }
                 });
@@ -81,7 +84,8 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
             }
-        });*/
+        });
+*/
         String conNoString = incidentsModelClasses.get(position).getIncident_no();
         double conNo;
         try {
@@ -184,7 +188,7 @@ public class IncidentAdapter extends RecyclerView.Adapter<IncidentAdapter.Viewho
             Inc_date = itemView.findViewById(R.id.incident_date);
             Inupload = itemView.findViewById(R.id.incident_photo_upload);
             Inc_created = itemView.findViewById(R.id.incident_createdby);
-           // Inc_delete = itemView.findViewById(R.id.incident_delete);
+            //Inc_delete = itemView.findViewById(R.id.incident_delete);
 
         }
     }

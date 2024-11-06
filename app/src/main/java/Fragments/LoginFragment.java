@@ -189,8 +189,10 @@ public class LoginFragment extends Fragment {
                 try {
                     JSONObject respObj = new JSONObject(response);
                     String access_token = respObj.getString("access_token");
+                    String refresh_token = respObj.getString("refresh_token");
                     Global.editor = Global.sharedPreferences.edit();
                     Global.editor.putString("access_token", access_token);
+                    Global.editor.putString("refresh_token", refresh_token);
                     Global.editor.commit();
                     getuserprofile();
 
@@ -253,8 +255,6 @@ public class LoginFragment extends Fragment {
                 JSONObject respObj1 = new JSONObject(response);
                 boolean isSuccess = respObj1.getBoolean("isSuccess");
                 if (isSuccess) {
-
-
                     JSONObject respObj = new JSONObject(respObj1.getString("data"));
                     String ayear = respObj1.getString("ayear");
                     String finstdate = respObj1.getString("fin_stdate");

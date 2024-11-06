@@ -27,11 +27,11 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
     private List<StpModelClass> stpModelClassList;
     Context context;
 
-    public void setFilteredList(List<StpModelClass> filteredList) {
+  /*  public void setFilteredList(List<StpModelClass> filteredList) {
         this.stpModelClassList = filteredList;
         notifyDataSetChanged();
 
-    }
+    }*/
 
     public SiteLocationAdapter(List<StpModelClass> stpModelClassList, Context context) {
         this.stpModelClassList = stpModelClassList;

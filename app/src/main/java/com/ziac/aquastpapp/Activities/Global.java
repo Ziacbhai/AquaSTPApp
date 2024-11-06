@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -46,9 +47,9 @@ public class Global {
     public static SharedPreferences.Editor editor;
     private static Picasso picassoInstance;
     //Server url
-    public static String baseurl = "http://aquastp.ziaconline.com/";
+    //public static String baseurl = "http://aquastp.ziaconline.com/";
     //Local url
-   // public static String baseurl = "http://192.168.1.20:9396/";
+   public static String baseurl = "http://192.168.1.20:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
     //Pump_Motor
@@ -319,4 +320,6 @@ public class Global {
 
         }
     }
+
+
 }
