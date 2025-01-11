@@ -54,7 +54,6 @@ import Models.RepairModel1;
 public class RepairFragment extends Fragment {
 
     RepairModel1 repairModel1;
-    RepairAdapter repairAdapter;
     RecyclerView RepairRecyclerview;
     TextView tvSelectedDate, Remark_A;
     String currentDatevalue, currentDateValue2;
@@ -66,8 +65,9 @@ public class RepairFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_repair, container, false);
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         context = getContext();
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
         user_topcard(view);
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setMessage("Loading please wait...");
@@ -115,6 +115,8 @@ public class RepairFragment extends Fragment {
                 });
             }
         });
+
+
         RepairRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         RepairRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
