@@ -24,6 +24,7 @@
     <string name="newpassword">New Password<font color="#FF0000"> *</font></string>
     <string name="repeatpassword">Repeat Password<font color="#FF0000"> *</font></string>
     <string name="username">User Name<font color="#FF0000"></font></string>
+    <string name="version_format">Version No : %1$s</string>
 
 
     <string name="lorem_ipsum">

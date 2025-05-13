@@ -344,7 +344,7 @@
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="50dp"
-                                android:src="@drawable/twitter" />
+                                android:src="@drawable/x" />
 
                             <TextView
                                 android:layout_width="match_parent"

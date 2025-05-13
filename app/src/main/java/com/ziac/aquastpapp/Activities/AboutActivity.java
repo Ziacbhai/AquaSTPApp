@@ -1,5 +1,4 @@
 package com.ziac.aquastpapp.Activities;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import android.annotation.SuppressLint;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.airbnb.lottie.LottieAnimationView;
 import com.chaos.view.BuildConfig;
 import com.ziac.aquastpapp.R;
@@ -41,8 +39,15 @@ public class AboutActivity extends AppCompatActivity {
         X = findViewById(R.id.X);
         Ziac = findViewById(R.id.animationView);
 
-        TextView versionName = findViewById(R.id.version);
-        versionName.setText("Ver No: 1.0.3" + BuildConfig.VERSION_NAME);
+        TextView versionText = findViewById(R.id.version);
+        try {
+            String versionName = getPackageManager()
+                    .getPackageInfo(getPackageName(), 0)
+                    .versionName;
+            versionText.setText(getString(R.string.version_format, versionName));
+        } catch (Exception e) {
+            versionText.setText("Version unknown");
+        }
 
         LottieAnimationView animationView
                 = findViewById(R.id.animationView);

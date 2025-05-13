@@ -10,14 +10,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.ziac.aquastpapp.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
+
 import Models.CommonModelClass;
 import Models.ConsumptionModel;
 import Models.ConsumptionModel2;
@@ -47,9 +51,9 @@ public class Global {
     public static SharedPreferences.Editor editor;
     private static Picasso picassoInstance;
     //Server url
-    //public static String baseurl = "http://aquastp.ziaconline.com/";
+    public static String baseurl = "https://aquastp.ziaconline.com/";
     //Local url
-   public static String baseurl = "http://192.168.1.20:9396/";
+    //public static String baseurl = "http://192.168.0.20:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
     //Pump_Motor

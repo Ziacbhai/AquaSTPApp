@@ -79,9 +79,19 @@ public class LoginFragment extends Fragment {
         TermsOfuse = view.findViewById(R.id.terms);
         Privacy = view.findViewById(R.id.privacy);
         Forgotpwd = view.findViewById(R.id.btnftpass);
-        TextView versionName = view.findViewById(R.id.version);
-        versionName.setText("Ver No: 1.0.3" + BuildConfig.VERSION_NAME);
 
+        TextView versionText = view.findViewById(R.id.version);
+        try {
+            String versionName = requireContext().getPackageManager()
+                    .getPackageInfo(requireContext().getPackageName(), 0)
+                    .versionName;
+            versionText.setText(getString(R.string.version_format, versionName));
+        } catch (Exception e) {
+            versionText.setText("Version unknown");
+        }
+ /*       TextView versionName = view.findViewById(R.id.version);
+        versionName.setText("Ver No: 1.0.3" + BuildConfig.VERSION_NAME);
+*/
         if (Global.isNetworkAvailable(getActivity())) {
         } else {
             Global.customtoast(getActivity(), getLayoutInflater(), "Internet connection lost !!");
