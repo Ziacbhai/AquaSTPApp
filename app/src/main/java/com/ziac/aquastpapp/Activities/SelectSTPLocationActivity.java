@@ -1,6 +1,7 @@
 package com.ziac.aquastpapp.Activities;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,11 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -46,6 +50,7 @@ public class SelectSTPLocationActivity extends AppCompatActivity {
     RecyclerView siteLocationRecyclerView;
     private SearchView searchView;
     StpModelClass stpModelClassList;
+    ImageView Logout;
     Context context;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -56,6 +61,7 @@ public class SelectSTPLocationActivity extends AppCompatActivity {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         stpModelClassList = new StpModelClass();
         searchView = findViewById(R.id.searchView);
+        Logout = findViewById(R.id.logout);
         Search = findViewById(R.id.search);
         searchView.clearFocus();
         Search.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +88,31 @@ public class SelectSTPLocationActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Logout Confirmation");
+                builder.setMessage("Are you sure you want to logout?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // User clicked "Yes", perform logout action
+                        startActivity(new Intent(context, LoginSignupActivity.class));
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // User clicked "No", dismiss the dialog
+                        dialog.dismiss();
+                    }
+                });
+                builder.create().show();
+            }
+        });
+
 
         siteLocationRecyclerView = findViewById(R.id.stp_recyclerview);
         siteLocationRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

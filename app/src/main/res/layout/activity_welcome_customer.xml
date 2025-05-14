@@ -57,6 +57,7 @@
         android:layout_marginBottom="16dp"
         android:gravity="center_horizontal"
         android:text="CompanyName"
+        android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -71,12 +72,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:fontFamily="@font/acme"
             android:gravity="center_horizontal"
             android:text="Greetings, esteemed Customer !"
             android:textColor="#01a4a3"
-            android:textSize="24sp"
-            android:textStyle="italic" />
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="20sp"
+             />
 
         <View
             android:layout_width="100dp"
@@ -115,27 +116,23 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center_horizontal"
+            android:fontFamily="@font/poppins_semibold"
             android:text="The helm of AquaSTP awaits."
-            android:textSize="19sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
+            android:fontFamily="@font/poppins"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:padding="2dp"
             android:text="Dive into comprehensive insights."
-            android:textSize="17sp" />
+            android:textSize="16sp" />
     </LinearLayout>
 
-    <!-- Add vertical spacing -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
 
-    <!-- Adjust button size and margin -->
 
-    <!-- Add vertical spacing -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/oContinue"
         android:layout_width="200dp"
@@ -147,8 +144,6 @@
         android:textColor="@color/white"
         android:textStyle="bold" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
+
 
 </LinearLayout>
