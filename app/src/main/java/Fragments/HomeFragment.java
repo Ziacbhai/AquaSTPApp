@@ -7,13 +7,17 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -30,6 +34,7 @@ import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.HandoverRemarksActivity;
 import com.ziac.aquastpapp.Activities.MeterDailyLogActivity;
 import com.ziac.aquastpapp.Activities.PumpMotorDailyLogActivity;
+import com.ziac.aquastpapp.Activities.SelectSTPLocationActivity;
 import com.ziac.aquastpapp.Activities.SensorsDailyLogActivity;
 import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
@@ -47,7 +52,7 @@ public class HomeFragment extends Fragment {
     FloatingActionButton Fab;
     DailyLogModel dailyLog;
     Context context;
-    RelativeLayout layoutpump, layoutblower, layoutmeter, layoutsensor, layoutfilter, layouthandover_remark;
+    CardView layoutpump, CardselectSTP,layoutblower, layoutmeter, layoutsensor, layoutfilter, layouthandover_remark;
 
    /* @Override
     public void onResume() {
@@ -59,12 +64,13 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home2, container, false);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         user_topcard(view);
         context = getActivity();
         DailyLogIndex();
+        CardselectSTP = view.findViewById(R.id.selectSTP);
         layoutpump = view.findViewById(R.id.pumpmotor);
         layoutblower = view.findViewById(R.id.blower);
         layoutmeter = view.findViewById(R.id.meter);
@@ -79,6 +85,15 @@ public class HomeFragment extends Fragment {
         } else {
             showViews();
         }
+
+        CardselectSTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(requireContext(), SelectSTPLocationActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         layoutpump.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,14 +172,16 @@ public class HomeFragment extends Fragment {
 
         txtsitename = view.findViewById(R.id.sitename);
         txtstpname = view.findViewById(R.id.stpname);
-        txtsiteaddress = view.findViewById(R.id.siteaddress);
+       // txtsiteaddress = view.findViewById(R.id.siteaddress);
         txtuseremail = view.findViewById(R.id.useremail);
         txtusermobile = view.findViewById(R.id.usermobile);
         txtpersonname = view.findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname + " / " + stpcapacity);
+        txtstpname.setText(stpname + " " + processname + " " + stpcapacity);
+/*
         txtsiteaddress.setText(siteaddress);
+*/
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);

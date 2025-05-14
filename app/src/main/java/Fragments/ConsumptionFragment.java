@@ -161,14 +161,14 @@ public class ConsumptionFragment extends Fragment {
 
         txtsitename = view.findViewById(R.id.sitename);
         txtstpname = view.findViewById(R.id.stpname);
-        txtsiteaddress = view.findViewById(R.id.siteaddress);
+       // txtsiteaddress = view.findViewById(R.id.siteaddress);
         txtuseremail = view.findViewById(R.id.useremail);
         txtusermobile = view.findViewById(R.id.usermobile);
         txtpersonname = view.findViewById(R.id.personname);
 
         txtsitename.setText(sharedPreferences.getString("site_name", ""));
-        txtstpname.setText(sharedPreferences.getString("stp_name", "") + " / " + sharedPreferences.getString("process_name", "") +  " / " + sharedPreferences.getString("stp_capacity", ""));
-        txtsiteaddress.setText(sharedPreferences.getString("site_address", ""));
+        txtstpname.setText(sharedPreferences.getString("stp_name", "") + " " + sharedPreferences.getString("process_name", "") +  " " + sharedPreferences.getString("stp_capacity", ""));
+      //  txtsiteaddress.setText(sharedPreferences.getString("site_address", ""));
         txtuseremail.setText(sharedPreferences.getString("user_email", ""));
         txtusermobile.setText(sharedPreferences.getString("user_mobile", ""));
         txtpersonname.setText(sharedPreferences.getString("user_name", ""));

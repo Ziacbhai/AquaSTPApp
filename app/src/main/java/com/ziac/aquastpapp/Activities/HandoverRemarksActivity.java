@@ -36,7 +36,7 @@ public class HandoverRemarksActivity extends AppCompatActivity {
     ImageView backbtn;
     TextView Remark_submit;
     EditText Remark_edit;
-
+    String usertype;
     Context context;
 
     @SuppressLint("MissingInflatedId")
@@ -55,7 +55,7 @@ public class HandoverRemarksActivity extends AppCompatActivity {
                 finish();
             }
         });
-        String usertype=Global.sharedPreferences.getString("user_type","");
+        usertype=Global.sharedPreferences.getString("user_type","");
         Remark_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,14 +82,14 @@ public class HandoverRemarksActivity extends AppCompatActivity {
 
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
-        txtsiteaddress = findViewById(R.id.siteaddress);
+       // txtsiteaddress = findViewById(R.id.siteaddress);
         txtuseremail = findViewById(R.id.useremail);
         txtusermobile = findViewById(R.id.usermobile);
         txtpersonname = findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
-        txtsiteaddress.setText(siteaddress);
+        txtstpname.setText(stpname + " " + processname +  " " + stpcapacity);
+      //  txtsiteaddress.setText(siteaddress);
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);

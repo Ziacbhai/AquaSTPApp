@@ -48,7 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="STP"
+                    android:text="Select STP"
                     android:textColor="#01a4a3"
                     android:textSize="18sp"
                     android:textStyle="bold" />

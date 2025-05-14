@@ -41,13 +41,13 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
     @NonNull
     @Override
     public SiteLocationAdapter.StpViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.select_stp_details, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.stp2, parent, false);
         return new StpViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SiteLocationAdapter.StpViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.Sucode.setText(String.valueOf(stpModelClassList.get(position).getSucode()));
+       // holder.Sucode.setText(String.valueOf(stpModelClassList.get(position).getSucode()));
         holder.StpName.setText(stpModelClassList.get(position).getStpname());
         holder.SiteName.setText(stpModelClassList.get(position).getSitename());
 
@@ -92,7 +92,7 @@ public class SiteLocationAdapter extends RecyclerView.Adapter<SiteLocationAdapte
 
         public StpViewHolder(@NonNull View itemView) {
             super(itemView);
-            Sucode = itemView.findViewById(R.id.sucode);
+           // Sucode = itemView.findViewById(R.id.sucode);
             StpName = itemView.findViewById(R.id.stpname);
             SiteName = itemView.findViewById(R.id.sitename);
             Selectcompany = itemView.findViewById(R.id.selectcompany);

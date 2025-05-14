@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- bottom_accent_gradient.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:startColor="#3949AB"
+        android:centerColor="#1E88E5"
+        android:endColor="#03A9F4"
+        android:angle="0" />
+</shape>

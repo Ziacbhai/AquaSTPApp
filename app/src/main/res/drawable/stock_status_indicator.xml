@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- stock_status_indicator.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#4CAF50" /> <!-- Green for in stock -->
+    <!-- Can be changed programmatically based on stock level:
+         Green (#4CAF50) for good stock
+         Orange (#FF9800) for low stock
+         Red (#F44336) for out of stock -->
+</shape>

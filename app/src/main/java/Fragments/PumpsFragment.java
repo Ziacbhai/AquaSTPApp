@@ -85,14 +85,14 @@ public class PumpsFragment extends Fragment {
 
         txtsitename = view.findViewById(R.id.sitename);
         txtstpname = view.findViewById(R.id.stpname);
-        txtsiteaddress = view.findViewById(R.id.siteaddress);
+       // txtsiteaddress = view.findViewById(R.id.siteaddress);
         txtuseremail = view.findViewById(R.id.useremail);
         txtusermobile = view.findViewById(R.id.usermobile);
         txtpersonname = view.findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
-        txtstpname.setText(stpname + " / " + processname +  " / " + stpcapacity);
-        txtsiteaddress.setText(siteaddress);
+        txtstpname.setText(stpname + " " + processname +  " " + stpcapacity);
+      //  txtsiteaddress.setText(siteaddress);
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);

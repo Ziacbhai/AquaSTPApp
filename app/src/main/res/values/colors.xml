@@ -20,4 +20,41 @@
     <color name="black">#000000</color>
     <color name="your_dark_primary_color">#2196F3</color>
 
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorAccent">#FF5722</color>
+    <color name="colorBackground">#F5F9FF</color>
+    <color name="gray">#757575</color>
+    <color name="light_gray">#BDBDBD</color>
+    <color name="pink">#ED1B62</color>
+    <color name="indigo">#3F51B5</color>
+    <color name="teal">#42B38B</color>
+    <color name="orange">#FF5722</color>
+    <color name="dark_green">#43A047</color>
+
+
+
+
+    <!-- Theme colors -->
+    <color name="accent_color">#5E72E4</color>
+    <color name="accent_color_dark">#4456B9</color>
+    <color name="gradient_start">#1A237E</color>
+    <color name="gradient_end">#283593</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="card_stroke">#E0E0E0</color>
+    <color name="ripple_color">#33FFFFFF</color>
+
+    <!-- Text colors -->
+    <color name="text_color">#334155</color>
+    <color name="light_text_color">#E0E6FF</color>
+    <color name="secondary_text">#757575</color>
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="primary_light">#C5CAE9</color>
+    <color name="accent">#FF4081</color>
+    <color name="primary_text">#212121</color>
+    <color name="divider">#E0E0E0</color>
+    <color name="light_bg">#F5F7FF</color>
+
+
 </resources>

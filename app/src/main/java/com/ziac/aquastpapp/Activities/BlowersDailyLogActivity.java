@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -65,7 +66,9 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
         String usertype = sharedPreferences.getString("user_type", "");
@@ -134,14 +137,15 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
 
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
-        txtsiteaddress = findViewById(R.id.siteaddress);
+       // txtsiteaddress = findViewById(R.id.siteaddress);
         txtuseremail = findViewById(R.id.useremail);
         txtusermobile = findViewById(R.id.usermobile);
         txtpersonname = findViewById(R.id.personname);
 
         txtsitename.setText(sharedPreferences.getString("site_name", ""));
-        txtstpname.setText(sharedPreferences.getString("stp_name", "") + " / " + sharedPreferences.getString("process_name", "") +  " / " + sharedPreferences.getString("stp_capacity", ""));
-        txtsiteaddress.setText(sharedPreferences.getString("site_address", ""));
+        txtstpname.setText(sharedPreferences.getString("stp_name", "") + " " +
+                sharedPreferences.getString("process_name", "") +  " " + sharedPreferences.getString("stp_capacity", ""));
+       // txtsiteaddress.setText(sharedPreferences.getString("site_address", ""));
         txtuseremail.setText(sharedPreferences.getString("user_email", ""));
         txtusermobile.setText(sharedPreferences.getString("user_mobile", ""));
         txtpersonname.setText(sharedPreferences.getString("user_name", ""));
@@ -241,5 +245,12 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         queue.add(jsonObjectRequest);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 }
