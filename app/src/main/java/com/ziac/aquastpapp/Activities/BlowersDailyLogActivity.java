@@ -59,10 +59,10 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         user_topcard();
         backbtn = findViewById(R.id.back_btn);
-        blowerview = findViewById(R.id.blowerview);
+       // blowerview = findViewById(R.id.blowerview);
         Displaydate = findViewById(R.id.displaydate);
         Displaytime = findViewById(R.id.displaytime);
-        Startheading = findViewById(R.id.startheading);
+       // Startheading = findViewById(R.id.startheading);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,9 +83,9 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
             }
         }, 0);
         if (usertype.equals("C")) {
-            hideViews();
+           // hideViews();
         } else {
-            showViews();
+           // showViews();
         }
         DailyLogBlowers();
         blowers_started_recyclerview = findViewById(R.id.blowers_started_recyclerview);

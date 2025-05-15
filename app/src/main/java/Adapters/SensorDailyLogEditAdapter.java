@@ -26,6 +26,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.button.MaterialButton;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.MeterDailyLogActivity;
 import com.ziac.aquastpapp.Activities.SensorsDailyLogActivity;
@@ -154,7 +155,7 @@ public class SensorDailyLogEditAdapter extends RecyclerView.Adapter<SensorDailyL
     public class Viewholder extends RecyclerView.ViewHolder {
 
         TextView Sensor_equip_name;
-        AppCompatButton Sensor_save;
+        MaterialButton Sensor_save;
         EditText Sensor_reading_edit;
 
         public Viewholder(@NonNull View itemView) {

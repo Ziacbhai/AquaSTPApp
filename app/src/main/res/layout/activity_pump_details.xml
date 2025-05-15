@@ -89,16 +89,17 @@
                             android:fontFamily="@font/poppins_semibold"
                             android:text="Site name"
                             android:textColor="#FFFFFF"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/stpname"
-                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
                             android:text="STP name"
                             android:textColor="#E6FFFFFF"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <!-- <TextView
                              android:id="@+id/siteaddress"
@@ -193,7 +194,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:background="@drawable/btnbgoutline"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="5dp"
@@ -291,7 +291,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btnbgoutline" />
+                 />
 
             <LinearLayout
                 android:id="@+id/pump_start_header"
@@ -370,7 +370,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/btnbgoutline" />
+                 />
 
         </LinearLayout>
 

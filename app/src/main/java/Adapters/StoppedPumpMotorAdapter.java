@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -144,7 +145,7 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
 
     public class Viewholder extends RecyclerView.ViewHolder {
         TextView Pumpeqipname, Pumprunningtime, Pumpstoptime;
-        ImageView Pump_start;
+        ImageButton Pump_start;
         View viewpump;
 
         public Viewholder(@NonNull View itemView) {
@@ -161,7 +162,7 @@ public class StoppedPumpMotorAdapter extends RecyclerView.Adapter<StoppedPumpMot
 
             }else {
                 viewpump.setVisibility(View.VISIBLE);
-                ;
+
             }
 
         }

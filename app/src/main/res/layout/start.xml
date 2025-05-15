@@ -20,34 +20,9 @@
             android:layout_width="4dp"
             android:layout_height="0dp"
             android:background="@color/green"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- Sensor Image -->
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/sensor_image"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginVertical="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/aqua_logo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/status_bar"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/CircleImageView" />
-
-        <!-- Camera Button -->
-        <ImageView
-            android:id="@+id/sensor_image_upload_btn"
-            android:layout_width="25dp"
-            android:layout_height="20dp"
-            android:padding="3dp"
-            android:src="@drawable/imageupload"
-            app:layout_constraintBottom_toBottomOf="@id/sensor_image"
-            app:layout_constraintEnd_toEndOf="@id/sensor_image"
-            app:tint="@android:color/black" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <!-- Sensor Name -->
         <TextView
@@ -62,9 +37,9 @@
             android:textColor="#212121"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/sensor_total_container"
-            app:layout_constraintStart_toEndOf="@id/sensor_image"
-            app:layout_constraintTop_toTopOf="@id/sensor_image" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/status_bar"
+            app:layout_constraintEnd_toStartOf="@id/sensor_total_container" />
 
         <!-- Reading Value with Badge -->
         <TextView
@@ -98,6 +73,27 @@
             app:layout_constraintStart_toEndOf="@id/sensor_reading"
             app:layout_constraintTop_toTopOf="@id/sensor_reading" />
 
+        <!-- Sensor Image (moved below reading) -->
+        <ImageView
+            android:id="@+id/sensor_image"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="6dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toBottomOf="@id/sensor_reading"
+            app:layout_constraintStart_toEndOf="@id/status_bar" />
+
+        <!-- Camera Button (icon changed and positioned on sensor image) -->
+        <ImageView
+            android:id="@+id/sensor_image_upload_btn"
+            android:layout_width="25dp"
+            android:layout_height="20dp"
+            android:padding="3dp"
+            app:tint="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="@id/sensor_image"
+            app:layout_constraintEnd_toEndOf="@id/sensor_image" />
+
         <!-- Total Container -->
         <LinearLayout
             android:id="@+id/sensor_total_container"
@@ -109,9 +105,9 @@
             android:orientation="vertical"
             android:paddingHorizontal="12dp"
             android:paddingVertical="6dp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"

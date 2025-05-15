@@ -27,6 +27,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.button.MaterialButton;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.MeterDailyLogActivity;
 import com.ziac.aquastpapp.R;
@@ -152,7 +153,7 @@ public class MeterDailyLogEditAdapter extends RecyclerView.Adapter<MeterDailyLog
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView Meter_equip_name;
-        AppCompatButton Meter_save;
+        MaterialButton Meter_save;
         EditText Meter_reading_edit;
 
         public ViewHolder(@NonNull View itemView) {

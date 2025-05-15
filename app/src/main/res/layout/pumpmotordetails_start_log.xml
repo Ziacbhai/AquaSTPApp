@@ -1,100 +1,156 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Item layout for RecyclerView to display pump information -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="#eaeff5"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardBackgroundColor="@color/white"
+    android:layout_marginVertical="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:background="@drawable/btnbgedited"
-        android:orientation="horizontal"
-        android:padding="5dp">
+        android:background="#FFFFFF"
+        android:orientation="vertical">
 
+        <!-- Pump Information Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-
-            <TextView
-                android:id="@+id/pump_equip_name"
+            <!-- Pump/Motor Name -->
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="2"
-                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/pump_equip_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#546E7A"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!-- Vertical Divider -->
+            <View
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:text="Pump/motor"
-                android:textColor="#000"
-                android:textSize="12dp" />
+                android:background="#B0BEC5" />
 
-
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#000" />
-
-
-
-
-            <TextView
-                android:id="@+id/pumpmotor_start_time"
+            <!-- Time Information -->
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp">
+
+                <!-- Start Time Column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/pumpmotor_start_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#0D47A1"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <!-- Vertical Divider -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#B0BEC5" />
+                <!-- Running Time Column -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/pump_running_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#00695C"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Vertical Divider -->
+            <View
+                android:id="@+id/vipump2"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#B0BEC5" />
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Start"
-                android:textColor="#000"
-                android:textSize="12dp" />
+                android:orientation="horizontal"
+                android:paddingStart="8dp">
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#000" />
-
-            <TextView
-                android:id="@+id/pump_running_time"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Running"
-                android:textColor="#000"
-                android:textSize="12dp" />
+                <!-- Reload Button -->
+                <ImageButton
+                    android:id="@+id/pump_reload"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Refresh pump data"
+                    android:padding="9dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/newshare"
+                     />
 
 
-        <View
-            android:id="@+id/vipump2"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#000" />
+                <!-- Vertical Divider -->
+                <View
+                    android:id="@+id/vipump"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#B0BEC5" />
+                <!-- Stop Button -->
+                <ImageButton
+                    android:id="@+id/pump_stop"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Stop pump"
+                    android:padding="9dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/stop"
+                    app:tint="#D32F2F" />
+            </LinearLayout>
+        </LinearLayout>
 
-            <ImageView
-                android:id="@+id/pump_reload"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:layout_height="16dp"
-                android:gravity="center"
-                android:src="@drawable/newshare"
-                android:textColor="#fff"/>
-
-
-        <View
-            android:id="@+id/vipump"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#000" />
-
-
-
-            <ImageView
-                android:id="@+id/pump_stop"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:layout_height="18dp"
-                android:gravity="center"
-                android:src="@drawable/stop"
-                android:textColor="#fff"/>
-
+        <!-- Status Bar -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#4CAF50" />
     </LinearLayout>
-
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

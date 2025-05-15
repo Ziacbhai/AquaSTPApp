@@ -89,16 +89,17 @@
                             android:fontFamily="@font/poppins_semibold"
                             android:text="Site name"
                             android:textColor="#FFFFFF"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/stpname"
-                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
                             android:text="STP name"
                             android:textColor="#E6FFFFFF"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <!-- <TextView
                              android:id="@+id/siteaddress"
@@ -192,7 +193,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:background="@drawable/btnbgoutline"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="5dp"
@@ -218,12 +218,12 @@
                 android:background="@drawable/btnbg"
                 android:orientation="horizontal"
                 android:padding="5dp"
-                android:weightSum="3">
+               >
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Meter"
@@ -252,13 +252,14 @@
 
                 <View
                     android:layout_width="1dp"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_height="match_parent"
                     android:background="#fff" />
 
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:gravity="center"
                     android:padding="5dp"
@@ -275,12 +276,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
-                android:background="@drawable/btnbgoutline" />
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="3dp"
+                android:layout_margin="5dp"
                 android:background="@drawable/btnbg"
                 android:orientation="horizontal"
                 android:padding="5dp">
@@ -288,7 +289,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"
+                    android:layout_weight="2.5"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Meter"
@@ -304,7 +305,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Reading"
@@ -323,7 +324,7 @@
                     android:id="@+id/meter_reading_time"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.8"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Time"
@@ -341,7 +342,7 @@
                     android:id="@+id/meter_total"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.9"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="Total"
@@ -357,7 +358,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
-                android:background="@drawable/btnbgoutline" />
+                />
 
         </LinearLayout>
 

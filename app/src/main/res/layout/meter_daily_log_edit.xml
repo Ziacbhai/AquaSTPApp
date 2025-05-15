@@ -1,83 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Alternative compact meter reading layout -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#eaeff5"
-    android:orientation="vertical">
-
+    android:layout_margin="6dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="2dp"
+    app:strokeColor="#E0E0E0"
+    app:strokeWidth="0.5dp">
 
     <LinearLayout
-        android:id="@+id/meter_adapter"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_margin="5dp"
-        android:weightSum="3"
-        android:background="@drawable/btnbgedited"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/meter_equip_name"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            android:background="@drawable/btnbgedited"
-            android:gravity="center"
-            android:text="Meter"
-            android:padding="5dp"
-            android:textColor="#000"
-            android:textSize="10dp"
-            />
-
-
+        <!-- Colored stripe at top -->
         <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#000" />
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="#1976D2" />
 
-
-        <EditText
-            android:id="@+id/meter_reading_edit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/btnbgedited"
+        <!-- Main content area -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:inputType="number"
-            android:hint="Reading"
-            android:padding="5dp"
-            android:textColor="#000"
-            android:textSize="12dp"
-             />
+            android:padding="6dp">
 
+            <!-- Meter icon and name -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#000" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="Meter icon"
+                    android:src="@drawable/ic_meter"/>
 
+                <TextView
+                    android:id="@+id/meter_equip_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Water Meter"
+                    android:textColor="#263238"
+                    android:textSize="8sp" />
+            </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/meter_save"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="Save"
-            android:textColor="#000"
-            android:textSize="12dp" />
+            <!-- Vertical divider -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:background="#E0E0E0" />
 
+            <!-- Reading input field -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:boxBackgroundColor="@android:color/white"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxStrokeColor="#1976D2"
+                app:hintEnabled="true"
+                app:hintTextColor="#78909C">
 
+                <EditText
+                    android:id="@+id/meter_reading_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:hint="Reading"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:textColor="#263238"
+                    android:textSize="10sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="8dp"
+                android:background="#E0E0E0" />
+
+            <!-- Save button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/meter_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#1976D2"
+                android:textSize="10dp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="12dp"
+                android:text="Save"
+                android:textColor="@android:color/white"
+                />
+        </LinearLayout>
+
+        <!-- Status bar or validation area (optional) -->
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:padding="5dp"
-            android:textColor="#000"
-            android:textSize="12dp"
-            android:textStyle="bold" />
-
+            android:id="@+id/validation_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EDF7FF"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:text="Last reading: 45,782 kWh on May 12"
+            android:textColor="#0D47A1"
+            android:textSize="12sp"
+            android:visibility="visible" />
     </LinearLayout>
-
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

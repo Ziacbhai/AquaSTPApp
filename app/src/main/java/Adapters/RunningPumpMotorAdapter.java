@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,12 +73,19 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
         holder.Pump_Reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StopRolloverMotorPumps(position, 2);
+            }
+        });
+
+       /* holder.Pump_Reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 StopRolloverMotorPumps(position,2);
                 Intent pump = new Intent(context, PumpMotorDailyLogActivity.class);
                 context.startActivity(pump);
                 ((Activity) context).finish();
             }
-        });
+        });*/
 
     }
 
@@ -171,7 +179,7 @@ public class RunningPumpMotorAdapter extends RecyclerView.Adapter<RunningPumpMot
 
     public class Viewholder extends RecyclerView.ViewHolder {
         TextView Pumpeqipname, Pumpstatedtime, Pumprunningtime;
-        ImageView Pump_Reload, Pump_Stop;
+        ImageButton Pump_Reload, Pump_Stop;
         View Vipump,Vipump2;
 
         public Viewholder(@NonNull View itemView) {

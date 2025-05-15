@@ -25,6 +25,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.button.MaterialButton;
 import com.ziac.aquastpapp.Activities.BlowersDailyLogActivity;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
@@ -93,21 +94,21 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
         {
             if(browersDailyLogClass.get(position).getRunning_status().equals("R"))
             {
-                holder.Blower_start.setImageBitmap(null);
+              //  holder.Blower_start.setImageBitmap(null);
                 holder.Blower_start.setEnabled(false);
                 holder.Blower_stop.setEnabled(true); // .setVisibility(View.GONE);
                 holder.Blower_rollover.setEnabled(true);
             } else if(browersDailyLogClass.get(position).getRunning_status().equals("C")) {
                 holder.Blower_start.setEnabled(true);
                 holder.Blower_stop.setEnabled(false);
-                holder.Blower_stop.setImageBitmap(null);
+               // holder.Blower_stop.setImageBitmap(null);
                 holder.Blower_rollover.setEnabled(false);
                 holder.Blower_rollover.setImageBitmap(null);
             } else{
                 holder.Blower_start.setEnabled(false);
-                holder.Blower_start.setImageBitmap(null);
+               // holder.Blower_start.setImageBitmap(null);
                 holder.Blower_stop.setEnabled(false);
-                holder.Blower_stop.setImageBitmap(null);
+               // holder.Blower_stop.setImageBitmap(null);
                 holder.Blower_rollover.setEnabled(false);
                 holder.Blower_rollover.setImageBitmap(null);
             }
@@ -211,8 +212,10 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
 
     public class Viewholder extends RecyclerView.ViewHolder {
         TextView Blower_equip_name,Blower_start_time,Blower_stopped_time,Blower_running_time;
-        ImageView Blower_start,Blower_rollover,Blower_stop;
+        ImageView Blower_rollover;
         View blowerview;
+        MaterialButton Blower_start,Blower_stop;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             Blower_equip_name = itemView.findViewById(R.id.blower_equip_name);
@@ -222,19 +225,19 @@ public class BlowersDailyLogStartAdapter extends RecyclerView.Adapter<BlowersDai
             Blower_start = itemView.findViewById(R.id.blower_start);
             Blower_stop = itemView.findViewById(R.id.blower_stop);
             Blower_rollover = itemView.findViewById(R.id.blower_rollover);
-            blowerview = itemView.findViewById(R.id.blowerview);
+           // blowerview = itemView.findViewById(R.id.blowerview);
 
             String usertype = Global.sharedPreferences.getString("user_type", "");
             if (usertype.equals("C")) {
                 Blower_start.setVisibility(View.GONE);
                 Blower_rollover.setVisibility(View.GONE);
                 Blower_stop.setVisibility(View.GONE);
-                blowerview.setVisibility(View.GONE);
+              //  blowerview.setVisibility(View.GONE);
             } else {
                 Blower_start.setVisibility(View.VISIBLE);
                 Blower_rollover.setVisibility(View.VISIBLE);
                 Blower_stop.setVisibility(View.VISIBLE);
-                blowerview.setVisibility(View.VISIBLE);
+              //  blowerview.setVisibility(View.VISIBLE);
             }
         }
     }
