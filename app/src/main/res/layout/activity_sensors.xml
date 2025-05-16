@@ -274,6 +274,7 @@
                 android:layout_margin="2dp"
                 android:layout_marginTop="10dp" />
 
+<!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -350,6 +351,11 @@
 
 
             </LinearLayout>
+-->
+            <View
+                android:id="@+id/viewhide3"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/sensors_recyclerview"

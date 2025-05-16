@@ -1,93 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#eaeff5"
-    android:orientation="vertical">
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    app:cardBackgroundColor="@color/card_background"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="1dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="2dp"
-        android:weightSum="4"
-        android:background="@drawable/btnbgedited"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:layout_height="wrap_content">
 
+        <!-- Left accent bar for visual appeal -->
+        <View
+            android:id="@+id/accent_bar"
+            android:layout_width="4dp"
+            android:layout_height="80dp"
+            android:background="@color/accent_color" />
+
+        <!-- Filter name and type -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="3.5"
-            android:layout_height="match_parent">
+            android:id="@+id/name_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@id/center_panel"
+            android:orientation="vertical"
+            android:paddingVertical="10dp">
 
             <TextView
                 android:id="@+id/filter_equip_name"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.8"
-                android:gravity="center"
-                android:text="Filter"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#000" />
-
-
-            <ImageView
-                android:id="@+id/filter_image"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1.2"
-                android:gravity="center"
-                android:src="@drawable/aqua_logo"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#000" />
-
-
-            <TextView
-                android:id="@+id/filter_reading"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.8"
-                android:gravity="center"
-                android:text="Time"
-                android:textColor="#000"
-                android:textSize="12dp" />
-
-            <View
-                android:id="@+id/filterview"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#000" />
-
-            <LinearLayout
-                android:id="@+id/senser_image_hide"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5">
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:text="Filter"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
 
-                <ImageView
-                    android:id="@+id/filter_image_upload"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:gravity="center"
-                    android:padding="1dp"
-                    android:src="@drawable/imageupload"
-                    android:textColor="#fff" />
-            </LinearLayout>
 
         </LinearLayout>
 
+        <!-- Center panel with logo -->
+        <LinearLayout
+            android:id="@+id/center_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/filter_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="Filter logo"
+                android:padding="4dp"
+                android:src="@drawable/aqua_logo" />
+        </LinearLayout>
 
-</LinearLayout>
+        <!-- Right panel with time and upload button -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="12dp"
+            android:layout_toEndOf="@id/center_panel"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/filter_reading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="12dp"
+                android:text="Time"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <ImageButton
+                android:id="@+id/filter_image_upload"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Upload image"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/imageupload"
+                app:tint="@color/black" />
+        </LinearLayout>
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

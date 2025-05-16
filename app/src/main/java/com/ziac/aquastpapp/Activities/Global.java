@@ -51,9 +51,9 @@ public class Global {
     public static SharedPreferences.Editor editor;
     private static Picasso picassoInstance;
     //Server url
-    public static String baseurl = "https://aquastp.ziaconline.com/";
+    //public static String baseurl = "https://aquastp.ziaconline.com/";
     //Local url
-    //public static String baseurl = "http://192.168.0.20:9396/";
+    public static String baseurl = "http://192.168.0.20:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
     //Pump_Motor

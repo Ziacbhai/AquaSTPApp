@@ -154,9 +154,9 @@ public class SensorDailyLogEditAdapter extends RecyclerView.Adapter<SensorDailyL
 
     public class Viewholder extends RecyclerView.ViewHolder {
 
-        TextView Sensor_equip_name;
-        MaterialButton Sensor_save;
-        EditText Sensor_reading_edit;
+        public TextView Sensor_equip_name;
+        public MaterialButton Sensor_save;
+        public EditText Sensor_reading_edit;
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
