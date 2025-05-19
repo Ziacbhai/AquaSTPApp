@@ -58,4 +58,30 @@
     <color name="red">#F44336</color>
 
 
+    <color name="background_color">#F5F5F5</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+
+
+    <color name="my_primary">#1565C0</color>
+
+    <color name="my_dark_primary">#0D47A1</color>
+    <color name="my_accent">#FF4081</color>
+
+    <!-- Text Colors -->
+    <color name="text_tertiary">#9E9E9E</color>
+
+    <!-- UI Element Colors -->
+    <color name="background_light">#F5F7FA</color>
+
+
+    <color name="transparent">#00000000</color>
+
+    <!-- Status Colors -->
+    <color name="success">#4CAF50</color>
+    <color name="warning">#FFC107</color>
+    <color name="error">#F44336</color>
+    <color name="info">#2196F3</color>
+
+
 </resources>

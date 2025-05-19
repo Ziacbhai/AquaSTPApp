@@ -1,34 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eaeff5"
-    android:orientation="vertical"
-    tools:context=".Activities.IncidentImageUploadActivity">
+    >
 
-
+    <!-- Top AppBar -->
     <LinearLayout
+        android:id="@+id/repair"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/btn_gradient"
-        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:weightSum="2"
-        tools:ignore="MissingConstraints">
+        android:gravity="center_vertical"
+        android:weightSum="2">
 
         <ImageView
             android:id="@+id/repair_back_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
-            android:gravity="center"
             android:padding="8dp"
             android:src="@drawable/back"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:contentDescription="Back Button" />
 
         <TextView
             android:layout_width="0dp"
@@ -41,6 +37,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <!-- Placeholder for symmetry -->
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -48,49 +45,40 @@
             android:visibility="invisible" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
-
-        <ImageView
-            android:id="@+id/incident_image_upload"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/inputbg"
-            android:src="@drawable/imageupload"
-            android:gravity="center"
-            android:text="Upload Image" />
-
-    </LinearLayout>
-
+    <!-- Scrollable Content -->
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_below="@id/repair"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:scrollbars="none">
+        android:layout_above="@+id/incident_image_upload"
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/incident_Images_Rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/incident_Images_Rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp" />
-            </LinearLayout>
+                android:layout_marginTop="10dp" />
 
         </LinearLayout>
-
-
     </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+    <!-- Floating Action Button for Image Upload -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/incident_image_upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:contentDescription="Upload Image"
+        app:srcCompat="@drawable/imageupload"
+        app:backgroundTint="@color/colorPrimary" />
+
+</RelativeLayout>

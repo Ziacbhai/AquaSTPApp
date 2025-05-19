@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eaeff5"
-    android:orientation="vertical">
+    android:background="#F5F7FA">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
-        <!-- Header Card with User Info -->
 
+        <!-- Header Card - Kept as is per your request -->
         <androidx.cardview.widget.CardView
             android:id="@+id/selectSTP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp">
@@ -53,299 +53,245 @@
                         android:text="STP name"
                         android:textColor="#E6FFFFFF"
                         android:textSize="14sp" />
-
-                    <!-- <TextView
-                         android:id="@+id/siteaddress"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:layout_marginTop="4dp"
-                         android:fontFamily="@font/poppins_light"
-                         android:text="Site_address"
-                         android:textColor="#E6FFFFFF"
-                         android:textSize="12sp" />-->
-
                 </LinearLayout>
 
-                <!-- User Info Panel -->
+                <!-- User Info -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:gravity="center"
                     android:padding="8dp">
 
-                    <!-- <com.google.android.material.imageview.ShapeableImageView
-                         android:layout_width="64dp"
-                         android:layout_height="64dp"
-                         android:background="#E1E1E1"
-                         android:padding="12dp"
-                         android:src="@drawable/ic_person"
-                         app:shapeAppearanceOverlay="@style/CircleImageView"
-                         app:tint="#474747" />-->
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/personname"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Personname"
+                        android:textColor="#212121"
+                        android:textSize="18sp"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:id="@+id/useremail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="email"
+                        android:textColor="#757575"
+                        android:textSize="12sp"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:drawablePadding="6dp" />
 
-                        <TextView
-                            android:gravity="center"
-                            android:id="@+id/personname"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:text="Personname"
-                            android:textColor="#212121"
-                            android:textSize="18sp" />
-                        <!--
-                                                    android:drawableStart="@drawable/ic_email"
-                        -->
-
-                        <TextView
-                            android:gravity="center"
-                            android:id="@+id/useremail"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:drawablePadding="6dp"
-                            android:fontFamily="@font/poppins"
-                            android:text="email"
-                            android:textColor="#757575"
-                            android:textSize="12sp" />
-                        <!--
-                                                android:drawableStart="@drawable/ic_phone"
-                        -->
-
-                        <TextView
-                            android:gravity="center"
-                            android:id="@+id/usermobile"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="mobile"
-                            android:textColor="#757575"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/usermobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="mobile"
+                        android:textColor="#757575"
+                        android:textSize="12sp"
+                        android:gravity="center" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!--
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp">
+        <!-- Categories Label -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Equipment Categories"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="18sp"
+            android:textColor="#263238"
+            android:layout_marginBottom="16dp"/>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        &lt;!&ndash; Top Banner &ndash;&gt;
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/btn_gradient"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="16dp">
-
-                            <TextView
-                                android:id="@+id/sitename"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_semibold"
-                                android:text="Site name"
-                                android:textColor="#FFFFFF"
-                                android:textSize="20sp" />
-
-                            <TextView
-                                android:id="@+id/stpname"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_medium"
-                                android:text="STP name"
-                                android:textColor="#E6FFFFFF"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/siteaddress"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:fontFamily="@font/poppins_light"
-                                android:text="Site_address"
-                                android:textColor="#E6FFFFFF"
-                                android:textSize="12sp" />
-
-                        </LinearLayout>
-
-                        &lt;!&ndash; User Info Panel &ndash;&gt;
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:padding="16dp">
-
-                            &lt;!&ndash; <com.google.android.material.imageview.ShapeableImageView
-                                 android:layout_width="64dp"
-                                 android:layout_height="64dp"
-                                 android:background="#E1E1E1"
-                                 android:padding="12dp"
-                                 android:src="@drawable/ic_person"
-                                 app:shapeAppearanceOverlay="@style/CircleImageView"
-                                 app:tint="#474747" />&ndash;&gt;
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/personname"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/poppins_semibold"
-                                    android:text="Personname"
-                                    android:textColor="#212121"
-                                    android:textSize="18sp" />
-
-                                <TextView
-                                    android:id="@+id/useremail"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:drawableStart="@drawable/ic_email"
-                                    android:drawablePadding="6dp"
-                                    android:fontFamily="@font/poppins"
-                                    android:text="email"
-                                    android:textColor="#757575"
-                                    android:textSize="12sp" />
-
-                                <TextView
-                                    android:id="@+id/usermobile"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
-                                    android:drawableStart="@drawable/ic_phone"
-                                    android:drawablePadding="6dp"
-                                    android:fontFamily="@font/poppins_regular"
-                                    android:text="mobile"
-                                    android:textColor="#757575"
-                                    android:textSize="12sp" />
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-        -->
-
+        <!-- Categories Cards - New Stylish Design -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:spacing="16dp">
 
-            <LinearLayout
+            <!-- Pumps / Motors / Blowers - New Design -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/pump_p"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:rippleColor="#33007AFF">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/pump_p"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    app:cardCornerRadius="16dp">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    <!-- Left side image container with rounded corners -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/pump_image_container"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="16dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:src="@drawable/motor" />
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/motor"
+                            android:background="#F5F9FF" />
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Content -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintStart_toEndOf="@id/pump_image_container"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/pump_image_container"
+                        app:layout_constraintBottom_toBottomOf="@id/pump_image_container">
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center"
-                            android:padding="5dp"
                             android:text="Pumps / Motors / Blowers"
-                            android:textColor="@color/black"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textColor="#263238"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View and manage all dynamic equipment"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textColor="#78909C"
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View Details"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="#1976D2"
+                            android:textSize="12sp"
+                            android:layout_marginTop="8dp"
+                            android:drawableEnd="@drawable/ic_arrow_right"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="#1976D2" />
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                    <!-- Status indicator -->
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="0dp"
+                        android:background="#1976D2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp" />
-
-            <LinearLayout
+            <!-- Meters / Filters / Sensors - New Design -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/moter_s"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:rippleColor="#33007AFF">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/moter_s"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    app:cardCornerRadius="16dp">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    <!-- Left side image container with rounded corners -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/meter_image_container"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="16dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center"
-                            android:padding="10dp"
-                            android:src="@drawable/metering" />
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/metering"
+                            android:background="#FFF8E1" />
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Content -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintStart_toEndOf="@id/meter_image_container"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/meter_image_container"
+                        app:layout_constraintBottom_toBottomOf="@id/meter_image_container">
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="center"
-                            android:padding="5dp"
                             android:text="Meters / Filters / Sensors"
-                            android:textColor="@color/black"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textColor="#263238"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Track measurements and monitoring equipment"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textColor="#78909C"
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="View Details"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="#FF8F00"
+                            android:textSize="12sp"
+                            android:layout_marginTop="8dp"
+                            android:drawableEnd="@drawable/ic_arrow_right"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="#FF8F00" />
                     </LinearLayout>
 
-
-                </androidx.cardview.widget.CardView>
-
-
-            </LinearLayout>
+                    <!-- Status indicator -->
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="0dp"
+                        android:background="#FF8F00"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-
-
     </LinearLayout>
-
-
 </androidx.core.widget.NestedScrollView>

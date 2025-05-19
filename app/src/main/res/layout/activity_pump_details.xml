@@ -63,7 +63,7 @@
                 android:id="@+id/selectSTP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="6dp"
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
@@ -281,6 +281,12 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#fff" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="16dp"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:textColor="#fff" />
 
             </LinearLayout>
 
@@ -352,6 +358,14 @@
                     android:layout_height="match_parent"
                     android:background="#fff" />
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:textColor="#fff"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

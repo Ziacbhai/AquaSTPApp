@@ -35,7 +35,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
@@ -55,7 +57,8 @@ public class RepairFragment extends Fragment {
 
     RepairModel1 repairModel1;
     RecyclerView RepairRecyclerview;
-    TextView tvSelectedDate, Remark_A;
+    TextView tvSelectedDate ;
+    TextInputEditText Remark_A;
     String currentDatevalue, currentDateValue2;
     ProgressDialog progressDialog;
     Context context;
@@ -191,7 +194,7 @@ public class RepairFragment extends Fragment {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.custom_dialog_repair_layout, null);
-        AppCompatButton Update_A, Cancel_A;
+        MaterialButton Update_A, Cancel_A;
         tvSelectedDate = dialogView.findViewById(R.id.tvSelectedDate);
         Remark_A = dialogView.findViewById(R.id.remark_alert_r);
         Update_A = dialogView.findViewById(R.id.update_alert_r);

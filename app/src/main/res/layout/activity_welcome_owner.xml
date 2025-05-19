@@ -1,96 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eaeff5"
-    android:orientation="vertical"
-    tools:context=".Activities.WelcomeOwnerActivity">
-
-    <!-- Add vertical spacing at the top -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
-    <!-- Move the exit icon to the top right corner -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:paddingEnd="16dp">
-
-        <ImageView
-            android:id="@+id/ownerexit"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/cross" />
-    </RelativeLayout>
-
-    <!-- Adjust the size and margin of the CircleImageView -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_centerHorizontal="true"
-
-            app:civ_border_color="#3FD5C7"
-            app:civ_border_width="4dp" />
-    </RelativeLayout>
-
-    <!-- Add vertical spacing -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
-
-    <!-- Adjust alignment and spacing of text views -->
-    <TextView
-        android:id="@+id/company"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:gravity="center_horizontal"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="CompanyName"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <!-- Exit Button Top Right -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ownerexit"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/cross" />
+        </RelativeLayout>
+
+        <!-- Profile Image -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageView"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:civ_border_color="#3FD5C7"
+                app:civ_border_width="4dp" />
+        </LinearLayout>
+
+        <!-- Company Name -->
+        <TextView
+            android:id="@+id/company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="CompanyName"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Welcome Message -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
             android:fontFamily="@font/poppins_semibold"
             android:text="Greetings, esteemed Owner!"
             android:textColor="#01a4a3"
             android:textSize="20sp"
-           />
+            android:layout_gravity="center" />
 
         <View
             android:layout_width="100dp"
             android:layout_height="2dp"
-            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:background="#F44336" />
 
+        <!-- Details -->
         <TextView
             android:id="@+id/wname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:text="Helloziac"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -99,7 +89,7 @@
             android:id="@+id/wemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:text="ziac@gmail.com"
             android:textSize="18sp" />
 
@@ -107,16 +97,17 @@
             android:id="@+id/wph"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:text="1234567890"
             android:textSize="18sp" />
 
+        <!-- Info Text -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:gravity="center"
             android:fontFamily="@font/poppins_semibold"
-            android:gravity="center_horizontal"
             android:text="The helm of AquaSTP awaits."
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -125,32 +116,21 @@
             android:fontFamily="@font/poppins"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:padding="2dp"
             android:text="Dive into comprehensive insights."
             android:textSize="16sp" />
 
+        <!-- Continue Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/oContinue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/profilebtnupdate"
+            android:text="Continue"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
     </LinearLayout>
-
-    <!-- Add vertical spacing -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
-
-    <!-- Adjust button size and margin -->
-
-    <!-- Add vertical spacing -->
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/oContinue"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/profilebtnupdate"
-        android:text="Continue"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
-
-
-
-</LinearLayout>
+</ScrollView>

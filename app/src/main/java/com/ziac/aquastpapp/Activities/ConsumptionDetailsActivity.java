@@ -49,6 +49,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
 
@@ -82,7 +83,7 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
     BottomSheetDialog bottomSheetDialog;
     TextView Equipment_code, Item_codeTV;
     EditText Qty_cb;
-    AppCompatButton Update_A, Cancel_A;
+    MaterialButton Update_A, Cancel_A;
     private ProgressDialog progressDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
     private boolean isSwipeRefreshTriggered = false;
@@ -127,27 +128,26 @@ public class ConsumptionDetailsActivity extends AppCompatActivity {
         getConsumablesDetails();
         Consumables_D_Rv = findViewById(R.id.consumables_details_recyclerview);
 
-        Consumables_D_Rv.setOnClickListener(new View.OnClickListener() {
+        Consumables_D_Rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onClick(View v) {
-                Consumables_D_Rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                        if (dy > 0 || dy < 0 && ConsumptionFab.isShown()) {
-                            ConsumptionFab.hide();
-                        }
-                    }
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                // Hide FAB when scrolling up or down
+                if ((dy > 0 || dy < 0) && ConsumptionFab.isShown()) {
+                    ConsumptionFab.hide();
+                }
+            }
 
-                    @Override
-                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                            ConsumptionFab.show();
-                        }
-                        super.onScrollStateChanged(recyclerView, newState);
-                    }
-                });
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                // Show FAB when scrolling stops
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    ConsumptionFab.show();
+                }
             }
         });
+
 
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(context));
         Consumables_D_Rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));

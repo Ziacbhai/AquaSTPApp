@@ -31,7 +31,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
@@ -49,8 +51,8 @@ import Models.ConsumptionModel;
 public class ConsumptionFragment extends Fragment {
     RecyclerView Consumables_rv;
     private TextView tvSelectedDate;
-    TextView  Remark_A;
-    AppCompatButton Update_A, Cancel_A;
+    TextInputEditText Remark_A;
+    MaterialButton Update_A, Cancel_A;
     ProgressDialog progressDialog;
     String currentDatevalue, currentDateValue2;
     Context context;
@@ -91,6 +93,22 @@ public class ConsumptionFragment extends Fragment {
 
         Consumables_rv = view.findViewById(R.id.consumables_recyclerview);
 
+
+        Consumables_rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0 && fab.getVisibility() == View.VISIBLE) {
+                    // User scrolled down -> hide FAB
+                    fab.hide();
+                } else if (dy < 0 && fab.getVisibility() != View.VISIBLE) {
+                    // User scrolled up -> show FAB
+                    fab.show();
+                }
+            }
+        });
+
+
+/*
         Consumables_rv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +130,7 @@ public class ConsumptionFragment extends Fragment {
                 });
             }
         });
+*/
 
 
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getActivity()));

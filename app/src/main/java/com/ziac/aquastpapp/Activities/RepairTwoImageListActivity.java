@@ -27,6 +27,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +45,7 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
     Bitmap imageBitmap;
     RecyclerView Repair_Images_Rv;
     RepairModel4 repairModel4;
-    AppCompatButton Repair_image_uploadbtn;
+    FloatingActionButton Repair_image_uploadbtn;
     ProgressDialog progressDialog;
     ImageView RepairImage;
     EditText Remark_repair;
@@ -164,5 +165,15 @@ public class RepairTwoImageListActivity extends AppCompatActivity {
                 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(jsonObjectRequest);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(RepairTwoImageListActivity.this, RepairDetailsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+
     }
 }

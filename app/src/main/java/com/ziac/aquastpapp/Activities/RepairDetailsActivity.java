@@ -40,6 +40,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
@@ -61,11 +62,10 @@ import Models.RepairModel2;
 public class RepairDetailsActivity extends AppCompatActivity {
     RepairModel2 repairModel2;
     TextView Remark_A;
-    static TextView Equipment_code;
-    AppCompatButton Update_A, Cancel_A;
+    TextView Equipment_code;
+    MaterialButton Update_A, Cancel_A;
     RecyclerView Repair_details_recyclerview;
     private static Dialog zDialog;
-
     BottomSheetDialog bottomSheetDialog;
     static EquipmentRepairListClass equipment_spinner;
     Context context;

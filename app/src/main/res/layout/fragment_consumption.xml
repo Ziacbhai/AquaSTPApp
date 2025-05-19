@@ -1,168 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eaeff5"
-    android:orientation="vertical"
-    tools:context="Fragments.ConsumptionFragment">
+    android:background="#eaeff5">
 
-
-    <LinearLayout
+    <!-- Swipe to refresh entire content -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <!-- Full page scrollable view -->
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-            <!-- Header Card with User Info -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/selectSTP"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                android:orientation="vertical"
+                android:padding="6dp">
 
-                <LinearLayout
+                <!-- Card Header -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/selectSTP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp">
 
-                    <!-- Top Banner -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/btn_gradient"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="8dp">
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/sitename"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_semibold"
-                            android:text="Site name"
-                            android:textColor="#FFFFFF"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:id="@+id/stpname"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_medium"
-                            android:text="STP name"
-                            android:textColor="#E6FFFFFF"
-                            android:textSize="14sp" />
-
-                        <!-- <TextView
-                             android:id="@+id/siteaddress"
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content"
-                             android:layout_marginTop="4dp"
-                             android:fontFamily="@font/poppins_light"
-                             android:text="Site_address"
-                             android:textColor="#E6FFFFFF"
-                             android:textSize="12sp" />-->
-
-                    </LinearLayout>
-
-                    <!-- User Info Panel -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center"
-                        android:padding="8dp">
-
-                        <!-- <com.google.android.material.imageview.ShapeableImageView
-                             android:layout_width="64dp"
-                             android:layout_height="64dp"
-                             android:background="#E1E1E1"
-                             android:padding="12dp"
-                             android:src="@drawable/ic_person"
-                             app:shapeAppearanceOverlay="@style/CircleImageView"
-                             app:tint="#474747" />-->
-
+                        <!-- ✅ Top Banner -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/btn_gradient"
                             android:gravity="center"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="8dp">
 
                             <TextView
-                                android:gravity="center"
-                                android:id="@+id/personname"
-                                android:layout_width="match_parent"
+                                android:id="@+id/sitename"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_semibold"
-                                android:text="Personname"
-                                android:textColor="#212121"
-                                android:textSize="18sp" />
-                            <!--
-                                                        android:drawableStart="@drawable/ic_email"
-                            -->
+                                android:text="Site name"
+                                android:textColor="#FFFFFF"
+                                android:textSize="20sp" />
 
                             <TextView
-                                android:gravity="center"
-                                android:id="@+id/useremail"
+                                android:id="@+id/stpname"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins"
-                                android:text="email"
-                                android:textColor="#757575"
-                                android:textSize="12sp" />
-                            <!--
-                                                    android:drawableStart="@drawable/ic_phone"
-                            -->
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="STP name"
+                                android:textColor="#E6FFFFFF"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
-                            <TextView
-                                android:gravity="center"
-                                android:id="@+id/usermobile"
-                                android:layout_width="wrap_content"
+                        <!-- User Info -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="8dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/poppins_regular"
-                                android:text="mobile"
-                                android:textColor="#757575"
-                                android:textSize="12sp" />
+                                android:orientation="vertical"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:id="@+id/personname"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:text="Person Name"
+                                    android:textColor="#212121"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/useremail"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:fontFamily="@font/poppins"
+                                    android:text="email@example.com"
+                                    android:textColor="#757575"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/usermobile"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text="1234567890"
+                                    android:textColor="#757575"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_refresh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                <!-- RecyclerView (content list) -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/consumables_recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp" />
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:nestedScrollingEnabled="false" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        </LinearLayout>
-
-    </LinearLayout>
-
-
+    <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_consumption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
+        app:srcCompat="@android:drawable/ic_input_add"
         app:backgroundTint="@color/white"
-        app:elevation="6dp"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-        app:pressedTranslationZ="12dp"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:elevation="6dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

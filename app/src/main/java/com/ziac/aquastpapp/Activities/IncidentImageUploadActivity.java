@@ -33,6 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,7 +51,7 @@ public class IncidentImageUploadActivity extends AppCompatActivity {
     Bitmap imageBitmap;
     RecyclerView Incident_Images_Rv;
     IncidentsModelClass incidentsModelClass;
-    ImageView In_image_uploadbtn;
+    FloatingActionButton In_image_uploadbtn;
     Context context;
     ImageView back_btn;
     private ProgressDialog progressDialog;

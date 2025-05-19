@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class IncidentDocumentsUploadActivity<Payment_upload> extends AppCompatActivity {
-    ImageView upload;
     TextView In_doc_uploadbtn;
     private RecyclerView Incident_Documents_Rv;
     private ProgressDialog progressDialog;
@@ -52,7 +51,7 @@ public class IncidentDocumentsUploadActivity<Payment_upload> extends AppCompatAc
         context = this;
 
         In_doc_uploadbtn = findViewById(R.id.in_doc_uploadbtn);
-        upload = findViewById(R.id.in_upload);
+        //upload = findViewById(R.id.in_upload);
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
 
