@@ -26,7 +26,7 @@ public class RecoveryPasswordWithActivity extends AppCompatActivity {
         Resetemail = findViewById(R.id.useremail);
         Resetusername = findViewById(R.id.usernamer);
         Resetmobile = findViewById(R.id.mobiler);
-        back_btn = findViewById(R.id.repair_back_btn);
+        back_btn = findViewById(R.id.back_btn);
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -45,7 +45,7 @@ public class VerifyNumberOTPActivity extends AppCompatActivity {
     ProgressBar progressBar;
     private TextInputEditText Newpwd;
     Context context;
-    ImageView Repair_back_btn;
+    ImageView Back_btn;
     @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +88,8 @@ public class VerifyNumberOTPActivity extends AppCompatActivity {
             return false;
         });
 
-        Repair_back_btn = findViewById(R.id.repair_back_btn);
-        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+        Back_btn = findViewById(R.id.back_btn);
+        Back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

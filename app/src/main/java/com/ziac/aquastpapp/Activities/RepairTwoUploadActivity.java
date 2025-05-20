@@ -96,11 +96,66 @@ public class RepairTwoUploadActivity extends AppCompatActivity {
         });
     }
 
+    private String imageToString(Bitmap imageBitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
+        byte[] imgBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    }
+
+    private void openCamera() {
+        try {
+            // Use image picker library
+            com.github.dhaval2404.imagepicker.ImagePicker.with(RepairTwoUploadActivity.this)
+                    .crop()
+                    .compress(800)
+                    .maxResultSize(1080, 1080)
+                    .start(10);
+        } catch (Exception e) {
+            // If image picker library is not available, try launching the camera
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+            } else {
+                // Handle the case where both image picker library and camera are not available
+            }
+
+        }
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == PICK_IMAGE_REQUEST_CODE) {
+                // Handle image picked from gallery
+                if (data != null && data.getData() != null) {
+                    Uri uri = data.getData();
+                    try {
+                        imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                        // Do something with the selected imageBitmap
+                        RtwoImage.setImageBitmap(imageBitmap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else if (requestCode == CAMERA_REQUEST_CODE) {
+                // Handle image captured from camera
+                if (data != null && data.getExtras() != null) {
+                    Bitmap cameraBitmap = (Bitmap) data.getExtras().get("data");
+                    // Do something with the captured cameraBitmap
+                    RtwoImage.setImageBitmap(cameraBitmap);
+                }
+            }
+        }
+    }
+
     private void updateRepairImage() {
         if (imageBitmap == null) {
             return;
         }
-       // String image = imageToString(imageBitmap);
+        // String image = imageToString(imageBitmap);
         String repair_remark = Repair_two_Remark.getText().toString();
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Global.Repair_UploadImage;
@@ -170,64 +225,5 @@ public class RepairTwoUploadActivity extends AppCompatActivity {
 
         queue.add(stringRequest);
     }
-
-
-
-    private String imageToString(Bitmap imageBitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
-        byte[] imgBytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
-    }
-
-    private void openCamera() {
-        try {
-            // Use image picker library
-            com.github.dhaval2404.imagepicker.ImagePicker.with(RepairTwoUploadActivity.this)
-                    .crop()
-                    .compress(800)
-                    .maxResultSize(1080, 1080)
-                    .start(10);
-        } catch (Exception e) {
-            // If image picker library is not available, try launching the camera
-            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-                startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
-            } else {
-                // Handle the case where both image picker library and camera are not available
-            }
-
-        }
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            if (requestCode == PICK_IMAGE_REQUEST_CODE) {
-                // Handle image picked from gallery
-                if (data != null && data.getData() != null) {
-                    Uri uri = data.getData();
-                    try {
-                        imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                        // Do something with the selected imageBitmap
-                        RtwoImage.setImageBitmap(imageBitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } else if (requestCode == CAMERA_REQUEST_CODE) {
-                // Handle image captured from camera
-                if (data != null && data.getExtras() != null) {
-                    Bitmap cameraBitmap = (Bitmap) data.getExtras().get("data");
-                    // Do something with the captured cameraBitmap
-                    RtwoImage.setImageBitmap(cameraBitmap);
-                }
-            }
-        }
-    }
-
 
 }

@@ -32,6 +32,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,7 +71,8 @@ public class ProfileActivity extends AppCompatActivity {
     Picasso.Builder builder;
     Picasso picasso;
     EditText Person_name, Person_number, Person_email;
-    TextView Person_ref_code,Updatebutton;
+    TextView Person_ref_code;
+    LinearLayout Updatebutton;
     ImageView Backarrowbtn;
     Context context;
     @SuppressLint("MissingInflatedId")

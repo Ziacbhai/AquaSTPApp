@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.DefaultRetryPolicy;
@@ -34,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 
 public class HandoverRemarksActivity extends AppCompatActivity {
     ImageView backbtn;
-    TextView Remark_submit;
+    LinearLayout Remark_submit;
     EditText Remark_edit;
     String usertype;
     Context context;

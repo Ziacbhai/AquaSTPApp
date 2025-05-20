@@ -13,46 +13,38 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/btn_gradient"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/btn_gradient"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/backarrowbtn"
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="5dp"
-                    android:src="@drawable/baseline_backbutton_icon" />
+            <ImageView
+                android:id="@+id/backarrowbtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                android:padding="8dp"
+                android:src="@drawable/back"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/tvprofile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:text="My Profile"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:gravity="left|center"
+                android:padding="3dp"
+                android:text="My Profile"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="40dp"
-                    android:visibility="invisible" />
-            </LinearLayout>
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -70,10 +62,6 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="5dp" />
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -81,10 +69,10 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/imageVie"
-                            android:layout_width="210dp"
-                            android:layout_height="210dp"
-                            android:src="@drawable/aqua_logo"
+                            android:layout_width="180dp"
+                            android:layout_height="160dp"
                             android:layout_centerHorizontal="true"
+                            android:src="@drawable/aqua_logo"
                             app:civ_border_color="#3FD5C7"
                             app:civ_border_width="4dp" />
 
@@ -131,14 +119,16 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_semibold"
                                     android:text="Referral code"
-                                    android:textSize="18dp" />
+                                    android:textSize="14sp" />
 
                                 <TextView
                                     android:id="@+id/Uref"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/poppins_semibold"
                                     android:hint="123456" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
@@ -166,17 +156,20 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_semibold"
                                     android:text="Name"
-                                    android:textSize="18dp" />
+                                    android:textSize="14sp" />
 
                                 <EditText
                                     android:id="@+id/profilename"
                                     android:layout_width="match_parent"
-                                    android:background="@drawable/btnbgedited"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
+                                    android:background="@color/android:transparent"
+                                    android:fontFamily="@font/poppins_semibold"
                                     android:hint="Ziacdemo"
-                                    android:maxLength="50" />
+                                    android:maxLength="50"
+                                    android:textSize="16sp" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -201,18 +194,21 @@
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_semibold"
                                         android:text="Number"
-                                        android:textSize="18dp" />
+                                        android:textSize="14sp" />
 
                                     <EditText
                                         android:id="@+id/uNumber"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="5dp"
+                                        android:background="@color/android:transparent"
+                                        android:fontFamily="@font/poppins_semibold"
                                         android:hint="123456"
-                                        android:background="@drawable/btnbgedited"
                                         android:inputType="number"
-                                        android:maxLength="10" />
+                                        android:maxLength="10"
+                                        android:textSize="16sp" />
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>
@@ -238,18 +234,21 @@
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_semibold"
                                         android:text="Email"
-                                        android:textSize="18dp" />
+                                        android:textSize="14sp" />
 
                                     <EditText
                                         android:id="@+id/uEmail"
                                         android:layout_width="match_parent"
-                                        android:background="@drawable/btnbgedited"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="5dp"
-                                        android:inputType="textEmailAddress"
+                                        android:background="@color/android:transparent"
+                                        android:fontFamily="@font/poppins_semibold"
                                         android:hint="Ziacdemo"
-                                        android:maxLength="150" />
+                                        android:inputType="textEmailAddress"
+                                        android:maxLength="150"
+                                        android:textSize="16sp" />
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>
@@ -258,6 +257,7 @@
 
 
                     <LinearLayout
+                        android:id="@+id/updatebutton"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_margin="10dp"
@@ -267,16 +267,15 @@
                         android:weightSum="2">
 
                         <TextView
-                            android:id="@+id/updatebutton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.7"
+                            android:fontFamily="@font/poppins_semibold"
                             android:padding="10dp"
                             android:text="Update"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textSize="18sp" />
 
                         <ImageView
                             android:layout_width="0dp"

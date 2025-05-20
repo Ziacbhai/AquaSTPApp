@@ -30,19 +30,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.6"
-            android:gravity="center"
+            android:gravity="left|center"
             android:padding="3dp"
             android:text="Upload Image"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <!-- Placeholder for symmetry -->
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:visibility="invisible" />
+
     </LinearLayout>
 
     <!-- Scrollable Content -->

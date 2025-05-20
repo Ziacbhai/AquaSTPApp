@@ -21,6 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONException;
@@ -31,8 +33,8 @@ import java.util.Map;
 
 public class ResetPasswordUserNameActivity extends AppCompatActivity {
 
-    EditText Forgotusername;
-    TextView UserGetotp;
+    TextInputEditText Forgotusername;
+    MaterialButton UserGetotp;
     ProgressBar progressBar;
     ImageView back_btn;
     String username;

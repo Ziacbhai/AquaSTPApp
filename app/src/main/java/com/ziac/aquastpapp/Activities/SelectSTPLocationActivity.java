@@ -45,7 +45,6 @@ import Models.StpModelClass;
 
 public class SelectSTPLocationActivity extends AppCompatActivity {
 
-    LinearLayout Search;
     SiteLocationAdapter siteLocationAdapter;
     RecyclerView siteLocationRecyclerView;
     private SearchView searchView;
@@ -62,9 +61,8 @@ public class SelectSTPLocationActivity extends AppCompatActivity {
         stpModelClassList = new StpModelClass();
         searchView = findViewById(R.id.searchView);
         Logout = findViewById(R.id.logout);
-        Search = findViewById(R.id.search);
         searchView.clearFocus();
-        Search.setOnClickListener(new View.OnClickListener() {
+        searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 searchView.setIconified(false);

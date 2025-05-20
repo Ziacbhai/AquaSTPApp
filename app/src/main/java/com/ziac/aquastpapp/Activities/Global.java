@@ -96,7 +96,7 @@ public class Global {
     public static String validateotpurl = baseurl + "api/Account/ValidateOTP";
     public static String changetpasswordurl = baseurl + "api/Account/ChangePassword";
 
-    public static String getuserdetailsurl = baseurl + "api/account/getuserdetails";
+    //public static String getuserdetailsurl = baseurl + "api/account/getuserdetails";
 
     public static String getuserprofileurl = baseurl + "api/Users/GetUserProfile";
     public static String getSearchSiteOrSTPByName = baseurl + "api/Users/SearchSiteOrSTPByName?";
@@ -146,12 +146,8 @@ public class Global {
     public static ArrayList<RepairModel3> repair3list;
     public static ArrayList<RepairModel4> repair4list;
     public static ConsumptionModel ConsumptionModel;
-    public static ConsumptionModel2 consumptionModel2;
     public static RepairModel1 repairModel1;
     public static RepairModel2 repairModel2;
-    public static RepairModel3 repairModel3;
-    public static DailyLogModel dailyLogModel;
-    public static RepairModel4 repairModel4;
     public static LabTestModel labTestModel1;
     public static IncidentsModelClass incidentsModelClass;
     public static FiltersModel filtersModel;
@@ -170,12 +166,10 @@ public class Global {
     public static ArrayList<IncidentsModelClass> Incident_Class;
     public static ArrayList<PumpMotorBlowerLogModel> RunningPumpsMotors_LogClass;
     public static ArrayList<PumpMotorBlowerLogModel> Blower_LogClass;
-    //public static ArrayList<PumpMotorBlower_LogClass> Stop_Blower_LogClass;
     public static ArrayList<PumpMotorBlowerLogModel> StoppedPumpsMotors_LogClass;
     public static ArrayList<FiltersModel> Filter_LogClass;
     public static ArrayList<SensorsModelClass> Sensors_Class;
     public static ArrayList<MetersDailyLogModel> Meters_Class;
-    public static SensorsModelClass sensorsClass;
     public static ArrayList<CommonModelClass> metersdetails;
 
     public static void customtoast(Context context, LayoutInflater inflater, String msg) {

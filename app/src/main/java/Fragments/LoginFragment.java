@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.DefaultRetryPolicy;
@@ -53,10 +54,11 @@ public class LoginFragment extends Fragment {
 
     EditText Login_User, Login_pwd;
     private CheckBox RememberMe;
-    TextView TermsOfuse, Privacy, Forgotpwd, Login_btn;
+    TextView TermsOfuse, Privacy, Forgotpwd ;
     boolean passwordVisible;
     String username, pwd;
     StpModelClass stpModelClass;
+    LinearLayout Login_btn;
     Context context;
 
     private ProgressDialog progressDialog;

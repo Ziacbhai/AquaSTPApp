@@ -19,7 +19,7 @@
     <string name="state">State<font color="#FF0000"> *</font></string>
     <string name="city">City<font color="#FF0000"> *</font></string>
     <string name="DisplayUserName">Display User Name<font color="#FF0000"> *</font></string>
-    <string name="password">Password<font color="#FF0000"></font></string>
+    <string name="password">Password<font color="#FF0000">*</font></string>
     <string name="confirmpassword">Confirm Password<font color="#FF0000"> *</font></string>
     <string name="newpassword">New Password<font color="#FF0000"> *</font></string>
     <string name="repeatpassword">Repeat Password<font color="#FF0000"> *</font></string>

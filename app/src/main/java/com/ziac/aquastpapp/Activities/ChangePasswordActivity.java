@@ -48,7 +48,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         Newpwd = findViewById(R.id.newpwd);
         Repeatpwd = findViewById(R.id.rpwd);
         Pwdconfirm = findViewById(R.id.pwdconfirm);
-        Backarrowbtn = findViewById(R.id.backarrowbtn);
+        Backarrowbtn = findViewById(R.id.back_btn);
         progressBar = findViewById(R.id.progressbr);
 
         Newpwd.setOnTouchListener((v, event) -> {

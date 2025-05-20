@@ -30,8 +30,8 @@
             android:text="Achieve sustainability goals with smart management"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins_semibold"
             android:layout_marginBottom="8dp"/>
 
         <TextView
@@ -39,7 +39,8 @@
             android:layout_height="wrap_content"
             android:text="Optimizing water treatment for a greener tomorrow"
             android:textAlignment="center"
-            android:textSize="16sp"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_medium"
             android:layout_marginBottom="16dp"/>
 
     </LinearLayout>

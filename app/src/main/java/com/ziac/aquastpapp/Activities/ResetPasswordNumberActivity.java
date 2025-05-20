@@ -20,6 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.ziac.aquastpapp.R;
 
 import org.json.JSONException;
@@ -29,8 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ResetPasswordNumberActivity extends AppCompatActivity {
-    TextView GetOTPBtn;
-    EditText ForgotNumber;
+    MaterialButton GetOTPBtn;
+    TextInputEditText ForgotNumber;
     ImageView back_btn;
     String usermobile;
     ProgressBar progressBar;

@@ -24,8 +24,8 @@
         android:text="Stay informed and in control, anytime, anywhere"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_semibold"
         android:layout_marginTop="16dp" />
 
     <!-- Text: Fast, accurate, and user-friendly analytics on the go -->
@@ -34,7 +34,8 @@
         android:layout_height="wrap_content"
         android:text="Fast, accurate, and user-friendly analytics on the go"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="14sp"
+        android:fontFamily="@font/poppins_medium"
         android:layout_marginTop="8dp" />
 
     <!-- Bottom Spacer -->

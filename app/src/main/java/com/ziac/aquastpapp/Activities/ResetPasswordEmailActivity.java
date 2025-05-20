@@ -18,6 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.ziac.aquastpapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,8 +28,8 @@ import java.util.Map;
 
 public class ResetPasswordEmailActivity extends AppCompatActivity {
 
-    TextView EnterOTPbtn;
-    EditText Forgotemail;
+    MaterialButton EnterOTPbtn;
+    TextInputEditText Forgotemail;
     String useremail;
     ImageView back_btn;
     ProgressBar progressBar;
@@ -65,6 +67,7 @@ public class ResetPasswordEmailActivity extends AppCompatActivity {
         });
 
         back_btn = findViewById(R.id.back_btn);
+
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -51,8 +51,8 @@ public class VerifyEmailOTPActivity extends AppCompatActivity {
         context = this;
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        Enter_pinnumber = findViewById(R.id.et_pinview);
-        EmailVerify = findViewById(R.id.emailverifyotp);
+        Enter_pinnumber = findViewById(R.id.pinview);
+        EmailVerify = findViewById(R.id.userverifyotp);
         Email_show = findViewById(R.id.showemail);
         progressBar = findViewById(R.id.progressbr);
         EnterNewpwd = findViewById(R.id.enternewpassword);

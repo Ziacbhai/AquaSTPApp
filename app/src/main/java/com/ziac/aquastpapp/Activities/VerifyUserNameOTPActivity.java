@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.chaos.view.PinView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ziac.aquastpapp.R;
 
@@ -42,10 +43,10 @@ public class VerifyUserNameOTPActivity extends AppCompatActivity {
     TextView Resendotp;
     PinView mPinView;
     private boolean passwordvisible;
-    TextView UserVerify;
+    MaterialButton UserVerify;
     ProgressBar progressBar;
     Context context;
-    ImageView Repair_back_btn;
+    ImageView Back_btn;
     private TextInputEditText UNewpwd;
 
     @SuppressLint({"MissingInflatedId", "ClickableViewAccessibility"})
@@ -82,8 +83,8 @@ public class VerifyUserNameOTPActivity extends AppCompatActivity {
             }
             return false;
         });
-        Repair_back_btn = findViewById(R.id.repair_back_btn);
-        Repair_back_btn.setOnClickListener(new View.OnClickListener() {
+        Back_btn = findViewById(R.id.back_btn);
+        Back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

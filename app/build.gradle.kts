@@ -37,7 +37,6 @@ android {
 }
 
 dependencies {
-
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.github.dhaval2404:imagepicker:2.1")

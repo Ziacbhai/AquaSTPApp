@@ -34,6 +34,7 @@ import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -72,8 +73,9 @@ public class SignUpFragment extends Fragment {
 
     BottomSheetDialog bottomSheetDialog;
     EditText Company, CPerson, Mobile, Email, Adminname, RPassword, Cpassword;
-    TextView tvState, tvCity, Site_address, TermsOfUse, Privacy, Registerbtn;
+    TextView tvState, tvCity, Site_address, TermsOfUse, Privacy;
     ImageView DDstate, DDcity;
+    LinearLayout Registerbtn;
     private zList statename, cityname;
     private boolean passwordvisible = false;
     String citycode;

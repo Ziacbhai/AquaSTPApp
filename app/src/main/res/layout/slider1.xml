@@ -21,16 +21,18 @@
         android:layout_height="wrap_content"
         android:text="The future of STP management"
         android:textAlignment="center"
+        android:fontFamily="@font/poppins_semibold"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
         android:text="Seamless monitoring, superior control"
         android:textAlignment="center"
-        android:textSize="15sp" />
+        android:textSize="14sp" />
 
     <View
         android:layout_width="match_parent"
