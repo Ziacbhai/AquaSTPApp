@@ -108,29 +108,7 @@ public class ConsumptionFragment extends Fragment {
         });
 
 
-/*
-        Consumables_rv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Consumables_rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                        if (dy > 0 || dy < 0 && fab.isShown()) {
-                            fab.hide();
-                        }
-                    }
 
-                    @Override
-                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                            fab.show();
-                        }
-                        super.onScrollStateChanged(recyclerView, newState);
-                    }
-                });
-            }
-        });
-*/
 
 
         Consumables_rv.setLayoutManager(new LinearLayoutManager(getActivity()));

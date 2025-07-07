@@ -229,6 +229,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, homeFragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
@@ -238,6 +239,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, itemStockFragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
@@ -252,6 +254,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, equipmentsFragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
@@ -261,6 +264,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, repairFragment);
+            fragmentTransaction.addToBackStack(null);
+
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
@@ -280,6 +285,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, reportingFragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
@@ -289,6 +295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_layout, consumables);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
             drawerLayout.closeDrawers();
             return true;
