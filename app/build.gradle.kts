@@ -5,8 +5,6 @@ plugins {
 android {
     namespace = "com.ziac.aquastpapp"
     compileSdk = 35
-
-
     defaultConfig {
         applicationId = "com.ziac.aquastpapp"
         minSdk = 21
@@ -67,7 +65,6 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    //implementation("com.karumi:dexter:6.2.2")
     implementation("com.afollestad.material-dialogs:core:3.3.0")
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
