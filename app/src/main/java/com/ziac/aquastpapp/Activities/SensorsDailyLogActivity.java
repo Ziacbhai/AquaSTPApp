@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -72,7 +73,7 @@ import Models.SensorsModelClass;
 
 public class SensorsDailyLogActivity extends AppCompatActivity {
     ImageView backbtn;
-    TextView Displaydate, Displaytime,Total_sensor_header;
+    TextView Displaydate, Displaytime, Total_sensor_header;
     SensorsModelClass sensorsModelClass;
     LinearLayout Sensor_header;
     RecyclerView sensor_recyclerView;
@@ -80,6 +81,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
     Context context;
     View viewhide;
     Bitmap imageBitmap;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -90,6 +92,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
         user_topcard();
         backbtn = findViewById(R.id.back_btn);
         viewhide = findViewById(R.id.viewhide3);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh);
 
         Displaydate = findViewById(R.id.displaydate);
         Displaytime = findViewById(R.id.displaytime);
@@ -98,7 +101,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
         sensor_recyclerView2 = findViewById(R.id.sensors_recyclerview);
         Total_sensor_header = findViewById(R.id.total_sensor_header);
 
-        String usertype=Global.sharedPreferences.getString("user_type","");
+        String usertype = Global.sharedPreferences.getString("user_type", "");
         if (usertype.equals("C")) {
             hideViews();
         } else {
@@ -124,13 +127,18 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
         }, 0);
 
         DailyLogSensorsEdit();
+        DailyLogSensors();
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            DailyLogSensorsEdit(); // or DailyLogSensors() depending on which one you want to refresh
+            DailyLogSensors();
+        });
 
         if (sensor_recyclerView != null) {
             sensor_recyclerView.setLayoutManager(new LinearLayoutManager(this));
             sensor_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         }
-        DailyLogSensors();
-        if (sensor_recyclerView2!= null){
+
+        if (sensor_recyclerView2 != null) {
             sensor_recyclerView2.setLayoutManager(new LinearLayoutManager(this));
             sensor_recyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         }
@@ -202,7 +210,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
 
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
-       // txtsiteaddress = findViewById(R.id.siteaddress);
+        // txtsiteaddress = findViewById(R.id.siteaddress);
         txtuseremail = findViewById(R.id.useremail);
         txtusermobile = findViewById(R.id.usermobile);
         txtpersonname = findViewById(R.id.personname);
@@ -217,7 +225,6 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
 
 
     private void DailyLogSensorsEdit() {
-
         RequestQueue queue = Volley.newRequestQueue(context);
         String dailylogsensors = Global.GetDailyLogSensors;
 
@@ -230,7 +237,6 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, dailylogsensors, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 Global.Sensors_Class = new ArrayList<SensorsModelClass>();
                 sensorsModelClass = new SensorsModelClass();
                 JSONArray jarray;
@@ -248,7 +254,6 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                             sensorsModelClass.setEquip_name(e.getString("equip_name"));
                             sensorsModelClass.setSensor_tstp6_code(e.getString("tstp6_code"));
                             sensorsModelClass.setSensor_status(e.getString("status"));
-                            //sensorsModelClass.setReading(e.getString("starttime"));
 
                         } catch (JSONException ex) {
                             throw new RuntimeException(ex);
@@ -261,6 +266,10 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
 
+                // Dismiss the refresh indicator
+                if (swipeRefreshLayout != null) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -276,9 +285,13 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                 } else if (error instanceof ParseError) {
                     Toast.makeText(context, "Parse Error", Toast.LENGTH_LONG).show();
                 }
+
+                // Dismiss the refresh indicator on error too
+                if (swipeRefreshLayout != null) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
         }) {
-
             @Override
             public Map<String, String> getHeaders() {
                 // Set the Authorization header with the access token
@@ -287,9 +300,6 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                 headers.put("Authorization", "Bearer " + accesstoken);
                 return headers;
             }
-
-
-
         };
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
@@ -301,7 +311,6 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
     }
 
     private void DailyLogSensors() {
-
         RequestQueue queue = Volley.newRequestQueue(context);
         String dailylogsensors = Global.GetDailyLogSensors;
 
@@ -344,15 +353,21 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
+
+                // Dismiss the refresh indicator
+                if (swipeRefreshLayout != null) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                // Dismiss the refresh indicator on error
+                if (swipeRefreshLayout != null) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
             }
-
         }) {
-
             @Override
             public Map<String, String> getHeaders() {
                 // Set the Authorization header with the access token
@@ -368,11 +383,11 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 return params;
             }
-
         };
 
         queue.add(jsonObjectRequest);
     }
+
 
     public class SensorDailyLogEditAdapter extends RecyclerView.Adapter<SensorDailyLogEditAdapter.Viewholder> {
 
@@ -546,7 +561,6 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
             holder.Sensor_reading.setText(formattedValue);
 
 
-
             holder.Sensor_image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -568,6 +582,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
             });
 
         }
+
         private void openCamera() {
             try {
                 if (context instanceof Activity) {
@@ -648,11 +663,11 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
 
         public class Viewholder extends RecyclerView.ViewHolder {
 
-            ImageView Sensor_image,Sensor_image_upload;
+            ImageView Sensor_image, Sensor_image_upload;
 
             TextView Sensor_equip_name, Sensor_reading, Sensor_reading_time, Sensor_total;
 
-            View viewhide2,viewhide;
+            View viewhide2, viewhide;
 
             public Viewholder(@NonNull View itemView) {
                 super(itemView);
@@ -666,11 +681,11 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
                 //   viewhide = itemView.findViewById(R.id.viewhide);
                 // viewhide2 = itemView.findViewById(R.id.viewhide2);
 
-                String usertype=Global.sharedPreferences.getString("user_type","");
-                if (usertype.equals("C")){
+                String usertype = Global.sharedPreferences.getString("user_type", "");
+                if (usertype.equals("C")) {
                     Sensor_image_upload.setVisibility(View.GONE);
                     //   viewhide.setVisibility(View.GONE);
-                }else {
+                } else {
                     Sensor_image_upload.setVisibility(View.VISIBLE);
                     Sensor_equip_name.setVisibility(View.VISIBLE);
                     Sensor_reading_time.setVisibility(View.VISIBLE);
@@ -707,7 +722,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
             @Override
             public void onResponse(String sresponse) {
                 try {
-                    JSONObject  jsonObject = new JSONObject(sresponse);
+                    JSONObject jsonObject = new JSONObject(sresponse);
                     boolean success = jsonObject.getBoolean("success");
                     String error = jsonObject.getString("error");
 
@@ -729,7 +744,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
 
             }
 
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<String, String>();
@@ -751,7 +766,7 @@ public class SensorsDailyLogActivity extends AppCompatActivity {
             }
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                (int) TimeUnit.SECONDS.toMillis(0),0,
+                (int) TimeUnit.SECONDS.toMillis(0), 0,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
     }

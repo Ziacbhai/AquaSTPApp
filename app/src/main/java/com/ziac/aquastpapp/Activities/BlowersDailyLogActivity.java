@@ -1,9 +1,11 @@
 package com.ziac.aquastpapp.Activities;
 
 import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
@@ -29,9 +32,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,6 +44,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
 import Adapters.BlowersDailyLogStartAdapter;
 import Models.PumpMotorBlowerLogModel;
 
@@ -49,6 +55,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
     RecyclerView blowers_started_recyclerview;
     TextView Startheading;
     View blowerview;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +63,13 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_blowers);
 
         context = this;
-       Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         user_topcard();
         backbtn = findViewById(R.id.back_btn);
-       // blowerview = findViewById(R.id.blowerview);
+        // blowerview = findViewById(R.id.blowerview);
         Displaydate = findViewById(R.id.displaydate);
         Displaytime = findViewById(R.id.displaytime);
-       // Startheading = findViewById(R.id.startheading);
+        // Startheading = findViewById(R.id.startheading);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,9 +90,9 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
             }
         }, 0);
         if (usertype.equals("C")) {
-           // hideViews();
+            // hideViews();
         } else {
-           // showViews();
+            // showViews();
         }
         DailyLogBlowers();
         blowers_started_recyclerview = findViewById(R.id.blowers_started_recyclerview);
@@ -93,18 +100,21 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         blowers_started_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
     }
+
     private void showViews() {
         if (Startheading != null) {
             Startheading.setVisibility(View.VISIBLE);
             blowerview.setVisibility(View.VISIBLE);
         }
     }
+
     private void hideViews() {
         if (Startheading != null) {
             Startheading.setVisibility(View.GONE);
             blowerview.setVisibility(View.GONE);
         }
     }
+
     private void updateDateTime() {
         Date currentDate = new Date();
         // Update date
@@ -130,6 +140,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
         }
 
     }
+
     private void user_topcard() {
 
 
@@ -137,19 +148,20 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
 
         txtsitename = findViewById(R.id.sitename);
         txtstpname = findViewById(R.id.stpname);
-       // txtsiteaddress = findViewById(R.id.siteaddress);
+        // txtsiteaddress = findViewById(R.id.siteaddress);
         txtuseremail = findViewById(R.id.useremail);
         txtusermobile = findViewById(R.id.usermobile);
         txtpersonname = findViewById(R.id.personname);
 
         txtsitename.setText(sharedPreferences.getString("site_name", ""));
         txtstpname.setText(sharedPreferences.getString("stp_name", "") + " " +
-                sharedPreferences.getString("process_name", "") +  " " + sharedPreferences.getString("stp_capacity", ""));
-       // txtsiteaddress.setText(sharedPreferences.getString("site_address", ""));
+                sharedPreferences.getString("process_name", "") + " " + sharedPreferences.getString("stp_capacity", ""));
+        // txtsiteaddress.setText(sharedPreferences.getString("site_address", ""));
         txtuseremail.setText(sharedPreferences.getString("user_email", ""));
         txtusermobile.setText(sharedPreferences.getString("user_mobile", ""));
         txtpersonname.setText(sharedPreferences.getString("user_name", ""));
     }
+
     private void DailyLogBlowers() {
         RequestQueue queue = Volley.newRequestQueue(context);
         String dailylogblowers = Global.GetDailyLogBlowers;
@@ -246,6 +258,7 @@ public class BlowersDailyLogActivity extends AppCompatActivity {
 
         queue.add(jsonObjectRequest);
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

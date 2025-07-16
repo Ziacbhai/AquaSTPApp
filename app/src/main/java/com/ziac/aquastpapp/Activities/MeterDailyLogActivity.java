@@ -5,6 +5,8 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -50,6 +52,7 @@ public class MeterDailyLogActivity extends AppCompatActivity {
     RecyclerView Meters_recyclerview2;
     LinearLayout Meter_header;
     Context context;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -59,6 +62,7 @@ public class MeterDailyLogActivity extends AppCompatActivity {
 
         context = this;
         user_topcard();
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh);
 
         backbtn = findViewById(R.id.back_btn);
 
@@ -115,7 +119,9 @@ public class MeterDailyLogActivity extends AppCompatActivity {
             Meters_recyclerview2.setLayoutManager(new LinearLayoutManager(this));
             Meters_recyclerview2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         }
-
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            DailyLogMetersEdit(); // or DailyLogSensors() depending on which one you want to refresh
+        });
     }
 
     private void updateDateTime() {
@@ -198,7 +204,10 @@ public class MeterDailyLogActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
-
+// Dismiss the refresh indicator
+                if (swipeRefreshLayout != null) {
+                    swipeRefreshLayout.setRefreshing(false);
+                }
 
             }
         }, new Response.ErrorListener() {

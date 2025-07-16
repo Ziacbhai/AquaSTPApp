@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
-import com.chaos.view.BuildConfig;
 import com.ziac.aquastpapp.R;
 
 public class AboutActivity extends AppCompatActivity {
