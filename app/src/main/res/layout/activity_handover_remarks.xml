@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.6"
+            android:layout_weight="1.8"
             android:gravity="left|center"
             android:padding="3dp"
             android:text="Handover Remarks"
@@ -37,11 +37,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:visibility="invisible" />
     </LinearLayout>
 
     <!-- Content Area (ScrollView) -->
@@ -88,7 +83,7 @@
                             android:fontFamily="@font/poppins_semibold"
                             android:text="Site name"
                             android:textColor="#FFFFFF"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/stpname"
@@ -97,7 +92,7 @@
                             android:fontFamily="@font/poppins_medium"
                             android:text="STP name"
                             android:textColor="#E6FFFFFF"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <!-- Person Info -->
@@ -134,8 +129,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:gravity="center"
                             android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
                             android:text="mobile"
                             android:textColor="#757575"
                             android:textSize="12sp" />

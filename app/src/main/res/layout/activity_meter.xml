@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.6"
+            android:layout_weight="1.8"
             android:gravity="left|center"
             android:padding="3dp"
             android:text="Meters"
@@ -39,12 +39,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:visibility="invisible" />
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
