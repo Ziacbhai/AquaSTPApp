@@ -9,19 +9,40 @@ android {
         applicationId = "com.ziac.aquastpapp"
         minSdk = 21
         targetSdk = 35
-        versionCode = 104
-        versionName = "1.0.4"
+        versionCode = 106
+        versionName = "1.0.6"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        ndk {
+            abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64"))
+        }
+
     }
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            //isDebuggable = true
+            isShrinkResources = false
+            // Enable test coverage for ANR detection
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            ndk {
+                debugSymbolLevel = "FULL" // or SYMBOL_TABLE
+            }
         }
     }
     compileOptions {
@@ -35,6 +56,7 @@ android {
 }
 
 dependencies {
+    // Update these libraries:
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:2.2.0"))
     implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("com.github.dhaval2404:imagepicker:2.1")
@@ -51,7 +73,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("com.google.android.material:material:1.12.0")
     implementation("com.github.Drjacky:ImagePicker:2.3.22")
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("io.github.chaosleung:pinview:1.4.4")
@@ -70,4 +91,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     testImplementation("com.github.yalantis:ucrop:2.2.6")
     testImplementation("junit:junit:4.13.2")
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    debugImplementation("com.github.anrwatchdog:anrwatchdog:1.4.0")
+
 }

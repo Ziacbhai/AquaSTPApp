@@ -1,28 +1,19 @@
 package Fragments;
 
 import static com.ziac.aquastpapp.Activities.Global.urlGetStates;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-
 import android.preference.PreferenceManager;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,18 +27,12 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
@@ -56,29 +41,26 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.Activities.LoginSignupActivity;
 import com.ziac.aquastpapp.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import Models.zList;
+
 public class SignUpFragment extends Fragment {
     private Dialog zDialog;
-
     BottomSheetDialog bottomSheetDialog;
-    EditText Company, CPerson, Mobile, Email, Adminname, RPassword, Cpassword;
+    EditText Company, Couponcode,CPerson, Mobile, Email, Adminname, RPassword, Cpassword;
     TextView tvState, tvCity, Site_address, TermsOfUse, Privacy;
     ImageView DDstate, DDcity;
     LinearLayout Registerbtn;
     private zList statename, cityname;
     private boolean passwordvisible = false;
-    String citycode;
+    String citycode,couponcode;
     ProgressDialog progressDialog;
     private CheckBox CheckBox;
     Context context;
@@ -101,6 +83,7 @@ public class SignUpFragment extends Fragment {
         Email = view.findViewById(R.id.emailuser);
         Adminname = view.findViewById(R.id.auname);
         CheckBox = view.findViewById(R.id.ccheckbox);
+        Couponcode = view.findViewById(R.id.couponcode);
 
         // Site_address = view.findViewById(R.id.site_address);
         Registerbtn = view.findViewById(R.id.registerbtn);
@@ -555,6 +538,7 @@ public class SignUpFragment extends Fragment {
         city = tvCity.getText().toString().trim();
         password = RPassword.getText().toString();
         cpassword = Cpassword.getText().toString();
+        couponcode = Couponcode.getText().toString();
 
         //  progressDialog.show();
 
@@ -709,6 +693,7 @@ public class SignUpFragment extends Fragment {
                 params.put("state_code", String.valueOf(statename.get_code()));
                 params.put("city_code", String.valueOf(cityname.get_code()));
                 params.put("com_name", Company.getText().toString());
+                params.put("ref_code", couponcode);
                 return params;
             }
         };
