@@ -1,7 +1,7 @@
 package Adapters;
 
 
-import static com.ziac.aquastpapp.Activities.Global.getPicassoInstance;
+//import static com.ziac.aquastpapp.Activities.Global.getPicassoInstance;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;

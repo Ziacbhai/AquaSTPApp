@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.preference.PreferenceManager;
+//import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,11 +49,11 @@ public class Global {
 
     public static SharedPreferences sharedPreferences;
     public static SharedPreferences.Editor editor;
-    private static Picasso picassoInstance;
+    //private Picasso picassoInstance;
     //Server url
-    //public static String baseurl = "https://aquastp.ziaconline.com/";
+    public static String baseurl = "https://aquastp.ziaconline.com/";
     //Local url
-    public static String baseurl = "http://192.168.100.20:9396/";
+    //public static String baseurl = "http://192.168.100.20:9396/";
     //Logs
     public static String GetDailyLogIndex = baseurl + "api/DailyLog/DailyLogIndex?";
     //Pump_Motor
@@ -120,7 +120,7 @@ public class Global {
 
     public static String GetLab_Test_Items = baseurl + "api/Lab/List?";
 
-    public static String Lab_Test_Update = baseurl + "api/Lab/AddUpdate";
+    //public static String Lab_Test_Update = baseurl + "api/Lab/AddUpdate";
     public static String Get_Incidents = baseurl + "api/Incidents/List?";
     public static String Get_Consumables = baseurl + "api/Consumables/List?";
 
@@ -174,7 +174,7 @@ public class Global {
 
     public static void customtoast(Context context, LayoutInflater inflater, String msg) {
         View customToastView = inflater.inflate(R.layout.costom_toast, null);
-        ImageView icon = customToastView.findViewById(R.id.toast_icon);
+        //ImageView icon = customToastView.findViewById(R.id.toast_icon);
         TextView text = customToastView.findViewById(R.id.toast_text);
         text.setText(msg);
 
@@ -195,10 +195,11 @@ public class Global {
     }
 
     public static Picasso getPicassoInstance(Context context) {
-        if (picassoInstance == null) {
-            picassoInstance = new Picasso.Builder(context.getApplicationContext()).build();
-        }
-        return picassoInstance;
+//        if (picassoInstance == null) {
+//            picassoInstance = new Picasso.Builder(context.getApplicationContext()).build();
+//        }
+//        return picassoInstance;
+        return new Picasso.Builder(context.getApplicationContext()).build();
     }
 
     public static void loadWithPicasso(Context context, ImageView imageView, String imageUrl) {
