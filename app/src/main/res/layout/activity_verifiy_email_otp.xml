@@ -8,6 +8,12 @@
     >
 
     <!-- Custom Toolbar with elevation shadow -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We will send you an OTP on Email" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -117,7 +123,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="6dp"
-                            app:cardBackgroundColor="#eaeff5"
                             app:cardCornerRadius="12dp"
                             app:cardElevation="0dp"
                             app:strokeWidth="1dp">
@@ -127,7 +132,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:padding="16dp"
-                                android:text="You will get an OTP via EMAIL"
+                                android:text="You will get an OTP via Email / Number"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
                         </com.google.android.material.card.MaterialCardView>
@@ -172,6 +177,7 @@
                             app:lineWidth="2dp" />
 
                         <!-- Resend OTP Section -->
+<!--
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -195,6 +201,7 @@
                                 android:textSize="15sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
+-->
 
                         <!-- Password Field with floating label -->
                         <com.google.android.material.textfield.TextInputLayout

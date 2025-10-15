@@ -56,13 +56,12 @@ public class VerifyEmailOTPActivity extends AppCompatActivity {
         Email_show = findViewById(R.id.showemail);
         progressBar = findViewById(R.id.progressbr);
         EnterNewpwd = findViewById(R.id.enternewpassword);
-        Resendotp = findViewById(R.id.resendEotp);
+       // Resendotp = findViewById(R.id.resendEotp);
 
         email_show = Global.sharedPreferences.getString("pfemail", "");
         Email_show.setText(email_show);
 
 
-        Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyEmailOTPActivity.this, ResetPasswordEmailActivity.class)));
         EnterNewpwd.setOnTouchListener((v, event) -> {
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -87,7 +86,10 @@ public class VerifyEmailOTPActivity extends AppCompatActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(VerifyEmailOTPActivity.this,ResetPasswordEmailActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+
             }
         });
 
@@ -131,8 +133,10 @@ public class VerifyEmailOTPActivity extends AppCompatActivity {
 
                     switch (issuccess) {
                         case "true":
-                            startActivity(new Intent(VerifyEmailOTPActivity.this, LoginSignupActivity.class));
-                            finish();
+                            Global.customtoast(VerifyEmailOTPActivity.this, getLayoutInflater(), error);
+                            Intent intent = new Intent(VerifyEmailOTPActivity.this,LoginSignupActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(intent);
                             break;
                         default:
                             if (error.equals("PasswordError")) {
@@ -188,5 +192,14 @@ public class VerifyEmailOTPActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(VerifyEmailOTPActivity.this,ResetPasswordEmailActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 }

@@ -73,7 +73,9 @@ public class ResetPasswordUserNameActivity extends AppCompatActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(context,RecoveryPasswordWithActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
     }
@@ -94,11 +96,13 @@ public class ResetPasswordUserNameActivity extends AppCompatActivity {
                     String error = respObj.getString("error");
 
                     if (issuccess.equals("true")) {
-                        Global.customtoast(ResetPasswordUserNameActivity.this, getLayoutInflater(), respObj.getString("error"));
-                        startActivity(new Intent(ResetPasswordUserNameActivity.this, VerifyUserNameOTPActivity.class));
+                        Global.customtoast(ResetPasswordUserNameActivity.this, getLayoutInflater(), error);
+                        Intent intent = new Intent(ResetPasswordUserNameActivity.this,VerifyUserNameOTPActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                     } else {
                         progressBar.setVisibility(View.GONE);
-                        Global.customtoast(ResetPasswordUserNameActivity.this, getLayoutInflater(), respObj.getString("error"));
+                        Global.customtoast(ResetPasswordUserNameActivity.this, getLayoutInflater(),error);
                         // Show a toast message for wrong username or password
                     }
 

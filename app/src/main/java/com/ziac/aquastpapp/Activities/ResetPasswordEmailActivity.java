@@ -71,7 +71,9 @@ public class ResetPasswordEmailActivity extends AppCompatActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(context,RecoveryPasswordWithActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
     }
@@ -96,7 +98,10 @@ public class ResetPasswordEmailActivity extends AppCompatActivity {
 
                     if (issuccess.equals("true")) {
                         Global.customtoast(ResetPasswordEmailActivity.this, getLayoutInflater(), respObj.getString("error"));
-                        startActivity(new Intent(ResetPasswordEmailActivity.this, VerifyEmailOTPActivity.class));
+                        Intent intent = new Intent(ResetPasswordEmailActivity.this,VerifyEmailOTPActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
+
                     } else {
                         progressBar.setVisibility(View.GONE);
                         // Show a toast message for wrong username or password

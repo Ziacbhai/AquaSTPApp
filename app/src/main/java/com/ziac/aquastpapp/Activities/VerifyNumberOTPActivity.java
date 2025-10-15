@@ -64,8 +64,17 @@ public class VerifyNumberOTPActivity extends AppCompatActivity {
         show_number = Global.sharedPreferences.getString("fpmobilenumber", "");
         Show_number.setText(show_number);
 
-        Resendotp = findViewById(R.id.resendNotp);
-        Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyNumberOTPActivity.this, ResetPasswordNumberActivity.class)));
+       // Resendotp = findViewById(R.id.resendNotp);
+
+       /* Resendotp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VerifyNumberOTPActivity.this,ResetPasswordNumberActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+
+            }
+        });*/
 
         Newpwd.setOnTouchListener((v, event) -> {
             final int Right = 2;
@@ -92,7 +101,10 @@ public class VerifyNumberOTPActivity extends AppCompatActivity {
         Back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(VerifyNumberOTPActivity.this,ResetPasswordNumberActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+
             }
         });
 
@@ -143,8 +155,10 @@ public class VerifyNumberOTPActivity extends AppCompatActivity {
 
                     switch (issuccess) {
                         case "true":
-                            startActivity(new Intent(VerifyNumberOTPActivity.this, LoginSignupActivity.class));
-                            finish();
+                            Global.customtoast(VerifyNumberOTPActivity.this, getLayoutInflater(), error);
+                            Intent intent = new Intent(VerifyNumberOTPActivity.this,LoginSignupActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(intent);
                             break;
                         default:
                             if (error.equals("PasswordError")) {
@@ -204,5 +218,13 @@ public class VerifyNumberOTPActivity extends AppCompatActivity {
     private boolean hasMultipleLogins() {
 
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(VerifyNumberOTPActivity.this,ResetPasswordNumberActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 }

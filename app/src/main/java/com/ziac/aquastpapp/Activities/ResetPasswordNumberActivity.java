@@ -69,7 +69,9 @@ public class ResetPasswordNumberActivity extends AppCompatActivity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(context,RecoveryPasswordWithActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
     }
@@ -91,7 +93,9 @@ public class ResetPasswordNumberActivity extends AppCompatActivity {
 
                     if (issuccess.equals("true")) {
                         Global.customtoast(ResetPasswordNumberActivity.this, getLayoutInflater(), respObj.getString("error"));
-                        startActivity(new Intent(ResetPasswordNumberActivity.this, VerifyNumberOTPActivity.class));
+                        Intent intent = new Intent(ResetPasswordNumberActivity.this,VerifyNumberOTPActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
                     } else {
                         progressBar.setVisibility(View.GONE);
                         // Show a toast message for wrong username or password

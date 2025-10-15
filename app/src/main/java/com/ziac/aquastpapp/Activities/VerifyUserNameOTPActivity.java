@@ -61,8 +61,18 @@ public class VerifyUserNameOTPActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressbr);
         UNewpwd = findViewById(R.id.usernewpassword);
-        Resendotp = findViewById(R.id.resendUotp);
-        Resendotp.setOnClickListener(v -> startActivity(new Intent(VerifyUserNameOTPActivity.this, ResetPasswordUserNameActivity.class)));
+
+     /*   Resendotp = findViewById(R.id.resendUotp);
+
+        Resendotp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VerifyUserNameOTPActivity.this,ResetPasswordUserNameActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+
+            }
+        });*/
         UNewpwd.setOnTouchListener((v, event) -> {
             final int Right = 2;
             if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -87,7 +97,10 @@ public class VerifyUserNameOTPActivity extends AppCompatActivity {
         Back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(VerifyUserNameOTPActivity.this,ResetPasswordUserNameActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+
             }
         });
         UserVerify.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +110,6 @@ public class VerifyUserNameOTPActivity extends AppCompatActivity {
                 Newpassword = UNewpwd.getText().toString();
                 otp = mPinView.getText().toString();
                 if (!TextUtils.isEmpty(otp)) {
-                    // Check if other required fields are not empty
                     if (!TextUtils.isEmpty(Newpassword)) {
                         UserDataUsingVolley(otp);
                     } else {
@@ -129,8 +141,10 @@ public class VerifyUserNameOTPActivity extends AppCompatActivity {
 
                     switch (issuccess) {
                         case "true":
-                            startActivity(new Intent(VerifyUserNameOTPActivity.this, LoginSignupActivity.class));
-                            finish();
+                            Global.customtoast(VerifyUserNameOTPActivity.this, getLayoutInflater(), error);
+                            Intent intent = new Intent(VerifyUserNameOTPActivity.this,LoginSignupActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(intent);
                             break;
                         default:
                             if (error.equals("PasswordError")) {
@@ -184,5 +198,13 @@ public class VerifyUserNameOTPActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(VerifyUserNameOTPActivity.this,ResetPasswordUserNameActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 }

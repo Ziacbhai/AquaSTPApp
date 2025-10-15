@@ -37,16 +37,20 @@ public class RecoveryPasswordWithActivity extends AppCompatActivity {
         Resetemail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RecoveryPasswordWithActivity.this, ResetPasswordEmailActivity.class));
-                finish();
+                Intent intent = new Intent(RecoveryPasswordWithActivity.this,ResetPasswordEmailActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+
             }
         });
 
         Resetusername.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RecoveryPasswordWithActivity.this, ResetPasswordUserNameActivity.class));
-                finish();
+                Intent intent = new Intent(RecoveryPasswordWithActivity.this,ResetPasswordUserNameActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+
 
             }
         });
@@ -54,8 +58,10 @@ public class RecoveryPasswordWithActivity extends AppCompatActivity {
         Resetmobile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RecoveryPasswordWithActivity.this, ResetPasswordNumberActivity.class));
-                finish();
+                Intent intent = new Intent(RecoveryPasswordWithActivity.this,ResetPasswordNumberActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+
 
             }
         });
