@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
-    android:layout_marginVertical="4dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="3dp"
-    app:strokeColor="#E0E0E0"
-    app:strokeWidth="0.5dp"
+    android:layout_margin="8dp"
+    android:layout_marginVertical="6dp"
     android:clickable="true"
     android:focusable="true"
-    app:rippleColor="#33000000">
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp"
+    app:rippleColor="#1A000000"
+    app:strokeColor="#E0E0E0"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,165 +31,258 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="56dp"
             android:orientation="horizontal"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="8dp">
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="12dp">
 
             <!-- Equipment Icon & Name Container -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.9"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingEnd="8dp">
 
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:letterSpacing="0.05"
+                    android:text="Equipment"
+                    android:textColor="#90A4AE"
+                    android:textSize="9sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/blower_equip_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Equipment Name"
-                    android:textColor="#263238"
-                    android:padding="5dp"
-                    android:textSize="10sp"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
                     android:fontFamily="sans-serif-medium"
-                    android:ellipsize="end"/>
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:text="Equipment Name"
+                    android:textColor="#37474F"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
+            <!-- Vertical Divider -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="4dp"
+                android:background="#CFD8DC" />
 
             <!-- Time Information Container -->
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="3.1"
-                android:orientation="horizontal"
                 android:background="@drawable/time_info_background"
-                android:padding="2dp">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp">
 
                 <!-- Start Time Column -->
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
 
-
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:letterSpacing="0.05"
+                        android:text="Start Time"
+                        android:textColor="#90A4AE"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/blower_start_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif-medium"
                         android:gravity="center"
+                        android:maxLines="1"
                         android:text="09:45"
                         android:textColor="#1565C0"
-                        android:textSize="10sp"
-                        android:fontFamily="sans-serif-medium" />
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
+                <!-- Vertical Divider -->
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#E0E0E0" />
+                    android:layout_marginVertical="4dp"
+                    android:layout_marginHorizontal="6dp"
+                    android:background="#CFD8DC" />
 
                 <!-- Stopped Time Column -->
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1.1"
                     android:gravity="center"
                     android:orientation="vertical">
 
-
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:letterSpacing="0.05"
+                        android:text="Stop Time"
+                        android:textColor="#90A4AE"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/blower_stopped_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif-medium"
                         android:gravity="center"
+                        android:maxLines="1"
                         android:text="--:--"
                         android:textColor="#E64A19"
-                        android:textSize="10sp"
-                        android:fontFamily="sans-serif-medium" />
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
+                <!-- Vertical Divider -->
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#E0E0E0" />
+                    android:layout_marginVertical="4dp"
+                    android:layout_marginHorizontal="6dp"
+                    android:background="#CFD8DC" />
 
                 <!-- Running Time Column -->
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
 
-
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:letterSpacing="0.05"
+                        android:text="Runtime"
+                        android:textColor="#90A4AE"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/blower_running_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif-medium"
                         android:gravity="center"
+                        android:maxLines="1"
                         android:text="01:25:30"
-                        android:textColor="#00695C"
-                        android:textSize="10sp"
-                        android:fontFamily="sans-serif-medium" />
+                        android:textColor="#00796B"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <!-- Divider between content and actions -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0" />
 
         <!-- Action Buttons Container -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="6dp"
-            android:paddingVertical="6dp"
+            android:background="#FAFAFA"
             android:gravity="center"
-            android:background="#F5F5F5">
-
-
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="10dp">
 
             <!-- Start Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/blower_start"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                style="@style/Widget.Material3.Button.Icon"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:backgroundTint="#43A047"
                 android:text="Start"
-                android:textSize="8sp"
-                app:cornerRadius="18dp"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:cornerRadius="8dp"
                 app:icon="@drawable/play"
-                app:iconSize="10dp"
                 app:iconGravity="textStart"
-                android:backgroundTint="#1976D2" />
+                app:iconPadding="4dp"
+                app:iconSize="14dp"
+                app:iconTint="@color/white" />
 
             <!-- Stop Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/blower_stop"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                style="@style/Widget.Material3.Button.Icon"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
                 android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="#E53935"
                 android:text="Stop"
-                android:textSize="8sp"
-                app:cornerRadius="18dp"
-                app:iconSize="10dp"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:cornerRadius="8dp"
                 app:icon="@drawable/stop"
                 app:iconGravity="textStart"
-                android:backgroundTint="#D32F2F" />
+                app:iconPadding="4dp"
+                app:iconSize="14dp"
+                app:iconTint="@color/white" />
 
-            <ImageView
-                android:id="@+id/blower_rollover"
+            <!-- Rollover/Share Button -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="36dp"
-                android:layout_height="25dp"
+                android:layout_height="36dp"
                 android:layout_marginStart="8dp"
-                android:gravity="center"
-                android:padding="5dp"
-                android:src="@drawable/newshare"
-                android:textColor="#fff" />
-        </LinearLayout>
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="1dp"
+                app:rippleColor="#1A000000"
+                app:strokeColor="#E0E0E0"
+                app:strokeWidth="1dp">
 
+                <ImageView
+                    android:id="@+id/blower_rollover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Share or rollover"
+                    android:padding="8dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/newshare"
+                    app:tint="#546E7A" />
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
