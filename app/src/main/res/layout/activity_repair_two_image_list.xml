@@ -5,54 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eaeff5"
-    >
+    android:fitsSystemWindows="true">
 
     <!-- Top AppBar -->
     <LinearLayout
         android:id="@+id/repair"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:weightSum="2"
         android:background="@drawable/btn_gradient"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <ImageView
             android:id="@+id/back_btn"
-            android:layout_weight="0.2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:padding="8dp"
+            android:layout_weight="0.2"
             android:gravity="center"
+            android:padding="8dp"
             android:src="@drawable/back"
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold" />
 
         <ImageView
-            android:layout_weight="1.6"
             android:id="@+id/backarrowbtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1.6"
             android:padding="3dp"
             android:src="@drawable/aquatoolbar" />
 
 
         <ImageView
-            android:layout_weight="0.2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="0.2"
             android:visibility="invisible" />
     </LinearLayout>
 
     <!-- Scrollable Content -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
-        android:layout_below="@id/repair"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
         android:layout_above="@+id/incident_image_upload"
+        android:layout_below="@id/repair"
+        android:fillViewport="true"
         android:padding="5dp">
 
         <LinearLayout
@@ -74,11 +74,11 @@
         android:id="@+id/repair_image_uploadbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:contentDescription="Upload Image"
-        app:srcCompat="@drawable/imageupload"
-        app:backgroundTint="@color/colorPrimary" />
+        app:backgroundTint="@color/colorPrimary"
+        app:srcCompat="@drawable/imageupload" />
 
 </RelativeLayout>

@@ -5,10 +5,13 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +29,12 @@ import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.MetersDetailsAdapter;
@@ -40,6 +47,7 @@ public class MetersFragment extends Fragment {
     CommonModelClass commonModelClassList;
     private ProgressDialog progressDialog;
     Context context;
+    TextView Displaydate;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +57,18 @@ public class MetersFragment extends Fragment {
         Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         context = getContext();
         user_topcard(view);
+        Displaydate = view.findViewById(R.id.displaydate);
+
+
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateDateTime();
+                handler.postDelayed(this, 1000); // Update every 1000 milliseconds (1 second)
+            }
+        }, 0);
 
         MetersRecyclerview = view.findViewById(R.id.meters_recyclerview);
         MetersRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -57,6 +77,36 @@ public class MetersFragment extends Fragment {
         getmeters();
         return view;
     }
+    private void updateDateTime() {
+        Date currentDate = new Date();
+        // Update date
+        SimpleDateFormat dateFormat = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+            }
+        }
+        String formattedDate = "";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && dateFormat != null) {
+            formattedDate = dateFormat.format(currentDate);
+        }
+        Displaydate.setText(formattedDate);
+
+        SimpleDateFormat timeFormat = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            timeFormat = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault());
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            String formattedTime = timeFormat.format(currentDate);
+            formattedTime = formattedTime.replace("am", "AM").replace("pm", "PM");
+
+            //Displaytime.setText(formattedTime);
+        }
+
+    }
+
+
+
 
     private void user_topcard(View view) {
         progressDialog = new ProgressDialog(requireActivity());

@@ -5,11 +5,14 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +22,15 @@ import android.widget.TextView;
 import com.ziac.aquastpapp.Activities.Global;
 import com.ziac.aquastpapp.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class EquipmentsFragment extends Fragment {
     private CardView Pump, Meters;
     ProgressDialog progressDialog;
     Context context;
+    TextView Displaydate ;
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +41,18 @@ public class EquipmentsFragment extends Fragment {
         user_topcard(view);
         Pump = view.findViewById(R.id.pump_p);
         Meters = view.findViewById(R.id.moter_s);
+        Displaydate = view.findViewById(R.id.displaydate);
+
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateDateTime();
+                handler.postDelayed(this, 1000); // Update every 1000 milliseconds (1 second)
+            }
+        }, 0);
+
         Pump.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +77,35 @@ public class EquipmentsFragment extends Fragment {
         });
         return view;
     }
+
+    private void updateDateTime() {
+        Date currentDate = new Date();
+        // Update date
+        SimpleDateFormat dateFormat = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+            }
+        }
+        String formattedDate = "";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && dateFormat != null) {
+            formattedDate = dateFormat.format(currentDate);
+        }
+        Displaydate.setText(formattedDate);
+
+        SimpleDateFormat timeFormat = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            timeFormat = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault());
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            String formattedTime = timeFormat.format(currentDate);
+            formattedTime = formattedTime.replace("am", "AM").replace("pm", "PM");
+
+            //Displaytime.setText(formattedTime);
+        }
+
+    }
+
 
     private void user_topcard(View view) {
         progressDialog = new ProgressDialog(requireActivity());

@@ -84,4 +84,11 @@
     <color name="info">#2196F3</color>
 
 
+    <color name="background_gradient_start">#F5F7FA</color>
+    <color name="background_gradient_end">#FFFFFF</color>
+    <color name="primary_teal">#00BFA5</color>
+    <color name="primary_dark_teal">#00897B</color>
+    <color name="text_hint">#BDBDBD</color>
+
+
 </resources>

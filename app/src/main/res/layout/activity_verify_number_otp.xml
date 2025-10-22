@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eaeff5"
-    >
+    android:fitsSystemWindows="true">
 
     <!-- Custom Toolbar with elevation shadow -->
     <com.google.android.material.appbar.AppBarLayout
@@ -171,42 +171,42 @@
                             app:lineWidth="2dp" />
 
                         <!-- Resend OTP Section -->
-                  <!--      <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="16dp"
-                            android:gravity="center"
-                            android:orientation="horizontal">
+                        <!--      <LinearLayout
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_gravity="center_horizontal"
+                                  android:layout_marginBottom="16dp"
+                                  android:gravity="center"
+                                  android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Didn't receive the OTP? " />
+                                  <TextView
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:text="Didn't receive the OTP? " />
 
-                            <TextView
-                                android:id="@+id/resendNotp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:text="Resend OTP"
-                                android:textColor="#01A3A3"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
-                        </LinearLayout>-->
+                                  <TextView
+                                      android:id="@+id/resendNotp"
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginStart="5dp"
+                                      android:text="Resend OTP"
+                                      android:textColor="#01A3A3"
+                                      android:textSize="15sp"
+                                      android:textStyle="bold" />
+                              </LinearLayout>-->
 
                         <!-- Password Field with floating label -->
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
+                            android:background="@color/android:transparent"
                             android:hint="New Password"
                             app:boxBackgroundColor="#eaeff5"
                             app:boxCornerRadiusBottomEnd="10dp"
                             app:boxCornerRadiusBottomStart="10dp"
                             app:boxCornerRadiusTopEnd="10dp"
                             app:boxCornerRadiusTopStart="10dp"
-                            android:background="@color/android:transparent"
                             app:boxStrokeColor="#01A3A3"
                             app:endIconMode="password_toggle"
                             app:endIconTint="#F44336"
@@ -228,8 +228,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="56dp"
                             android:backgroundTint="#01A3A3"
-                            android:text="Verify"
                             android:drawableEnd="@drawable/rightarrow"
+                            android:text="Verify"
                             android:textColor="@android:color/white"
                             android:textSize="14sp"
                             android:textStyle="bold"

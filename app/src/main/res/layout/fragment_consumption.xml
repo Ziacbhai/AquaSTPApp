@@ -23,12 +23,12 @@
                 android:orientation="vertical"
                 android:padding="6dp">
 
-                <!-- Card Header -->
+                <!-- Header Card with User Info -->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/selectSTP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="6dp"
                     app:cardBackgroundColor="#FFFFFF"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="4dp">
@@ -38,7 +38,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <!-- ✅ Top Banner -->
+                        <!-- Top Banner -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -54,58 +54,99 @@
                                 android:fontFamily="@font/poppins_semibold"
                                 android:text="Site name"
                                 android:textColor="#FFFFFF"
-                                android:textSize="20sp" />
+                                android:textSize="16sp" />
 
                             <TextView
                                 android:id="@+id/stpname"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins_medium"
+                                android:gravity="center"
                                 android:text="STP name"
                                 android:textColor="#E6FFFFFF"
                                 android:textSize="14sp" />
+
+                            <!-- <TextView
+                                 android:id="@+id/siteaddress"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:layout_marginTop="4dp"
+                                 android:fontFamily="@font/poppins_light"
+                                 android:text="Site_address"
+                                 android:textColor="#E6FFFFFF"
+                                 android:textSize="12sp" />-->
+
                         </LinearLayout>
 
-                        <!-- User Info -->
+                        <!-- User Info Panel -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:orientation="horizontal"
                             android:padding="8dp">
+
+                            <!-- <com.google.android.material.imageview.ShapeableImageView
+                                 android:layout_width="64dp"
+                                 android:layout_height="64dp"
+                                 android:background="#E1E1E1"
+                                 android:padding="12dp"
+                                 android:src="@drawable/ic_person"
+                                 app:shapeAppearanceOverlay="@style/CircleImageView"
+                                 app:tint="#474747" />-->
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:gravity="center">
+                                android:gravity="center"
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/personname"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
                                     android:fontFamily="@font/poppins_semibold"
-                                    android:text="Person Name"
+                                    android:gravity="center"
+                                    android:text="Personname"
                                     android:textColor="#212121"
-                                    android:textSize="18sp" />
+                                    android:textSize="16sp" />
+                                <!--
+                                                            android:drawableStart="@drawable/ic_email"
+                                -->
 
                                 <TextView
                                     android:id="@+id/useremail"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
                                     android:fontFamily="@font/poppins"
-                                    android:text="email@example.com"
+                                    android:gravity="center"
+                                    android:text="email"
                                     android:textColor="#757575"
                                     android:textSize="12sp" />
+                                <!--
+                                                        android:drawableStart="@drawable/ic_phone"
+                                -->
 
                                 <TextView
                                     android:id="@+id/usermobile"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
+                                    android:layout_marginTop="2dp"
+                                    android:drawablePadding="6dp"
                                     android:fontFamily="@font/poppins_regular"
-                                    android:text="1234567890"
+                                    android:gravity="center"
+                                    android:text="mobile"
+                                    android:textColor="#757575"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/displaydate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:gravity="center"
+                                    android:text="Date"
                                     android:textColor="#757575"
                                     android:textSize="12sp" />
                             </LinearLayout>

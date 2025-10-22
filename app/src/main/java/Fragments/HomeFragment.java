@@ -6,11 +6,14 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,7 +41,9 @@ import com.ziac.aquastpapp.R;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Models.DailyLogModel;
@@ -50,13 +55,10 @@ public class HomeFragment extends Fragment {
     FloatingActionButton Fab;
     DailyLogModel dailyLog;
     Context context;
+    TextView Displaydate;
     CardView layoutpump, CardselectSTP,layoutblower, layoutmeter, layoutsensor, layoutfilter, layouthandover_remark;
 
-   /* @Override
-    public void onResume() {
-        super.onResume();
-        DailyLogIndex();
-    }*/
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -69,12 +71,25 @@ public class HomeFragment extends Fragment {
         context = getActivity();
         DailyLogIndex();
         CardselectSTP = view.findViewById(R.id.selectSTP);
+        Displaydate = view.findViewById(R.id.displaydate);
         layoutpump = view.findViewById(R.id.pumpmotor);
         layoutblower = view.findViewById(R.id.blower);
         layoutmeter = view.findViewById(R.id.meter);
         layoutsensor = view.findViewById(R.id.sensor);
         layoutfilter = view.findViewById(R.id.filter);
         layouthandover_remark = view.findViewById(R.id.handover_remarks);
+
+
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateDateTime();
+                handler.postDelayed(this, 1000); // Update every 1000 milliseconds (1 second)
+            }
+        }, 0);
+
 
         String usertype = Global.sharedPreferences.getString("user_type", "");
 
@@ -136,6 +151,32 @@ public class HomeFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void updateDateTime() {
+        Date currentDate = new Date();
+        // Update date
+        SimpleDateFormat dateFormat = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        }
+        String formattedDate = "";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && dateFormat != null) {
+            formattedDate = dateFormat.format(currentDate);
+        }
+        Displaydate.setText(formattedDate);
+
+        SimpleDateFormat timeFormat = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            timeFormat = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault());
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            String formattedTime = timeFormat.format(currentDate);
+            formattedTime = formattedTime.replace("am", "AM").replace("pm", "PM");
+
+            //Displaytime.setText(formattedTime);
+        }
+
     }
 
     private void showViews() {

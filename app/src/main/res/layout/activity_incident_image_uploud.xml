@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eaeff5"
-    >
+    android:fitsSystemWindows="true">
 
     <!-- Top AppBar -->
     <LinearLayout
@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/btn_gradient"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:weightSum="2">
 
         <ImageView
@@ -22,9 +22,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
+            android:contentDescription="Back Button"
             android:padding="8dp"
-            android:src="@drawable/back"
-            android:contentDescription="Back Button" />
+            android:src="@drawable/back" />
 
         <TextView
             android:layout_width="0dp"
@@ -43,11 +43,11 @@
     <!-- Scrollable Content -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
-        android:layout_below="@id/repair"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
         android:layout_above="@+id/incident_image_upload"
+        android:layout_below="@id/repair"
+        android:fillViewport="true"
         android:padding="5dp">
 
         <LinearLayout
@@ -69,11 +69,11 @@
         android:id="@+id/incident_image_upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:contentDescription="Upload Image"
-        app:srcCompat="@drawable/imageupload"
-        app:backgroundTint="@color/colorPrimary" />
+        app:backgroundTint="@color/colorPrimary"
+        app:srcCompat="@drawable/imageupload" />
 
 </RelativeLayout>

@@ -4,10 +4,14 @@ import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +37,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import Adapters.PumpDetailsAdapter;
@@ -46,6 +52,8 @@ public class PumpsFragment extends Fragment {
     CommonModelClass commonModelClassList;
     Context context;
     private ProgressDialog progressDialog;
+    TextView Displaydate;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -55,14 +63,51 @@ public class PumpsFragment extends Fragment {
         context = getContext();
         user_topcard(view);
 
-
+        Displaydate = view.findViewById(R.id.displaydate);
         PumpRecyclerview = view.findViewById(R.id.pump_recyclerview);
         PumpRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         PumpRecyclerview.setHasFixedSize(true);
         PumpRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateDateTime();
+                handler.postDelayed(this, 1000); // Update every 1000 milliseconds (1 second)
+            }
+        }, 0);
+
+
+
         getpump();
         return view;
+    }
+    private void updateDateTime() {
+        Date currentDate = new Date();
+        // Update date
+        SimpleDateFormat dateFormat = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        }
+        String formattedDate = "";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && dateFormat != null) {
+            formattedDate = dateFormat.format(currentDate);
+        }
+        Displaydate.setText(formattedDate);
+
+        SimpleDateFormat timeFormat = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            timeFormat = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault());
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            String formattedTime = timeFormat.format(currentDate);
+            formattedTime = formattedTime.replace("am", "AM").replace("pm", "PM");
+
+            //Displaytime.setText(formattedTime);
+        }
+
     }
 
     private void user_topcard(View view) {
@@ -81,18 +126,16 @@ public class PumpsFragment extends Fragment {
         personname = sharedPreferences.getString("user_name", "");
         stpcapacity = sharedPreferences.getString("stp_capacity", "");
 
-        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
+        TextView txtsitename, txtstpname, txtuseremail, txtusermobile, txtpersonname;
 
         txtsitename = view.findViewById(R.id.sitename);
         txtstpname = view.findViewById(R.id.stpname);
-       // txtsiteaddress = view.findViewById(R.id.siteaddress);
         txtuseremail = view.findViewById(R.id.useremail);
         txtusermobile = view.findViewById(R.id.usermobile);
         txtpersonname = view.findViewById(R.id.personname);
 
         txtsitename.setText(sitename);
         txtstpname.setText(stpname + " " + processname +  " " + stpcapacity);
-      //  txtsiteaddress.setText(siteaddress);
         txtuseremail.setText(useremail);
         txtusermobile.setText(usermobile);
         txtpersonname.setText(personname);

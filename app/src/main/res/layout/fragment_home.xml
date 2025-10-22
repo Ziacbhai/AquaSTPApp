@@ -12,12 +12,13 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+
         <!-- Header Card with User Info -->
         <androidx.cardview.widget.CardView
             android:id="@+id/selectSTP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="6dp"
             app:cardBackgroundColor="#FFFFFF"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp">
@@ -43,26 +44,27 @@
                         android:fontFamily="@font/poppins_semibold"
                         android:text="Site name"
                         android:textColor="#FFFFFF"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/stpname"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"
+                        android:gravity="center"
                         android:text="STP name"
                         android:textColor="#E6FFFFFF"
                         android:textSize="14sp" />
 
-                   <!-- <TextView
-                        android:id="@+id/siteaddress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/poppins_light"
-                        android:text="Site_address"
-                        android:textColor="#E6FFFFFF"
-                        android:textSize="12sp" />-->
+                    <!-- <TextView
+                         android:id="@+id/siteaddress"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="4dp"
+                         android:fontFamily="@font/poppins_light"
+                         android:text="Site_address"
+                         android:textColor="#E6FFFFFF"
+                         android:textSize="12sp" />-->
 
                 </LinearLayout>
 
@@ -70,18 +72,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_gravity="center"
+                    android:orientation="horizontal"
                     android:padding="8dp">
 
-                   <!-- <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:background="#E1E1E1"
-                        android:padding="12dp"
-                        android:src="@drawable/ic_person"
-                        app:shapeAppearanceOverlay="@style/CircleImageView"
-                        app:tint="#474747" />-->
+                    <!-- <com.google.android.material.imageview.ShapeableImageView
+                         android:layout_width="64dp"
+                         android:layout_height="64dp"
+                         android:background="#E1E1E1"
+                         android:padding="12dp"
+                         android:src="@drawable/ic_person"
+                         app:shapeAppearanceOverlay="@style/CircleImageView"
+                         app:tint="#474747" />-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -90,55 +92,57 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:gravity="center"
                             android:id="@+id/personname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
+                            android:gravity="center"
                             android:text="Personname"
                             android:textColor="#212121"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                         <!--
                                                     android:drawableStart="@drawable/ic_email"
                         -->
 
                         <TextView
-                            android:gravity="center"
                             android:id="@+id/useremail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins"
+                            android:gravity="center"
                             android:text="email"
                             android:textColor="#757575"
                             android:textSize="12sp" />
-<!--
-                        android:drawableStart="@drawable/ic_phone"
--->
+                        <!--
+                                                android:drawableStart="@drawable/ic_phone"
+                        -->
 
                         <TextView
-                            android:gravity="center"
                             android:id="@+id/usermobile"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:drawablePadding="6dp"
                             android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
                             android:text="mobile"
+                            android:textColor="#757575"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/displaydate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:gravity="center"
+                            android:text="Date"
                             android:textColor="#757575"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
-        <!--&lt;!&ndash; Category Cards &ndash;&gt;
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Equipment Categories"
-            android:textColor="#212121"
-            android:textSize="18sp" />-->
 
         <!-- Pumps/Motors Card -->
         <androidx.cardview.widget.CardView

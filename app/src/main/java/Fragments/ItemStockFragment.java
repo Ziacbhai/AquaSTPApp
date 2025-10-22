@@ -1,11 +1,13 @@
 package Fragments;
 
 
+import static com.ziac.aquastpapp.Activities.Global.sharedPreferences;
+
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -13,15 +15,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ziac.aquastpapp.Activities.Global;
@@ -30,30 +31,40 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import Adapters.ConsumptionAdapter;
 import Adapters.ItemStockAdapter;
 import Models.ItemStockModel;
 public class ItemStockFragment extends Fragment {
-    RecyclerView consumableRecyclerView;
-    ItemStockModel itemStockModel;
+    RecyclerView Item_stockRecyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
+    TextView Displaydate;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         View view = inflater.inflate(R.layout.fragment_itemstock, container, false);
+        Global.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        consumableRecyclerView = view.findViewById(R.id.consumable_recyclerview);
-        consumableRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        consumableRecyclerView.setHasFixedSize(true);
-        consumableRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        Item_stockRecyclerView = view.findViewById(R.id.itemstock_recyclerview);
+        Item_stockRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        Item_stockRecyclerView.setHasFixedSize(true);
+        Item_stockRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        Displaydate = view.findViewById(R.id.displaydate);
 
         GetItemStockItems();
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
-
+        user_topcard(view);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateDateTime();
+                handler.postDelayed(this, 1000); // Update every 1000 milliseconds (1 second)
+            }
+        }, 0);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -63,6 +74,53 @@ public class ItemStockFragment extends Fragment {
 
         return view;
     }
+    private void updateDateTime() {
+        Date currentDate = new Date();
+        // Update date
+        SimpleDateFormat dateFormat = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+            }
+        }
+        String formattedDate = "";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && dateFormat != null) {
+            formattedDate = dateFormat.format(currentDate);
+        }
+        Displaydate.setText(formattedDate);
+
+        SimpleDateFormat timeFormat = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            timeFormat = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault());
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            String formattedTime = timeFormat.format(currentDate);
+            formattedTime = formattedTime.replace("am", "AM").replace("pm", "PM");
+
+            //Displaytime.setText(formattedTime);
+        }
+
+    }
+
+    private void user_topcard(View view) {
+
+        TextView txtsitename, txtstpname, txtsiteaddress, txtuseremail, txtusermobile, txtpersonname;
+
+        txtsitename = view.findViewById(R.id.sitename);
+        txtstpname = view.findViewById(R.id.stpname);
+        // txtsiteaddress = view.findViewById(R.id.siteaddress);
+        txtuseremail = view.findViewById(R.id.useremail);
+        txtusermobile = view.findViewById(R.id.usermobile);
+        txtpersonname = view.findViewById(R.id.personname);
+
+        txtsitename.setText(sharedPreferences.getString("site_name", ""));
+        txtstpname.setText(sharedPreferences.getString("stp_name", "") + " " + sharedPreferences.getString("process_name", "") +  " " + sharedPreferences.getString("stp_capacity", ""));
+        //  txtsiteaddress.setText(sharedPreferences.getString("site_address", ""));
+        txtuseremail.setText(sharedPreferences.getString("user_email", ""));
+        txtusermobile.setText(sharedPreferences.getString("user_mobile", ""));
+        txtpersonname.setText(sharedPreferences.getString("user_name", ""));
+    }
+
 
     private void refreshScreen() {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
@@ -71,7 +129,7 @@ public class ItemStockFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
                 Global.Item_stock.clear();
                 ItemStockAdapter itemStockAdapter = new ItemStockAdapter(getContext(), Global.Item_stock);
-                consumableRecyclerView.setAdapter(itemStockAdapter);
+                Item_stockRecyclerView.setAdapter(itemStockAdapter);
                 itemStockAdapter.notifyDataSetChanged();
                 GetItemStockItems();
             }
@@ -103,7 +161,7 @@ public class ItemStockFragment extends Fragment {
                         }
 
                         ItemStockAdapter itemStockAdapter = new ItemStockAdapter(getContext(), Global.Item_stock);
-                        consumableRecyclerView.setAdapter(itemStockAdapter);
+                        Item_stockRecyclerView.setAdapter(itemStockAdapter);
 
                     } catch (JSONException e) {
                         e.printStackTrace();

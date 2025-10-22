@@ -7,6 +7,7 @@
     android:background="#eaeff5"
     android:gravity="center"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context=".Activities.GenerateSTPdetails">
 
     <LinearLayout

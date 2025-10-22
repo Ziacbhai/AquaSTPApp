@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -50,7 +51,7 @@ import Models.ConsumptionModel;
 
 public class ConsumptionFragment extends Fragment {
     RecyclerView Consumables_rv;
-    private TextView tvSelectedDate;
+    private TextView Displaydate,tvSelectedDate;
     TextInputEditText Remark_A;
     MaterialButton Update_A, Cancel_A;
     ProgressDialog progressDialog;
@@ -82,6 +83,7 @@ public class ConsumptionFragment extends Fragment {
             }
         });
 
+        Displaydate = view.findViewById(R.id.displaydate);
 
         fab = view.findViewById(R.id.fab_consumption);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +95,15 @@ public class ConsumptionFragment extends Fragment {
 
         Consumables_rv = view.findViewById(R.id.consumables_recyclerview);
 
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateDateTime();
+                handler.postDelayed(this, 1000); // Update every 1000 milliseconds (1 second)
+            }
+        }, 0);
 
         Consumables_rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -135,6 +146,34 @@ public class ConsumptionFragment extends Fragment {
 //        Global.editor.commit();
         getConsumables();
         return view;
+
+    }
+
+    private void updateDateTime() {
+        Date currentDate = new Date();
+        // Update date
+        SimpleDateFormat dateFormat = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+            }
+        }
+        String formattedDate = "";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && dateFormat != null) {
+            formattedDate = dateFormat.format(currentDate);
+        }
+        Displaydate.setText(formattedDate);
+
+        SimpleDateFormat timeFormat = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            timeFormat = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault());
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            String formattedTime = timeFormat.format(currentDate);
+            formattedTime = formattedTime.replace("am", "AM").replace("pm", "PM");
+
+            //Displaytime.setText(formattedTime);
+        }
 
     }
      private void refreshScreen() {

@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_light"
+    android:fitsSystemWindows="true"
+
     tools:context=".Activities.RepairTwoUploadActivity">
 
     <!-- App Bar with Collapsing Toolbar -->
@@ -186,8 +188,8 @@
                     android:textStyle="bold"
                     app:cornerRadius="8dp"
                     app:elevation="4dp"
-                 app:iconGravity="textStart"
-                app:iconTint="@color/white" />
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/white" />
 
                 <!-- Cancel Button -->
                 <com.google.android.material.button.MaterialButton
