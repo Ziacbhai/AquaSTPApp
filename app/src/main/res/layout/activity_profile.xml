@@ -130,7 +130,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:fontFamily="@font/poppins_semibold"
-                                    android:hint="123456" />
+                                   />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
@@ -168,9 +168,9 @@
                                     android:layout_marginTop="5dp"
                                     android:background="@color/android:transparent"
                                     android:fontFamily="@font/poppins_semibold"
-                                    android:hint="Ziacdemo"
+                                    android:hint="Your Name "
                                     android:maxLength="50"
-                                    android:textSize="16sp" />
+                                    android:textSize="14sp" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -196,7 +196,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/poppins_semibold"
-                                        android:text="Number"
+                                        android:text="Mobile Number"
                                         android:textSize="14sp" />
 
                                     <EditText
@@ -206,10 +206,10 @@
                                         android:layout_marginTop="5dp"
                                         android:background="@color/android:transparent"
                                         android:fontFamily="@font/poppins_semibold"
-                                        android:hint="123456"
+                                        android:hint="Your Mobile Number"
                                         android:inputType="number"
                                         android:maxLength="10"
-                                        android:textSize="16sp" />
+                                        android:textSize="14sp" />
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>
@@ -246,10 +246,10 @@
                                         android:layout_marginTop="5dp"
                                         android:background="@color/android:transparent"
                                         android:fontFamily="@font/poppins_semibold"
-                                        android:hint="Ziacdemo"
+                                        android:hint="example@gmail.com"
                                         android:inputType="textEmailAddress"
                                         android:maxLength="150"
-                                        android:textSize="16sp" />
+                                        android:textSize="14sp" />
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>

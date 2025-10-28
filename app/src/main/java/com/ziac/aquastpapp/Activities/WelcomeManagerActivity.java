@@ -91,7 +91,7 @@ public class WelcomeManagerActivity extends AppCompatActivity {
         Ownermail = findViewById(R.id.wemail);
         Owanarmobile = findViewById(R.id.wph);
 
-        String username = Global.sharedPreferences.getString("user_name", "");
+        String username = Global.sharedPreferences.getString("person_name", "");
         String mail = Global.sharedPreferences.getString("user_email", "");
         String mobile = Global.sharedPreferences.getString("user_mobile", "");
         String com_name = Global.sharedPreferences.getString("com_name", "");

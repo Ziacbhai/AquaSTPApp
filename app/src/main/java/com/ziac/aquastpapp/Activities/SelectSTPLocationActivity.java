@@ -51,6 +51,7 @@ public class SelectSTPLocationActivity extends AppCompatActivity {
     StpModelClass stpModelClassList;
     ImageView Logout;
     Context context;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,11 +155,6 @@ public class SelectSTPLocationActivity extends AppCompatActivity {
                     stpModelClassList.setSstp1code(e.getString("sstp1_code"));
                     stpModelClassList.setSucode(e.getInt("su_code"));
 
-                          /*  String su_code = e.getString("su_code");
-                            if (su_code.startsWith("0")) {
-                                su_code = su_code.substring(1);
-                            }
-                            stpModelClassList.setSucode(Integer.parseInt(su_code));*/
 
                 } catch (JSONException ex) {
                     throw new RuntimeException(ex);
