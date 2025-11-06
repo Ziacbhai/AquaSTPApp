@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:background="#eaeff5"
-    >
+    android:background="#eaeff5">
 
     <!-- Custom Toolbar with elevation shadow -->
     <com.google.android.material.appbar.AppBarLayout
