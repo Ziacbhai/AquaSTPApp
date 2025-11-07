@@ -9,13 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.ziac.aquastpapp.R;
 
 public class AboutActivity extends AppCompatActivity {
 
-    private CardView Website, CallUs, MailUs, ChatUs, LinkedIn, FaceBook, Instagram, X;
-
+    CardView Website, CallUs, MailUs, ChatUs, LinkedIn, FaceBook, Instagram, X;
     LinearLayout Locate;
     LottieAnimationView Ziac;
     Context context;
@@ -87,12 +88,23 @@ public class AboutActivity extends AppCompatActivity {
         ChatUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Phone number to send SMS
+                String phoneNumber = "+91 9972595464"; // Replace with actual number
+                String message = "Hello, I’d like to know more about your services."; // Default message
+
+                // Create intent
                 Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-                smsIntent.putExtra("...Message...", "...default content...");
-                smsIntent.setType("vnd.android-dir/mms-sms");
-                startActivity(smsIntent);
+                smsIntent.setData(Uri.parse("sms:" + phoneNumber)); // Opens SMS app
+                smsIntent.putExtra("sms_body", message); // Default text
+
+                try {
+                    v.getContext().startActivity(smsIntent);
+                } catch (Exception e) {
+                    Toast.makeText(v.getContext(), "No SMS app found.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
         Instagram.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
