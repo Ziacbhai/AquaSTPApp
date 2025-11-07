@@ -72,12 +72,12 @@ public class HomeFragment extends Fragment {
         DailyLogIndex();
         CardselectSTP = view.findViewById(R.id.selectSTP);
         Displaydate = view.findViewById(R.id.displaydate);
-        layoutpump = view.findViewById(R.id.pumpmotor);
-        layoutblower = view.findViewById(R.id.blower);
-        layoutmeter = view.findViewById(R.id.meter);
-        layoutsensor = view.findViewById(R.id.sensor);
-        layoutfilter = view.findViewById(R.id.filter);
-        layouthandover_remark = view.findViewById(R.id.handover_remarks);
+        layoutpump = view.findViewById(R.id.cardPumpsMotors);
+        layoutblower = view.findViewById(R.id.cardBlowers);
+        layoutmeter = view.findViewById(R.id.cardMeters);
+        layoutsensor = view.findViewById(R.id.cardSensors);
+        layoutfilter = view.findViewById(R.id.cardFilters);
+        layouthandover_remark = view.findViewById(R.id.cardHandover);
 
 
 
